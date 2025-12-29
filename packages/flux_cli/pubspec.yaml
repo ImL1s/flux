@@ -1,0 +1,21 @@
+name: flux_cli
+description: Command line interface for the Flux language including REPL
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flux_compiler:
+    path: ../flux_compiler
+  flux_vm:
+    path: ../flux_vm
+  args: ^2.4.0
+
+dev_dependencies:
+  test: ^1.25.0
+
+executables:
+  flux: flux
+  flux_repl: repl

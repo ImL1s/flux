@@ -1,0 +1,7 @@
+name: flux_compiler
+description: The compiler for the Flux scripting language.
+version: 0.0.1
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+dev_dependencies:
+  test: ^1.26.3

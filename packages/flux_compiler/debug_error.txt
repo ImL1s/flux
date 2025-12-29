@@ -1,0 +1,10 @@
+Exception: RangeError (length): Invalid value: Not in inclusive range 0..2: 20
+Stack: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      BytecodePrinter.print (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/helpers/bytecode_printer.dart:31:56)
+#2      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart:125:42)
+#3      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#4      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#5      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
