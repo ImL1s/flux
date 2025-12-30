@@ -1,0 +1,90 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Flux",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#keywords"
+        },
+        {
+            "include": "#constants"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#functions"
+        },
+        {
+            "include": "#widgets"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-slash.flux",
+                    "match": "//.*$"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.flux",
+                    "match": "\\b(if|else|while|for|return|break|continue)\\b"
+                },
+                {
+                    "name": "storage.type.flux",
+                    "match": "\\b(var|widget|fun)\\b"
+                },
+                {
+                    "name": "keyword.operator.new.flux",
+                    "match": "\\bnew\\b"
+                }
+            ]
+        },
+        "widgets": {
+            "patterns": [
+                {
+                    "name": "entity.name.class.flux",
+                    "match": "\\b[A-Z][a-zA-Z0-9]*\\b"
+                }
+            ]
+        },
+        "constants": {
+            "patterns": [
+                {
+                    "name": "constant.language.boolean.flux",
+                    "match": "\\b(true|false|null)\\b"
+                },
+                {
+                    "name": "constant.numeric.flux",
+                    "match": "\\b\\d+(\\.\\d+)?\\b"
+                }
+            ]
+        },
+        "strings": {
+            "name": "string.quoted.double.flux",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.flux",
+                    "match": "\\\\."
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.flux",
+                    "match": "\\b[a-z][a-zA-Z0-9_]*(?=\\()"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.flux"
+}

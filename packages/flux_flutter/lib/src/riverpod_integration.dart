@@ -223,12 +223,16 @@ class _FluxRiverpodRuntime {
   void _initializeWidgetState(CompiledWidget widget) {
     for (int i = 0; i < widget.stateFields.length; i++) {
       final fieldName = widget.stateFields[i];
-      final key = '${widget.name}.$fieldName';
       
-      if (!_vm.widgetState.containsKey(key)) {
-        final initFunc = widget.stateInitializers[i];
-        final result = _vm.executeClosure(ObjClosure(initFunc, []), []);
-        _vm.widgetState[key] = result;
+      if (!_vm.widgetState.containsKey(fieldName)) {
+        if (i < widget.stateInitializers.length) {
+          final initFunc = widget.stateInitializers[i];
+          _vm.runChunk(initFunc.chunk);
+          final initValue = _vm.stack.isNotEmpty ? _vm.stack.removeLast() : null;
+          _vm.widgetState[fieldName] = initValue;
+        } else {
+          _vm.widgetState[fieldName] = null;
+        }
       }
     }
   }
@@ -245,7 +249,7 @@ class _FluxRiverpodRuntime {
     
     List<Object?> positionalArgs = [];
     final paramNames = buildFunc.paramNames;
-    if (args.isNotEmpty && paramNames != null) {
+    if (args.isNotEmpty) {
       for (final paramName in paramNames) {
         positionalArgs.add(args[paramName]);
       }
@@ -275,7 +279,42 @@ class _FluxRiverpodRuntime {
       return convertToFlutter(child);
     }).toList();
 
-    return builder(node.args, children);
+    // Wrap arguments to handle closures and nested widgets
+    final processedArgs = _preprocessArgs(node.args);
+
+    return builder(processedArgs, children);
+  }
+
+  Map<String, dynamic> _preprocessArgs(Map<String, dynamic> args) {
+    final newArgs = Map<String, dynamic>.from(args);
+    for (final entry in args.entries) {
+      final value = entry.value;
+      
+      if (value is ObjClosure) {
+        newArgs[entry.key] = (List<Object?>? callbackArgs) {
+          final result = _vm.executeClosure(value, callbackArgs ?? []);
+          return result;
+        };
+      } else if (value is FluxWidgetNode) {
+        newArgs[entry.key] = convertToFlutter(value);
+      } else if (value is List) {
+        // Handle list of widgets (e.g. for slivers or flexible layouts)
+        bool hasNodes = value.any((e) => e is FluxWidgetNode);
+        if (hasNodes) {
+           final list = value.map((e) {
+             if (e is FluxWidgetNode) return convertToFlutter(e);
+             return e;
+           }).toList();
+           
+           if (list.every((e) => e is Widget)) {
+             newArgs[entry.key] = List<Widget>.from(list);
+           } else {
+             newArgs[entry.key] = list;
+           }
+        }
+      }
+    }
+    return newArgs;
   }
 
   FluxWidgetNode? _handleWidgetCall(
@@ -288,9 +327,30 @@ class _FluxRiverpodRuntime {
     if (callee is String && _widgetConstructors.contains(callee)) {
       widgetName = callee;
     } else if (callee is CompiledWidget) {
+      // For CompiledWidget, we need to execute the build method and return the result.
+      // The challenge is that executeBuild uses the same stack, potentially corrupting
+      // the callee's position. We solve this by:
+      // 1. Finding and saving the callee's index on the stack
+      // 2. Running executeBuild (which may modify stack)
+      // 3. Removing the callee after executeBuild completes (it's still at its index)
+      // 4. Returning the result so _callValue properly cleans up and pushes result
+      
+      // Find callee index - it should be at (stack.length - argCount - 1) position
+      // But argCount is 0 for widgets (all args are named), so callee is at end
+      final calleeIdx = stack.length - 1;
+      
+      // Execute build - this runs on the same stack but creates isolated call frames
+      // The result will be on stack.last when executeBuild returns
       final tree = executeBuild(callee, namedArgs);
+      
+      // After executeBuild, callee is still at calleeIdx, and result is at stack.last
+      // We need to remove the callee (the original CompiledWidget)
+      if (calleeIdx >= 0 && calleeIdx < stack.length && stack[calleeIdx] == callee) {
+        stack.removeAt(calleeIdx);
+      }
+      
       if (tree is FluxWidgetNode) {
-         return tree;
+         return tree;  // Return non-null so _callValue pops remaining args and pushes result
       }
       return null;
     }

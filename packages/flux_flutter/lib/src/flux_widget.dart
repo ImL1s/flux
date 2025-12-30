@@ -190,16 +190,16 @@ class FluxRuntime {
     _vm.onStateChange = onStateChange;
     
     // Compile source
-    print('DEBUG RUNTIME: Source: $source');
+    debugPrint('DEBUG RUNTIME: Source: $source');
     final lexer = Lexer(source);
     final tokens = lexer.tokenize();
     final parser = Parser(tokens);
     final ast = parser.parse();
-    print('DEBUG RUNTIME: Parsed unit with ${ast.declarations.length} declarations');
+    debugPrint('DEBUG RUNTIME: Parsed unit with ${ast.declarations.length} declarations');
     
     final compiler = Compiler(unit: ast);
     final function = compiler.endCompiler();
-    print('DEBUG RUNTIME: Compilation finished. Bytecode size: ${function.chunk.code.length}');
+    debugPrint('DEBUG RUNTIME: Compilation finished. Bytecode size: ${function.chunk.code.length}');
     
     // Execute to populate globals (including widget definitions)
     
@@ -282,14 +282,8 @@ class FluxRuntime {
     // Map props from args map to positional arguments based on paramNames
     final positionalArgs = <Object?>[];
     final paramNames = widget.buildMethod.paramNames;
-    if (paramNames != null) {
-      for (final name in paramNames) {
-        positionalArgs.add(args[name]);
-      }
-    } else {
-      // Fallback if paramNames is missing (should not happen with new compiler)
-      // but if arity > 0, we might have passed them positionally?
-      // In Flux, props are always named in the caller, so they should be in args.
+    for (final name in paramNames) {
+      positionalArgs.add(args[name]);
     }
     
     final interpretResult = _vm.executeClosure(closure, positionalArgs);
@@ -358,7 +352,7 @@ class FluxRuntime {
     final isCustom = callee is CompiledWidget;
 
     if (isBuiltin || isCustom) {
-      final name = isBuiltin ? callee as String : (callee as CompiledWidget).name;
+      final name = isBuiltin ? callee : (callee as CompiledWidget).name;
       
       // Build arguments map
       final args = Map<String, dynamic>.from(namedArgs);
@@ -396,7 +390,7 @@ class FluxRuntime {
       FluxWidgetNode node;
       if (isCustom) {
           // Recursive build for custom widgets
-          node = executeBuild(callee as CompiledWidget, args);
+          node = executeBuild(callee, args);
       } else {
           node = FluxWidgetNode(name, args: args, children: children);
       }

@@ -6,10 +6,11 @@
 import 'dart:io';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_vm/flux_vm.dart';
+import 'package:flux_cli/src/commands/serve_command.dart';
 
 const String version = '2.0.0';
 
-void main(List<String> args) {
+Future<void> main(List<String> args) async {
   if (args.isEmpty || args.contains('--help') || args.contains('-h')) {
     _printHelp();
     return;
@@ -20,6 +21,16 @@ void main(List<String> args) {
     return;
   }
   
+  if (args[0] == 'serve') {
+    if (args.length < 2) {
+      stderr.writeln('Usage: flux serve <script.flux>');
+      exit(1);
+    }
+    final filePath = args[1];
+    await ServeCommand().run(filePath);
+    return;
+  }
+
   final filePath = args[0];
   final file = File(filePath);
   

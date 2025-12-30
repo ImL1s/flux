@@ -1,5 +1,5 @@
-[ +143 ms] Found 1 files which will be executed as Widget Tests.
-[   +8 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[ +146 ms] Found 1 files which will be executed as Widget Tests.
+[   +9 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
@@ -11,7 +11,7 @@
 [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
-[  +47 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[  +48 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
 [        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
 [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
@@ -33,60 +33,114 @@
 [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
-[  +28 ms] Skipping pub get: version match.
-[ +213 ms] running test package with arguments: [--no-color, --chain-stack-traces, --, file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart?]
-00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
-[ +121 ms] test 0: starting test D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+[  +25 ms] Skipping pub get: version match.
+[ +236 ms] running test package with arguments: [--no-color, --chain-stack-traces, --, file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart?]
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart
+[ +122 ms] test 0: starting test D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart
 [   +5 ms] Stopping scan for flutter_test_config.dart; found project root at D:\OtherProject\mine\flux\packages\flux_flutter
-[   +2 ms] Compiler will use the following file as its incremental dill file: C:\Users\aa223\AppData\Local\Temp\flutter_tools.1b3d75bf\flutter_test_compiler.64530acc\output.dill
+[   +2 ms] Compiler will use the following file as its incremental dill file: C:\Users\aa223\AppData\Local\Temp\flutter_tools.b253a667\flutter_test_compiler.91632ab1\output.dill
 [        ] Listening to compiler controller...
-[   +5 ms] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.1b3d75bf/flutter_test_listener.67cb09b1/listener.dart
-[  +94 ms] No packages with native assets. Skipping native assets compilation.
+[   +6 ms] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.b253a667/flutter_test_listener.22c13e85/listener.dart
+[ +107 ms] No packages with native assets. Skipping native assets compilation.
 [        ] Writing native assets yaml to file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml.
-[   +8 ms] Writing D:\OtherProject\mine\flux\packages\flux_flutter\build\native_assets\windows\native_assets.yaml done.
-[   +2 ms] D:\APP\flutter\bin\cache\dart-sdk\bin\dartaotruntime.exe D:\APP\flutter\bin\cache\dart-sdk\bin\snapshots\frontend_server_aot.dart.snapshot --sdk-root D:\APP\flutter\bin\cache\artifacts\engine\common\flutter_patched_sdk/ --incremental --no-print-incremental-dependencies --target=flutter --experimental-emit-debug-metadata --output-dill C:\Users\aa223\AppData\Local\Temp\flutter_tools.1b3d75bf\flutter_test_compiler.64530acc\output.dill --packages D:\OtherProject\mine\flux\packages\flux_flutter\.dart_tool\package_config.json -Ddart.vm.profile=false -Ddart.vm.product=false --enable-asserts --track-widget-creation --initialize-from-dill D:\OtherProject\mine\flux\packages\flux_flutter\build\test_cache\build\cache.dill.track.dill --native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml --verbosity=error
+[   +9 ms] Writing D:\OtherProject\mine\flux\packages\flux_flutter\build\native_assets\windows\native_assets.yaml done.
+[   +2 ms] D:\APP\flutter\bin\cache\dart-sdk\bin\dartaotruntime.exe D:\APP\flutter\bin\cache\dart-sdk\bin\snapshots\frontend_server_aot.dart.snapshot --sdk-root D:\APP\flutter\bin\cache\artifacts\engine\common\flutter_patched_sdk/ --incremental --no-print-incremental-dependencies --target=flutter --experimental-emit-debug-metadata --output-dill C:\Users\aa223\AppData\Local\Temp\flutter_tools.b253a667\flutter_test_compiler.91632ab1\output.dill --packages D:\OtherProject\mine\flux\packages\flux_flutter\.dart_tool\package_config.json -Ddart.vm.profile=false -Ddart.vm.product=false --enable-asserts --track-widget-creation --initialize-from-dill D:\OtherProject\mine\flux\packages\flux_flutter\build\test_cache\build\cache.dill.track.dill --native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml --verbosity=error
 [   +9 ms] <- native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml
-[        ] <- compile file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.1b3d75bf/flutter_test_listener.67cb09b1/listener.dart
-[+1116 ms] lib/src/flux_widget.dart:242:34: Error: The argument type 'CompilationUnit' can't be assigned to the parameter type 'Statement'.
-[   +1 ms]  - 'CompilationUnit' is from 'package:flux_compiler/src/ast.dart' ('../flux_compiler/lib/src/ast.dart').
-[        ]  - 'Statement' is from 'package:flux_compiler/src/ast.dart' ('../flux_compiler/lib/src/ast.dart').
-[        ]     _bytecode = compiler.compile(ast);
-[        ]                                  ^
-[        ] lib/src/flux_widget.dart:242:26: Error: This expression has type 'void' and can't be used.
-[        ]     _bytecode = compiler.compile(ast);
-[        ]                          ^
-[        ] lib/src/flux_widget.dart:242:5: Error: The setter '_bytecode' isn't defined for the class 'FluxRuntime'.
-[        ]  - 'FluxRuntime' is from 'package:flux_flutter/src/flux_widget.dart' ('lib/src/flux_widget.dart').
-[        ] Try correcting the name to the name of an existing setter, or defining a setter or field named '_bytecode'.
-[        ]     _bytecode = compiler.compile(ast);
-[        ]     ^^^^^^^^^
-[        ] lib/src/flux_widget.dart:244:66: Error: The getter '_bytecode' isn't defined for the class 'FluxRuntime'.
-[        ]  - 'FluxRuntime' is from 'package:flux_flutter/src/flux_widget.dart' ('lib/src/flux_widget.dart').
-[        ] Try correcting the name to the name of an existing getter, or defining a getter or field named '_bytecode'.
-[        ]     print('DEBUG RUNTIME: Compilation finished. Bytecode size: ${_bytecode.code.length}');
-[        ]                                                                  ^^^^^^^^^
-[  +83 ms] killing pid 156944
+[        ] <- compile file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.b253a667/flutter_test_listener.22c13e85/listener.dart
+[+1191 ms] <- accept
+[        ] <- reset
+[        ] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.b253a667/flutter_test_listener.22c13e85/listener.dart took 1320ms
+[        ] test 0: starting test device
+[   +2 ms] test 0: awaiting connection to test device
+[        ] test 0: VM Service uri is not available
+[   +2 ms] test 0: test harness socket server is running at port:63386
+[   +1 ms] Using this directory for fonts configuration: C:\Users\aa223\AppData\Local\Temp\flutter_tools.b253a667\flutter_test_fonts.2ac09125
+[   +1 ms] test 0: Starting flutter_tester process with command=[D:\APP\flutter\bin\cache\artifacts\engine\windows-x64\flutter_tester.exe, --disable-vm-service, --enable-checked-mode, --verify-entry-points, --enable-software-rendering, --skia-deterministic-rendering, --enable-dart-profiling, --non-interactive, --use-test-fonts, --disable-asset-fonts, --packages=D:\OtherProject\mine\flux\packages\flux_flutter\.dart_tool\package_config.json, --flutter-assets-dir=D:\OtherProject\mine\flux\packages\flux_flutter\build\unit_test_assets, C:\Users\aa223\AppData\Local\Temp\flutter_tools.b253a667\flutter_test_listener.22c13e85\listener.dart.dill], environment={FLUTTER_TEST: true, FONTCONFIG_FILE: C:\Users\aa223\AppData\Local\Temp\flutter_tools.b253a667\flutter_test_fonts.2ac09125/fonts.conf, SERVER_PORT: 63386, APP_NAME: flux_flutter, UNIT_TEST_ASSETS: D:\OtherProject\mine\flux\packages\flux_flutter\build\unit_test_assets, PATH: D:\OtherProject\mine\flux\packages\flux_flutter\build\native_assets\windows\;C:\Program Files\PowerShell\7;C:\Program Files\Eclipse Adoptium\jdk-21.0.9.10-hotspot\bin;C:\Python311\Scripts\;C:\Python311\;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\APP\flutter\bin;C:\Users\aa223\AppData\Local\Pub\Cache\bin;C:\ProgramData\chocolatey\bin;c:\Users\aa223\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\aa223\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\aa223\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\GitHub CLI\;D:\APP\controlmymonitor;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\PowerShell\7\;C:\Users\aa223\.local\bin\;C:\Program Files\dotnet\;C:\Program Files\Go\bin;C:\Program Files\cursor\resources\app\bin;C:\Users\aa223\bin;C:\Users\aa223\.cargo\bin;C:\Program Files\PowerShell\7;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\APP\flutter\bin;C:\Users\aa223\AppData\Local\Pub\Cache\bin;C:\ProgramData\chocolatey\bin;c:\Users\aa223\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\aa223\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\aa223\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\GitHub CLI\;D:\APP\controlmymonitor;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\PowerShell\7\;C:\Users\aa223\.local\bin\;;C:\Program Files\PowerShell\7;D:\APP\flutter\bin\;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDI;D:\APP\maestro\maestro\bin;C:\Users\aa223\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\aa223\AppData\Local\Programs\Ollama;D:\APP\Kiro\bin;C:\Users\aa223\AppData\Local\Microsoft\WindowsApps;C:\Users\aa223\AppData\Local\Microsoft\WinGet\Links;D:\APP\Antigravity\bin;C:\Users\aa223\go\bin;D:\APP\Warp\bin;C:\Users\aa223\AppData\Local\PowerToys\DSCModules\;D:\APP\flutter\bin\mingit\cmd}
+[   +7 ms] test 0: Started flutter_tester process at pid 37092
+[ +240 ms] test 0: connected to test device, now awaiting test result
+[        ] test 0: Waiting for test harness or tests to finish
+00:00 +0: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
+DEBUG PARSER: Widget App parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget App, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: FloatingActionButton, isState: false
+DEBUG COMPILER: Compiling variable: Icon, isState: false
+00:00 +1: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+DEBUG PARSER: Widget CustomContainer parsed. StateFields: 0
+DEBUG PARSER: Widget _SubWidget parsed. StateFields: 0
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget CustomContainer, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: _SubWidget, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget _SubWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: header, isState: false
+Runtime Error: type 'CompiledWidget' is not a subtype of type 'String' in type cast
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Header Text": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart:79:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart line 79
+The test description was:
+  FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +1 -1: FluxRiverpodWidget handles recursive argument conversion (nested widgets) [E]
+  Test failed. See exception logs above.
+  The test description was: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+  
+[ +647 ms] test 0: Test harness is no longer needed by test process
+[        ] test 0: finished
 [        ] test 0: cleaning up...
+[        ] test 0: ensuring test device is terminated.
+[        ] test 0: Terminating flutter_tester process
+[        ] test 0: Shutting down DevTools server
+[        ] test 0: Test process is no longer needed by test harness
+[        ] test 0: Shutting down test harness socket server
+[  +11 ms] test 0: flutter_tester process at pid 37092 exited with code=-1
 [        ] test 0: deleting temporary directory
-[   +2 ms] test 0: waiting for controller sink to close
-00:00 +0 -1: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart [E]
-  Failed to load "D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart": Compilation failed for testPath=D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
-00:00 +0 -1: Some tests failed.
-[   +9 ms] Deleting C:\Users\aa223\AppData\Local\Temp\flutter_tools.1b3d75bf\flutter_test_compiler.64530acc...
-[   +5 ms] killing pid 156944
-[   +2 ms] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.1b3d75bf/flutter_test_listener.67cb09b1/listener.dart took 1338ms
-[   +1 ms] test package returned with exit code 1
-[        ] Runtime for phase TestRunner: Wall-clock: 0:00:01.479495; combined: 0:00:01.479508.
-[        ] Runtime for phase Compile: Wall-clock: 0:00:01.339026; combined: 0:00:01.339038.
-[        ] Runtime for phase Run: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
+[   +4 ms] test 0: finished
+00:00 +1 -1: Some tests failed.
+[   +4 ms] Deleting C:\Users\aa223\AppData\Local\Temp\flutter_tools.b253a667\flutter_test_compiler.91632ab1...
+[   +4 ms] killing pid 5716
+[  +14 ms] Deleting C:\Users\aa223\AppData\Local\Temp\flutter_tools.b253a667\flutter_test_fonts.2ac09125...
+[   +2 ms] test package returned with exit code 1
+[        ] Runtime for phase TestRunner: Wall-clock: 0:00:02.411420; combined: 0:00:02.411431.
+[        ] Runtime for phase Compile: Wall-clock: 0:00:01.320817; combined: 0:00:01.320830.
+[        ] Runtime for phase Run: Wall-clock: 0:00:00.905179; combined: 0:00:00.905180.
 [        ] Runtime for phase CoverageTotal: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
 [        ] Runtime for phase CoverageCollect: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
 [        ] Runtime for phase CoverageParseJson: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
 [        ] Runtime for phase CoverageAddHitmap: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
 [        ] Runtime for phase CoverageDataCollect: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[        ] Runtime for phase WatcherFinishedTest: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[   +4 ms] "flutter test" took 1,788ms.
-[  +37 ms] 
+[        ] Runtime for phase WatcherFinishedTest: Wall-clock: 0:00:00.000483; combined: 0:00:00.000484.
+[   +5 ms] "flutter test" took 2,742ms.
+[  +46 ms] 
            #0      throwToolExit (package:flutter_tools/src/base/common.dart:10:3)
            #1      TestCommand.runCommand (package:flutter_tools/src/commands/test.dart:651:7)
            <asynchronous suspension>
@@ -110,7 +164,7 @@
            <asynchronous suspension>
 
 
-[  +21 ms] ensureAnalyticsSent: 20ms
+[  +23 ms] ensureAnalyticsSent: 20ms
 [        ] Running 2 shutdown hooks
 [   +1 ms] Shutdown hooks complete
 [   +3 ms] exiting with code 1

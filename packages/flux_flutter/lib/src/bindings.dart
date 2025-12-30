@@ -34,33 +34,46 @@ class FluxBindings {
   static void _initWidgets() {
     // Text widget
     register('Text', (args, children) {
-      final text = args['text'] as String? ?? args['0'] as String? ?? '';
+      final value = args['text'] ?? args['0'] ?? '';
+      final text = value is String ? value : value.toString();
       return Text(text);
     });
     
     // Column widget
     register('Column', (args, children) {
+      final mainAxisAlignment = _parseMainAxisAlignment(args['mainAxisAlignment'] as String?);
+      final crossAxisAlignment = _parseCrossAxisAlignment(args['crossAxisAlignment'] as String?);
       return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: children,
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        children: args['children'] as List<Widget>? ?? children,
       );
     });
     
     // Row widget
     register('Row', (args, children) {
+      final mainAxisAlignment = _parseMainAxisAlignment(args['mainAxisAlignment'] as String?);
+      final crossAxisAlignment = _parseCrossAxisAlignment(args['crossAxisAlignment'] as String?);
       return Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: children,
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        children: args['children'] as List<Widget>? ?? children,
       );
     });
     
     // Container widget
     register('Container', (args, children) {
+      final padding = args['padding'] as double?;
+      final color = _parseColor(args['color']);
+      final width = (args['width'] ?? args['0'])?.toDouble();
+      final height = (args['height'] ?? args['1'])?.toDouble();
+      
       return Container(
-        padding: const EdgeInsets.all(8.0),
-        child: children.isNotEmpty ? children.first : null,
+        padding: padding != null ? EdgeInsets.all(padding) : null,
+        color: color,
+        width: width,
+        height: height,
+        child: args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null),
       );
     });
     
@@ -106,25 +119,21 @@ class FluxBindings {
       return SizedBox(
         width: width,
         height: height,
-        child: children.isNotEmpty ? children.first : null,
+        child: args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null),
       );
     });
+
     register('Padding', (args, children) {
       final padding = args['padding'] as double? ?? 8.0;
       return Padding(
         padding: EdgeInsets.all(padding),
-        child: children.isNotEmpty ? children.first : null,
+        child: args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null),
       );
     });
-    
-    // SizedBox widget
-    register('SizedBox', (args, children) {
-      final width = args['width'] as double?;
-      final height = args['height'] as double?;
-      return SizedBox(
-        width: width,
-        height: height,
-        child: children.isNotEmpty ? children.first : null,
+
+    register('Center', (args, children) {
+      return Center(
+        child: args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null),
       );
     });
     
@@ -211,7 +220,7 @@ class FluxBindings {
       return ListView(
         scrollDirection: scrollDirection,
         padding: padding != null ? EdgeInsets.all(padding) : null,
-        children: children,
+        children: args['children'] as List<Widget>? ?? children,
       );
     });
     
@@ -260,6 +269,42 @@ class FluxBindings {
       final height = args['height'] as double?;
       final color = _parseColor(args['color']);
       return Divider(height: height, color: color);
+    });
+  
+    // Scaffold
+    register('Scaffold', (args, children) {
+      final appBar = args['appBar'] as PreferredSizeWidget?;
+      final body = args['body'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final floatingActionButton = args['floatingActionButton'] as Widget?;
+      
+      return Scaffold(
+        appBar: appBar,
+        body: body,
+        floatingActionButton: floatingActionButton,
+      );
+    });
+    
+    // AppBar
+    register('AppBar', (args, children) {
+      final title = args['title'] as Widget?;
+      final actions = args['actions'] as List<Widget>? ?? 
+          (args['actions'] as List?)?.whereType<Widget>().toList();
+      
+      return AppBar(
+        title: title,
+        actions: actions,
+      );
+    });
+    
+    // FloatingActionButton
+    register('FloatingActionButton', (args, children) {
+      final onPressed = args['onPressed'];
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      
+      return FloatingActionButton(
+        onPressed: onPressed != null ? () => _invokeCallback(onPressed, []) : null,
+        child: child,
+      );
     });
   }
   
@@ -349,6 +394,29 @@ class FluxBindings {
       'error': Icons.error,
     };
     return icons[name] ?? Icons.help_outline;
+  }
+
+  static MainAxisAlignment _parseMainAxisAlignment(String? value) {
+    switch (value) {
+      case 'start': return MainAxisAlignment.start;
+      case 'end': return MainAxisAlignment.end;
+      case 'center': return MainAxisAlignment.center;
+      case 'spaceBetween': return MainAxisAlignment.spaceBetween;
+      case 'spaceAround': return MainAxisAlignment.spaceAround;
+      case 'spaceEvenly': return MainAxisAlignment.spaceEvenly;
+      default: return MainAxisAlignment.start;
+    }
+  }
+
+  static CrossAxisAlignment _parseCrossAxisAlignment(String? value) {
+    switch (value) {
+      case 'start': return CrossAxisAlignment.start;
+      case 'end': return CrossAxisAlignment.end;
+      case 'center': return CrossAxisAlignment.center;
+      case 'stretch': return CrossAxisAlignment.stretch;
+      case 'baseline': return CrossAxisAlignment.baseline;
+      default: return CrossAxisAlignment.center;
+    }
   }
   
   static void _initFunctions() {

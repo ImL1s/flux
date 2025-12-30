@@ -16,6 +16,7 @@ dependencies:
   flux_vm:
     path: ../flux_vm
   flutter_riverpod: ^2.6.1
+  web_socket_channel: ^3.0.3
 
 dev_dependencies:
   flutter_test:

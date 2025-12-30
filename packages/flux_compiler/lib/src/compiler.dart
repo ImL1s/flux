@@ -181,6 +181,7 @@ class Compiler {
       
       // Begin scope and add props as local variables
       buildCompiler._beginScope();
+      buildCompiler._locals.add(Local("", 0)); // Reserve slot 0 for closure
       for (final prop in stmt.props) {
         buildCompiler._addLocal(prop.name);
       }

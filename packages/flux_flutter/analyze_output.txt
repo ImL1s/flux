@@ -1,14 +1,15 @@
-Analyzing riverpod_integration.dart...                          
+Analyzing flux_flutter...                                       
 
-   info - Dangling library doc comment - lib\src\riverpod_integration.dart:1:1 - dangling_library_doc_comments
-   info - Angle brackets will be interpreted as HTML - lib\src\riverpod_integration.dart:46:42 - unintended_html_in_doc_comment
-  error - The name 'StateProvider' isn't a type, so it can't be used as a type argument - lib\src\riverpod_integration.dart:47:21 - non_type_as_type_argument
-  error - 1 positional argument expected by 'FluxRuntime.new', but 0 found - lib\src\riverpod_integration.dart:75:7 - not_enough_positional_arguments
-  error - The named parameter 'source' isn't defined - lib\src\riverpod_integration.dart:75:7 - undefined_named_parameter
-  error - The named parameter 'widgetName' isn't defined - lib\src\riverpod_integration.dart:76:7 - undefined_named_parameter
-  error - The named parameter 'onRebuild' isn't defined - lib\src\riverpod_integration.dart:77:7 - undefined_named_parameter
-  error - The argument type 'Map<String, dynamic>' can't be assigned to the parameter type 'CompiledWidget'.  - lib\src\riverpod_integration.dart:140:42 - argument_type_not_assignable
-  error - The method 'convertToFlutter' isn't defined for the type 'FluxRuntime' - lib\src\riverpod_integration.dart:141:23 - undefined_method
-  error - Undefined name 'vm' - lib\src\riverpod_integration.dart:155:5 - undefined_identifier
+warning - The left operand can't be null, so the right operand is never executed - lib\src\bindings.dart:46:49 - dead_null_aware_expression
+warning - The left operand can't be null, so the right operand is never executed - lib\src\bindings.dart:47:51 - dead_null_aware_expression
+warning - The left operand can't be null, so the right operand is never executed - lib\src\bindings.dart:57:49 - dead_null_aware_expression
+warning - The left operand can't be null, so the right operand is never executed - lib\src\bindings.dart:58:51 - dead_null_aware_expression
+   info - Don't invoke 'print' in production code - lib\src\flux_widget.dart:193:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\flux_widget.dart:198:5 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\flux_widget.dart:202:5 - avoid_print
+warning - The operand can't be 'null', so the condition is always 'true' - lib\src\flux_widget.dart:285:20 - unnecessary_null_comparison
+warning - Unnecessary cast - lib\src\flux_widget.dart:361:32 - unnecessary_cast
+warning - Unnecessary cast - lib\src\flux_widget.dart:399:31 - unnecessary_cast
+warning - The operand can't be 'null', so the condition is always 'true' - lib\src\riverpod_integration.dart:248:39 - unnecessary_null_comparison
 
-10 issues found. (ran in 1.6s)
+11 issues found. (ran in 1.2s)

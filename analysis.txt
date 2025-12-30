@@ -1,0 +1,12 @@
+Analyzing flux_cli, flux_flutter...
+
+warning - packages\flux_cli\test\cli_test.dart:1:8 - Unused import: 'dart:io'. Try removing the import directive. - unused_import
+warning - packages\flux_flutter\lib\src\flux_widget.dart:285:20 - The operand can't be 'null', so the condition is always 'true'. Remove the condition. - unnecessary_null_comparison
+warning - packages\flux_flutter\lib\src\flux_widget.dart:361:32 - Unnecessary cast. Try removing the cast. - unnecessary_cast
+warning - packages\flux_flutter\lib\src\flux_widget.dart:399:31 - Unnecessary cast. Try removing the cast. - unnecessary_cast
+warning - packages\flux_flutter\lib\src\riverpod_integration.dart:248:39 - The operand can't be 'null', so the condition is always 'true'. Remove the condition. - unnecessary_null_comparison
+   info - packages\flux_flutter\lib\src\flux_widget.dart:193:5 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - packages\flux_flutter\lib\src\flux_widget.dart:198:5 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+   info - packages\flux_flutter\lib\src\flux_widget.dart:202:5 - Don't invoke 'print' in production code. Try using a logging framework. - avoid_print
+
+8 issues found.

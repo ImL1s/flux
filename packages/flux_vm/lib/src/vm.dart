@@ -622,8 +622,12 @@ class VM {
             // Pop named arguments (count pairs of key, value)
             for (int i = 0; i < namedCount; i++) {
               final value = _stack.removeLast();
-              final name = _stack.removeLast() as String;
-              namedArgs[name] = value;
+              final nameObj = _stack.removeLast();
+              if (nameObj is! String) {
+                _runtimeError("type '${nameObj.runtimeType}' is not a subtype of type 'String' in type cast");
+                return InterpretResult.runtimeError;
+              }
+              namedArgs[nameObj] = value;
             }
 
             final totalArgSlots = argCount; // positional args only on stack now
