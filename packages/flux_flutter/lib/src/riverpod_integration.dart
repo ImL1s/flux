@@ -167,6 +167,9 @@ class _FluxRiverpodRuntime {
       });
     }
     
+    // Set widget handler before initial execution
+    _vm.widgetCallHandler = _handleWidgetCall;
+    
     _vm.runChunk(function.chunk);
     
     // Extract widget definitions
@@ -245,21 +248,22 @@ class _FluxRiverpodRuntime {
     };
     
     final buildFunc = widget.buildMethod;
-    final closure = ObjClosure(buildFunc, []);
+    final  closure = ObjClosure(widget.buildMethod, []);
     
     List<Object?> positionalArgs = [];
-    final paramNames = buildFunc.paramNames;
+    final paramNames = widget.buildMethod.paramNames;
     if (args.isNotEmpty) {
       for (final paramName in paramNames) {
         positionalArgs.add(args[paramName]);
       }
     }
     
+    // Execute closure
     final result = _vm.executeClosure(closure, positionalArgs);
     if (result == InterpretResult.ok && _vm.stack.isNotEmpty) {
       return _vm.stack.last;
     }
-    return result; // Return error or empty result (which will likely fail later check)
+    return result;
   }
 
   Widget convertToFlutter(dynamic fluxNode) {
@@ -269,6 +273,25 @@ class _FluxRiverpodRuntime {
     }
 
     final node = fluxNode;
+    
+    // Check if this is a custom widget with deferred build execution
+    final compiledWidget = node.args['_compiledWidget'];
+    if (compiledWidget is CompiledWidget) {
+      // Remove internal marker before passing args
+      final propsArgs = Map<String, dynamic>.from(node.args);
+      propsArgs.remove('_compiledWidget');
+      
+      // First, convert any FluxWidgetNode args to Flutter Widgets
+      final processedProps = _preprocessArgs(propsArgs);
+      
+      // Execute build with converted props
+      final buildResult = executeBuild(compiledWidget, processedProps);
+      if (buildResult is FluxWidgetNode) {
+        return convertToFlutter(buildResult);
+      }
+      return Text('Error executing custom widget: ${node.name}');
+    }
+    
     final builder = FluxBindings.get(node.name);
     
     if (builder == null) {
@@ -323,48 +346,62 @@ class _FluxRiverpodRuntime {
     Map<String, dynamic> namedArgs,
     List<Object?> stack,
   ) {
-    String? widgetName;
-    if (callee is String && _widgetConstructors.contains(callee)) {
-      widgetName = callee;
-    } else if (callee is CompiledWidget) {
-      // For CompiledWidget, we need to execute the build method and return the result.
-      // The challenge is that executeBuild uses the same stack, potentially corrupting
-      // the callee's position. We solve this by:
-      // 1. Finding and saving the callee's index on the stack
-      // 2. Running executeBuild (which may modify stack)
-      // 3. Removing the callee after executeBuild completes (it's still at its index)
-      // 4. Returning the result so _callValue properly cleans up and pushes result
-      
-      // Find callee index - it should be at (stack.length - argCount - 1) position
-      // But argCount is 0 for widgets (all args are named), so callee is at end
-      final calleeIdx = stack.length - 1;
-      
-      // Execute build - this runs on the same stack but creates isolated call frames
-      // The result will be on stack.last when executeBuild returns
-      final tree = executeBuild(callee, namedArgs);
-      
-      // After executeBuild, callee is still at calleeIdx, and result is at stack.last
-      // We need to remove the callee (the original CompiledWidget)
-      if (calleeIdx >= 0 && calleeIdx < stack.length && stack[calleeIdx] == callee) {
-        stack.removeAt(calleeIdx);
-      }
-      
-      if (tree is FluxWidgetNode) {
-         return tree;  // Return non-null so _callValue pops remaining args and pushes result
-      }
-      return null;
-    }
+    // Check both static list AND dynamically registered bindings
+    final isBuiltin = callee is String && (_widgetConstructors.contains(callee) || FluxBindings.get(callee) != null);
+    final isCustom = callee is CompiledWidget;
     
-    if (widgetName == null) {
-        return null;
+    if (!isBuiltin && !isCustom) {
+      return null; // Not a widget call, let VM handle it
     }
 
+    String widgetName;
+    if (isBuiltin) {
+      widgetName = callee as String;
+    } else {
+      // CompiledWidget - store reference for later build execution
+      final compiledWidget = callee as CompiledWidget;
+      widgetName = compiledWidget.name;
+      
+      // Build args map from positional and named args
+      final args = Map<String, dynamic>.from(namedArgs);
+      args['_compiledWidget'] = compiledWidget; // Store reference for convertToFlutter
+      
+      // Pop positional args from stack
+      for (int i = argCount - 1; i >= 0; i--) {
+        if (stack.isNotEmpty) {
+          args[i.toString()] = stack.removeLast();
+        }
+      }
+      
+      // Pop callee
+      if (stack.isNotEmpty) stack.removeLast();
+      
+      final node = FluxWidgetNode(widgetName, args: args, children: []);
+      
+      // Add to parent collector if exists
+      if (_childrenStack.isNotEmpty) {
+        _childrenStack.last.add(node);
+      }
+      
+      // Push result to stack
+      stack.add(node);
+      return node;
+    }
+
+    // Build args map from positional and named args
     final args = Map<String, dynamic>.from(namedArgs);
-    final stackArgs = stack.sublist(stack.length - argCount);
-    for (int i = 0; i < stackArgs.length; i++) {
-      args[i.toString()] = stackArgs[i];
+    
+    // Pop positional args from stack
+    for (int i = argCount - 1; i >= 0; i--) {
+      if (stack.isNotEmpty) {
+        args[i.toString()] = stack.removeLast();
+      }
     }
     
+    // Pop callee
+    if (stack.isNotEmpty) stack.removeLast();
+    
+    // Handle _children closure (DSL block syntax)
     final childrenClosure = namedArgs['_children'];
     List<FluxWidgetNode> children = [];
     
@@ -373,13 +410,28 @@ class _FluxRiverpodRuntime {
       _vm.executeClosure(childrenClosure, []);
       children = _childrenStack.removeLast();
     }
+    
+    // Handle children: [...] named argument (list of widgets)
+    final childrenArg = args['children'];
+    if (childrenArg is List && children.isEmpty) {
+      for (final item in childrenArg) {
+        if (item is FluxWidgetNode) {
+          children.add(item);
+        }
+      }
+      // Remove from args since it's now in children
+      args.remove('children');
+    }
 
     final node = FluxWidgetNode(widgetName, args: args, children: children);
+    
+    // Add to parent collector if exists
     if (_childrenStack.isNotEmpty) {
       _childrenStack.last.add(node);
     }
     
-    
+    // Push result to stack
+    stack.add(node);
     return node;
   }
 }

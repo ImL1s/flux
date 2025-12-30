@@ -1,0 +1,38 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart
+00:00 +0: FluxRiverpodWidget handles ListView with children
+DEBUG PARSER: Widget ListApp parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget ListApp, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: ListView, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, List<Object?>]
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Item 1": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart:147:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart line 147
+The test description was:
+  FluxRiverpodWidget handles ListView with children
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: FluxRiverpodWidget handles ListView with children [E]
+  Test failed. See exception logs above.
+  The test description was: FluxRiverpodWidget handles ListView with children
+  
+00:00 +0 -1: Some tests failed.

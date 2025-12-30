@@ -291,27 +291,26 @@ class VM {
   }
 
   void _runtimeError(String message) {
-    print("Runtime Error: $message");
+    String sourceLoc = "";
+    if (_frames.isNotEmpty) {
+      final frame = _frames.last;
+      // ip points to next instruction, so look back one
+      final instruction = frame.ip > 0 ? frame.ip - 1 : 0;
+      if (instruction < frame.chunk.lines.length) {
+        final line = frame.chunk.lines[instruction];
+        sourceLoc = " [line $line]";
+      }
+    }
+    print("Runtime Error: $message$sourceLoc");
   }
 
   bool _callValue(Object? callee, int argCount, [Map<String, dynamic> namedArgs = const {}]) {
-    // print('DEBUG RUNTIME: _callValue: ${callee.runtimeType} ($callee), argCount: $argCount, namedArgs: ${namedArgs.keys}');
     // Check if external handler wants to intercept this call
     if (widgetCallHandler != null) {
       final result = widgetCallHandler!(callee, argCount, namedArgs, _stack);
       if (result != null) {
-        // Pop args and callee from stack
-        // namedArgs are already handled/popped by opcode if present? 
-        // No, namedArgs are passed in map. Positional args are on stack.
-        // OpCode.callNamed logic: 
-        // 1. Reads named args. 
-        // 2. Pushes positional args (already there).
-        // 3. Pushes callee (already there).
-        // Wait, stack is [callee, arg1, arg2...]
-        for (int i = 0; i < argCount; i++) _stack.removeLast();
-        _stack.removeLast(); // Pop callee
-        
-        _stack.add(result);
+        // Handler has already managed the stack (popped args/callee, pushed result)
+        // We just return success
         return true;
       }
     }

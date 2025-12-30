@@ -1,0 +1,471 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: (setUpAll)
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: Flux Decoration & EdgeInsets renders Container with simple padding (numeric)
+00:00 +1: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +2: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +3: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +4: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +5: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +6: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +8: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +11: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +13: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +14: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +15: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +16: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +17: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +18: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +19: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +20: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +21: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +22: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +23: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +24: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +25: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +26: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +27: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +28: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +29: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +30: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +31: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +32: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +33: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +33: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
+DEBUG PARSER: Widget App parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget App, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: FloatingActionButton, isState: false
+DEBUG COMPILER: Compiling variable: Icon, isState: false
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, String, String, FluxWidgetNode]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, FluxWidgetNode, String, String, String, FluxWidgetNode]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[ObjClosure, String, String, FluxWidgetNode, String, FluxWidgetNode, String, String, String, FluxWidgetNode, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=3, stack=[ObjClosure, String, String, FluxWidgetNode, String, FluxWidgetNode, String, FluxWidgetNode]
+00:00 +34: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +34: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+DEBUG PARSER: Widget CustomContainer parsed. StateFields: 0
+DEBUG PARSER: Widget _SubWidget parsed. StateFields: 0
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget CustomContainer, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: _SubWidget, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget _SubWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: header, isState: false
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, CompiledWidget, String, FluxWidgetNode]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, List<Object?>]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, Text, String, String, Text]
+00:00 +35: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +36: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +37: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG RUNTIME: Source:       widget TodoApp {
+        state todos = [];
+        state input = "";
+        
+        build {
+          Column {
+            // Input Area
+            Row {
+               Expanded {
+                 TextField(hint: "New Todo", onChanged: fn(val) {
+                     input = val;
+                 })
+               }
+               Button("Add", onPressed: fn() {
+                 if (input != "") {
+                   push(todos, input);
+                   input = "";
+                 }
+               })
+            }
+            
+            // List Area
+            Column {
+               var i = 0;
+               while (i < todos.length) {
+                   var todo = todos[i];
+                   var index = i; // Capture current index
+                   TodoItem(todo: todo, onDelete: fn() {
+                       removeAt(todos, index);
+                   });
+                   i = i + 1;
+               }
+            }
+          }
+        }
+      }
+
+      widget TodoItem {
+        props todo, onDelete;
+        build {
+          Container {
+            Padding(padding: 8.0) {
+              Row {
+                Text(todo)
+                Button("X", onPressed: onDelete)
+              }
+            }
+          }
+        }
+      }
+    
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG PARSER: Found state field: count
+DEBUG PARSER: Widget CounterApp parsed. StateFields: 1
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget CounterApp, State: [count]
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG PARSER: Found state field: todos
+DEBUG PARSER: Found state field: input
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG PARSER: Widget TodoApp parsed. StateFields: 2
+DEBUG PARSER: Widget TodoItem parsed. StateFields: 0
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG VM: getState(count) -> 0
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+Compiling Widget TodoApp, State: [todos, input]
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[ObjClosure, String, String, FluxWidgetNode, String, String, String, String, ObjClosure]
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+BuildCompiler created. _stateFields: [todos, input]
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, List<Object?>]
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Row, isState: false
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG VM: getState(count) -> 0
+DEBUG VM: getState(count) -> 1
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, FluxWidgetNode, String, String, String, String, ObjClosure]
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG COMPILER: Compiling variable: Expanded, isState: false
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, List<Object?>]
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG COMPILER: Compiling variable: TextField, isState: false
+00:00 +39: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: TodoItem, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling variable: removeAt, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: index, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget TodoItem, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: Padding, isState: false
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: onDelete, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=1, namedCount=1, stack=[ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> []
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=1, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> []
+DEBUG VM: getState(input) -> Buy Milk
+DEBUG VM: getState(todos) -> []
+DEBUG VM: getState(input) -> Buy Milk
+DEBUG RUNTIME: NativeFunction push returned null
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=1, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> [Buy Milk]
+DEBUG VM: getState(todos) -> [Buy Milk]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, CompiledWidget, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, double, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=1, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> [Buy Milk]
+Runtime Error: RangeError (length): Invalid value: Not in inclusive range 0..9: 11 [line 23]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=1, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> [Buy Milk]
+DEBUG VM: getState(todos) -> [Buy Milk]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, CompiledWidget, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, double, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=1, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> [Buy Milk]
+Runtime Error: RangeError (length): Invalid value: Not in inclusive range 0..17: 19 [line 23]
+Runtime Error: RangeError (length): Invalid value: Not in inclusive range 0..16: 19 [line 23]
+DEBUG VM: getState(input) -> Walk Dog
+DEBUG VM: getState(todos) -> [Buy Milk]
+DEBUG VM: getState(input) -> Walk Dog
+DEBUG RUNTIME: NativeFunction push returned null
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=1, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> [Buy Milk, Walk Dog]
+DEBUG VM: getState(todos) -> [Buy Milk, Walk Dog]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, CompiledWidget, String, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, double, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, ObjClosure]
+DEBUG OpCode.callNamed: argCount=1, namedCount=1, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, int, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, ObjClosure, String, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> [Buy Milk, Walk Dog]
+DEBUG VM: getState(todos) -> [Buy Milk, Walk Dog]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[FluxWidgetNode, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, ObjClosure, String, String, ObjClosure, String, ObjClosure, String, ObjClosure, int, String, String, int, CompiledWidget, String, String, String, ObjClosure]
+DEBUG VM: getState(todos) -> [Buy Milk, Walk Dog]
+Runtime Error: RangeError (length): Invalid value: Not in inclusive range 0..26: 27 [line 23]
+00:00 +40: D:/OtherProject/mine/flux/packages/flux_flutter/test/inputs_test.dart: Flux Input Widgets TextField renders properties
+00:00 +40: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles ListView with children
+DEBUG PARSER: Widget ListApp parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget ListApp, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: ListView, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, List<Object?>]
+00:00 +41: D:/OtherProject/mine/flux/packages/flux_flutter/test/inputs_test.dart: Flux Input Widgets TextField renders properties
+00:00 +42: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Stack with Alignment
+00:00 +43: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Stack with Alignment
+00:00 +44: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Stack with Alignment
+00:00 +45: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:00 +46: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:00 +47: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:00 +48: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:01 +49: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:01 +50: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:01 +51: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+DEBUG PARSER: Widget Counter parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, ObjClosure]
+00:01 +52: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders primitive Text without style
+00:01 +53: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:01 +54: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:01 +54: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget reads provider value
+DEBUG PARSER: Widget Hello parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Hello, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: getProvider, isState: false
+DEBUG RUNTIME: NativeFunction getProvider returned Guest
+00:01 +55: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:01 +56: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:01 +57: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:01 +58: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:01 +58: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget shows error for missing widget
+DEBUG PARSER: Widget Counter parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:01 +59: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+DEBUG RUNTIME: Source:       widget TaskList {
+        state tasks = "foo";
+        
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Flux ToDo")),
+            body: Column(
+              children: [
+                Text("Debug Message")
+              ]
+            )
+          )
+        }
+      }
+
+      widget AddTaskParam {
+        state newTask = "";
+
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Add Task")),
+            body: Column(
+              children: []
+            )
+          )
+        }
+      }
+      
+DEBUG PARSER: Found state field: tasks
+DEBUG PARSER: Widget TaskList parsed. StateFields: 1
+DEBUG PARSER: Found state field: newTask
+DEBUG PARSER: Widget AddTaskParam parsed. StateFields: 1
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget TaskList, State: [tasks]
+BuildCompiler created. _stateFields: [tasks]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget AddTaskParam, State: [newTask]
+BuildCompiler created. _stateFields: [newTask]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, String, String, FluxWidgetNode]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, FluxWidgetNode, String, String, String, List<Object?>]
+DEBUG OpCode.callNamed: argCount=0, namedCount=2, stack=[ObjClosure, String, String, FluxWidgetNode, String, FluxWidgetNode]
+00:01 +60: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+DEBUG RUNTIME: Source:         widget Main {
+          build {
+            Text("Hello Flux")
+          }
+        }
+      
+DEBUG PARSER: Widget Main parsed. StateFields: 0
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 7
+00:01 +61: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG RUNTIME: Source:         widget Main {
+          build {
+            Column {
+              Text("Item 1")
+              Text("Item 2")
+            }
+          }
+        }
+      
+DEBUG PARSER: Widget Main parsed. StateFields: 0
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 7
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, ObjClosure]
+00:01 +62: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction
+DEBUG RUNTIME: Source:         widget Counter {
+          state count = 0;
+          
+          build {
+            Column {
+              Text("Count: " + toString(count))
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: count
+DEBUG PARSER: Widget Counter parsed. StateFields: 1
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Counter, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 7
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, ObjClosure]
+DEBUG VM: getState(count) -> 0
+DEBUG RUNTIME: NativeFunction toString returned 0
+00:01 +63: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles text field input
+DEBUG RUNTIME: Source:         widget InputTest {
+          state text = "Hello";
+          
+          build {
+            Column {
+              Text("You typed: " + text)
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: text
+DEBUG PARSER: Widget InputTest parsed. StateFields: 1
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget InputTest, State: [text]
+BuildCompiler created. _stateFields: [text]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: text, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 7
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, ObjClosure]
+DEBUG VM: getState(text) -> Hello
+00:01 +64: All tests passed!

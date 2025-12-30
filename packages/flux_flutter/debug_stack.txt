@@ -1,18 +1,5 @@
 00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart
-00:00 +0: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
-DEBUG PARSER: Widget App parsed. StateFields: 0
-DEBUG COMPILER: Unit has 1 declarations
-DEBUG COMPILER: Compiling decl type: WidgetDecl
-Compiling Widget App, State: []
-BuildCompiler created. _stateFields: []
-DEBUG COMPILER: Compiling variable: Scaffold, isState: false
-DEBUG COMPILER: Compiling variable: AppBar, isState: false
-DEBUG COMPILER: Compiling variable: Text, isState: false
-DEBUG COMPILER: Compiling variable: Center, isState: false
-DEBUG COMPILER: Compiling variable: Text, isState: false
-DEBUG COMPILER: Compiling variable: FloatingActionButton, isState: false
-DEBUG COMPILER: Compiling variable: Icon, isState: false
-00:00 +1: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+00:00 +0: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
 DEBUG PARSER: Widget CustomContainer parsed. StateFields: 0
 DEBUG PARSER: Widget _SubWidget parsed. StateFields: 0
 DEBUG COMPILER: Unit has 2 declarations
@@ -28,7 +15,10 @@ Compiling Widget _SubWidget, State: []
 BuildCompiler created. _stateFields: []
 DEBUG COMPILER: Compiling variable: Container, isState: false
 DEBUG COMPILER: Compiling variable: header, isState: false
-Runtime Error: Expected 0 arguments but got 1. (Closure: CustomContainer.build)
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, CompiledWidget, String, FluxWidgetNode]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, CompiledWidget, ObjClosure, FluxWidgetNode, String, String, FluxWidgetNode]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, CompiledWidget, List<Object?>]
+Runtime Error: type 'CompiledWidget' is not a subtype of type 'String' in type cast [line 3]
 ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following TestFailure was thrown running a test:
 Expected: exactly one matching candidate
@@ -50,33 +40,8 @@ This was caught by the test expectation on the following line:
 The test description was:
   FluxRiverpodWidget handles recursive argument conversion (nested widgets)
 ════════════════════════════════════════════════════════════════════════════════════════════════════
-00:00 +1 -1: FluxRiverpodWidget handles recursive argument conversion (nested widgets) [E]
+00:00 +0 -1: FluxRiverpodWidget handles recursive argument conversion (nested widgets) [E]
   Test failed. See exception logs above.
   The test description was: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
   
-00:00 +1 -1: FluxRiverpodWidget handles Button onPressed callback
-DEBUG PARSER: Found state field: count
-DEBUG PARSER: Widget CounterApp parsed. StateFields: 1
-DEBUG COMPILER: Unit has 1 declarations
-DEBUG COMPILER: Compiling decl type: WidgetDecl
-Compiling Widget CounterApp, State: [count]
-BuildCompiler created. _stateFields: [count]
-DEBUG COMPILER: Compiling variable: Column, isState: false
-DEBUG COMPILER: Compiling variable: Text, isState: false
-DEBUG COMPILER: Compiling variable: count, isState: true
-DEBUG COMPILER: Compiling variable: Button, isState: false
-DEBUG COMPILER: Compiling variable: count, isState: true
-DEBUG VM: getState(count) -> 0
-DEBUG VM: getState(count) -> 0
-DEBUG VM: getState(count) -> 1
-00:00 +2 -1: FluxRiverpodWidget handles ListView with children
-DEBUG PARSER: Widget ListApp parsed. StateFields: 0
-DEBUG COMPILER: Unit has 1 declarations
-DEBUG COMPILER: Compiling decl type: WidgetDecl
-Compiling Widget ListApp, State: []
-BuildCompiler created. _stateFields: []
-DEBUG COMPILER: Compiling variable: ListView, isState: false
-DEBUG COMPILER: Compiling variable: Text, isState: false
-DEBUG COMPILER: Compiling variable: Text, isState: false
-DEBUG COMPILER: Compiling variable: Text, isState: false
-00:00 +3 -1: Some tests failed.
+00:00 +0 -1: Some tests failed.

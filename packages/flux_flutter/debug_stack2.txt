@@ -1,0 +1,21 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart
+00:00 +0: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+DEBUG PARSER: Widget CustomContainer parsed. StateFields: 0
+DEBUG PARSER: Widget _SubWidget parsed. StateFields: 0
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget CustomContainer, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: _SubWidget, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget _SubWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: header, isState: false
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, CompiledWidget, String, FluxWidgetNode]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[ObjClosure, String, String, List<Object?>]
+DEBUG OpCode.callNamed: argCount=0, namedCount=1, stack=[FluxWidgetNode, ObjClosure, Text, String, String, Text]
+00:00 +1: All tests passed!

@@ -122,7 +122,9 @@ class _FluxWidgetState extends State<FluxWidget> {
       
       // Execute the build method and convert to Flutter widget
       final fluxTree = _runtime.executeBuild(widgetDef);
+
       final flutterWidget = _runtime._convertToFlutter(fluxTree);
+
       
       setState(() {
         _builtWidget = flutterWidget;
@@ -229,6 +231,9 @@ class FluxRuntime {
       });
     }
     
+    // Set widget handler before initial execution to intercept any widget calls during compilation
+    _vm.widgetCallHandler = _handleWidgetCall;
+    
     _vm.runChunk(function.chunk);
     
     // Extract widget definitions from globals
@@ -269,6 +274,7 @@ class FluxRuntime {
     if (widget == null) return Text('Widget not found: $name');
     
     final node = executeBuild(widget, args);
+    debugPrint('DEBUG renderWidget: node=$node');
     return _convertToFlutter(node);
   }
 
@@ -286,21 +292,30 @@ class FluxRuntime {
       positionalArgs.add(args[name]);
     }
     
-    final interpretResult = _vm.executeClosure(closure, positionalArgs);
-    
-    // Clean up handler
-    _vm.widgetCallHandler = null;
+    FluxWidgetNode? builtNode;
+    try {
+      final interpretResult = _vm.executeClosure(closure, positionalArgs);
+      
+      // Clean up handler
+      _vm.widgetCallHandler = null;
 
-    if (interpretResult != InterpretResult.ok) {
-      // If execution failed, the stack might not contain a FluxWidgetNode
-      _vm.stack.clear(); 
-      return FluxWidgetNode('Error', args: {'text': 'Build error'});
+      if (interpretResult != InterpretResult.ok) {
+        // If execution failed, the stack might not contain a FluxWidgetNode
+        _vm.stack.clear(); 
+        return FluxWidgetNode('Error', args: {'text': 'Build error'});
+      }
+      
+      // Get result from stack (build returns a value)
+      final result = _vm.stack.isNotEmpty ? _vm.stack.last : null;
+      
+      if (result is FluxWidgetNode) {
+        builtNode = result;
+      }
+    } catch (e) {
+      debugPrint('Flux runtime error during build: $e');
     }
-    
-    // Get result from stack (build returns a value)
-    final builtNode = _vm.stack.isNotEmpty ? _vm.stack.removeLast() : null;
-    
-    if (builtNode is FluxWidgetNode) {
+
+    if (builtNode != null) {
       return builtNode;
     }
     
@@ -322,15 +337,28 @@ class FluxRuntime {
           .map((child) => _convertToFlutter(child))
           .toList();
       
-      // Process args to wrap closures
-      final processedArgs = Map<String, dynamic>.from(fluxNode.args);
-      for (final key in processedArgs.keys) {
-        final value = processedArgs[key];
-        if (value is ObjClosure) {
-           processedArgs[key] = (List<Object?> callArgs) {
-             // Execute closure on the VM
-             _vm.executeClosure(value, callArgs);
-           };
+      // Process args: convert FluxWidgetNode to Flutter Widget, wrap closures
+      final processedArgs = <String, dynamic>{};
+      for (final key in fluxNode.args.keys) {
+        final value = fluxNode.args[key];
+        if (value is FluxWidgetNode) {
+          // Recursively convert nested FluxWidgetNode to Flutter Widget
+          processedArgs[key] = _convertToFlutter(value);
+        } else if (value is List) {
+          // Handle list args (e.g., children: [...])
+          processedArgs[key] = value.map((item) {
+            if (item is FluxWidgetNode) {
+              return _convertToFlutter(item);
+            }
+            return item;
+          }).toList();
+        } else if (value is ObjClosure) {
+          processedArgs[key] = (List<Object?> callArgs) {
+            // Execute closure on the VM
+            _vm.executeClosure(value, callArgs);
+          };
+        } else {
+          processedArgs[key] = value;
         }
       }
 
@@ -348,8 +376,11 @@ class FluxRuntime {
   /// Handle widget constructor calls during build execution
   Object? _handleWidgetCall(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack) {
     // Check if this is a widget constructor call or a user-defined widget
-    final isBuiltin = callee is String && _widgetConstructors.contains(callee);
+    // Check both static list AND dynamically registered bindings
+    final isBuiltin = callee is String && (_widgetConstructors.contains(callee) || FluxBindings.get(callee) != null);
     final isCustom = callee is CompiledWidget;
+    
+
 
     if (isBuiltin || isCustom) {
       final name = isBuiltin ? callee : (callee as CompiledWidget).name;

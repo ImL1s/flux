@@ -1,0 +1,69 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: Flux ToDo Demo Complete App Flow
+DEBUG RUNTIME: Source:       widget TaskList {
+        state tasks = "foo";
+        
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Flux ToDo")),
+            body: Column(
+              children: [
+                Text("Debug Message")
+              ]
+            )
+          )
+        }
+      }
+
+      widget AddTaskParam {
+        state newTask = "";
+
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Add Task")),
+            body: Column(
+              children: []
+            )
+          )
+        }
+      }
+      
+DEBUG PARSER: Found state field: tasks
+DEBUG PARSER: Widget TaskList parsed. StateFields: 1
+DEBUG PARSER: Found state field: newTask
+DEBUG PARSER: Widget AddTaskParam parsed. StateFields: 1
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget TaskList, State: [tasks]
+BuildCompiler created. _stateFields: [tasks]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget AddTaskParam, State: [newTask]
+BuildCompiler created. _stateFields: [newTask]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG RUNTIME: _callValue: ObjClosure (<closure TaskList.build>), argCount: 0, namedArgs: (), widgetCallHandler: true
+DEBUG _handleWidgetCall: callee=<closure TaskList.build>(ObjClosure), isBuiltin=false, isCustom=false, namedArgs=()
+DEBUG RUNTIME: _callValue: String (Text), argCount: 1, namedArgs: (), widgetCallHandler: true
+DEBUG _handleWidgetCall: callee=Text(String), isBuiltin=true, isCustom=false, namedArgs=()
+DEBUG RUNTIME: _callValue: String (AppBar), argCount: 0, namedArgs: (title), widgetCallHandler: true
+DEBUG _handleWidgetCall: callee=AppBar(String), isBuiltin=true, isCustom=false, namedArgs=(title)
+DEBUG RUNTIME: _callValue: String (Text), argCount: 1, namedArgs: (), widgetCallHandler: true
+DEBUG _handleWidgetCall: callee=Text(String), isBuiltin=true, isCustom=false, namedArgs=()
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (children), widgetCallHandler: true
+DEBUG _handleWidgetCall: callee=Column(String), isBuiltin=true, isCustom=false, namedArgs=(children)
+DEBUG RUNTIME: _callValue: String (Scaffold), argCount: 0, namedArgs: (body, appBar), widgetCallHandler: true
+DEBUG _handleWidgetCall: callee=Scaffold(String), isBuiltin=true, isCustom=false, namedArgs=(body, appBar)
+DEBUG _buildWidget: fluxTree=FluxWidgetNode(Scaffold, args: {body: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {0: Debug Message}, children: [])]}, children: []), appBar: FluxWidgetNode(AppBar, args: {title: FluxWidgetNode(Text, args: {0: Flux ToDo}, children: [])}, children: [])}, children: [])
+DEBUG _buildWidget: flutterWidget=Scaffold
+00:00 +1: (tearDownAll)
+00:00 +1: All tests passed!
