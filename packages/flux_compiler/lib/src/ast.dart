@@ -75,10 +75,10 @@ class AssignExpr extends Expression {
 class CallExpr extends Expression {
   final Expression callee;
   final List<Expression> arguments;
-  final List<String>? namedArguments;
+  final Map<String, Expression> namedArguments;
 
   const CallExpr(this.callee, this.arguments,
-      {this.namedArguments, required super.line, required super.column});
+      {this.namedArguments = const {}, required super.line, required super.column});
 }
 
 /// Property access (a.b)

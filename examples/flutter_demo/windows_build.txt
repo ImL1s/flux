@@ -1,0 +1,2 @@
+Building Windows application...                                    22.5s
+√ Built build\windows\x64\runner\Debug\flutter_demo.exe

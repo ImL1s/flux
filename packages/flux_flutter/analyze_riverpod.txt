@@ -1,0 +1,7 @@
+Analyzing riverpod_integration.dart...                          
+
+warning - The operand can't be 'null', so the condition is always 'true' - lib\src\riverpod_integration.dart:226:49 - unnecessary_null_comparison
+warning - The '!' will have no effect because the receiver can't be null - lib\src\riverpod_integration.dart:227:51 - unnecessary_non_null_assertion
+  error - Too many positional arguments: 1 expected, but 3 found - lib\src\riverpod_integration.dart:287:45 - extra_positional_arguments_could_be_named
+
+3 issues found. (ran in 1.8s)

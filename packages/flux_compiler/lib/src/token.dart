@@ -44,6 +44,7 @@ enum TokenType {
   throw_,
   break_,
   continue_,
+  props,
 
   // Operators
   plus, // +
@@ -145,4 +146,5 @@ const keywords = <String, TokenType>{
   'throw': TokenType.throw_,
   'break': TokenType.break_,
   'continue': TokenType.continue_,
+  'props': TokenType.props,
 };

@@ -22,6 +22,9 @@ class FluxBindings {
   /// Get a function by name
   static FluxFunction? getFunction(String name) => _functions[name];
   
+  /// Get all registered functions
+  static Map<String, FluxFunction> get functions => _functions;
+  
   /// Initialize default bindings
   static void initDefaults() {
     _initWidgets();
@@ -64,21 +67,48 @@ class FluxBindings {
     // Button widget (using ElevatedButton)
     register('Button', (args, children) {
       final label = args['text'] as String? ?? args['0'] as String? ?? 'Button';
-      final onPressed = args['onPressed'] as VoidCallback?;
+      final onPressed = args['onPressed'];
+      
       return ElevatedButton(
-        onPressed: onPressed ?? () {},
+        onPressed: onPressed != null 
+            ? () => _invokeCallback(onPressed, []) 
+            : null,
         child: Text(label),
       );
     });
     
-    // Center widget
+    // Layout widgets
     register('Center', (args, children) {
       return Center(
         child: children.isNotEmpty ? children.first : null,
       );
     });
     
-    // Padding widget
+    register('Expanded', (args, children) {
+      final flex = args['flex'] as int? ?? 1;
+      return Expanded(
+        flex: flex,
+        child: children.isNotEmpty ? children.first : const SizedBox.shrink(),
+      );
+    });
+    
+    register('Flexible', (args, children) {
+      final flex = args['flex'] as int? ?? 1;
+      return Flexible(
+        flex: flex,
+        child: children.isNotEmpty ? children.first : const SizedBox.shrink(),
+      );
+    });
+    
+    register('SizedBox', (args, children) {
+      final width = (args['width'] ?? args['0'])?.toDouble();
+      final height = (args['height'] ?? args['1'])?.toDouble();
+      return SizedBox(
+        width: width,
+        height: height,
+        child: children.isNotEmpty ? children.first : null,
+      );
+    });
     register('Padding', (args, children) {
       final padding = args['padding'] as double? ?? 8.0;
       return Padding(
@@ -364,6 +394,30 @@ class FluxBindings {
     registerFunction('log', (args) {
       final message = args.isNotEmpty ? args[0].toString() : '';
       debugPrint('[Flux Log]: $message');
+      return null;
+    });
+    
+    // push(list, item) - Add item to list
+    registerFunction('push', (args) {
+      if (args.length < 2) return null;
+      final list = args[0];
+      final item = args[1];
+      if (list is List) {
+        list.add(item);
+      }
+      return null;
+    });
+    
+    // removeAt(list, index) - Remove item at index
+    registerFunction('removeAt', (args) {
+      if (args.length < 2) return null;
+      final list = args[0];
+      final index = args[1];
+      if (list is List && index is int) {
+        if (index >= 0 && index < list.length) {
+          list.removeAt(index);
+        }
+      }
       return null;
     });
   }

@@ -5,7 +5,7 @@ publish_to: none
 homepage: https://github.com/user/flux
 
 environment:
-  sdk: ^3.6.2
+  sdk: ^3.6.0
   flutter: ">=1.17.0"
 
 dependencies:
@@ -15,6 +15,7 @@ dependencies:
     path: ../flux_compiler
   flux_vm:
     path: ../flux_vm
+  flutter_riverpod: ^2.6.1
 
 dev_dependencies:
   flutter_test:

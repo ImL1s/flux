@@ -25,8 +25,9 @@ class CompiledFunction {
   final String name;
   final int arity;
   final bool isAsync;
+  final List<String> paramNames;
   
-  CompiledFunction(this.name, this.chunk, {this.arity = 0, this.isAsync = false});
+  CompiledFunction(this.name, this.chunk, {this.arity = 0, this.isAsync = false, this.paramNames = const []});
   
   @override
   String toString() => "<fn $name>";
@@ -86,9 +87,15 @@ class Compiler {
 
   Compiler({CompilationUnit? unit}) {
       _function = CompiledFunction("script", Chunk());
+      
+      // Reserve slot 0 for script closure
+      _locals.add(Local("", 0));
+      
       if (unit != null) {
+          print('DEBUG COMPILER: Unit has ${unit.declarations.length} declarations');
           // compile everything
           for (final decl in unit.declarations) {
+              print('DEBUG COMPILER: Compiling decl type: ${decl.runtimeType}');
               compile(decl);
           }
       }
@@ -156,14 +163,32 @@ class Compiler {
        stateNames.add(stateField.name);
      }
      
+     // DEBUG
+     print('Compiling Widget ${stmt.name}, State: $stateNames');
+     
      // Create build method compiler with state context
-     final buildCompiler = Compiler._inner(this, "${stmt.name}.build");
-     buildCompiler._stateFields = stateNames;  // Inject state field names
-     
-     buildCompiler._compileExpression(stmt.buildBlock.body);
-     buildCompiler.chunk.writeOp(OpCode.return_, stmt.line);
-     
-     final buildFunc = buildCompiler._function;
+      final buildCompiler = Compiler._inner(this, "${stmt.name}.build");
+      buildCompiler._stateFields = stateNames;  // Inject state field names
+      buildCompiler._function = CompiledFunction(
+        "${stmt.name}.build", 
+        buildCompiler.chunk,
+        arity: stmt.props.length,
+        paramNames: stmt.props.map((p) => p.name).toList(),
+      );
+      
+      // DEBUG
+      print('BuildCompiler created. _stateFields: ${buildCompiler._stateFields}');
+      
+      // Begin scope and add props as local variables
+      buildCompiler._beginScope();
+      for (final prop in stmt.props) {
+        buildCompiler._addLocal(prop.name);
+      }
+      
+      buildCompiler._compileExpression(stmt.buildBlock.body);
+      buildCompiler.chunk.writeOp(OpCode.return_, stmt.line);
+      
+      final buildFunc = buildCompiler._function;
      
      // Create CompiledWidget with state field information
      final widgetObj = CompiledWidget(
@@ -196,10 +221,14 @@ class Compiler {
       stmt.name, 
       funcCompiler.chunk,
       arity: stmt.parameters.length,
+      paramNames: stmt.parameters.map((p) => p.name).toList(),
     );
     
     // Begin a scope for parameters
     funcCompiler._beginScope();
+    
+    // Reserve slot 0 for the function instance (closure) or 'this'
+    funcCompiler._locals.add(Local("", 0));
     
     // Add parameters as local variables
     for (final param in stmt.parameters) {
@@ -250,10 +279,12 @@ class Compiler {
       "lambda", 
       funcCompiler.chunk,
       arity: expr.parameters.length,
+      paramNames: expr.parameters.map((p) => p.name).toList(),
     );
     
     // Begin scope for parameters
     funcCompiler._beginScope();
+    funcCompiler._locals.add(Local("", 0)); // Reserve slot 0
     for (final param in expr.parameters) {
       funcCompiler._addLocal(param.name);
     }
@@ -502,7 +533,18 @@ class Compiler {
        _compileIndexAssign(expr);
     } else if (expr is LambdaExpr) {
        _compileLambda(expr);
+    } else if (expr is GetExpr) {
+       _compileGetExpr(expr);
     }
+  }
+  
+  void _compileGetExpr(GetExpr expr) {
+    // Compile the object first
+    _compileExpression(expr.object);
+    // Emit getProperty with property name
+    final nameIdx = chunk.addConstant(expr.name);
+    chunk.writeOp(OpCode.getProperty, expr.line);
+    chunk.write(nameIdx, expr.line);
   }
   
   void _compileList(ListExpr expr) {
@@ -565,6 +607,8 @@ class Compiler {
         break;
       case TokenType.less: chunk.writeOp(OpCode.less, expr.line); break;
       case TokenType.greater: chunk.writeOp(OpCode.greater, expr.line); break;
+      case TokenType.lessEqual: chunk.writeOp(OpCode.lessEqual, expr.line); break;
+      case TokenType.greaterEqual: chunk.writeOp(OpCode.greaterEqual, expr.line); break;
       default: break; 
     }
   }
@@ -591,12 +635,12 @@ class Compiler {
   }
 
   void _compileVariable(VariableExpr expr) {
-      // Check if this is a state field access
-      if (_isStateField(expr.name)) {
-          final idx = chunk.addConstant(expr.name);
-          chunk.writeOp(OpCode.getState, expr.line);
-          chunk.write(idx, expr.line);
-          return;
+      final isState = _isStateField(expr.name);
+      print('DEBUG COMPILER: Compiling variable: ${expr.name}, isState: $isState');
+      if (isState) {
+        chunk.writeOp(OpCode.getState, expr.line);
+        chunk.write(chunk.addConstant(expr.name), expr.line);
+        return;
       }
       
       int arg = _resolveLocal(expr.name);
@@ -646,20 +690,36 @@ class Compiler {
   }
 
   void _compileCall(CallExpr expr) {
-       if (expr.callee is VariableExpr && (expr.callee as VariableExpr).name == 'print') {
-           if (expr.arguments.length != 1) throw Exception("print() takes 1 argument.");
-           _compileExpression(expr.arguments[0]);
-           chunk.writeOp(OpCode.print, expr.line);
-           chunk.writeOp(OpCode.nil, expr.line); 
-           return;
-       }
+    if (expr.callee is VariableExpr && (expr.callee as VariableExpr).name == 'print') {
+      if (expr.arguments.length != 1) throw Exception("print() takes 1 argument.");
+      _compileExpression(expr.arguments[0]);
+      chunk.writeOp(OpCode.print, expr.line);
+      chunk.writeOp(OpCode.nil, expr.line); 
+      return;
+    }
 
-       _compileExpression(expr.callee);
-       for (final arg in expr.arguments) {
-           _compileExpression(arg);
-       }
-       chunk.writeOp(OpCode.call, expr.line);
-       chunk.write(expr.arguments.length, expr.line);
+    _compileExpression(expr.callee);
+    
+    // Positional arguments
+    for (final arg in expr.arguments) {
+      _compileExpression(arg);
+    }
+    
+    // Named arguments
+    if (expr.namedArguments.isEmpty) {
+      chunk.writeOp(OpCode.call, expr.line);
+      chunk.write(expr.arguments.length, expr.line);
+    } else {
+      // Push named argument pairs (name, value)
+      for (final entry in expr.namedArguments.entries) {
+        chunk.writeOp(OpCode.constant, expr.line);
+        chunk.write(chunk.addConstant(entry.key), expr.line);
+        _compileExpression(entry.value);
+      }
+      chunk.writeOp(OpCode.callNamed, expr.line);
+      chunk.write(expr.arguments.length, expr.line);
+      chunk.write(expr.namedArguments.length, expr.line);
+    }
   }
 
   int _emitJump(OpCode op, int line) {

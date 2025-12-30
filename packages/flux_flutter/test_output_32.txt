@@ -1,0 +1,413 @@
+[ +148 ms] Found 1 files which will be executed as Widget Tests.
+[   +8 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[   +3 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[  +46 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[  +29 ms] Skipping pub get: version match.
+[ +225 ms] running test package with arguments: [--no-color, --chain-stack-traces, --, file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart?]
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+[ +118 ms] test 0: starting test D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+[   +5 ms] Stopping scan for flutter_test_config.dart; found project root at D:\OtherProject\mine\flux\packages\flux_flutter
+[   +2 ms] Compiler will use the following file as its incremental dill file: C:\Users\aa223\AppData\Local\Temp\flutter_tools.80b3c5fb\flutter_test_compiler.de140186\output.dill
+[        ] Listening to compiler controller...
+[   +5 ms] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.80b3c5fb/flutter_test_listener.5e8515e5/listener.dart
+[  +98 ms] No packages with native assets. Skipping native assets compilation.
+[        ] Writing native assets yaml to file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml.
+[   +9 ms] Writing D:\OtherProject\mine\flux\packages\flux_flutter\build\native_assets\windows\native_assets.yaml done.
+[   +2 ms] D:\APP\flutter\bin\cache\dart-sdk\bin\dartaotruntime.exe D:\APP\flutter\bin\cache\dart-sdk\bin\snapshots\frontend_server_aot.dart.snapshot --sdk-root D:\APP\flutter\bin\cache\artifacts\engine\common\flutter_patched_sdk/ --incremental --no-print-incremental-dependencies --target=flutter --experimental-emit-debug-metadata --output-dill C:\Users\aa223\AppData\Local\Temp\flutter_tools.80b3c5fb\flutter_test_compiler.de140186\output.dill --packages D:\OtherProject\mine\flux\packages\flux_flutter\.dart_tool\package_config.json -Ddart.vm.profile=false -Ddart.vm.product=false --enable-asserts --track-widget-creation --initialize-from-dill D:\OtherProject\mine\flux\packages\flux_flutter\build\test_cache\build\cache.dill.track.dill --native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml --verbosity=error
+[  +10 ms] <- native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml
+[        ] <- compile file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.80b3c5fb/flutter_test_listener.5e8515e5/listener.dart
+[+1214 ms] <- accept
+[        ] <- reset
+[        ] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.80b3c5fb/flutter_test_listener.5e8515e5/listener.dart took 1335ms
+[        ] test 0: starting test device
+[   +2 ms] test 0: awaiting connection to test device
+[        ] test 0: VM Service uri is not available
+[   +2 ms] test 0: test harness socket server is running at port:52704
+[   +2 ms] Using this directory for fonts configuration: C:\Users\aa223\AppData\Local\Temp\flutter_tools.80b3c5fb\flutter_test_fonts.3d1052ad
+[   +1 ms] test 0: Starting flutter_tester process with command=[D:\APP\flutter\bin\cache\artifacts\engine\windows-x64\flutter_tester.exe, --disable-vm-service, --enable-checked-mode, --verify-entry-points, --enable-software-rendering, --skia-deterministic-rendering, --enable-dart-profiling, --non-interactive, --use-test-fonts, --disable-asset-fonts, --packages=D:\OtherProject\mine\flux\packages\flux_flutter\.dart_tool\package_config.json, --flutter-assets-dir=D:\OtherProject\mine\flux\packages\flux_flutter\build\unit_test_assets, C:\Users\aa223\AppData\Local\Temp\flutter_tools.80b3c5fb\flutter_test_listener.5e8515e5\listener.dart.dill], environment={FLUTTER_TEST: true, FONTCONFIG_FILE: C:\Users\aa223\AppData\Local\Temp\flutter_tools.80b3c5fb\flutter_test_fonts.3d1052ad/fonts.conf, SERVER_PORT: 52704, APP_NAME: flux_flutter, UNIT_TEST_ASSETS: D:\OtherProject\mine\flux\packages\flux_flutter\build\unit_test_assets, PATH: D:\OtherProject\mine\flux\packages\flux_flutter\build\native_assets\windows\;C:\Program Files\PowerShell\7;C:\Program Files\Eclipse Adoptium\jdk-21.0.9.10-hotspot\bin;C:\Python311\Scripts\;C:\Python311\;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\APP\flutter\bin;C:\Users\aa223\AppData\Local\Pub\Cache\bin;C:\ProgramData\chocolatey\bin;c:\Users\aa223\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\aa223\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\aa223\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\GitHub CLI\;D:\APP\controlmymonitor;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\PowerShell\7\;C:\Users\aa223\.local\bin\;C:\Program Files\dotnet\;C:\Program Files\Go\bin;C:\Program Files\cursor\resources\app\bin;C:\Users\aa223\bin;C:\Users\aa223\.cargo\bin;C:\Program Files\PowerShell\7;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\APP\flutter\bin;C:\Users\aa223\AppData\Local\Pub\Cache\bin;C:\ProgramData\chocolatey\bin;c:\Users\aa223\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\aa223\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\aa223\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\GitHub CLI\;D:\APP\controlmymonitor;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\PowerShell\7\;C:\Users\aa223\.local\bin\;;C:\Program Files\PowerShell\7;D:\APP\flutter\bin\;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDI;D:\APP\maestro\maestro\bin;C:\Users\aa223\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\aa223\AppData\Local\Programs\Ollama;D:\APP\Kiro\bin;C:\Users\aa223\AppData\Local\Microsoft\WindowsApps;C:\Users\aa223\AppData\Local\Microsoft\WinGet\Links;D:\APP\Antigravity\bin;C:\Users\aa223\go\bin;D:\APP\Warp\bin;C:\Users\aa223\AppData\Local\PowerToys\DSCModules\;D:\APP\flutter\bin\mingit\cmd}
+[  +24 ms] test 0: Started flutter_tester process at pid 171316
+[ +239 ms] test 0: connected to test device, now awaiting test result
+[        ] test 0: Waiting for test harness or tests to finish
+00:00 +0: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG RUNTIME: Source:       widget TodoApp {
+        state todos = [];
+        state input = "";
+        
+        build {
+          Column {
+            // Input Area
+            Row {
+               Expanded {
+                 TextField(hint: "New Todo", onChanged: fn(val) {
+                     input = val;
+                 })
+               }
+               Button("Add", onPressed: fn() {
+                 if (input != "") {
+                   push(todos, input);
+                   input = "";
+                 }
+               })
+            }
+            
+            // List Area
+            Column {
+               var i = 0;
+               while (i < todos.length) {
+                   var todo = todos[i];
+                   var index = i; // Capture current index
+                   TodoItem(todo: todo, onDelete: fn() {
+                       removeAt(todos, index);
+                   });
+                   i = i + 1;
+               }
+            }
+          }
+        }
+      }
+
+      widget TodoItem {
+        props todo, onDelete;
+        build {
+          Container {
+            Padding(padding: 8.0) {
+              Row {
+                Text(todo)
+                Button("X", onPressed: onDelete)
+              }
+            }
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: todos
+DEBUG PARSER: Found state field: input
+DEBUG PARSER: Widget TodoApp parsed. StateFields: 2
+DEBUG PARSER: Widget TodoItem parsed. StateFields: 0
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget TodoApp, State: [todos, input]
+BuildCompiler created. _stateFields: [todos, input]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling variable: Expanded, isState: false
+DEBUG COMPILER: Compiling variable: TextField, isState: false
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: TodoItem, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling variable: removeAt, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: index, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget TodoItem, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: Padding, isState: false
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: onDelete, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Row, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Row (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Expanded), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Expanded, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Expanded (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (TextField), argCount: 0, namedArgs: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall intercepted: TextField, args: 0, named: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall matches widget: TextField (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Button, args: 1, named: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Button (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Row, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Row (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Expanded), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Expanded, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Expanded (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (TextField), argCount: 0, namedArgs: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall intercepted: TextField, args: 0, named: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall matches widget: TextField (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Button, args: 1, named: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Button (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+Runtime Error: RangeError (length): Invalid value: Valid value range is empty: -1
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: NativeFunction (<native fn push>), argCount: 2, namedArgs: ()
+DEBUG RUNTIME: NativeFunction push returned null
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Row, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Row (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Expanded), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Expanded, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Expanded (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (TextField), argCount: 0, namedArgs: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall intercepted: TextField, args: 0, named: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall matches widget: TextField (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Button, args: 1, named: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Button (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Row, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Row (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Expanded), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Expanded, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Expanded (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (TextField), argCount: 0, namedArgs: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall intercepted: TextField, args: 0, named: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall matches widget: TextField (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Button, args: 1, named: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Button (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+Runtime Error: RangeError (length): Invalid value: Valid value range is empty: -1
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: NativeFunction (<native fn push>), argCount: 2, namedArgs: ()
+DEBUG RUNTIME: NativeFunction push returned null
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Row, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Row (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Expanded), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Expanded, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Expanded (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (TextField), argCount: 0, namedArgs: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall intercepted: TextField, args: 0, named: (onChanged, hint)
+DEBUG RUNTIME: _handleWidgetCall matches widget: TextField (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Button, args: 1, named: (onPressed)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Button (isBuiltin: true)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _handleWidgetCall intercepted: Column, args: 0, named: (_children)
+DEBUG RUNTIME: _handleWidgetCall matches widget: Column (isBuiltin: true)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _handleWidgetCall intercepted: <closure lambda>, args: 0, named: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Buy Milk": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart:109:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart line 109
+The test description was:
+  E2E: Todo App (Input, State Update, List Rendering)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: E2E: Todo App (Input, State Update, List Rendering) [E]
+  Test failed. See exception logs above.
+  The test description was: E2E: Todo App (Input, State Update, List Rendering)
+  
+[ +957 ms] test 0: Test harness is no longer needed by test process
+[        ] test 0: finished
+[        ] test 0: cleaning up...
+[        ] test 0: ensuring test device is terminated.
+[        ] test 0: Terminating flutter_tester process
+[        ] test 0: Shutting down DevTools server
+[        ] test 0: Test process is no longer needed by test harness
+[        ] test 0: Shutting down test harness socket server
+[  +14 ms] test 0: flutter_tester process at pid 171316 exited with code=-1
+[        ] test 0: deleting temporary directory
+[   +4 ms] test 0: finished
+00:00 +0 -1: Some tests failed.
+[   +5 ms] Deleting C:\Users\aa223\AppData\Local\Temp\flutter_tools.80b3c5fb\flutter_test_compiler.de140186...
+[   +6 ms] killing pid 65528
+[  +17 ms] Deleting C:\Users\aa223\AppData\Local\Temp\flutter_tools.80b3c5fb\flutter_test_fonts.3d1052ad...
+[   +3 ms] test package returned with exit code 1
+[        ] Runtime for phase TestRunner: Wall-clock: 0:00:02.758537; combined: 0:00:02.758557.
+[        ] Runtime for phase Compile: Wall-clock: 0:00:01.336084; combined: 0:00:01.336096.
+[        ] Runtime for phase Run: Wall-clock: 0:00:01.230802; combined: 0:00:01.230805.
+[        ] Runtime for phase CoverageTotal: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
+[        ] Runtime for phase CoverageCollect: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
+[        ] Runtime for phase CoverageParseJson: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
+[        ] Runtime for phase CoverageAddHitmap: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
+[        ] Runtime for phase CoverageDataCollect: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
+[        ] Runtime for phase WatcherFinishedTest: Wall-clock: 0:00:00.000495; combined: 0:00:00.000497.
+[   +4 ms] "flutter test" took 3,079ms.
+[  +43 ms] 
+           #0      throwToolExit (package:flutter_tools/src/base/common.dart:10:3)
+           #1      TestCommand.runCommand (package:flutter_tools/src/commands/test.dart:651:7)
+           <asynchronous suspension>
+           #2      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1450:27)
+           <asynchronous suspension>
+           #3      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+           <asynchronous suspension>
+           #4      CommandRunner.runCommand (package:args/command_runner.dart:212:13)
+           <asynchronous suspension>
+           #5      FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:421:9)
+           <asynchronous suspension>
+           #6      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+           <asynchronous suspension>
+           #7      FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:364:5)
+           <asynchronous suspension>
+           #8      run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:131:9)
+           <asynchronous suspension>
+           #9      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:153:19)
+           <asynchronous suspension>
+           #10     main (package:flutter_tools/executable.dart:94:3)
+           <asynchronous suspension>
+
+
+[  +22 ms] ensureAnalyticsSent: 20ms
+[        ] Running 2 shutdown hooks
+[   +1 ms] Shutdown hooks complete
+[  +23 ms] exiting with code 1

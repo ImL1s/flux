@@ -1,0 +1,148 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart
+00:00 +0: FluxRiverpodWidget renders widget with Riverpod provider
+DEBUG PARSER: Widget Counter parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: getProvider, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure Counter.build>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: Counter.build, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: NativeFunction (<native fn getProvider>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: NativeFunction getProvider returned 0
+DEBUG RUNTIME: _callValue: String (Text), argCount: 1, namedArgs: ()
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing Count:: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart:44:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart line 44
+The test description was:
+  renders widget with Riverpod provider
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: FluxRiverpodWidget renders widget with Riverpod provider [E]
+  Test failed. See exception logs above.
+  The test description was: renders widget with Riverpod provider
+  
+00:00 +0 -1: FluxRiverpodWidget updates when provider changes
+DEBUG PARSER: Widget Counter parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: getProvider, isState: false
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: setProvider, isState: false
+DEBUG COMPILER: Compiling variable: getProvider, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure Counter.build>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: Counter.build, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: NativeFunction (<native fn getProvider>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: NativeFunction getProvider returned 0
+DEBUG RUNTIME: _callValue: String (Text), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing Value: 0: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart:82:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart line 82
+The test description was:
+  updates when provider changes
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -2: FluxRiverpodWidget updates when provider changes [E]
+  Test failed. See exception logs above.
+  The test description was: updates when provider changes
+  
+00:00 +0 -2: FluxRiverpodWidget handles multiple providers
+DEBUG PARSER: Widget MultiProvider parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget MultiProvider, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: getProvider, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: getProvider, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure MultiProvider.build>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: MultiProvider.build, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: NativeFunction (<native fn getProvider>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: NativeFunction getProvider returned Guest
+DEBUG RUNTIME: _callValue: String (Text), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callValue: NativeFunction (<native fn getProvider>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: NativeFunction getProvider returned 0
+DEBUG RUNTIME: _callValue: String (Text), argCount: 1, namedArgs: ()
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing Name: Guest: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart:130:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart line 130
+The test description was:
+  handles multiple providers
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -3: FluxRiverpodWidget handles multiple providers [E]
+  Test failed. See exception logs above.
+  The test description was: handles multiple providers
+  
+00:00 +0 -3: FluxRiverpodWidget shows error for missing widget
+DEBUG PARSER: Widget Counter parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+00:00 +1 -3: Some tests failed.

@@ -1,0 +1,224 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart
+00:00 +0: FluxRiverpodWidget renders widget with Riverpod provider
+DEBUG BINDINGS: Registering widget: Text
+DEBUG BINDINGS: Registering widget: Column
+DEBUG BINDINGS: Registering widget: Row
+DEBUG BINDINGS: Registering widget: Container
+DEBUG BINDINGS: Registering widget: Button
+DEBUG BINDINGS: Registering widget: Center
+DEBUG BINDINGS: Registering widget: Expanded
+DEBUG BINDINGS: Registering widget: Flexible
+DEBUG BINDINGS: Registering widget: SizedBox
+DEBUG BINDINGS: Registering widget: Padding
+DEBUG BINDINGS: Registering widget: SizedBox
+DEBUG BINDINGS: Registering widget: TextField
+DEBUG BINDINGS: Registering widget: Image
+DEBUG BINDINGS: Registering widget: Icon
+DEBUG BINDINGS: Registering widget: Card
+DEBUG BINDINGS: Registering widget: ListView
+DEBUG BINDINGS: Registering widget: GestureDetector
+DEBUG BINDINGS: Registering widget: ColoredBox
+DEBUG BINDINGS: Registering widget: Expanded
+DEBUG BINDINGS: Registering widget: Spacer
+DEBUG BINDINGS: Registering widget: Divider
+DEBUG PARSER: Widget Counter parsed. StateFields: 0
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: _handleWidgetCall detected callee: <closure Counter.build> (type: ObjClosure), argCount: 0, named: ()
+DEBUG RUNTIME: _handleWidgetCall ignoring callee
+DEBUG RUNTIME: _handleWidgetCall detected callee: Column (type: String), argCount: 0, named: (_children)
+DEBUG RUNTIME: Executing children closure...
+DEBUG RUNTIME: _handleWidgetCall detected callee: <closure lambda> (type: ObjClosure), argCount: 0, named: ()
+DEBUG RUNTIME: _handleWidgetCall ignoring callee
+DEBUG RUNTIME: _handleWidgetCall detected callee: Text (type: String), argCount: 1, named: ()
+DEBUG RUNTIME: Handler returning node: FluxWidgetNode(Text, args: {0: Count is set}, children: []) (type: FluxWidgetNode)
+DEBUG RUNTIME: Handler returning node: FluxWidgetNode(Column, args: {_children: <closure lambda>}, children: [FluxWidgetNode(Text, args: {0: Count is set}, children: [])]) (type: FluxWidgetNode)
+DEBUG RUNTIME: executeClosure returned: InterpretResult.ok, Stack size: 1
+DEBUG RUNTIME: convertToFlutter called with: FluxWidgetNode(Column, args: {_children: <closure lambda>}, children: [FluxWidgetNode(Text, args: {0: Count is set}, children: [])]) (FluxWidgetNode)
+DEBUG RUNTIME: convertToFlutter node: Column, args: {_children: <closure lambda>}, children: 1
+DEBUG BINDINGS: Get widget: Column -> Found (Keys: 19)
+DEBUG RUNTIME: convertToFlutter called with: FluxWidgetNode(Text, args: {0: Count is set}, children: []) (FluxWidgetNode)
+DEBUG RUNTIME: convertToFlutter node: Text, args: {0: Count is set}, children: 0
+DEBUG BINDINGS: Get widget: Text -> Found (Keys: 19)
+AutomatedTestWidgetsFlutterBinding - DEBUG MODE
+[root]
+└View(state: _ViewState#5e8d2)
+ └RawView
+  └_RawViewInternal-[_DeprecatedRawViewKey TestFlutterView#4084f](renderObject: _ReusableRenderView#27446)
+   └_ViewScope
+    └_PipelineOwnerScope
+     └_MediaQueryFromView(state: _MediaQueryFromViewState#227fa)
+      └MediaQuery(MediaQueryData(size: Size(800.0, 600.0), devicePixelRatio: 3.0, textScaler: no scaling, platformBrightness: Brightness.light, padding: EdgeInsets.zero, viewPadding: EdgeInsets.zero, viewInsets: EdgeInsets.zero, systemGestureInsets: EdgeInsets.zero, alwaysUse24HourFormat: false, accessibleNavigation: false, highContrast: false, onOffSwitchLabels: false, disableAnimations: false, invertColors: false, boldText: false, navigationMode: traditional, gestureSettings: DeviceGestureSettings(touchSlop: null), displayFeatures: [], supportsShowingSystemContextMenu: false))
+       └FocusTraversalGroup(policy: ReadingOrderTraversalPolicy#7e50d, state: _FocusTraversalGroupState#feb99)
+        └Focus(debugLabel: "FocusTraversalGroup", focusNode: _FocusTraversalGroupNode#c85c6(FocusTraversalGroup [IN FOCUS PATH]), state: _FocusState#762f7)
+         └_FocusInheritedScope
+          └_FocusScopeWithExternalFocusNode(debugLabel: "View Scope", focusNode: FocusScopeNode#b9ae7(View Scope [IN FOCUS PATH]), dependencies: [_FocusInheritedScope], state: _FocusScopeState#bbde4)
+           └_FocusInheritedScope
+            └ProviderScope(state: ProviderScopeState#a717e)
+             └UncontrolledProviderScope
+              └MaterialApp(state: _MaterialAppState#06d08)
+               └ScrollConfiguration(behavior: MaterialScrollBehavior)
+                └HeroControllerScope
+                 └Focus(dependencies: [_FocusInheritedScope], state: _FocusState#804bf)
+                  └_FocusInheritedScope
+                   └Semantics(container: false, properties: SemanticsProperties, renderObject: RenderSemanticsAnnotations#c9ffe)
+                    └WidgetsApp-[GlobalObjectKey _MaterialAppState#06d08](state: _WidgetsAppState#dd748)
+                     └RootRestorationScope(state: _RootRestorationScopeState#fc6cc)
+                      └UnmanagedRestorationScope
+                       └RestorationScope(dependencies: [UnmanagedRestorationScope], state: _RestorationScopeState#00e26)
+                        └UnmanagedRestorationScope
+                         └SharedAppData(state: _SharedAppDataState#b76d1)
+                          └_SharedAppModel
+                           └NotificationListener<NavigationNotification>
+                            └Shortcuts(shortcuts: <Default WidgetsApp Shortcuts>, state: _ShortcutsState#4f3b9)
+                             └Focus(debugLabel: "Shortcuts", dependencies: [_FocusInheritedScope], state: _FocusState#e4b55)
+                              └_FocusInheritedScope
+                               └Semantics(container: false, properties: SemanticsProperties, renderObject: RenderSemanticsAnnotations#0cfda)
+                                └DefaultTextEditingShortcuts
+                                 └Shortcuts(shortcuts: <Default Text Editing Shortcuts>, state: _ShortcutsState#29be7)
+                                  └Focus(debugLabel: "Shortcuts", dependencies: [_FocusInheritedScope], state: _FocusState#99166)
+                                   └_FocusInheritedScope
+                                    └Semantics(container: false, properties: SemanticsProperties, renderObject: RenderSemanticsAnnotations#d7f14)
+                                     └Actions(dispatcher: null, actions: {DoNothingIntent: DoNothingAction#55b3b, DoNothingAndStopPropagationIntent: DoNothingAction#eca86, RequestFocusIntent: RequestFocusAction#01c2b, NextFocusIntent: NextFocusAction#b1080, PreviousFocusIntent: PreviousFocusAction#e42a5, DirectionalFocusIntent: DirectionalFocusAction#db469, ScrollIntent: _OverridableContextAction<ScrollIntent>#7f6a4(defaultAction: ScrollAction#99e8e), PrioritizedIntents: PrioritizedAction#5bb45, VoidCallbackIntent: VoidCallbackAction#78f7b}, state: _ActionsState#95bb1)
+                                      └_ActionsScope
+                                       └FocusTraversalGroup(policy: ReadingOrderTraversalPolicy#91676, state: _FocusTraversalGroupState#545bb)
+                                        └Focus(debugLabel: "FocusTraversalGroup", focusNode: _FocusTraversalGroupNode#ad8e4(FocusTraversalGroup [IN FOCUS PATH]), dependencies: [_FocusInheritedScope], state: _FocusState#eba32)
+                                         └_FocusInheritedScope
+                                          └TapRegionSurface(renderObject: RenderTapRegionSurface#65dcd)
+                                           └ShortcutRegistrar(state: _ShortcutRegistrarState#bd654)
+                                            └_ShortcutRegistrarScope
+                                             └Shortcuts(manager: ShortcutManager#20179(shortcuts: {}), shortcuts: {}, state: _ShortcutsState#64e3e)
+                                              └Focus(debugLabel: "Shortcuts", dependencies: [_FocusInheritedScope], state: _FocusState#860ef)
+                                               └_FocusInheritedScope
+                                                └Semantics(container: false, properties: SemanticsProperties, renderObject: RenderSemanticsAnnotations#f6b56)
+                                                 └Localizations(locale: en_US, delegates: [DefaultMaterialLocalizations.delegate(en_US), DefaultCupertinoLocalizations.delegate(en_US), DefaultWidgetsLocalizations.delegate(en_US)], state: _LocalizationsState#1444b)
+                                                  └Semantics(container: false, properties: SemanticsProperties, textDirection: ltr, renderObject: RenderSemanticsAnnotations#725ce)
+                                                   └_LocalizationsScope-[GlobalKey#524f7]
+                                                    └Directionality(textDirection: ltr)
+                                                     └Title(color: Color(alpha: 1.0000, red: 0.1294, green: 0.5882, blue: 0.9529, colorSpace: ColorSpace.sRGB))
+                                                      └CheckedModeBanner("DEBUG")
+                                                       └Banner(dependencies: [Directionality], state: _BannerState#9fe6c("DEBUG", textDirection: ltr, location: topEnd, Color(alpha: 0.6275, red: 0.7176, green: 0.1098, blue: 0.1098, colorSpace: ColorSpace.sRGB), text inherit: true, text color: Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 1.0000, colorSpace: ColorSpace.sRGB), text size: 10.2, text weight: 900, text height: 1.0x))
+                                                        └CustomPaint(renderObject: RenderCustomPaint#49cdd)
+                                                         └ValueListenableBuilder<bool>(state: _ValueListenableBuilderState<bool>#c6db2)
+                                                          └DefaultTextStyle(debugLabel: fallback style; consider putting your text in a Material, inherit: true, color: Color(alpha: 0.8157, red: 1.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), family: monospace, size: 48.0, weight: 900, decoration: double Color(alpha: 1.0000, red: 1.0000, green: 1.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB) TextDecoration.underline, softWrap: wrapping at box width, overflow: clip)
+                                                           └Builder(dependencies: [MediaQuery])
+                                                            └ScaffoldMessenger(dependencies: [MediaQuery], state: ScaffoldMessengerState#716a1)
+                                                             └_ScaffoldMessengerScope
+                                                              └DefaultSelectionStyle
+                                                               └AnimatedTheme(duration: 200ms, state: _AnimatedThemeState#30bee(ticker inactive, ThemeDataTween(ThemeData#a184c → ThemeData#a184c)))
+                                                                └Theme(ThemeData#a184c, dependencies: [DefaultSelectionStyle])
+                                                                 └_InheritedTheme
+                                                                  └CupertinoTheme(brightness: light, primaryColor: Color(alpha: 1.0000, red: 0.4039, green: 0.3137, blue: 0.6431, colorSpace: ColorSpace.sRGB), scaffoldBackgroundColor: Color(alpha: 1.0000, red: 0.9961, green: 0.9686, blue: 1.0000, colorSpace: ColorSpace.sRGB), actionTextStyle: TextStyle(inherit: false, color: Color(alpha: 1.0000, red: 0.4039, green: 0.3137, blue: 0.6431, colorSpace: ColorSpace.sRGB), family: CupertinoSystemText, size: 17.0, letterSpacing: -0.4, decoration: TextDecoration.none), actionSmallTextStyle: TextStyle(inherit: false, color: Color(alpha: 1.0000, red: 0.4039, green: 0.3137, blue: 0.6431, colorSpace: ColorSpace.sRGB), family: CupertinoSystemText, size: 15.0, letterSpacing: -0.2, decoration: TextDecoration.none), navActionTextStyle: TextStyle(inherit: false, color: Color(alpha: 1.0000, red: 0.4039, green: 0.3137, blue: 0.6431, colorSpace: ColorSpace.sRGB), family: CupertinoSystemText, size: 17.0, letterSpacing: -0.4, decoration: TextDecoration.none))
+                                                                   └InheritedCupertinoTheme
+                                                                    └IconTheme(color: Color(alpha: 1.0000, red: 0.4039, green: 0.3137, blue: 0.6431, colorSpace: ColorSpace.sRGB))
+                                                                     └IconTheme(color: Color(alpha: 0.8667, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB))
+                                                                      └DefaultSelectionStyle
+                                                                       └FocusScope(debugLabel: "Navigator Scope", AUTOFOCUS, dependencies: [_FocusInheritedScope], state: _FocusScopeState#dec5d)
+                                                                        └Semantics(container: false, properties: SemanticsProperties, renderObject: RenderSemanticsAnnotations#12991)
+                                                                         └_FocusInheritedScope
+                                                                          └Navigator-[GlobalObjectKey<NavigatorState> _WidgetsAppState#dd748](dependencies: [HeroControllerScope, UnmanagedRestorationScope], state: NavigatorState#de97c(tickers: tracking 1 ticker))
+                                                                           └HeroControllerScope
+                                                                            └NotificationListener<NavigationNotification>
+                                                                             └Listener(listeners: [down, up, cancel], behavior: deferToChild, renderObject: RenderPointerListener#31020)
+                                                                              └AbsorbPointer(absorbing: false, renderObject: RenderAbsorbPointer#572ed)
+                                                                               └FocusTraversalGroup(policy: ReadingOrderTraversalPolicy#91676, state: _FocusTraversalGroupState#45485)
+                                                                                └Focus(debugLabel: "FocusTraversalGroup", focusNode: _FocusTraversalGroupNode#e21da(FocusTraversalGroup [IN FOCUS PATH]), dependencies: [_FocusInheritedScope], state: _FocusState#daff5)
+                                                                                 └_FocusInheritedScope
+                                                                                  └Focus(debugLabel: "Navigator", AUTOFOCUS, focusNode: FocusNode#fdc83(Navigator [IN FOCUS PATH]), dependencies: [_FocusInheritedScope], state: _FocusState#5974d)
+                                                                                   └_FocusInheritedScope
+                                                                                    └UnmanagedRestorationScope
+                                                                                     └Overlay-[LabeledGlobalKey<OverlayState>#64241](state: OverlayState#69503(entries: [OverlayEntry#57e5d(opaque: true; maintainState: false), OverlayEntry#99d83(opaque: false; maintainState: true)]))
+                                                                                      └_Theater(skipCount: 0, dependencies: [Directionality], renderObject: _RenderTheater#6cbef)
+                                                                                       ├_OverlayEntryWidget-[LabeledGlobalKey<_OverlayEntryWidgetState>#9bee5](state: _OverlayEntryWidgetState#5f8fe)
+                                                                                       │└TickerMode(state: _TickerModeState#45589(requested mode: enabled))
+                                                                                       │ └_EffectiveTickerMode(effective mode: enabled)
+                                                                                       │  └_RenderTheaterMarker
+                                                                                       │   └IgnorePointer(ignoring: false, renderObject: RenderIgnorePointer#7ef9c)
+                                                                                       │    └ModalBarrier
+                                                                                       │     └BlockSemantics(blocking: true, renderObject: RenderBlockSemantics#4daaf)
+                                                                                       │      └ExcludeSemantics(excluding: true, renderObject: RenderExcludeSemantics#8c28f)
+                                                                                       │       └_ModalBarrierGestureDetector
+                                                                                       │        └RawGestureDetector(state: RawGestureDetectorState#5515f(gestures: [any tap], behavior: opaque))
+                                                                                       │         └_GestureSemantics(renderObject: RenderSemanticsGestureHandler#87cd5)
+                                                                                       │          └Listener(listeners: [down, panZoomStart], behavior: opaque, renderObject: RenderPointerListener#4ecec)
+                                                                                       │           └Semantics(container: false, properties: SemanticsProperties, renderObject: RenderSemanticsAnnotations#b1e75)
+                                                                                       │            └MouseRegion(listeners: <none>, cursor: SystemMouseCursor(basic), renderObject: RenderMouseRegion#612c4)
+                                                                                       │             └ConstrainedBox(BoxConstraints(biggest), renderObject: RenderConstrainedBox#efdb1)
+                                                                                       └_OverlayEntryWidget-[LabeledGlobalKey<_OverlayEntryWidgetState>#45e39](state: _OverlayEntryWidgetState#bdec2)
+                                                                                        └TickerMode(state: _TickerModeState#d7864(requested mode: enabled))
+                                                                                         └_EffectiveTickerMode(effective mode: enabled)
+                                                                                          └_RenderTheaterMarker
+                                                                                           └Semantics(container: false, properties: SemanticsProperties, sortKey: OrdinalSortKey#78d94(order: 0.0), renderObject: RenderSemanticsAnnotations#60115)
+                                                                                            └_ModalScope<dynamic>-[LabeledGlobalKey<_ModalScopeState<dynamic>>#66b2f](state: _ModalScopeState<dynamic>#4d638)
+                                                                                             └AnimatedBuilder(listenable: ValueNotifier<String?>#ed012(null), state: _AnimatedState#eeb6c)
+                                                                                              └RestorationScope(dependencies: [UnmanagedRestorationScope], state: _RestorationScopeState#3d7cc)
+                                                                                               └UnmanagedRestorationScope
+                                                                                                └_ModalScopeStatus(active)
+                                                                                                 └Offstage(offstage: false, renderObject: RenderOffstage#b6012)
+                                                                                                  └PageStorage
+                                                                                                   └Builder
+                                                                                                    └Actions(dispatcher: null, actions: {DismissIntent: _DismissModalAction#fe34b}, state: _ActionsState#080d5)
+                                                                                                     └_ActionsScope
+                                                                                                      └PrimaryScrollController(ScrollController#c807c(no clients))
+                                                                                                       └_FocusScopeWithExternalFocusNode(debugLabel: "_ModalScopeState<dynamic> Focus Scope", focusNode: FocusScopeNode#edf39(_ModalScopeState<dynamic> Focus Scope [PRIMARY FOCUS]), dependencies: [_FocusInheritedScope], state: _FocusScopeState#abb8c)
+                                                                                                        └Semantics(container: false, properties: SemanticsProperties, renderObject: RenderSemanticsAnnotations#6c69d)
+                                                                                                         └_FocusInheritedScope
+                                                                                                          └RepaintBoundary(renderObject: RenderRepaintBoundary#09f6e)
+                                                                                                           └ListenableBuilder(listenable: Listenable.merge([AnimationController#8b81c(⏭ 1.000; paused; for MaterialPageRoute<dynamic>(/))➩ProxyAnimation, kAlwaysDismissedAnimation➩ProxyAnimation➩ProxyAnimation]), dependencies: [InheritedCupertinoTheme, _InheritedTheme, _LocalizationsScope-[GlobalKey#524f7]], state: _AnimatedState#a1953)
+                                                                                                            └_PageTransitionsThemeTransitions<dynamic>(dependencies: [InheritedCupertinoTheme, _InheritedTheme, _LocalizationsScope-[GlobalKey#524f7]], state: _PageTransitionsThemeTransitionsState<dynamic>#9edb8)
+                                                                                                             └_ZoomPageTransition(dependencies: [InheritedCupertinoTheme, _InheritedTheme, _LocalizationsScope-[GlobalKey#524f7]])
+                                                                                                              └DualTransitionBuilder(state: _DualTransitionBuilderState#3c4a7)
+                                                                                                               └_ZoomEnterTransition(state: _ZoomEnterTransitionState#693ec)
+                                                                                                                └SnapshotWidget(dependencies: [MediaQuery], renderObject: _RenderSnapshotWidget#caa02)
+                                                                                                                 └_ZoomExitTransition(state: _ZoomExitTransitionState#694ca)
+                                                                                                                  └SnapshotWidget(dependencies: [MediaQuery], renderObject: _RenderSnapshotWidget#4f560)
+                                                                                                                   └DualTransitionBuilder(state: _DualTransitionBuilderState#b4215)
+                                                                                                                    └_ZoomEnterTransition(state: _ZoomEnterTransitionState#9c64f)
+                                                                                                                     └SnapshotWidget(dependencies: [MediaQuery], renderObject: _RenderSnapshotWidget#fab7f)
+                                                                                                                      └_ZoomExitTransition(state: _ZoomExitTransitionState#4d8c1)
+                                                                                                                       └SnapshotWidget(dependencies: [MediaQuery], renderObject: _RenderSnapshotWidget#912fd)
+                                                                                                                        └ListenableBuilder(listenable: ValueNotifier<bool>#37095(false), state: _AnimatedState#08786)
+                                                                                                                         └IgnorePointer(ignoring: false, renderObject: RenderIgnorePointer#8ca7d)
+                                                                                                                          └RepaintBoundary-[GlobalKey#0bc5c](renderObject: RenderRepaintBoundary#6ac38)
+                                                                                                                           └Builder
+                                                                                                                            └Semantics(container: false, properties: SemanticsProperties, renderObject: RenderSemanticsAnnotations#fa4ea)
+                                                                                                                             └Scaffold(dependencies: [Directionality, InheritedCupertinoTheme, MediaQuery, UnmanagedRestorationScope, _InheritedTheme, _LocalizationsScope-[GlobalKey#524f7], _ScaffoldMessengerScope], state: ScaffoldState#30bb5(tickers: tracking 2 tickers))
+                                                                                                                              └_ScaffoldScope
+                                                                                                                               └ScrollNotificationObserver(state: ScrollNotificationObserverState#962ef)
+                                                                                                                                └NotificationListener<ScrollMetricsNotification>
+                                                                                                                                 └NotificationListener<ScrollNotification>
+                                                                                                                                  └_ScrollNotificationObserverScope
+                                                                                                                                   └Material(type: canvas, color: Color(alpha: 1.0000, red: 0.9961, green: 0.9686, blue: 1.0000, colorSpace: ColorSpace.sRGB), dependencies: [InheritedCupertinoTheme, _InheritedTheme, _LocalizationsScope-[GlobalKey#524f7]], state: _MaterialState#ea1ed)
+                                                                                                                                    └AnimatedPhysicalModel(duration: 200ms, shape: rectangle, borderRadius: null, elevation: 0.0, color: Color(alpha: 1.0000, red: 0.9961, green: 0.9686, blue: 1.0000, colorSpace: ColorSpace.sRGB), animateColor: false, shadowColor: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), animateShadowColor: true, state: _AnimatedPhysicalModelState#abec4(ticker inactive))
+                                                                                                                                     └PhysicalModel(shape: rectangle, borderRadius: BorderRadius.zero, elevation: 0.0, color: Color(alpha: 1.0000, red: 0.9961, green: 0.9686, blue: 1.0000, colorSpace: ColorSpace.sRGB), shadowColor: Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 0.0000, colorSpace: ColorSpace.sRGB), renderObject: RenderPhysicalModel#b8b33)
+                                                                                                                                      └NotificationListener<LayoutChangedNotification>
+                                                                                                                                       └_InkFeatures-[GlobalKey#3db98 ink renderer](renderObject: _RenderInkFeatures#4b8e0)
+                                                                                                                                        └AnimatedDefaultTextStyle(duration: 200ms, debugLabel: (englishLike bodyMedium 2021).merge((blackMountainView bodyMedium).apply), inherit: false, color: Color(alpha: 1.0000, red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB), family: Roboto, size: 14.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic, height: 1.4x, leadingDistribution: even, decoration: Color(alpha: 1.0000, red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB) TextDecoration.none, softWrap: wrapping at box width, overflow: clip, state: _AnimatedDefaultTextStyleState#85391(ticker inactive))
+                                                                                                                                         └DefaultTextStyle(debugLabel: (englishLike bodyMedium 2021).merge((blackMountainView bodyMedium).apply), inherit: false, color: Color(alpha: 1.0000, red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB), family: Roboto, size: 14.0, weight: 400, letterSpacing: 0.3, baseline: alphabetic, height: 1.4x, leadingDistribution: even, decoration: Color(alpha: 1.0000, red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB) TextDecoration.none, softWrap: wrapping at box width, overflow: clip)
+                                                                                                                                          └AnimatedBuilder(listenable: AnimationController#439d7(⏭ 1.000; paused), state: _AnimatedState#89fa6)
+                                                                                                                                           └Actions(dispatcher: null, actions: {DismissIntent: _DismissDrawerAction#3fbbb}, state: _ActionsState#601f9)
+                                                                                                                                            └_ActionsScope
+                                                                                                                                             └CustomMultiChildLayout(renderObject: RenderCustomMultiChildLayoutBox#c5680)
+                                                                                                                                              ├LayoutId-[<_ScaffoldSlot.body>](id: _ScaffoldSlot.body)
+                                                                                                                                              │└MediaQuery(MediaQueryData(size: Size(800.0, 600.0), devicePixelRatio: 3.0, textScaler: no scaling, platformBrightness: Brightness.light, padding: EdgeInsets.zero, viewPadding: EdgeInsets.zero, viewInsets: EdgeInsets.zero, systemGestureInsets: EdgeInsets.zero, alwaysUse24HourFormat: false, accessibleNavigation: false, highContrast: false, onOffSwitchLabels: false, disableAnimations: false, invertColors: false, boldText: false, navigationMode: traditional, gestureSettings: DeviceGestureSettings(touchSlop: null), displayFeatures: [], supportsShowingSystemContextMenu: false))
+                                                                                                                                              │ └_BodyBuilder
+                                                                                                                                              │  └KeyedSubtree-[GlobalKey#4f319]
+                                                                                                                                              │   └FluxRiverpodWidget(dependencies: [UncontrolledProviderScope], state: _FluxRiverpodWidgetState#413d9)
+                                                                                                                                              │    └Column(direction: vertical, mainAxisAlignment: start, crossAxisAlignment: center, renderObject: RenderFlex#1bf69 relayoutBoundary=up1)
+                                                                                                                                              │     └Text("Count is set", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery])
+                                                                                                                                              │      └RichText(softWrap: wrapping at box width, maxLines: unlimited, text: "Count is set", dependencies: [Directionality, _LocalizationsScope-[GlobalKey#524f7]], renderObject: RenderParagraph#d8815 relayoutBoundary=up2)
+                                                                                                                                              └LayoutId-[<_ScaffoldSlot.floatingActionButton>](id: _ScaffoldSlot.floatingActionButton)
+                                                                                                                                               └MediaQuery(MediaQueryData(size: Size(800.0, 600.0), devicePixelRatio: 3.0, textScaler: no scaling, platformBrightness: Brightness.light, padding: EdgeInsets.zero, viewPadding: EdgeInsets.zero, viewInsets: EdgeInsets.zero, systemGestureInsets: EdgeInsets.zero, alwaysUse24HourFormat: false, accessibleNavigation: false, highContrast: false, onOffSwitchLabels: false, disableAnimations: false, invertColors: false, boldText: false, navigationMode: traditional, gestureSettings: DeviceGestureSettings(touchSlop: null), displayFeatures: [], supportsShowingSystemContextMenu: false))
+                                                                                                                                                └_FloatingActionButtonTransition(state: _FloatingActionButtonTransitionState#1a286(tickers: tracking 1 ticker))
+                                                                                                                                                 └Stack(alignment: Alignment.centerRight, fit: loose, dependencies: [Directionality], renderObject: RenderStack#d3415 relayoutBoundary=up1)
+                                                                                                                                                  └ScaleTransition(listenable: AnimationMin<double>(_AnimationSwap<double>(AnimationController#439d7(⏭ 1.000; paused)➩CurveTween(curve: FlippedCurve(Interval(0.5⋯1.0)➩Cubic(0.25, 0.10, 0.25, 1.00)))➩1.0➪ReverseAnimation, AnimationController#439d7(⏭ 1.000; paused)➩CurveTween(curve: Interval(0.5⋯1.0)➩Cubic(0.25, 0.10, 0.25, 1.00))➩1.0), AnimationController#6e6af(⏮ 0.000; paused)➩Cubic(0.42, 0.00, 1.00, 1.00)), state: _AnimatedState#4e05d)
+                                                                                                                                                   └Transform(dependencies: [Directionality], renderObject: RenderTransform#1febb relayoutBoundary=up2)
+                                                                                                                                                    └RotationTransition(listenable: AnimationController#6e6af(⏮ 0.000; paused)➩CurveTween(curve: Cubic(0.42, 0.00, 1.00, 1.00))➩Tween<double>(0.875 → 1.0)➩0.875➩TrainHoppingAnimation(next: _AnimationSwap<double>(AnimationController#439d7(⏭ 1.000; paused)➩Tween<double>(0.75 → 1.0)➩1.0, AnimationController#439d7(⏭ 1.000; paused)➩CurveTween(curve: Threshold)➩1.0➪ReverseAnimation)), state: _AnimatedState#69947)
+                                                                                                                                                     └Transform(dependencies: [Directionality], renderObject: RenderTransform#16589 relayoutBoundary=up3 NEEDS-PAINT)
+
+
+00:00 +1: All tests passed!

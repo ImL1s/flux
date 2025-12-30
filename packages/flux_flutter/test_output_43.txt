@@ -1,0 +1,9 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+../flux_compiler/lib/src/compiler.dart:182:23: Error: The method '_markInitialized' isn't defined for the class 'Compiler'.
+ - 'Compiler' is from 'package:flux_compiler/src/compiler.dart' ('../flux_compiler/lib/src/compiler.dart').
+Try correcting the name to the name of an existing method, or defining a method named '_markInitialized'.
+        buildCompiler._markInitialized();
+                      ^^^^^^^^^^^^^^^^
+00:00 +0 -1: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart [E]
+  Failed to load "D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart": Compilation failed for testPath=D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+00:00 +0 -1: Some tests failed.

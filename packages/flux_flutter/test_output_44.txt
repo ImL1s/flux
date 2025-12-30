@@ -1,0 +1,679 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+00:00 +0: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG RUNTIME: Source:       widget TodoApp {
+        state todos = [];
+        state input = "";
+        
+        build {
+          Column {
+            // Input Area
+            Row {
+               Expanded {
+                 TextField(hint: "New Todo", onChanged: fn(val) {
+                     input = val;
+                 })
+               }
+               Button("Add", onPressed: fn() {
+                 if (input != "") {
+                   push(todos, input);
+                   input = "";
+                 }
+               })
+            }
+            
+            // List Area
+            Column {
+               var i = 0;
+               while (i < todos.length) {
+                   var todo = todos[i];
+                   var index = i; // Capture current index
+                   TodoItem(todo: todo, onDelete: fn() {
+                       removeAt(todos, index);
+                   });
+                   i = i + 1;
+               }
+            }
+          }
+        }
+      }
+
+      widget TodoItem {
+        props todo, onDelete;
+        build {
+          Container {
+            Padding(padding: 8.0) {
+              Row {
+                Text(todo)
+                Button("X", onPressed: onDelete)
+              }
+            }
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: todos
+DEBUG PARSER: Found state field: input
+DEBUG PARSER: Widget TodoApp parsed. StateFields: 2
+DEBUG PARSER: Widget TodoItem parsed. StateFields: 0
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget TodoApp, State: [todos, input]
+BuildCompiler created. _stateFields: [todos, input]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling variable: Expanded, isState: false
+DEBUG COMPILER: Compiling variable: TextField, isState: false
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: TodoItem, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling variable: removeAt, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: index, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+Compiling Widget TodoItem, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: Padding, isState: false
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: onDelete, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure script>]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 2, Stack: [<closure script>, <widget TodoApp>]
+DEBUG VM: Instr: setGlobal
+DEBUG VM: IP: 4, Stack: [<closure script>, <widget TodoApp>]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 5, Stack: [<closure script>]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 7, Stack: [<closure script>, <widget TodoItem>]
+DEBUG VM: Instr: setGlobal
+DEBUG VM: IP: 9, Stack: [<closure script>, <widget TodoItem>]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 10, Stack: [<closure script>]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 11, Stack: [<closure script>, null]
+DEBUG VM: Instr: return_
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure script>]
+DEBUG VM: Instr: newList
+DEBUG VM: IP: 2, Stack: [<closure script>, []]
+DEBUG VM: Instr: return_
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure script>]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 2, Stack: [<closure script>, ]
+DEBUG VM: Instr: return_
+DEBUG RUNTIME: _callValue: ObjClosure (<closure TodoApp.build>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: TodoApp.build, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure script>, <closure TodoApp.build>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [<closure script>, <closure TodoApp.build>, Column]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure script>, <closure TodoApp.build>, Column, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [<closure script>, <closure TodoApp.build>, Column, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure script>, <closure TodoApp.build>, Column, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [<closure script>, <closure TodoApp.build>, Column, <closure lambda>, Row]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [Column, <closure lambda>, Row, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [Row, <closure lambda>, Expanded, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Expanded), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, TextField]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Expanded, <closure lambda>, TextField, hint]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 6, Stack: [Expanded, <closure lambda>, TextField, hint, New Todo]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 8, Stack: [<closure lambda>, TextField, hint, New Todo, onChanged]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 11, Stack: [TextField, hint, New Todo, onChanged, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (TextField), argCount: 0, namedArgs: (onChanged, hint)
+DEBUG VM: IP: 14, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 15, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, <closure lambda>]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 16, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 10, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 11, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 13, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, Button]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 15, Stack: [Row, <closure lambda>, Expanded, Button, Add]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 17, Stack: [<closure lambda>, Expanded, Button, Add, onPressed]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 20, Stack: [Expanded, Button, Add, onPressed, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG VM: IP: 23, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 24, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 25, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 10, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 11, Stack: [<closure script>, <closure TodoApp.build>, Column, <closure lambda>, Row]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 13, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, Column]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 15, Stack: [Column, <closure lambda>, Row, Column, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 18, Stack: [<closure lambda>, Row, Column, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [Column, <closure lambda>, Row, Column, <closure lambda>]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 2, Stack: [<closure lambda>, Row, Column, <closure lambda>, 0]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 4, Stack: [Row, Column, <closure lambda>, 0, 0]
+DEBUG VM: Instr: getState
+DEBUG VM: getState(todos) -> []
+DEBUG VM: IP: 6, Stack: [Column, <closure lambda>, 0, 0, []]
+DEBUG VM: Instr: getProperty
+DEBUG VM: IP: 8, Stack: [Column, <closure lambda>, 0, 0, 0]
+DEBUG VM: Instr: less
+DEBUG VM: IP: 9, Stack: [Row, Column, <closure lambda>, 0, false]
+DEBUG VM: Instr: jumpIfFalse
+DEBUG VM: IP: 48, Stack: [Row, Column, <closure lambda>, 0, false]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 49, Stack: [<closure lambda>, Row, Column, <closure lambda>, 0]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 50, Stack: [Column, <closure lambda>, Row, Column, <closure lambda>]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 51, Stack: [<closure lambda>, Row, Column, <closure lambda>, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 21, Stack: [Column, <closure lambda>, Row, Column, FluxWidgetNode(Column, args: {}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 22, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, Column]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 23, Stack: [Column, <closure lambda>, Row, Column, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 10, Stack: [<closure script>, <closure TodoApp.build>, Column, FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [])])]
+DEBUG VM: Instr: return_
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure script>, <closure TodoApp.build>, <closure lambda>, Buy Milk]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 2, Stack: [<closure script>, <closure TodoApp.build>, <closure lambda>, Buy Milk, Buy Milk]
+DEBUG VM: Instr: setState
+DEBUG RUNTIME: _callValue: ObjClosure (<closure TodoApp.build>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: TodoApp.build, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure TodoApp.build>, <closure lambda>, Buy Milk, Buy Milk, <closure TodoApp.build>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [<closure lambda>, Buy Milk, Buy Milk, <closure TodoApp.build>, Column]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [Buy Milk, Buy Milk, <closure TodoApp.build>, Column, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [Buy Milk, <closure TodoApp.build>, Column, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [Buy Milk, Buy Milk, <closure TodoApp.build>, Column, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Buy Milk, <closure TodoApp.build>, Column, <closure lambda>, Row]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [Column, <closure lambda>, Row, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [Row, <closure lambda>, Expanded, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Expanded), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, TextField]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Expanded, <closure lambda>, TextField, hint]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 6, Stack: [Expanded, <closure lambda>, TextField, hint, New Todo]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 8, Stack: [<closure lambda>, TextField, hint, New Todo, onChanged]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 11, Stack: [TextField, hint, New Todo, onChanged, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (TextField), argCount: 0, namedArgs: (onChanged, hint)
+DEBUG VM: IP: 14, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 15, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, <closure lambda>]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 16, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 10, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 11, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 13, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, Button]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 15, Stack: [Row, <closure lambda>, Expanded, Button, Add]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 17, Stack: [<closure lambda>, Expanded, Button, Add, onPressed]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 20, Stack: [Expanded, Button, Add, onPressed, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG VM: IP: 23, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 24, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 25, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 10, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 11, Stack: [Buy Milk, <closure TodoApp.build>, Column, <closure lambda>, Row]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 13, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, Column]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 15, Stack: [Column, <closure lambda>, Row, Column, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 18, Stack: [<closure lambda>, Row, Column, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [Column, <closure lambda>, Row, Column, <closure lambda>]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 2, Stack: [<closure lambda>, Row, Column, <closure lambda>, 0]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 4, Stack: [Row, Column, <closure lambda>, 0, 0]
+DEBUG VM: Instr: getState
+DEBUG VM: getState(todos) -> []
+DEBUG VM: IP: 6, Stack: [Column, <closure lambda>, 0, 0, []]
+DEBUG VM: Instr: getProperty
+DEBUG VM: IP: 8, Stack: [Column, <closure lambda>, 0, 0, 0]
+DEBUG VM: Instr: less
+DEBUG VM: IP: 9, Stack: [Row, Column, <closure lambda>, 0, false]
+DEBUG VM: Instr: jumpIfFalse
+DEBUG VM: IP: 48, Stack: [Row, Column, <closure lambda>, 0, false]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 49, Stack: [<closure lambda>, Row, Column, <closure lambda>, 0]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 50, Stack: [Column, <closure lambda>, Row, Column, <closure lambda>]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 51, Stack: [<closure lambda>, Row, Column, <closure lambda>, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 21, Stack: [Column, <closure lambda>, Row, Column, FluxWidgetNode(Column, args: {}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 22, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, Column]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 23, Stack: [Column, <closure lambda>, Row, Column, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 10, Stack: [Buy Milk, Buy Milk, <closure TodoApp.build>, Column, FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [])])]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 4, Stack: [<closure TodoApp.build>, <closure lambda>, Buy Milk, Buy Milk, <closure TodoApp.build>]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 5, Stack: [<closure script>, <closure TodoApp.build>, <closure lambda>, Buy Milk, Buy Milk]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 6, Stack: [<closure TodoApp.build>, <closure lambda>, Buy Milk, Buy Milk, null]
+DEBUG VM: Instr: return_
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure script>, <closure TodoApp.build>, <closure lambda>, <closure lambda>]
+DEBUG VM: Instr: getState
+DEBUG VM: getState(input) -> Buy Milk
+DEBUG VM: IP: 2, Stack: [<closure script>, <closure TodoApp.build>, <closure lambda>, <closure lambda>, Buy Milk]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure TodoApp.build>, <closure lambda>, <closure lambda>, Buy Milk, ]
+DEBUG VM: Instr: jumpIfFalse
+DEBUG VM: IP: 6, Stack: [<closure TodoApp.build>, <closure lambda>, <closure lambda>, Buy Milk, ]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 7, Stack: [<closure script>, <closure TodoApp.build>, <closure lambda>, <closure lambda>, Buy Milk]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 9, Stack: [<closure TodoApp.build>, <closure lambda>, <closure lambda>, Buy Milk, <native fn push>]
+DEBUG VM: Instr: getState
+DEBUG VM: getState(todos) -> []
+DEBUG VM: IP: 11, Stack: [<closure lambda>, <closure lambda>, Buy Milk, <native fn push>, []]
+DEBUG VM: Instr: getState
+DEBUG VM: getState(input) -> Buy Milk
+DEBUG VM: IP: 13, Stack: [<closure lambda>, Buy Milk, <native fn push>, [], Buy Milk]
+DEBUG VM: Instr: call
+DEBUG RUNTIME: _callValue: NativeFunction (<native fn push>), argCount: 2, namedArgs: ()
+DEBUG RUNTIME: NativeFunction push returned null
+DEBUG VM: IP: 15, Stack: [<closure TodoApp.build>, <closure lambda>, <closure lambda>, Buy Milk, null]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 16, Stack: [<closure script>, <closure TodoApp.build>, <closure lambda>, <closure lambda>, Buy Milk]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 18, Stack: [<closure TodoApp.build>, <closure lambda>, <closure lambda>, Buy Milk, ]
+DEBUG VM: Instr: setState
+DEBUG RUNTIME: _callValue: ObjClosure (<closure TodoApp.build>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: TodoApp.build, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure lambda>, <closure lambda>, Buy Milk, , <closure TodoApp.build>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [<closure lambda>, Buy Milk, , <closure TodoApp.build>, Column]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [Buy Milk, , <closure TodoApp.build>, Column, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [, <closure TodoApp.build>, Column, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [Buy Milk, , <closure TodoApp.build>, Column, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [, <closure TodoApp.build>, Column, <closure lambda>, Row]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [Column, <closure lambda>, Row, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 7, Stack: [Row, <closure lambda>, Expanded, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Expanded), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, TextField]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Expanded, <closure lambda>, TextField, hint]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 6, Stack: [Expanded, <closure lambda>, TextField, hint, New Todo]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 8, Stack: [<closure lambda>, TextField, hint, New Todo, onChanged]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 11, Stack: [TextField, hint, New Todo, onChanged, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (TextField), argCount: 0, namedArgs: (onChanged, hint)
+DEBUG VM: IP: 14, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 15, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, <closure lambda>]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 16, Stack: [Row, <closure lambda>, Expanded, <closure lambda>, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 10, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 11, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 13, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, Button]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 15, Stack: [Row, <closure lambda>, Expanded, Button, Add]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 17, Stack: [<closure lambda>, Expanded, Button, Add, onPressed]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 20, Stack: [Expanded, Button, Add, onPressed, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG VM: IP: 23, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 24, Stack: [Column, <closure lambda>, Row, <closure lambda>, Expanded]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 25, Stack: [<closure lambda>, Row, <closure lambda>, Expanded, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 10, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 11, Stack: [, <closure TodoApp.build>, Column, <closure lambda>, Row]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 13, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, Column]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 15, Stack: [Column, <closure lambda>, Row, Column, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 18, Stack: [<closure lambda>, Row, Column, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Column), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [Column, <closure lambda>, Row, Column, <closure lambda>]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 2, Stack: [<closure lambda>, Row, Column, <closure lambda>, 0]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 4, Stack: [Row, Column, <closure lambda>, 0, 0]
+DEBUG VM: Instr: getState
+DEBUG VM: getState(todos) -> [Buy Milk]
+DEBUG VM: IP: 6, Stack: [Column, <closure lambda>, 0, 0, [Buy Milk]]
+DEBUG VM: Instr: getProperty
+DEBUG VM: IP: 8, Stack: [Column, <closure lambda>, 0, 0, 1]
+DEBUG VM: Instr: less
+DEBUG VM: IP: 9, Stack: [Row, Column, <closure lambda>, 0, true]
+DEBUG VM: Instr: jumpIfFalse
+DEBUG VM: IP: 11, Stack: [Row, Column, <closure lambda>, 0, true]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 12, Stack: [<closure lambda>, Row, Column, <closure lambda>, 0]
+DEBUG VM: Instr: getState
+DEBUG VM: getState(todos) -> [Buy Milk]
+DEBUG VM: IP: 14, Stack: [Row, Column, <closure lambda>, 0, [Buy Milk]]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 16, Stack: [Column, <closure lambda>, 0, [Buy Milk], 0]
+DEBUG VM: Instr: getIndex
+DEBUG VM: IP: 17, Stack: [Row, Column, <closure lambda>, 0, Buy Milk]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 19, Stack: [Column, <closure lambda>, 0, Buy Milk, 0]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 21, Stack: [<closure lambda>, 0, Buy Milk, 0, <widget TodoItem>]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 23, Stack: [0, Buy Milk, 0, <widget TodoItem>, todo]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 25, Stack: [Buy Milk, 0, <widget TodoItem>, todo, Buy Milk]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 27, Stack: [0, <widget TodoItem>, todo, Buy Milk, onDelete]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 32, Stack: [<widget TodoItem>, todo, Buy Milk, onDelete, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: CompiledWidget (<widget TodoItem>), argCount: 0, namedArgs: (onDelete, todo)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure TodoItem.build>), argCount: 2, namedArgs: ()
+DEBUG RUNTIME: _callFunction: TodoItem.build, arity: 2, totalProvided: 2 (pos: 2, named: 0)
+DEBUG VM: IP: 0, Stack: [Buy Milk, 0, <closure TodoItem.build>, Buy Milk, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [0, <closure TodoItem.build>, Buy Milk, <closure lambda>, Container]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure TodoItem.build>, Buy Milk, <closure lambda>, Container, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 11, Stack: [Buy Milk, <closure lambda>, Container, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Container), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure TodoItem.build>, Buy Milk, <closure lambda>, Container, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Buy Milk, <closure lambda>, Container, <closure lambda>, Padding]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Container, <closure lambda>, Padding, padding]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 6, Stack: [Container, <closure lambda>, Padding, padding, 8.0]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 8, Stack: [<closure lambda>, Padding, padding, 8.0, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 15, Stack: [Padding, padding, 8.0, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Padding), argCount: 0, namedArgs: (_children, padding)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure lambda>, Container, <closure lambda>, Padding, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Container, <closure lambda>, Padding, <closure lambda>, Row]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Padding, <closure lambda>, Row, _children]
+DEBUG VM: Instr: closure
+DEBUG VM: IP: 11, Stack: [Padding, <closure lambda>, Row, _children, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Row), argCount: 0, namedArgs: (_children)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure lambda>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: lambda, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG VM: IP: 0, Stack: [<closure lambda>, Padding, <closure lambda>, Row, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 2, Stack: [Padding, <closure lambda>, Row, <closure lambda>, Text]
+DEBUG VM: Instr: getUpvalue
+DEBUG VM: IP: 4, Stack: [<closure lambda>, Row, <closure lambda>, Text, Buy Milk]
+DEBUG VM: Instr: call
+DEBUG RUNTIME: _callValue: String (Text), argCount: 1, namedArgs: ()
+DEBUG VM: IP: 6, Stack: [Padding, <closure lambda>, Row, <closure lambda>, FluxWidgetNode(Text, args: {0: Buy Milk}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 7, Stack: [<closure lambda>, Padding, <closure lambda>, Row, <closure lambda>]
+DEBUG VM: Instr: getGlobal
+DEBUG VM: IP: 9, Stack: [Padding, <closure lambda>, Row, <closure lambda>, Button]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 11, Stack: [<closure lambda>, Row, <closure lambda>, Button, X]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 13, Stack: [Row, <closure lambda>, Button, X, onPressed]
+DEBUG VM: Instr: getUpvalue
+DEBUG VM: IP: 15, Stack: [<closure lambda>, Button, X, onPressed, <closure lambda>]
+DEBUG VM: Instr: callNamed
+DEBUG RUNTIME: _callValue: String (Button), argCount: 1, namedArgs: (onPressed)
+DEBUG VM: IP: 18, Stack: [Padding, <closure lambda>, Row, <closure lambda>, FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 19, Stack: [<closure lambda>, Padding, <closure lambda>, Row, <closure lambda>]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 20, Stack: [Padding, <closure lambda>, Row, <closure lambda>, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 14, Stack: [<closure lambda>, Padding, <closure lambda>, Row, FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 15, Stack: [Container, <closure lambda>, Padding, <closure lambda>, Row]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 16, Stack: [<closure lambda>, Padding, <closure lambda>, Row, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 18, Stack: [<closure lambda>, Container, <closure lambda>, Padding, FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 19, Stack: [Buy Milk, <closure lambda>, Container, <closure lambda>, Padding]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 20, Stack: [<closure lambda>, Container, <closure lambda>, Padding, null]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 14, Stack: [<closure TodoItem.build>, Buy Milk, <closure lambda>, Container, FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])])]
+DEBUG VM: Instr: return_
+DEBUG VM: IP: 35, Stack: [0, Buy Milk, 0, <closure TodoItem.build>, FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])])]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 36, Stack: [<closure lambda>, 0, Buy Milk, 0, <closure TodoItem.build>]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 38, Stack: [0, Buy Milk, 0, <closure TodoItem.build>, 0]
+DEBUG VM: Instr: constant
+DEBUG VM: IP: 40, Stack: [Buy Milk, 0, <closure TodoItem.build>, 0, 1]
+DEBUG VM: Instr: add
+DEBUG VM: IP: 41, Stack: [0, Buy Milk, 0, <closure TodoItem.build>, 1]
+DEBUG VM: Instr: setLocal
+DEBUG VM: IP: 43, Stack: [1, Buy Milk, 0, <closure TodoItem.build>, 1]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 44, Stack: [<closure lambda>, 1, Buy Milk, 0, <closure TodoItem.build>]
+DEBUG VM: Instr: closeUpvalue
+DEBUG VM: IP: 45, Stack: [Column, <closure lambda>, 1, Buy Milk, 0]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 46, Stack: [Row, Column, <closure lambda>, 1, Buy Milk]
+DEBUG VM: Instr: loop
+DEBUG VM: IP: 2, Stack: [Row, Column, <closure lambda>, 1, Buy Milk]
+DEBUG VM: Instr: getLocal
+DEBUG VM: IP: 4, Stack: [Column, <closure lambda>, 1, Buy Milk, 1]
+DEBUG VM: Instr: getState
+DEBUG VM: getState(todos) -> [Buy Milk]
+DEBUG VM: IP: 6, Stack: [<closure lambda>, 1, Buy Milk, 1, [Buy Milk]]
+DEBUG VM: Instr: getProperty
+DEBUG VM: IP: 8, Stack: [<closure lambda>, 1, Buy Milk, 1, 1]
+DEBUG VM: Instr: less
+DEBUG VM: IP: 9, Stack: [Column, <closure lambda>, 1, Buy Milk, false]
+DEBUG VM: Instr: jumpIfFalse
+DEBUG VM: IP: 48, Stack: [Column, <closure lambda>, 1, Buy Milk, false]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 49, Stack: [Row, Column, <closure lambda>, 1, Buy Milk]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 50, Stack: [<closure lambda>, Row, Column, <closure lambda>, 1]
+DEBUG VM: Instr: nil
+DEBUG VM: IP: 51, Stack: [Row, Column, <closure lambda>, 1, null]
+DEBUG VM: Instr: return_
+Runtime Error: RangeError (length): Invalid value: Not in inclusive range 0..12: 14
+DEBUG VM: IP: 20, Stack: [Column, <closure lambda>, Row, Column, <closure lambda>]
+DEBUG VM: Instr: pop
+DEBUG VM: IP: 21, Stack: [<closure TodoApp.build>, Column, <closure lambda>, Row, Column]
+DEBUG VM: Instr: jump
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 3 widgets with text "Buy Milk": [
+            EditableText-[LabeledGlobalKey<EditableTextState>#c9c69](controller:
+TextEditingController#638af(TextEditingValue(text: ┤Buy Milk├, selection:
+TextSelection.collapsed(offset: 8, affinity: TextAffinity.downstream, isDirectional: false),
+composing: TextRange(start: -1, end: -1))), focusNode: FocusNode#b8c83([PRIMARY FOCUS]), debugLabel:
+((englishLike bodyLarge 2021).merge((blackMountainView bodyLarge).apply)).merge(unknown), inherit:
+false, color: Color(alpha: 1.0000, red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace:
+ColorSpace.sRGB), family: Roboto, size: 16.0, weight: 400, letterSpacing: 0.5, baseline: alphabetic,
+height: 1.5x, leadingDistribution: even, decoration: Color(alpha: 1.0000, red: 0.1137, green:
+0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB) TextDecoration.none, textAlign: start,
+keyboardType: TextInputType(name: TextInputType.text, signed: null, decimal: null), autofillHints:
+[], spellCheckConfiguration: SpellCheckConfiguration(disabled, service: null, text style: null,
+toolbar builder: null), dependencies: [Directionality, MediaQuery, ScrollConfiguration,
+_EffectiveTickerMode, _ViewScope], state: EditableTextState#4f3dd(tickers: tracking 1 ticker)),
+            Text("Buy Milk", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Buy Milk", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart:87:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart line 87
+The test description was:
+  E2E: Todo App (Input, State Update, List Rendering)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: E2E: Todo App (Input, State Update, List Rendering) [E]
+  Test failed. See exception logs above.
+  The test description was: E2E: Todo App (Input, State Update, List Rendering)
+  
+00:00 +0 -1: Some tests failed.

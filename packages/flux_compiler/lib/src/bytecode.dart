@@ -26,6 +26,8 @@ enum OpCode {
   equal,    // Pop a, b, push a == b
   greater,  // Pop a, b, push a > b
   less,     // Pop a, b, push a < b
+  greaterEqual, // Pop a, b, push a >= b
+  lessEqual,    // Pop a, b, push a <= b
 
   // Variables
   print,      // Pop a, print a
@@ -87,6 +89,9 @@ enum OpCode {
   
   // Module system
   import_,     // [path_index] -> load and execute module
+  
+  // Named calls
+  callNamed,   // [pos_count, named_count] -> call with named arguments
   
   // Class system
   class_,      // [class_index] -> define class

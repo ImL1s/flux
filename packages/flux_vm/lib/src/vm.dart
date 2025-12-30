@@ -7,6 +7,8 @@ import 'package:flux_compiler/flux_compiler.dart';
 import 'stdlib.dart';
 import 'closure.dart';
 
+typedef WidgetCallHandler = Object? Function(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack);
+
 enum InterpretResult {
   ok,
   compileError,
@@ -87,6 +89,9 @@ class VM {
   /// Callback triggered when setState is called (for Flutter rebuild)
   void Function(String name, Object? value)? onStateChange;
   
+  /// Optional widget call handler for FluxRuntime
+  WidgetCallHandler? widgetCallHandler;
+  
   // Async/await state
   bool _awaitingFuture = false;
   Future<dynamic>? _pendingFuture;
@@ -135,22 +140,17 @@ class VM {
     return _run();
   }
   
-  /// Access to global variables (for FluxRuntime integration)
-  Map<String, Object?> get globals => _globals;
-  
-  /// Access to widget state for FluxRuntime
-  Map<String, Object?> get widgetState => _widgetState;
-  
   /// Access to the stack for widget building
   List<Object?> get stack => _stack;
   
   /// Basic output handler
   void Function(String message) onPrint = print;
   
-  /// Optional widget call handler for FluxRuntime
-  /// Called when a function call is made and returns non-null to intercept
-  /// Parameters: (callee, argCount, stack) => handled result or null
-  Object? Function(Object? callee, int argCount, List<Object?> stack)? widgetCallHandler;
+  /// Access to global variables (for FluxRuntime integration)
+  Map<String, Object?> get globals => _globals;
+  
+  /// Access to widget state for FluxRuntime
+  Map<String, Object?> get widgetState => _widgetState;
   
   /// Initialize widget state from CompiledWidget
   void initializeState(CompiledWidget widget) {
@@ -172,47 +172,62 @@ class VM {
   InterpretResult interpret(String source) {
     try {
       final lexer = Lexer(source);
+      _globals['push'] = NativeFunction('push', 2, (args) {
+      final list = args[0] as List;
+      final value = args[1];
+      list.add(value);
+      print('DEBUG STDLIB: push added $value, list is now $list');
+      return list.length;
+    });
       final tokens = lexer.tokenize();
-      
+
       final parser = Parser(tokens);
       final ast = parser.parse();
-      
+
       if (parser.errors.isNotEmpty) {
         for (final error in parser.errors) {
           _runtimeError(error.toString());
         }
         return InterpretResult.compileError;
       }
-      
+
       final compiler = Compiler(unit: ast);
       final function = compiler.endCompiler();
-      
+
       return runChunk(function.chunk);
     } catch (e) {
       _runtimeError(e.toString());
       return InterpretResult.compileError;
     }
   }
-  
+
   /// Run a pre-compiled chunk directly
   InterpretResult runChunk(Chunk chunk) {
+    // If we are already running, don't clear the stack!
+    // This happens during nested widget construction or state initialization.
+    if (_frames.isNotEmpty) {
+      final function = CompiledFunction("script", chunk);
+      final closure = ObjClosure(function, []);
+      return executeClosure(closure);
+    }
+
     // Wrap chunk in a CompiledFunction then a Closure
     final function = CompiledFunction("script", chunk);
     final closure = ObjClosure(function, []);
-    
+
     // Reset VM state
     _stack.clear();
     _frames.clear();
     _openUpvalues = null; // Clear open upvalues
-    
+
     // Push the script closure to stack
     _stack.add(closure);
-    
+
     _callFunction(closure, 0);
-    
+
     return _run();
   }
-  
+
   /// Execute a closure with arguments.
   /// Used by FluxRuntime to execute widget builder closures.
   InterpretResult executeClosure(ObjClosure closure, [List<Object?> args = const []]) {
@@ -221,45 +236,45 @@ class VM {
      for (final arg in args) {
        _stack.add(arg);
      }
-     
+
      if (!_callValue(closure, args.length)) {
        return InterpretResult.runtimeError;
      }
-     
+
      return _run(startDepth);
   }
-  
 
-  
+
+
   /// Capture an upvalue for the given stack slot
   ObjUpvalue _captureUpvalue(int localIndex) {
     ObjUpvalue? prevUpvalue;
     var upvalue = _openUpvalues;
-    
+
     // Walk the list to find insertion point or existing upvalue
     while (upvalue != null && upvalue.location > localIndex) {
       prevUpvalue = upvalue;
       upvalue = upvalue.next;
     }
-    
+
     // Found existing upvalue for this local
     if (upvalue != null && upvalue.location == localIndex) {
       return upvalue;
     }
-    
+
     // Create new upvalue
     final createdUpvalue = ObjUpvalue(localIndex);
     createdUpvalue.next = upvalue;
-    
+
     if (prevUpvalue == null) {
       _openUpvalues = createdUpvalue;
     } else {
       prevUpvalue.next = createdUpvalue;
     }
-    
+
     return createdUpvalue;
   }
-  
+
   /// Close all upvalues that point to stack slots >= last
   void _closeUpvalues(int last) {
     while (_openUpvalues != null && _openUpvalues!.location >= last) {
@@ -274,37 +289,54 @@ class VM {
     if (value is bool) return value;
     return true;
   }
-  
+
   void _runtimeError(String message) {
     print("Runtime Error: $message");
   }
 
-  bool _callValue(Object? callee, int argCount) {
+  bool _callValue(Object? callee, int argCount, [Map<String, dynamic> namedArgs = const {}]) {
+    // print('DEBUG RUNTIME: _callValue: ${callee.runtimeType} ($callee), argCount: $argCount, namedArgs: ${namedArgs.keys}');
     // Check if external handler wants to intercept this call
     if (widgetCallHandler != null) {
-      final result = widgetCallHandler!(callee, argCount, _stack);
+      final result = widgetCallHandler!(callee, argCount, namedArgs, _stack);
       if (result != null) {
-        // Handler processed the call, result is already on stack
+        // Pop args and callee from stack
+        // namedArgs are already handled/popped by opcode if present? 
+        // No, namedArgs are passed in map. Positional args are on stack.
+        // OpCode.callNamed logic: 
+        // 1. Reads named args. 
+        // 2. Pushes positional args (already there).
+        // 3. Pushes callee (already there).
+        // Wait, stack is [callee, arg1, arg2...]
+        for (int i = 0; i < argCount; i++) _stack.removeLast();
+        _stack.removeLast(); // Pop callee
+        
+        _stack.add(result);
         return true;
       }
     }
-    
+
     if (callee is ObjClosure) {
-      return _callFunction(callee, argCount);
+      return _callFunction(callee, argCount, namedArgs);
     }
-    
+
     // Support calling raw CompiledFunctions by wrapping them (e.g. from tests or old code)
     if (callee is CompiledFunction) {
       final closure = ObjClosure(callee, []);
-      _stack[_stack.length - argCount - 1] = closure; // Replace function on stack with closure
-      return _callFunction(closure, argCount);
+      // The named arguments were already popped from the stack in OpCode.callNamed
+      // so totalArgSlots here only refers to positional arguments still on stack.
+      final totalArgSlotsOnStack = argCount;
+      _stack[_stack.length - totalArgSlotsOnStack - 1] = closure;
+      return _callFunction(closure, argCount, namedArgs);
     }
-    
+
     if (callee is NativeFunction) {
       final args = _stack.sublist(_stack.length - argCount);
-      _stack.length -= argCount + 1; // Pop args and function
+      // Again, named args were already popped, so we just pop positional and the function
+      _stack.length -= argCount + 1;
       try {
         final result = callee.call(args);
+        print('DEBUG RUNTIME: NativeFunction ${callee.name} returned $result');
         _stack.add(result);
         return true;
       } catch (e) {
@@ -312,88 +344,106 @@ class VM {
         return false;
       }
     }
-    
+
     if (callee is CompiledWidget) {
       // Widget instantiation - for now just put the widget on stack
       _stack.add(callee);
       return true;
     }
-    
+
     _runtimeError("Can only call functions, classes, and widgets.");
     return false;
   }
 
-  bool _callFunction(ObjClosure closure, int argCount) {
-    if (argCount != closure.function.arity) {
-      _runtimeError("Expected ${closure.function.arity} arguments but got $argCount.");
+  bool _callFunction(ObjClosure closure, int argCount, [Map<String, dynamic> namedArgs = const {}]) {
+    final totalProvided = argCount + namedArgs.length;
+    // print('DEBUG RUNTIME: _callFunction: ${closure.function.name}, arity: ${closure.function.arity}, totalProvided: $totalProvided (pos: $argCount, named: ${namedArgs.length})');
+    if (totalProvided != closure.function.arity) {
+      _runtimeError("Expected ${closure.function.arity} arguments but got $totalProvided. (Closure: ${closure.function.name})");
       return false;
     }
-    
+
     if (_frames.length == framesMax) {
       _runtimeError("Stack overflow.");
       return false;
     }
-    
+
+    // If we have named arguments, we need to push them onto the stack in the correct slots
+    // matching the parameter names.
+    if (namedArgs.isNotEmpty) {
+      // Positional arguments are already on the stack.
+      // We fill the remaining slots with named arguments.
+      for (int i = argCount; i < closure.function.arity; i++) {
+        final paramName = closure.function.paramNames[i];
+        if (namedArgs.containsKey(paramName)) {
+          _stack.add(namedArgs[paramName]);
+        } else {
+          _runtimeError("Missing required argument: $paramName");
+          return false;
+        }
+      }
+    }
+
     final frame = CallFrame(
       closure,
-      slotBase: _stack.length - argCount,
+      slotBase: _stack.length - closure.function.arity - 1,
     );
     _frames.add(frame);
     return true;
   }
-  
+
 
 
   InterpretResult _run([int minDepth = 0]) {
     CallFrame frame = _frames.last;
-    
+
     try {
       while (true) {
         if (frame.ip >= frame.chunk.code.length) {
              // Implicit return if end of chunk reached
              return InterpretResult.ok;
         }
-        
+
         // Debug
-        // print("IP: ${frame.ip}, Stack: $_stack");
-        // print("Instr: ${OpCode.values[frame.chunk.code[frame.ip]].name}");
-        
+      // print("DEBUG VM: IP: ${frame.ip}, Stack: ${(_stack.length > 5 ? _stack.sublist(_stack.length - 5) : _stack)}");
+      // print("DEBUG VM: Instr: ${OpCode.values[frame.chunk.code[frame.ip]].name}");
+
         final instruction = frame.chunk.code[frame.ip];
         frame.ip++;
-        
+
         final op = OpCode.values[instruction];
-        
+
         int readByte() {
            final b = frame.chunk.code[frame.ip];
            frame.ip++;
            return b;
         }
-        
+
         Object? readConstant() {
            final idx = frame.chunk.code[frame.ip];
            frame.ip++;
            return frame.chunk.constants[idx];
         }
-        
+
         switch (op) {
           case OpCode.constant:
             final constant = readConstant();
             _stack.add(constant);
             break;
-            
-          case OpCode.nil: 
-            _stack.add(null); 
+
+          case OpCode.nil:
+            _stack.add(null);
             break;
-          case OpCode.true_: 
-            _stack.add(true); 
+          case OpCode.true_:
+            _stack.add(true);
             break;
-          case OpCode.false_: 
-            _stack.add(false); 
+          case OpCode.false_:
+            _stack.add(false);
             break;
-          case OpCode.pop: 
-            if (_stack.isNotEmpty) _stack.removeLast(); 
+          case OpCode.pop:
+            if (_stack.isNotEmpty) _stack.removeLast();
             break;
-          
+
           case OpCode.add:
             final b = _stack.removeLast();
             final a = _stack.removeLast();
@@ -405,36 +455,36 @@ class VM {
               throw "Operands must be two numbers or two strings.";
             }
             break;
-            
+
           case OpCode.sub:
             final b = _stack.removeLast() as num;
             final a = _stack.removeLast() as num;
             _stack.add(a - b);
             break;
-            
-          case OpCode.mul: 
+
+          case OpCode.mul:
             final b = _stack.removeLast() as num;
             final a = _stack.removeLast() as num;
             _stack.add(a * b);
             break;
-            
+
           case OpCode.div:
             final b = _stack.removeLast() as num;
             final a = _stack.removeLast() as num;
             _stack.add(a / b);
             break;
-            
+
           case OpCode.mod:
             final b = _stack.removeLast() as num;
             final a = _stack.removeLast() as num;
             _stack.add(a % b);
             break;
-            
+
           case OpCode.negate:
             final a = _stack.removeLast() as num;
             _stack.add(-a);
             break;
-            
+
           case OpCode.not:
             final a = _stack.removeLast();
             _stack.add(!_isTruthy(a));
@@ -445,17 +495,29 @@ class VM {
             final a = _stack.removeLast() as num;
             _stack.add(a < b);
             break;
-            
+
           case OpCode.greater:
             final b = _stack.removeLast() as num;
             final a = _stack.removeLast() as num;
             _stack.add(a > b);
             break;
-            
+
           case OpCode.equal:
             final b = _stack.removeLast();
             final a = _stack.removeLast();
             _stack.add(a == b);
+            break;
+
+          case OpCode.greaterEqual:
+            final b = _stack.removeLast() as num;
+            final a = _stack.removeLast() as num;
+            _stack.add(a >= b);
+            break;
+
+          case OpCode.lessEqual:
+            final b = _stack.removeLast() as num;
+            final a = _stack.removeLast() as num;
+            _stack.add(a <= b);
             break;
 
           case OpCode.print:
@@ -466,38 +528,62 @@ class VM {
           case OpCode.setGlobal:
             final nameIdx = readByte(); // Index in constants
             final name = frame.chunk.constants[nameIdx] as String;
-            _globals[name] = _stack.last; 
+            _globals[name] = _stack.last;
             break;
 
           case OpCode.getGlobal:
             final nameIdx = readByte();
             final name = frame.chunk.constants[nameIdx] as String;
-            if (!_globals.containsKey(name)) {
-              throw "Undefined variable '$name'.";
+            if (_globals.containsKey(name)) {
+              _stack.add(_globals[name]);
+            } else {
+              throw "Undefined global '$name'.";
             }
-            _stack.add(_globals[name]);
             break;
-            
+
           case OpCode.getLocal:
             final slot = readByte();
             _stack.add(_stack[frame.slotBase + slot]);
             break;
-            
+
           case OpCode.setLocal:
             final slot = readByte();
             _stack[frame.slotBase + slot] = _stack.last;
             break;
+
+          case OpCode.getProperty:
+            final name = frame.chunk.constants[readByte()] as String;
+            final obj = _stack.removeLast();
             
+            if (obj is List) {
+              if (name == 'length') {
+                _stack.add(obj.length);
+              } else {
+                _runtimeError("List has no property '$name'.");
+                return InterpretResult.runtimeError;
+              }
+            } else if (obj is Map) {
+              if (name == 'length') {
+                _stack.add(obj.length);
+              } else {
+                _stack.add(obj[name]);
+              }
+            } else {
+              _runtimeError("Only lists and maps have properties.");
+              return InterpretResult.runtimeError;
+            }
+            break;
+
           case OpCode.popScope:
              // Should not be emitted by compiler anymore, but keep for compatibility
              final count = readByte();
              for(var i=0; i<count; i++) _stack.removeLast();
              break;
-             
+
           // Control flow
           case OpCode.jumpIfFalse:
             final offset = readByte();
-            final condition = _stack.last; 
+            final condition = _stack.last;
             if (!_isTruthy(condition)) {
               frame.ip += offset;
             }
@@ -509,12 +595,12 @@ class VM {
             final offset = offsetLow | (offsetHigh << 8);
             frame.ip += offset;
             break;
-             
+
           case OpCode.loop:
             final offset = readByte();
             frame.ip -= offset;
             break;
-            
+
           // Function calls
           case OpCode.call:
             final argCount = readByte();
@@ -527,59 +613,75 @@ class VM {
               frame = _frames.last;
             }
             break;
-             
+
+          case OpCode.callNamed:
+            final argCount = readByte();
+            final namedCount = readByte();
+            final namedArgs = <String, dynamic>{};
+
+            // Pop named arguments (count pairs of key, value)
+            for (int i = 0; i < namedCount; i++) {
+              final value = _stack.removeLast();
+              final name = _stack.removeLast() as String;
+              namedArgs[name] = value;
+            }
+
+            final totalArgSlots = argCount; // positional args only on stack now
+            final callee = _stack[_stack.length - 1 - totalArgSlots];
+
+            if (!_callValue(callee, argCount, namedArgs)) {
+              return InterpretResult.runtimeError;
+            }
+            // Update frame reference after call returns
+            if (_frames.isNotEmpty) {
+              frame = _frames.last;
+            }
+            break;
+
           case OpCode.return_:
             final result = _stack.removeLast();
-            
+
             // Close upvalues for remaining locals in this frame
             _closeUpvalues(frame.slotBase);
-            
+
             // Pop frame
             final returningFrame = _frames.removeLast();
-            
-            if (_frames.length == minDepth) {
-               // Finished execution for this nested run()
-               // Pop slots up to the closure (slotBase - 1)
-               while (_stack.length > returningFrame.slotBase - 1) {
-                 _stack.removeLast();
-               }
-               
+
+             if (_frames.length <= minDepth) {
+                // Finished execution for this nested run() or top-level script
+                // Pop slots up to the closure (slotBase)
+                while (_stack.length > returningFrame.slotBase) {
+                  _stack.removeLast();
+                }
+
                if (result != null) _stack.add(result);
                return InterpretResult.ok;
             }
-            
-            if (_frames.isEmpty) {
-              // Top-level script finished
-              _stack.removeLast(); // Pop script closure
-              if (result != null) _stack.add(result); // Keep result for caller
-              return InterpretResult.ok;
-            }
-            
+
             // Discard all locals from this frame (including the callee and args)
             // _closeUpvalues already handled capturing, so we can just wipe stack
-            // We need to pop back to just before the callee was pushed
-            // slotBase pointed to the first arg, so callee is at slotBase - 1
-            while (_stack.length > frame.slotBase - 1) { // Wait, frame is gone, use popped frame reference? 
-              // Actually we popped frame, so 'frame' var is the OLD frame.
-              // Wait, previous code used `returnSlotBase`.
-              // But 'frame' variable still holds the popped frame object.
-              _stack.removeLast();
-            }
-            
+            // slotBase pointed to the callee
+             while (_stack.length > returningFrame.slotBase) {
+               _stack.removeLast();
+             }
+
             // Push return value
             _stack.add(result);
-            
+
             // Continue in caller's frame
-            frame = _frames.last;
+            if (_frames.isNotEmpty) {
+              frame = _frames.last;
+            }
             break;
-            
+
           // Widget State Management
           case OpCode.getState:
-            final nameIdx = readByte();
-            final name = frame.chunk.constants[nameIdx] as String;
-            _stack.add(_widgetState[name]);
+            final name = frame.chunk.constants[frame.chunk.code[frame.ip++]] as String;
+            final val = _widgetState[name];
+            print('DEBUG VM: getState($name) -> $val');
+            _stack.add(val);
             break;
-            
+
           case OpCode.setState:
             final nameIdx = readByte();
             final name = frame.chunk.constants[nameIdx] as String;
@@ -794,8 +896,20 @@ class VM {
             if (obj is FluxInstance) {
               final value = obj.getProperty(name);
               _stack.add(value);
+            } else if (obj is List) {
+              if (name == 'length') {
+                _stack.add(obj.length);
+              } else {
+                _stack.add(null);
+              }
             } else if (obj is Map) {
-              _stack.add(obj[name]);
+              if (name == 'length') {
+                _stack.add(obj.length);
+              } else {
+                _stack.add(obj[name]);
+              }
+            } else if (_widgetState.containsKey(name)) { 
+               _stack.add(_widgetState[name]);
             } else {
               throw 'Cannot get property from ${obj.runtimeType}';
             }
@@ -812,6 +926,29 @@ class VM {
               obj[name] = value;
             } else {
               throw 'Cannot set property on ${obj.runtimeType}';
+            }
+            break;
+
+          case OpCode.getState:
+            final idx = readByte();
+            final name = frame.chunk.constants[idx] as String;
+            if (_widgetState.containsKey(name)) {
+                _stack.add(_widgetState[name]);
+            } else {
+                _runtimeError("Undefined state variable '$name'.");
+                return InterpretResult.runtimeError;
+            }
+            break;
+
+          case OpCode.setState: // New opcode for setting widget state
+            final idx = readByte();
+            final name = frame.chunk.constants[idx] as String;
+            final value = _stack.last; // Peek/Assigned value
+            if (_widgetState.containsKey(name)) {
+               _widgetState[name] = value;
+               if (onStateChange != null) onStateChange!(name, value);
+            } else {
+               throw "Undefined state variable '$name'.";
             }
             break;
             

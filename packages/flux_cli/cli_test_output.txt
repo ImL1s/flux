@@ -1,0 +1,176 @@
+00:00 +0: loading test\cli_test.dart
+00:00 +0: test\cli_test.dart: Flux Script Execution executes simple print statement
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+00:00 +1: test\cli_test.dart: Flux Script Execution executes arithmetic expressions
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+00:00 +2: test\cli_test.dart: Flux Script Execution executes function definitions and calls
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling variable: name, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: greet, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure greet>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: greet, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+00:00 +3: test\cli_test.dart: Flux Script Execution executes while loops
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling decl type: WhileStmt
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+00:00 +4: test\cli_test.dart: Flux Script Execution executes if/else statements
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+00:00 +5: test\cli_test.dart: Flux Script Execution handles recursive functions (fibonacci)
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure fib>), argCount: 1, namedArgs: ()
+DEBUG RUNTIME: _callFunction: fib, arity: 1, totalProvided: 1 (pos: 1, named: 0)
+Runtime Error: Operands must be two numbers or two strings.
+00:00 +5 -1: test\cli_test.dart: Flux Script Execution handles recursive functions (fibonacci) [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher          expect
+  test\cli_test.dart 96:7  main.<fn>.<fn>
+  
+00:00 +5 -1: test\cli_test.dart: Flux Script Execution handles closures
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling variable: count, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: false
+DEBUG COMPILER: Compiling variable: increment, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling variable: makeCounter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: counter, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure makeCounter>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: makeCounter, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure increment>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: increment, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure increment>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: increment, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: ObjClosure (<closure increment>), argCount: 0, namedArgs: ()
+DEBUG RUNTIME: _callFunction: increment, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+00:00 +6 -1: test\cli_test.dart: Flux Script Execution handles try/catch exceptions
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+00:00 +7 -1: test\cli_test.dart: Flux Script Execution handles list operations
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+DEBUG RUNTIME: _callValue: NativeFunction (<native fn push>), argCount: 2, namedArgs: ()
+DEBUG RUNTIME: NativeFunction push returned 4
+00:00 +8 -1: test\cli_test.dart: Error Handling reports parse errors
+DEBUG PARSER: Error during parse: Expect expression. at 1:9
+#0      Parser._primary (package:flux_compiler/src/parser.dart:595:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:481:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:477:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:468:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:453:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:443:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:432:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:422:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:412:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:402:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:379:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:375:12)
+#12     Parser._varDeclaration (package:flux_compiler/src/parser.dart:357:21)
+#13     Parser._declaration (package:flux_compiler/src/parser.dart:62:66)
+#14     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#15     _runFlux (file:///D:/OtherProject/mine/flux/packages/flux_cli/test/cli_test.dart:178:23)
+#16     main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_cli/test/cli_test.dart:160:15)
+#17     Throws.matchAsync (package:matcher/src/expect/throws_matcher.dart:86:23)
+#18     _expect (package:matcher/src/expect/expect.dart:109:26)
+#19     expect (package:matcher/src/expect/expect.dart:56:3)
+#20     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_cli/test/cli_test.dart:159:7)
+#21     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#22     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#23     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 0 declarations
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+00:00 +8 -2: test\cli_test.dart: Error Handling reports parse errors [E]
+  Expected: throws <Instance of 'ParseError'>
+    Actual: <Closure: () => InterpretResult>
+     Which: returned InterpretResult:<InterpretResult.ok>
+  
+  package:matcher           expect
+  test\cli_test.dart 159:7  main.<fn>.<fn>
+  
+00:00 +8 -2: test\cli_test.dart: Error Handling reports undefined variable errors
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling variable: undefinedVar, isState: false
+DEBUG RUNTIME: _callFunction: script, arity: 0, totalProvided: 0 (pos: 0, named: 0)
+Runtime Error: Undefined global 'undefinedVar'.
+00:00 +9 -2: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

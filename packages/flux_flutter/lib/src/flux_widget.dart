@@ -122,7 +122,7 @@ class _FluxWidgetState extends State<FluxWidget> {
       
       // Execute the build method and convert to Flutter widget
       final fluxTree = _runtime.executeBuild(widgetDef);
-      final flutterWidget = _convertToFlutter(fluxTree);
+      final flutterWidget = _runtime._convertToFlutter(fluxTree);
       
       setState(() {
         _builtWidget = flutterWidget;
@@ -136,32 +136,6 @@ class _FluxWidgetState extends State<FluxWidget> {
     }
   }
   
-  Widget _convertToFlutter(dynamic fluxNode) {
-    if (fluxNode == null) {
-      return const SizedBox.shrink();
-    }
-    
-    if (fluxNode is FluxWidgetNode) {
-      final builder = FluxBindings.get(fluxNode.name);
-      if (builder == null) {
-        return ErrorWidget(Exception("Unknown widget: ${fluxNode.name}"));
-      }
-      
-      final children = fluxNode.children
-          .map((child) => _convertToFlutter(child))
-          .toList();
-      
-      return builder(fluxNode.args, children);
-    }
-    
-    // Fallback for primitives (e.g., strings become Text)
-    if (fluxNode is String) {
-      return Text(fluxNode);
-    }
-    
-    return ErrorWidget(Exception("Cannot convert $fluxNode to Widget"));
-  }
-
   @override
   Widget build(BuildContext context) {
     if (_error != null) {
@@ -216,13 +190,16 @@ class FluxRuntime {
     _vm.onStateChange = onStateChange;
     
     // Compile source
+    print('DEBUG RUNTIME: Source: $source');
     final lexer = Lexer(source);
     final tokens = lexer.tokenize();
     final parser = Parser(tokens);
     final ast = parser.parse();
+    print('DEBUG RUNTIME: Parsed unit with ${ast.declarations.length} declarations');
     
     final compiler = Compiler(unit: ast);
     final function = compiler.endCompiler();
+    print('DEBUG RUNTIME: Compilation finished. Bytecode size: ${function.chunk.code.length}');
     
     // Execute to populate globals (including widget definitions)
     
@@ -231,13 +208,55 @@ class FluxRuntime {
       _vm.globals[name] = name;
     }
     
+    // Inject registered global functions
+    for (final entry in FluxBindings.functions.entries) {
+      _vm.globals[entry.key] = NativeFunction(entry.key, -1, (args) {
+        // NativeFunction logic wraps FluxFunction
+        // FluxFunction takes List<Object?> and returns FutureOr<Object?>
+        // We pass arguments dynamically.
+        // NativeFunction in VM usually has fixed arity, but we can use generic 0 or -1?
+        // Wait, NativeFunction constructor takes arity. 
+        // Our FluxBindings don't specify arity. 
+        // We can pass -1 or similar if VM supports variable arity, 
+        // OR we just set a high arity and let VM pass all args?
+        // Actually VM._callValue checks arity?
+        // VM._callValue passes `argCount` to helper, but NativeFunction.call(args) just takes list.
+        // VM._callValue line 304: final args = _stack.sublist...
+        // It DOES NOT check NativeFunction.arity against argCount explicitly in _callValue!
+        // So arity in NativeFunction is metadata or used by compiler?
+        // Let's pass 0 or a placeholder.
+        return entry.value(args);
+      });
+    }
+    
     _vm.runChunk(function.chunk);
     
     // Extract widget definitions from globals
     for (final entry in _vm.globals.entries) {
       if (entry.value is CompiledWidget) {
-        _widgets[entry.key] = entry.value as CompiledWidget;
+        final widget = entry.value as CompiledWidget;
+        _widgets[entry.key] = widget;
+
+        // Initialize state for THIS widget if it hasn't been initialized
+        // Note: For top-level widgets, this happens here. 
+        // For nested widgets, initialization happens in _handleWidgetCall.
+        _initializeWidgetState(widget);
       }
+    }
+  }
+
+  void _initializeWidgetState(CompiledWidget widget) {
+    for (int i = 0; i < widget.stateFields.length; i++) {
+        final fieldName = widget.stateFields[i];
+        if (_vm.widgetState.containsKey(fieldName)) continue;
+
+        if (i < widget.stateInitializers.length) {
+            _vm.runChunk(widget.stateInitializers[i].chunk);
+            final initValue = _vm.stack.isNotEmpty ? _vm.stack.removeLast() : null;
+            _vm.widgetState[fieldName] = initValue;
+        } else {
+            _vm.widgetState[fieldName] = null;
+        }
     }
   }
   
@@ -245,86 +264,154 @@ class FluxRuntime {
     return _widgets[name];
   }
   
-  FluxWidgetNode executeBuild(CompiledWidget widget) {
+  Widget renderWidget(String name, [Map<String, dynamic> args = const {}]) {
+    final widget = getWidget(name);
+    if (widget == null) return Text('Widget not found: $name');
+    
+    final node = executeBuild(widget, args);
+    return _convertToFlutter(node);
+  }
+
+  FluxWidgetNode executeBuild(CompiledWidget widget, [Map<String, dynamic> args = const {}]) {
     // Set up widget call handler to intercept widget constructor calls
     _vm.widgetCallHandler = _handleWidgetCall;
     
-    // Initialize state fields with their initial values
-    for (int i = 0; i < widget.stateFields.length; i++) {
-      final fieldName = widget.stateFields[i];
-      // Execute the state initializer to get the initial value
-      if (i < widget.stateInitializers.length) {
-        _vm.runChunk(widget.stateInitializers[i].chunk);
-        final initValue = _vm.stack.isNotEmpty ? _vm.stack.removeLast() : null;
-        _vm.widgetState[fieldName] = initValue;
-      } else {
-        _vm.widgetState[fieldName] = null;
+    // Use executeClosure for the buildMethod
+    final closure = ObjClosure(widget.buildMethod, []);
+    
+    // Map props from args map to positional arguments based on paramNames
+    final positionalArgs = <Object?>[];
+    final paramNames = widget.buildMethod.paramNames;
+    if (paramNames != null) {
+      for (final name in paramNames) {
+        positionalArgs.add(args[name]);
       }
+    } else {
+      // Fallback if paramNames is missing (should not happen with new compiler)
+      // but if arity > 0, we might have passed them positionally?
+      // In Flux, props are always named in the caller, so they should be in args.
     }
     
-    // Execute the build method
-    _vm.runChunk(widget.buildMethod.chunk);
-    
-    // Get result from stack (build returns a value)
-    final result = _vm.stack.isNotEmpty ? _vm.stack.last : null;
+    final interpretResult = _vm.executeClosure(closure, positionalArgs);
     
     // Clean up handler
     _vm.widgetCallHandler = null;
+
+    if (interpretResult != InterpretResult.ok) {
+      // If execution failed, the stack might not contain a FluxWidgetNode
+      _vm.stack.clear(); 
+      return FluxWidgetNode('Error', args: {'text': 'Build error'});
+    }
     
-    if (result is FluxWidgetNode) {
-      return result;
+    // Get result from stack (build returns a value)
+    final builtNode = _vm.stack.isNotEmpty ? _vm.stack.removeLast() : null;
+    
+    if (builtNode is FluxWidgetNode) {
+      return builtNode;
     }
     
     // Fallback
     return FluxWidgetNode(
       'Text',
-      args: {'0': 'Build returned: ${result?.toString() ?? "null"}'},
+      args: {'0': 'Build returned: ${builtNode?.toString() ?? "null"}'},
     );
+  }
+
+  Widget _convertToFlutter(dynamic fluxNode) {
+    if (fluxNode is FluxWidgetNode) {
+      final builder = FluxBindings.get(fluxNode.name);
+      if (builder == null) {
+        return Text('Unknown widget: ${fluxNode.name}');
+      }
+      
+      final children = fluxNode.children
+          .map((child) => _convertToFlutter(child))
+          .toList();
+      
+      // Process args to wrap closures
+      final processedArgs = Map<String, dynamic>.from(fluxNode.args);
+      for (final key in processedArgs.keys) {
+        final value = processedArgs[key];
+        if (value is ObjClosure) {
+           processedArgs[key] = (List<Object?> callArgs) {
+             // Execute closure on the VM
+             _vm.executeClosure(value, callArgs);
+           };
+        }
+      }
+
+      return builder(processedArgs, children);
+    }
+    
+    // Fallback for primitives (e.g., strings become Text)
+    if (fluxNode is String) {
+      return Text(fluxNode);
+    }
+    
+    return ErrorWidget(Exception("Cannot convert $fluxNode to Widget"));
   }
   
   /// Handle widget constructor calls during build execution
-  Object? _handleWidgetCall(Object? callee, int argCount, List<Object?> stack) {
-    // Check if this is a widget constructor call
-    if (callee is String && _widgetConstructors.contains(callee)) {
-      // Build FluxWidgetNode from stack arguments
-      final args = <String, dynamic>{};
+  Object? _handleWidgetCall(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack) {
+    // Check if this is a widget constructor call or a user-defined widget
+    final isBuiltin = callee is String && _widgetConstructors.contains(callee);
+    final isCustom = callee is CompiledWidget;
+
+    if (isBuiltin || isCustom) {
+      final name = isBuiltin ? callee as String : (callee as CompiledWidget).name;
+      
+      // Build arguments map
+      final args = Map<String, dynamic>.from(namedArgs);
       final children = <FluxWidgetNode>[];
       
-      // Pop arguments from stack (in reverse order)
+      // Pop positional arguments from stack (in reverse order)
       for (int i = argCount - 1; i >= 0; i--) {
         if (stack.isEmpty) break;
         final arg = stack.removeLast();
         
-        if (arg is ObjClosure) {
-           // Execute closure to generate children
-           _childrenStack.add([]); // Push new collector
-           _vm.executeClosure(arg);
-           children.addAll(_childrenStack.removeLast());
-        } else if (arg is FluxWidgetNode) {
+        if (arg is FluxWidgetNode) {
           children.insert(0, arg);
         } else {
           args['$i'] = arg;
         }
       }
       
-      // Pop the callee (widget name string)
+      // Special handling for builder closures (trailing blocks)
+      if (args.containsKey('_children')) {
+        final builder = args.remove('_children');
+        if (builder is ObjClosure) {
+            // Execute closure to generate children
+            _childrenStack.add([]); // Push new collector
+            _vm.executeClosure(builder);
+            children.addAll(_childrenStack.removeLast());
+        }
+      }
+      
+      // Pop the callee (widget name string or CompiledWidget)
       if (stack.isNotEmpty) {
         stack.removeLast();
       }
       
       // Create node
-      final node = FluxWidgetNode(callee, args: args, children: children);
+      FluxWidgetNode node;
+      if (isCustom) {
+          // Recursive build for custom widgets
+          node = executeBuild(callee as CompiledWidget, args);
+      } else {
+          node = FluxWidgetNode(name, args: args, children: children);
+      }
       
       // Add to parent collector if exists
       if (_childrenStack.isNotEmpty) {
         _childrenStack.last.add(node);
       }
       
+      // Push result to stack so VM is happy
       stack.add(node);
-      
-      return node; // Non-null indicates we handled it
+      return node;
     }
     
-    return null; // Let VM handle normally
+    // Not a widget call
+    return null; 
   }
 }

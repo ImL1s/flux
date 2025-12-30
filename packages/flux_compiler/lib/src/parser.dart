@@ -32,7 +32,12 @@ class Parser {
     while (!_isAtEnd) {
       try {
         statements.add(_declaration());
-      } catch (e) {
+      } catch (e, stack) {
+        if (e is ParseError) {
+            errors.add(e);
+        }
+        print('DEBUG PARSER: Error during parse: $e');
+        print(stack);
         _synchronize();
       }
     }
@@ -112,38 +117,39 @@ class Parser {
 
     while (!_check(TokenType.rightBrace) && !_isAtEnd) {
       if (_match(TokenType.state)) {
-        // State field: state count = 0
         final fieldName = _consume(TokenType.identifier, 'Expect state variable name.').lexeme;
+        print('DEBUG PARSER: Found state field: $fieldName'); // DEBUG
         String? type;
-         if (_match(TokenType.colon)) {
-           type = _consume(TokenType.identifier, 'Expect state type.').lexeme;
+        if (_match(TokenType.colon)) {
+          type = _consume(TokenType.identifier, 'Expect state type.').lexeme;
         }
         _consume(TokenType.equal, 'State fields must be initialized.');
         final initializer = _expression();
-        _match(TokenType.semicolon); // Optional semicolon
+        _match(TokenType.semicolon); 
         stateFields.add(StateField(fieldName, initializer, type: type));
+      } else if (_match(TokenType.props)) {
+        do {
+          final propName = _consume(TokenType.identifier, 'Expect property name.').lexeme;
+          String? type;
+          if (_match(TokenType.colon)) {
+            type = _consume(TokenType.identifier, 'Expect property type.').lexeme;
+          }
+          props.add(Parameter(propName, type: type, isRequired: true));
+        } while (_match(TokenType.comma));
+        _consume(TokenType.semicolon, 'Expect ";" after properties.');
       } else if (_match(TokenType.build)) {
-        // Build block: build { ... }
         _consume(TokenType.leftBrace, 'Expect "{" after "build".');
-        // The body of build is a single expression (usually a Widget constructor call)
-        // that matches the DSL syntax like Column { ... }
-        // For simplicity in parser, we parse it as an expression.
-        final expr = _expression();
+        final body = _expression();
         _consume(TokenType.rightBrace, 'Expect "}" after build body.');
+        
         if (buildBlock != null) {
           _error(_previous, 'Widget can only have one build block.');
         }
-        buildBlock = BuildBlock(expr);
+        buildBlock = BuildBlock(body);
       } else if (_match(TokenType.semicolon)) {
-          // Ignore stray semicolons
+        // Ignore stray semicolons
       } else {
-        // Assuming it's a prop or helper method? 
-        // For minimal MVP, let's just error or skip.
-        // Or maybe props are defined in the head?
-        // spec: widget Counter { ... }
-        // Let's assume props might be passed in constructor syntax later, 
-        // but for now let's just ignore other things or error.
-        throw _error(_peek, 'Unexpected token in widget declaration.');
+        throw _error(_peek, 'Unexpected token in widget declaration: ${_peek.lexeme}');
       }
     }
     _consume(TokenType.rightBrace, 'Expect "}" after widget body.');
@@ -152,7 +158,8 @@ class Parser {
       throw _error(_previous, 'Widget must have a build block.');
     }
 
-    return WidgetDecl(name, props, stateFields, buildBlock, line: _peek.line, column: _peek.column);
+    print('DEBUG PARSER: Widget $name parsed. StateFields: ${stateFields.length}'); // DEBUG
+    return WidgetDecl(name, props, stateFields, buildBlock!, line: _peek.line, column: _peek.column);
   }
 
   ClassDecl _classDeclaration() {
@@ -489,23 +496,12 @@ class Parser {
          while (!_check(TokenType.rightBrace) && !_isAtEnd) {
            statements.add(_statement());
          }
-         _consume(TokenType.rightBrace, 'Expect "}" after widget block.');
-         
-         final args = <Expression>[];
-         for (final stmt in statements) {
-           if (stmt is ExpressionStmt) {
-             args.add(stmt.expression);
-           } else {
-             // Ignore non-expression statements or handle them?
-             // For simple DSL, we ignore logic statements or treat them as valid logic building logic?
-             // But CallExpr arguments must be Expressions.
-             // If we have `if` inside Column, it should be an expression (ConditionalExpr) or flow.
-             // We can't put `IfStmt` in `CallExpr` args.
-             // So strict DSL: only expressions allowed in Widget blocks.
-           }
-         }
-         
-         expr = CallExpr(expr, args, line: brace.line, column: brace.column);
+          _consume(TokenType.rightBrace, 'Expect "}" after widget block.');
+          
+          final block = BlockStmt(statements, line: brace.line, column: brace.column);
+          final lambda = LambdaExpr([], block, line: brace.line, column: brace.column);
+          
+          expr = CallExpr(expr, [], namedArguments: {'_children': lambda}, line: brace.line, column: brace.column);
       } else if (_match(TokenType.leftBracket)) {
         // Index access: list[0], map["key"]
         final bracket = _previous;
@@ -522,26 +518,44 @@ class Parser {
 
   Expression _finishCall(Expression callee) {
     final arguments = <Expression>[];
+    final namedArguments = <String, Expression>{};
+
     if (!_check(TokenType.rightParen)) {
       do {
-        if (arguments.length >= 255) {
-          _error(_peek, 'Can\'t have more than 255 arguments.');
+        if (_peek.type == TokenType.identifier && _peekNext.type == TokenType.colon) {
+          final name = _consume(TokenType.identifier, 'Expect named argument name.');
+          _consume(TokenType.colon, 'Expect ":" after named argument name.');
+          namedArguments[name.lexeme] = _expression();
+        } else {
+          if (arguments.length >= 255) {
+            _error(_peek, 'Can\'t have more than 255 arguments.');
+          }
+          arguments.add(_expression());
         }
-        arguments.add(_expression());
       } while (_match(TokenType.comma));
     }
     final paren = _consume(TokenType.rightParen, 'Expect ")" after arguments.');
 
-    // Trailing lambda? `Button("Click") { ... }`
+    // Trailing lambda or widget block syntax
     if (_match(TokenType.leftBrace)) {
-        // Parse block
-        final block = _block();
-        // Convert block to LambdaExpr
-        final lambda = LambdaExpr([], block, line: block.line, column: block.column);
-        arguments.add(lambda);
+        final brace = _previous;
+        final statements = <Statement>[];
+        while (!_check(TokenType.rightBrace) && !_isAtEnd) {
+          statements.add(_statement());
+        }
+        _consume(TokenType.rightBrace, 'Expect "}" after widget block.');
+        
+        // Wrap children in a LambdaExpr and pass as a special named argument
+        namedArguments["_children"] = LambdaExpr([], BlockStmt(statements, line: brace.line, column: brace.column), 
+            line: brace.line, column: brace.column);
     }
 
-    return CallExpr(callee, arguments, line: paren.line, column: paren.column);
+    return CallExpr(callee, arguments, namedArguments: namedArguments, line: callee.line, column: callee.column);
+  }
+
+  Token get _peekNext {
+    if (_current + 1 >= _tokens.length) return _tokens.last;
+    return _tokens[_current + 1];
   }
 
   Expression _primary() {

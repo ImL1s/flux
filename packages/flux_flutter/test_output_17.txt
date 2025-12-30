@@ -1,0 +1,62 @@
+[ +147 ms] Found 1 files which will be executed as Widget Tests.
+[   +8 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[   +3 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[  +46 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[  +27 ms] Skipping pub get: version match.
+[ +212 ms] running test package with arguments: [--no-color, --chain-stack-traces, --, file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart?]
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+[ +119 ms] test 0: starting test D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+[   +5 ms] Stopping scan for flutter_test_config.dart; found project root at D:\OtherProject\mine\flux\packages\flux_flutter
+[   +2 ms] Compiler will use the following file as its incremental dill file: C:\Users\aa223\AppData\Local\Temp\flutter_tools.f22da74e\flutter_test_compiler.dd5595ab\output.dill
+[        ] Listening to compiler controller...
+[   +5 ms] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.f22da74e/flutter_test_listener.d2028a84/listener.dart
+[  +92 ms] No packages with native assets. Skipping native assets compilation.
+[        ] Writing native assets yaml to file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml.
+[   +9 ms] Writing D:\OtherProject\mine\flux\packages\flux_flutter\build\native_assets\windows\native_assets.yaml done.
+[   +2 ms] D:\APP\flutter\bin\cache\dart-sdk\bin\dartaotruntime.exe D:\APP\flutter\bin\cache\dart-sdk\bin\snapshots\frontend_server_aot.dart.snapshot --sdk-root D:\APP\flutter\bin\cache\artifacts\engine\common\flutter_patched_sdk/ --incremental --no-print-incremental-dependencies --target=flutter --experimental-emit-debug-metadata --output-dill C:\Users\aa223\AppData\Local\Temp\flutter_tools.f22da74e\flutter_test_compiler.dd5595ab\output.dill --packages D:\OtherProject\mine\flux\packages\flux_flutter\.dart_tool\package_config.json -Ddart.vm.profile=false -Ddart.vm.product=false --enable-asserts --track-widget-creation --initialize-from-dill D:\OtherProject\mine\flux\packages\flux_flutter\build\test_cache\build\cache.dill.track.dill --native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml --verbosity=error
+[   +9 ms] <- native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml
+[        ] <- compile file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.f22da74e/flutter_test_listener.d2028a84/listener.dart
+[+1228 ms] <- accept
+[        ] <- reset
+[        ] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.f22da74e/flutter_test_listener.d2028a84/listener.dart took 1342ms
+[        ] test 0: starting test device
+[   +1 ms] test 0: awaiting connection to test device
+[        ] test 0: VM Service uri is not available
+[   +2 ms] test 0: test harness socket server is running at port:51842
+[   +1 ms] Using this directory for fonts configuration: C:\Users\aa223\AppData\Local\Temp\flutter_tools.f22da74e\flutter_test_fonts.205597d7
+[   +1 ms] test 0: Starting flutter_tester process with command=[D:\APP\flutter\bin\cache\artifacts\engine\windows-x64\flutter_tester.exe, --disable-vm-service, --enable-checked-mode, --verify-entry-points, --enable-software-rendering, --skia-deterministic-rendering, --enable-dart-profiling, --non-interactive, --use-test-fonts, --disable-asset-fonts, --packages=D:\OtherProject\mine\flux\packages\flux_flutter\.dart_tool\package_config.json, --flutter-assets-dir=D:\OtherProject\mine\flux\packages\flux_flutter\build\unit_test_assets, C:\Users\aa223\AppData\Local\Temp\flutter_tools.f22da74e\flutter_test_listener.d2028a84\listener.dart.dill], environment={FLUTTER_TEST: true, FONTCONFIG_FILE: C:\Users\aa223\AppData\Local\Temp\flutter_tools.f22da74e\flutter_test_fonts.205597d7/fonts.conf, SERVER_PORT: 51842, APP_NAME: flux_flutter, UNIT_TEST_ASSETS: D:\OtherProject\mine\flux\packages\flux_flutter\build\unit_test_assets, PATH: D:\OtherProject\mine\flux\packages\flux_flutter\build\native_assets\windows\;C:\Program Files\PowerShell\7;C:\Program Files\Eclipse Adoptium\jdk-21.0.9.10-hotspot\bin;C:\Python311\Scripts\;C:\Python311\;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\APP\flutter\bin;C:\Users\aa223\AppData\Local\Pub\Cache\bin;C:\ProgramData\chocolatey\bin;c:\Users\aa223\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\aa223\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\aa223\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\GitHub CLI\;D:\APP\controlmymonitor;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\PowerShell\7\;C:\Users\aa223\.local\bin\;C:\Program Files\dotnet\;C:\Program Files\Go\bin;C:\Program Files\cursor\resources\app\bin;C:\Users\aa223\bin;C:\Users\aa223\.cargo\bin;C:\Program Files\PowerShell\7;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\APP\flutter\bin;C:\Users\aa223\AppData\Local\Pub\Cache\bin;C:\ProgramData\chocolatey\bin;c:\Users\aa223\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\aa223\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\aa223\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\GitHub CLI\;D:\APP\controlmymonitor;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\PowerShell\7\;C:\Users\aa223\.local\bin\;;C:\Program Files\PowerShell\7;D:\APP\flutter\bin\;C:\Program Files\Zulu\zulu-17\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDI;D:\APP\maestro\maestro\bin;C:\Users\aa223\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\aa223\AppData\Local\Programs\Ollama;D:\APP\Kiro\bin;C:\Users\aa223\AppData\Local\Microsoft\WindowsApps;C:\Users\aa223\AppData\Local\Microsoft\WinGet\Links;D:\APP\Antigravity\bin;C:\Users\aa223\go\bin;D:\APP\Warp\bin;C:\Users\aa223\AppData\Local\PowerToys\DSCModules\;D:\APP\flutter\bin\mingit\cmd}
+[   +5 ms] test 0: Started flutter_tester process at pid 78484
+[ +239 ms] test 0: connected to test device, now awaiting test result
+[        ] test 0: Waiting for test harness or tests to finish
+00:00 +0: E2E: Todo App (Input, State Update, List Rendering)
