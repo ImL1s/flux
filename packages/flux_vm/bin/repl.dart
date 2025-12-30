@@ -119,8 +119,8 @@ void main(List<String> args) {
       }
       
       // Compile
-      final compiler = Compiler();
-      compiler.compile(ast);
+      // Compile
+      final compiler = Compiler(unit: ast);
       final function = compiler.endCompiler();
       
       // Execute

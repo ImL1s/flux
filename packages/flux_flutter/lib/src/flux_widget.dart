@@ -208,6 +208,9 @@ class FluxRuntime {
     'AppBar', 'FloatingActionButton', 'TextField', 'Checkbox',
   };
   
+  // Stack for collecting children in nested widgets
+  final List<List<FluxWidgetNode>> _childrenStack = [];
+  
   FluxRuntime(String source, {this.onStateChange}) {
     // Set up state change callback
     _vm.onStateChange = onStateChange;
@@ -222,6 +225,12 @@ class FluxRuntime {
     final function = compiler.endCompiler();
     
     // Execute to populate globals (including widget definitions)
+    
+    // Inject widget names into globals so they can be resolved
+    for (final name in _widgetConstructors) {
+      _vm.globals[name] = name;
+    }
+    
     _vm.runChunk(function.chunk);
     
     // Extract widget definitions from globals
@@ -239,6 +248,19 @@ class FluxRuntime {
   FluxWidgetNode executeBuild(CompiledWidget widget) {
     // Set up widget call handler to intercept widget constructor calls
     _vm.widgetCallHandler = _handleWidgetCall;
+    
+    // Initialize state fields with their initial values
+    for (int i = 0; i < widget.stateFields.length; i++) {
+      final fieldName = widget.stateFields[i];
+      // Execute the state initializer to get the initial value
+      if (i < widget.stateInitializers.length) {
+        _vm.runChunk(widget.stateInitializers[i].chunk);
+        final initValue = _vm.stack.isNotEmpty ? _vm.stack.removeLast() : null;
+        _vm.widgetState[fieldName] = initValue;
+      } else {
+        _vm.widgetState[fieldName] = null;
+      }
+    }
     
     // Execute the build method
     _vm.runChunk(widget.buildMethod.chunk);
@@ -272,7 +294,13 @@ class FluxRuntime {
       for (int i = argCount - 1; i >= 0; i--) {
         if (stack.isEmpty) break;
         final arg = stack.removeLast();
-        if (arg is FluxWidgetNode) {
+        
+        if (arg is ObjClosure) {
+           // Execute closure to generate children
+           _childrenStack.add([]); // Push new collector
+           _vm.executeClosure(arg);
+           children.addAll(_childrenStack.removeLast());
+        } else if (arg is FluxWidgetNode) {
           children.insert(0, arg);
         } else {
           args['$i'] = arg;
@@ -284,8 +312,14 @@ class FluxRuntime {
         stack.removeLast();
       }
       
-      // Create and push node
+      // Create node
       final node = FluxWidgetNode(callee, args: args, children: children);
+      
+      // Add to parent collector if exists
+      if (_childrenStack.isNotEmpty) {
+        _childrenStack.last.add(node);
+      }
+      
       stack.add(node);
       
       return node; // Non-null indicates we handled it

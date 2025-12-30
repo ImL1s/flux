@@ -1,5 +1,6 @@
 name: flux_vm
-description: The virtual machine for the Flux scripting language.
+publish_to: 'none'
+description: Virtual Machine for Flux language.x scripting language.
 version: 0.0.1
 environment:
   sdk: '>=3.0.0 <4.0.0'

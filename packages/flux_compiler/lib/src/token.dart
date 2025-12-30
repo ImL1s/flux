@@ -42,6 +42,8 @@ enum TokenType {
   catch_,
   finally_,
   throw_,
+  break_,
+  continue_,
 
   // Operators
   plus, // +
@@ -141,4 +143,6 @@ const keywords = <String, TokenType>{
   'catch': TokenType.catch_,
   'finally': TokenType.finally_,
   'throw': TokenType.throw_,
+  'break': TokenType.break_,
+  'continue': TokenType.continue_,
 };

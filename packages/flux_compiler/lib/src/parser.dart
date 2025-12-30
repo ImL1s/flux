@@ -575,8 +575,44 @@ class Parser {
       final end = _consume(TokenType.rightBracket, 'Expect "]" after list elements.');
       return ListExpr(elements, line: end.line, column: end.column);
     }
+    
+    // Anonymous lambda: fn() { ... } or fn(a, b) { ... }
+    if (_match(TokenType.fn)) {
+      return _lambdaExpression();
+    }
 
     throw _error(_peek, 'Expect expression.');
+  }
+  
+  /// Parse anonymous lambda: fn(params) { body }
+  Expression _lambdaExpression() {
+    final fnToken = _previous;
+    
+    // Parse parameters
+    _consume(TokenType.leftParen, 'Expect "(" after "fn".');
+    final parameters = <Parameter>[];
+    if (!_check(TokenType.rightParen)) {
+      do {
+        if (parameters.length >= 255) {
+          _error(_peek, 'Can\'t have more than 255 parameters.');
+        }
+        
+        final paramName = _consume(TokenType.identifier, 'Expect parameter name.').lexeme;
+        String? type;
+        if (_match(TokenType.colon)) {
+          type = _consume(TokenType.identifier, 'Expect parameter type.').lexeme;
+        }
+        
+        parameters.add(Parameter(paramName, type: type));
+      } while (_match(TokenType.comma));
+    }
+    _consume(TokenType.rightParen, 'Expect ")" after parameters.');
+    
+    // Parse body
+    _consume(TokenType.leftBrace, 'Expect "{" before lambda body.');
+    final body = _block();
+    
+    return LambdaExpr(parameters, body, line: fnToken.line, column: fnToken.column);
   }
   
   Expression _finishInterpolation() {

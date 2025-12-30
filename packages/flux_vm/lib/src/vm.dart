@@ -167,6 +167,32 @@ class VM {
   void clearState() {
     _widgetState.clear();
   }
+
+  /// Interpret source code
+  InterpretResult interpret(String source) {
+    try {
+      final lexer = Lexer(source);
+      final tokens = lexer.tokenize();
+      
+      final parser = Parser(tokens);
+      final ast = parser.parse();
+      
+      if (parser.errors.isNotEmpty) {
+        for (final error in parser.errors) {
+          _runtimeError(error.toString());
+        }
+        return InterpretResult.compileError;
+      }
+      
+      final compiler = Compiler(unit: ast);
+      final function = compiler.endCompiler();
+      
+      return runChunk(function.chunk);
+    } catch (e) {
+      _runtimeError(e.toString());
+      return InterpretResult.compileError;
+    }
+  }
   
   /// Run a pre-compiled chunk directly
   InterpretResult runChunk(Chunk chunk) {
@@ -186,6 +212,24 @@ class VM {
     
     return _run();
   }
+  
+  /// Execute a closure with arguments.
+  /// Used by FluxRuntime to execute widget builder closures.
+  InterpretResult executeClosure(ObjClosure closure, [List<Object?> args = const []]) {
+     final startDepth = _frames.length;
+     _stack.add(closure);
+     for (final arg in args) {
+       _stack.add(arg);
+     }
+     
+     if (!_callValue(closure, args.length)) {
+       return InterpretResult.runtimeError;
+     }
+     
+     return _run(startDepth);
+  }
+  
+
   
   /// Capture an upvalue for the given stack slot
   ObjUpvalue _captureUpvalue(int localIndex) {
@@ -298,7 +342,9 @@ class VM {
     return true;
   }
   
-  InterpretResult _run() {
+
+
+  InterpretResult _run([int minDepth = 0]) {
     CallFrame frame = _frames.last;
     
     try {
@@ -489,11 +535,23 @@ class VM {
             _closeUpvalues(frame.slotBase);
             
             // Pop frame
-            _frames.removeLast();
+            final returningFrame = _frames.removeLast();
+            
+            if (_frames.length == minDepth) {
+               // Finished execution for this nested run()
+               // Pop slots up to the closure (slotBase - 1)
+               while (_stack.length > returningFrame.slotBase - 1) {
+                 _stack.removeLast();
+               }
+               
+               if (result != null) _stack.add(result);
+               return InterpretResult.ok;
+            }
             
             if (_frames.isEmpty) {
               // Top-level script finished
               _stack.removeLast(); // Pop script closure
+              if (result != null) _stack.add(result); // Keep result for caller
               return InterpretResult.ok;
             }
             

@@ -1,0 +1,61 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart
+00:00 +0: FluxWidget Tests renders basic text widget
+00:00 +1: FluxWidget Tests renders nested column with children
+00:00 +2: FluxWidget Tests handles state changes and interaction
+00:00 +2 -1: FluxWidget Tests handles state changes and interaction [E]
+  Bad state: Cannot fire new event. Controller is already firing an event
+  dart:core                                                    print
+  package:flutter/src/foundation/print.dart 57:5               debugPrintSynchronously
+  package:flutter/src/foundation/assertions.dart 1014:19       FlutterError.dumpErrorToConsole
+  package:flutter_test/src/test_exception_reporter.dart 29:16  _defaultTestExceptionReporter
+  package:flutter_test/src/binding.dart 830:28                 TestWidgetsFlutterBinding._createTestCompletionHandler.<fn>
+  dart:async                                                   _CustomZone.run
+  package:flutter_test/src/binding.dart 996:20                 TestWidgetsFlutterBinding._runTest.handleUncaughtError
+  package:flutter_test/src/binding.dart 1000:9                 TestWidgetsFlutterBinding._runTest.<fn>
+  ===== asynchronous gap ===========================
+  dart:async                                                   _CustomZone.registerBinaryCallback
+  package:flutter_test/src/binding.dart 1016:5                 TestWidgetsFlutterBinding._runTestBody
+  dart:async                                                   _CustomZone.runBinary
+  package:flutter_test/src/binding.dart 1005:14                TestWidgetsFlutterBinding._runTest
+  package:flutter_test/src/binding.dart 1485:24                AutomatedTestWidgetsFlutterBinding.runTest.<fn>
+  package:fake_async/fake_async.dart 182:54                    FakeAsync.run.<fn>.<fn>
+  dart:async                                                   runZoned
+  package:clock/src/default.dart 52:10                         withClock
+  package:fake_async/fake_async.dart 182:22                    FakeAsync.run.<fn>
+  dart:async                                                   runZoned
+  package:fake_async/fake_async.dart 182:7                     FakeAsync.run
+  package:flutter_test/src/binding.dart 1482:15                AutomatedTestWidgetsFlutterBinding.runTest
+  package:flutter_test/src/widget_tester.dart 181:24           testWidgets.<fn>
+  
+  TimeoutException after 0:10:00.000000: Test timed out after 10 minutes.
+  dart:isolate  _RawReceivePort._handleMessage
+  
+10:00 +2 -1: FluxWidget Tests handles text field input
+Runtime Error: Expected 1 arguments but got 0.
+Runtime Error: Expected 1 arguments but got 0.
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "You typed: ": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart:137:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart line 137
+The test description was:
+  handles text field input
+════════════════════════════════════════════════════════════════════════════════════════════════════
+10:00 +2 -2: FluxWidget Tests handles text field input [E]
+  Test failed. See exception logs above.
+  The test description was: handles text field input
+  
+10:00 +2 -2: Some tests failed.

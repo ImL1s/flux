@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'dart:io';
+
 import 'package:flux_compiler/flux_compiler.dart';
 import 'helpers/ast_printer.dart';
 import 'helpers/bytecode_printer.dart';

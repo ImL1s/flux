@@ -74,6 +74,9 @@ class Compiler {
   late CompiledFunction _function;
   Compiler? _enclosing;
   
+  // Track enclosing TryStmts for return/break/continue handling
+  final List<TryStmt> _enclosingTrys = [];
+  
   final List<Local> _locals = [];
   final List<CompilerUpvalue> _upvalues = [];
   int _scopeDepth = 0;
@@ -126,6 +129,16 @@ class Compiler {
       _compileThrowStmt(statement);
     }
     // Handle others...
+  }
+  
+  bool _isStateField(String name) {
+    if (_stateFields.contains(name)) {
+      return true;
+    }
+    if (_enclosing != null) {
+      return _enclosing!._isStateField(name);
+    }
+    return false;
   }
   
   CompiledFunction endCompiler() {
@@ -219,6 +232,7 @@ class Compiler {
     }
     
     // Define as global variable (if top level) or local variable
+    // Define as global variable (if top level) or local variable
     if (_scopeDepth > 0) {
       _addLocal(stmt.name);
     } else {
@@ -227,6 +241,55 @@ class Compiler {
       chunk.write(nameIdx, stmt.line);
       chunk.writeOp(OpCode.pop, stmt.line); // Pop the closure instance
     }
+  }
+  
+  void _compileLambda(LambdaExpr expr) {
+    // Compile lambda body
+    final funcCompiler = Compiler._inner(this, "lambda");
+    funcCompiler._function = CompiledFunction(
+      "lambda", 
+      funcCompiler.chunk,
+      arity: expr.parameters.length,
+    );
+    
+    // Begin scope for parameters
+    funcCompiler._beginScope();
+    for (final param in expr.parameters) {
+      funcCompiler._addLocal(param.name);
+    }
+    
+    // Compile body
+    if (expr.body is BlockStmt) {
+      funcCompiler._compileBlock(expr.body as BlockStmt);
+    } else if (expr.body is Statement) {
+      funcCompiler.compile(expr.body as Statement);
+    } else if (expr.body is Expression) {
+      // Expression lambda? (e.g. arrow function)
+      funcCompiler._compileExpression(expr.body as Expression);
+      // If expression body, the result IS the return value?
+      // But standard block returns returnOp.
+      // If we implement expression lambdas later, we need 'return' opcode here.
+      // For now, Flux doesn't seem to produce Expression-bodied lambdas in parser.
+    }
+    
+    // Ensure return logic
+    funcCompiler.chunk.writeOp(OpCode.nil, expr.line);
+    funcCompiler.chunk.writeOp(OpCode.return_, expr.line);
+    
+    // Emit closure creation
+    final funcObj = funcCompiler._function;
+    final idx = chunk.addConstant(funcObj);
+    chunk.writeOp(OpCode.closure, expr.line);
+    chunk.write(idx, expr.line);
+    
+    // Emit upvalues
+    chunk.write(funcCompiler._upvalues.length, expr.line);
+    for (final upvalue in funcCompiler._upvalues) {
+      chunk.write(upvalue.isLocal ? 1 : 0, expr.line);
+      chunk.write(upvalue.index, expr.line);
+    }
+    
+    // Result (Closure) is left on stack
   }
   
   void _compileWhileStmt(WhileStmt stmt) {
@@ -245,11 +308,25 @@ class Compiler {
   }
   
   void _compileReturnStmt(ReturnStmt stmt) {
+    // 1. Compile return value (pushes to stack)
     if (stmt.value != null) {
       _compileExpression(stmt.value!);
     } else {
       chunk.writeOp(OpCode.nil, stmt.line);
     }
+    
+    // 2. Execute all enclosing finally blocks (from inside out)
+    // Note: finally blocks are compiled as statements, so they preserve stack height (mostly).
+    // The return value is ON TOP OF STACK.
+    // Finally blocks must not consume it.
+    // Since finally blocks are usually just expression statements or helper calls, they push/pop cleanly.
+    for (final tryStmt in _enclosingTrys.reversed) {
+      if (tryStmt.finallyBlock != null) {
+        compile(tryStmt.finallyBlock!);
+      }
+    }
+    
+    // 3. Return
     chunk.writeOp(OpCode.return_, stmt.line);
   }
 
@@ -262,6 +339,8 @@ class Compiler {
   }
   
   void _compileTryStmt(TryStmt stmt) {
+    _enclosingTrys.add(stmt);
+    
     // Emit try_ opcode with placeholder absolute addresses
     chunk.writeOp(OpCode.try_, stmt.line);
     final catchAddrOffset = chunk.code.length;
@@ -271,52 +350,70 @@ class Compiler {
     chunk.write(0, stmt.line); // Placeholder for finally address (low byte)
     chunk.write(0, stmt.line); // Placeholder for finally address (high byte)
     
-    // Compile try block
+    // 1. Compile TRY block
     compile(stmt.tryBlock);
     
-    // Success path: remove handler and jump over catch block
+    _enclosingTrys.removeLast();
+    
+    // 2. Success Path
     chunk.writeOp(OpCode.endTry, stmt.line);  // Remove handler on success
+    
+    // Execute finally block on success
+    if (stmt.finallyBlock != null) {
+      compile(stmt.finallyBlock!);
+    }
+    
     chunk.writeOp(OpCode.jump, stmt.line);
     final successJumpOffset = chunk.code.length;
-    chunk.write(0, stmt.line);
+    chunk.write(0, stmt.line); // Placeholder for jump to end
     chunk.write(0, stmt.line);
     
-    // Record catch block start address and patch it
-    final catchBlockAddr = chunk.code.length;
-    chunk.code[catchAddrOffset] = catchBlockAddr & 0xff;
-    chunk.code[catchAddrOffset + 1] = (catchBlockAddr >> 8) & 0xff;
+    // 3. Exception Path (Compiler jumps here on error)
+    final catchHandlerAddr = chunk.code.length;
+    chunk.code[catchAddrOffset] = catchHandlerAddr & 0xff;
+    chunk.code[catchAddrOffset + 1] = (catchHandlerAddr >> 8) & 0xff;
     
-    // Compile catch block (if present)
+    // Note: finallyAddr is mostly for debug/introspection in current VM implementation
+    // as the VM jumps to catchAddr on exception.
+    chunk.code[finallyAddrOffset] = catchHandlerAddr & 0xff;
+    chunk.code[finallyAddrOffset + 1] = (catchHandlerAddr >> 8) & 0xff;
+    
     if (stmt.catchBlock != null) {
+      // -- Try-Catch or Try-Catch-Finally --
       chunk.writeOp(OpCode.catch_, stmt.line);
       
-      // Create local variable for exception
       _beginScope();
       if (stmt.catchVariable != null) {
         _addLocal(stmt.catchVariable!);
-        // The exception is already on the stack from the VM's catch handler
       }
       
       compile(stmt.catchBlock!);
       _endScope(stmt.line);
+      
+      // Execute finally after catch
+      if (stmt.finallyBlock != null) {
+        compile(stmt.finallyBlock!);
+      }
+      // Fallthrough to end
+    } else {
+      // -- Try-Finally (Synthesized Catch) --
+      // Exception is on stack
+      chunk.writeOp(OpCode.catch_, stmt.line);
+      
+      // Execute finally
+      if (stmt.finallyBlock != null) {
+        compile(stmt.finallyBlock!);
+      }
+      
+      // Rethrow exception
+      chunk.writeOp(OpCode.throw_, stmt.line);
     }
     
-    // Patch success jump to skip to finally/end
-    final afterCatchAddr = chunk.code.length;
-    final jumpOffset = afterCatchAddr - successJumpOffset - 2;
-    chunk.code[successJumpOffset] = jumpOffset & 0xff;
-    chunk.code[successJumpOffset + 1] = (jumpOffset >> 8) & 0xff;
-    
-    // Record finally block start address and patch it
-    final finallyBlockAddr = chunk.code.length;
-    chunk.code[finallyAddrOffset] = finallyBlockAddr & 0xff;
-    chunk.code[finallyAddrOffset + 1] = (finallyBlockAddr >> 8) & 0xff;
-    
-    // Compile finally block (if present)
-    if (stmt.finallyBlock != null) {
-      compile(stmt.finallyBlock!);
-    }
-    // Note: No endTry here since it's either already done (success) or handler was removed by _handleException
+    // Patch Success Jump to here (End)
+    final endAddr = chunk.code.length;
+    final jumpDist = endAddr - successJumpOffset - 2;
+    chunk.code[successJumpOffset] = jumpDist & 0xff;
+    chunk.code[successJumpOffset + 1] = (jumpDist >> 8) & 0xff;
   }
   
   void _compileThrowStmt(ThrowStmt stmt) {
@@ -403,6 +500,8 @@ class Compiler {
        _compileIndex(expr);
     } else if (expr is IndexAssignExpr) {
        _compileIndexAssign(expr);
+    } else if (expr is LambdaExpr) {
+       _compileLambda(expr);
     }
   }
   
@@ -493,7 +592,7 @@ class Compiler {
 
   void _compileVariable(VariableExpr expr) {
       // Check if this is a state field access
-      if (_stateFields.contains(expr.name)) {
+      if (_isStateField(expr.name)) {
           final idx = chunk.addConstant(expr.name);
           chunk.writeOp(OpCode.getState, expr.line);
           chunk.write(idx, expr.line);
@@ -519,7 +618,7 @@ class Compiler {
   
   void _compileAssign(AssignExpr expr) {
     // Check if state field
-    if (_stateFields.contains(expr.name)) {
+    if (_isStateField(expr.name)) {
       _compileExpression(expr.value);
       final idx = chunk.addConstant(expr.name);
       chunk.writeOp(OpCode.setState, expr.line);

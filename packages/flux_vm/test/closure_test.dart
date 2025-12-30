@@ -19,18 +19,7 @@ void main() {
     vm = VM();
   });
 
-  // Helper helper to compile and run
-  void testScript(String source, dynamic expected) {
-    final unit = FluxCompiler.compile(source);
-    final result = vm.runChunk(unit.chunk);
-    expect(result, InterpretResult.ok);
-    
-    // Assuming the script puts the result in a global 'result' or returns it?
-    // The VM implementation usually leaves the stack empty except return value if any?
-    // Actually our VM runChunk returns InterpretResult.
-    // We can rely on 'print' output OR checking global variables.
-    // Let's use globals since vm.globals is accessible.
-  }
+  // testScript helper removed as it was unused and caused analysis warnings
   
   test('Basic closure', () {
     final source = """
