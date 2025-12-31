@@ -17,16 +17,7 @@ enum InterpretResult {
   awaiting,  // VM is suspended waiting for a Future
 }
 
-/// Represents a single active function call
-class CallFrame {
-  final ObjClosure closure;
-  int ip;              // Instruction pointer within the function's chunk
-  final int slotBase;  // Start of this frame's local variables on the stack
-  
-  CallFrame(this.closure, {this.ip = 0, required this.slotBase});
-  
-  Chunk get chunk => closure.function.chunk;
-}
+// CallFrame is now defined in coroutine.dart
 
 /// Maximum number of call frames (call depth)
 const int framesMax = 64;
@@ -77,12 +68,14 @@ class FluxInstance {
 }
 
 class VM {
-  final List<Object?> _stack = [];
   final Map<String, Object?> _globals = {};
-  final List<CallFrame> _frames = [];
   
   /// Widget state storage (keyed by state field name)
+  /// Shared across all coroutines for the current widget instance
   final Map<String, Object?> _widgetState = {};
+  
+  List<Object?> get _stack => _currentCoroutine!.stack;
+  List<CallFrame> get _frames => _currentCoroutine!.frames;
   
   /// Linked list of open upvalues (for closure support)
   ObjUpvalue? _openUpvalues;
@@ -113,6 +106,7 @@ class VM {
   
   /// Constructor - initializes standard library
   VM() {
+    _currentCoroutine = FluxCoroutine('root');
     _initStdlib();
   }
   
@@ -149,32 +143,21 @@ class VM {
   /// 
   /// Called when await encounters a pending Future.
   /// Captures all execution state needed to resume later.
+  /// Suspend current execution
+  /// 
+  /// Simply marks the current coroutine as suspended.
   FluxCoroutine suspendToCoroutine() {
-    final coroutine = FluxCoroutine(FluxCoroutine.generateId());
-    
-    // Save all call frames
-    for (final frame in _frames) {
-      coroutine.savedFrames.add(CoroutineFrame(
-        closureConstantIndex: 0, // Not used for direct closure ref
-        instructionPointer: frame.ip,
-        slotBase: frame.slotBase,
-        closureRef: frame.closure,
-      ));
-    }
-    
-    // Save stack
-    coroutine.savedStack.addAll(_stack);
-    
-    // Save widget state
-    coroutine.savedWidgetState.addAll(_widgetState);
+    final coroutine = _currentCoroutine!;
     
     coroutine.state = CoroutineState.suspended;
     coroutine.suspendedAt = DateTime.now();
     
-    _currentCoroutine = coroutine;
     return coroutine;
   }
   
+  /// Resume a suspended coroutine with the await result
+  /// 
+  /// Called when the awaited Future completes.
   /// Resume a suspended coroutine with the await result
   /// 
   /// Called when the awaited Future completes.
@@ -184,32 +167,14 @@ class VM {
       return InterpretResult.runtimeError;
     }
     
-    // Restore call frames
-    _frames.clear();
-    for (final savedFrame in coroutine.savedFrames) {
-      if (savedFrame.closureRef is ObjClosure) {
-        _frames.add(CallFrame(
-          savedFrame.closureRef as ObjClosure,
-          ip: savedFrame.instructionPointer,
-          slotBase: savedFrame.slotBase,
-        ));
-      }
-    }
+    // Context Switch: Set the current coroutine
+    _currentCoroutine = coroutine;
     
-    // Restore stack
-    _stack.clear();
-    _stack.addAll(coroutine.savedStack);
-    
-    // Restore widget state
-    _widgetState.clear();
-    _widgetState.addAll(coroutine.savedWidgetState);
-    
-    // Push the await result
+    // Push the await result onto the coroutine's stack
     _stack.add(result);
     
     // Update coroutine state
     coroutine.state = CoroutineState.running;
-    _currentCoroutine = null;
     
     // Continue execution
     final interpretResult = _run();
@@ -225,36 +190,29 @@ class VM {
   }
   
   /// Resume a suspended coroutine with an error
+  /// Resume a suspended coroutine with an error
   InterpretResult resumeCoroutineWithError(FluxCoroutine coroutine, Object error) {
     if (coroutine.state != CoroutineState.suspended) {
       _runtimeError('Cannot resume coroutine in state: ${coroutine.state}');
       return InterpretResult.runtimeError;
     }
     
+    _currentCoroutine = coroutine;
     coroutine.awaitError = error;
-    coroutine.state = CoroutineState.error;
-    
-    // Restore state for error handling
-    _frames.clear();
-    for (final savedFrame in coroutine.savedFrames) {
-      if (savedFrame.closureRef is ObjClosure) {
-        _frames.add(CallFrame(
-          savedFrame.closureRef as ObjClosure,
-          ip: savedFrame.instructionPointer,
-          slotBase: savedFrame.slotBase,
-        ));
-      }
-    }
-    _stack.clear();
-    _stack.addAll(coroutine.savedStack);
-    _widgetState.clear();
-    _widgetState.addAll(coroutine.savedWidgetState);
+    coroutine.state = CoroutineState.running; // Set to running to handle exception
     
     // Try to handle exception
     if (_handleException(error)) {
-      return _run();
+      final res = _run();
+      if (res == InterpretResult.runtimeError) {
+         coroutine.state = CoroutineState.error;
+      } else {
+         coroutine.state = CoroutineState.completed;
+      }
+      return res;
     }
     
+    coroutine.state = CoroutineState.error;
     _runtimeError('Unhandled async error: $error');
     return InterpretResult.runtimeError;
   }
@@ -316,7 +274,7 @@ class VM {
       return runChunk(function.chunk);
     } catch (e) {
       _runtimeError(e.toString());
-      return InterpretResult.compileError;
+      return InterpretResult.runtimeError;
     }
   }
 
@@ -350,17 +308,36 @@ class VM {
   /// Execute a closure with arguments.
   /// Used by FluxRuntime to execute widget builder closures.
   InterpretResult executeClosure(ObjClosure closure, [List<Object?> args = const []]) {
-     final startDepth = _frames.length;
+     // Create a new coroutine for this execution context to ensure isolation
+     // This solves the race condition where multiple events share the same stack
+     final coroutine = FluxCoroutine(FluxCoroutine.generateId());
+     final prevCoroutine = _currentCoroutine;
+     _currentCoroutine = coroutine;
+     
      _stack.add(closure);
      for (final arg in args) {
        _stack.add(arg);
      }
 
      if (!_callValue(closure, args.length)) {
+       _currentCoroutine = prevCoroutine;
        return InterpretResult.runtimeError;
      }
 
-     return _run(startDepth);
+     final result = _run();
+     
+     // If execution finished synchronously, we must propagate the result to the caller's stack
+     if (result == InterpretResult.ok) {
+        final returnValue = coroutine.stack.isNotEmpty ? coroutine.stack.last : null;
+        _currentCoroutine = prevCoroutine;
+        _stack.add(returnValue);
+     } else {
+        // For awaiting or error, we also restore the previous context.
+        // The suspended coroutine is kept alive by Future callbacks.
+        _currentCoroutine = prevCoroutine;
+     }
+     
+     return result;
   }
 
 
@@ -410,17 +387,18 @@ class VM {
   }
 
   void _runtimeError(String message) {
-    String sourceLoc = "";
-    if (_frames.isNotEmpty) {
-      final frame = _frames.last;
-      // ip points to next instruction, so look back one
+    onPrint("Runtime Error: $message");
+    
+    for (int i = _frames.length - 1; i >= 0; i--) {
+      final frame = _frames[i];
+      final function = frame.closure.function;
       final instruction = frame.ip > 0 ? frame.ip - 1 : 0;
-      if (instruction < frame.chunk.lines.length) {
-        final line = frame.chunk.lines[instruction];
-        sourceLoc = " [line $line]";
-      }
+      final line = frame.chunk.getLine(instruction);
+      onPrint("   at ${function.name}() [line $line]");
     }
-    print("Runtime Error: $message$sourceLoc");
+    
+    // Reset stack on fatal error
+    _stack.clear();
   }
 
   bool _callValue(Object? callee, int argCount, [Map<String, dynamic> namedArgs = const {}]) {

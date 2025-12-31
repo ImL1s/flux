@@ -589,6 +589,21 @@ class Parser {
       final end = _consume(TokenType.rightBracket, 'Expect "]" after list elements.');
       return ListExpr(elements, line: end.line, column: end.column);
     }
+
+    if (_match(TokenType.leftBrace)) {
+      // Map literal {a: b, c: d}
+      final entries = <MapEntry<Expression, Expression>>[];
+      if (!_check(TokenType.rightBrace)) {
+        do {
+          final key = _expression();
+          _consume(TokenType.colon, 'Expect ":" after map key.');
+          final value = _expression();
+          entries.add(MapEntry(key, value));
+        } while (_match(TokenType.comma));
+      }
+      final end = _consume(TokenType.rightBrace, 'Expect "}" after map entries.');
+      return MapExpr(entries, line: end.line, column: end.column);
+    }
     
     // Anonymous lambda: fn() { ... } or fn(a, b) { ... }
     if (_match(TokenType.fn)) {

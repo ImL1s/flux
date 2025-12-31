@@ -105,11 +105,26 @@ enum OpCode {
 class Chunk {
   final List<int> code = [];
   final List<Object?> constants = [];
-  final List<int> lines = []; // Line number for each byte (for debugging)
+  
+  // RLE encoded lines: [count, line, count, line, ...]
+  final List<int> lines = []; 
 
   void write(int byte, int line) {
     code.add(byte);
-    lines.add(line);
+    
+    if (lines.isEmpty) {
+      lines.add(1);
+      lines.add(line);
+    } else {
+      // Check if we can coalesce
+      if (lines.last == line) {
+        // Increment count (2nd to last element)
+        lines[lines.length - 2]++;
+      } else {
+        lines.add(1);
+        lines.add(line);
+      }
+    }
   }
 
   void writeOp(OpCode op, int line) {
@@ -119,5 +134,20 @@ class Chunk {
   int addConstant(Object? value) {
     constants.add(value);
     return constants.length - 1;
+  }
+  
+  /// Get line number for a given bytecode offset
+  int getLine(int offset) {
+    int currentOffset = 0;
+    for (int i = 0; i < lines.length; i += 2) {
+      final count = lines[i];
+      final line = lines[i+1];
+      
+      currentOffset += count;
+      if (currentOffset > offset) {
+        return line;
+      }
+    }
+    return -1; // Should not happen if offset is valid
   }
 }
