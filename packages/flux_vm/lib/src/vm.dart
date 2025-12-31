@@ -7,6 +7,7 @@ import 'package:flux_compiler/flux_compiler.dart';
 import 'stdlib.dart';
 import 'closure.dart';
 import 'coroutine.dart';
+import 'debugger.dart';
 
 typedef WidgetCallHandler = Object? Function(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack);
 
@@ -97,6 +98,10 @@ class VM {
   // Coroutine support
   FluxCoroutine? _currentCoroutine;
   CoroutineResumeCallback? coroutineResumeCallback;
+  
+  // Debugger and Profiler
+  FluxDebugger? debugger;
+  FluxProfiler? profiler;
   
   // Module import tracking
   final List<String> _imports = [];
@@ -444,7 +449,10 @@ class VM {
     }
 
     if (callee is ObjClosure) {
-      return _callFunction(callee, argCount, namedArgs);
+      if (profiler != null) profiler!.recordFunctionEntry(callee.function.name);
+      final result = _callFunction(callee, argCount, namedArgs);
+      if (profiler != null) profiler!.recordFunctionExit(callee.function.name);
+      return result;
     }
 
     // Support calling raw CompiledFunctions by wrapping them (e.g. from tests or old code)
@@ -528,6 +536,20 @@ class VM {
 
     try {
       while (true) {
+        // Debugger hooks
+        if (debugger != null) {
+           // Provide hooks for step debugging and breakpoints
+           // This is a simplified integration point
+           if (debugger!.isPaused) {
+              // Yield to let debugger handle state
+              // In a real implementation this would involve more complex suspension
+           }
+        }
+        
+        if (profiler != null) {
+           profiler!.recordInstruction();
+        }
+
         if (frame.ip >= frame.chunk.code.length) {
              // Implicit return if end of chunk reached
              return InterpretResult.ok;
@@ -688,28 +710,7 @@ class VM {
             _stack[frame.slotBase + slot] = _stack.last;
             break;
 
-          case OpCode.getProperty:
-            final name = frame.chunk.constants[readByte()] as String;
-            final obj = _stack.removeLast();
-            
-            if (obj is List) {
-              if (name == 'length') {
-                _stack.add(obj.length);
-              } else {
-                _runtimeError("List has no property '$name'.");
-                return InterpretResult.runtimeError;
-              }
-            } else if (obj is Map) {
-              if (name == 'length') {
-                _stack.add(obj.length);
-              } else {
-                _stack.add(obj[name]);
-              }
-            } else {
-              _runtimeError("Only lists and maps have properties.");
-              return InterpretResult.runtimeError;
-            }
-            break;
+
 
           case OpCode.popScope:
              // Should not be emitted by compiler anymore, but keep for compatibility
@@ -840,46 +841,7 @@ class VM {
             _stack.add(map);
             break;
             
-          case OpCode.getIndex:
-            final index = _stack.removeLast();
-            final object = _stack.removeLast();
-            if (object is List) {
-              if (index is int && index >= 0 && index < object.length) {
-                _stack.add(object[index]);
-              } else {
-                throw 'List index out of bounds: $index';
-              }
-            } else if (object is Map) {
-              _stack.add(object[index]);
-            } else if (object is String) {
-              if (index is int && index >= 0 && index < object.length) {
-                _stack.add(object[index]);
-              } else {
-                throw 'String index out of bounds: $index';
-              }
-            } else {
-              throw 'Cannot index into ${object.runtimeType}';
-            }
-            break;
-            
-          case OpCode.setIndex:
-            final value = _stack.removeLast();
-            final index = _stack.removeLast();
-            final object = _stack.removeLast();
-            if (object is List) {
-              if (index is int && index >= 0 && index < object.length) {
-                object[index] = value;
-                _stack.add(value);
-              } else {
-                throw 'List index out of bounds: $index';
-              }
-            } else if (object is Map) {
-              object[index] = value;
-              _stack.add(value);
-            } else {
-              throw 'Cannot set index on ${object.runtimeType}';
-            }
-            break;
+
             
           case OpCode.closure:
             // Read function index from constants
