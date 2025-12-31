@@ -44,6 +44,12 @@ class FluxCast {
     return toInt(value) ?? 0;
   }
 
+  /// Alias for toDouble (explicit nullable return)
+  static double? toDoubleNullable(dynamic value) => toDouble(value);
+
+  /// Alias for toInt (explicit nullable return)
+  static int? toIntNullable(dynamic value) => toInt(value);
+
   /// Convert to boolean.
   /// 
   /// null -> false

@@ -558,6 +558,506 @@ class FluxBindings {
         children: children,
       );
     });
+
+    // ========== Scaffold & AppBar (Phase 24: Extended Widget Library) ==========
+    
+    // Scaffold widget - The basic Material Design visual layout structure
+    register('Scaffold', (args, children) {
+      final appBar = args['appBar'] as Widget?;
+      final body = args['body'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final floatingActionButton = args['floatingActionButton'] as Widget?;
+      final drawer = args['drawer'] as Widget?;
+      final bottomNavigationBar = args['bottomNavigationBar'] as Widget?;
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      
+      return Scaffold(
+        appBar: appBar is PreferredSizeWidget ? appBar : null,
+        body: body,
+        floatingActionButton: floatingActionButton,
+        drawer: drawer,
+        bottomNavigationBar: bottomNavigationBar,
+        backgroundColor: backgroundColor,
+      );
+    });
+
+    // AppBar widget - Material Design app bar
+    register('AppBar', (args, children) {
+      final titleRaw = args['title'];
+      final actionsRaw = args['actions'];
+      final leadingRaw = args['leading'] as Widget?;
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      final centerTitle = FluxCast.toBool(args['centerTitle']);
+      final elevation = FluxCast.toDoubleNullable(args['elevation']);
+      
+      Widget? title;
+      if (titleRaw is Widget) {
+        title = titleRaw;
+      } else if (titleRaw != null) {
+        title = Text(titleRaw.toString());
+      }
+      
+      List<Widget> actions = [];
+      if (actionsRaw is List) {
+        actions = actionsRaw.whereType<Widget>().toList();
+      }
+      
+      return AppBar(
+        title: title,
+        leading: leadingRaw,
+        actions: actions.isNotEmpty ? actions : null,
+        backgroundColor: backgroundColor,
+        centerTitle: centerTitle,
+        elevation: elevation,
+      );
+    });
+
+    // Drawer widget - Material Design drawer
+    register('Drawer', (args, children) {
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      final elevation = FluxCast.toDoubleNullable(args['elevation']);
+      final width = FluxCast.toDoubleNullable(args['width']);
+      
+      return Drawer(
+        backgroundColor: backgroundColor,
+        elevation: elevation,
+        width: width,
+        child: child,
+      );
+    });
+
+    // DrawerHeader widget
+    register('DrawerHeader', (args, children) {
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final decoration = _parseBoxDecoration(args['decoration']);
+      final padding = _parseEdgeInsets(args['padding']) ?? const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0);
+      final margin = _parseEdgeInsets(args['margin']) ?? const EdgeInsets.only(bottom: 8.0);
+      
+      return DrawerHeader(
+        decoration: decoration,
+        padding: padding,
+        margin: margin,
+        child: child,
+      );
+    });
+
+    // FloatingActionButton widget
+    register('FloatingActionButton', (args, children) {
+      final onPressed = args['onPressed'];
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      final tooltip = FluxCast.toStringNullable(args['tooltip']);
+      final mini = FluxCast.toBool(args['mini']);
+      
+      return FloatingActionButton(
+        onPressed: onPressed is Function ? () => _invokeCallback(onPressed, []) : null,
+        backgroundColor: backgroundColor,
+        tooltip: tooltip,
+        mini: mini,
+        child: child,
+      );
+    });
+
+    // BottomNavigationBar widget
+    register('BottomNavigationBar', (args, children) {
+      final itemsRaw = args['items'] as List?;
+      final currentIndex = FluxCast.toInt(args['currentIndex']) ?? 0;
+      final onTap = args['onTap'];
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      final selectedItemColor = FluxCast.toColor(args['selectedItemColor']);
+      final unselectedItemColor = FluxCast.toColor(args['unselectedItemColor']);
+      final typeStr = FluxCast.toStringNullable(args['type']);
+      
+      List<BottomNavigationBarItem> items = [];
+      if (itemsRaw != null) {
+        for (final item in itemsRaw) {
+          if (item is Map) {
+            final icon = item['icon'] as Widget?;
+            final label = FluxCast.toStr(item['label']);
+            final activeIcon = item['activeIcon'] as Widget?;
+            if (icon != null) {
+              items.add(BottomNavigationBarItem(
+                icon: icon,
+                label: label,
+                activeIcon: activeIcon,
+              ));
+            }
+          }
+        }
+      }
+      
+      return BottomNavigationBar(
+        items: items,
+        currentIndex: currentIndex,
+        onTap: onTap is Function ? (index) => _invokeCallback(onTap, [index]) : null,
+        backgroundColor: backgroundColor,
+        selectedItemColor: selectedItemColor,
+        unselectedItemColor: unselectedItemColor,
+        type: typeStr == 'shifting' ? BottomNavigationBarType.shifting : BottomNavigationBarType.fixed,
+      );
+    });
+
+    // BottomNavigationBarItem helper (returns a Map for use in items list)
+    registerFunction('BottomNavItem', (args) {
+      final icon = args.isNotEmpty ? args[0] : null;
+      final label = args.length > 1 ? FluxCast.toStr(args[1]) : '';
+      final activeIcon = args.length > 2 ? args[2] : null;
+      return {
+        'icon': icon,
+        'label': label,
+        'activeIcon': activeIcon,
+      };
+    });
+
+    // ListTile widget - Common list item
+    register('ListTile', (args, children) {
+      final titleRaw = args['title'];
+      final subtitleRaw = args['subtitle'];
+      final leading = args['leading'] as Widget?;
+      final trailing = args['trailing'] as Widget?;
+      final onTap = args['onTap'];
+      final dense = FluxCast.toBool(args['dense']);
+      final enabled = args['enabled'] != false;
+      
+      Widget? title;
+      if (titleRaw is Widget) {
+        title = titleRaw;
+      } else if (titleRaw != null) {
+        title = Text(titleRaw.toString());
+      }
+      
+      Widget? subtitle;
+      if (subtitleRaw is Widget) {
+        subtitle = subtitleRaw;
+      } else if (subtitleRaw != null) {
+        subtitle = Text(subtitleRaw.toString());
+      }
+      
+      return ListTile(
+        title: title,
+        subtitle: subtitle,
+        leading: leading,
+        trailing: trailing,
+        onTap: onTap is Function ? () => _invokeCallback(onTap, []) : null,
+        dense: dense,
+        enabled: enabled,
+      );
+    });
+
+    // Divider widget
+    register('Divider', (args, children) {
+      final height = FluxCast.toDoubleNullable(args['height']);
+      final thickness = FluxCast.toDoubleNullable(args['thickness']);
+      final indent = FluxCast.toDoubleNullable(args['indent']);
+      final endIndent = FluxCast.toDoubleNullable(args['endIndent']);
+      final color = FluxCast.toColor(args['color']);
+      
+      return Divider(
+        height: height,
+        thickness: thickness,
+        indent: indent,
+        endIndent: endIndent,
+        color: color,
+      );
+    });
+
+    // ========== Animation Widgets ==========
+
+    // AnimatedContainer widget
+    register('AnimatedContainer', (args, children) {
+      final duration = FluxCast.toInt(args['duration']) ?? 300;
+      final padding = _parseEdgeInsets(args['padding']);
+      final margin = _parseEdgeInsets(args['margin']);
+      final color = FluxCast.toColor(args['color']);
+      final decoration = _parseBoxDecoration(args['decoration']);
+      final width = FluxCast.toDoubleNullable(args['width']);
+      final height = FluxCast.toDoubleNullable(args['height']);
+      final alignment = _parseAlignment(args['alignment']);
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      
+      return AnimatedContainer(
+        duration: Duration(milliseconds: duration),
+        padding: padding,
+        margin: margin,
+        color: decoration == null ? color : null,
+        decoration: decoration,
+        width: width,
+        height: height,
+        alignment: alignment,
+        child: child,
+      );
+    });
+
+    // AnimatedOpacity widget
+    register('AnimatedOpacity', (args, children) {
+      final opacity = FluxCast.toDouble(args['opacity']) ?? 1.0;
+      final duration = FluxCast.toInt(args['duration']) ?? 300;
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      
+      return AnimatedOpacity(
+        opacity: opacity.clamp(0.0, 1.0),
+        duration: Duration(milliseconds: duration),
+        child: child ?? const SizedBox.shrink(),
+      );
+    });
+
+    // AnimatedSwitcher widget
+    register('AnimatedSwitcher', (args, children) {
+      final duration = FluxCast.toInt(args['duration']) ?? 300;
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      
+      return AnimatedSwitcher(
+        duration: Duration(milliseconds: duration),
+        child: child,
+      );
+    });
+
+    // ========== Input Widgets ==========
+
+    // Slider widget
+    register('Slider', (args, children) {
+      final value = FluxCast.toDouble(args['value']) ?? 0.0;
+      final min = FluxCast.toDouble(args['min']) ?? 0.0;
+      final max = FluxCast.toDouble(args['max']) ?? 1.0;
+      final divisions = FluxCast.toIntNullable(args['divisions']);
+      final label = FluxCast.toStringNullable(args['label']);
+      final onChanged = args['onChanged'];
+      final activeColor = FluxCast.toColor(args['activeColor']);
+      final inactiveColor = FluxCast.toColor(args['inactiveColor']);
+      
+      return Slider(
+        value: value.clamp(min, max),
+        min: min,
+        max: max,
+        divisions: divisions,
+        label: label,
+        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        activeColor: activeColor,
+        inactiveColor: inactiveColor,
+      );
+    });
+
+    // DropdownButton widget (simplified - uses String values)
+    register('DropdownButton', (args, children) {
+      final value = FluxCast.toStringNullable(args['value']);
+      final itemsRaw = args['items'] as List?;
+      final onChanged = args['onChanged'];
+      final hint = args['hint'];
+      final isExpanded = FluxCast.toBool(args['isExpanded']);
+      
+      List<DropdownMenuItem<String>> items = [];
+      if (itemsRaw != null) {
+        for (final item in itemsRaw) {
+          final itemStr = item.toString();
+          items.add(DropdownMenuItem(
+            value: itemStr,
+            child: Text(itemStr),
+          ));
+        }
+      }
+      
+      Widget? hintWidget;
+      if (hint is Widget) {
+        hintWidget = hint;
+      } else if (hint != null) {
+        hintWidget = Text(hint.toString());
+      }
+      
+      return DropdownButton<String>(
+        value: items.any((i) => i.value == value) ? value : null,
+        items: items,
+        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        hint: hintWidget,
+        isExpanded: isExpanded,
+      );
+    });
+
+    // Radio widget
+    register('Radio', (args, children) {
+      final value = args['value'];
+      final groupValue = args['groupValue'];
+      final onChanged = args['onChanged'];
+      final activeColor = FluxCast.toColor(args['activeColor']);
+      
+      return Radio<dynamic>(
+        value: value,
+        groupValue: groupValue,
+        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        activeColor: activeColor,
+      );
+    });
+
+    // RadioListTile widget
+    register('RadioListTile', (args, children) {
+      final value = args['value'];
+      final groupValue = args['groupValue'];
+      final onChanged = args['onChanged'];
+      final titleRaw = args['title'];
+      final subtitleRaw = args['subtitle'];
+      final activeColor = FluxCast.toColor(args['activeColor']);
+      final dense = FluxCast.toBool(args['dense']);
+      
+      Widget? title;
+      if (titleRaw is Widget) {
+        title = titleRaw;
+      } else if (titleRaw != null) {
+        title = Text(titleRaw.toString());
+      }
+      
+      Widget? subtitle;
+      if (subtitleRaw is Widget) {
+        subtitle = subtitleRaw;
+      } else if (subtitleRaw != null) {
+        subtitle = Text(subtitleRaw.toString());
+      }
+      
+      return RadioListTile<dynamic>(
+        value: value,
+        groupValue: groupValue,
+        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        title: title,
+        subtitle: subtitle,
+        activeColor: activeColor,
+        dense: dense,
+      );
+    });
+
+    // CheckboxListTile widget
+    register('CheckboxListTile', (args, children) {
+      final value = FluxCast.toBool(args['value']);
+      final onChanged = args['onChanged'];
+      final titleRaw = args['title'];
+      final subtitleRaw = args['subtitle'];
+      final activeColor = FluxCast.toColor(args['activeColor']);
+      final dense = FluxCast.toBool(args['dense']);
+      
+      Widget? title;
+      if (titleRaw is Widget) {
+        title = titleRaw;
+      } else if (titleRaw != null) {
+        title = Text(titleRaw.toString());
+      }
+      
+      Widget? subtitle;
+      if (subtitleRaw is Widget) {
+        subtitle = subtitleRaw;
+      } else if (subtitleRaw != null) {
+        subtitle = Text(subtitleRaw.toString());
+      }
+      
+      return CheckboxListTile(
+        value: value,
+        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        title: title,
+        subtitle: subtitle,
+        activeColor: activeColor,
+        dense: dense,
+      );
+    });
+
+    // SwitchListTile widget  
+    register('SwitchListTile', (args, children) {
+      final value = FluxCast.toBool(args['value']);
+      final onChanged = args['onChanged'];
+      final titleRaw = args['title'];
+      final subtitleRaw = args['subtitle'];
+      final activeColor = FluxCast.toColor(args['activeColor']);
+      final dense = FluxCast.toBool(args['dense']);
+      
+      Widget? title;
+      if (titleRaw is Widget) {
+        title = titleRaw;
+      } else if (titleRaw != null) {
+        title = Text(titleRaw.toString());
+      }
+      
+      Widget? subtitle;
+      if (subtitleRaw is Widget) {
+        subtitle = subtitleRaw;
+      } else if (subtitleRaw != null) {
+        subtitle = Text(subtitleRaw.toString());
+      }
+      
+      return SwitchListTile(
+        value: value,
+        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        title: title,
+        subtitle: subtitle,
+        activeColor: activeColor,
+        dense: dense,
+      );
+    });
+
+    // Card widget
+    register('Card', (args, children) {
+      final color = FluxCast.toColor(args['color']);
+      final elevation = FluxCast.toDoubleNullable(args['elevation']);
+      final margin = _parseEdgeInsets(args['margin']);
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      
+      return Card(
+        color: color,
+        elevation: elevation,
+        margin: margin,
+        child: child,
+      );
+    });
+
+    // CircularProgressIndicator widget
+    register('CircularProgressIndicator', (args, children) {
+      final value = FluxCast.toDoubleNullable(args['value']);
+      final color = FluxCast.toColor(args['color']);
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      final strokeWidth = FluxCast.toDouble(args['strokeWidth']) ?? 4.0;
+      
+      return CircularProgressIndicator(
+        value: value,
+        color: color,
+        backgroundColor: backgroundColor,
+        strokeWidth: strokeWidth,
+      );
+    });
+
+    // LinearProgressIndicator widget
+    register('LinearProgressIndicator', (args, children) {
+      final value = FluxCast.toDoubleNullable(args['value']);
+      final color = FluxCast.toColor(args['color']);
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      final minHeight = FluxCast.toDoubleNullable(args['minHeight']);
+      
+      return LinearProgressIndicator(
+        value: value,
+        color: color,
+        backgroundColor: backgroundColor,
+        minHeight: minHeight,
+      );
+    });
+
+    // Chip widget
+    register('Chip', (args, children) {
+      final labelRaw = args['label'];
+      final avatar = args['avatar'] as Widget?;
+      final deleteIcon = args['deleteIcon'] as Widget?;
+      final onDeleted = args['onDeleted'];
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      final padding = _parseEdgeInsets(args['padding']);
+      
+      Widget label;
+      if (labelRaw is Widget) {
+        label = labelRaw;
+      } else {
+        label = Text(labelRaw?.toString() ?? '');
+      }
+      
+      return Chip(
+        label: label,
+        avatar: avatar,
+        deleteIcon: deleteIcon,
+        onDeleted: onDeleted is Function ? () => _invokeCallback(onDeleted, []) : null,
+        backgroundColor: backgroundColor,
+        padding: padding,
+      );
+    });
   }
 
   
