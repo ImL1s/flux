@@ -107,6 +107,7 @@ class Compiler {
   }
 
   void compile(Statement statement) {
+    print('DEBUG COMPILER: Compiling statement type: ${statement.runtimeType} at line ${statement.line}');
     if (statement is BlockStmt) {
       _compileBlock(statement);
     } else if (statement is ExpressionStmt) {
@@ -222,6 +223,7 @@ class Compiler {
       stmt.name, 
       funcCompiler.chunk,
       arity: stmt.parameters.length,
+      isAsync: stmt.isAsync,
       paramNames: stmt.parameters.map((p) => p.name).toList(),
     );
     
@@ -280,6 +282,7 @@ class Compiler {
       "lambda", 
       funcCompiler.chunk,
       arity: expr.parameters.length,
+      isAsync: expr.isAsync,
       paramNames: expr.parameters.map((p) => p.name).toList(),
     );
     
@@ -364,7 +367,8 @@ class Compiler {
 
   void _compileBlock(BlockStmt stmt) {
     _beginScope();
-    for (final s in stmt.statements) {
+    for (int i = 0; i < stmt.statements.length; i++) {
+      final s = stmt.statements[i];
       compile(s);
     }
     _endScope(stmt.line);

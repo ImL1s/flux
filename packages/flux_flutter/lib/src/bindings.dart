@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'utils/flux_cast.dart';
+import 'http_bindings.dart';
 
 /// Registry for Flux -> Flutter widget bindings
 class FluxBindings {
@@ -17,6 +18,12 @@ class FluxBindings {
   
   /// Register a Dart function for Flux to call
   static void registerFunction(String name, FluxFunction function) {
+    _functions[name] = function;
+  }
+  
+  /// Register an async Dart function for Flux to call
+  /// This is a convenience method that wraps async functions properly
+  static void registerAsyncFunction(String name, Future<Object?> Function(List<Object?>) function) {
     _functions[name] = function;
   }
   
@@ -831,6 +838,7 @@ class FluxBindings {
       return null;
     });
     
+    // List functions
     // push(list, item) - Add item to list
     registerFunction('push', (args) {
       if (args.length < 2) return null;
@@ -839,6 +847,13 @@ class FluxBindings {
       if (list is List) {
         list.add(item);
       }
+      return null;
+    });
+
+    registerFunction('list_add', (args) {
+      if (args.isEmpty) return null;
+      final list = args[0] as List;
+      list.add(args[1]);
       return null;
     });
     
@@ -869,6 +884,10 @@ class FluxBindings {
       final routeArgs = args.length > 1 ? args[1] : null;
       return navigatorKey.currentState?.pushNamed(routeName, arguments: routeArgs);
     });
+    // Register HTTP bindings
+    for (final entry in HttpBindings.functions.entries) {
+      registerFunction(entry.key, entry.value as FluxFunction);
+    }
   }
 }
 

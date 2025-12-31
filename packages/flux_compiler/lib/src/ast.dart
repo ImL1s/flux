@@ -137,9 +137,10 @@ class MapExpr extends Expression {
 class LambdaExpr extends Expression {
   final List<Parameter> parameters;
   final AstNode body; // Expression or BlockStmt
+  final bool isAsync;
 
   const LambdaExpr(this.parameters, this.body,
-      {required super.line, required super.column});
+      {this.isAsync = false, required super.line, required super.column});
 }
 
 /// Await expression

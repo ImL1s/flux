@@ -22,20 +22,24 @@ import 'bindings.dart';
 /// ```
 class FluxWidget extends StatefulWidget {
   /// The Flux source code containing widget definitions
-  final String source;
+  final String? source; // Made nullable to support runtime-only
   
   /// The name of the widget to render from the source
   final String widgetName;
   
   /// Optional initial state values
   final Map<String, dynamic>? initialState;
+  
+  /// Optional external runtime
+  final FluxRuntime? runtime;
 
   const FluxWidget({
     super.key,
-    required this.source,
+    this.source,
     required this.widgetName,
     this.initialState,
-  });
+    this.runtime,
+  }) : assert(source != null || runtime != null, 'Either source or runtime must be provided');
 
   @override
   State<FluxWidget> createState() => _FluxWidgetState();
@@ -50,24 +54,32 @@ class _FluxWidgetState extends State<FluxWidget> {
   void initState() {
     super.initState();
     FluxBindings.initDefaults();
-    _compile();
+    _initRuntime();
   }
   
   @override
   void didUpdateWidget(FluxWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.source != widget.source || 
-        oldWidget.widgetName != widget.widgetName) {
-      _compile();
+        oldWidget.widgetName != widget.widgetName || 
+        oldWidget.runtime != widget.runtime) {
+      _initRuntime();
     }
   }
   
-  void _compile() {
+  void _initRuntime() {
     try {
-      _runtime = FluxRuntime(
-        widget.source,
-        onStateChange: _handleStateChange,
-      );
+      if (widget.runtime != null) {
+        _runtime = widget.runtime!;
+        // Attach our state change listener to the external runtime's VM
+        // This ensures widget rebuilds when state changes in the shared runtime
+        _runtime._vm.onStateChange = _handleStateChange;
+      } else {
+        _runtime = FluxRuntime(
+          widget.source!,
+          onStateChange: _handleStateChange,
+        );
+      }
       _buildWidget();
       _error = null;
     } catch (e) {
@@ -78,34 +90,8 @@ class _FluxWidgetState extends State<FluxWidget> {
     }
   }
   
-  /// Hot reload with new source code, preserving widget state
-  void hotReload(String newSource, {bool preserveState = true}) {
-    try {
-      // Save current state if preserving
-      final savedState = preserveState 
-          ? Map<String, Object?>.from(_runtime._vm.widgetState)
-          : <String, Object?>{};
-      
-      // Recompile with new source
-      _runtime = FluxRuntime(
-        newSource,
-        onStateChange: _handleStateChange,
-      );
-      
-      // Restore state if preserving
-      if (preserveState) {
-        _runtime._vm.widgetState.addAll(savedState);
-      }
-      
-      // Rebuild widget
-      _buildWidget();
-      _error = null;
-    } catch (e) {
-      setState(() {
-        _error = 'Hot reload failed: $e';
-      });
-    }
-  }
+  // NOTE: hotReload logic moved to FluxRuntime
+  // ...
   
   /// Called when Flux state changes - triggers Flutter rebuild
   void _handleStateChange(String name, Object? value) {
@@ -234,6 +220,9 @@ class FluxRuntime {
     // Set widget handler before initial execution to intercept any widget calls during compilation
     _vm.widgetCallHandler = _handleWidgetCall;
     
+    // Set coroutine resume callback for async/await support
+    _vm.coroutineResumeCallback = _handleCoroutineResume;
+    
     _vm.runChunk(function.chunk);
     
     // Extract widget definitions from globals
@@ -250,6 +239,45 @@ class FluxRuntime {
     }
   }
 
+  /// Hot reload the runtime with new code.
+  /// 
+  /// This updates the widget definitions but keeps the state.
+  void hotReload(Chunk newChunk) {
+    debugPrint('🔥 FluxRuntime: Hot Reloading...');
+    
+    // 1. Capture old state
+    final oldState = Map<String, Object?>.from(_vm.widgetState);
+
+    // 2. Re-run the chunk to re-define global widget classes
+    _vm.runChunk(newChunk);
+    
+    // 3. Clear current state (so initializers run cleanly for new version)
+    _vm.widgetState.clear();
+    
+    // 4. Update widget definitions and run initializers for the new version
+    for (final entry in _vm.globals.entries) {
+      if (entry.value is CompiledWidget) {
+        final widget = entry.value as CompiledWidget;
+        // Update cache
+        _widgets[entry.key] = widget;
+        
+        // Run initializer: this populates _vm.widgetState with V2 defaults
+        _initializeWidgetState(widget);
+      }
+    }
+    
+    // 5. Restore old state (overwrite defaults with preserved values)
+    // If a field exists in V2 (initialized in step 4), it gets overwritten by V1 value if present.
+    // If a field was new in V2, it keeps the default from step 4.
+    // If a field was removed in V2, it gets added back as "dead state" (harmless).
+    _vm.widgetState.addAll(oldState);
+    
+    debugPrint('✅ Hot Reload Complete.');
+    
+    // Notify listeners to force update if anyone is listening
+    _vm.onStateChange?.call('*', null);
+  }
+
   void _initializeWidgetState(CompiledWidget widget) {
     for (int i = 0; i < widget.stateFields.length; i++) {
         final fieldName = widget.stateFields[i];
@@ -263,6 +291,33 @@ class FluxRuntime {
             _vm.widgetState[fieldName] = null;
         }
     }
+  }
+  
+  /// Handle coroutine resume callback from VM
+  /// 
+  /// This is called when an awaited Future completes.
+  /// Uses Flutter's event loop to schedule the resumption.
+  void _handleCoroutineResume(FluxCoroutine coroutine, Object? result, Object? error) {
+    debugPrint('DEBUG COROUTINE: _handleCoroutineResume called, result=$result, error=$error');
+    
+    // Use scheduleMicrotask for faster response in tests
+    // (addPostFrameCallback requires widget tree pumping)
+    Future.microtask(() {
+      debugPrint('DEBUG COROUTINE: Resuming coroutine ${coroutine.id}');
+      if (error != null) {
+        // Resume with error
+        _vm.resumeCoroutineWithError(coroutine, error);
+      } else {
+        // Resume with result
+        final interpretResult = _vm.resumeCoroutine(coroutine, result);
+        debugPrint('DEBUG COROUTINE: Resume result: $interpretResult');
+        
+        // If execution completed successfully, trigger UI rebuild
+        if (interpretResult == InterpretResult.ok && onStateChange != null) {
+          onStateChange!('_coroutine_complete', result);
+        }
+      }
+    });
   }
   
   CompiledWidget? getWidget(String name) {
@@ -306,7 +361,7 @@ class FluxRuntime {
       }
       
       // Get result from stack (build returns a value)
-      final result = _vm.stack.isNotEmpty ? _vm.stack.last : null;
+      final result = _vm.stack.isNotEmpty ? _vm.stack.removeLast() : null;
       
       if (result is FluxWidgetNode) {
         builtNode = result;
@@ -355,7 +410,9 @@ class FluxRuntime {
         } else if (value is ObjClosure) {
           processedArgs[key] = (List<Object?> callArgs) {
             // Execute closure on the VM
-            _vm.executeClosure(value, callArgs);
+            debugPrint('DEBUG CLOSURE: Executing $key closure, args=${callArgs.length}');
+            final result = _vm.executeClosure(value, callArgs);
+            debugPrint('DEBUG CLOSURE: $key closure returned $result');
           };
         } else {
           processedArgs[key] = value;

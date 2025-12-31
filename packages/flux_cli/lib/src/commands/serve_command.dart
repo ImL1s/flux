@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_web_socket/shelf_web_socket.dart';
@@ -25,7 +26,8 @@ class ServeCommand {
       // Send current content immediately on connection
       try {
         final content = file.readAsStringSync();
-        webSocket.sink.add(content);
+        final payload = '{"type": "reload", "content": ${jsonEncode(content)}}';
+        webSocket.sink.add(payload);
       } catch (e) {
         print('Error reading file: $e');
       }
@@ -69,9 +71,11 @@ class ServeCommand {
       // Small delay to ensure write is complete
       Future.delayed(const Duration(milliseconds: 100), () {
         final content = file.readAsStringSync();
+        final payload = '{"type": "reload", "content": ${jsonEncode(content)}}';
+        
         print('Broadcasting update to ${_clients.length} clients...');
         for (final client in _clients) {
-          client.sink.add(content);
+          client.sink.add(payload);
         }
       });
     } catch (e) {

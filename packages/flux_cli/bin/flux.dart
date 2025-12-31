@@ -31,6 +31,17 @@ Future<void> main(List<String> args) async {
     return;
   }
 
+  if (args[0] == 'watch') {
+    if (args.length < 2) {
+      stderr.writeln('Usage: flux watch <script.flux>');
+      exit(1);
+    }
+    final filePath = args[1];
+    // Use ServeCommand for watch too, as they are essentially the same (file watcher + server)
+    await ServeCommand().run(filePath);
+    return;
+  }
+
   final filePath = args[0];
   final file = File(filePath);
   

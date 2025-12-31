@@ -592,14 +592,20 @@ class Parser {
     
     // Anonymous lambda: fn() { ... } or fn(a, b) { ... }
     if (_match(TokenType.fn)) {
-      return _lambdaExpression();
+      return _lambdaExpression(isAsync: false);
+    }
+    
+    // Async anonymous lambda: async fn() { ... }
+    if (_match(TokenType.async_)) {
+      _consume(TokenType.fn, 'Expect "fn" after "async".');
+      return _lambdaExpression(isAsync: true);
     }
 
     throw _error(_peek, 'Expect expression.');
   }
   
   /// Parse anonymous lambda: fn(params) { body }
-  Expression _lambdaExpression() {
+  Expression _lambdaExpression({required bool isAsync}) {
     final fnToken = _previous;
     
     // Parse parameters
@@ -626,7 +632,7 @@ class Parser {
     _consume(TokenType.leftBrace, 'Expect "{" before lambda body.');
     final body = _block();
     
-    return LambdaExpr(parameters, body, line: fnToken.line, column: fnToken.column);
+    return LambdaExpr(parameters, body, isAsync: isAsync, line: fnToken.line, column: fnToken.column);
   }
   
   Expression _finishInterpolation() {

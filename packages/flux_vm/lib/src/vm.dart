@@ -6,6 +6,7 @@
 import 'package:flux_compiler/flux_compiler.dart';
 import 'stdlib.dart';
 import 'closure.dart';
+import 'coroutine.dart';
 
 typedef WidgetCallHandler = Object? Function(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack);
 
@@ -100,6 +101,10 @@ class VM {
   // Exception handling state
   final List<_ExceptionHandler> _exceptionHandlers = [];
   
+  // Coroutine support
+  FluxCoroutine? _currentCoroutine;
+  CoroutineResumeCallback? coroutineResumeCallback;
+  
   // Module import tracking
   final List<String> _imports = [];
   
@@ -138,6 +143,120 @@ class VM {
     
     // Continue execution
     return _run();
+  }
+  
+  /// Suspend current execution and create a coroutine snapshot
+  /// 
+  /// Called when await encounters a pending Future.
+  /// Captures all execution state needed to resume later.
+  FluxCoroutine suspendToCoroutine() {
+    final coroutine = FluxCoroutine(FluxCoroutine.generateId());
+    
+    // Save all call frames
+    for (final frame in _frames) {
+      coroutine.savedFrames.add(CoroutineFrame(
+        closureConstantIndex: 0, // Not used for direct closure ref
+        instructionPointer: frame.ip,
+        slotBase: frame.slotBase,
+        closureRef: frame.closure,
+      ));
+    }
+    
+    // Save stack
+    coroutine.savedStack.addAll(_stack);
+    
+    // Save widget state
+    coroutine.savedWidgetState.addAll(_widgetState);
+    
+    coroutine.state = CoroutineState.suspended;
+    coroutine.suspendedAt = DateTime.now();
+    
+    _currentCoroutine = coroutine;
+    return coroutine;
+  }
+  
+  /// Resume a suspended coroutine with the await result
+  /// 
+  /// Called when the awaited Future completes.
+  InterpretResult resumeCoroutine(FluxCoroutine coroutine, Object? result) {
+    if (coroutine.state != CoroutineState.suspended) {
+      _runtimeError('Cannot resume coroutine in state: ${coroutine.state}');
+      return InterpretResult.runtimeError;
+    }
+    
+    // Restore call frames
+    _frames.clear();
+    for (final savedFrame in coroutine.savedFrames) {
+      if (savedFrame.closureRef is ObjClosure) {
+        _frames.add(CallFrame(
+          savedFrame.closureRef as ObjClosure,
+          ip: savedFrame.instructionPointer,
+          slotBase: savedFrame.slotBase,
+        ));
+      }
+    }
+    
+    // Restore stack
+    _stack.clear();
+    _stack.addAll(coroutine.savedStack);
+    
+    // Restore widget state
+    _widgetState.clear();
+    _widgetState.addAll(coroutine.savedWidgetState);
+    
+    // Push the await result
+    _stack.add(result);
+    
+    // Update coroutine state
+    coroutine.state = CoroutineState.running;
+    _currentCoroutine = null;
+    
+    // Continue execution
+    final interpretResult = _run();
+    
+    // Mark coroutine as completed
+    if (interpretResult == InterpretResult.ok) {
+      coroutine.state = CoroutineState.completed;
+    } else if (interpretResult == InterpretResult.runtimeError) {
+      coroutine.state = CoroutineState.error;
+    }
+    
+    return interpretResult;
+  }
+  
+  /// Resume a suspended coroutine with an error
+  InterpretResult resumeCoroutineWithError(FluxCoroutine coroutine, Object error) {
+    if (coroutine.state != CoroutineState.suspended) {
+      _runtimeError('Cannot resume coroutine in state: ${coroutine.state}');
+      return InterpretResult.runtimeError;
+    }
+    
+    coroutine.awaitError = error;
+    coroutine.state = CoroutineState.error;
+    
+    // Restore state for error handling
+    _frames.clear();
+    for (final savedFrame in coroutine.savedFrames) {
+      if (savedFrame.closureRef is ObjClosure) {
+        _frames.add(CallFrame(
+          savedFrame.closureRef as ObjClosure,
+          ip: savedFrame.instructionPointer,
+          slotBase: savedFrame.slotBase,
+        ));
+      }
+    }
+    _stack.clear();
+    _stack.addAll(coroutine.savedStack);
+    _widgetState.clear();
+    _widgetState.addAll(coroutine.savedWidgetState);
+    
+    // Try to handle exception
+    if (_handleException(error)) {
+      return _run();
+    }
+    
+    _runtimeError('Unhandled async error: $error');
+    return InterpretResult.runtimeError;
   }
   
   /// Access to the stack for widget building
@@ -408,9 +527,9 @@ class VM {
       // print("DEBUG VM: Instr: ${OpCode.values[frame.chunk.code[frame.ip]].name}");
 
         final instruction = frame.chunk.code[frame.ip];
-        frame.ip++;
-
         final op = OpCode.values[instruction];
+        
+        frame.ip++;
 
         int readByte() {
            final b = frame.chunk.code[frame.ip];
@@ -677,44 +796,6 @@ class VM {
             }
             break;
 
-          // Widget State Management
-          case OpCode.getState:
-            final name = frame.chunk.constants[frame.chunk.code[frame.ip++]] as String;
-            final val = _widgetState[name];
-            print('DEBUG VM: getState($name) -> $val');
-            _stack.add(val);
-            break;
-
-          case OpCode.setState:
-            final nameIdx = readByte();
-            final name = frame.chunk.constants[nameIdx] as String;
-            final value = _stack.last; // Peek, don't pop (assignment returns value)
-            _widgetState[name] = value;
-            // Notify Flutter to rebuild
-            onStateChange?.call(name, value);
-            break;
-            
-          case OpCode.defineState:
-            readByte(); // skip name
-            break;
-            
-          case OpCode.await_:
-            // Pop the value to await from stack
-            final value = _stack.removeLast();
-            
-            if (value is Future) {
-              // Mark that we're awaiting and store continuation context
-              _awaitingFuture = true;
-              _pendingFuture = value;
-              _pendingFrame = frame;
-              // Return to let event loop handle the future
-              return InterpretResult.awaiting;
-            } else {
-              // Not a Future, just push back the value
-              _stack.add(value);
-            }
-            break;
-            
           case OpCode.newList:
             final count = readByte();
             final list = <Object?>[];
@@ -978,6 +1059,71 @@ class VM {
               }
             } else {
               throw 'Cannot invoke method on ${instance.runtimeType}';
+            }
+            break;
+          
+          case OpCode.await_:
+            // DEBUG: Check for potential stack corruption (Ghost closure duplication)
+            // This handles a specific issue where 'this' closure appears duplicated on the stack
+            if (_stack.length >= 3) {
+                 final peekFuture = _stack.last;
+                 final peekSecond = _stack[_stack.length - 2];
+                 final peekThird = _stack[_stack.length - 3];
+                 // Check if we have [Closure, Closure, Future] pattern
+                 // We use runtimeType check and toString or identity
+                 if (peekFuture is Future && 
+                     peekSecond.runtimeType.toString().contains('ObjClosure') && 
+                     peekThird.runtimeType.toString().contains('ObjClosure')) {
+                      // Remove the duplicate closure (keep Future)
+                      _stack.removeAt(_stack.length - 2);
+                 }
+            }
+            
+            // Pop the value to await (should be a Future)
+            final value = _stack.removeLast();
+            if (value is Future) {
+              // Create coroutine snapshot for resumption
+              final coroutine = suspendToCoroutine();
+              
+              // Set legacy flags for compatibility
+              _awaitingFuture = true;
+              _pendingFuture = value;
+              _pendingFrame = frame;
+              
+              // Register callback for when Future completes
+              value.then((result) {
+                coroutine.awaitResult = result;
+                
+                // Notify external handler for resume scheduling
+                if (coroutineResumeCallback != null) {
+                  coroutineResumeCallback!(coroutine, result, null);
+                } else {
+                  // Fallback: direct resume (for non-Flutter contexts)
+                  _awaitingFuture = false;
+                  _pendingFuture = null;
+                  _pendingFrame = null;
+                  resumeCoroutine(coroutine, result);
+                }
+              }).catchError((error) {
+                coroutine.awaitError = error;
+                
+                // Notify external handler for error handling
+                if (coroutineResumeCallback != null) {
+                  coroutineResumeCallback!(coroutine, null, error);
+                } else {
+                  // Fallback: direct error handling
+                  _awaitingFuture = false;
+                  _pendingFuture = null;
+                  _pendingFrame = null;
+                  resumeCoroutineWithError(coroutine, error);
+                }
+              });
+              
+              // Return awaiting status - VM loop exits
+              return InterpretResult.awaiting;
+            } else {
+              // Not a Future, just push it back (already resolved)
+              _stack.add(value);
             }
             break;
              
