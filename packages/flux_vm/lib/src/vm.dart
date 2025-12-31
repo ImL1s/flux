@@ -619,8 +619,32 @@ class VM {
         firstInstruction = false;
 
         if (frame.ip >= frame.chunk.code.length) {
-          _frames.removeLast();
-          continue; // Check minDepth/next frame
+          // Chunk ended without explicit return - treat as implicit "return nil"
+          // This replicates OpCode.return_ logic with nil result
+          
+          // Close upvalues before cleaning stack
+          _closeUpvalues(frame.slotBase);
+          
+          // Pop the frame
+          final endingFrame = _frames.removeLast();
+          
+          if (_frames.length < minDepth) {
+            // Top-level script or nested run() finished
+            while (_stack.length > endingFrame.slotBase) {
+              _stack.removeLast();
+            }
+            // Don't push nil for top-level - just exit cleanly
+            return InterpretResult.ok;
+          }
+          
+          // Pop all locals (including callee and args) from this frame
+          while (_stack.length > endingFrame.slotBase) {
+            _stack.removeLast();
+          }
+          
+          // Push nil as implicit return value for caller
+          _stack.add(null);
+          continue; // Continue in caller's frame
         }
 
         final instruction = frame.chunk.code[frame.ip];
@@ -854,7 +878,7 @@ class VM {
                   _stack.removeLast();
                 }
 
-               if (result != null) _stack.add(result);
+               _stack.add(result); // Always push result (including nil)
                return InterpretResult.ok;
             }
             
@@ -863,23 +887,9 @@ class VM {
                _stack.removeLast();
             }
             
-            // Push result back
-            if (result != null) _stack.add(result);
-            break; // Continue in caller's frame
-            // _closeUpvalues already handled capturing, so we can just wipe stack
-            // slotBase pointed to the callee
-             while (_stack.length > returningFrame.slotBase) {
-               _stack.removeLast();
-             }
-
-            // Push return value
+            // Push result back (always, including nil)
             _stack.add(result);
-
-            // Continue in caller's frame
-            if (_frames.isNotEmpty) {
-              frame = _frames.last;
-            }
-            break;
+            break; // Continue in caller's frame
 
           case OpCode.newList:
             final count = readByte();
@@ -1156,21 +1166,6 @@ class VM {
             break;
           
           case OpCode.await_:
-            // DEBUG: Check for potential stack corruption (Ghost closure duplication)
-            // This handles a specific issue where 'this' closure appears duplicated on the stack
-            if (_stack.length >= 3) {
-                 final peekFuture = _stack.last;
-                 final peekSecond = _stack[_stack.length - 2];
-                 final peekThird = _stack[_stack.length - 3];
-                 // Check if we have [Closure, Closure, Future] pattern
-                 // We use runtimeType check and toString or identity
-                 if (peekFuture is Future && 
-                     peekSecond.runtimeType.toString().contains('ObjClosure') && 
-                     peekThird.runtimeType.toString().contains('ObjClosure')) {
-                      // Remove the duplicate closure (keep Future)
-                      _stack.removeAt(_stack.length - 2);
-                 }
-            }
             
             // Pop the value to await (should be a Future)
             final value = _stack.removeLast();
