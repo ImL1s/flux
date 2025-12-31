@@ -34,6 +34,10 @@ class FluxServiceExtensions {
     registerExtension('ext.flux.getLocals', (method, parameters) => 
         FluxServiceExtensionHandlers.getLocals(vm, parameters));
 
+    // 12. Get Object
+    registerExtension('ext.flux.getObject', (method, parameters) => 
+        FluxServiceExtensionHandlers.getObject(vm, parameters));
+
     // Setup Listener
     vm.debugger?.addListener((event, context) {
       postEvent('Flux.Debug', {
@@ -137,14 +141,36 @@ class FluxServiceExtensionHandlers {
       final frameIndex = frameIndexStr != null ? int.tryParse(frameIndexStr) ?? 0 : 0;
       
       final locals = vm.debugger?.getLocals(frameIndex) ?? {};
-      final safeLocals = <String, String>{};
-      locals.forEach((key, value) {
-        safeLocals[key] = value.toString();
-      });
       
+      // Locals are now already serialized by FluxDebugger
       return ServiceExtensionResponse.result(jsonEncode({
         'type': 'Locals',
-        'locals': safeLocals,
+        'locals': locals,
+      }));
+  }
+
+  static Future<ServiceExtensionResponse> getObject(VM vm, Map<String, String> parameters) async {
+      final handleStr = parameters['handle'];
+      final handle = handleStr != null ? int.tryParse(handleStr) : null;
+      
+      if (handle == null) {
+         return ServiceExtensionResponse.error(
+          ServiceExtensionResponse.invalidParams, 
+          'Handle "handle" is required'
+        );
+      }
+      
+      final obj = vm.debugger?.getObject(handle);
+      if (obj == null) {
+         return ServiceExtensionResponse.error(
+          ServiceExtensionResponse.extensionError, 
+          'Object with handle $handle not found (or expired)'
+        );
+      }
+      
+      return ServiceExtensionResponse.result(jsonEncode({
+        'type': 'Object',
+        'object': obj,
       }));
   }
 }

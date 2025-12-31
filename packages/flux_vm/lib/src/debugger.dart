@@ -4,6 +4,7 @@
 // step execution, variable inspection, and profiling.
 
 import 'vm.dart';
+import 'closure.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 
 /// Debugger event types
@@ -254,6 +255,7 @@ class FluxDebugger {
   void continue_() {
     if (!_paused) return;
     _paused = false;
+    _clearRegistry();
     _stepMode = null;
     _stepTargetDepth = null;
     _notifyListeners(DebugEvent.resumed, _createContext());
@@ -267,6 +269,7 @@ class FluxDebugger {
   void stepInto() {
     if (!_paused) return;
     _paused = false;
+    _clearRegistry();
     _stepMode = StepMode.stepInto;
     _stepTargetDepth = _getCurrentDepth();
     final frame = vm.frames.last;
@@ -278,6 +281,7 @@ class FluxDebugger {
   void stepOver() {
     if (!_paused) return;
     _paused = false;
+    _clearRegistry();
     _stepMode = StepMode.stepOver;
     _stepTargetDepth = _getCurrentDepth();
     final frame = vm.frames.last;
@@ -289,6 +293,7 @@ class FluxDebugger {
   void stepOut() {
     if (!_paused) return;
     _paused = false;
+    _clearRegistry();
     _stepMode = StepMode.stepOut;
     _stepTargetDepth = _getCurrentDepth() - 1;
     _stepSourceLine = -1; // Not needed for stepOut but for consistency
@@ -400,7 +405,7 @@ class FluxDebugger {
       
       final stackIndex = frame.slotBase + i;
       if (stackIndex < stack.length) {
-        locals[name] = stack[stackIndex];
+        locals[name] = _serializeValue(stack[stackIndex]);
       }
       // Implicitly skip if out of bounds (future locals)
     }
@@ -409,7 +414,7 @@ class FluxDebugger {
     if (actualFrameIndex == 0) {
       for (final entry in vm.globals.entries) {
         if (!locals.containsKey(entry.key)) {
-          locals[entry.key] = entry.value;
+          locals[entry.key] = _serializeValue(entry.value);
         }
       }
     }
@@ -439,6 +444,107 @@ class FluxDebugger {
     );
   }
   
+  /// Object registry for deep inspection (valid only while paused)
+  final Map<int, Object> _objectRegistry = {};
+  int _nextHandleId = 1;
+
+  void _clearRegistry() {
+    _objectRegistry.clear();
+    _nextHandleId = 1;
+  }
+
+  int _registerObject(Object obj) {
+    final handle = _nextHandleId++;
+    _objectRegistry[handle] = obj;
+    return handle;
+  }
+  
+  /// Get object details by handle
+  Map<String, dynamic>? getObject(int handle) {
+    if (!_objectRegistry.containsKey(handle)) return null;
+    final obj = _objectRegistry[handle];
+    
+    if (obj is List) {
+      final elements = <Map<String, dynamic>>[];
+      for (var i = 0; i < obj.length; i++) {
+        elements.add({
+          'index': i,
+          'value': _serializeValue(obj[i]),
+        });
+      }
+      return {
+        'kind': 'List',
+        'length': obj.length,
+        'elements': elements,
+      };
+    } else if (obj is Map) {
+      final entries = <Map<String, dynamic>>[];
+      for (final entry in obj.entries) {
+        entries.add({
+          'key': _serializeValue(entry.key),
+          'value': _serializeValue(entry.value),
+        });
+      }
+      return {
+        'kind': 'Map',
+        'length': obj.length,
+        'entries': entries,
+      };
+    } else if (obj is FluxInstance) {
+      final fields = <String, Map<String, dynamic>>{};
+      obj.fields.forEach((key, value) {
+        fields[key] = _serializeValue(value);
+      });
+      return {
+        'kind': 'Instance',
+        'class': obj.klass.name,
+        'fields': fields,
+      };
+    } else if (obj is ObjClosure) {
+      return {
+        'kind': 'Closure',
+        'name': obj.function.name,
+        'arity': obj.function.arity,
+      };
+    }
+    
+    return {
+      'kind': 'Unknown',
+      'value': obj.toString(),
+    };
+  }
+  
+  Map<String, dynamic> _serializeValue(Object? value) {
+    if (value == null) {
+      return {'type': 'primitive', 'kind': 'Null', 'value': 'null'};
+    }
+    if (value is bool || value is num || value is String) {
+      return {'type': 'primitive', 'kind': value.runtimeType.toString(), 'value': value.toString()};
+    }
+    
+    // Complex object
+    final handle = _registerObject(value);
+    String preview;
+    if (value is List) {
+      preview = 'List(${value.length})';
+    } else if (value is Map) {
+      preview = 'Map(${value.length})';
+    } else if (value is FluxInstance) {
+      preview = value.klass.name;
+    } else if (value is ObjClosure) {
+      preview = 'Closure(${value.function.name})';
+    } else {
+      preview = value.runtimeType.toString();
+    }
+    
+    return {
+      'type': 'ref',
+      'kind': value.runtimeType.toString(),
+      'handle': handle,
+      'preview': preview,
+    };
+  }
+
   void _notifyListeners(DebugEvent event, DebugContext context) {
     for (final listener in _listeners) {
       listener(event, context);
