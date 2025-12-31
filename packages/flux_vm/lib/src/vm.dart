@@ -399,6 +399,67 @@ class VM {
      return _run(_frames.length - 1);
   }
 
+  /// Execute a compiled function/expression in a specific context (isolated)
+  /// 
+  /// Used for debugger expression evaluation.
+  /// Does not affect the current execution state (stack/frames are saved and restored).
+  Object? executeFunctionInContext(CompiledFunction function, List<Object?> locals) {
+     final closure = ObjClosure(function, []);
+     
+     // 1. Back up current execution state
+     final savedFrames = List<CallFrame>.from(_frames);
+     final savedStack = List<Object?>.from(_stack);
+     final savedUpvalues = _openUpvalues; 
+     
+     // 2. Clear state for isolated execution
+     _frames.clear();
+     _stack.clear();
+     _openUpvalues = null;
+     
+     try {
+       // 3. Setup stack with "locals"
+       // Slot 0 is the closure itself
+       _stack.add(closure); 
+       
+       // Slots 1..N are the provided locals
+       _stack.addAll(locals);
+       
+       // 4. Create frame manually
+       // Slot 0 is at index 0.
+       final frame = CallFrame(
+         closure,
+         slotBase: 0, 
+       );
+       
+       _frames.add(frame);
+       
+       // 5. Run until frames empty
+       final result = _run(0); 
+       
+       if (result == InterpretResult.ok) {
+         // Result is on stack
+         if (_stack.isNotEmpty) {
+           return _stack.last;
+         }
+         return null;
+       } else {
+         // Error occurred
+         return "Error: Execution failed with $result"; 
+       }
+     } catch (e) {
+       return "Error: $e";
+     } finally {
+       // 6. Restore state
+       _frames.clear();
+       _frames.addAll(savedFrames);
+       
+       _stack.clear();
+       _stack.addAll(savedStack);
+       
+       _openUpvalues = savedUpvalues; 
+     }
+  }
+
   /// Capture an upvalue for the given stack slot
   ObjUpvalue _captureUpvalue(int localIndex) {
     ObjUpvalue? prevUpvalue;

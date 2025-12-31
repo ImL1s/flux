@@ -44,6 +44,23 @@ class Parser {
     return CompilationUnit(statements, line: 1, column: 1);
   }
 
+  /// Parse a single expression (used for debugger evaluation)
+  Expression parseExpression() {
+    try {
+      final expr = _expression();
+      if (!_isAtEnd) {
+        throw _error(_peek, "Expect end of expression.");
+      }
+      return expr;
+    } catch (e) {
+      if (e is ParseError) {
+        errors.add(e);
+        rethrow;
+      }
+      throw ParseError(e.toString(), _peek);
+    }
+  }
+
   // ==========================================================================
   // Declarations
   // ==========================================================================

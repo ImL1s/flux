@@ -4,6 +4,7 @@
 // step execution, variable inspection, and profiling.
 
 import 'vm.dart';
+import 'package:flux_compiler/flux_compiler.dart';
 
 /// Debugger event types
 enum DebugEvent {
@@ -294,6 +295,38 @@ class FluxDebugger {
     _notifyListeners(DebugEvent.resumed, _createContext());
   }
   
+  /// Evaluate an expression in the context of a specific stack frame
+  /// 
+  /// [expression] is the source code to evaluate.
+  /// [frameIndex] is the index of the frame (0 = top/current frame).
+  Object? evaluate(String expression, {int frameIndex = 0}) {
+    if (vm.frames.isEmpty) return "Error: VM is not running";
+    if (frameIndex >= vm.frames.length) return "Error: Invalid frame index";
+    
+    // Get frame from top (index 0 is top)
+    final frame = vm.frames[vm.frames.length - 1 - frameIndex];
+    final function = frame.closure.function;
+    final localNames = function.localNames;
+    
+    // Collect all local values from the stack corresponding to localNames
+    final values = <Object?>[];
+    for (int i = 0; i < localNames.length; i++) {
+       values.add(vm.stack[frame.slotBase + i]);
+    }
+    
+    try {
+      // Compile expression knowing the local variable names
+      // Compiler adds these names starting at Slot 1 (Slot 0 is internal closure)
+      final compiledFn = compileFluxExpression(expression, localNames);
+      
+      // Execute in a separate context
+      // Pushes compiled closure (Slot 0) + values (Slot 1..N)
+      return vm.executeFunctionInContext(compiledFn, values);
+    } catch (e) {
+      return "Error: $e";
+    }
+  }
+
   /// Get the current call stack
   List<StackFrame> getCallStack() {
     final frames = <StackFrame>[];
@@ -316,12 +349,7 @@ class FluxDebugger {
     return frames;
   }
   
-  /// Evaluate an expression in the current context
-  Object? evaluate(String expression) {
-    // In a real implementation, we would parse and evaluate the expression
-    // in the current VM context
-    return null;
-  }
+
   
   /// Get local variables in the current frame
   Map<String, Object?> getLocals([int frameIndex = 0]) {

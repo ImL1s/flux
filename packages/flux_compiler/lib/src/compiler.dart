@@ -5,6 +5,8 @@
 import 'ast.dart';
 import 'token.dart';
 import 'bytecode.dart';
+import 'lexer.dart';
+import 'parser.dart';
 
 class Local {
   final String name;
@@ -117,6 +119,11 @@ class Compiler {
       _function = CompiledFunction(name, Chunk(), moduleName: _moduleName);
   }
 
+  /// Compiles a single expression in the context of specific local variables.
+  /// 
+  /// [source] is the expression to compile.
+  /// [variableNames] is the list of local variables available in the scope,
+  /// ordered by their stack slot index.
   void compile(Statement statement) {
     print('DEBUG COMPILER: Compiling statement type: ${statement.runtimeType} at line ${statement.line}');
     if (statement is BlockStmt) {
@@ -900,5 +907,40 @@ class Compiler {
     chunk.write(nameIdx, stmt.line);
     chunk.writeOp(OpCode.pop, stmt.line);
   }
+}
+
+/// Compiles a single expression in the context of specific local variables.
+/// 
+/// [source] is the expression to compile.
+/// [variableNames] is the list of local variables available in the scope,
+/// ordered by their stack slot index.
+CompiledFunction compileFluxExpression(String source, List<String> variableNames) {
+  if (source.trim().isEmpty) return CompiledFunction("empty", Chunk());
+  
+  // Parse expression
+  final lexer = Lexer(source);
+  final parser = Parser(lexer.tokenize());
+  final expr = parser.parseExpression();
+  
+  // Create compiler instance
+  final compiler = Compiler(moduleName: '<eval>');
+  
+  // Setup local variable context
+  // We treat the provided variables as being already initialized in the current scope.
+  compiler._scopeDepth = 1;
+  
+  for (final name in variableNames) {
+    // Add local with depth 1 (initialized)
+    // Even empty names (internal slots) are added to keep index alignment
+    compiler._locals.add(Local(name, 1));
+  }
+  
+  // Compile expression
+  compiler._compileExpression(expr);
+  
+  // Emit return to end the chunk
+  compiler.chunk.writeOp(OpCode.return_, 1);
+  
+  return compiler._function;
 }
 
