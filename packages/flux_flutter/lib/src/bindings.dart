@@ -35,6 +35,9 @@ class FluxBindings {
   
   /// Get all registered functions
   static Map<String, FluxFunction> get functions => _functions;
+
+  /// Get all registered widget names
+  static Set<String> get registeredWidgets => _builders.keys.toSet();
   
   /// Initialize default bindings
   static void initDefaults() {
@@ -591,6 +594,8 @@ class FluxBindings {
       final centerTitle = FluxCast.toBool(args['centerTitle']);
       final elevation = FluxCast.toDoubleNullable(args['elevation']);
       
+      final bottomRaw = args['bottom'] as Widget?;
+      
       Widget? title;
       if (titleRaw is Widget) {
         title = titleRaw;
@@ -607,6 +612,7 @@ class FluxBindings {
         title: title,
         leading: leadingRaw,
         actions: actions.isNotEmpty ? actions : null,
+        bottom: bottomRaw is PreferredSizeWidget ? bottomRaw : null,
         backgroundColor: backgroundColor,
         centerTitle: centerTitle,
         elevation: elevation,

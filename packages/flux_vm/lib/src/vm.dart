@@ -16,6 +16,7 @@ enum InterpretResult {
   compileError,
   runtimeError,
   awaiting,  // VM is suspended waiting for a Future
+  paused,    // VM is suspended by debugger
 }
 
 // CallFrame is now defined in coroutine.dart
@@ -75,8 +76,14 @@ class VM {
   /// Shared across all coroutines for the current widget instance
   final Map<String, Object?> _widgetState = {};
   
-  List<Object?> get _stack => _currentCoroutine!.stack;
-  List<CallFrame> get _frames => _currentCoroutine!.frames;
+  List<Object?> get _stack => (_pausedCoroutine ?? _currentCoroutine)!.stack;
+  List<CallFrame> get _frames => (_pausedCoroutine ?? _currentCoroutine)!.frames;
+  
+  /// Get current execution stack
+  List<Object?> get stack => _stack;
+  
+  /// Get current call frames
+  List<CallFrame> get frames => _frames;
   
   /// Linked list of open upvalues (for closure support)
   ObjUpvalue? _openUpvalues;
@@ -97,6 +104,8 @@ class VM {
   
   // Coroutine support
   FluxCoroutine? _currentCoroutine;
+  FluxCoroutine? _pausedCoroutine; // Saved paused coroutine for debugger
+  
   CoroutineResumeCallback? coroutineResumeCallback;
   
   // Debugger and Profiler
@@ -222,8 +231,7 @@ class VM {
     return InterpretResult.runtimeError;
   }
   
-  /// Access to the stack for widget building
-  List<Object?> get stack => _stack;
+
   
   /// Basic output handler
   void Function(String message) onPrint = print;
@@ -313,36 +321,56 @@ class VM {
   /// Execute a closure with arguments.
   /// Used by FluxRuntime to execute widget builder closures.
   InterpretResult executeClosure(ObjClosure closure, [List<Object?> args = const []]) {
-     // Create a new coroutine for this execution context to ensure isolation
-     // This solves the race condition where multiple events share the same stack
-     final coroutine = FluxCoroutine(FluxCoroutine.generateId());
-     final prevCoroutine = _currentCoroutine;
-     _currentCoroutine = coroutine;
-     
-     _stack.add(closure);
-     for (final arg in args) {
-       _stack.add(arg);
-     }
+    final coroutine = FluxCoroutine(FluxCoroutine.generateId());
+    final prevCoroutine = _currentCoroutine;
+    _currentCoroutine = coroutine;
+    
+    _stack.add(closure);
+    for (final arg in args) {
+      _stack.add(arg);
+    }
 
-     if (!_callValue(closure, args.length)) {
-       _currentCoroutine = prevCoroutine;
-       return InterpretResult.runtimeError;
-     }
+    if (!_callValue(closure, args.length)) {
+      _currentCoroutine = prevCoroutine;
+      return InterpretResult.runtimeError;
+    }
 
-     final result = _run();
-     
-     // If execution finished synchronously, we must propagate the result to the caller's stack
-     if (result == InterpretResult.ok) {
-        final returnValue = coroutine.stack.isNotEmpty ? coroutine.stack.last : null;
-        _currentCoroutine = prevCoroutine;
-        _stack.add(returnValue);
-     } else {
-        // For awaiting or error, we also restore the previous context.
-        // The suspended coroutine is kept alive by Future callbacks.
-        _currentCoroutine = prevCoroutine;
-     }
-     
-     return result;
+    final result = _run();
+    
+    if (result == InterpretResult.ok) {
+      final returnValue = coroutine.stack.isNotEmpty ? coroutine.stack.last : null;
+      _currentCoroutine = prevCoroutine;
+      _stack.add(returnValue);
+    } else if (result == InterpretResult.paused) {
+      _pausedCoroutine = coroutine;
+      _currentCoroutine = prevCoroutine;
+    } else {
+      _currentCoroutine = prevCoroutine;
+    }
+    
+    return result;
+  }
+
+  InterpretResult resume() {
+    if (_pausedCoroutine != null) {
+      final prev = _currentCoroutine;
+      _currentCoroutine = _pausedCoroutine;
+      _pausedCoroutine = null;
+      
+      if (debugger != null && debugger!.isPaused) {
+        debugger!.continue_();
+      }
+      
+      final result = _run();
+      
+      if (result == InterpretResult.paused) {
+        _pausedCoroutine = _currentCoroutine; // Paused again
+      }
+      
+      _currentCoroutine = prev;
+      return result;
+    }
+    return _run();
   }
 
 
@@ -532,46 +560,73 @@ class VM {
 
 
   InterpretResult _run([int minDepth = 0]) {
-    CallFrame frame = _frames.last;
-
+    bool firstInstruction = true;
     try {
       while (true) {
+        if (_frames.length <= minDepth) {
+          return InterpretResult.ok;
+        }
+        CallFrame frame = _frames.last;
+
         // Debugger hooks
         if (debugger != null) {
-           // Provide hooks for step debugging and breakpoints
-           // This is a simplified integration point
-           if (debugger!.isPaused) {
-              // Yield to let debugger handle state
-              // In a real implementation this would involve more complex suspension
-           }
+          if (debugger!.isPaused) {
+            return InterpretResult.paused;
+          }
+
+          // Stepping Logic
+          if (!firstInstruction) {
+            final stepMode = debugger!.stepMode;
+            final currentDepth = _frames.length;
+            final currentLine = frame.chunk.getLine(frame.ip);
+            
+            if (stepMode == StepMode.stepInto) {
+              if (currentDepth > (debugger!.stepTargetDepth ?? 0) || 
+                  currentLine != debugger!.stepSourceLine) {
+                debugger!.pause();
+                return InterpretResult.paused;
+              }
+            } else if (stepMode == StepMode.stepOver) {
+              if (currentDepth < (debugger!.stepTargetDepth ?? 0) || 
+                  (currentDepth == debugger!.stepTargetDepth && currentLine != debugger!.stepSourceLine)) {
+                debugger!.pause();
+                return InterpretResult.paused;
+              }
+            } else if (stepMode == StepMode.stepOut && 
+                       debugger!.stepTargetDepth != null) {
+              if (currentDepth <= debugger!.stepTargetDepth!) {
+                debugger!.pause();
+                return InterpretResult.paused;
+              }
+            }
+          }
+
+          // Breakpoints
+          final moduleName = frame.closure.function.moduleName;
+          if (moduleName != null) {
+            final line = frame.chunk.getLine(frame.ip);
+            if (line != frame.lastLine) {
+              if (debugger!.shouldBreakAt(moduleName, line) != null) {
+                frame.lastLine = line;
+                debugger!.pause();
+                return InterpretResult.paused;
+              }
+              frame.lastLine = line;
+            }
+          }
         }
         
-        if (profiler != null) {
-           profiler!.recordInstruction();
-        }
+        firstInstruction = false;
 
         if (frame.ip >= frame.chunk.code.length) {
-             // Implicit return if end of chunk reached
-             return InterpretResult.ok;
+          _frames.removeLast();
+          continue; // Check minDepth/next frame
         }
 
-        // Debug
-      // print("DEBUG VM: IP: ${frame.ip}, Stack: ${(_stack.length > 5 ? _stack.sublist(_stack.length - 5) : _stack)}");
-      // print("DEBUG VM: Instr: ${OpCode.values[frame.chunk.code[frame.ip]].name}");
-
-        int instruction;
-        OpCode op;
-        try {
-          instruction = frame.chunk.code[frame.ip];
-          op = OpCode.values[instruction];
-        } catch (e) {
-             print('DEBUG VM CRASH: IP ${frame.ip} out of code bounds or invalid OpCode. Code len: ${frame.chunk.code.length}');
-             rethrow;
-        }
+        final instruction = frame.chunk.code[frame.ip];
+        final op = OpCode.values[instruction];
+        frame.ip++; 
         
-        frame.ip++;
-
-
         int readByte() {
            final b = frame.chunk.code[frame.ip];
            frame.ip++;
@@ -579,9 +634,9 @@ class VM {
         }
 
         Object? readConstant() {
-           final idx = frame.chunk.code[frame.ip];
-           frame.ip++;
-           return frame.chunk.constants[idx];
+          final idx = frame.chunk.code[frame.ip];
+          frame.ip++;
+          return frame.chunk.constants[idx];
         }
 
         switch (op) {
@@ -802,8 +857,15 @@ class VM {
                if (result != null) _stack.add(result);
                return InterpretResult.ok;
             }
-
+            
             // Discard all locals from this frame (including the callee and args)
+            while (_stack.length > returningFrame.slotBase) {
+               _stack.removeLast();
+            }
+            
+            // Push result back
+            if (result != null) _stack.add(result);
+            break; // Continue in caller's frame
             // _closeUpvalues already handled capturing, so we can just wipe stack
             // slotBase pointed to the callee
              while (_stack.length > returningFrame.slotBase) {

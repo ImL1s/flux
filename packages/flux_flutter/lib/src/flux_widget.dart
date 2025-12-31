@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'bindings.dart';
+import 'dev_tools/flux_service_extensions.dart';
 
 /// A Flutter widget that executes and renders a Flux widget definition.
 /// 
@@ -78,6 +79,7 @@ class _FluxWidgetState extends State<FluxWidget> {
         _runtime = FluxRuntime(
           widget.source!,
           onStateChange: _handleStateChange,
+          moduleName: widget.widgetName,
         );
       }
       _buildWidget();
@@ -175,7 +177,7 @@ class FluxRuntime {
   // Stack for collecting children in nested widgets
   final List<List<FluxWidgetNode>> _childrenStack = [];
   
-  FluxRuntime(String source, {this.onStateChange}) {
+  FluxRuntime(String source, {this.onStateChange, String? moduleName}) {
     // Set up state change callback
     _vm.onStateChange = onStateChange;
     
@@ -186,15 +188,23 @@ class FluxRuntime {
     final parser = Parser(tokens);
     final ast = parser.parse();
     debugPrint('DEBUG RUNTIME: Parsed unit with ${ast.declarations.length} declarations');
-    
-    final compiler = Compiler(unit: ast);
+    final compiler = Compiler(unit: ast, moduleName: moduleName);
+    compiler.compile(ast.declarations[0]); // Compile script
+      
     final function = compiler.endCompiler();
     debugPrint('DEBUG RUNTIME: Compilation finished. Bytecode size: ${function.chunk.code.length}');
+    
+    // Register script for DevTools
+    _vm.registerScript(moduleName ?? 'script_${source.hashCode}', source, function);
     
     // Execute to populate globals (including widget definitions)
     
     // Inject widget names into globals so they can be resolved
-    for (final name in _widgetConstructors) {
+    final allWidgetNames = {..._widgetConstructors, ...FluxBindings.registeredWidgets};
+      
+    // Register DevTools extensions
+    FluxServiceExtensions.register(_vm);
+    for (final name in allWidgetNames) {
       _vm.globals[name] = name;
     }
     
@@ -356,7 +366,9 @@ class FluxRuntime {
       // Clean up handler
       _vm.widgetCallHandler = null;
 
-      if (interpretResult != InterpretResult.ok) {
+      if (interpretResult == InterpretResult.paused) {
+         return FluxWidgetNode('Text', args: {'0': 'Paused at Breakpoint (Resume in DevTools)'});
+      } else if (interpretResult != InterpretResult.ok) {
         // If execution failed, the stack might not contain a FluxWidgetNode
         _vm.stack.clear(); 
         return FluxWidgetNode('Error', args: {'text': 'Build error'});
@@ -463,6 +475,32 @@ class FluxRuntime {
         }
       }
       
+      // CLEANUP: Remove any widgets passed as arguments from the parent collector.
+      // If a widget was created as an argument (e.g. child: Text(...)), it was
+      // inadvertently added to the parent's children list. We must remove it
+      // because it's being consumed as an argument here.
+      if (_childrenStack.isNotEmpty) {
+         final parentCollector = _childrenStack.last;
+         
+         void removeFromCollector(dynamic value) {
+            if (value is FluxWidgetNode) {
+               parentCollector.remove(value);
+            } else if (value is List) {
+               for (final item in value) {
+                  removeFromCollector(item);
+               }
+            } else if (value is Map) {
+               for (final item in value.values) {
+                  removeFromCollector(item);
+               }
+            }
+         }
+
+         for (final arg in args.values) {
+            removeFromCollector(arg);
+         }
+      }
+
       // Special handling for builder closures (trailing blocks)
       if (args.containsKey('_children')) {
         final builder = args.remove('_children');

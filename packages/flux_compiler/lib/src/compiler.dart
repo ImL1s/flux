@@ -25,9 +25,10 @@ class CompiledFunction {
   final String name;
   final int arity;
   final bool isAsync;
+  final String? moduleName;
   final List<String> paramNames;
   
-  CompiledFunction(this.name, this.chunk, {this.arity = 0, this.isAsync = false, this.paramNames = const []});
+  CompiledFunction(this.name, this.chunk, {this.arity = 0, this.isAsync = false, this.moduleName, this.paramNames = const []});
   
   @override
   String toString() => "<fn $name>";
@@ -81,12 +82,13 @@ class Compiler {
   final List<Local> _locals = [];
   final List<CompilerUpvalue> _upvalues = [];
   int _scopeDepth = 0;
+  final String? _moduleName;
   
   /// State field names available in current widget context (for build method)
   List<String> _stateFields = [];
 
-  Compiler({CompilationUnit? unit}) {
-      _function = CompiledFunction("script", Chunk());
+  Compiler({CompilationUnit? unit, String? moduleName}) : _moduleName = moduleName {
+      _function = CompiledFunction("script", Chunk(), moduleName: moduleName);
       
       // Reserve slot 0 for script closure
       _locals.add(Local("", 0));
@@ -102,8 +104,8 @@ class Compiler {
   }
   
   // Internal constructor for inner functions
-  Compiler._inner(this._enclosing, String name) {
-      _function = CompiledFunction(name, Chunk());
+  Compiler._inner(this._enclosing, String name) : _moduleName = _enclosing?._moduleName {
+      _function = CompiledFunction(name, Chunk(), moduleName: _moduleName);
   }
 
   void compile(Statement statement) {
@@ -174,6 +176,7 @@ class Compiler {
         "${stmt.name}.build", 
         buildCompiler.chunk,
         arity: stmt.props.length,
+        moduleName: _moduleName,
         paramNames: stmt.props.map((p) => p.name).toList(),
       );
       
@@ -224,6 +227,7 @@ class Compiler {
       funcCompiler.chunk,
       arity: stmt.parameters.length,
       isAsync: stmt.isAsync,
+      moduleName: _moduleName,
       paramNames: stmt.parameters.map((p) => p.name).toList(),
     );
     
@@ -283,6 +287,7 @@ class Compiler {
       funcCompiler.chunk,
       arity: expr.parameters.length,
       isAsync: expr.isAsync,
+      moduleName: _moduleName,
       paramNames: expr.parameters.map((p) => p.name).toList(),
     );
     

@@ -195,6 +195,22 @@ class FluxDebugger {
     return _breakpoints.remove(id) != null;
   }
   
+  /// Remove a breakpoint by source and line
+  bool removeBreakpointAt(String source, int line) {
+    int? toRemove;
+    for (final bp in _breakpoints.values) {
+      if (bp.source == source && bp.line == line) {
+        toRemove = bp.id;
+        break;
+      }
+    }
+    if (toRemove != null) {
+      _breakpoints.remove(toRemove);
+      return true;
+    }
+    return false;
+  }
+  
   /// Get all breakpoints
   List<Breakpoint> get breakpoints => _breakpoints.values.toList();
   
@@ -227,6 +243,12 @@ class FluxDebugger {
     return null;
   }
   
+  /// Pause execution
+  void pause() {
+    _paused = true;
+    _notifyListeners(DebugEvent.breakpoint, _createContext());
+  }
+
   /// Resume execution
   void continue_() {
     if (!_paused) return;
@@ -236,11 +258,18 @@ class FluxDebugger {
     _notifyListeners(DebugEvent.resumed, _createContext());
   }
   
-  /// Step into the next instruction
+  /// Current step source line
+  int? _stepSourceLine;
+  int? get stepSourceLine => _stepSourceLine;
+
+  /// Step into the next instruction or function
   void stepInto() {
     if (!_paused) return;
     _paused = false;
     _stepMode = StepMode.stepInto;
+    _stepTargetDepth = _getCurrentDepth();
+    final frame = vm.frames.last;
+    _stepSourceLine = frame.chunk.getLine(frame.ip);
     _notifyListeners(DebugEvent.resumed, _createContext());
   }
   
@@ -250,6 +279,8 @@ class FluxDebugger {
     _paused = false;
     _stepMode = StepMode.stepOver;
     _stepTargetDepth = _getCurrentDepth();
+    final frame = vm.frames.last;
+    _stepSourceLine = frame.chunk.getLine(frame.ip);
     _notifyListeners(DebugEvent.resumed, _createContext());
   }
   
@@ -259,6 +290,7 @@ class FluxDebugger {
     _paused = false;
     _stepMode = StepMode.stepOut;
     _stepTargetDepth = _getCurrentDepth() - 1;
+    _stepSourceLine = -1; // Not needed for stepOut but for consistency
     _notifyListeners(DebugEvent.resumed, _createContext());
   }
   
@@ -288,14 +320,18 @@ class FluxDebugger {
   }
   
   int _getCurrentDepth() {
-    // Return current call stack depth
-    return 0;
+    return vm.frames.length;
   }
   
   DebugContext _createContext() {
+    if (vm.frames.isEmpty) {
+      return DebugContext(source: '', line: 0, stackFrames: []);
+    }
+    final frame = vm.frames.last;
+    final line = frame.chunk.getLine(frame.ip);
     return DebugContext(
-      source: '',
-      line: 0,
+      source: frame.closure.function.moduleName ?? '',
+      line: line,
       stackFrames: getCallStack(),
     );
   }

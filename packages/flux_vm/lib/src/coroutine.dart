@@ -25,6 +25,7 @@ class CallFrame {
   final ObjClosure closure;
   int ip;              // Instruction pointer within the function's chunk
   final int slotBase;  // Start of this frame's local variables on the stack
+  int lastLine = -1;   // For debugger debouncing
   
   CallFrame(this.closure, {this.ip = 0, required this.slotBase});
   

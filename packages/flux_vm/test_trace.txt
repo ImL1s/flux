@@ -1,0 +1,362 @@
+00:00 +0: loading test/debugger_strict_test.dart
+00:00 +0: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Added local "res" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: res, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: add, isState: false
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Added local "res" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: res, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: add, isState: false
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: y, isState: false
+VM TRACE: depth=1 line=5 instruction=closure paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=getGlobal paused=false mode=StepMode.stepOver
+VM TRACE: depth=1 line=6 instruction=getGlobal paused=false mode=StepMode.stepOver
+VM TRACE: depth=1 line=6 instruction=constant paused=false mode=StepMode.stepOver
+VM TRACE: depth=1 line=6 instruction=call paused=false mode=StepMode.stepOver
+VM TRACE: depth=2 line=2 instruction=getLocal paused=false mode=StepMode.stepOver
+VM TRACE: depth=2 line=2 instruction=getLocal paused=false mode=StepMode.stepOver
+VM TRACE: depth=2 line=2 instruction=add paused=false mode=StepMode.stepOver
+VM TRACE: depth=2 line=3 instruction=getLocal paused=false mode=StepMode.stepOver
+VM TRACE: depth=2 line=3 instruction=return_ paused=false mode=StepMode.stepOver
+VM TRACE: depth=1 line=6 instruction=setGlobal paused=false mode=StepMode.stepOver
+VM TRACE: depth=1 line=6 instruction=pop paused=false mode=StepMode.stepOver
+VM TRACE: depth=1 line=7 instruction=getGlobal paused=false mode=StepMode.stepOver
+VM TRACE: depth=1 line=7 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=mul paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=closure paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=getGlobal paused=false mode=null
+00:00 +1: Debugger Strict Tests Step Out finishes function and stops in caller
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: work, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: work, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+VM TRACE: depth=1 line=6 instruction=closure paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=call paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=constant paused=false mode=StepMode.stepOut
+VM TRACE: depth=2 line=3 instruction=constant paused=false mode=StepMode.stepOut
+VM TRACE: depth=2 line=4 instruction=getLocal paused=false mode=StepMode.stepOut
+VM TRACE: depth=2 line=4 instruction=getLocal paused=false mode=StepMode.stepOut
+VM TRACE: depth=2 line=4 instruction=add paused=false mode=StepMode.stepOut
+VM TRACE: depth=2 line=4 instruction=return_ paused=false mode=StepMode.stepOut
+VM TRACE: depth=1 line=6 instruction=pop paused=false mode=StepMode.stepOut
+VM TRACE: depth=1 line=6 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=true_ paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=closure paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=call paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=constant paused=false mode=null
+00:00 +2: Debugger Strict Tests Multiple breakpoints in a loop
+TEST: Multiple breakpoints in a loop START
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ForStmt
+DEBUG COMPILER: Compiling statement type: ForStmt at line 4
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling statement type: ForStmt at line 4
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+VM TRACE: depth=1 line=1 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=less paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=add paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=add paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=setLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=4 instruction=loop paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=less paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=add paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=add paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=setLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=4 instruction=loop paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=less paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=add paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=add paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=setLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=4 instruction=loop paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=less paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=1 line=4 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=4 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=less paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=1 line=2 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=3 instruction=getGlobal paused=false mode=null
+TEST: Multiple breakpoints in a loop result: InterpretResult.paused
+00:00 +2 -1: Debugger Strict Tests Multiple breakpoints in a loop [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.paused>
+  
+  package:matcher                       expect
+  test\debugger_strict_test.dart 121:7  main.<fn>.<fn>
+  
+00:00 +2 -1: Debugger Strict Tests Breaking in recursive calls
+TEST: Breaking in recursive calls START
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 3
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 3
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: fib, isState: false
+VM TRACE: depth=1 line=5 instruction=closure paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=5 instruction=call paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=lessEqual paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=pop paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=getLocal paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=constant paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=sub paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=call paused=false mode=null
+VM TRACE: depth=3 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=3 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=3 line=2 instruction=lessEqual paused=false mode=null
+VM TRACE: depth=3 line=3 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=3 line=3 instruction=jumpIfFalse paused=false mode=null
+VM TRACE: depth=3 line=3 instruction=pop paused=false mode=null
+VM TRACE: depth=3 line=3 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=3 line=3 instruction=getLocal paused=false mode=null
+VM TRACE: depth=3 line=3 instruction=constant paused=false mode=null
+VM TRACE: depth=3 line=3 instruction=sub paused=false mode=null
+VM TRACE: depth=3 line=3 instruction=call paused=false mode=null
+VM TRACE: depth=4 line=2 instruction=getLocal paused=false mode=null
+VM TRACE: depth=4 line=2 instruction=constant paused=false mode=null
+VM TRACE: depth=4 line=2 instruction=lessEqual paused=false mode=null
+VM TRACE: depth=4 line=3 instruction=jumpIfFalse paused=false mode=null
+TEST: Breaking in recursive calls result: InterpretResult.paused
+00:00 +2 -2: Debugger Strict Tests Breaking in recursive calls [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.paused>
+  
+  package:matcher                       expect
+  test\debugger_strict_test.dart 146:7  main.<fn>.<fn>
+  
+00:00 +2 -2: Debugger Strict Tests Step Into follows into closure call
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Added local "y" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: makeAdder, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: adder, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Added local "y" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: makeAdder, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: adder, isState: false
+VM TRACE: depth=1 line=1 instruction=closure paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=call paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=closure paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=return_ paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=getGlobal paused=false mode=StepMode.stepInto
+VM TRACE: depth=1 line=7 instruction=constant paused=false mode=StepMode.stepInto
+VM TRACE: depth=1 line=7 instruction=call paused=false mode=StepMode.stepInto
+VM TRACE: depth=2 line=3 instruction=getUpvalue paused=false mode=StepMode.stepInto
+VM TRACE: depth=2 line=3 instruction=getUpvalue paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=getLocal paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=add paused=false mode=null
+VM TRACE: depth=2 line=3 instruction=return_ paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=closure paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=1 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=getGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=constant paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=call paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=closure paused=false mode=null
+VM TRACE: depth=2 line=2 instruction=return_ paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=setGlobal paused=false mode=null
+VM TRACE: depth=1 line=6 instruction=pop paused=false mode=null
+VM TRACE: depth=1 line=7 instruction=getGlobal paused=false mode=null
+00:00 +3 -2: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.
