@@ -1,0 +1,223 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart
+00:00 +0: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG RUNTIME: Source:       widget TodoApp {
+        state todos = [];
+        state input = "";
+        
+        build {
+          Column {
+            // Input Area
+            Row {
+               Expanded {
+                 TextField(hint: "New Todo", onChanged: fn(val) {
+                     input = val;
+                 })
+               }
+               Button("Add", onPressed: fn() {
+                 if (input != "") {
+                   push(todos, input);
+                   input = "";
+                 }
+               })
+            }
+            
+            // List Area
+            Column {
+               var i = 0;
+               while (i < todos.length) {
+                   var todo = todos[i];
+                   var index = i; // Capture current index
+                   TodoItem(todo: todo, onDelete: fn() {
+                       removeAt(todos, index);
+                   });
+                   i = i + 1;
+               }
+            }
+          }
+        }
+      }
+
+      widget TodoItem {
+        props todo, onDelete;
+        build {
+          Container {
+            Padding(padding: 8.0) {
+              Row {
+                Text(todo)
+                Button("X", onPressed: onDelete)
+              }
+            }
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: todos
+DEBUG PARSER: Found state field: input
+DEBUG PARSER: Widget TodoApp parsed. StateFields: 2
+DEBUG PARSER: Widget TodoItem parsed. StateFields: 0
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 38
+Compiling Widget TodoApp, State: [todos, input]
+BuildCompiler created. _stateFields: [todos, input]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Expanded, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: TextField, isState: false
+DEBUG COMPILER: Added local "val" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: IfStmt at line 19
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 19
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 23
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 24
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 33
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 33
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 26
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 27
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "index" at slot 3 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 28
+DEBUG COMPILER: Compiling variable: TodoItem, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 29
+DEBUG COMPILER: Compiling variable: removeAt, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: index, isState: false
+DEBUG COMPILER: Resolving upvalue "index" -> enclosing local 3. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 3 as captured.
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 31
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 3 (captured: true) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 51
+Compiling Widget TodoItem, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Added local "todo" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "onDelete" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 42
+DEBUG COMPILER: Compiling variable: Padding, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 43
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 44
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Resolving upvalue "todo" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 45
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: onDelete, isState: false
+DEBUG COMPILER: Resolving upvalue "onDelete" -> enclosing local 2. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 2 as captured.
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [], input: }
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+DEBUG E2E: Found 2 Text widgets
+  Text: "New Todo"
+  Text: "Add"
+DEBUG CLOSURE: Executing onChanged closure, args=1
+DEBUG REBUILD: _handleStateChange triggered for "input"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [], input: Buy Milk}
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
+DEBUG REBUILD: _handleStateChange triggered for "_closure_complete"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [], input: Buy Milk}
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG RUNTIME: NativeFunction push returned null
+DEBUG REBUILD: _handleStateChange triggered for "input"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: }
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: }
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])]), FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])])])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+DEBUG REBUILD: _handleStateChange triggered for "_closure_complete"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: }
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: }
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])]), FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])])])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+DEBUG CLOSURE: Executing onChanged closure, args=1
+DEBUG REBUILD: _handleStateChange triggered for "input"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: Walk Dog}
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: Walk Dog}
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])]), FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])])])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
+DEBUG REBUILD: _handleStateChange triggered for "_closure_complete"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: Walk Dog}
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: Walk Dog}
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])]), FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])])])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG RUNTIME: NativeFunction push returned null
+DEBUG REBUILD: _handleStateChange triggered for "input"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk, Walk Dog], input: }
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk, Walk Dog], input: }
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])]), FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])])])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+DEBUG REBUILD: _handleStateChange triggered for "_closure_complete"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk, Walk Dog], input: }
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk, Walk Dog], input: }
+DEBUG BUILD: FluxTree result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])]), FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Text}, children: []), FluxWidgetNode(Button, args: {onPressed: X, 0: X}, children: [])])])])])])
+DEBUG BUILD: FluxTree children count: 2
+DEBUG BUILD: FlutterWidget type: Column
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: at least one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Buy Milk": []>
+   Which: means none were found but some were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart:121:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart line 121
+The test description was:
+  E2E: Todo App (Input, State Update, List Rendering)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: E2E: Todo App (Input, State Update, List Rendering) [E]
+  Test failed. See exception logs above.
+  The test description was: E2E: Todo App (Input, State Update, List Rendering)
+  
+00:00 +0 -1: Some tests failed.

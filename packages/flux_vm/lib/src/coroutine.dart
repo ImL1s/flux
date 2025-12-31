@@ -3,6 +3,9 @@
 /// Implements coroutines for async/await functionality.
 /// Based on Lua coroutine pattern with Dart event loop integration.
 
+import 'package:flux_compiler/flux_compiler.dart';
+import 'closure.dart';
+
 /// Coroutine execution state
 enum CoroutineState {
   /// Coroutine created but not yet started
@@ -17,6 +20,20 @@ enum CoroutineState {
   error,
 }
 
+/// Represents a single active function call
+class CallFrame {
+  final ObjClosure closure;
+  int ip;              // Instruction pointer within the function's chunk
+  final int slotBase;  // Start of this frame's local variables on the stack
+  
+  CallFrame(this.closure, {this.ip = 0, required this.slotBase});
+  
+  Chunk get chunk => closure.function.chunk;
+
+  @override
+  String toString() => 'CallFrame(fn: ${closure.function.name}, ip: $ip, base: $slotBase)';
+}
+
 /// Represents a suspendable/resumable execution context.
 /// 
 /// When an `await` expression is encountered and the awaited Future is pending,
@@ -29,15 +46,11 @@ class FluxCoroutine {
   /// Current state of the coroutine
   CoroutineState state = CoroutineState.created;
   
-  /// Saved call frames (execution stack)
-  /// Each frame contains: closure, instruction pointer, slot base
-  final List<CoroutineFrame> savedFrames = [];
+  /// Active call frames (execution stack)
+  final List<CallFrame> frames = [];
   
-  /// Saved value stack
-  final List<Object?> savedStack = [];
-  
-  /// Widget state snapshot (for Flux widgets)
-  final Map<String, Object?> savedWidgetState = {};
+  /// Active value stack
+  final List<Object?> stack = [];
   
   /// Result from awaited Future (set when Future completes)
   Object? awaitResult;
@@ -65,32 +78,7 @@ class FluxCoroutine {
   }
   
   @override
-  String toString() => 'FluxCoroutine($id, state: $state, frames: ${savedFrames.length})';
-}
-
-/// Saved state of a single call frame
-class CoroutineFrame {
-  /// Index into the closure list (for reconstruction)
-  final int closureConstantIndex;
-  
-  /// Instruction pointer within the frame's chunk
-  final int instructionPointer;
-  
-  /// Base slot index on the stack
-  final int slotBase;
-  
-  /// The actual closure (for simple cases)
-  final Object? closureRef;
-  
-  CoroutineFrame({
-    required this.closureConstantIndex,
-    required this.instructionPointer,
-    required this.slotBase,
-    this.closureRef,
-  });
-  
-  @override
-  String toString() => 'CoroutineFrame(ip: $instructionPointer, slot: $slotBase)';
+  String toString() => 'FluxCoroutine($id, state: $state, frames: ${frames.length}, stack: ${stack.length})';
 }
 
 /// Callback type for coroutine resume notifications

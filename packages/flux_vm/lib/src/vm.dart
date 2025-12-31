@@ -342,6 +342,30 @@ class VM {
 
 
 
+  /// Execute a closure synchronously on the current stack/coroutine.
+  /// Used for callbacks that must happen within the same execution context (e.g. nested widget builds).
+  InterpretResult invokeClosure(ObjClosure closure, [List<Object?> args = const []]) {
+     if (_currentCoroutine == null) {
+       // Fallback to executeClosure if no active coroutine
+       return executeClosure(closure, args);
+     }
+
+     _stack.add(closure);
+     for (final arg in args) {
+       _stack.add(arg);
+     }
+     
+     if (!_callValue(closure, args.length)) {
+       return InterpretResult.runtimeError;
+     }
+
+     // Run until we return to the current frame depth (minus the one we just pushed)
+     // _callFunction added a frame, so we want to return when that frame is popped.
+     // current frames.length is N (including new frame).
+     // We want to run until depth is N-1.
+     return _run(_frames.length - 1);
+  }
+
   /// Capture an upvalue for the given stack slot
   ObjUpvalue _captureUpvalue(int localIndex) {
     ObjUpvalue? prevUpvalue;
@@ -375,7 +399,14 @@ class VM {
   void _closeUpvalues(int last) {
     while (_openUpvalues != null && _openUpvalues!.location >= last) {
       final upvalue = _openUpvalues!;
-      upvalue.close(_stack);
+      // print('DEBUG VM: Closing upvalue at ${upvalue.location} (stack len: ${_stack.length})');
+      if (upvalue.location >= _stack.length) {
+          // Dangling upvalue (stack popped?) - close with null to avoid crash
+          upvalue.closed = null;
+          upvalue.location = -1;
+      } else {
+          upvalue.close(_stack);
+      }
       _openUpvalues = upvalue.next;
     }
   }
@@ -443,6 +474,8 @@ class VM {
 
     if (callee is CompiledWidget) {
       // Widget instantiation - for now just put the widget on stack
+      // Pop arguments and the callee itself, then push the widget instance (currently just the declaration)
+      _stack.length -= argCount + 1;
       _stack.add(callee);
       return true;
     }
@@ -504,10 +537,18 @@ class VM {
       // print("DEBUG VM: IP: ${frame.ip}, Stack: ${(_stack.length > 5 ? _stack.sublist(_stack.length - 5) : _stack)}");
       // print("DEBUG VM: Instr: ${OpCode.values[frame.chunk.code[frame.ip]].name}");
 
-        final instruction = frame.chunk.code[frame.ip];
-        final op = OpCode.values[instruction];
+        int instruction;
+        OpCode op;
+        try {
+          instruction = frame.chunk.code[frame.ip];
+          op = OpCode.values[instruction];
+        } catch (e) {
+             print('DEBUG VM CRASH: IP ${frame.ip} out of code bounds or invalid OpCode. Code len: ${frame.chunk.code.length}');
+             rethrow;
+        }
         
         frame.ip++;
+
 
         int readByte() {
            final b = frame.chunk.code[frame.ip];
@@ -739,10 +780,13 @@ class VM {
             break;
 
           case OpCode.return_:
-            final result = _stack.removeLast();
+            final result = _stack.last; // Peek result first
 
             // Close upvalues for remaining locals in this frame
             _closeUpvalues(frame.slotBase);
+            
+            // Now remove result
+            _stack.removeLast();
 
             // Pop frame
             final returningFrame = _frames.removeLast();
@@ -852,7 +896,8 @@ class VM {
               
               if (isLocal) {
                 // Capture a local variable from current frame
-                upvalues.add(_captureUpvalue(frame.slotBase + index));
+                final loc = frame.slotBase + index;
+                upvalues.add(_captureUpvalue(loc));
               } else {
                 // Capture an upvalue from enclosing closure
                 upvalues.add(frame.closure.upvalues[index]);
@@ -1155,7 +1200,19 @@ class VM {
             throw "Unknown opcode $op";
         }
       }
-    } catch (e) {
+    } catch (e, stack) {
+      print('DEBUG VM RUNTIME EXCEPTION: $e');
+      print('Stack Trace: $stack');
+      if (_frames.isNotEmpty) {
+        final frame = _frames.last;
+        print('IP: ${frame.ip}');
+        if (frame.ip > 0 && frame.ip <= frame.chunk.code.length) {
+             try {
+                 final opCode = frame.chunk.code[frame.ip - 1]; // -1 as ip was incremented
+                 print('Last OpCode: ${OpCode.values[opCode]}');
+             } catch (_) {}
+        }
+      }
       _runtimeError(e.toString());
       return InterpretResult.runtimeError;
     }

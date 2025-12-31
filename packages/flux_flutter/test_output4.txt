@@ -132,19 +132,42 @@ DEBUG COMPILER: Compiling variable: onDelete, isState: false
 DEBUG COMPILER: Resolving upvalue "onDelete" -> enclosing local 2. Prev captured: false
 DEBUG COMPILER: Marked enclosing local 2 as captured.
 DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [], input: }
 DEBUG E2E: Found 2 Text widgets
   Text: "New Todo"
   Text: "Add"
 DEBUG CLOSURE: Executing onChanged closure, args=1
+DEBUG REBUILD: _handleStateChange triggered for "input"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [], input: Buy Milk}
 DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
+DEBUG REBUILD: _handleStateChange triggered for "_closure_complete"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [], input: Buy Milk}
 DEBUG CLOSURE: Executing onPressed closure, args=0
 DEBUG RUNTIME: NativeFunction push returned null
+DEBUG REBUILD: _handleStateChange triggered for "input"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: }
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: }
 DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+DEBUG REBUILD: _handleStateChange triggered for "_closure_complete"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: }
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: }
 DEBUG CLOSURE: Executing onChanged closure, args=1
+DEBUG REBUILD: _handleStateChange triggered for "input"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: Walk Dog}
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: Walk Dog}
 DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
+DEBUG REBUILD: _handleStateChange triggered for "_closure_complete"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: Walk Dog}
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk], input: Walk Dog}
 DEBUG CLOSURE: Executing onPressed closure, args=0
 DEBUG RUNTIME: NativeFunction push returned null
+DEBUG REBUILD: _handleStateChange triggered for "input"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk, Walk Dog], input: }
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk, Walk Dog], input: }
 DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+DEBUG REBUILD: _handleStateChange triggered for "_closure_complete"
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk, Walk Dog], input: }
+DEBUG BUILD: Starting executeBuild. widgetState: {todos: [Buy Milk, Walk Dog], input: }
 ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following TestFailure was thrown running a test:
 Expected: at least one matching candidate
@@ -166,8 +189,8 @@ This was caught by the test expectation on the following line:
 The test description was:
   E2E: Todo App (Input, State Update, List Rendering)
 ════════════════════════════════════════════════════════════════════════════════════════════════════
-00:01 +0 -1: E2E: Todo App (Input, State Update, List Rendering) [E]
+00:00 +0 -1: E2E: Todo App (Input, State Update, List Rendering) [E]
   Test failed. See exception logs above.
   The test description was: E2E: Todo App (Input, State Update, List Rendering)
   
-00:01 +0 -1: Some tests failed.
+00:00 +0 -1: Some tests failed.

@@ -166,8 +166,8 @@ This was caught by the test expectation on the following line:
 The test description was:
   E2E: Todo App (Input, State Update, List Rendering)
 ════════════════════════════════════════════════════════════════════════════════════════════════════
-00:01 +0 -1: E2E: Todo App (Input, State Update, List Rendering) [E]
+00:00 +0 -1: E2E: Todo App (Input, State Update, List Rendering) [E]
   Test failed. See exception logs above.
   The test description was: E2E: Todo App (Input, State Update, List Rendering)
   
-00:01 +0 -1: Some tests failed.
+00:00 +0 -1: Some tests failed.

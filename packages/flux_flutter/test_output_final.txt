@@ -145,29 +145,4 @@ DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
 DEBUG CLOSURE: Executing onPressed closure, args=0
 DEBUG RUNTIME: NativeFunction push returned null
 DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
-══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
-The following TestFailure was thrown running a test:
-Expected: at least one matching candidate
-  Actual: _TextWidgetFinder:<Found 0 widgets with text "Buy Milk": []>
-   Which: means none were found but some were expected
-
-When the exception was thrown, this was the stack:
-#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart:121:5)
-<asynchronous suspension>
-#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
-<asynchronous suspension>
-#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
-<asynchronous suspension>
-<asynchronous suspension>
-(elided one frame from package:stack_trace)
-
-This was caught by the test expectation on the following line:
-  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart line 121
-The test description was:
-  E2E: Todo App (Input, State Update, List Rendering)
-════════════════════════════════════════════════════════════════════════════════════════════════════
-00:01 +0 -1: E2E: Todo App (Input, State Update, List Rendering) [E]
-  Test failed. See exception logs above.
-  The test description was: E2E: Todo App (Input, State Update, List Rendering)
-  
-00:01 +0 -1: Some tests failed.
+00:00 +1: All tests passed!

@@ -109,7 +109,9 @@ class _FluxWidgetState extends State<FluxWidget> {
       // Execute the build method and convert to Flutter widget
       final fluxTree = _runtime.executeBuild(widgetDef);
 
+
       final flutterWidget = _runtime._convertToFlutter(fluxTree);
+
 
       
       setState(() {
@@ -413,6 +415,9 @@ class FluxRuntime {
             debugPrint('DEBUG CLOSURE: Executing $key closure, args=${callArgs.length}');
             final result = _vm.executeClosure(value, callArgs);
             debugPrint('DEBUG CLOSURE: $key closure returned $result');
+            // Trigger state change notification to rebuild widget
+            // This ensures list mutations (push, pop, etc.) cause UI updates
+            onStateChange?.call('_closure_complete', null);
           };
         } else {
           processedArgs[key] = value;
@@ -464,7 +469,8 @@ class FluxRuntime {
         if (builder is ObjClosure) {
             // Execute closure to generate children
             _childrenStack.add([]); // Push new collector
-            _vm.executeClosure(builder);
+            // Use invokeClosure to execute on current stack (preserving upvalues)
+            _vm.invokeClosure(builder);
             children.addAll(_childrenStack.removeLast());
         }
       }

@@ -751,7 +751,9 @@ class Compiler {
     
     final local = _enclosing!._resolveLocal(name);
     if (local != -1) {
+      print('DEBUG COMPILER: Resolving upvalue "$name" -> enclosing local $local. Prev captured: ${_enclosing!._locals[local].isCaptured}');
       _enclosing!._locals[local].isCaptured = true;
+      print('DEBUG COMPILER: Marked enclosing local $local as captured.');
       return _addUpvalue(local, true);
     }
     
@@ -782,8 +784,12 @@ class Compiler {
 
   void _endScope(int line) {
     _scopeDepth--;
+    // print('DEBUG COMPILER: Ending scope depth $_scopeDepth');
     while (_locals.isNotEmpty && _locals.last.depth > _scopeDepth) {
+      // Slot computation
+      final slot = _locals.length - 1;
       final local = _locals.removeLast();
+      print('DEBUG COMPILER: Pop/Close local "$local.name" at slot $slot (captured: ${local.isCaptured}) [Depth: ${local.depth}]');
 
       // If captured, close it using closeUpvalue. Otherwise just pop.
       // Note: closeUpvalue also pops the value from stack.
@@ -796,7 +802,9 @@ class Compiler {
   }
 
   void _addLocal(String name) {
+    final slot = _locals.length;
     _locals.add(Local(name, _scopeDepth));
+    print('DEBUG COMPILER: Added local "$name" at slot $slot [Depth: $_scopeDepth]');
   }
 
   int _resolveLocal(String name) {

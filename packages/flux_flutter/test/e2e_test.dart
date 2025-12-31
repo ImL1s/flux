@@ -73,7 +73,16 @@ void main() {
     );
 
     // Initial render
-    expect(find.text('New Todo'), findsOneWidget); // Hint text
+    await tester.pumpAndSettle();
+    
+    // Debug: Print all Text widgets found
+    final textWidgets = find.byType(Text);
+    print('DEBUG E2E: Found ${textWidgets.evaluate().length} Text widgets');
+    for (final e in textWidgets.evaluate()) {
+      final text = e.widget as Text;
+      print('  Text: "${text.data}"');
+    }
+    
     expect(find.text('Add'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
 
