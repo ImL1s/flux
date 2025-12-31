@@ -40,6 +40,8 @@ class FluxBindings {
   static void initDefaults() {
     _initWidgets();
     _initFunctions();
+    _initDateTimePickers();
+    _initFormWidgets();
   }
   
   static void _initWidgets() {
@@ -1058,6 +1060,272 @@ class FluxBindings {
         padding: padding,
       );
     });
+
+    // ========== Tab Widgets ==========
+
+    // DefaultTabController - Wrapper for TabBar/TabBarView
+    register('DefaultTabController', (args, children) {
+      final length = FluxCast.toInt(args['length']) ?? 2;
+      final initialIndex = FluxCast.toInt(args['initialIndex']) ?? 0;
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      
+      return DefaultTabController(
+        length: length,
+        initialIndex: initialIndex,
+        child: child ?? const SizedBox.shrink(),
+      );
+    });
+
+    // TabBar widget
+    register('TabBar', (args, children) {
+      final tabsRaw = args['tabs'] as List?;
+      final isScrollable = FluxCast.toBool(args['isScrollable']);
+      final indicatorColor = FluxCast.toColor(args['indicatorColor']);
+      final labelColor = FluxCast.toColor(args['labelColor']);
+      final unselectedLabelColor = FluxCast.toColor(args['unselectedLabelColor']);
+      final onTap = args['onTap'];
+      
+      List<Widget> tabs = [];
+      if (tabsRaw != null) {
+        for (final tab in tabsRaw) {
+          if (tab is Widget) {
+            tabs.add(tab);
+          } else if (tab is String) {
+            tabs.add(Tab(text: tab));
+          } else if (tab is Map) {
+            final text = FluxCast.toStringNullable(tab['text']);
+            final icon = tab['icon'] as Widget?;
+            tabs.add(Tab(text: text, icon: icon));
+          }
+        }
+      } else {
+        // Use children as tabs
+        tabs = children.whereType<Widget>().toList();
+      }
+      
+      return TabBar(
+        tabs: tabs,
+        isScrollable: isScrollable,
+        indicatorColor: indicatorColor,
+        labelColor: labelColor,
+        unselectedLabelColor: unselectedLabelColor,
+        onTap: onTap is Function ? (index) => _invokeCallback(onTap, [index]) : null,
+      );
+    });
+
+    // Tab widget helper
+    register('Tab', (args, children) {
+      final text = FluxCast.toStringNullable(args['text'] ?? args['0']);
+      final icon = args['icon'] as Widget?;
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      
+      return Tab(
+        text: text,
+        icon: icon,
+        child: child,
+      );
+    });
+
+    // TabBarView widget
+    register('TabBarView', (args, children) {
+      final childrenRaw = args['children'] as List?;
+      
+      List<Widget> tabChildren = [];
+      if (childrenRaw != null) {
+        tabChildren = childrenRaw.whereType<Widget>().toList();
+      } else {
+        tabChildren = children.whereType<Widget>().toList();
+      }
+      
+      return TabBarView(
+        children: tabChildren,
+      );
+    });
+
+    // ========== Hero Animation ==========
+
+    // Hero widget for shared element transitions
+    register('Hero', (args, children) {
+      final tag = args['tag']?.toString() ?? 'hero_${DateTime.now().millisecondsSinceEpoch}';
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      
+      return Hero(
+        tag: tag,
+        child: child ?? const SizedBox.shrink(),
+      );
+    });
+
+    // ========== Date/Time Pickers (as functions) ==========
+    // Note: These are registered as functions since they return Futures
+  }
+
+  // ========== Date/Time Picker Functions ==========
+  
+  static void _initDateTimePickers() {
+    // showDatePicker function
+    registerFunction('showDatePicker', (args) async {
+      final context = _currentContext;
+      if (context == null) return null;
+      
+      final initialDate = _parseDate(args.isNotEmpty ? args[0] : null) ?? DateTime.now();
+      final firstDate = _parseDate(args.length > 1 ? args[1] : null) ?? DateTime(2000);
+      final lastDate = _parseDate(args.length > 2 ? args[2] : null) ?? DateTime(2100);
+      
+      final result = await showDatePicker(
+        context: context,
+        initialDate: initialDate,
+        firstDate: firstDate,
+        lastDate: lastDate,
+      );
+      
+      return result?.toIso8601String();
+    });
+
+    // showTimePicker function
+    registerFunction('showTimePicker', (args) async {
+      final context = _currentContext;
+      if (context == null) return null;
+      
+      final hour = args.isNotEmpty ? FluxCast.toInt(args[0]) ?? 12 : 12;
+      final minute = args.length > 1 ? FluxCast.toInt(args[1]) ?? 0 : 0;
+      
+      final result = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: hour, minute: minute),
+      );
+      
+      if (result != null) {
+        return {'hour': result.hour, 'minute': result.minute};
+      }
+      return null;
+    });
+  }
+
+  static DateTime? _parseDate(dynamic value) {
+    if (value == null) return null;
+    if (value is DateTime) return value;
+    if (value is String) return DateTime.tryParse(value);
+    return null;
+  }
+
+  // Current build context for dialogs/pickers
+  static BuildContext? _currentContext;
+  
+  /// Set the current build context (called by FluxWidget before building)
+  static void setContext(BuildContext context) {
+    _currentContext = context;
+  }
+
+  // ========== Form Widgets ==========
+  
+  static void _initFormWidgets() {
+    // Form widget
+    register('Form', (args, children) {
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final autovalidateMode = args['autovalidateMode']?.toString();
+      
+      AutovalidateMode mode = AutovalidateMode.disabled;
+      if (autovalidateMode == 'always') {
+        mode = AutovalidateMode.always;
+      } else if (autovalidateMode == 'onUserInteraction') {
+        mode = AutovalidateMode.onUserInteraction;
+      }
+      
+      return Form(
+        autovalidateMode: mode,
+        child: child ?? const SizedBox.shrink(),
+      );
+    });
+
+    // TextFormField widget
+    register('TextFormField', (args, children) {
+      final hint = FluxCast.toStringNullable(args['hint']);
+      final label = FluxCast.toStringNullable(args['label']);
+      final initialValue = FluxCast.toStringNullable(args['initialValue']);
+      final obscureText = FluxCast.toBool(args['obscureText']);
+      final keyboardType = _parseKeyboardType(FluxCast.toStringNullable(args['keyboardType']));
+      final onChanged = args['onChanged'];
+      final onSaved = args['onSaved'];
+      final validator = args['validator'];
+      final maxLines = FluxCast.toInt(args['maxLines']) ?? 1;
+      final enabled = args['enabled'] != false;
+      
+      return TextFormField(
+        initialValue: initialValue,
+        obscureText: obscureText,
+        keyboardType: keyboardType,
+        maxLines: maxLines,
+        enabled: enabled,
+        decoration: InputDecoration(
+          hintText: hint,
+          labelText: label,
+        ),
+        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        onSaved: onSaved is Function ? (v) => _invokeCallback(onSaved, [v]) : null,
+        validator: validator is Function ? (v) {
+          final result = validator([v]);
+          if (result is String) return result;
+          return null;
+        } : null,
+      );
+    });
+
+    // DropdownButtonFormField widget
+    register('DropdownButtonFormField', (args, children) {
+      final value = FluxCast.toStringNullable(args['value']);
+      final itemsRaw = args['items'] as List?;
+      final onChanged = args['onChanged'];
+      final onSaved = args['onSaved'];
+      final hint = args['hint'];
+      final label = FluxCast.toStringNullable(args['label']);
+      final validator = args['validator'];
+      
+      List<DropdownMenuItem<String>> items = [];
+      if (itemsRaw != null) {
+        for (final item in itemsRaw) {
+          final itemStr = item.toString();
+          items.add(DropdownMenuItem(
+            value: itemStr,
+            child: Text(itemStr),
+          ));
+        }
+      }
+      
+      Widget? hintWidget;
+      if (hint is Widget) {
+        hintWidget = hint;
+      } else if (hint != null) {
+        hintWidget = Text(hint.toString());
+      }
+      
+      return DropdownButtonFormField<String>(
+        value: items.any((i) => i.value == value) ? value : null,
+        items: items,
+        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        onSaved: onSaved is Function ? (v) => _invokeCallback(onSaved, [v]) : null,
+        hint: hintWidget,
+        decoration: InputDecoration(
+          labelText: label,
+        ),
+        validator: validator is Function ? (v) {
+          final result = validator([v]);
+          if (result is String) return result;
+          return null;
+        } : null,
+      );
+    });
+  }
+
+  static TextInputType? _parseKeyboardType(String? type) {
+    if (type == null) return null;
+    switch (type.toLowerCase()) {
+      case 'email': return TextInputType.emailAddress;
+      case 'number': return TextInputType.number;
+      case 'phone': return TextInputType.phone;
+      case 'url': return TextInputType.url;
+      case 'multiline': return TextInputType.multiline;
+      default: return TextInputType.text;
+    }
   }
 
   
