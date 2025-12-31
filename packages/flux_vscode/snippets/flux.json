@@ -1,0 +1,204 @@
+{
+    "Widget Definition": {
+        "prefix": "widget",
+        "body": [
+            "widget ${1:WidgetName} {",
+            "\tstate ${2:count} = ${3:0};",
+            "\t",
+            "\tbuild {",
+            "\t\t${4:Column} {",
+            "\t\t\t$0",
+            "\t\t}",
+            "\t}",
+            "}"
+        ],
+        "description": "Create a new Flux widget with state"
+    },
+    "Stateless Widget": {
+        "prefix": "swidget",
+        "body": [
+            "widget ${1:WidgetName} {",
+            "\tprops ${2:title};",
+            "\t",
+            "\tbuild {",
+            "\t\t${3:Column} {",
+            "\t\t\t$0",
+            "\t\t}",
+            "\t}",
+            "}"
+        ],
+        "description": "Create a stateless Flux widget with props"
+    },
+    "Function": {
+        "prefix": "fn",
+        "body": [
+            "fn ${1:functionName}(${2:params}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Create a function"
+    },
+    "Async Function": {
+        "prefix": "afn",
+        "body": [
+            "async fn ${1:functionName}(${2:params}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Create an async function"
+    },
+    "If Statement": {
+        "prefix": "if",
+        "body": [
+            "if (${1:condition}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "If statement"
+    },
+    "If Else Statement": {
+        "prefix": "ife",
+        "body": [
+            "if (${1:condition}) {",
+            "\t$2",
+            "} else {",
+            "\t$0",
+            "}"
+        ],
+        "description": "If-else statement"
+    },
+    "While Loop": {
+        "prefix": "while",
+        "body": [
+            "while (${1:condition}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "While loop"
+    },
+    "For Loop": {
+        "prefix": "for",
+        "body": [
+            "for (var ${1:i} = 0; ${1:i} < ${2:length}; ${1:i} = ${1:i} + 1) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "For loop"
+    },
+    "Try Catch": {
+        "prefix": "try",
+        "body": [
+            "try {",
+            "\t$1",
+            "} catch (${2:e}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Try-catch block"
+    },
+    "Try Catch Finally": {
+        "prefix": "tryf",
+        "body": [
+            "try {",
+            "\t$1",
+            "} catch (${2:e}) {",
+            "\t$3",
+            "} finally {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Try-catch-finally block"
+    },
+    "Anonymous Function": {
+        "prefix": "lambda",
+        "body": [
+            "fn(${1:params}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Anonymous function (lambda)"
+    },
+    "Button with onPressed": {
+        "prefix": "btn",
+        "body": [
+            "Button(\"${1:Label}\", onPressed: fn() {",
+            "\t$0",
+            "})"
+        ],
+        "description": "Button with onPressed handler"
+    },
+    "TextField with onChanged": {
+        "prefix": "tf",
+        "body": [
+            "TextField(hint: \"${1:Enter text}\", onChanged: fn(val) {",
+            "\t${2:input} = val;",
+            "})"
+        ],
+        "description": "TextField with onChanged handler"
+    },
+    "Scaffold with AppBar": {
+        "prefix": "scaffold",
+        "body": [
+            "Scaffold(",
+            "\tappBar: AppBar(title: \"${1:Title}\"),",
+            "\tbody: ${2:Column} {",
+            "\t\t$0",
+            "\t}",
+            ")"
+        ],
+        "description": "Scaffold with AppBar"
+    },
+    "HTTP GET Request": {
+        "prefix": "httpget",
+        "body": [
+            "var ${1:response} = await http_get(\"${2:url}\");",
+            "$0"
+        ],
+        "description": "HTTP GET request with await"
+    },
+    "State Variable": {
+        "prefix": "state",
+        "body": [
+            "state ${1:name} = ${2:value};"
+        ],
+        "description": "State variable declaration"
+    },
+    "Props Variable": {
+        "prefix": "props",
+        "body": [
+            "props ${1:name};"
+        ],
+        "description": "Props declaration"
+    },
+    "ListTile": {
+        "prefix": "listtile",
+        "body": [
+            "ListTile(",
+            "\ttitle: \"${1:Title}\",",
+            "\tsubtitle: \"${2:Subtitle}\",",
+            "\tonTap: fn() {",
+            "\t\t$0",
+            "\t}",
+            ")"
+        ],
+        "description": "ListTile with onTap handler"
+    },
+    "Column": {
+        "prefix": "col",
+        "body": [
+            "Column {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Column widget"
+    },
+    "Row": {
+        "prefix": "row",
+        "body": [
+            "Row {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Row widget"
+    }
+}

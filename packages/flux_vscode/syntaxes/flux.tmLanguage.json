@@ -9,6 +9,12 @@
             "include": "#keywords"
         },
         {
+            "include": "#widget-declaration"
+        },
+        {
+            "include": "#function-declaration"
+        },
+        {
             "include": "#constants"
         },
         {
@@ -19,6 +25,9 @@
         },
         {
             "include": "#widgets"
+        },
+        {
+            "include": "#operators"
         }
     ],
     "repository": {
@@ -27,18 +36,43 @@
                 {
                     "name": "comment.line.double-slash.flux",
                     "match": "//.*$"
+                },
+                {
+                    "name": "comment.block.flux",
+                    "begin": "/\\*",
+                    "end": "\\*/"
                 }
             ]
         },
         "keywords": {
             "patterns": [
                 {
-                    "name": "keyword.control.flux",
-                    "match": "\\b(if|else|while|for|return|break|continue)\\b"
+                    "name": "keyword.control.conditional.flux",
+                    "match": "\\b(if|else)\\b"
+                },
+                {
+                    "name": "keyword.control.loop.flux",
+                    "match": "\\b(while|for)\\b"
+                },
+                {
+                    "name": "keyword.control.flow.flux",
+                    "match": "\\b(return|break|continue)\\b"
+                },
+                {
+                    "name": "keyword.control.exception.flux",
+                    "match": "\\b(try|catch|finally|throw)\\b"
+                },
+                {
+                    "name": "keyword.control.async.flux",
+                    "match": "\\b(async|await)\\b"
                 },
                 {
                     "name": "storage.type.flux",
-                    "match": "\\b(var|widget|fun)\\b"
+                    "match": "\\b(var|widget|fn|class)\\b"
+                },
+                {
+                    "name": "storage.modifier.flux",
+                    "match": "\\b(state|props|build)\\b"
                 },
                 {
                     "name": "keyword.operator.new.flux",
@@ -46,10 +80,54 @@
                 }
             ]
         },
+        "widget-declaration": {
+            "patterns": [
+                {
+                    "match": "\\b(widget)\\s+([A-Z][a-zA-Z0-9]*)\\b",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.widget.flux"
+                        },
+                        "2": {
+                            "name": "entity.name.type.widget.flux"
+                        }
+                    }
+                }
+            ]
+        },
+        "function-declaration": {
+            "patterns": [
+                {
+                    "match": "\\b(fn)\\s+([a-z][a-zA-Z0-9_]*)\\s*\\(",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.function.flux"
+                        },
+                        "2": {
+                            "name": "entity.name.function.flux"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(async)\\s+(fn)\\s+([a-z][a-zA-Z0-9_]*)\\s*\\(",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.async.flux"
+                        },
+                        "2": {
+                            "name": "storage.type.function.flux"
+                        },
+                        "3": {
+                            "name": "entity.name.function.flux"
+                        }
+                    }
+                }
+            ]
+        },
         "widgets": {
             "patterns": [
                 {
-                    "name": "entity.name.class.flux",
+                    "name": "entity.name.class.widget.flux",
                     "match": "\\b[A-Z][a-zA-Z0-9]*\\b"
                 }
             ]
@@ -61,19 +139,42 @@
                     "match": "\\b(true|false|null)\\b"
                 },
                 {
-                    "name": "constant.numeric.flux",
-                    "match": "\\b\\d+(\\.\\d+)?\\b"
+                    "name": "constant.numeric.hex.flux",
+                    "match": "\\b0x[0-9A-Fa-f]+\\b"
+                },
+                {
+                    "name": "constant.numeric.float.flux",
+                    "match": "\\b\\d+\\.\\d+\\b"
+                },
+                {
+                    "name": "constant.numeric.integer.flux",
+                    "match": "\\b\\d+\\b"
                 }
             ]
         },
         "strings": {
-            "name": "string.quoted.double.flux",
-            "begin": "\"",
-            "end": "\"",
             "patterns": [
                 {
-                    "name": "constant.character.escape.flux",
-                    "match": "\\\\."
+                    "name": "string.quoted.double.flux",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.flux",
+                            "match": "\\\\."
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.single.flux",
+                    "begin": "'",
+                    "end": "'",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.flux",
+                            "match": "\\\\."
+                        }
+                    ]
                 }
             ]
         },
@@ -82,6 +183,26 @@
                 {
                     "name": "entity.name.function.flux",
                     "match": "\\b[a-z][a-zA-Z0-9_]*(?=\\()"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.comparison.flux",
+                    "match": "(==|!=|<=|>=|<|>)"
+                },
+                {
+                    "name": "keyword.operator.logical.flux",
+                    "match": "(&&|\\|\\||!)"
+                },
+                {
+                    "name": "keyword.operator.arithmetic.flux",
+                    "match": "(\\+|-|\\*|/|%)"
+                },
+                {
+                    "name": "keyword.operator.assignment.flux",
+                    "match": "(=)"
                 }
             ]
         }

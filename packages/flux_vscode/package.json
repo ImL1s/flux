@@ -1,14 +1,28 @@
 {
     "name": "flux-vscode",
     "displayName": "Flux",
-    "description": "Syntax highlighting for Flux language",
-    "version": "0.0.1",
+    "description": "Syntax highlighting, snippets, and language support for Flux - A dynamic scripting language for Flutter Server-Driven UI",
+    "version": "0.1.0",
+    "publisher": "ImL1s",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ImL1s/flux"
+    },
     "engines": {
         "vscode": "^1.75.0"
     },
     "categories": [
-        "Programming Languages"
+        "Programming Languages",
+        "Snippets"
     ],
+    "keywords": [
+        "flux",
+        "flutter",
+        "server-driven-ui",
+        "scripting",
+        "widget"
+    ],
+    "icon": "images/flux-icon.png",
     "contributes": {
         "languages": [
             {
@@ -28,6 +42,12 @@
                 "language": "flux",
                 "scopeName": "source.flux",
                 "path": "./syntaxes/flux.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "flux",
+                "path": "./snippets/flux.json"
             }
         ]
     }
