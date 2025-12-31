@@ -28,7 +28,16 @@ class CompiledFunction {
   final String? moduleName;
   final List<String> paramNames;
   
-  CompiledFunction(this.name, this.chunk, {this.arity = 0, this.isAsync = false, this.moduleName, this.paramNames = const []});
+  /// Debug info: names of local variables by slot index (index 0 is 'this' closure)
+  List<String> localNames;
+  
+  CompiledFunction(this.name, this.chunk, {
+    this.arity = 0, 
+    this.isAsync = false, 
+    this.moduleName, 
+    this.paramNames = const [],
+    List<String>? localNames,
+  }) : localNames = localNames ?? [];
   
   @override
   String toString() => "<fn $name>";
@@ -247,6 +256,9 @@ class Compiler {
       funcCompiler.compile(s);
     }
     
+    // Capture local variable names for debugger inspection
+    funcCompiler._function.localNames = funcCompiler._locals.map((l) => l.name).toList();
+    
     // Ensure function returns nil if no explicit return
     funcCompiler.chunk.writeOp(OpCode.nil, stmt.line);
     funcCompiler.chunk.writeOp(OpCode.return_, stmt.line);
@@ -311,6 +323,9 @@ class Compiler {
       // If we implement expression lambdas later, we need 'return' opcode here.
       // For now, Flux doesn't seem to produce Expression-bodied lambdas in parser.
     }
+    
+    // Capture local variable names for debugger inspection
+    funcCompiler._function.localNames = funcCompiler._locals.map((l) => l.name).toList();
     
     // Ensure return logic
     funcCompiler.chunk.writeOp(OpCode.nil, expr.line);

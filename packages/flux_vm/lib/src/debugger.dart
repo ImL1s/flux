@@ -296,9 +296,24 @@ class FluxDebugger {
   
   /// Get the current call stack
   List<StackFrame> getCallStack() {
-    // In a real implementation, we would walk the VM's call frames
-    // For now, return a placeholder
-    return [];
+    final frames = <StackFrame>[];
+    final vmFrames = vm.frames;
+    
+    for (int i = vmFrames.length - 1; i >= 0; i--) {
+      final frame = vmFrames[i];
+      final function = frame.closure.function;
+      final line = frame.chunk.getLine(frame.ip);
+      
+      frames.add(StackFrame(
+        index: vmFrames.length - 1 - i,
+        functionName: function.name.isEmpty ? '<script>' : function.name,
+        source: function.moduleName ?? '<unknown>',
+        line: line,
+        locals: _getLocalsForFrame(i),
+      ));
+    }
+    
+    return frames;
   }
   
   /// Evaluate an expression in the current context
@@ -310,8 +325,49 @@ class FluxDebugger {
   
   /// Get local variables in the current frame
   Map<String, Object?> getLocals([int frameIndex = 0]) {
-    // In a real implementation, we would return the locals from the specified frame
-    return {};
+    final vmFrames = vm.frames;
+    if (vmFrames.isEmpty) return {};
+    
+    // Convert frameIndex (0 = top) to actual index in vmFrames (highest = top)
+    final actualIndex = vmFrames.length - 1 - frameIndex;
+    if (actualIndex < 0 || actualIndex >= vmFrames.length) return {};
+    
+    return _getLocalsForFrame(actualIndex);
+  }
+  
+  /// Internal helper to get locals for a frame by its actual index in vmFrames
+  Map<String, Object?> _getLocalsForFrame(int actualFrameIndex) {
+    final vmFrames = vm.frames;
+    if (actualFrameIndex < 0 || actualFrameIndex >= vmFrames.length) return {};
+    
+    final frame = vmFrames[actualFrameIndex];
+    final function = frame.closure.function;
+    final localNames = function.localNames;
+    final stack = vm.stack;
+    
+    final locals = <String, Object?>{};
+    
+    // Map each local name to its stack value
+    for (int i = 0; i < localNames.length; i++) {
+      final name = localNames[i];
+      if (name.isEmpty) continue; // Skip slot 0 (closure placeholder)
+      
+      final stackIndex = frame.slotBase + i;
+      if (stackIndex < stack.length) {
+        locals[name] = stack[stackIndex];
+      }
+    }
+    
+    // Also include globals for top-level visibility
+    if (actualFrameIndex == 0) {
+      for (final entry in vm.globals.entries) {
+        if (!locals.containsKey(entry.key)) {
+          locals[entry.key] = entry.value;
+        }
+      }
+    }
+    
+    return locals;
   }
   
   /// Get the value of a specific variable
