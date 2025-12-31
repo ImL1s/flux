@@ -299,6 +299,10 @@ class FluxDebugger {
   /// 
   /// [expression] is the source code to evaluate.
   /// [frameIndex] is the index of the frame (0 = top/current frame).
+  /// Evaluate an expression in the context of a specific stack frame
+  /// 
+  /// [expression] is the source code to evaluate.
+  /// [frameIndex] is the index of the frame (0 = top/current frame).
   Object? evaluate(String expression, {int frameIndex = 0}) {
     if (vm.frames.isEmpty) return "Error: VM is not running";
     if (frameIndex >= vm.frames.length) return "Error: Invalid frame index";
@@ -310,18 +314,34 @@ class FluxDebugger {
     
     // Collect all local values from the stack corresponding to localNames
     final values = <Object?>[];
+    // Only pass localNames that are actually available on stack
+    final availableNames = <String>[];
+    
     for (int i = 0; i < localNames.length; i++) {
-       values.add(vm.stack[frame.slotBase + i]);
+        final stackIndex = frame.slotBase + i;
+        if (stackIndex < vm.stack.length) {
+            values.add(vm.stack[stackIndex]);
+            availableNames.add(localNames[i]);
+        } else {
+            // Stop if we reach end of stack (future locals not yet initialized)
+            break;
+        }
     }
     
     try {
-      // Compile expression knowing the local variable names
-      // Compiler adds these names starting at Slot 1 (Slot 0 is internal closure)
-      final compiledFn = compileFluxExpression(expression, localNames);
+      // Compile expression knowing only the AVAILABLE local variable names
+      final compiledFn = compileFluxExpression(expression, availableNames);
       
       // Execute in a separate context
-      // Pushes compiled closure (Slot 0) + values (Slot 1..N)
-      return vm.executeFunctionInContext(compiledFn, values);
+      // We must temporarily unpause the debugger to allow the evaluation to run
+      // otherwise the VM will immediately return InterpretResult.paused
+      final wasPaused = _paused;
+      _paused = false;
+      try {
+        return vm.executeFunctionInContext(compiledFn, values);
+      } finally {
+        _paused = wasPaused;
+      }
     } catch (e) {
       return "Error: $e";
     }
@@ -348,8 +368,6 @@ class FluxDebugger {
     
     return frames;
   }
-  
-
   
   /// Get local variables in the current frame
   Map<String, Object?> getLocals([int frameIndex = 0]) {
@@ -384,6 +402,7 @@ class FluxDebugger {
       if (stackIndex < stack.length) {
         locals[name] = stack[stackIndex];
       }
+      // Implicitly skip if out of bounds (future locals)
     }
     
     // Also include globals for top-level visibility

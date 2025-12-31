@@ -13,16 +13,52 @@ class FluxServiceExtensions {
     _registered = true;
 
     // 1. Get Version
-    registerExtension('ext.flux.getVersion', (method, parameters) async {
+    registerExtension('ext.flux.getVersion', (method, parameters) => 
+        FluxServiceExtensionHandlers.getVersion(vm, parameters));
+
+    // 2. Eval
+    registerExtension('ext.flux.eval', (method, parameters) => 
+        FluxServiceExtensionHandlers.eval(vm, parameters));
+
+    // 3. Get Status
+    registerExtension('ext.flux.getStatus', (method, parameters) => 
+        FluxServiceExtensionHandlers.getStatus(vm, parameters));
+    
+    // ... existing getScripts ...
+    
+    // 10. Get Stack
+    registerExtension('ext.flux.getStack', (method, parameters) => 
+        FluxServiceExtensionHandlers.getStack(vm, parameters));
+
+    // 11. Get Locals
+    registerExtension('ext.flux.getLocals', (method, parameters) => 
+        FluxServiceExtensionHandlers.getLocals(vm, parameters));
+
+    // Setup Listener
+    vm.debugger?.addListener((event, context) {
+      postEvent('Flux.Debug', {
+        'event': event.name,
+        'script': context.source,
+        'line': context.line,
+      });
+    });
+    
+    log('Flux Service Extensions registered', name: 'Flux');
+  }
+}
+
+/// Testable handlers for Flux service extensions
+class FluxServiceExtensionHandlers {
+  
+  static Future<ServiceExtensionResponse> getVersion(VM vm, Map<String, String> parameters) async {
       return ServiceExtensionResponse.result(jsonEncode({
         'type': 'FluxVersion',
         'version': '2.0.0',
         'details': 'Flux V2.0 with DevTools Support'
       }));
-    });
+  }
 
-    // 2. Eval
-    registerExtension('ext.flux.eval', (method, parameters) async {
+  static Future<ServiceExtensionResponse> eval(VM vm, Map<String, String> parameters) async {
       final expr = parameters['expr'];
       final frameIndexStr = parameters['frameIndex'];
       final frameIndex = frameIndexStr != null ? int.tryParse(frameIndexStr) : 0;
@@ -36,10 +72,12 @@ class FluxServiceExtensions {
 
       try {
         final result = vm.debugger?.evaluate(expr, frameIndex: frameIndex ?? 0);
+        final isError = result is String && result.startsWith('Error: ');
+        
         return ServiceExtensionResponse.result(jsonEncode({
           'type': 'EvalResult',
           'result': result.toString(),
-          'isError': false
+          'isError': isError
         }));
       } catch (e) {
         return ServiceExtensionResponse.result(jsonEncode({
@@ -48,10 +86,9 @@ class FluxServiceExtensions {
           'isError': true
         }));
       }
-    });
+  }
 
-    // 3. Get Status
-    registerExtension('ext.flux.getStatus', (method, parameters) async {
+  static Future<ServiceExtensionResponse> getStatus(VM vm, Map<String, String> parameters) async {
       final isPaused = vm.debugger?.isPaused ?? false;
       String? pausedScript;
       int? pausedLine;
@@ -73,12 +110,9 @@ class FluxServiceExtensions {
         'pausedScript': pausedScript,
         'pausedLine': pausedLine,
       }));
-    });
-    
-    // ... existing getScripts ...
+  }
 
-    // 10. Get Stack
-    registerExtension('ext.flux.getStack', (method, parameters) async {
+  static Future<ServiceExtensionResponse> getStack(VM vm, Map<String, String> parameters) async {
       final frames = vm.debugger?.getCallStack() ?? [];
       final framesJson = <Map<String, dynamic>>[];
       
@@ -96,16 +130,13 @@ class FluxServiceExtensions {
         'type': 'Stack',
         'frames': framesJson,
       }));
-    });
+  }
 
-    // 11. Get Locals
-    registerExtension('ext.flux.getLocals', (method, parameters) async {
+  static Future<ServiceExtensionResponse> getLocals(VM vm, Map<String, String> parameters) async {
       final frameIndexStr = parameters['frameIndex'];
       final frameIndex = frameIndexStr != null ? int.tryParse(frameIndexStr) ?? 0 : 0;
       
       final locals = vm.debugger?.getLocals(frameIndex) ?? {};
-      // Convert values to strings for JSON safety for now
-      // In future we might want robust object serialization
       final safeLocals = <String, String>{};
       locals.forEach((key, value) {
         safeLocals[key] = value.toString();
@@ -115,20 +146,6 @@ class FluxServiceExtensions {
         'type': 'Locals',
         'locals': safeLocals,
       }));
-    });
-
-    // Setup Listener
-    vm.debugger?.addListener((event, context) {
-      postEvent('Flux.Debug', {
-        'event': event.name,
-        'script': context.source,
-        'line': context.line,
-        // Send simplified stack in event for quick reference?
-        // Or just let UI fetch full stack.
-      });
-    });
-    
-    log('Flux Service Extensions registered', name: 'Flux');
   }
 }
 
