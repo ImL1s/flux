@@ -932,6 +932,52 @@ class VM {
             }
             break;
           
+          case OpCode.getIndex:
+            final index = _stack.removeLast();
+            final obj = _stack.removeLast();
+            if (obj is List) {
+              final idx = (index as num).toInt();
+              if (idx < 0 || idx >= obj.length) {
+                _runtimeError("Index $idx out of bounds for list of length ${obj.length}.");
+                return InterpretResult.runtimeError;
+              }
+              _stack.add(obj[idx]);
+            } else if (obj is Map) {
+              _stack.add(obj[index]);
+            } else if (obj is String) {
+              final idx = (index as num).toInt();
+              if (idx < 0 || idx >= obj.length) {
+                _runtimeError("Index $idx out of bounds for string of length ${obj.length}.");
+                return InterpretResult.runtimeError;
+              }
+              _stack.add(obj[idx]);
+            } else {
+              _runtimeError("Cannot index into ${obj.runtimeType}.");
+              return InterpretResult.runtimeError;
+            }
+            break;
+          
+          case OpCode.setIndex:
+            final value = _stack.removeLast();
+            final index = _stack.removeLast();
+            final obj = _stack.removeLast();
+            if (obj is List) {
+              final idx = (index as num).toInt();
+              if (idx < 0 || idx >= obj.length) {
+                _runtimeError("Index $idx out of bounds for list of length ${obj.length}.");
+                return InterpretResult.runtimeError;
+              }
+              obj[idx] = value;
+              _stack.add(value); // Assignment expression returns the value
+            } else if (obj is Map) {
+              obj[index] = value;
+              _stack.add(value);
+            } else {
+              _runtimeError("Cannot set index on ${obj.runtimeType}.");
+              return InterpretResult.runtimeError;
+            }
+            break;
+          
           // Module system
           case OpCode.import_:
             final pathIdx = readByte();
