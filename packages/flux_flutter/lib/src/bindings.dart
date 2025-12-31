@@ -509,6 +509,55 @@ class FluxBindings {
         child: child,
       );
     });
+
+    // AlertDialog widget
+    register('AlertDialog', (args, children) {
+      final titleRaw = args['title'];
+      final contentRaw = args['content'];
+      final actionsRaw = args['actions'];
+      
+      Widget? title;
+      if (titleRaw is Widget) {
+        title = titleRaw;
+      } else if (titleRaw != null) {
+        title = Text(titleRaw.toString());
+      }
+
+      Widget? content;
+      if (contentRaw is Widget) {
+        content = contentRaw;
+      } else if (contentRaw != null) {
+        content = Text(contentRaw.toString());
+      }
+      
+      List<Widget> actionWidgets = [];
+      if (actionsRaw is List) {
+        actionWidgets = actionsRaw.whereType<Widget>().toList();
+      }
+      
+      return AlertDialog(
+        title: title,
+        content: content,
+        actions: actionWidgets.isNotEmpty ? actionWidgets : null,
+      );
+    });
+
+    // SimpleDialog widget
+    register('SimpleDialog', (args, children) {
+      final titleRaw = args['title'];
+      
+      Widget? title;
+      if (titleRaw is Widget) {
+        title = titleRaw;
+      } else if (titleRaw != null) {
+        title = Text(titleRaw.toString());
+      }
+      
+      return SimpleDialog(
+        title: title,
+        children: children,
+      );
+    });
   }
 
   
@@ -884,6 +933,110 @@ class FluxBindings {
       final routeArgs = args.length > 1 ? args[1] : null;
       return navigatorKey.currentState?.pushNamed(routeName, arguments: routeArgs);
     });
+
+    // Navigation: push with a simple screen widget
+    // Usage: navigator_push("ScreenName", {arg1: value1})
+    // Note: This pushes a named route. For dynamic widget pushing, use pushNamed with registered routes.
+    registerFunction('navigator_push', (args) async {
+      if (args.isEmpty) return null;
+      final context = navigatorKey.currentContext;
+      if (context == null) return null;
+      
+      final routeName = args[0].toString();
+      final routeArgs = args.length > 1 ? args[1] : null;
+      
+      return navigatorKey.currentState?.pushNamed(routeName, arguments: routeArgs);
+    });
+
+    // Dialog: showAlert(title, content) -> Future<bool?>
+    // Returns true if OK pressed, false if Cancel pressed, null if dismissed
+    registerFunction('showAlert', (args) async {
+      final context = navigatorKey.currentContext;
+      if (context == null) return null;
+
+      final title = args.isNotEmpty ? args[0]?.toString() : 'Alert';
+      final content = args.length > 1 ? args[1]?.toString() : '';
+      
+      return showDialog<bool>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(title ?? 'Alert'),
+          content: Text(content ?? ''),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    });
+
+    // Dialog: showConfirmDialog(title, content, confirmText, cancelText) -> Future<bool?>
+    registerFunction('showConfirmDialog', (args) async {
+      final context = navigatorKey.currentContext;
+      if (context == null) return null;
+
+      final title = args.isNotEmpty ? args[0]?.toString() : 'Confirm';
+      final content = args.length > 1 ? args[1]?.toString() : '';
+      final confirmText = args.length > 2 ? args[2]?.toString() : 'OK';
+      final cancelText = args.length > 3 ? args[3]?.toString() : 'Cancel';
+      
+      return showDialog<bool>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(title ?? 'Confirm'),
+          content: Text(content ?? ''),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(cancelText ?? 'Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: Text(confirmText ?? 'OK'),
+            ),
+          ],
+        ),
+      );
+    });
+
+    // Dialog: showInputDialog(title, hint) -> Future<String?>
+    registerFunction('showInputDialog', (args) async {
+      final context = navigatorKey.currentContext;
+      if (context == null) return null;
+
+      final title = args.isNotEmpty ? args[0]?.toString() : 'Input';
+      final hint = args.length > 1 ? args[1]?.toString() : '';
+      final controller = TextEditingController();
+      
+      return showDialog<String>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(title ?? 'Input'),
+          content: TextField(
+            controller: controller,
+            decoration: InputDecoration(hintText: hint),
+            autofocus: true,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, null),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, controller.text),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    });
+
     // Register HTTP bindings
     for (final entry in HttpBindings.functions.entries) {
       registerFunction(entry.key, entry.value as FluxFunction);
