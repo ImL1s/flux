@@ -2,7 +2,7 @@
     "name": "flux-vscode",
     "displayName": "Flux",
     "description": "Syntax highlighting, snippets, and language support for Flux - A dynamic scripting language for Flutter Server-Driven UI",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "publisher": "ImL1s",
     "repository": {
         "type": "git",
@@ -13,7 +13,8 @@
     },
     "categories": [
         "Programming Languages",
-        "Snippets"
+        "Snippets",
+        "Linters"
     ],
     "keywords": [
         "flux",
@@ -23,6 +24,10 @@
         "widget"
     ],
     "icon": "images/flux-icon.png",
+    "main": "./out/extension.js",
+    "activationEvents": [
+        "onLanguage:flux"
+    ],
     "contributes": {
         "languages": [
             {
@@ -49,6 +54,39 @@
                 "language": "flux",
                 "path": "./snippets/flux.json"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "Flux",
+            "properties": {
+                "flux.lspPath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Path to the Flux LSP server executable. Leave empty to use the bundled server."
+                },
+                "flux.trace.server": {
+                    "type": "string",
+                    "enum": [
+                        "off",
+                        "messages",
+                        "verbose"
+                    ],
+                    "default": "off",
+                    "description": "Traces the communication between VS Code and the Flux language server."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "dependencies": {
+        "vscode-languageclient": "^9.0.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@types/vscode": "^1.75.0",
+        "typescript": "^5.0.0"
     }
 }

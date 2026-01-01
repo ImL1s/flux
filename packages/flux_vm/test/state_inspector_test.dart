@@ -72,8 +72,8 @@ test();
       expect(result, InterpretResult.paused);
       
       final locals = debugger.getLocals();
-      expect(locals['a'], 42);
-      expect(locals['b'], 'hello');
+      expect(locals['a'], {'type': 'primitive', 'kind': 'int', 'value': '42'});
+      expect(locals['b'], {'type': 'primitive', 'kind': 'String', 'value': 'hello'});
     });
 
     test('getLocals works with function parameters', () {
@@ -99,9 +99,9 @@ greet("World", 3);
       expect(result, InterpretResult.paused);
       
       final locals = debugger.getLocals();
-      expect(locals['name'], 'World');
-      expect(locals['count'], 3);
-      expect(locals['msg'], 'Hello');
+      expect(locals['name'], {'type': 'primitive', 'kind': 'String', 'value': 'World'});
+      expect(locals['count'], {'type': 'primitive', 'kind': 'int', 'value': '3'});
+      expect(locals['msg'], {'type': 'primitive', 'kind': 'String', 'value': 'Hello'});
     });
   });
 }

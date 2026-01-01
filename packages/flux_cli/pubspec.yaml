@@ -16,6 +16,7 @@ dependencies:
   shelf_web_socket: ^3.0.0
   watcher: ^1.2.0
   web_socket_channel: ^3.0.3
+  cryptography: ^2.9.0
 
 dev_dependencies:
   test: ^1.25.0

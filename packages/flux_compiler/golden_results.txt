@@ -1,0 +1,78 @@
+00:00 +0: loading test/golden_test.dart
+00:00 +0: AST Golden Tests basic structure
+00:00 +1: AST Golden Tests class definitions
+00:00 +2: AST Golden Tests import statement
+00:00 +3: AST Golden Tests error recovery
+DEBUG PARSER: Error during parse: Expect expression. at 1:23
+#0      Parser._primary (package:flux_compiler/src/parser.dart:636:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:501:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:497:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:488:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:473:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:466:21)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:452:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:442:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:432:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:422:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:399:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:395:12)
+#12     Parser._varDeclaration (package:flux_compiler/src/parser.dart:377:21)
+#13     Parser._declaration (package:flux_compiler/src/parser.dart:82:66)
+#14     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#15     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart:77:28)
+#16     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#17     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#18     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+00:00 +4: Bytecode Golden Tests basic arithmetic
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +4 -1: Bytecode Golden Tests basic arithmetic [E]
+  Expected: contains 'add'
+    Actual: '== Constants ==\n'
+              '0: 1\n'
+              '1: 2\n'
+              '2: 3\n'
+              '== Code ==\n'
+              '0000 constant     2 (\'3\')\n'
+              '0002 noOp        \n'
+              '0003 noOp        \n'
+              '0004 noOp        \n'
+              '0005 print       \n'
+              '0006 nil         \n'
+              '0007 pop         \n'
+              '0008 nil         \n'
+              '0009 return_     \n'
+              ''
+     Which: does not contain 'add'
+  
+  package:matcher              expect
+  test\golden_test.dart 105:7  main.<fn>.<fn>
+  
+00:00 +4 -1: Bytecode Golden Tests if statement with jump
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 1
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +5 -1: Bytecode Golden Tests function call
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: foo, isState: false
+00:00 +6 -1: BytecodePrinter Unit Test prints call opcode
+Manual Chunk Output:
+== Constants ==
+== Code ==
+0000 call         0
+
+00:00 +7 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

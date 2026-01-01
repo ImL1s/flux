@@ -1,35 +1,82 @@
-00:00 +0: loading test/expression_eval_test.dart
-00:00 +0: Expression Evaluation evaluates expressions with local variables
+00:00 +0: loading test/state_inspector_test.dart
+00:00 +0: State Inspector getCallStack returns frame info during breakpoint
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: test, isState: false
+00:00 +1: State Inspector getLocals returns local variables
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
 DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
 DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
 DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
 DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
 DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
-DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
-DEBUG COMPILER: Compiling variable: a, isState: false
-DEBUG COMPILER: Compiling variable: b, isState: false
-DEBUG COMPILER: Added local "c" at slot 3 [Depth: 1]
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
-DEBUG COMPILER: Compiling variable: main, isState: false
-DEBUG TEST: Hit breakpoint at line 2
-00:00 +1: Expression Evaluation evaluates expressions with function parameters
-DEBUG COMPILER: Compiling statement type: FunctionDecl at line 4
-DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
-DEBUG COMPILER: Added local "y" at slot 2 [Depth: 1]
-DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
-DEBUG COMPILER: Compiling variable: x, isState: false
-DEBUG COMPILER: Compiling variable: y, isState: false
-DEBUG COMPILER: Added local "z" at slot 3 [Depth: 1]
 DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
-DEBUG COMPILER: Compiling variable: add, isState: false
-00:00 +1 -1: Expression Evaluation evaluates expressions with function parameters [E]
-  Expected: true
-    Actual: <false>
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: test, isState: false
+00:00 +1 -1: State Inspector getLocals returns local variables [E]
+  Expected: <42>
+    Actual: {'type': 'primitive', 'kind': 'int', 'value': '42'}
+  
+  package:matcher                      expect
+  test\state_inspector_test.dart 75:7  main.<fn>.<fn>
+  
+00:00 +1 -1: State Inspector getLocals works with function parameters
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "name" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "count" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "msg" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: msg, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: greet, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "name" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "count" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "msg" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: msg, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: greet, isState: false
+00:00 +1 -2: State Inspector getLocals works with function parameters [E]
+  Expected: 'World'
+    Actual: {'type': 'primitive', 'kind': 'String', 'value': 'World'}
+     Which: not an <Instance of 'String'>
   
   package:matcher                       expect
-  test\expression_eval_test.dart 111:7  main.<fn>.<fn>
+  test\state_inspector_test.dart 102:7  main.<fn>.<fn>
   
-00:00 +1 -1: Some tests failed.
+00:00 +1 -2: Some tests failed.
 
 Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
 For example, 'dart test --chain-stack-traces'.

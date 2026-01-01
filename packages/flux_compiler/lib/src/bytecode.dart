@@ -12,6 +12,7 @@ enum OpCode {
 
   // Stack manipulation
   pop,      // Pop top of stack
+  noOp,     // No operation (placeholder for optimizations)
 
   // Arithmetic
   add,      // Pop a, b, push a + b
@@ -44,6 +45,7 @@ enum OpCode {
   // Control Flow
   jump,       // [offset] -> ip += offset
   jumpIfFalse,// [offset] -> if top is false, ip += offset
+  jumpIfTrue, // [offset] -> if top is true, ip += offset
   loop,       // [offset] -> ip -= offset
 
   // Functions

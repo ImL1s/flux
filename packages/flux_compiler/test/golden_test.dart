@@ -96,13 +96,11 @@ CompilationUnit
       final chunk = _compile(source);
       final output = BytecodePrinter().print(chunk);
       
-      // Expected bytecode check
-      // Constants: 0: 1, 1: 2
-      expect(output, contains("0: 1"));
-      expect(output, contains("1: 2"));
-      // Opcodes: constant, constant, add, print
+      // Expected bytecode check: 1 + 2 folded to 3
+      expect(output, contains("2: 3"));
       expect(output, contains("constant"));
-      expect(output, contains("add"));
+      // 'add' is replaced by noOps by the optimizer
+      expect(output, contains("noOp"));
       expect(output, contains("print"));
     });
     

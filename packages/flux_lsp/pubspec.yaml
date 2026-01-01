@@ -1,0 +1,14 @@
+name: flux_lsp
+description: Language Server Protocol implementation for Flux scripting language
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flux_compiler:
+    path: ../flux_compiler
+  args: ^2.4.0
+
+dev_dependencies:
+  test: ^1.24.0

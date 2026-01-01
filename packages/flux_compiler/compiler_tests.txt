@@ -1,0 +1,304 @@
+00:00 +0: loading test\compiler_test.dart
+00:00 +0: test\compiler_test.dart: Lexer tokenizes simple expression
+00:00 +1: test\golden_test.dart: AST Golden Tests basic structure
+00:00 +2: test\golden_test.dart: AST Golden Tests basic structure
+00:00 +3: test\golden_test.dart: AST Golden Tests basic structure
+00:00 +4: test\golden_test.dart: AST Golden Tests basic structure
+00:00 +5: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +6: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +7: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +8: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +9: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +9: test\golden_test.dart: AST Golden Tests error recovery
+DEBUG PARSER: Error during parse: Expect expression. at 1:23
+#0      Parser._primary (package:flux_compiler/src/parser.dart:636:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:501:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:497:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:488:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:473:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:466:21)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:452:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:442:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:432:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:422:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:399:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:395:12)
+#12     Parser._varDeclaration (package:flux_compiler/src/parser.dart:377:21)
+#13     Parser._declaration (package:flux_compiler/src/parser.dart:82:66)
+#14     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#15     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart:77:28)
+#16     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#17     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#18     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+00:00 +10: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +11: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +11: test\golden_test.dart: Bytecode Golden Tests basic arithmetic
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +11: test\compiler_test.dart: Parser parses widget declaration
+DEBUG PARSER: Widget MyWidget parsed. StateFields: 0
+00:00 +12: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +13: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +13: test\compiler_test.dart: Parser parses while statement
+DEBUG PARSER: Error during parse: Expect expression. at 1:16
+#0      Parser._primary (package:flux_compiler/src/parser.dart:636:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:501:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:497:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:488:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:473:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:463:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:452:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:442:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:432:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:422:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:399:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:395:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:385:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:240:12)
+#14     Parser._block (package:flux_compiler/src/parser.dart:293:22)
+#15     Parser._statement (package:flux_compiler/src/parser.dart:230:45)
+#16     Parser._whileStatement (package:flux_compiler/src/parser.dart:317:18)
+#17     Parser._statement (package:flux_compiler/src/parser.dart:228:42)
+#18     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#19     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#20     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart:95:26)
+#21     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#22     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#23     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+00:00 +14: test\optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+00:00 +15: test\golden_test.dart: Bytecode Golden Tests basic arithmetic
+00:00 +16: test\golden_test.dart: Bytecode Golden Tests basic arithmetic
+00:00 +16: test\optimizer_test.dart: BytecodeOptimizer folds string concatenation
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +17: test\golden_test.dart: Bytecode Golden Tests basic arithmetic
+00:00 +17: test\compiler_test.dart: Compiler compiles simple expression
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +17: test\optimizer_test.dart: BytecodeOptimizer folds nested arithmetic expressions (requires multi-pass)
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +18: test\golden_test.dart: Bytecode Golden Tests basic arithmetic
+00:00 +18: test\optimizer_test.dart: BytecodeOptimizer does not fold mismatch types (conservative)
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +19: test\golden_test.dart: Bytecode Golden Tests basic arithmetic
+00:00 +20: test\golden_test.dart: Bytecode Golden Tests basic arithmetic
+00:00 +20 -1: test\rle_test.dart: Chunk RLE Line Mapping Empty chunk returns -1
+00:00 +20 -1: test\optimizer_test.dart: BytecodeOptimizer does not fold variables
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +20 -1: test\compiler_test.dart: Compiler compiles function
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+00:00 +20 -1: test\optimizer_test.dart: BytecodeOptimizer does not fold variables
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +20 -1: test\compiler_test.dart: Compiler compiles function
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+00:00 +20 -1: test\optimizer_test.dart: BytecodeOptimizer does not fold variables
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +21 -1: test\rle_test.dart: Chunk RLE Line Mapping Empty chunk returns -1
+00:00 +21 -1: test\compiler_test.dart: Compiler compiles function
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 1
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +22 -1: test\rle_test.dart: Chunk RLE Line Mapping Empty chunk returns -1
+00:00 +22 -1: test\compiler_test.dart: Compiler generates bytecode
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +22 -1: test\optimizer_test.dart: BytecodeOptimizer optimizes NOT + JUMP_IF_FALSE to JUMP_IF_TRUE
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 5
+00:00 +23 -1: test\rle_test.dart: Chunk RLE Line Mapping Empty chunk returns -1
+00:00 +23 -1: test\optimizer_test.dart: BytecodeOptimizer optimizes NOT + JUMP_IF_FALSE to JUMP_IF_TRUE
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+00:00 +23 -1: test\compiler_test.dart: Compiler compiles closure with upvalue
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 8
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +24 -1: test\rle_test.dart: Chunk RLE Line Mapping Empty chunk returns -1
+00:00 +24 -1: test\compiler_test.dart: Compiler compiles closure with upvalue
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Compiling variable: inner, isState: false
+00:00 +25 -1: test\rle_test.dart: Chunk RLE Line Mapping Empty chunk returns -1
+00:00 +25 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after return
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+00:00 +25 -1: test\compiler_test.dart: Compiler compiles nested closures
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 12
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 10
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Added local "b" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 8
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Resolving upvalue "a" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Resolving upvalue "b" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 8
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Added local "middle" at slot 2 [Depth: 1]
+00:00 +25 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after return
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+00:00 +25 -1: test\compiler_test.dart: Compiler compiles nested closures
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 10
+DEBUG COMPILER: Compiling variable: middle, isState: false
+00:00 +25 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after return
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +26 -1: test\rle_test.dart: Chunk RLE Line Mapping Empty chunk returns -1
+00:00 +26 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after return
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ReturnStmt
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +27 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after return
+00:00 +28 -1: test\rle_test.dart: Chunk RLE Line Mapping Single instruction
+00:00 +29 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +29 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after unconditional jump
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 4
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +30 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +30 -1: test\golden_test.dart: Bytecode Golden Tests basic arithmetic [E]
+  Expected: contains 'add'
+    Actual: '== Constants ==\n'
+              '0: 1\n'
+              '1: 2\n'
+              '2: 3\n'
+              '== Code ==\n'
+              '0000 constant     2 (\'3\')\n'
+              '0002 noOp        \n'
+              '0003 noOp        \n'
+              '0004 noOp        \n'
+              '0005 print       \n'
+              '0006 nil         \n'
+              '0007 pop         \n'
+              '0008 nil         \n'
+              '0009 return_     \n'
+              ''
+     Which: does not contain 'add'
+  
+  package:matcher              expect
+  test\golden_test.dart 105:7  main.<fn>.<fn>
+  
+00:00 +31 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +31 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination preserves jump targets (if-else)
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+00:00 +32 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +32 -1: test\golden_test.dart: Bytecode Golden Tests if statement with jump
+DEBUG COMPILER: Unit has 1 declarations
+00:00 +32 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after throw
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +32 -1: test\golden_test.dart: Bytecode Golden Tests if statement with jump
+DEBUG COMPILER: Compiling decl type: IfStmt
+00:00 +32 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after throw
+DEBUG COMPILER: Compiling decl type: ThrowStmt
+00:00 +32 -1: test\golden_test.dart: Bytecode Golden Tests if statement with jump
+DEBUG COMPILER: Compiling statement type: IfStmt at line 1
+00:00 +32 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after throw
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 1
+00:00 +33 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +33 -1: test\optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after throw
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +33 -1: test\golden_test.dart: Bytecode Golden Tests if statement with jump
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 1
+00:00 +34 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +34 -1: test\golden_test.dart: Bytecode Golden Tests if statement with jump
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +35 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +36 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +36 -1: test\golden_test.dart: Bytecode Golden Tests function call
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 2
+00:00 +37 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +37 -1: test\golden_test.dart: Bytecode Golden Tests function call
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +37 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+DEBUG PARSER: Found state field: count
+00:00 +37 -1: test\golden_test.dart: Bytecode Golden Tests function call
+DEBUG COMPILER: Compiling variable: foo, isState: false
+00:00 +38 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+00:00 +38 -1: test\golden_test.dart: BytecodePrinter Unit Test prints call opcode
+Manual Chunk Output:
+== Constants ==
+== Code ==
+0000 call         0
+
+00:00 +39 -1: test\widget_compilation_test.dart: Widget state access compiles to getState/setState
+DEBUG PARSER: Widget TestWidget parsed. StateFields: 1
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 10
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: count, isState: true
+00:00 +40 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

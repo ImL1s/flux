@@ -1,0 +1,1304 @@
+00:00 +0: loading test\closure_test.dart
+00:00 +0: test\closure_test.dart: Basic closure
+00:00 +0: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +0: test\closure_test.dart: Basic closure
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +0: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +0: test\closure_test.dart: Basic closure
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 9
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: outer, isState: false
+00:00 +1: test\closure_test.dart: Basic closure
+00:00 +2: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +2: test\concurrency_test.dart: VM Concurrency await on Dart Future suspends execution
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: fetchData, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +2: test\closure_test.dart: Closure closes over variable
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 9
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: outer, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: f, isState: false
+00:00 +2: test\concurrency_test.dart: VM Concurrency await on Dart Future suspends execution
+DEBUG RUNTIME: NativeFunction fetchData returned Instance of 'Future<int>'
+00:00 +3: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +4: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +4: test\closure_test.dart: Closure modifies captured variable
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +4: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +4: test\closure_test.dart: Closure modifies captured variable
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 10
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: outer, isState: false
+00:00 +4: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Compiling variable: a, isState: false
+00:00 +5: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +5: test\concurrency_test.dart: VM Concurrency async function call flow
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +5: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +5: test\concurrency_test.dart: VM Concurrency async function call flow
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+00:00 +5: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: c, isState: false
+00:00 +5: test\concurrency_test.dart: VM Concurrency async function call flow
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+00:00 +5: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +5: test\concurrency_test.dart: VM Concurrency async function call flow
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: waitString, isState: false
+DEBUG COMPILER: Added local "s" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: doAsync, isState: false
+00:00 +5: test\closure_test.dart: Closure modifies closed upvalue
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 16
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+00:00 +5: test\concurrency_test.dart: VM Concurrency async function call flow
+DEBUG RUNTIME: NativeFunction waitString returned Instance of 'Future<String>'
+00:00 +5: test\closure_test.dart: Closure modifies closed upvalue
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "setter" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: true
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "getter" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: setter, isState: false
+00:00 +6: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +6: test\closure_test.dart: Closure modifies closed upvalue
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: getter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: outer, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling variable: set, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Compiling variable: get, isState: false
+00:00 +7: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +7: test\closure_test.dart: Multiple closures capture same existing upvalue
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 13
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "y" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Added local "inner1" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Added local "inner2" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: inner1, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: inner2, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: outer, isState: false
+00:00 +8: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +9: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +9: test\closure_test.dart: Nested closures
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 13
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 11
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Added local "b" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Resolving upvalue "a" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Resolving upvalue "b" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Added local "middle" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: middle, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: outer, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: f, isState: false
+00:00 +10: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +10: test\debugger_control_test.dart: Debugger Control Resuming from breakpoint executes next line
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +11: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +11: test\closure_test.dart: Counter pattern (classic closure use case)
+DEBUG COMPILER: Unit has 7 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 13
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Added local "count" at slot 1 [Depth: 1]
+00:00 +11: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Unit has 4 declarations
+00:00 +11: test\closure_test.dart: Counter pattern (classic closure use case)
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: count, isState: false
+DEBUG COMPILER: Resolving upvalue "count" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Resolving upvalue "count" -> enclosing local 1. Prev captured: true
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+00:00 +11: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+00:00 +11: test\closure_test.dart: Counter pattern (classic closure use case)
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: count, isState: false
+DEBUG COMPILER: Resolving upvalue "count" -> enclosing local 1. Prev captured: true
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "increment" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 10
+DEBUG COMPILER: Compiling variable: increment, isState: false
+00:00 +11: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+00:00 +11: test\closure_test.dart: Counter pattern (classic closure use case)
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: createCounter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: counter, isState: false
+00:00 +11: test\debugger_control_test.dart: Debugger Control Step Into behaves correctly
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +12: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+00:00 +13: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Added local "res" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: res, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+00:00 +13: test\closure_test.dart: Closure captures parameter
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +13: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Compiling variable: add, isState: false
+00:00 +13: test\closure_test.dart: Closure captures parameter
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 8
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+00:00 +13: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +13: test\closure_test.dart: Closure captures parameter
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: inner, isState: false
+00:00 +13: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+00:00 +13: test\closure_test.dart: Closure captures parameter
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +13: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Compiling variable: y, isState: false
+00:00 +13: test\closure_test.dart: Closure captures parameter
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+00:00 +13: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+00:00 +13: test\closure_test.dart: Closure captures parameter
+DEBUG COMPILER: Compiling variable: outer, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+00:00 +13: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+00:00 +13: test\closure_test.dart: Closure captures parameter
+DEBUG COMPILER: Compiling variable: f, isState: false
+00:00 +13: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Added local "res" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: res, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: add, isState: false
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: y, isState: false
+00:00 +14: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +15: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +15: test\closure_test.dart: Two independent closures with same variable name
+DEBUG COMPILER: Unit has 8 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 12
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 20
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 20
+DEBUG COMPILER: Compiling variable: make1, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 21
+DEBUG COMPILER: Compiling variable: make2, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 22
+DEBUG COMPILER: Compiling variable: f1, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 23
+DEBUG COMPILER: Compiling variable: f2, isState: false
+00:00 +16: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +17: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +17: test\closure_test.dart: Closed upvalue survives stack pop
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 11
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "local" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: local, isState: false
+DEBUG COMPILER: Resolving upvalue "local" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+00:00 +18: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +18: test\closure_test.dart: Closed upvalue survives stack pop
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: outer, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: f, isState: false
+00:00 +19: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +19: test\closure_test.dart: Three-level nested closure
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 17
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 15
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Added local "b" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 13
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Added local "c" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Resolving upvalue "a" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Resolving upvalue "b" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Resolving upvalue "c" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "level4" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: level4, isState: false
+DEBUG COMPILER: Added local "level3" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: level3, isState: false
+DEBUG COMPILER: Added local "level2" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: level2, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling variable: level1, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Compiling variable: f, isState: false
+00:00 +20: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +21: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+00:00 +21: test\debugger_strict_test.dart: Debugger Strict Tests Step Out finishes function and stops in caller
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+00:00 +21: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+DEBUG COMPILER: Unit has 1 declarations
+00:00 +21: test\debugger_strict_test.dart: Debugger Strict Tests Step Out finishes function and stops in caller
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+00:00 +21: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+DEBUG COMPILER: Compiling decl type: TryStmt
+00:00 +21: test\debugger_strict_test.dart: Debugger Strict Tests Step Out finishes function and stops in caller
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: work, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+00:00 +21: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+00:00 +21: test\debugger_strict_test.dart: Debugger Strict Tests Step Out finishes function and stops in caller
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: work, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+00:00 +21: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 2
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+00:00 +22: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +22: test\debugger_strict_test.dart: Debugger Strict Tests Multiple breakpoints in a loop
+TEST: Multiple breakpoints in a loop START
+00:00 +23: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+00:00 +23: test\debugger_strict_test.dart: Debugger Strict Tests Multiple breakpoints in a loop
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ForStmt
+DEBUG COMPILER: Compiling statement type: ForStmt at line 4
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: sum, isState: false
+00:00 +24: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+00:00 +24: test\debugger_strict_test.dart: Debugger Strict Tests Multiple breakpoints in a loop
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling statement type: ForStmt at line 4
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +25: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+00:00 +26: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+00:00 +26: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+00:00 +26: test\debugger_strict_test.dart: Debugger Strict Tests Breaking in recursive calls
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 3
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 3
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling variable: n, isState: false
+00:00 +26: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+00:00 +26: test\debugger_strict_test.dart: Debugger Strict Tests Breaking in recursive calls
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling variable: fib, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: fib, isState: false
+00:00 +26: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Added local "c" at slot 3 [Depth: 1]
+00:00 +27: test\exception_test.dart: Exception Handling try-catch catches thrown exception
+00:00 +27: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: main, isState: false
+00:00 +28: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +28: test\debugger_strict_test.dart: Debugger Strict Tests Step Into follows into closure call
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Added local "y" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: makeAdder, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: adder, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Added local "y" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: makeAdder, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: adder, isState: false
+00:00 +28: test\exception_test.dart: Exception Handling try block without exception runs normally
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +29: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +30: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +30: test\exception_test.dart: Exception Handling catch block does not run when no exception
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +31: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +31: test\exception_test.dart: Exception Handling exception variable is accessible in catch
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 2
+DEBUG COMPILER: Added local "myError" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: myError, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +32: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +32: test\exception_test.dart: Exception Handling throw string exception
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 2
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +33: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +33: test\exception_test.dart: Exception Handling nested try-catch (inner catches)
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 8
+DEBUG COMPILER: Compiling statement type: TryStmt at line 2
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 3
+DEBUG COMPILER: Added local "e1" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: e1, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Added local "e2" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +34: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +34: test\exception_test.dart: Exception Handling code after try-catch continues
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 2
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+00:00 +35: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +36: test\integration_test.dart: Class System defines and instantiates a simple class
+00:00 +37: test\exception_test.dart: Exception Handling throw propagates from function to outer catch
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+00:00 +37: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with function parameters
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 4
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "y" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Added local "z" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: add, isState: false
+00:00 +37: test\exception_test.dart: Exception Handling throw propagates from function to outer catch
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 2
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 5
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +38: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with function parameters
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +39: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with function parameters
+00:00 +39: test\exception_test.dart: Exception Handling throw propagates through multiple function calls
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 2
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: level1, isState: false
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 13
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: level2, isState: false
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 13
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 15
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: level3, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 18
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+00:00 +40: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with function parameters
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling variable: y, isState: false
+00:00 +41: test\integration_test.dart: Class System compiles class to CompiledClass
+00:00 +41: test\exception_test.dart: Exception Handling exception in function with local try-catch stays local
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 10
+DEBUG COMPILER: Compiling statement type: TryStmt at line 2
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 3
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 10
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: mayFail, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 15
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+00:00 +41: test\integration_test.dart: Class System compiles class to CompiledClass
+DEBUG COMPILER: Unit has 1 declarations
+00:00 +42: test\integration_test.dart: Class System compiles class to CompiledClass
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 10
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 7
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +43: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+00:00 +44: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+00:00 +44: test\integration_test.dart: Import System compiles import to opcode
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ImportDecl
+DEBUG COMPILER: Compiling statement type: ImportDecl at line 1
+00:00 +45: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+00:00 +45: test\integration_test.dart: Import System VM tracks imports
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ImportDecl
+DEBUG COMPILER: Compiling statement type: ImportDecl at line 1
+DEBUG COMPILER: Compiling decl type: ImportDecl
+DEBUG COMPILER: Compiling statement type: ImportDecl at line 2
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+00:00 +46: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +47: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 2
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 3
+00:00 +48: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+00:00 +48: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +48: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+DEBUG VM RUNTIME EXCEPTION: error
+00:00 +48: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+00:00 +48: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1126:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/regression_test.dart:18:25)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 29
+Last OpCode: OpCode.throw_
+00:00 +48: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 8
+00:00 +48: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+Runtime Error: error
+   at script() [line 2]
+00:00 +48: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: test, isState: false
+00:00 +49: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +49: test\regression_test.dart: Regression Tests return inside try executes finally (Fix: Return Skipping Finally)
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 10
+DEBUG COMPILER: Compiling statement type: TryStmt at line 3
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 5
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +49: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+DEBUG RUNTIME: NativeFunction delay returned Instance of 'Future<Null>'
+00:00 +50: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +50: test\regression_test.dart: Regression Tests nested try-finally return execution
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 13
+DEBUG COMPILER: Compiling statement type: TryStmt at line 3
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 9
+DEBUG COMPILER: Compiling statement type: TryStmt at line 4
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 5
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: log, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: log, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: log, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: log, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: log, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: log, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: log, isState: false
+00:00 +51: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +51: test\source_map_multiline_test.dart: Multi-line Source Maps Error in multi-line List
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/source_map_multiline_test.dart:21:10)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.sub
+00:00 +52: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.resumeCoroutine (package:flux_vm/src/vm.dart:232:29)
+#2      VM._run.<anonymous closure> (package:flux_vm/src/vm.dart:1327:19)
+#3      _rootRunUnary (dart:async/zone.dart:1422:47)
+#4      _CustomZone.runUnary (dart:async/zone.dart:1324:19)
+#5      Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:902:45)
+#6      Future._propagateToListeners (dart:async/future_impl.dart:931:13)
+#7      Future._completeWithValue (dart:async/future_impl.dart:707:5)
+<asynchronous suspension>
+
+00:00 +52: test\source_map_multiline_test.dart: Multi-line Source Maps Error in multi-line Map
+DEBUG COMPILER: Unit has 1 declarations
+00:00 +52: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+IP: 21
+00:00 +52: test\source_map_multiline_test.dart: Multi-line Source Maps Error in multi-line Map
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +52: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+Last OpCode: OpCode.sub
+00:00 +52: test\source_map_multiline_test.dart: Multi-line Source Maps Error in multi-line Map
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/source_map_multiline_test.dart:37:10)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 11
+Last OpCode: OpCode.sub
+00:00 +53: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +53: test\source_map_multiline_test.dart: Multi-line Source Maps Error in multi-line Function Call
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 2
+00:00 +54: test\source_map_test.dart: Source Maps Runtime error reports correct line number
+00:00 +54: test\source_map_multiline_test.dart: Multi-line Source Maps Error in multi-line Function Call
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 1
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: add, isState: false
+00:00 +54: test\source_map_async_test.dart: Async Source Maps Nested async traces
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: delay, isState: false
+00:00 +54: test\source_map_multiline_test.dart: Multi-line Source Maps Error in multi-line Function Call
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+00:00 +54: test\source_map_async_test.dart: Async Source Maps Nested async traces
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+00:00 +54: test\source_map_multiline_test.dart: Multi-line Source Maps Error in multi-line Function Call
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/source_map_multiline_test.dart:54:10)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 15
+Last OpCode: OpCode.sub
+00:00 +54: test\source_map_async_test.dart: Async Source Maps Nested async traces
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: level2, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: level1, isState: false
+DEBUG RUNTIME: NativeFunction delay returned Instance of 'Future<Null>'
+00:00 +55: test\source_map_test.dart: Source Maps Runtime error reports correct line number
+00:00 +55: test\source_map_multiline_test.dart: Multi-line Source Maps Error in nested multi-line structures
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/source_map_multiline_test.dart:74:10)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+00:00 +55: test\source_map_test.dart: Source Maps Runtime error reports correct line number
+DEBUG COMPILER: Unit has 4 declarations
+00:00 +55: test\source_map_multiline_test.dart: Multi-line Source Maps Error in nested multi-line structures
+IP: 11
+Last OpCode: OpCode.sub
+00:00 +55: test\source_map_test.dart: Source Maps Runtime error reports correct line number
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +56: test\source_map_test.dart: Source Maps Runtime error reports correct line number
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +56: test\source_map_multiline_test.dart: Multi-line Source Maps Stack trace shows original error site after catch
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +56: test\source_map_test.dart: Source Maps Runtime error reports correct line number
+DEBUG COMPILER: Compiling variable: a, isState: false
+00:00 +56: test\source_map_multiline_test.dart: Multi-line Source Maps Stack trace shows original error site after catch
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 13
+DEBUG COMPILER: Compiling statement type: TryStmt at line 6
+00:00 +56: test\source_map_test.dart: Source Maps Runtime error reports correct line number
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +56: test\source_map_multiline_test.dart: Multi-line Source Maps Stack trace shows original error site after catch
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 8
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: fail, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: wrapper, isState: false
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/source_map_multiline_test.dart:99:10)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 5
+Last OpCode: OpCode.sub
+00:00 +57: test\source_map_test.dart: Source Maps Runtime error reports correct line number
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/source_map_test.dart:19:25)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 20
+Last OpCode: OpCode.sub
+00:00 +58: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +58: test\source_map_async_test.dart: Async Source Maps Nested async traces
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.resumeCoroutine (package:flux_vm/src/vm.dart:232:29)
+#2      VM._run.<anonymous closure> (package:flux_vm/src/vm.dart:1327:19)
+#3      _rootRunUnary (dart:async/zone.dart:1422:47)
+#4      _CustomZone.runUnary (dart:async/zone.dart:1324:19)
+#5      Future._propagateToListeners.handleValueCallback (dart:async/future_impl.dart:902:45)
+#6      Future._propagateToListeners (dart:async/future_impl.dart:931:13)
+#7      Future._completeWithValue (dart:async/future_impl.dart:707:5)
+<asynchronous suspension>
+
+IP: 11
+Last OpCode: OpCode.sub
+00:00 +58: test\source_map_test.dart: Source Maps Stack trace shows function names and lines
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 9
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 13
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG VM RUNTIME EXCEPTION: type 'String' is not a subtype of type 'num' in type cast
+00:00 +58: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +58: test\source_map_test.dart: Source Maps Stack trace shows function names and lines
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:811:43)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/source_map_test.dart:49:25)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 5
+Last OpCode: OpCode.sub
+00:00 +58: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+00:00 +59: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: test, isState: false
+00:00 +60: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +61: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +62: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +63: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +64: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +65: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +66: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +67: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +68: test\state_inspector_test.dart: State Inspector getCallStack returns frame info during breakpoint
+00:00 +69: test\vm_test.dart: VM Execution executes simple bytecode
+00:00 +69: test\state_inspector_test.dart: State Inspector getLocals returns local variables
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 6
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: test, isState: false
+00:00 +70: test\vm_test.dart: VM Execution executes simple bytecode
+00:00 +70: test\state_inspector_test.dart: State Inspector getLocals works with function parameters
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "name" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "count" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "msg" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: msg, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: greet, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Added local "name" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "count" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "msg" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: msg, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: greet, isState: false
+00:00 +71: test\vm_test.dart: VM Execution executes simple bytecode
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +72: test\vm_test.dart: VM Execution executes print statement
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+Hello
+00:00 +73: test\vm_test.dart: VM Execution executes arithmetic
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+14
+00:00 +74: test\vm_test.dart: VM Execution executes function call
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 4
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: add, isState: false
+00:00 +75: test\vm_test.dart: VM Execution executes if statement
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+00:00 +76: test\vm_test.dart: VM Execution executes while loop
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: WhileStmt
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 5
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: i, isState: false
+00:00 +76 -1: test\vm_test.dart: VM Execution executes while loop [E]
+  Expected: '3'
+    Actual: <null>
+     Which: not an <Instance of 'String'>
+  
+  package:matcher          expect
+  test\vm_test.dart 202:7  main.<fn>.<fn>
+  
+00:00 +76 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

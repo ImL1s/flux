@@ -5,11 +5,29 @@ import 'package:shelf_web_socket/shelf_web_socket.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:watcher/watcher.dart';
 
-class ServeCommand {
+import 'package:args/command_runner.dart';
+
+class ServeCommand extends Command {
+  @override
+  final String name = 'serve';
+
+  @override
+  final String description = 'Serve a Flux script for Flutter client with hot reload.';
+
+  @override
+  final List<String> aliases = ['watch'];
+
   final List<WebSocketChannel> _clients = [];
 
-  Future<void> run(String filePath) async {
+  @override
+  Future<void> run() async {
+    if (argResults!.rest.isEmpty) {
+      print('Usage: flux serve <script.flux>');
+      exit(1);
+    }
+    final filePath = argResults!.rest.first;
     final file = File(filePath);
+
     if (!file.existsSync()) {
       print('Error: File not found: $filePath');
       exit(1);

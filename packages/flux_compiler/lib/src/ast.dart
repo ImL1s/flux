@@ -65,10 +65,12 @@ class GroupingExpr extends Expression {
 /// Assignment expression (a = b)
 class AssignExpr extends Expression {
   final String name;
+  final int? nameLine;
+  final int? nameColumn;
   final Expression value;
 
   const AssignExpr(this.name, this.value,
-      {required super.line, required super.column});
+      {this.nameLine, this.nameColumn, required super.line, required super.column});
 }
 
 /// Function call expression
@@ -94,10 +96,12 @@ class GetExpr extends Expression {
 class SetExpr extends Expression {
   final Expression object;
   final String name;
+  final int? nameLine;
+  final int? nameColumn;
   final Expression value;
 
   const SetExpr(this.object, this.name, this.value,
-      {required super.line, required super.column});
+      {this.nameLine, this.nameColumn, required super.line, required super.column});
 }
 
 /// Index access (a[b])
@@ -200,12 +204,14 @@ class ExpressionStmt extends Statement {
 /// Variable declaration
 class VarDeclStmt extends Statement {
   final String name;
+  final int? nameLine;
+  final int? nameColumn;
   final String? type;
   final Expression? initializer;
   final bool isMutable;
 
   const VarDeclStmt(this.name,
-      {this.type, this.initializer, this.isMutable = true, required super.line, required super.column});
+      {this.nameLine, this.nameColumn, this.type, this.initializer, this.isMutable = true, required super.line, required super.column});
 }
 
 /// Block statement
@@ -307,35 +313,41 @@ sealed class Declaration extends Statement {
 /// Function declaration
 class FunctionDecl extends Declaration {
   final String name;
+  final int? nameLine;
+  final int? nameColumn;
   final List<Parameter> parameters;
   final String? returnType;
   final BlockStmt body;
   final bool isAsync;
 
   const FunctionDecl(this.name, this.parameters, this.body,
-      {this.returnType, this.isAsync = false, required super.line, required super.column});
+      {this.nameLine, this.nameColumn, this.returnType, this.isAsync = false, required super.line, required super.column});
 }
 
 /// Class declaration
 class ClassDecl extends Declaration {
   final String name;
+  final int? nameLine;
+  final int? nameColumn;
   final String? superclass;
   final List<String> interfaces;
   final List<Declaration> members;
 
   const ClassDecl(this.name, this.members,
-      {this.superclass, this.interfaces = const [], required super.line, required super.column});
+      {this.nameLine, this.nameColumn, this.superclass, this.interfaces = const [], required super.line, required super.column});
 }
 
 /// Widget declaration (Flux-specific)
 class WidgetDecl extends Declaration {
   final String name;
+  final int? nameLine;
+  final int? nameColumn;
   final List<Parameter> props;
   final List<StateField> stateFields;
   final BuildBlock buildBlock;
 
   const WidgetDecl(this.name, this.props, this.stateFields, this.buildBlock,
-      {required super.line, required super.column});
+      {this.nameLine, this.nameColumn, required super.line, required super.column});
 }
 
 /// Import declaration
@@ -356,21 +368,25 @@ class ImportDecl extends Declaration {
 /// Function parameter
 class Parameter {
   final String name;
+  final int? line;
+  final int? column;
   final String? type;
   final Expression? defaultValue;
   final bool isRequired;
 
   const Parameter(this.name,
-      {this.type, this.defaultValue, this.isRequired = true});
+      {this.line, this.column, this.type, this.defaultValue, this.isRequired = true});
 }
 
 /// State field in a widget
 class StateField {
   final String name;
+  final int? line;
+  final int? column;
   final String? type;
   final Expression initialValue;
 
-  const StateField(this.name, this.initialValue, {this.type});
+  const StateField(this.name, this.initialValue, {this.line, this.column, this.type});
 }
 
 /// Build block in a widget

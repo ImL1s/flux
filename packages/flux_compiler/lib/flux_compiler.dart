@@ -7,4 +7,5 @@ export 'src/ast.dart';
 export 'src/parser.dart';
 export 'src/bytecode.dart';
 export 'src/compiler.dart';
+export 'src/optimizer.dart';
 // Force reload

@@ -85,7 +85,9 @@ class Parser {
   }
 
   FunctionDecl _functionDeclaration(bool isAsync) {
-    final name = _consume(TokenType.identifier, 'Expect function name.').lexeme;
+    final fnToken = _previous;
+    final nameToken = _consume(TokenType.identifier, 'Expect function name.');
+    final name = nameToken.lexeme;
     
     _consume(TokenType.leftParen, 'Expect "(" after function name.');
     final parameters = <Parameter>[];
@@ -95,7 +97,8 @@ class Parser {
           _error(_peek, 'Can\'t have more than 255 parameters.');
         }
         
-        final paramName = _consume(TokenType.identifier, 'Expect parameter name.').lexeme;
+        final paramToken = _consume(TokenType.identifier, 'Expect parameter name.');
+        final paramName = paramToken.lexeme;
         String? type;
         if (_match(TokenType.colon)) {
            // Simple type parsing for now (just identifiers)
@@ -107,7 +110,7 @@ class Parser {
           defaultValue = _expression();
         }
 
-        parameters.add(Parameter(paramName, type: type, defaultValue: defaultValue));
+        parameters.add(Parameter(paramName, line: paramToken.line, column: paramToken.column, type: type, defaultValue: defaultValue));
       } while (_match(TokenType.comma));
     }
     _consume(TokenType.rightParen, 'Expect ")" after parameters.');
@@ -121,11 +124,14 @@ class Parser {
     final body = _block();
 
     return FunctionDecl(name, parameters, body, 
-        returnType: returnType, isAsync: isAsync, line: _peek.line, column: _peek.column);
+        nameLine: nameToken.line, nameColumn: nameToken.column,
+        returnType: returnType, isAsync: isAsync, line: fnToken.line, column: fnToken.column);
   }
 
   WidgetDecl _widgetDeclaration() {
-    final name = _consume(TokenType.identifier, 'Expect widget name.').lexeme;
+    final widgetToken = _previous;
+    final nameToken = _consume(TokenType.identifier, 'Expect widget name.');
+    final name = nameToken.lexeme;
     _consume(TokenType.leftBrace, 'Expect "{" before widget body.');
 
     final props = <Parameter>[];
@@ -134,7 +140,8 @@ class Parser {
 
     while (!_check(TokenType.rightBrace) && !_isAtEnd) {
       if (_match(TokenType.state)) {
-        final fieldName = _consume(TokenType.identifier, 'Expect state variable name.').lexeme;
+        final fieldToken = _consume(TokenType.identifier, 'Expect state variable name.');
+        final fieldName = fieldToken.lexeme;
         print('DEBUG PARSER: Found state field: $fieldName'); // DEBUG
         String? type;
         if (_match(TokenType.colon)) {
@@ -143,15 +150,16 @@ class Parser {
         _consume(TokenType.equal, 'State fields must be initialized.');
         final initializer = _expression();
         _match(TokenType.semicolon); 
-        stateFields.add(StateField(fieldName, initializer, type: type));
+        stateFields.add(StateField(fieldName, initializer, line: fieldToken.line, column: fieldToken.column, type: type));
       } else if (_match(TokenType.props)) {
         do {
-          final propName = _consume(TokenType.identifier, 'Expect property name.').lexeme;
+          final propToken = _consume(TokenType.identifier, 'Expect property name.');
+          final propName = propToken.lexeme;
           String? type;
           if (_match(TokenType.colon)) {
             type = _consume(TokenType.identifier, 'Expect property type.').lexeme;
           }
-          props.add(Parameter(propName, type: type, isRequired: true));
+          props.add(Parameter(propName, line: propToken.line, column: propToken.column, type: type, isRequired: true));
         } while (_match(TokenType.comma));
         _consume(TokenType.semicolon, 'Expect ";" after properties.');
       } else if (_match(TokenType.build)) {
@@ -175,12 +183,15 @@ class Parser {
       throw _error(_previous, 'Widget must have a build block.');
     }
 
-    print('DEBUG PARSER: Widget $name parsed. StateFields: ${stateFields.length}'); // DEBUG
-    return WidgetDecl(name, props, stateFields, buildBlock!, line: _peek.line, column: _peek.column);
+    return WidgetDecl(name, props, stateFields, buildBlock!, 
+        nameLine: nameToken.line, nameColumn: nameToken.column,
+        line: widgetToken.line, column: widgetToken.column);
   }
 
   ClassDecl _classDeclaration() {
-    final name = _consume(TokenType.identifier, 'Expect class name.').lexeme;
+    final classToken = _previous;
+    final nameToken = _consume(TokenType.identifier, 'Expect class name.');
+    final name = nameToken.lexeme;
     
     String? superclass;
     if (_match(TokenType.extends_)) {
@@ -207,7 +218,9 @@ class Parser {
     }
     _consume(TokenType.rightBrace, 'Expect "}" after class body.');
 
-    return ClassDecl(name, members, superclass: superclass, line: _peek.line, column: _peek.column);
+    return ClassDecl(name, members, 
+        nameLine: nameToken.line, nameColumn: nameToken.column,
+        superclass: superclass, line: classToken.line, column: classToken.column);
   }
 
   ImportDecl _importDeclaration() {
@@ -365,7 +378,8 @@ class Parser {
     final keyword = _previous;
     final isMutable = keyword.type == TokenType.var_;
     
-    final name = _consume(TokenType.identifier, 'Expect variable name.').lexeme;
+    final nameToken = _consume(TokenType.identifier, 'Expect variable name.');
+    final name = nameToken.lexeme;
     
     String? type;
     if (_match(TokenType.colon)) {
@@ -378,7 +392,9 @@ class Parser {
     }
 
     _match(TokenType.semicolon); // Optional semicolon
-    return VarDeclStmt(name, type: type, initializer: initializer, isMutable: isMutable, line: keyword.line, column: keyword.column);
+    return VarDeclStmt(name, 
+        nameLine: nameToken.line, nameColumn: nameToken.column,
+        type: type, initializer: initializer, isMutable: isMutable, line: keyword.line, column: keyword.column);
   }
 
   Statement _expressionStatement() {
@@ -403,9 +419,9 @@ class Parser {
       final value = _assignment();
 
       if (expr is VariableExpr) {
-        return AssignExpr(expr.name, value, line: equals.line, column: equals.column);
+        return AssignExpr(expr.name, value, nameLine: expr.line, nameColumn: expr.column, line: equals.line, column: equals.column);
       } else if (expr is GetExpr) {
-        return SetExpr(expr.object, expr.name, value, line: equals.line, column: equals.column);
+        return SetExpr(expr.object, expr.name, value, nameLine: expr.line, nameColumn: expr.column, line: equals.line, column: equals.column);
       } else if (expr is IndexExpr) {
         return IndexAssignExpr(expr.object, expr.index, value, line: equals.line, column: equals.column);
       }
@@ -649,13 +665,14 @@ class Parser {
           _error(_peek, 'Can\'t have more than 255 parameters.');
         }
         
-        final paramName = _consume(TokenType.identifier, 'Expect parameter name.').lexeme;
+        final paramToken = _consume(TokenType.identifier, 'Expect parameter name.');
+        final paramName = paramToken.lexeme;
         String? type;
         if (_match(TokenType.colon)) {
           type = _consume(TokenType.identifier, 'Expect parameter type.').lexeme;
         }
         
-        parameters.add(Parameter(paramName, type: type));
+        parameters.add(Parameter(paramName, line: paramToken.line, column: paramToken.column, type: type));
       } while (_match(TokenType.comma));
     }
     _consume(TokenType.rightParen, 'Expect ")" after parameters.');

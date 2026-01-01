@@ -791,6 +791,9 @@ class VM {
           case OpCode.pop:
             if (_stack.isNotEmpty) _stack.removeLast();
             break;
+            
+          case OpCode.noOp:
+            break;
 
           case OpCode.add:
             final b = _stack.removeLast();
@@ -909,9 +912,21 @@ class VM {
 
           // Control flow
           case OpCode.jumpIfFalse:
-            final offset = readByte();
+            final offsetLow = readByte();
+            final offsetHigh = readByte();
+            final offset = offsetLow | (offsetHigh << 8);
             final condition = _stack.last;
             if (!_isTruthy(condition)) {
+              frame.ip += offset;
+            }
+            break;
+
+          case OpCode.jumpIfTrue:
+            final offsetLow = readByte();
+            final offsetHigh = readByte();
+            final offset = offsetLow | (offsetHigh << 8);
+            final condition = _stack.last;
+            if (_isTruthy(condition)) {
               frame.ip += offset;
             }
             break;

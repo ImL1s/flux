@@ -6,7 +6,9 @@ import 'ast.dart';
 import 'token.dart';
 import 'bytecode.dart';
 import 'lexer.dart';
+import 'lexer.dart';
 import 'parser.dart';
+import 'optimizer.dart';
 
 class Local {
   final String name;
@@ -167,10 +169,25 @@ class Compiler {
     return false;
   }
   
-  CompiledFunction endCompiler() {
-      chunk.writeOp(OpCode.nil, 0);
-      chunk.writeOp(OpCode.return_, 0);
-      return _function;
+  CompiledFunction endCompiler([int line = 0]) {
+    // Only write implicit return if the last instruction isn't already a return or throw
+    bool needsReturn = true;
+    if (chunk.code.isNotEmpty) {
+      final lastOp = OpCode.values[chunk.code.last];
+      if (lastOp == OpCode.return_ || lastOp == OpCode.throw_) {
+        needsReturn = false;
+      }
+    }
+
+    if (needsReturn) {
+      chunk.writeOp(OpCode.nil, line);
+      chunk.writeOp(OpCode.return_, line);
+    }
+    
+    // Run Post-Pass Optimization
+    BytecodeOptimizer.optimize(chunk);
+    
+    return _function;
   }
 
   void _compileWidgetDecl(WidgetDecl stmt) {
@@ -207,9 +224,7 @@ class Compiler {
       }
       
       buildCompiler._compileExpression(stmt.buildBlock.body);
-      buildCompiler.chunk.writeOp(OpCode.return_, stmt.line);
-      
-      final buildFunc = buildCompiler._function;
+      final buildFunc = buildCompiler.endCompiler(stmt.line);
      
      // Create CompiledWidget with state field information
      final widgetObj = CompiledWidget(
@@ -220,9 +235,8 @@ class Compiler {
          // Compile each initializer to a separate chunk
          final initCompiler = Compiler._inner(this, "${stmt.name}.state.${f.name}");
          initCompiler._compileExpression(f.initialValue);
-         initCompiler.chunk.writeOp(OpCode.return_, stmt.line);
-         return initCompiler._function;
-       }).toList(),
+          return initCompiler.endCompiler(stmt.line);
+        }).toList(),
      );
      
      final idx = chunk.addConstant(widgetObj);
@@ -266,15 +280,8 @@ class Compiler {
     // Capture local variable names for debugger inspection
     funcCompiler._function.localNames = funcCompiler._locals.map((l) => l.name).toList();
     
-    // Ensure function returns nil if no explicit return
-    funcCompiler.chunk.writeOp(OpCode.nil, stmt.line);
-    funcCompiler.chunk.writeOp(OpCode.return_, stmt.line);
-    
-    // End scope (parameters)
-    // Note: We don't pop locals at end since return handles cleanup
-    
-    // Store compiled function as constant
-    final funcObj = funcCompiler._function;
+    // Store compiled function as constant with optimization
+    final funcObj = funcCompiler.endCompiler(stmt.line);
     final idx = chunk.addConstant(funcObj);
     chunk.writeOp(OpCode.closure, stmt.line);
     chunk.write(idx, stmt.line);
@@ -757,13 +764,20 @@ class Compiler {
   int _emitJump(OpCode op, int line) {
     chunk.writeOp(op, line);
     chunk.write(0xff, line); 
-    return chunk.code.length - 1;
+    chunk.write(0xff, line); 
+    return chunk.code.length - 2;
   }
 
   void _patchJump(int offset) {
-    int jump = chunk.code.length - offset - 1;
-    if (jump > 255) throw Exception("Jump too large!");
-    chunk.code[offset] = jump;
+    // -2 to adjust for the bytecode for the jump offset itself.
+    int jump = chunk.code.length - offset - 2;
+
+    if (jump > 65535) {
+      throw Exception("Jump too large!");
+    }
+
+    chunk.code[offset] = jump & 0xff;
+    chunk.code[offset + 1] = (jump >> 8) & 0xff;
   }
   
   void _emitLoop(int loopStart, int line) {
@@ -881,11 +895,7 @@ class Compiler {
           methodCompiler.compile(s);
         }
         
-        // Implicit nil return
-        methodCompiler.chunk.writeOp(OpCode.nil, member.line);
-        methodCompiler.chunk.writeOp(OpCode.return_, member.line);
-        
-        methods[member.name] = methodCompiler._function;
+        methods[member.name] = methodCompiler.endCompiler(member.line);
       }
       // TODO: Add field support when FieldDecl is available
     }
