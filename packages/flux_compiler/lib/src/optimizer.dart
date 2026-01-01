@@ -257,6 +257,7 @@ static bool _isSideEffectFree(OpCode op) {
          return 2;
 
       case OpCode.invoke: 
+      case OpCode.invokeSuper:
       case OpCode.callNamed: 
       case OpCode.buildWidget: 
          return 3;

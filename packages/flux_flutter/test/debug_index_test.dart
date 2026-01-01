@@ -27,12 +27,11 @@ void main() {
   ''';
 
   final runtime = FluxRuntime(
-    source: source,
-    widgetName: 'TestWidget',
+    source,
   );
   
   try {
-    final widget = runtime.buildWidget();
+    final widget = runtime.renderWidget('TestWidget');
     print('SUCCESS: Built widget: ${widget.runtimeType}');
   } catch (e, stack) {
     print('ERROR: $e');

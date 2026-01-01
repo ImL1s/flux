@@ -1,0 +1,69 @@
+Analyzing vm.dart...
+
+  error - vm.dart:693:19 - The body might complete normally, causing 'null' to be returned, but the return type, 'InterpretResult', is a potentially non-nullable type. Try adding either a return or a throw statement at the end. - body_might_complete_normally
+  error - vm.dart:695:5 - A try block must be followed by an 'on', 'catch', or 'finally' clause. Try adding either a catch or finally clause, or remove the try statement. - missing_catch_or_finally
+  error - vm.dart:797:9 - The type 'OpCode' is not exhaustively matched by the switch cases since it doesn't match 'OpCode.defineState'. Try adding a default case or cases that match 'OpCode.defineState'. - non_exhaustive_switch_statement
+  error - vm.dart:1302:11 - 'case' can't be used as an identifier because it's a keyword. Try renaming this to be an identifier that isn't a keyword. - expected_identifier_but_got_keyword
+  error - vm.dart:1302:11 - Expected a statement. - missing_statement
+  error - vm.dart:1302:11 - Expected to find ';'. - expected_token
+  error - vm.dart:1302:11 - Undefined name 'case'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1302:23 - Expected to find ';'. - expected_token
+  error - vm.dart:1302:29 - Expected an identifier. - missing_identifier
+  error - vm.dart:1302:29 - Unexpected text ':'. Try removing the text. - unexpected_token
+  error - vm.dart:1328:11 - 'case' can't be used as an identifier because it's a keyword. Try renaming this to be an identifier that isn't a keyword. - expected_identifier_but_got_keyword
+  error - vm.dart:1328:11 - Expected a statement. - missing_statement
+  error - vm.dart:1328:11 - Expected to find ';'. - expected_token
+  error - vm.dart:1328:11 - Undefined name 'case'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1328:23 - Expected to find ';'. - expected_token
+  error - vm.dart:1328:34 - Expected an identifier. - missing_identifier
+  error - vm.dart:1328:34 - Unexpected text ':'. Try removing the text. - unexpected_token
+  error - vm.dart:1329:19 - The name 'nameIdx' is already defined. Try renaming one of the declarations. - duplicate_definition
+           - The first definition of this name at vm.dart:1303:19.
+  error - vm.dart:1330:19 - The name 'argCount' is already defined. Try renaming one of the declarations. - duplicate_definition
+           - The first definition of this name at vm.dart:1304:19.
+  error - vm.dart:1331:19 - The name 'name' is already defined. Try renaming one of the declarations. - duplicate_definition
+           - The first definition of this name at vm.dart:1305:19.
+  error - vm.dart:1334:19 - The name 'args' is already defined. Try renaming one of the declarations. - duplicate_definition
+           - The first definition of this name at vm.dart:1308:19.
+  error - vm.dart:1340:19 - The name 'instance' is already defined. Try renaming one of the declarations. - duplicate_definition
+           - The first definition of this name at vm.dart:1314:19.
+  error - vm.dart:1376:11 - 'case' can't be used as an identifier because it's a keyword. Try renaming this to be an identifier that isn't a keyword. - expected_identifier_but_got_keyword
+  error - vm.dart:1376:11 - Expected a statement. - missing_statement
+  error - vm.dart:1376:11 - Expected to find ';'. - expected_token
+  error - vm.dart:1376:11 - Undefined name 'case'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1376:23 - Expected to find ';'. - expected_token
+  error - vm.dart:1376:29 - Expected an identifier. - missing_identifier
+  error - vm.dart:1376:29 - Unexpected text ':'. Try removing the text. - unexpected_token
+  error - vm.dart:1426:11 - 'default' can't be used as an identifier because it's a keyword. Try renaming this to be an identifier that isn't a keyword. - expected_identifier_but_got_keyword
+  error - vm.dart:1426:11 - Expected a statement. - missing_statement
+  error - vm.dart:1426:11 - Expected to find ';'. - expected_token
+  error - vm.dart:1426:11 - Undefined name 'default'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1426:18 - Expected an identifier. - missing_identifier
+  error - vm.dart:1426:18 - Unexpected text ':'. Try removing the text. - unexpected_token
+  error - vm.dart:1430:7 - Expected a class member. Try placing this code inside a class member. - expected_class_member
+  error - vm.dart:1430:13 - Expected an identifier. - missing_identifier
+  error - vm.dart:1450:26 - Undefined name '_awaitingFuture'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1455:12 - Undefined name '_exceptionHandlers'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1456:23 - Undefined name '_exceptionHandlers'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1459:33 - Undefined name '_frames'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1464:14 - Undefined name '_frames'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1465:9 - Undefined name '_frames'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1469:14 - Undefined name '_stack'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1470:9 - Undefined name '_stack'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1474:7 - Undefined name '_stack'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1477:11 - Undefined name '_frames'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1478:9 - Undefined name '_frames'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1491:5 - Undefined name '_stack'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1495:7 - Undefined name '_stack'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1499:51 - Undefined name '_stack'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1500:5 - Undefined name '_frames'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - vm.dart:1502:1 - Expected a method, getter, setter or operator declaration. This appears to be incomplete code. Try removing it or completing it. - expected_executable
+warning - vm.dart:1302:11 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code
+warning - vm.dart:1329:19 - The value of the local variable 'nameIdx' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - vm.dart:1330:19 - The value of the local variable 'argCount' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - vm.dart:1331:19 - The value of the local variable 'name' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - vm.dart:1334:19 - The value of the local variable 'args' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - vm.dart:1340:19 - The value of the local variable 'instance' isn't used. Try removing the variable or using it. - unused_local_variable
+warning - vm.dart:1341:17 - Unnecessary type check; the result is always 'true'. Try correcting the type check, or removing the type check. - unnecessary_type_check
+
+60 issues found.

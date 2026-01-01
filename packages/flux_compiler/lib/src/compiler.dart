@@ -272,6 +272,7 @@ class Compiler {
       }
       
       buildCompiler._compileExpression(stmt.buildBlock.body);
+      buildCompiler._emit(OpCode.return_, stmt.line, stmt.column);
       final buildFunc = buildCompiler.endCompiler(stmt.line);
      
      // Create CompiledWidget with state field information
@@ -283,6 +284,7 @@ class Compiler {
          // Compile each initializer to a separate chunk
          final initCompiler = Compiler._inner(this, "${stmt.name}.state.${f.name}");
          initCompiler._compileExpression(f.initialValue);
+         initCompiler._emit(OpCode.return_, stmt.line, stmt.column);
           return initCompiler.endCompiler(stmt.line);
         }).toList(),
      );
@@ -473,8 +475,6 @@ class Compiler {
     
     _enclosingTrys.removeLast();
     
-    _enclosingTrys.removeLast();
-    
     // 2. Success Path
     _emit(OpCode.endTry, stmt.line, stmt.column);  // Remove handler on success
     
@@ -624,8 +624,29 @@ class Compiler {
        _compileLambda(expr);
     } else if (expr is GetExpr) {
        _compileGetExpr(expr);
+    } else if (expr is SetExpr) {
+       _compileSetExpr(expr);
+    } else if (expr is ThisExpr) {
+      _compileThis(expr);
+    } else if (expr is SuperExpr) {
+      _compileSuper(expr);
     }
   }
+  
+  void _compileThis(ThisExpr expr) {
+    _emit(OpCode.getLocal, expr.line, expr.column);
+    chunk.write(0, expr.line); // 'this' is always at slot 0 in methods
+  }
+
+  void _compileSuper(SuperExpr expr) {
+  if (expr.method == null) {
+    throw 'Super must be followed by a method name.';
+  }
+  
+  // For super.method(...), we just push 'this'.
+  // The call handling will emit invokeSuper.
+  _compileThis(ThisExpr(line: expr.line, column: expr.column));
+}
   
   void _compileGetExpr(GetExpr expr) {
     // Compile the object first
@@ -633,6 +654,17 @@ class Compiler {
     // Emit getProperty with property name
     final nameIdx = chunk.addConstant(expr.name);
     _emit(OpCode.getProperty, expr.line, expr.column);
+    chunk.write(nameIdx, expr.line);
+  }
+
+  void _compileSetExpr(SetExpr expr) {
+    // Compile object and value
+    _compileExpression(expr.object);
+    _compileExpression(expr.value);
+    
+    // Emit setProperty with property name
+    final nameIdx = chunk.addConstant(expr.name);
+    _emit(OpCode.setProperty, expr.line, expr.column);
     chunk.write(nameIdx, expr.line);
   }
   
@@ -779,15 +811,55 @@ class Compiler {
   }
 
   void _compileCall(CallExpr expr) {
-    if (expr.callee is VariableExpr && (expr.callee as VariableExpr).name == 'print') {
-      if (expr.arguments.length != 1) throw Exception("print() takes 1 argument.");
-      _compileExpression(expr.arguments[0]);
-      chunk.writeOp(OpCode.print, expr.line);
-      chunk.writeOp(OpCode.nil, expr.line); 
-      return;
-    }
+  if (expr.callee is VariableExpr && (expr.callee as VariableExpr).name == 'print') {
+    if (expr.arguments.length != 1) throw Exception("print() takes 1 argument.");
+    _compileExpression(expr.arguments[0]);
+    chunk.writeOp(OpCode.print, expr.line);
+    chunk.writeOp(OpCode.nil, expr.line); 
+    return;
+  }
 
-    _compileExpression(expr.callee);
+  if (expr.callee is SuperExpr) {
+    final superExpr = expr.callee as SuperExpr;
+    if (superExpr.method == null) throw 'Super must be followed by a method name.';
+    
+    // Load 'this'
+    _compileThis(ThisExpr(line: expr.line, column: expr.column));
+    
+    // Positional arguments
+    for (final arg in expr.arguments) {
+      _compileExpression(arg);
+    }
+    
+    // Emit invokeSuper
+    _emit(OpCode.invokeSuper, expr.line, expr.column);
+    final nameIdx = chunk.addConstant(superExpr.method!);
+    chunk.write(nameIdx, expr.line);
+    chunk.write(expr.arguments.length, expr.line);
+    return;
+  }
+
+  // Optimization for method calls (obj.method(...))
+  if (expr.callee is GetExpr && expr.namedArguments.isEmpty) {
+    final getExpr = expr.callee as GetExpr;
+    
+    // 1. Compile object (receiver)
+    _compileExpression(getExpr.object);
+    
+    // 2. Compile arguments
+    for (final arg in expr.arguments) {
+      _compileExpression(arg);
+    }
+    
+    // 3. Emit invoke
+    _emit(OpCode.invoke, expr.line, expr.column);
+    final nameIdx = chunk.addConstant(getExpr.name);
+    chunk.write(nameIdx, expr.line);
+    chunk.write(expr.arguments.length, expr.line);
+    return;
+  }
+
+  _compileExpression(expr.callee);
     
     // Positional arguments
     for (final arg in expr.arguments) {
@@ -943,6 +1015,13 @@ class Compiler {
         // Compile method body
         for (final s in member.body.statements) {
           methodCompiler.compile(s);
+        }
+        
+        // If it's 'init', we must return 'this' explicitly
+        if (member.name == 'init') {
+          methodCompiler._emit(OpCode.getLocal, member.line, 0);
+          methodCompiler.chunk.write(0, member.line); // slot 0 (this)
+          methodCompiler._emit(OpCode.return_, member.line, 0);
         }
         
         methods[member.name] = methodCompiler.endCompiler(member.line);

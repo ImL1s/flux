@@ -1,0 +1,1 @@
+print("VM is running");

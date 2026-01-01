@@ -2,25 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_flutter/src/flux_context.dart';
 
-class DialogModule implements FluxModule {
-  @override
-  String get name => 'dialog';
-
-  @override
-  void register(VM vm) {
-    vm.registerFunction('alert', _alert);
-    vm.registerFunction('confirm', _confirm);
-    vm.registerFunction('toast', _toast);
+class DialogModule extends FluxModule {
+  DialogModule() : super('dialog') {
+    register('alert', AsyncNativeFunction('dialog.alert', 1, _alert));
+    register('confirm', AsyncNativeFunction('dialog.confirm', 1, _confirm));
+    register('toast', NativeFunction('dialog.toast', 1, _toast));
   }
 
-  Future<void> _alert(List<dynamic> args) async {
+  Future<Object?> _alert(List<Object?> args) async {
     final message = args.isNotEmpty ? args[0].toString() : '';
     final title = args.length > 1 ? args[1].toString() : 'Alert';
 
     final context = fluxNavigatorKey.currentContext;
     if (context == null) {
       debugPrint('Flux DialogModule: No context available for alert.');
-      return;
+      return null;
     }
 
     await showDialog(
@@ -36,9 +32,10 @@ class DialogModule implements FluxModule {
         ],
       ),
     );
+    return null;
   }
 
-  Future<bool> _confirm(List<dynamic> args) async {
+  Future<Object?> _confirm(List<Object?> args) async {
     final message = args.isNotEmpty ? args[0].toString() : 'Confirm?';
     final title = args.length > 1 ? args[1].toString() : 'Confirm';
 
@@ -68,12 +65,12 @@ class DialogModule implements FluxModule {
     return result ?? false;
   }
 
-  void _toast(List<dynamic> args) {
+  Object? _toast(List<Object?> args) {
     final message = args.isNotEmpty ? args[0].toString() : '';
     final context = fluxNavigatorKey.currentContext;
     if (context == null) {
       debugPrint('Flux DialogModule: No context available for toast.');
-      return;
+      return null;
     }
 
     // Attempt to find ScaffoldMessenger
@@ -84,5 +81,7 @@ class DialogModule implements FluxModule {
     } catch (e) {
       debugPrint('Flux DialogModule: Failed to show toast: $e');
     }
+    return null;
   }
 }
+

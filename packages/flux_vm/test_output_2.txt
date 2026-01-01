@@ -14,7 +14,7 @@ DEBUG COMPILER: Compiling variable: Box, isState: false
 DEBUG COMPILER: Compiling decl type: ExpressionStmt
 DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
 DEBUG COMPILER: Compiling variable: b, isState: false
-DEBUG VM RUNTIME EXCEPTION: Cannot get property from Null
+DEBUG VM RUNTIME EXCEPTION: Cannot get property from ObjClosure
 Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1258:15)
 #1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
 #2      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/class_test.dart:32:10)
@@ -25,11 +25,11 @@ Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1258:15)
 #5      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
 <asynchronous suspension>
 
-IP: 18
-Last OpCode: OpCode.add
+IP: 6
+Last OpCode: OpCode.nil
 00:00 +0 -1: Class System Class instantiation and method call [E]
   Expected: <1>
-    Actual: <2>
+    Actual: <3>
   
   package:matcher            expect
   test\class_test.dart 34:7  main.<fn>.<fn>
@@ -51,17 +51,38 @@ DEBUG COMPILER: Added local "breed" at slot 2 [Depth: 1]
 DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
 DEBUG COMPILER: Compiling variable: name, isState: false
 DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 20
+DEBUG COMPILER: Compiling variable: Dog, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 21
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG VM RUNTIME EXCEPTION: Cannot get property from ObjClosure
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1258:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/class_test.dart:71:10)
+#3      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#4      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#5      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 4
+Last OpCode: OpCode.constant
 00:00 +0 -2: Class System Inheritance and super calls [E]
-  RangeError (length): Invalid value: Only valid value is 0: 1
-  dart:core                                        List.[]
-  package:flux_compiler/src/optimizer.dart 292:33  BytecodeOptimizer._matchConstantFolding
-  package:flux_compiler/src/optimizer.dart 177:25  BytecodeOptimizer._foldConstants
-  package:flux_compiler/src/optimizer.dart 9:28    BytecodeOptimizer.optimize
-  package:flux_compiler/src/compiler.dart 207:23   Compiler.endCompiler
-  package:flux_compiler/src/compiler.dart 985:47   Compiler._compileClassDecl
-  package:flux_compiler/src/compiler.dart 162:7    Compiler.compile
-  package:flux_compiler/src/compiler.dart 128:15   new Compiler
-  test\class_test.dart 67:24                       main.<fn>.<fn>
+  Expected: 'Buddy the Golden woofs'
+    Actual: 'Runtime Error: Cannot get property from ObjClosure'
+     Which: is different.
+            Expected: Buddy the  ...
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher            expect
+  test\class_test.dart 73:7  main.<fn>.<fn>
   
 00:00 +0 -2: Some tests failed.
 

@@ -1,0 +1,98 @@
+00:00 +0: loading test/class_test.dart
+00:00 +0: Class System Class instantiation and method call
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "val" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling variable: Box, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG VM: Instantiating class Box. Instance: <Box instance>
+DEBUG VM: Invoking method open on instance FluxInstance
+DEBUG VM: getProperty value on FluxInstance
+DEBUG VM RUNTIME EXCEPTION: Undefined property: Box.value
+Stack Trace: #0      FluxInstance.getProperty (package:flux_vm/src/vm.dart:61:5)
+#1      VM._run (package:flux_vm/src/vm.dart:1243:33)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/class_test.dart:32:10)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 6
+Last OpCode: OpCode.nil
+00:00 +0 -1: Class System Class instantiation and method call [E]
+  Expected: <1>
+    Actual: <3>
+  
+  package:matcher            expect
+  test\class_test.dart 34:7  main.<fn>.<fn>
+  
+00:00 +0 -1: Class System Inheritance and super calls
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "name" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 10
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "name" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "breed" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: name, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 20
+DEBUG COMPILER: Compiling variable: Dog, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 21
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG VM: Instantiating class Dog. Instance: <Dog instance>
+DEBUG VM: Invoking method speak on instance FluxInstance
+DEBUG VM: getProperty name on FluxInstance
+DEBUG VM RUNTIME EXCEPTION: Undefined property: Dog.name
+Stack Trace: #0      FluxInstance.getProperty (package:flux_vm/src/vm.dart:61:5)
+#1      VM._run (package:flux_vm/src/vm.dart:1243:33)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/class_test.dart:71:10)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 4
+Last OpCode: OpCode.constant
+00:00 +0 -2: Class System Inheritance and super calls [E]
+  Expected: 'Buddy the Golden woofs'
+    Actual: 'Runtime Error: Undefined property: Dog.name'
+     Which: is different.
+            Expected: Buddy the  ...
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher            expect
+  test\class_test.dart 73:7  main.<fn>.<fn>
+  
+00:00 +0 -2: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

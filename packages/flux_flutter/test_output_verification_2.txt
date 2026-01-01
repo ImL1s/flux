@@ -1,0 +1,1940 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/debug_index_test.dart
+DEBUG RUNTIME: Source:     widget TestWidget {
+      state todos = [];
+      
+      build {
+        Column {
+          Button("Add", onPressed: fn() {
+            push(todos, "Item 1");
+          })
+          Column {
+            var i = 0;
+            while (i < todos.length) {
+              var todo = todos[i];
+              Text(todo)
+              i = i + 1;
+            }
+          }
+        }
+      }
+    }
+  
+DEBUG PARSER: Found state field: todos
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [todos]
+BuildCompiler created. _stateFields: [todos]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 16
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 16
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [todos]
+BuildCompiler created. _stateFields: [todos]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 16
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 16
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG renderWidget: node=FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: []), FluxWidgetNode(Column, args: {}, children: [])])
+SUCCESS: Built widget: Column
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +1: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +2: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +3: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +4: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +5: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +5: D:/OtherProject/mine/flux/packages/flux_flutter/test/deep_inspection_test.dart: Deep Object Inspection Test Verifies deep inspection of List and Map
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "list" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "map" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Added local "x" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: main, isState: false
+00:00 +6: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+DEBUG RUNTIME: Source:         widget AsyncTest {
+          state result = "pending";
+
+          build {
+            Column {
+              Text(result)
+              Button("Start", onPressed: async fn() {
+                result = await delay_return("completed");
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: result
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget AsyncTest, State: [result]
+BuildCompiler created. _stateFields: [result]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: result, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: delay_return, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget AsyncTest, State: [result]
+BuildCompiler created. _stateFields: [result]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: result, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: delay_return, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=completed, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175501159
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await await with immediate resolution
+DEBUG RUNTIME: Source:         widget ImmediateAsyncTest {
+          state value = "waiting";
+
+          build {
+            Column {
+              Text(value)
+              Button("Go", onPressed: async fn() {
+                value = await immediate_return();
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: value
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ImmediateAsyncTest, State: [value]
+BuildCompiler created. _stateFields: [value]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: value, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: immediate_return, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ImmediateAsyncTest, State: [value]
+BuildCompiler created. _stateFields: [value]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: value, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: immediate_return, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=instant, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175579337
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +8: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Sequential Awaits multiple sequential awaits execute in order
+DEBUG RUNTIME: Source:         widget SequentialTest {
+          state log = "";
+
+          build {
+            Column {
+              Text(log)
+              Button("Run", onPressed: async fn() {
+                log = await append_async(log, "A");
+                log = await append_async(log, "B");
+                log = await append_async(log, "C");
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: log
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget SequentialTest, State: [log]
+BuildCompiler created. _stateFields: [log]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget SequentialTest, State: [log]
+BuildCompiler created. _stateFields: [log]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=A, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175613001
+DEBUG COROUTINE: Resume result: InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=AB, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175613001
+DEBUG COROUTINE: Resume result: InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=ABC, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175613001
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG RUNTIME: Source:         widget TryCatchAsyncTest {
+          state status = "idle";
+          state errorMsg = "";
+
+          build {
+            Column {
+              Text(status)
+              Text(errorMsg)
+              Button("Trigger", onPressed: async fn() {
+                status = "running";
+                try {
+                  var result = await throw_error();
+                  status = "success";
+                } catch (e) {
+                  status = "failed";
+                  errorMsg = toString(e);
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: status
+DEBUG PARSER: Found state field: errorMsg
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TryCatchAsyncTest, State: [status, errorMsg]
+BuildCompiler created. _stateFields: [status, errorMsg]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: status, isState: true
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: errorMsg, isState: true
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling variable: helper, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 4
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: TryStmt at line 11
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+DEBUG COMPILER: Compiling variable: throw_error, isState: false
+DEBUG COMPILER: Added local "result" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 18
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: e, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling variable: a, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+Compiling Widget TryCatchAsyncTest, State: [status, errorMsg]
+BuildCompiler created. _stateFields: [status, errorMsg]
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Added local "c" at slot 3 [Depth: 1]
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: status, isState: true
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling variable: main, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling variable: a, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: errorMsg, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling variable: unknown_var, isState: false
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'unknown_var'.
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling statement type: TryStmt at line 11
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:912:15)
+#1      VM.executeFunctionInContext (package:flux_vm/src/vm.dart:475:23)
+#2      FluxDebugger.evaluate (package:flux_vm/src/debugger.dart:346:19)
+#3      FluxServiceExtensionHandlers.eval (package:flux_flutter/src/dev_tools/flux_service_extensions.dart:78:37)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart:87:67)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:215:9)
+<asynchronous suspension>
+#6      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:213:7)
+<asynchronous suspension>
+#7      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:258:9)
+<asynchronous suspension>
+
+IP: 2
+Last OpCode: OpCode.constant
+Runtime Error: Undefined global 'unknown_var'.
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling variable: throw_error, isState: false
+DEBUG COMPILER: Added local "result" at slot 1 [Depth: 3]
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+   at script() [line 1]
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 18
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=null, error=Exception: Async failure
+DEBUG COROUTINE: Resuming coroutine coro_1767301175654430
+00:00 +11: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch with successful async recovers
+DEBUG RUNTIME: Source:         widget RecoveryTest {
+          state result = "pending";
+
+          build {
+            Column {
+              Text(result)
+              Button("Safe", onPressed: async fn() {
+                try {
+                  result = await may_fail(false);
+                } catch (e) {
+                  result = "error";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: result
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RecoveryTest, State: [result]
+BuildCompiler created. _stateFields: [result]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: result, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: TryStmt at line 8
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: may_fail, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 13
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RecoveryTest, State: [result]
+BuildCompiler created. _stateFields: [result]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: result, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: TryStmt at line 8
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: may_fail, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 13
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=ok, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175701719
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +12: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await await inside conditional branch
+DEBUG RUNTIME: Source:         widget ConditionalAwaitTest {
+          state output = 0;
+
+          build {
+            Column {
+              Text(toString(output))
+              Button("Fetch", onPressed: async fn() {
+                var data = await fetch_data();
+                if (data["success"] == true) {
+                  output = data["value"];
+                } else {
+                  output = -1;
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: output
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ConditionalAwaitTest, State: [output]
+BuildCompiler created. _stateFields: [output]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: output, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: fetch_data, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ConditionalAwaitTest, State: [output]
+BuildCompiler created. _stateFields: [output]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: output, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: fetch_data, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result={success: true, value: 42}, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175740463
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +13: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await multiple state updates in single async function
+DEBUG RUNTIME: Source:         widget MultiStateTest {
+          state step = 0;
+          state message = "";
+
+          build {
+            Column {
+              Text(toString(step))
+              Text(message)
+              Button("Process", onPressed: async fn() {
+                step = 1;
+                message = await step_delay("loading");
+                step = 2;
+                message = await step_delay("processing");
+                step = 3;
+                message = await step_delay("done");
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: step
+DEBUG PARSER: Found state field: message
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget MultiStateTest, State: [step, message]
+BuildCompiler created. _stateFields: [step, message]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: step, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: message, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget MultiStateTest, State: [step, message]
+BuildCompiler created. _stateFields: [step, message]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: step, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: message, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=loading, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175780230
+DEBUG COROUTINE: Resume result: InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=processing, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175780230
+DEBUG COROUTINE: Resume result: InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=done, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175780230
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +14: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await with null result
+DEBUG RUNTIME: Source:         widget NullAwaitTest {
+          state value = "initial";
+
+          build {
+            Column {
+              Text(value)
+              Button("Nullify", onPressed: async fn() {
+                var result = await return_null();
+                if (result == null) {
+                  value = "got_null";
+                } else {
+                  value = "got_value";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: value
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget NullAwaitTest, State: [value]
+BuildCompiler created. _stateFields: [value]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: value, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: return_null, isState: false
+DEBUG COMPILER: Added local "result" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: result, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget NullAwaitTest, State: [value]
+BuildCompiler created. _stateFields: [value]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: value, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: return_null, isState: false
+DEBUG COMPILER: Added local "result" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: result, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=null, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175824180
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +15: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await returning complex nested data
+DEBUG RUNTIME: Source:         widget NestedDataTest {
+          state userName = "";
+
+          build {
+            Column {
+              Text(userName)
+              Button("Load", onPressed: async fn() {
+                var data = await get_nested();
+                userName = data["user"]["name"];
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: userName
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget NestedDataTest, State: [userName]
+BuildCompiler created. _stateFields: [userName]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: userName, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: get_nested, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget NestedDataTest, State: [userName]
+BuildCompiler created. _stateFields: [userName]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: userName, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: get_nested, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result={user: {name: Alice, scores: [100, 95, 88]}}, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175865545
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +16: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +16: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios async timeout simulation
+DEBUG RUNTIME: Source:         widget TimeoutTest {
+          state status = "start";
+
+          build {
+            Column {
+              Text(status)
+              Button("Run", onPressed: async fn() {
+                // Determine if we should wait long or short
+                // Note: Flux doesn't have Future.timeout built-in yet, 
+                // so we simulate checking "too long" via a racing pattern manually if needed.
+                // Here we just verify long delays work correctly.
+                status = "waiting";
+                var res = await delayed_msg(50); 
+                status = res;
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: status
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TimeoutTest, State: [status]
+BuildCompiler created. _stateFields: [status]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: status, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: delayed_msg, isState: false
+DEBUG COMPILER: Added local "res" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: res, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TimeoutTest, State: [status]
+BuildCompiler created. _stateFields: [status]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: status, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: delayed_msg, isState: false
+DEBUG COMPILER: Added local "res" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: res, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=done, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175905027
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +17: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +17: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios race condition on shared state
+DEBUG RUNTIME: Source:         widget RaceTest {
+          state counter = 0;
+
+          build {
+            Column {
+              Text(toString(counter))
+              // Button A takes 50ms to add 1
+              Button("A", onPressed: async fn() {
+                var v = await async_incr(50);
+                counter = counter + v;
+              })
+              // Button B takes 10ms to add 1
+              Button("B", onPressed: async fn() {
+                var v = await async_incr(10);
+                counter = counter + v;
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: counter
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RaceTest, State: [counter]
+BuildCompiler created. _stateFields: [counter]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: async_incr, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 14
+DEBUG COMPILER: Compiling variable: async_incr, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RaceTest, State: [counter]
+BuildCompiler created. _stateFields: [counter]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: async_incr, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 14
+DEBUG COMPILER: Compiling variable: async_incr, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=1, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175944854
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+DEBUG COROUTINE: _handleCoroutineResume called, result=1, error=null
+DEBUG COROUTINE: Resuming coroutine coro_1767301175942730
+DEBUG COROUTINE: Resume result: InterpretResult.ok
+00:00 +18: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:00 +18: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios error re-throwing
+DEBUG RUNTIME: Source:         widget RethrowTest {
+          state error = "none";
+
+          build {
+            Column {
+              Text(error)
+              Button("Throw", onPressed: async fn() {
+                try {
+                  try {
+                    await fail_async();
+                  } catch (e) {
+                    // Rethrow implicitly or handle
+                    // Since Flux doesn't have 'throw e' yet, we simulate nested handling
+                    error = "caught_inner";
+                    // In a real rethrow scenario, we would need 'throw' support
+                  }
+                } catch (e2) {
+                  error = "caught_outer";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: error
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RethrowTest, State: [error]
+BuildCompiler created. _stateFields: [error]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: error, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: TryStmt at line 8
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: TryStmt at line 9
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: fail_async, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 4]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 4]
+DEBUG COMPILER: Added local "e2" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 20
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RethrowTest, State: [error]
+BuildCompiler created. _stateFields: [error]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: error, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: TryStmt at line 8
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: TryStmt at line 9
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: fail_async, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 4]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 4]
+DEBUG COMPILER: Added local "e2" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 20
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG COROUTINE: _handleCoroutineResume called, result=null, error=Exception: Original Error
+DEBUG COROUTINE: Resuming coroutine coro_1767301175988859
+00:00 +19: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +20: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +21: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +22: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +23: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +24: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +25: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +26: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +27: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +28: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +29: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +30: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +31: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +32: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +33: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +34: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +35: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +36: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +37: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +38: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +39: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +40: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +41: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +42: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +43: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +44: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +45: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +46: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +47: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +47: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget App, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: FloatingActionButton, isState: false
+DEBUG COMPILER: Compiling variable: Icon, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+00:01 +48: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +48: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget CustomContainer, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: _SubWidget, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 12
+Compiling Widget _SubWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Added local "header" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: header, isState: false
+00:01 +49: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG RUNTIME: Source:       widget TodoApp {
+        state todos = [];
+        state input = "";
+        
+        build {
+          Column {
+            // Input Area
+            Row {
+               Expanded {
+                 TextField(hint: "New Todo", onChanged: fn(val) {
+                     input = val;
+                 })
+               }
+               Button("Add", onPressed: fn() {
+                 if (input != "") {
+                   push(todos, input);
+                   input = "";
+                 }
+               })
+            }
+            
+            // List Area
+            Column {
+               var i = 0;
+               while (i < todos.length) {
+                   var todo = todos[i];
+                   var index = i; // Capture current index
+                   TodoItem(todo: todo, onDelete: fn() {
+                       removeAt(todos, index);
+                   });
+                   i = i + 1;
+               }
+            }
+          }
+        }
+      }
+
+      widget TodoItem {
+        props todo, onDelete;
+        build {
+          Container {
+            Padding(padding: 8.0) {
+              Row {
+                Text(todo)
+                Button("X", onPressed: onDelete)
+              }
+            }
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: todos
+DEBUG PARSER: Found state field: input
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TodoApp, State: [todos, input]
+BuildCompiler created. _stateFields: [todos, input]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Expanded, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: TextField, isState: false
+DEBUG COMPILER: Added local "val" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: IfStmt at line 19
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 19
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 23
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 24
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 33
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 33
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 26
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 27
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "index" at slot 3 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 28
+DEBUG COMPILER: Compiling variable: TodoItem, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 29
+DEBUG COMPILER: Compiling variable: removeAt, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: index, isState: false
+DEBUG COMPILER: Resolving upvalue "index" -> enclosing local 3. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 3 as captured.
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 31
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 3 (captured: true) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 38
+Compiling Widget TodoItem, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Added local "todo" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "onDelete" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 42
+DEBUG COMPILER: Compiling variable: Padding, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 43
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 44
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Resolving upvalue "todo" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 45
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: onDelete, isState: false
+DEBUG COMPILER: Resolving upvalue "onDelete" -> enclosing local 2. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 2 as captured.
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TodoApp, State: [todos, input]
+BuildCompiler created. _stateFields: [todos, input]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Expanded, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: TextField, isState: false
+DEBUG COMPILER: Added local "val" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: IfStmt at line 19
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 19
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 23
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 24
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 33
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 33
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 26
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 27
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "index" at slot 3 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 28
+DEBUG COMPILER: Compiling variable: TodoItem, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 29
+DEBUG COMPILER: Compiling variable: removeAt, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: index, isState: false
+DEBUG COMPILER: Resolving upvalue "index" -> enclosing local 3. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 3 as captured.
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 31
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 3 (captured: true) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 17
+DEBUG E2E: Found 2 Text widgets
+  Text: "New Todo"
+  Text: "Add"
+DEBUG CLOSURE: Executing onChanged closure, args=1
+DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+DEBUG CLOSURE: Executing onChanged closure, args=1
+DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+00:01 +50: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG PARSER: Found state field: count
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget CounterApp, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: count, isState: true
+00:01 +51: D:/OtherProject/mine/flux/packages/flux_flutter/test/generic_test.dart: Flux Generic Widgets Icon renders properties properly
+00:01 +52: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles ListView with children
+00:01 +53: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles ListView with children
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ListApp, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: ListView, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:01 +54: D:/OtherProject/mine/flux/packages/flux_flutter/test/generic_test.dart: Flux Generic Widgets Image renders properties (Network)
+00:01 +55: D:/OtherProject/mine/flux/packages/flux_flutter/test/generic_test.dart: (tearDownAll)
+00:01 +55: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Preserves matching state when adding new state fields
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state count = 10;
+          build {
+            Column {
+               Text("V1")
+               Text("Count: " + toString(count))
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: count
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG PARSER: Found state field: count
+DEBUG PARSER: Found state field: name
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count, name]
+BuildCompiler created. _stateFields: [count, name]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: name, isState: true
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete.
+00:01 +56: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:01 +56: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Handles removing state fields gracefully
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state a = "kept";
+          state b = "removed";
+          build {
+            Column {
+               Text(a)
+               Text(b)
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: a
+DEBUG PARSER: Found state field: b
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [a, b]
+BuildCompiler created. _stateFields: [a, b]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: a, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [a, b]
+BuildCompiler created. _stateFields: [a, b]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: a, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG PARSER: Found state field: a
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [a]
+BuildCompiler created. _stateFields: [a]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: a, isState: true
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete.
+00:01 +57: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +58: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +59: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +59: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Updates closure logic while preserving captured state
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state count = 0;
+          build {
+            Column {
+               Text(toString(count))
+               Button("Action", onPressed: fn() {
+                 count = count + 1;
+               })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: count
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+00:02 +60: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +60: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Updates closure logic while preserving captured state
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+00:02 +60: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +60: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Updates closure logic while preserving captured state
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+DEBUG PARSER: Found state field: count
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: count, isState: true
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete.
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+00:02 +61: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +61: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Handles syntax errors by throwing (handled by wrapper in app)
+DEBUG RUNTIME: Source:         widget TestWidget {
+          build { Text("OK") }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG PARSER: Error during parse: Expect ")" after arguments. at 3:9
+#0      Parser._consume (package:flux_compiler/src/parser.dart:744:5)
+#1      Parser._finishCall (package:flux_compiler/src/parser.dart:570:19)
+#2      Parser._call (package:flux_compiler/src/parser.dart:521:16)
+#3      Parser._await (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._unary (package:flux_compiler/src/parser.dart:504:12)
+#5      Parser._factor (package:flux_compiler/src/parser.dart:489:16)
+#6      Parser._term (package:flux_compiler/src/parser.dart:479:16)
+#7      Parser._comparison (package:flux_compiler/src/parser.dart:468:16)
+#8      Parser._equality (package:flux_compiler/src/parser.dart:458:16)
+#9      Parser._and (package:flux_compiler/src/parser.dart:448:16)
+#10     Parser._or (package:flux_compiler/src/parser.dart:438:16)
+#11     Parser._assignment (package:flux_compiler/src/parser.dart:415:18)
+#12     Parser._expression (package:flux_compiler/src/parser.dart:411:12)
+#13     Parser._widgetDeclaration (package:flux_compiler/src/parser.dart:167:22)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:79:42)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     compile (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart:10:23)
+#17     main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart:175:20)
+#18     Throws.matchAsync (package:matcher/src/expect/throws_matcher.dart:86:23)
+#19     _expect (package:matcher/src/expect/expect.dart:109:26)
+#20     expect (package:matcher/src/expect/expect.dart:56:3)
+#21     expect (package:flutter_test/src/widget_tester.dart:480:18)
+#22     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart:175:7)
+<asynchronous suspension>
+#23     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#24     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+#25     StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+
+00:02 +62: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+DEBUG RUNTIME: Source:       widget TestWidget {
+        state count = 0;
+        build {
+          Column {
+             Text("Version 1")
+             Text(toString(count))
+             Button("Inc", onPressed: fn() {
+               count = count + 1;
+             })
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: count
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: count, isState: true
+00:02 +63: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+DEBUG PARSER: Found state field: count
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: count, isState: true
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete.
+00:02 +64: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.get returns standardized response map
+00:02 +65: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.get returns standardized response map
+00:02 +66: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Wrap with spacing and direction
+00:02 +67: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.post returns response
+00:02 +68: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets Wrap defaults
+00:02 +69: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: (tearDownAll)
+00:02 +69: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: storage.set and get work correctly
+00:02 +70: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: storage.remove works
+00:02 +71: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: storage.clear works
+00:02 +72: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +73: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +74: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +75: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +76: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +77: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +78: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +79: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +80: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +81: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +82: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +83: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +84: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:02 +85: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget reads provider value
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Hello, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: getProvider, isState: false
+00:02 +86: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget shows error for missing widget
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:02 +87: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: (setUpAll)
+00:02 +87: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders primitive Text without style
+00:03 +88: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders Text with full style
+00:03 +89: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders Text with numeric fontWeight
+00:03 +90: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style handles nested hex color in style
+00:03 +91: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style gracefully handles invalid style
+00:03 +92: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: (setUpAll)
+00:03 +92: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+DEBUG RUNTIME: Source:       widget TaskList {
+        state tasks = "foo";
+        
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Flux ToDo")),
+            body: Column(
+              children: [
+                Text("Debug Message")
+              ]
+            )
+          )
+        }
+      }
+
+      widget AddTaskParam {
+        state newTask = "";
+
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Add Task")),
+            body: Column(
+              children: []
+            )
+          )
+        }
+      }
+      
+DEBUG PARSER: Found state field: tasks
+DEBUG PARSER: Found state field: newTask
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TaskList, State: [tasks]
+BuildCompiler created. _stateFields: [tasks]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 16
+Compiling Widget AddTaskParam, State: [newTask]
+BuildCompiler created. _stateFields: [newTask]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TaskList, State: [tasks]
+BuildCompiler created. _stateFields: [tasks]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 17
+00:03 +93: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+00:03 +93: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+DEBUG RUNTIME: Source:         widget Main {
+          build {
+            Text("Hello Flux")
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        DefaultTabController(length: 2) {
+          Scaffold(
+            appBar: AppBar(
+              title: Text("Tabs Demo"),
+              bottom: TabBar(
+                tabs: [
+                  Tab(text: "Tab 1"),
+                  Tab(text: "Tab 2")
+                ]
+              )
+            ),
+            body: TabBarView(
+              children: [
+                Center(child: Text("Page 1")),
+                Center(child: Text("Page 2"))
+              ]
+            )
+          )
+        }
+      }
+    }
+    
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG RUNTIME: Source:         widget Main {
+          build {
+            Column {
+              Text("Item 1")
+              Text("Item 2")
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG RUNTIME: Parsed unit with 1 declarations
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+Compiling Widget Main, State: []
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+BuildCompiler created. _stateFields: []
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+BuildCompiler created. _stateFields: []
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Compiling variable: DefaultTabController, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG COMPILER: Compiling variable: Column, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:03 +94: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Compiling variable: TabBar, isState: false
+00:03 +95: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG COMPILER: Compiling variable: Tab, isState: false
+DEBUG COMPILER: Compiling variable: Tab, isState: false
+DEBUG COMPILER: Compiling variable: TabBarView, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: DefaultTabController, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: TabBar, isState: false
+DEBUG COMPILER: Compiling variable: Tab, isState: false
+DEBUG COMPILER: Compiling variable: Tab, isState: false
+DEBUG COMPILER: Compiling variable: TabBarView, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:03 +96: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction
+DEBUG RUNTIME: Source:         widget Counter {
+          state count = 0;
+          
+          build {
+            Column {
+              Text("Count: " + toString(count))
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: count
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Counter, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Counter, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:03 +97: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Form and Input widgets
+00:03 +97: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles text field input
+DEBUG RUNTIME: Source:         widget InputTest {
+          state text = "Hello";
+          
+          build {
+            Column {
+              Text("You typed: " + text)
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: text
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget InputTest, State: [text]
+BuildCompiler created. _stateFields: [text]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: text, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget InputTest, State: [text]
+BuildCompiler created. _stateFields: [text]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: text, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:03 +98: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Form and Input widgets
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        Scaffold(
+          body: Form(
+            child: Column(
+              children: [
+                 TextFormField(initialValue: "Test Input"),
+                 Switch(value: true),
+                 Slider(value: 0.5, min: 0.0, max: 1.0)
+              ]
+            )
+          )
+        )
+      }
+    }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: Form, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: TextFormField, isState: false
+DEBUG COMPILER: Compiling variable: Switch, isState: false
+DEBUG COMPILER: Compiling variable: Slider, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: Form, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: TextFormField, isState: false
+DEBUG COMPILER: Compiling variable: Switch, isState: false
+DEBUG COMPILER: Compiling variable: Slider, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:03 +99: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Animation widgets (Hero)
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        Hero(
+          tag: "hero-tag",
+          child: Container(width: 100, height: 100, color: 4278190335)
+        )
+      }
+    }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Hero, isState: false
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Hero, isState: false
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:03 +100: All tests passed!

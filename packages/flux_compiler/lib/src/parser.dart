@@ -643,6 +643,19 @@ class Parser {
       return _lambdaExpression(isAsync: false);
     }
     
+    if (_match(TokenType.this_)) {
+      return ThisExpr(line: _previous.line, column: _previous.column);
+    }
+
+    if (_match(TokenType.super_)) {
+      final keyword = _previous;
+      String? method;
+      if (_match(TokenType.dot)) {
+        method = _consume(TokenType.identifier, 'Expect superclass method name.').lexeme;
+      }
+      return SuperExpr(method: method, line: keyword.line, column: keyword.column);
+    }
+    
     // Async anonymous lambda: async fn() { ... }
     if (_match(TokenType.async_)) {
       _consume(TokenType.fn, 'Expect "fn" after "async".');

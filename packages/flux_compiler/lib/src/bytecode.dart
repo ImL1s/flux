@@ -101,6 +101,7 @@ enum OpCode {
   getProperty, // [name_index] -> get property from instance
   setProperty, // [name_index, value on stack] -> set property on instance
   invoke,      // [name_index, arg_count] -> invoke method on instance
+  invokeSuper, // [name_index, arg_count] -> invoke method on instance's superclass
 }
 
 /// A chunk of bytecode instructions and constants

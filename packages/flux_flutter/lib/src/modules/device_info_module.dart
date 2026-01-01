@@ -3,17 +3,13 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flux_vm/flux_vm.dart';
 
-class DeviceInfoModule implements FluxModule {
-  @override
-  String get name => 'device';
-
-  @override
-  void register(VM vm) {
-    vm.registerFunction('getDeviceInfo', _getDeviceInfo);
-    vm.registerFunction('getPackageInfo', _getPackageInfo);
+class DeviceInfoModule extends FluxModule {
+  DeviceInfoModule() : super('device') {
+    register('getDeviceInfo', AsyncNativeFunction('device.getDeviceInfo', 0, _getDeviceInfo));
+    register('getPackageInfo', AsyncNativeFunction('device.getPackageInfo', 0, _getPackageInfo));
   }
 
-  Future<Map<String, dynamic>> _getDeviceInfo(List<dynamic> args) async {
+  Future<Object?> _getDeviceInfo(List<Object?> args) async {
     final deviceInfo = DeviceInfoPlugin();
     
     if (Platform.isAndroid) {
@@ -54,7 +50,7 @@ class DeviceInfoModule implements FluxModule {
     return {'os': 'unknown'};
   }
 
-  Future<Map<String, dynamic>> _getPackageInfo(List<dynamic> args) async {
+  Future<Object?> _getPackageInfo(List<Object?> args) async {
     final info = await PackageInfo.fromPlatform();
     return {
       'appName': info.appName,
@@ -64,3 +60,4 @@ class DeviceInfoModule implements FluxModule {
     };
   }
 }
+

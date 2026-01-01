@@ -1,0 +1,721 @@
+00:00 +0: loading test/class_test.dart
+00:00 +0 -1: loading test/class_test.dart [E]
+  Failed to load "test/class_test.dart":
+  lib/src/vm.dart:643:5: Error: Expected a class member, but got 'if'.
+      if (callee is CompiledWidget) {
+      ^^
+  lib/src/vm.dart:643:8: Error: Expected an identifier, but got '('.
+  Try inserting an identifier before '('.
+      if (callee is CompiledWidget) {
+         ^
+  lib/src/vm.dart:643:16: Error: Expected ')' before this.
+      if (callee is CompiledWidget) {
+                 ^^
+  lib/src/vm.dart:651:19: Error: Expected an identifier, but got '"Can only call functions, classes, and widgets."'.
+  Try inserting an identifier before '"Can only call functions, classes, and widgets."'.
+      _runtimeError("Can only call functions, classes, and widgets.");
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:652:5: Error: Expected a class member, but got 'return'.
+      return false;
+      ^^^^^^
+  lib/src/vm.dart:652:12: Error: Expected a class member, but got 'false'.
+      return false;
+             ^^^^^
+  lib/src/vm.dart:652:17: Error: Expected a class member, but got ';'.
+      return false;
+                  ^
+  lib/src/vm.dart:1503:1: Error: Expected a declaration, but got '}'.
+  }
+  ^
+  lib/src/vm.dart:651:5: Error: '_runtimeError' is already declared in this scope.
+      _runtimeError("Can only call functions, classes, and widgets.");
+      ^^^^^^^^^^^^^
+  lib/src/vm.dart:554:8: Context: Previous declaration of '_runtimeError'.
+    void _runtimeError(String message) {
+         ^^^^^^^^^^^^^
+  lib/src/vm.dart:220:7: Error: Can't use '_runtimeError' because it is declared more than once.
+        _runtimeError('Cannot resume coroutine in state: ${coroutine.state}');
+        ^
+  lib/src/vm.dart:250:7: Error: Can't use '_runtimeError' because it is declared more than once.
+        _runtimeError('Cannot resume coroutine in state: ${coroutine.state}');
+        ^
+  lib/src/vm.dart:270:5: Error: Can't use '_runtimeError' because it is declared more than once.
+      _runtimeError('Unhandled async error: $error');
+      ^
+  lib/src/vm.dart:319:11: Error: Can't use '_runtimeError' because it is declared more than once.
+            _runtimeError(error.toString());
+            ^
+  lib/src/vm.dart:329:7: Error: Can't use '_runtimeError' because it is declared more than once.
+        _runtimeError(e.toString());
+        ^
+  lib/src/vm.dart:607:9: Error: Can't use '_runtimeError' because it is declared more than once.
+          _runtimeError(e.toString());
+          ^
+  lib/src/vm.dart:634:41: Error: The getter 'initMethod' isn't defined for the class 'VM'.
+   - 'VM' is from 'package:flux_vm/src/vm.dart' ('lib/src/vm.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'initMethod'.
+          return _callFunction(ObjClosure(initMethod, []), argCount, namedArgs);
+                                          ^^^^^^^^^^
+  lib/src/vm.dart:638:20: Error: The getter 'instance' isn't defined for the class 'VM'.
+   - 'VM' is from 'package:flux_vm/src/vm.dart' ('lib/src/vm.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'instance'.
+          _stack.add(instance);
+                     ^^^^^^^^
+  lib/src/vm.dart:659:7: Error: Method not found: '_runtimeError'.
+        _runtimeError("Expected ${closure.function.arity} arguments but got $totalProvided. (Closure: ${closure.function.name})");
+        ^^^^^^^^^^^^^
+  lib/src/vm.dart:663:9: Error: Undefined name '_frames'.
+      if (_frames.length == framesMax) {
+          ^^^^^^^
+  lib/src/vm.dart:664:7: Error: Method not found: '_runtimeError'.
+        _runtimeError("Stack overflow.");
+        ^^^^^^^^^^^^^
+  lib/src/vm.dart:676:11: Error: Undefined name '_stack'.
+            _stack.add(namedArgs[paramName]);
+            ^^^^^^
+  lib/src/vm.dart:678:11: Error: Method not found: '_runtimeError'.
+            _runtimeError("Missing required argument: $paramName");
+            ^^^^^^^^^^^^^
+  lib/src/vm.dart:686:17: Error: Undefined name '_stack'.
+        slotBase: _stack.length - closure.function.arity - 1,
+                  ^^^^^^
+  lib/src/vm.dart:688:5: Error: Undefined name '_frames'.
+      _frames.add(frame);
+      ^^^^^^^
+  lib/src/vm.dart:698:13: Error: Undefined name '_frames'.
+          if (_frames.length <= minDepth) {
+              ^^^^^^^
+  lib/src/vm.dart:701:27: Error: Undefined name '_frames'.
+          CallFrame frame = _frames.last;
+                            ^^^^^^^
+  lib/src/vm.dart:704:13: Error: Undefined name 'debugger'.
+          if (debugger != null) {
+              ^^^^^^^^
+  lib/src/vm.dart:705:15: Error: Undefined name 'debugger'.
+            if (debugger!.isPaused) {
+                ^^^^^^^^
+  lib/src/vm.dart:711:30: Error: Undefined name 'debugger'.
+              final stepMode = debugger!.stepMode;
+                               ^^^^^^^^
+  lib/src/vm.dart:712:34: Error: Undefined name '_frames'.
+              final currentDepth = _frames.length;
+                                   ^^^^^^^
+  lib/src/vm.dart:716:35: Error: Undefined name 'debugger'.
+                if (currentDepth > (debugger!.stepTargetDepth ?? 0) || 
+                                    ^^^^^^^^
+  lib/src/vm.dart:717:34: Error: Undefined name 'debugger'.
+                    currentLine != debugger!.stepSourceLine) {
+                                   ^^^^^^^^
+  lib/src/vm.dart:718:17: Error: Undefined name 'debugger'.
+                  debugger!.pause();
+                  ^^^^^^^^
+  lib/src/vm.dart:722:35: Error: Undefined name 'debugger'.
+                if (currentDepth < (debugger!.stepTargetDepth ?? 0) || 
+                                    ^^^^^^^^
+  lib/src/vm.dart:723:36: Error: Undefined name 'debugger'.
+                    (currentDepth == debugger!.stepTargetDepth && currentLine != debugger!.stepSourceLine)) {
+                                     ^^^^^^^^
+  lib/src/vm.dart:723:80: Error: Undefined name 'debugger'.
+                    (currentDepth == debugger!.stepTargetDepth && currentLine != debugger!.stepSourceLine)) {
+                                                                                 ^^^^^^^^
+  lib/src/vm.dart:724:17: Error: Undefined name 'debugger'.
+                  debugger!.pause();
+                  ^^^^^^^^
+  lib/src/vm.dart:728:24: Error: Undefined name 'debugger'.
+                         debugger!.stepTargetDepth != null) {
+                         ^^^^^^^^
+  lib/src/vm.dart:729:35: Error: Undefined name 'debugger'.
+                if (currentDepth <= debugger!.stepTargetDepth!) {
+                                    ^^^^^^^^
+  lib/src/vm.dart:730:17: Error: Undefined name 'debugger'.
+                  debugger!.pause();
+                  ^^^^^^^^
+  lib/src/vm.dart:741:19: Error: Undefined name 'debugger'.
+                if (debugger!.shouldBreakAt(moduleName, line) != null) {
+                    ^^^^^^^^
+  lib/src/vm.dart:743:17: Error: Undefined name 'debugger'.
+                  debugger!.pause();
+                  ^^^^^^^^
+  lib/src/vm.dart:758:11: Error: Method not found: '_closeUpvalues'.
+            _closeUpvalues(frame.slotBase);
+            ^^^^^^^^^^^^^^
+  lib/src/vm.dart:761:31: Error: Undefined name '_frames'.
+            final endingFrame = _frames.removeLast();
+                                ^^^^^^^
+  lib/src/vm.dart:763:15: Error: Undefined name '_frames'.
+            if (_frames.length < minDepth) {
+                ^^^^^^^
+  lib/src/vm.dart:765:20: Error: Undefined name '_stack'.
+              while (_stack.length > endingFrame.slotBase) {
+                     ^^^^^^
+  lib/src/vm.dart:766:15: Error: Undefined name '_stack'.
+                _stack.removeLast();
+                ^^^^^^
+  lib/src/vm.dart:773:18: Error: Undefined name '_stack'.
+            while (_stack.length > endingFrame.slotBase) {
+                   ^^^^^^
+  lib/src/vm.dart:774:13: Error: Undefined name '_stack'.
+              _stack.removeLast();
+              ^^^^^^
+  lib/src/vm.dart:778:11: Error: Undefined name '_stack'.
+            _stack.add(null);
+            ^^^^^^
+  lib/src/vm.dart:801:13: Error: Undefined name '_stack'.
+              _stack.add(constant);
+              ^^^^^^
+  lib/src/vm.dart:805:13: Error: Undefined name '_stack'.
+              _stack.add(null);
+              ^^^^^^
+  lib/src/vm.dart:808:13: Error: Undefined name '_stack'.
+              _stack.add(true);
+              ^^^^^^
+  lib/src/vm.dart:811:13: Error: Undefined name '_stack'.
+              _stack.add(false);
+              ^^^^^^
+  lib/src/vm.dart:814:17: Error: Undefined name '_stack'.
+              if (_stack.isNotEmpty) _stack.removeLast();
+                  ^^^^^^
+  lib/src/vm.dart:814:36: Error: Undefined name '_stack'.
+              if (_stack.isNotEmpty) _stack.removeLast();
+                                     ^^^^^^
+  lib/src/vm.dart:821:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast();
+                        ^^^^^^
+  lib/src/vm.dart:822:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast();
+                        ^^^^^^
+  lib/src/vm.dart:824:15: Error: Undefined name '_stack'.
+                _stack.add(a.toString() + b.toString());
+                ^^^^^^
+  lib/src/vm.dart:826:15: Error: Undefined name '_stack'.
+                _stack.add(a + b);
+                ^^^^^^
+  lib/src/vm.dart:828:15: Error: Undefined name '_stack'.
+                _stack.add([...a, ...b]);
+                ^^^^^^
+  lib/src/vm.dart:835:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:836:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:837:13: Error: Undefined name '_stack'.
+              _stack.add(a - b);
+              ^^^^^^
+  lib/src/vm.dart:841:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:842:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:843:13: Error: Undefined name '_stack'.
+              _stack.add(a * b);
+              ^^^^^^
+  lib/src/vm.dart:847:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:848:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:849:13: Error: Undefined name '_stack'.
+              _stack.add(a / b);
+              ^^^^^^
+  lib/src/vm.dart:853:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:854:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:855:13: Error: Undefined name '_stack'.
+              _stack.add(a % b);
+              ^^^^^^
+  lib/src/vm.dart:859:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:860:13: Error: Undefined name '_stack'.
+              _stack.add(-a);
+              ^^^^^^
+  lib/src/vm.dart:864:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast();
+                        ^^^^^^
+  lib/src/vm.dart:865:25: Error: Method not found: '_isTruthy'.
+              _stack.add(!_isTruthy(a));
+                          ^^^^^^^^^
+  lib/src/vm.dart:865:13: Error: Undefined name '_stack'.
+              _stack.add(!_isTruthy(a));
+              ^^^^^^
+  lib/src/vm.dart:869:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:870:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:871:13: Error: Undefined name '_stack'.
+              _stack.add(a < b);
+              ^^^^^^
+  lib/src/vm.dart:875:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:876:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:877:13: Error: Undefined name '_stack'.
+              _stack.add(a > b);
+              ^^^^^^
+  lib/src/vm.dart:881:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast();
+                        ^^^^^^
+  lib/src/vm.dart:882:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast();
+                        ^^^^^^
+  lib/src/vm.dart:883:13: Error: Undefined name '_stack'.
+              _stack.add(a == b);
+              ^^^^^^
+  lib/src/vm.dart:887:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:888:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:889:13: Error: Undefined name '_stack'.
+              _stack.add(a >= b);
+              ^^^^^^
+  lib/src/vm.dart:893:23: Error: Undefined name '_stack'.
+              final b = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:894:23: Error: Undefined name '_stack'.
+              final a = _stack.removeLast() as num;
+                        ^^^^^^
+  lib/src/vm.dart:895:13: Error: Undefined name '_stack'.
+              _stack.add(a <= b);
+              ^^^^^^
+  lib/src/vm.dart:899:25: Error: Undefined name '_stack'.
+              final val = _stack.removeLast();
+                          ^^^^^^
+  lib/src/vm.dart:900:13: Error: Method not found: 'onPrint'.
+              onPrint(val.toString());
+              ^^^^^^^
+  lib/src/vm.dart:906:13: Error: Undefined name '_globals'.
+              _globals[name] = _stack.last;
+              ^^^^^^^^
+  lib/src/vm.dart:906:30: Error: Undefined name '_stack'.
+              _globals[name] = _stack.last;
+                               ^^^^^^
+  lib/src/vm.dart:912:17: Error: Undefined name '_globals'.
+              if (_globals.containsKey(name)) {
+                  ^^^^^^^^
+  lib/src/vm.dart:913:26: Error: Undefined name '_globals'.
+                _stack.add(_globals[name]);
+                           ^^^^^^^^
+  lib/src/vm.dart:913:15: Error: Undefined name '_stack'.
+                _stack.add(_globals[name]);
+                ^^^^^^
+  lib/src/vm.dart:921:24: Error: Undefined name '_stack'.
+              _stack.add(_stack[frame.slotBase + slot]);
+                         ^^^^^^
+  lib/src/vm.dart:921:13: Error: Undefined name '_stack'.
+              _stack.add(_stack[frame.slotBase + slot]);
+              ^^^^^^
+  lib/src/vm.dart:926:13: Error: Undefined name '_stack'.
+              _stack[frame.slotBase + slot] = _stack.last;
+              ^^^^^^
+  lib/src/vm.dart:926:45: Error: Undefined name '_stack'.
+              _stack[frame.slotBase + slot] = _stack.last;
+                                              ^^^^^^
+  lib/src/vm.dart:934:41: Error: Undefined name '_stack'.
+               for(var i=0; i<count; i++) _stack.removeLast();
+                                          ^^^^^^
+  lib/src/vm.dart:942:31: Error: Undefined name '_stack'.
+              final condition = _stack.last;
+                                ^^^^^^
+  lib/src/vm.dart:943:18: Error: Method not found: '_isTruthy'.
+              if (!_isTruthy(condition)) {
+                   ^^^^^^^^^
+  lib/src/vm.dart:952:31: Error: Undefined name '_stack'.
+              final condition = _stack.last;
+                                ^^^^^^
+  lib/src/vm.dart:953:17: Error: Method not found: '_isTruthy'.
+              if (_isTruthy(condition)) {
+                  ^^^^^^^^^
+  lib/src/vm.dart:973:35: Error: Undefined name '_stack'.
+              final callee = _stack[_stack.length - 1 - argCount];
+                                    ^^^^^^
+  lib/src/vm.dart:973:28: Error: Undefined name '_stack'.
+              final callee = _stack[_stack.length - 1 - argCount];
+                             ^^^^^^
+  lib/src/vm.dart:974:18: Error: Method not found: '_callValue'.
+              if (!_callValue(callee, argCount)) {
+                   ^^^^^^^^^^
+  lib/src/vm.dart:978:17: Error: Undefined name '_frames'.
+              if (_frames.isNotEmpty) {
+                  ^^^^^^^
+  lib/src/vm.dart:979:23: Error: Undefined name '_frames'.
+                frame = _frames.last;
+                        ^^^^^^^
+  lib/src/vm.dart:990:29: Error: Undefined name '_stack'.
+                final value = _stack.removeLast();
+                              ^^^^^^
+  lib/src/vm.dart:991:31: Error: Undefined name '_stack'.
+                final nameObj = _stack.removeLast();
+                                ^^^^^^
+  lib/src/vm.dart:993:17: Error: Method not found: '_runtimeError'.
+                  _runtimeError("type '${nameObj.runtimeType}' is not a subtype of type 'String' in type cast");
+                  ^^^^^^^^^^^^^
+  lib/src/vm.dart:1000:35: Error: Undefined name '_stack'.
+              final callee = _stack[_stack.length - 1 - totalArgSlots];
+                                    ^^^^^^
+  lib/src/vm.dart:1000:28: Error: Undefined name '_stack'.
+              final callee = _stack[_stack.length - 1 - totalArgSlots];
+                             ^^^^^^
+  lib/src/vm.dart:1002:18: Error: Method not found: '_callValue'.
+              if (!_callValue(callee, argCount, namedArgs)) {
+                   ^^^^^^^^^^
+  lib/src/vm.dart:1006:17: Error: Undefined name '_frames'.
+              if (_frames.isNotEmpty) {
+                  ^^^^^^^
+  lib/src/vm.dart:1007:23: Error: Undefined name '_frames'.
+                frame = _frames.last;
+                        ^^^^^^^
+  lib/src/vm.dart:1012:28: Error: Undefined name '_stack'.
+              final result = _stack.last; // Peek result first
+                             ^^^^^^
+  lib/src/vm.dart:1015:13: Error: Method not found: '_closeUpvalues'.
+              _closeUpvalues(frame.slotBase);
+              ^^^^^^^^^^^^^^
+  lib/src/vm.dart:1018:13: Error: Undefined name '_stack'.
+              _stack.removeLast();
+              ^^^^^^
+  lib/src/vm.dart:1021:36: Error: Undefined name '_frames'.
+              final returningFrame = _frames.removeLast();
+                                     ^^^^^^^
+  lib/src/vm.dart:1023:18: Error: Undefined name '_frames'.
+               if (_frames.length <= minDepth) {
+                   ^^^^^^^
+  lib/src/vm.dart:1026:24: Error: Undefined name '_stack'.
+                  while (_stack.length > returningFrame.slotBase) {
+                         ^^^^^^
+  lib/src/vm.dart:1027:19: Error: Undefined name '_stack'.
+                    _stack.removeLast();
+                    ^^^^^^
+  lib/src/vm.dart:1030:16: Error: Undefined name '_stack'.
+                 _stack.add(result); // Always push result (including nil)
+                 ^^^^^^
+  lib/src/vm.dart:1035:20: Error: Undefined name '_stack'.
+              while (_stack.length > returningFrame.slotBase) {
+                     ^^^^^^
+  lib/src/vm.dart:1036:16: Error: Undefined name '_stack'.
+                 _stack.removeLast();
+                 ^^^^^^
+  lib/src/vm.dart:1040:13: Error: Undefined name '_stack'.
+              _stack.add(result);
+              ^^^^^^
+  lib/src/vm.dart:1048:30: Error: Undefined name '_stack'.
+                list.insert(0, _stack.removeLast());
+                               ^^^^^^
+  lib/src/vm.dart:1050:13: Error: Undefined name '_stack'.
+              _stack.add(list);
+              ^^^^^^
+  lib/src/vm.dart:1058:29: Error: Undefined name '_stack'.
+                final value = _stack.removeLast();
+                              ^^^^^^
+  lib/src/vm.dart:1059:27: Error: Undefined name '_stack'.
+                final key = _stack.removeLast();
+                            ^^^^^^
+  lib/src/vm.dart:1062:13: Error: Undefined name '_stack'.
+              _stack.add(map);
+              ^^^^^^
+  lib/src/vm.dart:1083:30: Error: Method not found: '_captureUpvalue'.
+                  upvalues.add(_captureUpvalue(loc));
+                               ^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1090:13: Error: Undefined name '_stack'.
+              _stack.add(ObjClosure(function, upvalues));
+              ^^^^^^
+  lib/src/vm.dart:1098:58: Error: Undefined name '_stack'.
+                _stack.add(callee.upvalues[index].getValue(_stack));
+                                                           ^^^^^^
+  lib/src/vm.dart:1098:15: Error: Undefined name '_stack'.
+                _stack.add(callee.upvalues[index].getValue(_stack));
+                ^^^^^^
+  lib/src/vm.dart:1106:27: Error: Undefined name '_stack'.
+              final value = _stack.last;
+                            ^^^^^^
+  lib/src/vm.dart:1110:47: Error: Undefined name '_stack'.
+                callee.upvalues[index].setValue(_stack, value);
+                                                ^^^^^^
+  lib/src/vm.dart:1118:28: Error: Undefined name '_stack'.
+              _closeUpvalues(_stack.length - 1);
+                             ^^^^^^
+  lib/src/vm.dart:1118:13: Error: Method not found: '_closeUpvalues'.
+              _closeUpvalues(_stack.length - 1);
+              ^^^^^^^^^^^^^^
+  lib/src/vm.dart:1119:13: Error: Undefined name '_stack'.
+              _stack.removeLast();
+              ^^^^^^
+  lib/src/vm.dart:1134:27: Error: Undefined name '_frames'.
+                frameIndex: _frames.length - 1,
+                            ^^^^^^^
+  lib/src/vm.dart:1135:28: Error: Undefined name '_stack'.
+                stackHeight: _stack.length,
+                             ^^^^^^
+  lib/src/vm.dart:1133:13: Error: Undefined name '_exceptionHandlers'.
+              _exceptionHandlers.add(_ExceptionHandler(
+              ^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1147:31: Error: Undefined name '_stack'.
+              final exception = _stack.removeLast();
+                                ^^^^^^
+  lib/src/vm.dart:1153:21: Error: Undefined name '_frames'.
+              frame = _frames.last;
+                      ^^^^^^^
+  lib/src/vm.dart:1158:17: Error: Undefined name '_exceptionHandlers'.
+              if (_exceptionHandlers.isNotEmpty) {
+                  ^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1159:15: Error: Undefined name '_exceptionHandlers'.
+                _exceptionHandlers.removeLast();
+                ^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1164:27: Error: Undefined name '_stack'.
+              final index = _stack.removeLast();
+                            ^^^^^^
+  lib/src/vm.dart:1165:25: Error: Undefined name '_stack'.
+              final obj = _stack.removeLast();
+                          ^^^^^^
+  lib/src/vm.dart:1169:17: Error: Method not found: '_runtimeError'.
+                  _runtimeError("Index $idx out of bounds for list of length ${obj.length}.");
+                  ^^^^^^^^^^^^^
+  lib/src/vm.dart:1172:15: Error: Undefined name '_stack'.
+                _stack.add(obj[idx]);
+                ^^^^^^
+  lib/src/vm.dart:1174:15: Error: Undefined name '_stack'.
+                _stack.add(obj[index]);
+                ^^^^^^
+  lib/src/vm.dart:1178:17: Error: Method not found: '_runtimeError'.
+                  _runtimeError("Index $idx out of bounds for string of length ${obj.length}.");
+                  ^^^^^^^^^^^^^
+  lib/src/vm.dart:1181:15: Error: Undefined name '_stack'.
+                _stack.add(obj[idx]);
+                ^^^^^^
+  lib/src/vm.dart:1187:17: Error: Method not found: '_runtimeError'.
+                  _runtimeError("Module '${obj.name}' has no member '$memberName'.");
+                  ^^^^^^^^^^^^^
+  lib/src/vm.dart:1190:15: Error: Undefined name '_stack'.
+                _stack.add(member);
+                ^^^^^^
+  lib/src/vm.dart:1192:15: Error: Method not found: '_runtimeError'.
+                _runtimeError("Cannot index into ${obj.runtimeType}.");
+                ^^^^^^^^^^^^^
+  lib/src/vm.dart:1198:27: Error: Undefined name '_stack'.
+              final value = _stack.removeLast();
+                            ^^^^^^
+  lib/src/vm.dart:1199:27: Error: Undefined name '_stack'.
+              final index = _stack.removeLast();
+                            ^^^^^^
+  lib/src/vm.dart:1200:25: Error: Undefined name '_stack'.
+              final obj = _stack.removeLast();
+                          ^^^^^^
+  lib/src/vm.dart:1204:17: Error: Method not found: '_runtimeError'.
+                  _runtimeError("Index $idx out of bounds for list of length ${obj.length}.");
+                  ^^^^^^^^^^^^^
+  lib/src/vm.dart:1208:15: Error: Undefined name '_stack'.
+                _stack.add(value); // Assignment expression returns the value
+                ^^^^^^
+  lib/src/vm.dart:1211:15: Error: Undefined name '_stack'.
+                _stack.add(value);
+                ^^^^^^
+  lib/src/vm.dart:1213:15: Error: Method not found: '_runtimeError'.
+                _runtimeError("Cannot set index on ${obj.runtimeType}.");
+                ^^^^^^^^^^^^^
+  lib/src/vm.dart:1223:13: Error: Undefined name '_imports'.
+              _imports.add(path);
+              ^^^^^^^^
+  lib/src/vm.dart:1228:30: Error: Undefined name '_stack'.
+              final classObj = _stack.removeLast();
+                               ^^^^^^
+  lib/src/vm.dart:1231:15: Error: Undefined name '_stack'.
+                _stack.add(instance);
+                ^^^^^^
+  lib/src/vm.dart:1240:25: Error: Undefined name '_stack'.
+              final obj = _stack.removeLast();
+                          ^^^^^^
+  lib/src/vm.dart:1244:15: Error: Undefined name '_stack'.
+                _stack.add(value);
+                ^^^^^^
+  lib/src/vm.dart:1247:17: Error: Undefined name '_stack'.
+                  _stack.add(obj.length);
+                  ^^^^^^
+  lib/src/vm.dart:1249:17: Error: Undefined name '_stack'.
+                  _stack.add(null);
+                  ^^^^^^
+  lib/src/vm.dart:1253:17: Error: Undefined name '_stack'.
+                  _stack.add(obj.length);
+                  ^^^^^^
+  lib/src/vm.dart:1255:17: Error: Undefined name '_stack'.
+                  _stack.add(obj[name]);
+                  ^^^^^^
+  lib/src/vm.dart:1257:24: Error: Undefined name '_widgetState'.
+              } else if (_widgetState.containsKey(name)) { 
+                         ^^^^^^^^^^^^
+  lib/src/vm.dart:1258:27: Error: Undefined name '_widgetState'.
+                 _stack.add(_widgetState[name]);
+                            ^^^^^^^^^^^^
+  lib/src/vm.dart:1258:16: Error: Undefined name '_stack'.
+                 _stack.add(_widgetState[name]);
+                 ^^^^^^
+  lib/src/vm.dart:1268:27: Error: Undefined name '_stack'.
+              final value = _stack.removeLast();
+                            ^^^^^^
+  lib/src/vm.dart:1269:25: Error: Undefined name '_stack'.
+              final obj = _stack.removeLast();
+                          ^^^^^^
+  lib/src/vm.dart:1282:17: Error: Undefined name '_widgetState'.
+              if (_widgetState.containsKey(name)) {
+                  ^^^^^^^^^^^^
+  lib/src/vm.dart:1283:28: Error: Undefined name '_widgetState'.
+                  _stack.add(_widgetState[name]);
+                             ^^^^^^^^^^^^
+  lib/src/vm.dart:1283:17: Error: Undefined name '_stack'.
+                  _stack.add(_widgetState[name]);
+                  ^^^^^^
+  lib/src/vm.dart:1285:17: Error: Method not found: '_runtimeError'.
+                  _runtimeError("Undefined state variable '$name'.");
+                  ^^^^^^^^^^^^^
+  lib/src/vm.dart:1293:27: Error: Undefined name '_stack'.
+              final value = _stack.last; // Peek/Assigned value
+                            ^^^^^^
+  lib/src/vm.dart:1294:17: Error: Undefined name '_widgetState'.
+              if (_widgetState.containsKey(name)) {
+                  ^^^^^^^^^^^^
+  lib/src/vm.dart:1295:16: Error: Undefined name '_widgetState'.
+                 _widgetState[name] = value;
+                 ^^^^^^^^^^^^
+  lib/src/vm.dart:1296:20: Error: Undefined name 'onStateChange'.
+                 if (onStateChange != null) onStateChange!(name, value);
+                     ^^^^^^^^^^^^^
+  lib/src/vm.dart:1296:43: Error: Undefined name 'onStateChange'.
+                 if (onStateChange != null) onStateChange!(name, value);
+                                            ^^^^^^^^^^^^^
+  lib/src/vm.dart:1310:30: Error: Undefined name '_stack'.
+                args.insert(0, _stack.removeLast());
+                               ^^^^^^
+  lib/src/vm.dart:1314:30: Error: Undefined name '_stack'.
+              final instance = _stack.removeLast();
+                               ^^^^^^
+  lib/src/vm.dart:1337:30: Error: Undefined name '_stack'.
+                args.insert(0, _stack.removeLast());
+                               ^^^^^^
+  lib/src/vm.dart:1341:30: Error: Undefined name '_stack'.
+              final instance = _stack.removeLast();
+                               ^^^^^^
+  lib/src/vm.dart:1348:34: Error: Undefined name '_globals'.
+                final superclass = _globals[superclassName];
+                                   ^^^^^^^^
+  lib/src/vm.dart:1358:36: Error: Undefined name '_globals'.
+                      currentClass = _globals[currentClass.superclass] as CompiledClass?;
+                                     ^^^^^^^^
+  lib/src/vm.dart:1380:27: Error: Undefined name '_stack'.
+              final value = _stack.removeLast();
+                            ^^^^^^
+  lib/src/vm.dart:1383:33: Error: Method not found: 'suspendToCoroutine'.
+                final coroutine = suspendToCoroutine();
+                                  ^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1386:15: Error: Setter not found: '_awaitingFuture'.
+                _awaitingFuture = true;
+                ^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1387:15: Error: Setter not found: '_pendingFuture'.
+                _pendingFuture = value;
+                ^^^^^^^^^^^^^^
+  lib/src/vm.dart:1388:15: Error: Setter not found: '_pendingFrame'.
+                _pendingFrame = frame;
+                ^^^^^^^^^^^^^
+  lib/src/vm.dart:1395:21: Error: Undefined name 'coroutineResumeCallback'.
+                  if (coroutineResumeCallback != null) {
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1396:19: Error: Undefined name 'coroutineResumeCallback'.
+                    coroutineResumeCallback!(coroutine, result, null);
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1399:19: Error: Setter not found: '_awaitingFuture'.
+                    _awaitingFuture = false;
+                    ^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1400:19: Error: Setter not found: '_pendingFuture'.
+                    _pendingFuture = null;
+                    ^^^^^^^^^^^^^^
+  lib/src/vm.dart:1401:19: Error: Setter not found: '_pendingFrame'.
+                    _pendingFrame = null;
+                    ^^^^^^^^^^^^^
+  lib/src/vm.dart:1402:19: Error: Method not found: 'resumeCoroutine'.
+                    resumeCoroutine(coroutine, result);
+                    ^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1408:21: Error: Undefined name 'coroutineResumeCallback'.
+                  if (coroutineResumeCallback != null) {
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1409:19: Error: Undefined name 'coroutineResumeCallback'.
+                    coroutineResumeCallback!(coroutine, null, error);
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1412:19: Error: Setter not found: '_awaitingFuture'.
+                    _awaitingFuture = false;
+                    ^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1413:19: Error: Setter not found: '_pendingFuture'.
+                    _pendingFuture = null;
+                    ^^^^^^^^^^^^^^
+  lib/src/vm.dart:1414:19: Error: Setter not found: '_pendingFrame'.
+                    _pendingFrame = null;
+                    ^^^^^^^^^^^^^
+  lib/src/vm.dart:1415:19: Error: Method not found: 'resumeCoroutineWithError'.
+                    resumeCoroutineWithError(coroutine, error);
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1423:15: Error: Undefined name '_stack'.
+                _stack.add(value);
+                ^^^^^^
+  lib/src/vm.dart:1434:11: Error: Undefined name '_frames'.
+        if (_frames.isNotEmpty) {
+            ^^^^^^^
+  lib/src/vm.dart:1435:23: Error: Undefined name '_frames'.
+          final frame = _frames.last;
+                        ^^^^^^^
+  lib/src/vm.dart:1444:7: Error: Method not found: '_runtimeError'.
+        _runtimeError(e.toString());
+        ^^^^^^^^^^^^^
+  lib/src/vm.dart:1451:26: Error: Undefined name '_awaitingFuture'.
+    bool get isAwaiting => _awaitingFuture;
+                           ^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1456:12: Error: Undefined name '_exceptionHandlers'.
+      while (_exceptionHandlers.isNotEmpty) {
+             ^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1457:23: Error: Undefined name '_exceptionHandlers'.
+        final handler = _exceptionHandlers.removeLast();
+                        ^^^^^^^^^^^^^^^^^^
+  lib/src/vm.dart:1460:33: Error: Undefined name '_frames'.
+        if (handler.frameIndex >= _frames.length) {
+                                  ^^^^^^^
+  lib/src/vm.dart:1465:14: Error: Undefined name '_frames'.
+        while (_frames.length > handler.frameIndex + 1) {
+               ^^^^^^^
+  lib/src/vm.dart:1466:9: Error: Undefined name '_frames'.
+          _frames.removeLast();
+          ^^^^^^^
+  lib/src/vm.dart:1470:14: Error: Undefined name '_stack'.
+        while (_stack.length > handler.stackHeight) {
+               ^^^^^^
+  lib/src/vm.dart:1471:9: Error: Undefined name '_stack'.
+          _stack.removeLast();
+          ^^^^^^
+  lib/src/vm.dart:1475:7: Error: Undefined name '_stack'.
+        _stack.add(exception);
+        ^^^^^^
+  lib/src/vm.dart:1478:11: Error: Undefined name '_frames'.
+        if (_frames.isNotEmpty) {
+            ^^^^^^^
+  lib/src/vm.dart:1479:9: Error: Undefined name '_frames'.
+          _frames.last.ip = handler.catchOffset;
+          ^^^^^^^
+  lib/src/vm.dart:1492:5: Error: Undefined name '_stack'.
+      _stack.add(instance);
+      ^^^^^^
+  lib/src/vm.dart:1496:7: Error: Undefined name '_stack'.
+        _stack.add(arg);
+        ^^^^^^
+  lib/src/vm.dart:1500:51: Error: Undefined name '_stack'.
+      final newFrame = CallFrame(closure, slotBase: _stack.length - args.length - 1);
+                                                    ^^^^^^
+  lib/src/vm.dart:1501:5: Error: Undefined name '_frames'.
+      _frames.add(newFrame);
+      ^^^^^^^
+00:00 +0 -1: Some tests failed.

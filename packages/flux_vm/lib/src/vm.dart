@@ -598,7 +598,7 @@ class VM {
       _stack.length -= argCount + 1;
       try {
         final result = callee.call(args);
-        print('DEBUG RUNTIME: NativeFunction ${callee.name} returned $result');
+        // print('DEBUG RUNTIME: NativeFunction ${callee.name} returned $result');
         _stack.add(result);
         return true;
       } catch (e) {
@@ -616,6 +616,25 @@ class VM {
       final future = callee.call(args);
       _stack.add(future);
       return true;
+    }
+
+    if (callee is CompiledClass) {
+      // 1. Create the instance
+      final instance = FluxInstance(callee);
+      
+      // 2. Check for 'init' method
+      final initMethod = callee.methods['init'];
+      if (initMethod != null) {
+        // Replace callee with instance on stack
+        _stack[_stack.length - argCount - 1] = instance;
+        // Call init method
+        return _callFunction(ObjClosure(initMethod, []), argCount, namedArgs);
+      } else {
+        // No init method, just pop args and push instance
+        _stack.length -= argCount + 1;
+        _stack.add(instance);
+        return true;
+      }
     }
 
     if (callee is CompiledWidget) {
@@ -802,8 +821,10 @@ class VM {
               _stack.add(a.toString() + b.toString());
             } else if (a is num && b is num) {
               _stack.add(a + b);
+            } else if (a is List && b is List) {
+              _stack.add([...a, ...b]);
             } else {
-              throw "Operands must be two numbers or two strings.";
+              throw "Operands must be two numbers, two strings or two lists.";
             }
             break;
 
@@ -1215,6 +1236,7 @@ class VM {
             final name = frame.chunk.constants[nameIdx] as String;
             final obj = _stack.removeLast();
             if (obj is FluxInstance) {
+              print('DEBUG VM: getProperty $name on FluxInstance');
               final value = obj.getProperty(name);
               _stack.add(value);
             } else if (obj is List) {
@@ -1232,6 +1254,7 @@ class VM {
             } else if (_widgetState.containsKey(name)) { 
                _stack.add(_widgetState[name]);
             } else {
+              print('DEBUG VM: getProperty $name on ${obj.runtimeType}');
               throw 'Cannot get property from ${obj.runtimeType}';
             }
             break;
@@ -1290,12 +1313,61 @@ class VM {
               final method = instance.klass.methods[name];
               if (method != null) {
                 // Call method with instance as 'this'
+                print('DEBUG VM: Invoking method $name on instance ${instance.runtimeType}');
                 _callMethod(instance, method, args);
               } else {
                 throw 'Undefined method: ${instance.klass.name}.$name';
               }
             } else {
               throw 'Cannot invoke method on ${instance.runtimeType}';
+            }
+            break;
+
+          case OpCode.invokeSuper:
+            final nameIdx = readByte();
+            final argCount = readByte();
+            final name = frame.chunk.constants[nameIdx] as String;
+            
+            // Get arguments (pop them from stack)
+            final args = <Object?>[];
+            for (int i = 0; i < argCount; i++) {
+              args.insert(0, _stack.removeLast());
+            }
+            
+            // Get instance ('this')
+            final instance = _stack.removeLast();
+            if (instance is FluxInstance) {
+              final superclassName = instance.klass.superclass;
+              if (superclassName == null) {
+                throw 'Class ${instance.klass.name} has no superclass.';
+              }
+              
+              final superclass = _globals[superclassName];
+              if (superclass is CompiledClass) {
+                // Find method in superclass or its ancestors
+                CompiledFunction? method;
+                CompiledClass? currentClass = superclass;
+                while (currentClass != null) {
+                  method = currentClass.methods[name];
+                  if (method != null) break;
+                  
+                  if (currentClass.superclass != null) {
+                    currentClass = _globals[currentClass.superclass] as CompiledClass?;
+                  } else {
+                    currentClass = null;
+                  }
+                }
+                
+                if (method != null) {
+                  _callMethod(instance, method, args);
+                } else {
+                  throw 'Undefined method: $superclassName.$name';
+                }
+              } else {
+                throw 'Superclass $superclassName not found.';
+              }
+            } else {
+              throw 'Cannot invoke super method on ${instance.runtimeType}';
             }
             break;
           

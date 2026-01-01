@@ -1,0 +1,65 @@
+00:00 +0: loading test/class_test.dart
+00:00 +0: Class System Class instantiation and method call
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "val" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling variable: Box, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG VM: Instantiating class Box. Instance: 373990606
+DEBUG VM: Init method chunk code: [20, 0, 20, 1, 56, 0, 4, 20, 0, 29]
+DEBUG VM: Init method constants: [value]
+DEBUG VM: setProperty value on FluxInstance (in VM opcode)
+DEBUG INSTANCE: setProperty value = Gold on 373990606
+DEBUG VM: Invoking method open on instance FluxInstance
+DEBUG VM: getProperty value on FluxInstance
+DEBUG INSTANCE: getProperty value on 373990606 (fields: (value))
+00:00 +1: Class System Inheritance and super calls
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "name" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: name, isState: false
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 10
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "name" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "breed" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: name, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: breed, isState: false
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 20
+DEBUG COMPILER: Compiling variable: Dog, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 21
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG VM: Instantiating class Dog. Instance: 556814354
+DEBUG VM: Init method chunk code: [20, 0, 20, 1, 58, 0, 1, 4, 20, 0, 20, 2, 56, 1, 4, 20, 0, 29]
+DEBUG VM: Init method constants: [init, breed]
+DEBUG VM: setProperty name on FluxInstance (in VM opcode)
+DEBUG INSTANCE: setProperty name = Buddy on 556814354
+DEBUG VM: setProperty breed on FluxInstance (in VM opcode)
+DEBUG INSTANCE: setProperty breed = Golden on 556814354
+DEBUG VM: Invoking method speak on instance FluxInstance
+DEBUG VM: getProperty name on FluxInstance
+DEBUG INSTANCE: getProperty name on 556814354 (fields: (name, breed))
+DEBUG VM: getProperty breed on FluxInstance
+DEBUG INSTANCE: getProperty breed on 556814354 (fields: (name, breed))
+00:00 +2: All tests passed!

@@ -1,0 +1,2493 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/debug_index_test.dart
+DEBUG RUNTIME: Source:     widget TestWidget {
+      state todos = [];
+      
+      build {
+        Column {
+          Button("Add", onPressed: fn() {
+            push(todos, "Item 1");
+          })
+          Column {
+            var i = 0;
+            while (i < todos.length) {
+              var todo = todos[i];
+              Text(todo)
+              i = i + 1;
+            }
+          }
+        }
+      }
+    }
+  
+DEBUG PARSER: Found state field: todos
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [todos]
+BuildCompiler created. _stateFields: [todos]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 16
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 16
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [todos]
+BuildCompiler created. _stateFields: [todos]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 16
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 16
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+DEBUG renderWidget: node=FluxWidgetNode(Text, args: {0: Build returned: null}, children: [])
+SUCCESS: Built widget: Text
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+DEBUG RUNTIME: Source:         widget AsyncTest {
+          state result = "pending";
+
+          build {
+            Column {
+              Text(result)
+              Button("Start", onPressed: async fn() {
+                result = await delay_return("completed");
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: result
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget AsyncTest, State: [result]
+BuildCompiler created. _stateFields: [result]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: result, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: delay_return, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget AsyncTest, State: [result]
+BuildCompiler created. _stateFields: [result]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: result, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: delay_return, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "pending": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:46:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 46
+The test description was:
+  simple await resolves and updates state
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -1: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: Flux Decoration & EdgeInsets renders Container with simple padding (numeric)
+00:00 +0 -1: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state [E]
+  Test failed. See exception logs above.
+  The test description was: simple await resolves and updates state
+  
+00:00 +0 -1: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await await with immediate resolution
+DEBUG RUNTIME: Source:         widget ImmediateAsyncTest {
+          state value = "waiting";
+
+          build {
+            Column {
+              Text(value)
+              Button("Go", onPressed: async fn() {
+                value = await immediate_return();
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: value
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ImmediateAsyncTest, State: [value]
+BuildCompiler created. _stateFields: [value]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: value, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: immediate_return, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ImmediateAsyncTest, State: [value]
+BuildCompiler created. _stateFields: [value]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: value, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: immediate_return, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "waiting": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:79:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 79
+The test description was:
+  await with immediate resolution
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +0 -2: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: Flux Decoration & EdgeInsets renders Container with simple padding (numeric)
+00:00 +0 -2: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await await with immediate resolution [E]
+  Test failed. See exception logs above.
+  The test description was: await with immediate resolution
+  
+00:00 +1 -2: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Sequential Awaits multiple sequential awaits execute in order
+00:00 +2 -2: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Sequential Awaits multiple sequential awaits execute in order
+DEBUG RUNTIME: Source:         widget SequentialTest {
+          state log = "";
+
+          build {
+            Column {
+              Text(log)
+              Button("Run", onPressed: async fn() {
+                log = await append_async(log, "A");
+                log = await append_async(log, "B");
+                log = await append_async(log, "C");
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: log
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget SequentialTest, State: [log]
+BuildCompiler created. _stateFields: [log]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget SequentialTest, State: [log]
+BuildCompiler created. _stateFields: [log]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+00:00 +3 -2: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Sequential Awaits multiple sequential awaits execute in order
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: append_async, isState: false
+DEBUG COMPILER: Compiling variable: log, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:116:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 116
+The test description was:
+  multiple sequential awaits execute in order
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +3 -3: D:/OtherProject/mine/flux/packages/flux_flutter/test/deep_inspection_test.dart: Deep Object Inspection Test Verifies deep inspection of List and Map
+00:00 +3 -3: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Sequential Awaits multiple sequential awaits execute in order [E]
+  Test failed. See exception logs above.
+  The test description was: multiple sequential awaits execute in order
+  
+00:00 +4 -3: D:/OtherProject/mine/flux/packages/flux_flutter/test/deep_inspection_test.dart: Deep Object Inspection Test Verifies deep inspection of List and Map
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "list" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "map" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Added local "x" at slot 3 [Depth: 1]
+00:00 +5 -3: D:/OtherProject/mine/flux/packages/flux_flutter/test/deep_inspection_test.dart: Deep Object Inspection Test Verifies deep inspection of List and Map
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: main, isState: false
+00:00 +6 -3: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+DEBUG RUNTIME: Source:         widget TryCatchAsyncTest {
+          state status = "idle";
+          state errorMsg = "";
+
+          build {
+            Column {
+              Text(status)
+              Text(errorMsg)
+              Button("Trigger", onPressed: async fn() {
+                status = "running";
+                try {
+                  var result = await throw_error();
+                  status = "success";
+                } catch (e) {
+                  status = "failed";
+                  errorMsg = toString(e);
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: status
+DEBUG PARSER: Found state field: errorMsg
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TryCatchAsyncTest, State: [status, errorMsg]
+BuildCompiler created. _stateFields: [status, errorMsg]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: status, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: errorMsg, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: TryStmt at line 11
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+DEBUG COMPILER: Compiling variable: throw_error, isState: false
+DEBUG COMPILER: Added local "result" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 18
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TryCatchAsyncTest, State: [status, errorMsg]
+BuildCompiler created. _stateFields: [status, errorMsg]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: status, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: errorMsg, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: TryStmt at line 11
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+DEBUG COMPILER: Compiling variable: throw_error, isState: false
+DEBUG COMPILER: Added local "result" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 18
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "idle": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:161:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 161
+The test description was:
+  try/catch catches async errors
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +6 -4: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors [E]
+  Test failed. See exception logs above.
+  The test description was: try/catch catches async errors
+  
+00:00 +6 -4: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch with successful async recovers
+DEBUG RUNTIME: Source:         widget RecoveryTest {
+          state result = "pending";
+
+          build {
+            Column {
+              Text(result)
+              Button("Safe", onPressed: async fn() {
+                try {
+                  result = await may_fail(false);
+                } catch (e) {
+                  result = "error";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: result
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RecoveryTest, State: [result]
+BuildCompiler created. _stateFields: [result]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: result, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: TryStmt at line 8
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: may_fail, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 13
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RecoveryTest, State: [result]
+BuildCompiler created. _stateFields: [result]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: result, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: TryStmt at line 8
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: may_fail, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 13
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "Safe": []" (used in a call to "tap()") could not find any
+matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:1895:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1795:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1043:18)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:203:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  try/catch with successful async recovers
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +6 -5: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch with successful async recovers [E]
+  Test failed. See exception logs above.
+  The test description was: try/catch with successful async recovers
+  
+00:00 +6 -5: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await await inside conditional branch
+DEBUG RUNTIME: Source:         widget ConditionalAwaitTest {
+          state output = 0;
+
+          build {
+            Column {
+              Text(toString(output))
+              Button("Fetch", onPressed: async fn() {
+                var data = await fetch_data();
+                if (data["success"] == true) {
+                  output = data["value"];
+                } else {
+                  output = -1;
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: output
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ConditionalAwaitTest, State: [output]
+BuildCompiler created. _stateFields: [output]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: output, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: fetch_data, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ConditionalAwaitTest, State: [output]
+BuildCompiler created. _stateFields: [output]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: output, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: fetch_data, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "0": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:242:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 242
+The test description was:
+  await inside conditional branch
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +6 -6: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await await inside conditional branch [E]
+  Test failed. See exception logs above.
+  The test description was: await inside conditional branch
+  
+00:00 +6 -6: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await multiple state updates in single async function
+DEBUG RUNTIME: Source:         widget MultiStateTest {
+          state step = 0;
+          state message = "";
+
+          build {
+            Column {
+              Text(toString(step))
+              Text(message)
+              Button("Process", onPressed: async fn() {
+                step = 1;
+                message = await step_delay("loading");
+                step = 2;
+                message = await step_delay("processing");
+                step = 3;
+                message = await step_delay("done");
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: step
+DEBUG PARSER: Found state field: message
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget MultiStateTest, State: [step, message]
+BuildCompiler created. _stateFields: [step, message]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: step, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: message, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget MultiStateTest, State: [step, message]
+BuildCompiler created. _stateFields: [step, message]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: step, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: message, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: step_delay, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "0": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:283:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 283
+The test description was:
+  multiple state updates in single async function
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +6 -7: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+00:00 +6 -7: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await multiple state updates in single async function [E]
+  Test failed. See exception logs above.
+  The test description was: multiple state updates in single async function
+  
+00:00 +6 -7: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await with null result
+DEBUG RUNTIME: Source:         widget NullAwaitTest {
+          state value = "initial";
+
+          build {
+            Column {
+              Text(value)
+              Button("Nullify", onPressed: async fn() {
+                var result = await return_null();
+                if (result == null) {
+                  value = "got_null";
+                } else {
+                  value = "got_value";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: value
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget NullAwaitTest, State: [value]
+BuildCompiler created. _stateFields: [value]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: value, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: return_null, isState: false
+DEBUG COMPILER: Added local "result" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: result, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget NullAwaitTest, State: [value]
+BuildCompiler created. _stateFields: [value]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: value, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: return_null, isState: false
+DEBUG COMPILER: Added local "result" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: result, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "Nullify": []" (used in a call to "tap()") could not find any
+matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:1895:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1795:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1043:18)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:326:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  await with null result
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +6 -8: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+00:00 +6 -8: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await with null result [E]
+  Test failed. See exception logs above.
+  The test description was: await with null result
+  
+00:00 +6 -8: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: helper, isState: false
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 4
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Added local "c" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: main, isState: false
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling variable: unknown_var, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'unknown_var'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:912:15)
+#1      VM.executeFunctionInContext (package:flux_vm/src/vm.dart:475:23)
+#2      FluxDebugger.evaluate (package:flux_vm/src/debugger.dart:346:19)
+#3      FluxServiceExtensionHandlers.eval (package:flux_flutter/src/dev_tools/flux_service_extensions.dart:78:37)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart:87:67)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:215:9)
+<asynchronous suspension>
+#6      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:213:7)
+<asynchronous suspension>
+#7      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:258:9)
+<asynchronous suspension>
+
+IP: 2
+Last OpCode: OpCode.constant
+Runtime Error: Undefined global 'unknown_var'.
+   at script() [line 1]
+00:00 +7 -8: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await returning complex nested data
+DEBUG RUNTIME: Source:         widget NestedDataTest {
+          state userName = "";
+
+          build {
+            Column {
+              Text(userName)
+              Button("Load", onPressed: async fn() {
+                var data = await get_nested();
+                userName = data["user"]["name"];
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: userName
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget NestedDataTest, State: [userName]
+BuildCompiler created. _stateFields: [userName]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: userName, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: get_nested, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget NestedDataTest, State: [userName]
+BuildCompiler created. _stateFields: [userName]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: userName, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: get_nested, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "Load": []" (used in a call to "tap()") could not find any
+matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:1895:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1795:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1043:18)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:364:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  await returning complex nested data
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +7 -9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await returning complex nested data [E]
+  Test failed. See exception logs above.
+  The test description was: await returning complex nested data
+  
+00:00 +7 -9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios async timeout simulation
+DEBUG RUNTIME: Source:         widget TimeoutTest {
+          state status = "start";
+
+          build {
+            Column {
+              Text(status)
+              Button("Run", onPressed: async fn() {
+                // Determine if we should wait long or short
+                // Note: Flux doesn't have Future.timeout built-in yet, 
+                // so we simulate checking "too long" via a racing pattern manually if needed.
+                // Here we just verify long delays work correctly.
+                status = "waiting";
+                var res = await delayed_msg(50); 
+                status = res;
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: status
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TimeoutTest, State: [status]
+BuildCompiler created. _stateFields: [status]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: status, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: delayed_msg, isState: false
+DEBUG COMPILER: Added local "res" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: res, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TimeoutTest, State: [status]
+BuildCompiler created. _stateFields: [status]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: status, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: delayed_msg, isState: false
+DEBUG COMPILER: Added local "res" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: res, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "Run": []" (used in a call to "tap()") could not find any
+matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:1895:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1795:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1043:18)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:405:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  async timeout simulation
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +7 -10: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios async timeout simulation [E]
+  Test failed. See exception logs above.
+  The test description was: async timeout simulation
+  
+00:00 +7 -10: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios race condition on shared state
+DEBUG RUNTIME: Source:         widget RaceTest {
+          state counter = 0;
+
+          build {
+            Column {
+              Text(toString(counter))
+              // Button A takes 50ms to add 1
+              Button("A", onPressed: async fn() {
+                var v = await async_incr(50);
+                counter = counter + v;
+              })
+              // Button B takes 10ms to add 1
+              Button("B", onPressed: async fn() {
+                var v = await async_incr(10);
+                counter = counter + v;
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: counter
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RaceTest, State: [counter]
+BuildCompiler created. _stateFields: [counter]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: async_incr, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 14
+DEBUG COMPILER: Compiling variable: async_incr, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RaceTest, State: [counter]
+BuildCompiler created. _stateFields: [counter]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: async_incr, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 14
+DEBUG COMPILER: Compiling variable: async_incr, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: counter, isState: true
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "A": []" (used in a call to "tap()") could not find any
+matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:1895:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1795:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1043:18)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:457:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  race condition on shared state
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +7 -11: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios race condition on shared state [E]
+  Test failed. See exception logs above.
+  The test description was: race condition on shared state
+  
+00:00 +7 -11: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios error re-throwing
+DEBUG RUNTIME: Source:         widget RethrowTest {
+          state error = "none";
+
+          build {
+            Column {
+              Text(error)
+              Button("Throw", onPressed: async fn() {
+                try {
+                  try {
+                    await fail_async();
+                  } catch (e) {
+                    // Rethrow implicitly or handle
+                    // Since Flux doesn't have 'throw e' yet, we simulate nested handling
+                    error = "caught_inner";
+                    // In a real rethrow scenario, we would need 'throw' support
+                  }
+                } catch (e2) {
+                  error = "caught_outer";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: error
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RethrowTest, State: [error]
+BuildCompiler created. _stateFields: [error]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: error, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: TryStmt at line 8
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: TryStmt at line 9
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: fail_async, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 4]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 4]
+DEBUG COMPILER: Added local "e2" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 20
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget RethrowTest, State: [error]
+BuildCompiler created. _stateFields: [error]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: error, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: TryStmt at line 8
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: TryStmt at line 9
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 11
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: fail_async, isState: false
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 4]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 4]
+DEBUG COMPILER: Added local "e2" at slot 1 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 20
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 3]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "Throw": []" (used in a call to "tap()") could not find any
+matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:1895:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1795:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1043:18)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:502:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  error re-throwing
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +7 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios error re-throwing [E]
+  Test failed. See exception logs above.
+  The test description was: error re-throwing
+  
+00:00 +7 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +8 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +9 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +10 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +11 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +12 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +13 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +14 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +15 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +16 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +17 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +18 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +19 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +20 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +21 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +22 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +23 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +24 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +25 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +26 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +27 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +28 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +29 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +30 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +31 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +32 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:01 +33 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG RUNTIME: Source:       widget TodoApp {
+        state todos = [];
+        state input = "";
+        
+        build {
+          Column {
+            // Input Area
+            Row {
+               Expanded {
+                 TextField(hint: "New Todo", onChanged: fn(val) {
+                     input = val;
+                 })
+               }
+               Button("Add", onPressed: fn() {
+                 if (input != "") {
+                   push(todos, input);
+                   input = "";
+                 }
+               })
+            }
+            
+            // List Area
+            Column {
+               var i = 0;
+               while (i < todos.length) {
+                   var todo = todos[i];
+                   var index = i; // Capture current index
+                   TodoItem(todo: todo, onDelete: fn() {
+                       removeAt(todos, index);
+                   });
+                   i = i + 1;
+               }
+            }
+          }
+        }
+      }
+
+      widget TodoItem {
+        props todo, onDelete;
+        build {
+          Container {
+            Padding(padding: 8.0) {
+              Row {
+                Text(todo)
+                Button("X", onPressed: onDelete)
+              }
+            }
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: todos
+DEBUG PARSER: Found state field: input
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TodoApp, State: [todos, input]
+BuildCompiler created. _stateFields: [todos, input]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Expanded, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: TextField, isState: false
+DEBUG COMPILER: Added local "val" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: IfStmt at line 19
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 19
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 23
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 24
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 33
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 33
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 26
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 27
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "index" at slot 3 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 28
+DEBUG COMPILER: Compiling variable: TodoItem, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 29
+DEBUG COMPILER: Compiling variable: removeAt, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: index, isState: false
+DEBUG COMPILER: Resolving upvalue "index" -> enclosing local 3. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 3 as captured.
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 31
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 3 (captured: true) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 38
+Compiling Widget TodoItem, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Added local "todo" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "onDelete" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 42
+DEBUG COMPILER: Compiling variable: Padding, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 43
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 44
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Resolving upvalue "todo" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 45
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling variable: onDelete, isState: false
+DEBUG COMPILER: Resolving upvalue "onDelete" -> enclosing local 2. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 2 as captured.
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TodoApp, State: [todos, input]
+BuildCompiler created. _stateFields: [todos, input]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Row, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Expanded, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: TextField, isState: false
+DEBUG COMPILER: Added local "val" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: val, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: IfStmt at line 19
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 19
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: input, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 23
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 24
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WhileStmt at line 33
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 33
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 26
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "todo" at slot 2 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 27
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "index" at slot 3 [Depth: 3]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 28
+DEBUG COMPILER: Compiling variable: TodoItem, isState: false
+DEBUG COMPILER: Compiling variable: todo, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 29
+DEBUG COMPILER: Compiling variable: removeAt, isState: false
+DEBUG COMPILER: Compiling variable: todos, isState: true
+DEBUG COMPILER: Compiling variable: index, isState: false
+DEBUG COMPILER: Resolving upvalue "index" -> enclosing local 3. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 3 as captured.
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 31
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 3 (captured: true) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 3]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 17
+DEBUG E2E: Found 1 Text widgets
+  Text: "Build returned: null"
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Add": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart:86:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart line 86
+The test description was:
+  E2E: Todo App (Input, State Update, List Rendering)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +33 -13: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
+00:01 +33 -13: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering) [E]
+  Test failed. See exception logs above.
+  The test description was: E2E: Todo App (Input, State Update, List Rendering)
+  
+00:01 +34 -13: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
+00:01 +35 -13: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget App, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: FloatingActionButton, isState: false
+DEBUG COMPILER: Compiling variable: Icon, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TypeWidgetFinder:<Found 0 widgets with type "Scaffold": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart:36:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart line 36
+The test description was:
+  FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +35 -14: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton [E]
+  Test failed. See exception logs above.
+  The test description was: FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton
+  
+00:01 +35 -14: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget CustomContainer, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: _SubWidget, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 12
+Compiling Widget _SubWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Added local "header" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: header, isState: false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Header Text": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart:79:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart line 79
+The test description was:
+  FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +35 -15: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles recursive argument conversion (nested widgets) [E]
+  Test failed. See exception logs above.
+  The test description was: FluxRiverpodWidget handles recursive argument conversion (nested widgets)
+  
+00:01 +35 -15: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+DEBUG PARSER: Found state field: count
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget CounterApp, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: count, isState: true
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "0": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart:111:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart line 111
+The test description was:
+  FluxRiverpodWidget handles Button onPressed callback
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +35 -16: D:/OtherProject/mine/flux/packages/flux_flutter/test/generic_test.dart: Flux Generic Widgets Icon renders properties properly
+00:01 +35 -16: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback [E]
+  Test failed. See exception logs above.
+  The test description was: FluxRiverpodWidget handles Button onPressed callback
+  
+00:01 +35 -16: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles ListView with children
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ListApp, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: ListView, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Item 1": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart:147:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart line 147
+The test description was:
+  FluxRiverpodWidget handles ListView with children
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +35 -17: D:/OtherProject/mine/flux/packages/flux_flutter/test/generic_test.dart: Flux Generic Widgets Icon renders properties properly
+00:01 +35 -17: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles ListView with children [E]
+  Test failed. See exception logs above.
+  The test description was: FluxRiverpodWidget handles ListView with children
+  
+00:01 +36 -17: D:/OtherProject/mine/flux/packages/flux_flutter/test/generic_test.dart: Flux Generic Widgets Image renders properties (Asset)
+00:01 +37 -17: D:/OtherProject/mine/flux/packages/flux_flutter/test/generic_test.dart: Flux Generic Widgets Image renders properties (Network)
+00:01 +38 -17: D:/OtherProject/mine/flux/packages/flux_flutter/test/generic_test.dart: (tearDownAll)
+00:01 +38 -17: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Preserves matching state when adding new state fields
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state count = 10;
+          build {
+            Column {
+               Text("V1")
+               Text("Count: " + toString(count))
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: count
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "V1": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart:43:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart line 43
+The test description was:
+  Preserves matching state when adding new state fields
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +38 -18: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:01 +38 -18: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Preserves matching state when adding new state fields [E]
+  Test failed. See exception logs above.
+  The test description was: Preserves matching state when adding new state fields
+  
+00:01 +38 -18: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Handles removing state fields gracefully
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state a = "kept";
+          state b = "removed";
+          build {
+            Column {
+               Text(a)
+               Text(b)
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: a
+DEBUG PARSER: Found state field: b
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [a, b]
+BuildCompiler created. _stateFields: [a, b]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: a, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [a, b]
+BuildCompiler created. _stateFields: [a, b]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: a, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "kept": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart:84:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart line 84
+The test description was:
+  Handles removing state fields gracefully
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +38 -19: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:01 +38 -19: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Handles removing state fields gracefully [E]
+  Test failed. See exception logs above.
+  The test description was: Handles removing state fields gracefully
+  
+00:01 +39 -19: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:01 +40 -19: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +41 -19: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +41 -19: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Updates closure logic while preserving captured state
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state count = 0;
+          build {
+            Column {
+               Text(toString(count))
+               Button("Action", onPressed: fn() {
+                 count = count + 1;
+               })
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: count
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+00:02 +41 -19: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +41 -19: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Updates closure logic while preserving captured state
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "Action": []" (used in a call to "tap()") could not find any
+matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:1895:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1795:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1043:18)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart:123:20)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  Updates closure logic while preserving captured state
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +41 -20: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +41 -20: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Updates closure logic while preserving captured state [E]
+  Test failed. See exception logs above.
+  The test description was: Updates closure logic while preserving captured state
+  
+00:02 +41 -20: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Handles syntax errors by throwing (handled by wrapper in app)
+DEBUG RUNTIME: Source:         widget TestWidget {
+          build { Text("OK") }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "OK": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart:165:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart line 165
+The test description was:
+  Handles syntax errors by throwing (handled by wrapper in app)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +41 -21: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:02 +41 -21: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Handles syntax errors by throwing (handled by wrapper in app) [E]
+  Test failed. See exception logs above.
+  The test description was: Handles syntax errors by throwing (handled by wrapper in app)
+  
+00:02 +41 -21: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+DEBUG RUNTIME: Source:       widget TestWidget {
+        state count = 0;
+        build {
+          Column {
+             Text("Version 1")
+             Text(toString(count))
+             Button("Inc", onPressed: fn() {
+               count = count + 1;
+             })
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: count
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Version 1": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart:31:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart line 31
+The test description was:
+  FluxRuntime.hotReload updates widget definition
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +41 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Stack with Alignment
+00:02 +41 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition [E]
+  Test failed. See exception logs above.
+  The test description was: FluxRuntime.hotReload updates widget definition
+  
+00:02 +42 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.get returns standardized response map
+00:02 +43 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Positioned with props
+00:02 +44 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.post returns response
+00:02 +45 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Wrap with spacing and direction
+00:02 +46 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets Wrap defaults
+00:02 +47 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: (tearDownAll)
+00:02 +47 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: storage.set and get work correctly
+00:02 +48 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: storage.remove works
+00:02 +49 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: storage.clear works
+00:02 +50 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +51 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +52 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +53 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +54 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +55 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +56 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +57 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +58 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +59 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +60 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +61 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:02 +62 -22: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: Text, isState: false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Count is set": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart:44:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart line 44
+The test description was:
+  renders widget with Riverpod provider
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +62 -23: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders primitive Text without style
+00:02 +62 -23: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider [E]
+  Test failed. See exception logs above.
+  The test description was: renders widget with Riverpod provider
+  
+00:02 +62 -23: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget reads provider value
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Hello, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: getProvider, isState: false
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Hello, Guest!": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart:77:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart line 77
+The test description was:
+  reads provider value
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +62 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders primitive Text without style
+00:02 +62 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget reads provider value [E]
+  Test failed. See exception logs above.
+  The test description was: reads provider value
+  
+00:02 +62 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget shows error for missing widget
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Counter, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+00:02 +63 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders primitive Text without style
+00:02 +64 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders Text with full style
+00:02 +65 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders Text with numeric fontWeight
+00:02 +66 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: (setUpAll)
+00:02 +67 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: (setUpAll)
+00:02 +67 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style gracefully handles invalid style
+00:02 +68 -24: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+DEBUG RUNTIME: Source:       widget TaskList {
+        state tasks = "foo";
+        
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Flux ToDo")),
+            body: Column(
+              children: [
+                Text("Debug Message")
+              ]
+            )
+          )
+        }
+      }
+
+      widget AddTaskParam {
+        state newTask = "";
+
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Add Task")),
+            body: Column(
+              children: []
+            )
+          )
+        }
+      }
+      
+DEBUG PARSER: Found state field: tasks
+DEBUG PARSER: Found state field: newTask
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TaskList, State: [tasks]
+BuildCompiler created. _stateFields: [tasks]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 16
+Compiling Widget AddTaskParam, State: [newTask]
+BuildCompiler created. _stateFields: [newTask]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TaskList, State: [tasks]
+BuildCompiler created. _stateFields: [tasks]
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 17
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Debug Message": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart:62:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart line 62
+The test description was:
+  Complete App Flow
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +68 -25: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+00:03 +68 -25: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow [E]
+  Test failed. See exception logs above.
+  The test description was: Complete App Flow
+  
+00:03 +68 -25: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        DefaultTabController(length: 2) {
+          Scaffold(
+            appBar: AppBar(
+              title: Text("Tabs Demo"),
+              bottom: TabBar(
+                tabs: [
+                  Tab(text: "Tab 1"),
+                  Tab(text: "Tab 2")
+                ]
+              )
+            ),
+            body: TabBarView(
+              children: [
+                Center(child: Text("Page 1")),
+                Center(child: Text("Page 2"))
+              ]
+            )
+          )
+        }
+      }
+    }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: DefaultTabController, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: TabBar, isState: false
+DEBUG COMPILER: Compiling variable: Tab, isState: false
+DEBUG COMPILER: Compiling variable: Tab, isState: false
+DEBUG COMPILER: Compiling variable: TabBarView, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: DefaultTabController, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: AppBar, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: TabBar, isState: false
+DEBUG COMPILER: Compiling variable: Tab, isState: false
+DEBUG COMPILER: Compiling variable: Tab, isState: false
+DEBUG COMPILER: Compiling variable: TabBarView, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: Center, isState: false
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Tabs Demo": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart:45:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart line 45
+The test description was:
+  Phase 24: TabBar and Scaffold layout
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +68 -26: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+00:03 +68 -26: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout [E]
+  Test failed. See exception logs above.
+  The test description was: Phase 24: TabBar and Scaffold layout
+  
+00:03 +68 -26: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Form and Input widgets
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        Scaffold(
+          body: Form(
+            child: Column(
+              children: [
+                 TextFormField(initialValue: "Test Input"),
+                 Switch(value: true),
+                 Slider(value: 0.5, min: 0.0, max: 1.0)
+              ]
+            )
+          )
+        )
+      }
+    }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: Form, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: TextFormField, isState: false
+DEBUG COMPILER: Compiling variable: Switch, isState: false
+DEBUG COMPILER: Compiling variable: Slider, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Scaffold, isState: false
+DEBUG COMPILER: Compiling variable: Form, isState: false
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling variable: TextFormField, isState: false
+DEBUG COMPILER: Compiling variable: Switch, isState: false
+DEBUG COMPILER: Compiling variable: Slider, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TypeWidgetFinder:<Found 0 widgets with type "Form": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart:92:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart line 92
+The test description was:
+  Phase 24: Form and Input widgets
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +68 -27: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+00:03 +68 -27: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Form and Input widgets [E]
+  Test failed. See exception logs above.
+  The test description was: Phase 24: Form and Input widgets
+  
+00:03 +68 -27: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Animation widgets (Hero)
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        Hero(
+          tag: "hero-tag",
+          child: Container(width: 100, height: 100, color: 4278190335)
+        )
+      }
+    }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Hero, isState: false
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Hero, isState: false
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TypeWidgetFinder:<Found 0 widgets with type "Hero": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart:122:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart line 122
+The test description was:
+  Phase 24: Animation widgets (Hero)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +68 -28: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+00:03 +68 -28: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Animation widgets (Hero) [E]
+  Test failed. See exception logs above.
+  The test description was: Phase 24: Animation widgets (Hero)
+  
+00:03 +68 -28: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+DEBUG RUNTIME: Source:         widget Main {
+          build {
+            Text("Hello Flux")
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Hello Flux": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart:27:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart line 27
+The test description was:
+  renders basic text widget
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +68 -29: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget [E]
+  Test failed. See exception logs above.
+  The test description was: renders basic text widget
+  
+00:03 +68 -29: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG RUNTIME: Source:         widget Main {
+          build {
+            Column {
+              Text("Item 1")
+              Text("Item 2")
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Main, State: []
+BuildCompiler created. _stateFields: []
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TypeWidgetFinder:<Found 0 widgets with type "Column": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart:53:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart line 53
+The test description was:
+  renders nested column with children
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +68 -30: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children [E]
+  Test failed. See exception logs above.
+  The test description was: renders nested column with children
+  
+00:03 +68 -30: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction
+DEBUG RUNTIME: Source:         widget Counter {
+          state count = 0;
+          
+          build {
+            Column {
+              Text("Count: " + toString(count))
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: count
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Counter, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget Counter, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: toString, isState: false
+DEBUG COMPILER: Compiling variable: count, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Count: 0": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart:87:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart line 87
+The test description was:
+  handles state changes and interaction
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +68 -31: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction [E]
+  Test failed. See exception logs above.
+  The test description was: handles state changes and interaction
+  
+00:03 +68 -31: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles text field input
+DEBUG RUNTIME: Source:         widget InputTest {
+          state text = "Hello";
+          
+          build {
+            Column {
+              Text("You typed: " + text)
+            }
+          }
+        }
+      
+DEBUG PARSER: Found state field: text
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget InputTest, State: [text]
+BuildCompiler created. _stateFields: [text]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: text, isState: true
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget InputTest, State: [text]
+BuildCompiler created. _stateFields: [text]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Text, isState: false
+DEBUG COMPILER: Compiling variable: text, isState: true
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "You typed: Hello": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart:116:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart line 116
+The test description was:
+  handles text field input
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:03 +68 -32: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles text field input [E]
+  Test failed. See exception logs above.
+  The test description was: handles text field input
+  
+00:03 +68 -32: Some tests failed.
