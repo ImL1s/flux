@@ -4,6 +4,13 @@
 
 ## Features
 
+### Intelligence (LSP)
+- **Go to Definition**: Jump to variable, function, and widget declarations.
+- **Find All References**: Track symbol usage across the file.
+- **Autocompletion**: Context-aware completions for keywords, widgets, and stdlib.
+- **Hover Information**: Detailed documentation and signatures on hover.
+- **Diagnostics**: Real-time syntax and semantic error reporting.
+
 ### Syntax Highlighting
 - **Keywords**: `if`, `else`, `while`, `for`, `return`, `break`, `continue`
 - **Async/Await**: `async`, `await`
@@ -57,10 +64,16 @@ This extension has no configuration settings yet.
 
 ## Known Issues
 
-- Language Server Protocol (LSP) not yet implemented
+- Multi-file symbol resolution (WIP)
 - No debugging support yet
 
 ## Release Notes
+
+### 0.2.0
+- Integrated Flux Language Server (LSP)
+- Support for Go to Definition & Find All References
+- Context-aware code completion
+- Real-time error diagnostics and hover information
 
 ### 0.1.0
 - Initial release

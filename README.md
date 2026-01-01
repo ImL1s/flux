@@ -52,6 +52,8 @@ The project is organized as a monorepo containing the following core packages:
 | **[`flux_vm`](packages/flux_vm)** | The runtime engine. A stack machine that executes Flux bytecode. |
 | **[`flux_flutter`](packages/flux_flutter)** | Flutter integration layer. Contains widget bindings and the Riverpod runtime adapter. |
 | **[`flux_cli`](packages/flux_cli)** | Command-line tool for running `.flux` scripts directly in the terminal. |
+| **[`flux_lsp`](packages/flux_lsp)** | Language Server Protocol (LSP) implementation for editor intelligence. |
+| **[`flux_vscode`](packages/flux_vscode)** | VSCode Extension providing syntax highlighting, snippets, and LSP integration. |
 
 ---
 
@@ -126,6 +128,19 @@ class MyApp extends ConsumerWidget {
 
 ---
 
+# Tooling & IDE Support
+
+### VSCode Extension
+The **Flux VSCode Extension** provides a premium development experience:
+- **Intelligent Navigation**: Go to Definition and Find All References.
+- **Code Intelligence**: Autocompletion for widgets, keywords, and providers.
+- **Diagnostics**: Real-time error reporting as you type.
+- **Snippets**: Rapidly scaffold widgets and logic blocks.
+
+To install, see the [VSCode Extension README](packages/flux_vscode/README.md).
+
+---
+
 ## 🛠️ Development
 
 ### Running Tests
@@ -137,6 +152,7 @@ To ensure the integrity of the ecosystem, run the test suite across all packages
 dart test packages/flux_compiler
 dart test packages/flux_vm
 dart test packages/flux_cli
+dart test packages/flux_lsp
 
 # Integration Tests
 flutter test packages/flux_flutter
