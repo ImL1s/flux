@@ -513,6 +513,12 @@ class FluxDebugger {
       'value': obj.toString(),
     };
   }
+
+  /// Get deep value by handle (alias for getObject)
+  /// 
+  /// This is the public API for deep object inspection.
+  /// Returns detailed structure of complex objects like Lists, Maps, and Instances.
+  Map<String, dynamic>? getValue(int handle) => getObject(handle);
   
   Map<String, dynamic> _serializeValue(Object? value) {
     if (value == null) {
