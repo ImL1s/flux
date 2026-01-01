@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import '../widgets/object_inspector.dart';
 
 class VariablesPane extends StatelessWidget {
-  final Map<String, String> locals;
+  final Map<String, dynamic> locals;
 
   const VariablesPane({
     super.key,
@@ -33,11 +34,12 @@ class VariablesPane extends StatelessWidget {
               
               return ListTile(
                 title: Text(key, style: const TextStyle(fontWeight: FontWeight.w500)),
-                subtitle: Text(value ?? 'null', 
-                  style: TextStyle(
-                    fontFamily: 'monospace', 
-                    color: value == null ? Colors.grey : Colors.blue.shade800
-                  )
+                trailing: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 200),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: ValueRenderer(value: value),
+                  ),
                 ),
                 dense: true,
               );

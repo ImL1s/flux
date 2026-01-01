@@ -68,8 +68,10 @@ main();
          
          expect(localsJson['type'], 'Locals');
          final locals = localsJson['locals'] as Map;
-         expect(locals['a'], '100');
-         expect(locals['b'], '200');
+         // New format: locals are structured objects
+         expect(locals['a']['type'], 'primitive');
+         expect(locals['a']['value'], '100');
+         expect(locals['b']['value'], '200');
          
          // 7. Test Eval (ext.flux.eval)
          final evalResponse = await FluxServiceExtensionHandlers.eval(vm, {'expr': 'a + b', 'frameIndex': '0'});

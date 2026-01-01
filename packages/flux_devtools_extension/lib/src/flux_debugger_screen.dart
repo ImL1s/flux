@@ -24,7 +24,7 @@ class _FluxDebuggerScreenState extends State<FluxDebuggerScreen> {
   
   // New State for Inspector
   List<Map<String, dynamic>> _callStack = [];
-  Map<String, String> _locals = {};
+  Map<String, dynamic> _locals = {};
   int _selectedFrameIndex = 0;
 
   // Map of "scriptName:line" -> breakpointId
@@ -141,7 +141,7 @@ class _FluxDebuggerScreenState extends State<FluxDebuggerScreen> {
       final localsJson = localsResp.json ?? {};
       
       setState(() {
-        _locals = Map<String, String>.from(localsJson['locals'] ?? {});
+        _locals = Map<String, dynamic>.from(localsJson['locals'] ?? {});
         _selectedFrameIndex = frameIndex;
       });
     } catch (e) {
