@@ -129,6 +129,11 @@ class VM {
     _scripts[name] = function;
   }
   
+  /// Register a custom module with the VM (e.g., http, storage)
+  void registerModule(FluxModule module) {
+    _globals[module.name] = module;
+  }
+  
   /// Hot-swap a script with a new compiled function
   /// 
   /// Replaces the script's bytecode while preserving:

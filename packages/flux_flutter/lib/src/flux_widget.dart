@@ -3,6 +3,7 @@ import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'bindings.dart';
 import 'dev_tools/flux_service_extensions.dart';
+import 'modules/flux_native_modules.dart';
 
 /// A Flutter widget that executes and renders a Flux widget definition.
 /// 
@@ -82,6 +83,10 @@ class _FluxWidgetState extends State<FluxWidget> {
           moduleName: widget.widgetName,
         );
       }
+      
+      // Register native modules (http, storage)
+      FluxNativeModules.register(_runtime._vm);
+      
       _buildWidget();
       _error = null;
     } catch (e) {
@@ -161,6 +166,7 @@ class FluxWidgetNode {
 /// Runtime for executing Flux code and managing widget state
 class FluxRuntime {
   final VM _vm = VM();
+  VM get vm => _vm; // Expose VM for module registration
   final Map<String, CompiledWidget> _widgets = {};
   
   /// Callback when state changes (for Flutter rebuild)
@@ -195,7 +201,7 @@ class FluxRuntime {
     debugPrint('DEBUG RUNTIME: Compilation finished. Bytecode size: ${function.chunk.code.length}');
     
     // Register script for DevTools
-    _vm.registerScript(moduleName ?? 'script_${source.hashCode}', source, function);
+    _vm.registerScript(moduleName ?? 'script_${source.hashCode}', function);
     
     // Execute to populate globals (including widget definitions)
     
