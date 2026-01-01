@@ -548,7 +548,7 @@ class VM {
     if (value is bool) return value;
     return true;
   }
-
+  
   void _runtimeError(String message) {
     onPrint("Runtime Error: $message");
     
@@ -747,6 +747,7 @@ class VM {
         
         firstInstruction = false;
 
+        // print("DEBUG VM LOOP: IP ${frame.ip}. Stack ${_stack.length}");
         if (frame.ip >= frame.chunk.code.length) {
           // Chunk ended without explicit return - treat as implicit "return nil"
           // This replicates OpCode.return_ logic with nil result
@@ -915,7 +916,8 @@ class VM {
 
           case OpCode.getLocal:
             final slot = readByte();
-            _stack.add(_stack[frame.slotBase + slot]);
+            final index = frame.slotBase + slot;
+            _stack.add(_stack[index]);
             break;
 
           case OpCode.setLocal:
@@ -1020,10 +1022,9 @@ class VM {
              if (_frames.length <= minDepth) {
                 // Finished execution for this nested run() or top-level script
                 // Pop slots up to the closure (slotBase)
-                while (_stack.length > returningFrame.slotBase) {
-                  _stack.removeLast();
-                }
-
+            while (_stack.length > returningFrame.slotBase) {
+               _stack.removeLast();
+            }
                _stack.add(result); // Always push result (including nil)
                return InterpretResult.ok;
             }
@@ -1236,7 +1237,6 @@ class VM {
             final name = frame.chunk.constants[nameIdx] as String;
             final obj = _stack.removeLast();
             if (obj is FluxInstance) {
-              print('DEBUG VM: getProperty $name on FluxInstance');
               final value = obj.getProperty(name);
               _stack.add(value);
             } else if (obj is List) {
@@ -1251,6 +1251,13 @@ class VM {
               } else {
                 _stack.add(obj[name]);
               }
+            } else if (obj is FluxModule) {
+               final member = obj.get(name);
+               if (member != null) {
+                 _stack.add(member);
+               } else {
+                  throw "Undefined member '$name' in module '${obj.name}'";
+               }
             } else if (_widgetState.containsKey(name)) { 
                _stack.add(_widgetState[name]);
             } else {
@@ -1266,8 +1273,10 @@ class VM {
             final obj = _stack.removeLast();
             if (obj is FluxInstance) {
               obj.setProperty(name, value);
+              _stack.add(value); // Standardized: Assignment leaves value on stack
             } else if (obj is Map) {
               obj[name] = value;
+              _stack.add(value);
             } else {
               throw 'Cannot set property on ${obj.runtimeType}';
             }
@@ -1318,6 +1327,50 @@ class VM {
               } else {
                 throw 'Undefined method: ${instance.klass.name}.$name';
               }
+            } else if (instance is FluxModule) {
+               final member = instance.get(name);
+               if (member != null) {
+                  // It's a NativeFunction or AsyncNativeFunction.
+                  // We need to call it.
+                  // _callValue expects the function to be on top of stack?
+                  // No, _callValue(callee, argCount).
+                  // But here we are in OpCode.invoke.
+                  // We have 'instance' and 'args'.
+                  // We can just call _callValue(member, argCount) ?
+                  // But _callValue pops args from stack. We already popped them into 'args' list in invoke.
+                  // This OpCode.invoke implementation is specific for FluxInstance which handles args differently?
+                  // Wait, OpCode.invoke implementation in vm.dart lines 1306-1310 POPS args into a List<Object?> named 'args'.
+                  // Then it calls _callMethod(instance, method, args).
+                  
+                  // For NativeFunction, we can just call it directly with 'args'.
+                  if (member is NativeFunction) {
+                     try {
+                        final result = member.call(args);
+                        _stack.add(result);
+                     } catch (e) {
+                        _runtimeError(e.toString());
+                        return InterpretResult.runtimeError;
+                     }
+                  } else if (member is AsyncNativeFunction) {
+                      // Async support in invoke?
+                      // The current VM seems synchronous for invoke?
+                      // _callMethod is synchronous.
+                      // If we support async, we need to await. 
+                      // For now stdlib json is sync. timer is async but usually not called as method on module?
+                      // timer.delay(100) -> FluxModule('timer').get('delay') -> AsyncNativeFunction.
+                      
+                      // if usage is `await timer.delay(100)`, compiler emits `await` opcode?
+                      // If usage is `timer.delay(100)`, it returns a Future.
+                      // We should push the specific result.
+                      
+                      final result = member.call(args); // This returns a Future
+                      _stack.add(result);
+                  } else {
+                     throw 'Member $name in module ${instance.name} is not a function/method';
+                  }
+               } else {
+                 throw 'Undefined method: ${instance.name}.$name';
+               }
             } else {
               throw 'Cannot invoke method on ${instance.runtimeType}';
             }
