@@ -2,9 +2,11 @@
 /// 
 /// Built-in functions for the Flux VM.
 
+import 'dart:async';
+import 'dart:convert';
 import 'dart:math' as math;
 
-/// Native function wrapper
+/// Native function wrapper (synchronous)
 class NativeFunction {
   final String name;
   final int arity;
@@ -16,9 +18,40 @@ class NativeFunction {
   String toString() => '<native fn $name>';
 }
 
+/// Async native function wrapper
+class AsyncNativeFunction {
+  final String name;
+  final int arity;
+  final Future<Object?> Function(List<Object?> args) call;
+  
+  const AsyncNativeFunction(this.name, this.arity, this.call);
+  
+  @override
+  String toString() => '<async native fn $name>';
+}
+
+/// A module is a namespace containing functions
+/// Accessed as module.function() in Flux scripts
+class FluxModule {
+  final String name;
+  final Map<String, dynamic> members = {}; // NativeFunction or AsyncNativeFunction
+  
+  FluxModule(this.name);
+  
+  void register(String name, dynamic fn) {
+    members[name] = fn;
+  }
+  
+  dynamic get(String name) => members[name];
+  
+  @override
+  String toString() => '<module $name>';
+}
+
 /// Standard library registry
 class StdLib {
   static final Map<String, NativeFunction> functions = {};
+  static final Map<String, FluxModule> modules = {};
   
   /// Initialize all standard library functions
   static void init() {
@@ -30,6 +63,9 @@ class StdLib {
     _registerString();
     // List functions
     _registerList();
+    // Module-based stdlib
+    _registerJsonModule();
+    _registerTimerModule();
   }
   
   static void _registerCore() {
@@ -220,5 +256,43 @@ class StdLib {
       final separator = args[1] as String;
       return list.join(separator);
     });
+  }
+  
+  /// JSON module: json.parse(), json.stringify()
+  static void _registerJsonModule() {
+    final jsonModule = FluxModule('json');
+    
+    jsonModule.register('parse', NativeFunction('json.parse', 1, (args) {
+      final str = args[0] as String;
+      try {
+        return jsonDecode(str);
+      } catch (e) {
+        throw 'json.parse error: $e';
+      }
+    }));
+    
+    jsonModule.register('stringify', NativeFunction('json.stringify', 1, (args) {
+      final obj = args[0];
+      try {
+        return jsonEncode(obj);
+      } catch (e) {
+        throw 'json.stringify error: $e';
+      }
+    }));
+    
+    modules['json'] = jsonModule;
+  }
+  
+  /// Timer module: timer.delay() - async
+  static void _registerTimerModule() {
+    final timerModule = FluxModule('timer');
+    
+    timerModule.register('delay', AsyncNativeFunction('timer.delay', 1, (args) async {
+      final ms = args[0] as int;
+      await Future.delayed(Duration(milliseconds: ms));
+      return null;
+    }));
+    
+    modules['timer'] = timerModule;
   }
 }

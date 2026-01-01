@@ -118,6 +118,34 @@ class VM {
   /// Get list of imports encountered during execution
   List<String> get imports => List.unmodifiable(_imports);
   
+  /// Callback triggered after a hot swap is applied
+  void Function(String scriptName)? onHotSwap;
+  
+  /// Loaded scripts registry (for hot-swap)
+  final Map<String, CompiledFunction> _scripts = {};
+  
+  /// Register a compiled script for potential hot-swap
+  void registerScript(String name, CompiledFunction function) {
+    _scripts[name] = function;
+  }
+  
+  /// Hot-swap a script with a new compiled function
+  /// 
+  /// Replaces the script's bytecode while preserving:
+  /// - Widget state (_widgetState)
+  /// - Global variables (_globals)
+  /// 
+  /// Triggers onHotSwap callback on success.
+  void hotSwap(String scriptName, CompiledFunction newFunction) {
+    _scripts[scriptName] = newFunction;
+    
+    // Notify listeners (e.g., FluxWidget to rebuild)
+    onHotSwap?.call(scriptName);
+  }
+  
+  /// Get a registered script by name
+  CompiledFunction? getScript(String name) => _scripts[name];
+  
   /// Constructor - initializes standard library
   VM() {
     _currentCoroutine = FluxCoroutine('root');
@@ -127,7 +155,12 @@ class VM {
   /// Initialize standard library functions
   void _initStdlib() {
     StdLib.init();
+    // Register functions as globals
     for (final entry in StdLib.functions.entries) {
+      _globals[entry.key] = entry.value;
+    }
+    // Register modules as globals (json, timer, etc.)
+    for (final entry in StdLib.modules.entries) {
       _globals[entry.key] = entry.value;
     }
   }
@@ -567,6 +600,17 @@ class VM {
         _runtimeError(e.toString());
         return false;
       }
+    }
+    
+    // Handle async native functions (like timer.delay)
+    if (callee is AsyncNativeFunction) {
+      final args = _stack.sublist(_stack.length - argCount);
+      _stack.length -= argCount + 1;
+      
+      // Create Future and push it to stack (will be awaited by OpCode.await_)
+      final future = callee.call(args);
+      _stack.add(future);
+      return true;
     }
 
     if (callee is CompiledWidget) {
@@ -1091,6 +1135,15 @@ class VM {
                 return InterpretResult.runtimeError;
               }
               _stack.add(obj[idx]);
+            } else if (obj is FluxModule) {
+              // Module property access: json["parse"], timer["delay"] etc.
+              final memberName = index as String;
+              final member = obj.get(memberName);
+              if (member == null) {
+                _runtimeError("Module '${obj.name}' has no member '$memberName'.");
+                return InterpretResult.runtimeError;
+              }
+              _stack.add(member);
             } else {
               _runtimeError("Cannot index into ${obj.runtimeType}.");
               return InterpretResult.runtimeError;

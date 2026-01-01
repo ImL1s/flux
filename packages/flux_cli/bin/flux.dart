@@ -31,6 +31,15 @@ Future<void> main(List<String> args) async {
     return;
   }
 
+  if (args[0] == 'dev') {
+    // Import dev server dynamically to avoid overhead when not used
+    final devServerLib = await import('package:flux_cli/src/dev_server.dart');
+    final watchDir = args.length > 1 ? args[1] : '.';
+    final port = args.length > 2 ? int.tryParse(args[2]) ?? 8765 : 8765;
+    await devServerLib.runDevServer([watchDir, port.toString()]);
+    return;
+  }
+
   if (args[0] == 'watch') {
     if (args.length < 2) {
       stderr.writeln('Usage: flux watch <script.flux>');
