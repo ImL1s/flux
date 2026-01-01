@@ -10,6 +10,7 @@ import 'package:flux_cli/src/commands/serve_command.dart';
 import 'package:flux_cli/src/commands/key_command.dart';
 import 'package:flux_cli/src/commands/sign_command.dart';
 import 'package:flux_cli/src/commands/verify_command.dart';
+import 'package:flux_cli/src/commands/build_command.dart';
 import 'package:args/command_runner.dart';
 import 'package:flux_cli/src/dev_server.dart' as dev_server;
 
@@ -31,10 +32,11 @@ Future<void> main(List<String> args) async {
     ..addCommand(ServeCommand())
     ..addCommand(KeyCommand())
     ..addCommand(SignCommand())
-    ..addCommand(VerifyCommand());
+    ..addCommand(VerifyCommand())
+    ..addCommand(BuildCommand());
     
   // Handle built-in dev commands manually for now or migrate them to proper Commands
-  if (['serve', 'watch', 'keygen', 'sign', 'verify'].contains(args[0])) {
+  if (['serve', 'watch', 'keygen', 'sign', 'verify', 'build'].contains(args[0])) {
     try {
       await runner.run(args);
     } catch (e) {
@@ -93,6 +95,7 @@ Commands:
   keygen          Generate a new Ed25519 key pair
   sign <file>     Sign a script with a private key
   verify <file>   Verify a signed script
+  build <file>    Compile a Flux script to bytecode
 
 Options:
   -h, --help     Show this help message
@@ -101,6 +104,7 @@ Options:
 Examples:
   flux hello.flux
   flux sign script.flux
+  flux build script.flux
 ''');
 }
 

@@ -9,6 +9,7 @@ import 'lexer.dart';
 import 'lexer.dart';
 import 'parser.dart';
 import 'optimizer.dart';
+import 'source_map_generator.dart';
 
 class Local {
   final String name;
@@ -41,7 +42,11 @@ class CompiledFunction {
     this.moduleName, 
     this.paramNames = const [],
     List<String>? localNames,
+    this.sourceMap,
   }) : localNames = localNames ?? [];
+
+  /// Source Map v3 JSON string for this function's bytecode
+  final String? sourceMap;
   
   @override
   String toString() => "<fn $name>";
@@ -99,9 +104,18 @@ class Compiler {
   
   /// State field names available in current widget context (for build method)
   List<String> _stateFields = [];
+  
+  SourceMapGenerator? _sourceMapGenerator;
 
-  Compiler({CompilationUnit? unit, String? moduleName}) : _moduleName = moduleName {
+  Compiler({CompilationUnit? unit, String? moduleName, bool generateSourceMap = false}) : _moduleName = moduleName {
       _function = CompiledFunction("script", Chunk(), moduleName: moduleName);
+      
+      if (generateSourceMap) {
+        _sourceMapGenerator = SourceMapGenerator(file: moduleName ?? 'script');
+        if (moduleName != null) {
+          _sourceMapGenerator!.addSource(moduleName);
+        }
+      }
       
       // Reserve slot 0 for script closure
       _locals.add(Local("", 0));
@@ -118,6 +132,11 @@ class Compiler {
   
   // Internal constructor for inner functions
   Compiler._inner(this._enclosing, String name) : _moduleName = _enclosing?._moduleName {
+      if (_enclosing?._sourceMapGenerator != null) {
+        _sourceMapGenerator = SourceMapGenerator(file: _moduleName ?? 'script');
+        // Copy sources/names or just add the file again (it handles dupes)
+        if (_moduleName != null) _sourceMapGenerator!.addSource(_moduleName!);
+      }
       _function = CompiledFunction(name, Chunk(), moduleName: _moduleName);
   }
 
@@ -132,7 +151,7 @@ class Compiler {
       _compileBlock(statement);
     } else if (statement is ExpressionStmt) {
       _compileExpression(statement.expression);
-      chunk.writeOp(OpCode.pop, statement.line); 
+      _emit(OpCode.pop, statement.line, statement.column); 
     } else if (statement is VarDeclStmt) {
       _compileVarDecl(statement);
     } else if (statement is FunctionDecl) {
@@ -187,7 +206,36 @@ class Compiler {
     // Run Post-Pass Optimization
     BytecodeOptimizer.optimize(chunk);
     
+    // Generate Source Map if enabled
+    if (_sourceMapGenerator != null) {
+      // Re-create CompiledFunction with source map because fields are final
+      return CompiledFunction(
+        _function.name,
+        _function.chunk,
+        arity: _function.arity,
+        isAsync: _function.isAsync,
+        moduleName: _function.moduleName,
+        paramNames: _function.paramNames,
+        localNames: _function.localNames,
+        sourceMap: _sourceMapGenerator!.toJson(),
+      );
+    }
+    
     return _function;
+  }
+
+  /// Emits an opcode and records source mapping if generator is present
+  void _emit(OpCode op, int line, int column) {
+      if (_sourceMapGenerator != null) {
+        _sourceMapGenerator!.addEntry(
+          chunk.code.length, // generatedColumn (byte offset)
+          1, // generatedLine (treat bytecode as line 1)
+          sourceLine: line,
+          sourceColumn: column,
+          sourceIndex: 0, // Assuming single source file for now or handled by generator addSource logic
+        );
+      }
+      chunk.writeOp(op, line);
   }
 
   void _compileWidgetDecl(WidgetDecl stmt) {
@@ -280,10 +328,10 @@ class Compiler {
     // Capture local variable names for debugger inspection
     funcCompiler._function.localNames = funcCompiler._locals.map((l) => l.name).toList();
     
-    // Store compiled function as constant with optimization
+    // Closure creation
     final funcObj = funcCompiler.endCompiler(stmt.line);
     final idx = chunk.addConstant(funcObj);
-    chunk.writeOp(OpCode.closure, stmt.line);
+    _emit(OpCode.closure, stmt.line, stmt.column);
     chunk.write(idx, stmt.line);
     
     // Emit upvalue info
@@ -299,9 +347,9 @@ class Compiler {
       _addLocal(stmt.name);
     } else {
       final nameIdx = chunk.addConstant(stmt.name);
-      chunk.writeOp(OpCode.setGlobal, stmt.line);
+      _emit(OpCode.setGlobal, stmt.line, stmt.column);
       chunk.write(nameIdx, stmt.line);
-      chunk.writeOp(OpCode.pop, stmt.line); // Pop the closure instance
+      _emit(OpCode.pop, stmt.line, stmt.column); // Pop the closure instance
     }
   }
   
@@ -348,7 +396,7 @@ class Compiler {
     // Emit closure creation
     final funcObj = funcCompiler._function;
     final idx = chunk.addConstant(funcObj);
-    chunk.writeOp(OpCode.closure, expr.line);
+    _emit(OpCode.closure, expr.line, expr.column);
     chunk.write(idx, expr.line);
     
     // Emit upvalues
@@ -365,15 +413,15 @@ class Compiler {
     int loopStart = chunk.code.length;
     
     _compileExpression(stmt.condition);
-    int exitJump = _emitJump(OpCode.jumpIfFalse, stmt.line);
-    chunk.writeOp(OpCode.pop, stmt.line); // Pop true condition
+    int exitJump = _emitJump(OpCode.jumpIfFalse, stmt.line, stmt.column);
+    _emit(OpCode.pop, stmt.line, stmt.column); // Pop true condition
     
     compile(stmt.body);
     
-    _emitLoop(loopStart, stmt.line);
+    _emitLoop(loopStart, stmt.line, stmt.column);
     
     _patchJump(exitJump);
-    chunk.writeOp(OpCode.pop, stmt.line); // Pop false condition
+    _emit(OpCode.pop, stmt.line, stmt.column); // Pop false condition
   }
   
   void _compileReturnStmt(ReturnStmt stmt) {
@@ -396,7 +444,7 @@ class Compiler {
     }
     
     // 3. Return
-    chunk.writeOp(OpCode.return_, stmt.line);
+    _emit(OpCode.return_, stmt.line, stmt.column);
   }
 
   void _compileBlock(BlockStmt stmt) {
@@ -425,15 +473,17 @@ class Compiler {
     
     _enclosingTrys.removeLast();
     
+    _enclosingTrys.removeLast();
+    
     // 2. Success Path
-    chunk.writeOp(OpCode.endTry, stmt.line);  // Remove handler on success
+    _emit(OpCode.endTry, stmt.line, stmt.column);  // Remove handler on success
     
     // Execute finally block on success
     if (stmt.finallyBlock != null) {
       compile(stmt.finallyBlock!);
     }
     
-    chunk.writeOp(OpCode.jump, stmt.line);
+    _emit(OpCode.jump, stmt.line, stmt.column);
     final successJumpOffset = chunk.code.length;
     chunk.write(0, stmt.line); // Placeholder for jump to end
     chunk.write(0, stmt.line);
@@ -450,7 +500,7 @@ class Compiler {
     
     if (stmt.catchBlock != null) {
       // -- Try-Catch or Try-Catch-Finally --
-      chunk.writeOp(OpCode.catch_, stmt.line);
+      _emit(OpCode.catch_, stmt.line, stmt.column);
       
       _beginScope();
       if (stmt.catchVariable != null) {
@@ -468,7 +518,7 @@ class Compiler {
     } else {
       // -- Try-Finally (Synthesized Catch) --
       // Exception is on stack
-      chunk.writeOp(OpCode.catch_, stmt.line);
+      _emit(OpCode.catch_, stmt.line, stmt.column);
       
       // Execute finally
       if (stmt.finallyBlock != null) {
@@ -476,7 +526,7 @@ class Compiler {
       }
       
       // Rethrow exception
-      chunk.writeOp(OpCode.throw_, stmt.line);
+      _emit(OpCode.throw_, stmt.line, stmt.column);
     }
     
     // Patch Success Jump to here (End)
@@ -502,20 +552,20 @@ class Compiler {
       _addLocal(stmt.name);
     } else {
       final nameIdx = chunk.addConstant(stmt.name);
-      chunk.writeOp(OpCode.setGlobal, stmt.line);
+      _emit(OpCode.setGlobal, stmt.line, stmt.column);
       chunk.write(nameIdx, stmt.line);
-      chunk.writeOp(OpCode.pop, stmt.line); 
+      _emit(OpCode.pop, stmt.line, stmt.column); 
     }
   }
 
   void _compileIfStmt(IfStmt stmt) {
     _compileExpression(stmt.condition);
-    final thenJump = _emitJump(OpCode.jumpIfFalse, stmt.line);
-    chunk.writeOp(OpCode.pop, stmt.line); 
+    final thenJump = _emitJump(OpCode.jumpIfFalse, stmt.line, stmt.column);
+    _emit(OpCode.pop, stmt.line, stmt.column); 
     compile(stmt.thenBranch);
-    final elseJump = _emitJump(OpCode.jump, stmt.line);
+    final elseJump = _emitJump(OpCode.jump, stmt.line, stmt.column);
     _patchJump(thenJump);
-    chunk.writeOp(OpCode.pop, stmt.line); 
+    _emit(OpCode.pop, stmt.line, stmt.column); 
     if (stmt.elseBranch != null) {
       compile(stmt.elseBranch!);
     }
@@ -529,18 +579,18 @@ class Compiler {
       int exitJump = -1;
       if (stmt.condition != null) {
           _compileExpression(stmt.condition!);
-          exitJump = _emitJump(OpCode.jumpIfFalse, stmt.condition!.line);
-          chunk.writeOp(OpCode.pop, stmt.condition!.line);
+          exitJump = _emitJump(OpCode.jumpIfFalse, stmt.condition!.line, stmt.condition!.column);
+          _emit(OpCode.pop, stmt.condition!.line, stmt.condition!.column);
       }
       compile(stmt.body);
       if (stmt.increment != null) {
           _compileExpression(stmt.increment!);
-          chunk.writeOp(OpCode.pop, stmt.increment!.line);
+          _emit(OpCode.pop, stmt.increment!.line, stmt.increment!.column);
       }
-      _emitLoop(loopStart, stmt.line);
+      _emitLoop(loopStart, stmt.line, stmt.column);
       if (exitJump != -1) {
           _patchJump(exitJump);
-          chunk.writeOp(OpCode.pop, stmt.line); 
+          _emit(OpCode.pop, stmt.line, stmt.column); 
       }
       _endScope(stmt.line);
   }
@@ -582,7 +632,7 @@ class Compiler {
     _compileExpression(expr.object);
     // Emit getProperty with property name
     final nameIdx = chunk.addConstant(expr.name);
-    chunk.writeOp(OpCode.getProperty, expr.line);
+    _emit(OpCode.getProperty, expr.line, expr.column);
     chunk.write(nameIdx, expr.line);
   }
   
@@ -592,7 +642,7 @@ class Compiler {
       _compileExpression(element);
     }
     // Emit newList with element count
-    chunk.writeOp(OpCode.newList, expr.line);
+    _emit(OpCode.newList, expr.line, expr.column);
     chunk.write(expr.elements.length, expr.line);
   }
   
@@ -603,7 +653,7 @@ class Compiler {
       _compileExpression(entry.value);
     }
     // Emit newMap with pair count
-    chunk.writeOp(OpCode.newMap, expr.line);
+    _emit(OpCode.newMap, expr.line, expr.column);
     chunk.write(expr.entries.length, expr.line);
   }
   
@@ -612,7 +662,7 @@ class Compiler {
     _compileExpression(expr.object);
     _compileExpression(expr.index);
     // Emit getIndex
-    chunk.writeOp(OpCode.getIndex, expr.line);
+    _emit(OpCode.getIndex, expr.line, expr.column);
   }
   
   void _compileIndexAssign(IndexAssignExpr expr) {
@@ -621,45 +671,45 @@ class Compiler {
     _compileExpression(expr.index);
     _compileExpression(expr.value);
     // Emit setIndex
-    chunk.writeOp(OpCode.setIndex, expr.line);
+    _emit(OpCode.setIndex, expr.line, expr.column);
   }
   
   void _compileAwait(AwaitExpr expr) {
     // Compile the expression being awaited
     _compileExpression(expr.expression);
     // Emit await opcode
-    chunk.writeOp(OpCode.await_, expr.line);
+    _emit(OpCode.await_, expr.line, expr.column);
   }
 
   void _compileBinary(BinaryExpr expr) {
     _compileExpression(expr.left);
     _compileExpression(expr.right);
     switch (expr.operator_.type) {
-      case TokenType.plus: chunk.writeOp(OpCode.add, expr.line); break;
-      case TokenType.minus: chunk.writeOp(OpCode.sub, expr.line); break;
-      case TokenType.star: chunk.writeOp(OpCode.mul, expr.line); break;
-      case TokenType.slash: chunk.writeOp(OpCode.div, expr.line); break;
-      case TokenType.equalEqual: chunk.writeOp(OpCode.equal, expr.line); break;
+      case TokenType.plus: _emit(OpCode.add, expr.line, expr.column); break;
+      case TokenType.minus: _emit(OpCode.sub, expr.line, expr.column); break;
+      case TokenType.star: _emit(OpCode.mul, expr.line, expr.column); break;
+      case TokenType.slash: _emit(OpCode.div, expr.line, expr.column); break;
+      case TokenType.equalEqual: _emit(OpCode.equal, expr.line, expr.column); break;
       case TokenType.bangEqual: 
-        chunk.writeOp(OpCode.equal, expr.line); 
-        chunk.writeOp(OpCode.not, expr.line);
+        _emit(OpCode.equal, expr.line, expr.column); 
+        _emit(OpCode.not, expr.line, expr.column);
         break;
-      case TokenType.less: chunk.writeOp(OpCode.less, expr.line); break;
-      case TokenType.greater: chunk.writeOp(OpCode.greater, expr.line); break;
-      case TokenType.lessEqual: chunk.writeOp(OpCode.lessEqual, expr.line); break;
-      case TokenType.greaterEqual: chunk.writeOp(OpCode.greaterEqual, expr.line); break;
+      case TokenType.less: _emit(OpCode.less, expr.line, expr.column); break;
+      case TokenType.greater: _emit(OpCode.greater, expr.line, expr.column); break;
+      case TokenType.lessEqual: _emit(OpCode.lessEqual, expr.line, expr.column); break;
+      case TokenType.greaterEqual: _emit(OpCode.greaterEqual, expr.line, expr.column); break;
       default: break; 
     }
   }
 
   void _compileLiteral(LiteralExpr expr) {
       if (expr.value == null) {
-        chunk.writeOp(OpCode.nil, expr.line);
+        _emit(OpCode.nil, expr.line, expr.column);
       } else if (expr.value is bool) {
-        chunk.writeOp((expr.value as bool) ? OpCode.true_ : OpCode.false_, expr.line);
+        _emit((expr.value as bool) ? OpCode.true_ : OpCode.false_, expr.line, expr.column);
       } else { 
           final idx = chunk.addConstant(expr.value);
-          chunk.writeOp(OpCode.constant, expr.line);
+          _emit(OpCode.constant, expr.line, expr.column);
           chunk.write(idx, expr.line);
       }
   }
@@ -667,8 +717,8 @@ class Compiler {
   void _compileUnary(UnaryExpr expr) {
     _compileExpression(expr.operand);
     switch (expr.operator_.type) {
-      case TokenType.minus: chunk.writeOp(OpCode.negate, expr.line); break;
-      case TokenType.not: chunk.writeOp(OpCode.not, expr.line); break;
+      case TokenType.minus: _emit(OpCode.negate, expr.line, expr.column); break;
+      case TokenType.not: _emit(OpCode.not, expr.line, expr.column); break;
       default: break;
     }
   }
@@ -677,23 +727,23 @@ class Compiler {
       final isState = _isStateField(expr.name);
       print('DEBUG COMPILER: Compiling variable: ${expr.name}, isState: $isState');
       if (isState) {
-        chunk.writeOp(OpCode.getState, expr.line);
+        _emit(OpCode.getState, expr.line, expr.column);
         chunk.write(chunk.addConstant(expr.name), expr.line);
         return;
       }
       
       int arg = _resolveLocal(expr.name);
       if (arg != -1) {
-          chunk.writeOp(OpCode.getLocal, expr.line);
+          _emit(OpCode.getLocal, expr.line, expr.column);
           chunk.write(arg, expr.line);
       } else {
           arg = _resolveUpvalue(expr.name);
           if (arg != -1) {
-            chunk.writeOp(OpCode.getUpvalue, expr.line);
+            _emit(OpCode.getUpvalue, expr.line, expr.column);
             chunk.write(arg, expr.line);
           } else {
             final idx = chunk.addConstant(expr.name);
-            chunk.writeOp(OpCode.getGlobal, expr.line);
+            _emit(OpCode.getGlobal, expr.line, expr.column);
             chunk.write(idx, expr.line);
           }
       }
@@ -713,16 +763,16 @@ class Compiler {
     
     int arg = _resolveLocal(expr.name);
     if (arg != -1) {
-      chunk.writeOp(OpCode.setLocal, expr.line);
+      _emit(OpCode.setLocal, expr.line, expr.column);
       chunk.write(arg, expr.line);
     } else {
       arg = _resolveUpvalue(expr.name);
       if (arg != -1) {
-        chunk.writeOp(OpCode.setUpvalue, expr.line);
+        _emit(OpCode.setUpvalue, expr.line, expr.column);
         chunk.write(arg, expr.line);
       } else {
         final idx = chunk.addConstant(expr.name);
-        chunk.writeOp(OpCode.setGlobal, expr.line);
+        _emit(OpCode.setGlobal, expr.line, expr.column);
         chunk.write(idx, expr.line);
       }
     }
@@ -751,18 +801,18 @@ class Compiler {
     } else {
       // Push named argument pairs (name, value)
       for (final entry in expr.namedArguments.entries) {
-        chunk.writeOp(OpCode.constant, expr.line);
+        _emit(OpCode.constant, expr.line, expr.column);
         chunk.write(chunk.addConstant(entry.key), expr.line);
         _compileExpression(entry.value);
       }
-      chunk.writeOp(OpCode.callNamed, expr.line);
+      _emit(OpCode.callNamed, expr.line, expr.column);
       chunk.write(expr.arguments.length, expr.line);
       chunk.write(expr.namedArguments.length, expr.line);
     }
   }
 
-  int _emitJump(OpCode op, int line) {
-    chunk.writeOp(op, line);
+  int _emitJump(OpCode op, int line, int column) {
+    _emit(op, line, column);
     chunk.write(0xff, line); 
     chunk.write(0xff, line); 
     return chunk.code.length - 2;
@@ -780,8 +830,8 @@ class Compiler {
     chunk.code[offset + 1] = (jump >> 8) & 0xff;
   }
   
-  void _emitLoop(int loopStart, int line) {
-      chunk.writeOp(OpCode.loop, line);
+  void _emitLoop(int loopStart, int line, int column) {
+      _emit(OpCode.loop, line, column);
       int offset = chunk.code.length + 1 - loopStart;
       if (offset > 255) throw Exception("Loop body too large.");
       chunk.write(offset, line);
@@ -860,7 +910,7 @@ class Compiler {
   void _compileImportDecl(ImportDecl stmt) {
     // Store the import path as a constant and emit import opcode
     final pathIdx = chunk.addConstant(stmt.path);
-    chunk.writeOp(OpCode.import_, stmt.line);
+    _emit(OpCode.import_, stmt.line, stmt.column);
     chunk.write(pathIdx, stmt.line);
   }
   
@@ -909,13 +959,13 @@ class Compiler {
     
     // Store as global
     final classIdx = chunk.addConstant(classObj);
-    chunk.writeOp(OpCode.constant, stmt.line);
+    _emit(OpCode.constant, stmt.line, stmt.column);
     chunk.write(classIdx, stmt.line);
     
     final nameIdx = chunk.addConstant(stmt.name);
-    chunk.writeOp(OpCode.setGlobal, stmt.line);
+    _emit(OpCode.setGlobal, stmt.line, stmt.column);
     chunk.write(nameIdx, stmt.line);
-    chunk.writeOp(OpCode.pop, stmt.line);
+    _emit(OpCode.pop, stmt.line, stmt.column);
   }
 }
 
@@ -924,7 +974,7 @@ class Compiler {
 /// [source] is the expression to compile.
 /// [variableNames] is the list of local variables available in the scope,
 /// ordered by their stack slot index.
-CompiledFunction compileFluxExpression(String source, List<String> variableNames) {
+CompiledFunction compileFluxExpression(String source, List<String> variableNames, {bool generateSourceMap = false, String moduleName = '<eval>'}) {
   if (source.trim().isEmpty) return CompiledFunction("empty", Chunk());
   
   // Parse expression
@@ -933,7 +983,7 @@ CompiledFunction compileFluxExpression(String source, List<String> variableNames
   final expr = parser.parseExpression();
   
   // Create compiler instance
-  final compiler = Compiler(moduleName: '<eval>');
+  final compiler = Compiler(moduleName: moduleName, generateSourceMap: generateSourceMap);
   
   // Setup local variable context
   // We treat the provided variables as being already initialized in the current scope.

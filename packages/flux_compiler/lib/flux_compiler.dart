@@ -8,4 +8,6 @@ export 'src/parser.dart';
 export 'src/bytecode.dart';
 export 'src/compiler.dart';
 export 'src/optimizer.dart';
+export 'src/serializer.dart';
+export 'src/deserializer.dart';
 // Force reload

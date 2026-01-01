@@ -20,6 +20,8 @@ dependencies:
   http: ^1.6.0
   crypto: ^3.0.3
   shared_preferences: ^2.4.0
+  device_info_plus: ^10.1.0
+  package_info_plus: ^8.0.0
 
 dev_dependencies:
   flutter_test:
