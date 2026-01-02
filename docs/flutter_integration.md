@@ -196,8 +196,28 @@ void main() async {
 # 監控 scripts 資料夾
 flux dev --watch ./scripts
 ```
-
 現在，當你修改 `./scripts` 中的 `.flux` 文件時，App 會自動更新！
+
+### 實戰演練：體驗熱重載
+
+1. **運行 App**: 確保你已經按照上述步驟連接了熱重載服務。
+2. **創建腳本**: 在 `scripts/demo.flux` 中寫入：
+    ```dart
+    widget Demo {
+      state count = 0;
+      build {
+        return Button(text: "Count: " + count, onTap: fn(){ count = count + 1; });
+      }
+    }
+    ```
+3. **觀察 App**: 點擊幾次按鈕，讓 count 變成 `5`。
+4. **修改腳本**: 將 `count = count + 1` 改為 `count = count + 10`，**保存文件**。
+5. **神奇時刻**: 
+    - App **不需要** 重啟。
+    - 你的 count **依然是 5** (狀態被保留了！)。
+    - 再點擊按鈕，count 會變成 `15` (新的邏輯生效了！)。
+
+這就是 Flux 的開發體驗：**邏輯更新，數據保留**。
 
 ---
 
