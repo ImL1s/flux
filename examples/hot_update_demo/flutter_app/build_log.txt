@@ -1,5 +1,0 @@
-
-Building Windows application...                                 
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): error MSB8066: 'D:\OtherProject\mine\flux\examples\hot_update_demo\flutter_app\build\windows\x64\CMakeFiles\86759719ee38bcbd31ae1bdbab41abfb\flutter_windows.dll.rule;D:\OtherProject\mine\flux\examples\hot_update_demo\flutter_app\build\windows\x64\CMakeFiles\ddb93ea237131a218bdeb7f4a5e4a71d\flutter_assemble.rule;D:\OtherProject\mine\flux\examples\hot_update_demo\flutter_app\windows\flutter\CMakeLists.txt' 的自訂建置已結束，代碼為 1。 [D:\OtherProject\mine\flux\examples\hot_update_demo\flutter_app\build\windows\x64\flutter\flutter_assemble.vcxproj]
-Building Windows application...                                    22.8s
-Build process failed.

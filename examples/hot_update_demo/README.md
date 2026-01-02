@@ -1,45 +1,41 @@
-# 🔥 Flux 熱更新展示
+# 🔥 Flux 熱更新展示 (Hot Update Demo)
 
-Flux 是一個為 Flutter 設計的動態 UI 框架，允許在不重新發布 App 的情況下即時更新介面。
+這個範例展示了 Flux 的核心能力：在不重新編譯 App 的情況下，透過修改外部腳本即時更新 UI 和業務邏輯。
 
-## 🚀 快速啟動
+## 📁 目錄結構
+
+- `scripts/` - 存放 Flux 腳本 (`.flux`)。
+- `flutter_app/` - 載入並載入腳本的 Flutter 應用程序。
+
+## 🚀 快速開始
+
+### 1. 安裝與執行
 
 ```bash
-# 1. 進入展示目錄
 cd examples/hot_update_demo/flutter_app
-
-# 2. 安裝依賴
 flutter pub get
-
-# 3. 運行 (Windows/macOS/Linux)
-flutter run -d windows
-# 或
-flutter run -d macos
-# 或
-flutter run -d linux
+flutter run -d windows  # 或其他桌面平台
 ```
 
-## 📱 展示功能
+### 2. 測試熱更新
 
-| 功能 | 說明 |
-|------|------|
-| 📊 狀態管理 | 計數器即時更新 |
-| 🎨 動態主題 | 點擊切換顏色 |
-| 📝 列表操作 | 動態新增/清空 |
-| 🔄 熱更新 | 修改腳本即時生效 |
+1. 保持 App 運行。
+2. 使用編輯器開啟 `examples/hot_update_demo/scripts/home_banner.flux`。
+3. 修改任何內容（例如改變 `state theme` 的初值或修改 `Text` 文字）。
+4. 儲存檔案。
+5. 在 App 中點擊右上角的 **刷新按鈕 (🔄)**。
 
-## 🎯 測試熱更新
+### 3. 觀察結果
 
-1. **開啟** `scripts/home_banner.flux`
-2. **修改**任何內容 (顏色、文字、邏輯)
-3. **儲存**檔案
-4. **點擊** App 右上角 🔄
+UI 會立即根據新腳本重新渲染，且狀態（State）會重新初始化。
 
-**無需重新編譯，UI 立即更新！**
+## 💡 技術要點
 
-## 💡 應用場景
+- **動態載入**：App 會從檔案系統動態讀取腳本內容。
+- **即時編譯**：Flux VM 在運行時將原始碼編譯為 Bytecode 並執行。
+- **跨平台**：同一份 `.flux` 腳本可以在所有支援的 Flutter 平台上運行。
+- **路徑搜尋**：`main.dart` 內建了路徑搜尋邏輯，會自動在當前目錄及其父目錄中尋找 `scripts` 文件夾。
 
-- 🎄 節日活動 - 即時更換 Banner
-- 🐛 緊急修復 - 分鐘級上線
-- 🧪 A/B 測試 - 無需發版
-- 🌍 本地化 - 動態載入 UI
+---
+
+更多資訊請參考 [GitHub Repo](https://github.com/ImL1s/flux)

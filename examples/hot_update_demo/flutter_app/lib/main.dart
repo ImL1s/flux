@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
+import 'package:path/path.dart' as p;
 
 const String DEFAULT_SCRIPT = r'''
 widget HomeBanner {
@@ -8,7 +9,7 @@ widget HomeBanner {
     Container(
       padding: 20.0,
       color: "blue",
-      child: Text(text: "Default Script", style: {"fontSize": 24.0, "color": "white"})
+      child: Text(text: "Flux Demo", style: {"fontSize": 24.0, "color": "white"})
     )
   }
 }
@@ -40,14 +41,15 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
   
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomePage> {
   String _script = DEFAULT_SCRIPT;
   String _status = 'Initializing...';
   bool _loading = false;
   int _reloadCount = 0;
+  String? _resolvedPath;
   
   @override
   void initState() {
@@ -61,15 +63,17 @@ class _HomePageState extends State<HomePage> {
       _status = 'Loading script...';
     });
     
-    // Try to find script file relative to executable or in common locations
     File? scriptFile;
-    final possiblePaths = [
+    
+    // 1. Try common relative paths
+    final relativePaths = [
       '../scripts/home_banner.flux',
       'scripts/home_banner.flux',
       './scripts/home_banner.flux',
+      '../../scripts/home_banner.flux',
     ];
     
-    for (final path in possiblePaths) {
+    for (final path in relativePaths) {
       final f = File(path);
       if (await f.exists()) {
         scriptFile = f;
@@ -77,12 +81,28 @@ class _HomePageState extends State<HomePage> {
       }
     }
     
-    if (scriptFile == null || !await scriptFile.exists()) {
+    // 2. Try to find by walking up from current directory (robust for compiled apps)
+    if (scriptFile == null) {
+      var current = Directory.current;
+      for (int i = 0; i < 5; i++) {
+        final testPath = p.join(current.path, 'scripts', 'home_banner.flux');
+        final f = File(testPath);
+        if (await f.exists()) {
+          scriptFile = f;
+          break;
+        }
+        current = current.parent;
+        if (current.path == current.parent.path) break;
+      }
+    }
+    
+    if (scriptFile == null) {
       setState(() {
         _script = DEFAULT_SCRIPT;
-        _status = '⚠️ 使用預設腳本 (scripts/home_banner.flux 未找到)';
+        _status = '⚠️ 使用預設腳本 (找不到 scripts/home_banner.flux)';
         _loading = false;
         _reloadCount++;
+        _resolvedPath = null;
       });
       return;
     }
@@ -91,7 +111,8 @@ class _HomePageState extends State<HomePage> {
       final script = await scriptFile.readAsString();
       setState(() {
         _script = script;
-        _status = '✅ 已載入: ${scriptFile!.path}\n🕐 ${DateTime.now().toString().substring(11, 19)}';
+        _resolvedPath = scriptFile!.absolute.path;
+        _status = '✅ 已載入: ${p.basename(scriptFile!.path)}\n🕐 ${DateTime.now().toString().substring(11, 19)}';
         _loading = false;
         _reloadCount++;
       });
@@ -136,14 +157,23 @@ class _HomePageState extends State<HomePage> {
                 elevation: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(12),
-                  child: Row(
+                  child: Column(
                     children: [
-                      Icon(_loading ? Icons.sync : Icons.check_circle, 
-                           color: _loading ? Colors.orange : Colors.green),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(_status, style: const TextStyle(fontSize: 13)),
+                      Row(
+                        children: [
+                          Icon(_loading ? Icons.sync : Icons.check_circle, 
+                               color: _loading ? Colors.orange : Colors.green),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(_status, style: const TextStyle(fontSize: 13)),
+                          ),
+                        ],
                       ),
+                      if (_resolvedPath != null) ...[
+                        const Divider(),
+                        Text('路徑: \$_resolvedPath', 
+                             style: const TextStyle(fontSize: 10, color: Colors.grey, fontFamily: 'monospace')),
+                      ]
                     ],
                   ),
                 ),
@@ -194,61 +224,20 @@ class _HomePageState extends State<HomePage> {
                       const SizedBox(height: 12),
                       const Text('1️⃣ 開啟 scripts/home_banner.flux'),
                       const SizedBox(height: 4),
-                      const Text('2️⃣ 修改顏色、文字或功能'),
+                      const Text('2️⃣ 修改顏色、文字、功能或狀態初值'),
                       const SizedBox(height: 4),
                       const Text('3️⃣ 儲存檔案'),
                       const SizedBox(height: 4),
-                      const Text('4️⃣ 點擊右上角 🔄 重新載入'),
+                      const Text('4️⃣ 點擊右上角 🔄 即時套用更新'),
                     ],
                   ),
                 ),
               ),
-              
-              const SizedBox(height: 16),
-              
-              // Features Card
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Row(
-                        children: [
-                          Icon(Icons.star, color: Colors.blue),
-                          SizedBox(width: 8),
-                          Text('Flux 功能展示', 
-                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          _buildChip('📊 狀態管理'),
-                          _buildChip('🎨 動態主題'),
-                          _buildChip('📝 列表操作'),
-                          _buildChip('🔘 事件處理'),
-                          _buildChip('🔄 即時更新'),
-                          _buildChip('🚀 無需發版'),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              const SizedBox(height: 32),
             ],
           ),
         ),
       ),
-    );
-  }
-  
-  Widget _buildChip(String label) {
-    return Chip(
-      label: Text(label, style: const TextStyle(fontSize: 12)),
-      backgroundColor: Colors.blue[50],
     );
   }
 }

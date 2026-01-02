@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   flux_flutter:
     path: ../../../packages/flux_flutter
-  path_provider: ^2.1.1
+  path: ^1.9.0
 
 dev_dependencies:
   flutter_test:

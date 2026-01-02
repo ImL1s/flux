@@ -1,5 +1,5 @@
 widget HomeBanner {
-  state count = 0
+  state count = 5
   state theme = "blue"
   state items = ["蘋果", "香蕉", "橘子"]
 
