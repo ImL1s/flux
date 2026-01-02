@@ -128,6 +128,36 @@ p.greet();
 
 ---
 
+## Flutter 整合示例
+
+在 Flutter 中使用 `FluxWidget` 嵌入腳本：
+
+```dart
+// 在 build 方法中
+FluxWidget(
+  widgetName: 'Counter', // 對應 Flux 中的 widget 名稱
+  source: '''
+    widget Counter {
+      state count = 0;
+      
+      build {
+        return Column(
+          children: [
+            Text("點擊次數: " + count),
+            Button(
+              text: "加一",
+              onTap: fn() { count = count + 1; }
+            )
+          ]
+        );
+      }
+    }
+  ''',
+)
+```
+
+---
+
 ## 更多文檔
 
 - [語言完整參考](language_reference.md)
