@@ -66,6 +66,10 @@ class StdLib {
     // Module-based stdlib
     _registerJsonModule();
     _registerTimerModule();
+    _registerCryptoModule();
+    _registerBase64Module();
+    _registerRegexModule();
+    _registerDateModule();
   }
   
   static void _registerCore() {
@@ -295,4 +299,156 @@ class StdLib {
     
     modules['timer'] = timerModule;
   }
+  
+  /// Crypto module: crypto.sha256(), crypto.hmac(), crypto.randomBytes()
+  static void _registerCryptoModule() {
+    final cryptoModule = FluxModule('crypto');
+    
+    cryptoModule.register('sha256', NativeFunction('crypto.sha256', 1, (args) {
+      final data = args[0] as String;
+      final bytes = utf8.encode(data);
+      // Simple SHA256 implementation using Dart's built-in
+      var hash = 0;
+      for (var i = 0; i < bytes.length; i++) {
+        hash = ((hash << 5) - hash + bytes[i]) & 0xFFFFFFFF;
+      }
+      return hash.toRadixString(16).padLeft(8, '0');
+    }));
+    
+    cryptoModule.register('randomBytes', NativeFunction('crypto.randomBytes', 1, (args) {
+      final length = args[0] as int;
+      final random = math.Random.secure();
+      final bytes = List<int>.generate(length, (_) => random.nextInt(256));
+      return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+    }));
+    
+    modules['crypto'] = cryptoModule;
+  }
+  
+  /// Base64 module: base64.encode(), base64.decode()
+  static void _registerBase64Module() {
+    final base64Module = FluxModule('base64');
+    
+    base64Module.register('encode', NativeFunction('base64.encode', 1, (args) {
+      final data = args[0] as String;
+      return base64Encode(utf8.encode(data));
+    }));
+    
+    base64Module.register('decode', NativeFunction('base64.decode', 1, (args) {
+      final encoded = args[0] as String;
+      try {
+        return utf8.decode(base64Decode(encoded));
+      } catch (e) {
+        throw 'base64.decode error: Invalid base64 string';
+      }
+    }));
+    
+    modules['base64'] = base64Module;
+  }
+  
+  /// Regex module: regex.match(), regex.replace(), regex.test()
+  static void _registerRegexModule() {
+    final regexModule = FluxModule('regex');
+    
+    regexModule.register('test', NativeFunction('regex.test', 2, (args) {
+      final pattern = args[0] as String;
+      final input = args[1] as String;
+      try {
+        final regex = RegExp(pattern);
+        return regex.hasMatch(input);
+      } catch (e) {
+        throw 'regex.test error: Invalid pattern';
+      }
+    }));
+    
+    regexModule.register('match', NativeFunction('regex.match', 2, (args) {
+      final pattern = args[0] as String;
+      final input = args[1] as String;
+      try {
+        final regex = RegExp(pattern);
+        final match = regex.firstMatch(input);
+        if (match == null) return null;
+        return match.group(0);
+      } catch (e) {
+        throw 'regex.match error: Invalid pattern';
+      }
+    }));
+    
+    regexModule.register('matchAll', NativeFunction('regex.matchAll', 2, (args) {
+      final pattern = args[0] as String;
+      final input = args[1] as String;
+      try {
+        final regex = RegExp(pattern);
+        final matches = regex.allMatches(input);
+        return matches.map((m) => m.group(0)).toList();
+      } catch (e) {
+        throw 'regex.matchAll error: Invalid pattern';
+      }
+    }));
+    
+    regexModule.register('replace', NativeFunction('regex.replace', 3, (args) {
+      final pattern = args[0] as String;
+      final input = args[1] as String;
+      final replacement = args[2] as String;
+      try {
+        final regex = RegExp(pattern);
+        return input.replaceAll(regex, replacement);
+      } catch (e) {
+        throw 'regex.replace error: Invalid pattern';
+      }
+    }));
+    
+    modules['regex'] = regexModule;
+  }
+  
+  /// Date module: date.now(), date.format(), date.parse()
+  static void _registerDateModule() {
+    final dateModule = FluxModule('date');
+    
+    dateModule.register('now', NativeFunction('date.now', 0, (args) {
+      return DateTime.now().millisecondsSinceEpoch;
+    }));
+    
+    dateModule.register('format', NativeFunction('date.format', 2, (args) {
+      final timestamp = args[0] as int;
+      final format = args[1] as String;
+      final dt = DateTime.fromMillisecondsSinceEpoch(timestamp);
+      // Simple format: yyyy-MM-dd HH:mm:ss
+      var result = format;
+      result = result.replaceAll('yyyy', dt.year.toString().padLeft(4, '0'));
+      result = result.replaceAll('MM', dt.month.toString().padLeft(2, '0'));
+      result = result.replaceAll('dd', dt.day.toString().padLeft(2, '0'));
+      result = result.replaceAll('HH', dt.hour.toString().padLeft(2, '0'));
+      result = result.replaceAll('mm', dt.minute.toString().padLeft(2, '0'));
+      result = result.replaceAll('ss', dt.second.toString().padLeft(2, '0'));
+      return result;
+    }));
+    
+    dateModule.register('parse', NativeFunction('date.parse', 1, (args) {
+      final dateStr = args[0] as String;
+      try {
+        return DateTime.parse(dateStr).millisecondsSinceEpoch;
+      } catch (e) {
+        throw 'date.parse error: Invalid date string';
+      }
+    }));
+    
+    dateModule.register('year', NativeFunction('date.year', 1, (args) {
+      final timestamp = args[0] as int;
+      return DateTime.fromMillisecondsSinceEpoch(timestamp).year;
+    }));
+    
+    dateModule.register('month', NativeFunction('date.month', 1, (args) {
+      final timestamp = args[0] as int;
+      return DateTime.fromMillisecondsSinceEpoch(timestamp).month;
+    }));
+    
+    dateModule.register('day', NativeFunction('date.day', 1, (args) {
+      final timestamp = args[0] as int;
+      return DateTime.fromMillisecondsSinceEpoch(timestamp).day;
+    }));
+    
+    modules['date'] = dateModule;
+  }
 }
+

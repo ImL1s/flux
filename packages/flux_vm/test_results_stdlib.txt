@@ -1,0 +1,446 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.push adds elements
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: l, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.pop removes last element
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: pop, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +2: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.pop throws on empty list
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: pop, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +2 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string case conversion
+00:00 +2 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.pop throws on empty list [E]
+  Expected: throws <Instance of 'String'> with `message`: contains 'Cannot pop from empty list'
+    Actual: <Closure: () => void>
+     Which: returned <null>
+  
+  package:matcher                  expect
+  test\stdlib_list_test.dart 49:8  main.<fn>.<fn>
+  
+00:00 +2 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string case conversion
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: upper, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: lower, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.insert adds at index
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.trim
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.insert adds at index
+DEBUG COMPILER: Unit has 3 declarations
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.trim
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.insert adds at index
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.trim
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.insert adds at index
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.trim
+DEBUG COMPILER: Compiling variable: trim, isState: false
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.insert adds at index
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: insert, isState: false
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.trim
+DEBUG COMPILER: Compiling variable: s, isState: false
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.insert adds at index
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +4 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.insert adds at index
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.split
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.remove removes at index
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.split
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.remove removes at index
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.split
+DEBUG COMPILER: Compiling variable: split, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.remove removes at index
+DEBUG COMPILER: Compiling variable: remove, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: rem, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.split
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: parts, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.remove removes at index
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.split
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: parts, isState: false
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.remove removes at index
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +6 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.split
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.indexOf finds elements
+DEBUG COMPILER: Unit has 3 declarations
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.contains
+DEBUG COMPILER: Unit has 3 declarations
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.indexOf finds elements
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.contains
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.indexOf finds elements
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.contains
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: contains, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.indexOf finds elements
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: indexOf, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.contains
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: contains, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.indexOf finds elements
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: indexOf, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +8 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.contains
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.replace
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.reverse returns reversed copy
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.replace
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.reverse returns reversed copy
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.replace
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.reverse returns reversed copy
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.replace
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.reverse returns reversed copy
+DEBUG COMPILER: Compiling variable: reverse, isState: false
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.replace
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.reverse returns reversed copy
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.replace
+DEBUG COMPILER: Compiling variable: replace, isState: false
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.reverse returns reversed copy
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.replace
+DEBUG COMPILER: Compiling variable: s, isState: false
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.reverse returns reversed copy
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+00:00 +10 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.reverse returns reversed copy
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +11 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string.substring
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: substring, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+00:00 +12 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.sort sorts in place
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: sort, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: s, isState: false
+00:00 +12 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string conversions
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +12 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.sort sorts in place
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +12 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string conversions
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +12 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.sort sorts in place
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +12 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string conversions
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +12 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.sort sorts in place
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +12 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string conversions
+DEBUG COMPILER: Compiling variable: toInt, isState: false
+00:00 +13 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_string_test.dart: StdLib String Operations string conversions
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: toDouble, isState: false
+00:00 +14 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_list_test.dart: StdLib List Operations list.join creates string
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: join, isState: false
+DEBUG COMPILER: Compiling variable: l, isState: false
+00:00 +15 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart: StdLib Map and JSON Map basics
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: m, isState: false
+00:00 +16 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart: StdLib Map and JSON json.stringify
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: json, isState: false
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: contains, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: contains, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG VM RUNTIME EXCEPTION: Cannot invoke method on FluxModule
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1324:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart:22:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart:41:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 20
+Last OpCode: OpCode.nil
+00:00 +16 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart: StdLib Map and JSON json.stringify [E]
+  Expected: 'true'
+    Actual: 'Runtime Error: Cannot invoke method on FluxModule'
+     Which: is different.
+            Expected: true
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                 expect
+  test\stdlib_map_test.dart 48:7  main.<fn>.<fn>
+  
+00:00 +16 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart: StdLib Map and JSON json.parse
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: json, isState: false
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG VM RUNTIME EXCEPTION: Cannot invoke method on FluxModule
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1324:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart:22:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart:53:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 12
+Last OpCode: OpCode.nil
+00:00 +16 -3: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart: StdLib Map and JSON json.parse [E]
+  Expected: '10'
+    Actual: 'Runtime Error: Cannot invoke method on FluxModule'
+     Which: is different.
+            Expected: 10
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher                 expect
+  test\stdlib_map_test.dart 59:7  main.<fn>.<fn>
+  
+00:00 +16 -3: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart: StdLib Map and JSON json error handling
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling variable: json, isState: false
+DEBUG VM RUNTIME EXCEPTION: Cannot invoke method on FluxModule
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1324:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart:22:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart:67:12)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 7
+Last OpCode: OpCode.nil
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling variable: json, isState: false
+DEBUG VM RUNTIME EXCEPTION: Cannot invoke method on FluxModule
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1324:15)
+#1      VM.executeClosure (package:flux_vm/src/vm.dart:376:20)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:339:14)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_map_test.dart:81:27)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 7
+Last OpCode: OpCode.nil
+00:00 +17 -3: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_math_test.dart: StdLib Math Operations math basic funcs
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling variable: abs, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: min, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: max, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: floor, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: ceil, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: sqrt, isState: false
+00:00 +18 -3: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_math_test.dart: StdLib Math Operations math.pow
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling variable: pow, isState: false
+00:00 +19 -3: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_math_test.dart: StdLib Math Operations math.random
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: random, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: type, isState: false
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 4
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 5
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +20 -3: D:/OtherProject/mine/flux/packages/flux_vm/test/stdlib_math_test.dart: StdLib Math Operations math.randomInt
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: randomInt, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: type, isState: false
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 4
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 5
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +21 -3: Some tests failed.

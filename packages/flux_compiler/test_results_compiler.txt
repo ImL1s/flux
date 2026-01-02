@@ -1,0 +1,792 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Basic Field with initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Box, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+00:00 +1: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Basic Field initialization order (fields before init body)
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "start" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: start, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling variable: Point, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 12
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 11
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 13
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 12
+00:00 +2: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Basic Field without initializer parses correctly
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Empty, isState: false
+00:00 +3: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Basic Multiple fields
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: Config, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 8
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 7
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 9
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 8
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 10
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+00:00 +4: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Counter class with field
+DEBUG COMPILER: Unit has 8 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 18
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 17
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 20
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 19
+DEBUG VM: Invoking method increment on instance FluxInstance
+DEBUG VM: Invoking method increment on instance FluxInstance
+DEBUG VM: Invoking method increment on instance FluxInstance
+DEBUG VM: Invoking method decrement on instance FluxInstance
+00:00 +5: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for variable declaration and print
+00:00 +5: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests User model with fields and constructor
+DEBUG COMPILER: Unit has 7 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "userId" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "userName" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: userId, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: userName, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 17
+DEBUG COMPILER: Compiling variable: User, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 19
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 18
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 20
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 19
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 22
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 20
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 22
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 24
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 23
+DEBUG VM: Invoking method deactivate on instance FluxInstance
+00:00 +6: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for variable declaration and print
+00:00 +6: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Stack data structure with field
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "item" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: item, isState: false
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 9
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Stack, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 18
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 17
+DEBUG VM: Invoking method push on instance FluxInstance
+DEBUG VM: Invoking method push on instance FluxInstance
+DEBUG VM: Invoking method push on instance FluxInstance
+DEBUG VM: Invoking method size on instance FluxInstance
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for variable declaration and print
+DEBUG: Adding source url: script.flux
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for variable declaration and print
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for variable declaration and print
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for variable declaration and print
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for variable declaration and print
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for variable declaration and print
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+Mappings: CACS;;CAAR;;CAAA;CACM;;;;CAAN
+00:00 +7: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: n, isState: false
+00:00 +8: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 11
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 16
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 20
+DEBUG COMPILER: Compiling variable: Calculator, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 21
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 23
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 22
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG VM: Invoking method add on instance FluxInstance
+00:00 +8: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for if statement
+DEBUG: Adding source url: script.flux
+00:00 +8: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG VM: Invoking method add on instance FluxInstance
+00:00 +8: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for if statement
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: IfStmt
+00:00 +8: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Application Tests Calculator with state field
+DEBUG VM: Invoking method mul on instance FluxInstance
+00:00 +9: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps generates map for if statement
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Unit has 3 declarations
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps local variables have mappings
+DEBUG: Adding source url: script.flux
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Compiling decl type: ClassDecl
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps local variables have mappings
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: BlockStmt
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps local variables have mappings
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 5
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "y" at slot 1 [Depth: 1]
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps local variables have mappings
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: y, isState: false
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Compiling variable: Math, isState: false
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps local variables have mappings
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +10: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Compiling decl type: IfStmt
+00:00 +11: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 6
+00:00 +12: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_source_map_test.dart: Compiler Source Maps expressions have columns
+DEBUG: Adding source url: script.flux
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +13: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with list initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+00:00 +14: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with map initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Settings, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+00:00 +15: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Multiple instances have independent fields
+DEBUG COMPILER: Unit has 8 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 13
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+DEBUG VM: Invoking method inc on instance FluxInstance
+DEBUG VM: Invoking method inc on instance FluxInstance
+DEBUG VM: Invoking method inc on instance FluxInstance
+00:00 +16: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field overwritten in init
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: Wrapper, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 11
+DEBUG COMPILER: Compiling variable: w, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 10
+00:00 +17: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Class with only fields (no methods)
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: Point, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 9
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 8
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 10
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+00:00 +18: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Class with only init (no declared fields)
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: Dynamic, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 9
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 8
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 10
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+00:00 +19: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with nil initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Nullable, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+00:00 +20: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field with boolean initializer
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: Flags, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 6
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 8
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 7
+00:00 +21: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Field accessing another field in method
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: Rectangle, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 11
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 10
+DEBUG VM: Invoking method area on instance FluxInstance
+00:00 +22: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Edge Cases Chained field access after construction
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling variable: Node, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
+DEBUG COMPILER: Compiling variable: Node, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: n1, isState: false
+DEBUG COMPILER: Compiling variable: n2, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: n1, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+00:00 +23: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Stress Tests Many fields
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: BigClass, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 14
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 16
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 15
+DEBUG COMPILER: Compiling variable: str, isState: false
+DEBUG COMPILER: Compiling variable: sum, isState: false
+00:00 +24: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Lexer tokenizes simple expression
+00:00 +24: D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: Class Fields - Stress Tests Nested object creation
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 5
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Inner, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Outer, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: o, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+00:00 +25: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Lexer tokenizes simple expression
+00:00 +26: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Lexer tokenizes keywords
+00:00 +27: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Lexer tokenizes string literal
+00:00 +28: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Lexer handles comments
+00:00 +29: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Lexer tokenizes operators
+00:00 +30: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Parser parses variable declaration
+00:00 +31: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Parser parses function declaration
+00:00 +32: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Parser parses widget declaration
+00:00 +33: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Parser parses if statement
+00:00 +34: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Parser parses while statement
+DEBUG PARSER: Error during parse: Expect expression. at 1:16
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._block (package:flux_compiler/src/parser.dart:315:22)
+#15     Parser._statement (package:flux_compiler/src/parser.dart:252:45)
+#16     Parser._whileStatement (package:flux_compiler/src/parser.dart:339:18)
+#17     Parser._statement (package:flux_compiler/src/parser.dart:250:42)
+#18     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#19     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#20     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart:95:26)
+#21     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#22     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#23     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+00:00 +35: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Parser parses local function declaration
+00:00 +36: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Compiler compiles simple expression
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+00:00 +37: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Compiler compiles function
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 1
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +38: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Compiler generates bytecode
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +39: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Compiler compiles closure with upvalue
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 3
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Compiling variable: inner, isState: false
+00:00 +40: D:/OtherProject/mine/flux/packages/flux_compiler/test/compiler_test.dart: Compiler compiles nested closures
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 3
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Added local "b" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Resolving upvalue "a" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Resolving upvalue "b" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inner" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 8
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG COMPILER: Added local "middle" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 10
+DEBUG COMPILER: Compiling variable: middle, isState: false
+00:00 +41: D:/OtherProject/mine/flux/packages/flux_compiler/test/flx_integration_test.dart: End-to-End .flx File Test compile, write .flx, load .flx, and execute
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: greeting, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: sum, isState: false
+00:00 +42: D:/OtherProject/mine/flux/packages/flux_compiler/test/flx_integration_test.dart: End-to-End .flx File Test flux build command produces valid .flx file
+00:00 +42 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart: AST Golden Tests basic structure
+00:00 +42 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/flx_integration_test.dart: End-to-End .flx File Test flux build command produces valid .flx file [E]
+  ProcessException: 系統找不到指定的檔案。
+  
+    Command: dart run bin/flux.dart build C:\Users\aa223\AppData\Local\Temp\flux_test_f977bfad/build_test.flux -o C:\Users\aa223\AppData\Local\Temp\flux_test_f977bfad/build_test.flx
+  dart:io                               Process.runSync
+  test\flx_integration_test.dart 73:30  main.<fn>.<fn>
+  
+00:00 +43 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart: AST Golden Tests class definitions
+00:00 +44 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart: AST Golden Tests import statement
+00:00 +45 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart: AST Golden Tests error recovery
+DEBUG PARSER: Error during parse: Expect expression. at 1:23
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:491:21)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._varDeclaration (package:flux_compiler/src/parser.dart:400:21)
+#13     Parser._declaration (package:flux_compiler/src/parser.dart:82:66)
+#14     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#15     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart:77:28)
+#16     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#17     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#18     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+00:00 +46 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart: Bytecode Golden Tests basic arithmetic
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +47 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart: Bytecode Golden Tests if statement with jump
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 1
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +48 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart: Bytecode Golden Tests function call
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: foo, isState: false
+00:00 +49 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/golden_test.dart: BytecodePrinter Unit Test prints call opcode
+Manual Chunk Output:
+== Constants ==
+== Code ==
+0000 call         0
+
+00:00 +50 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer folds simple arithmetic constants
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +51 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer folds string concatenation
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +52 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer folds nested arithmetic expressions (requires multi-pass)
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +53 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer does not fold mismatch types (conservative)
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +54 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer does not fold variables
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +55 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer optimizes NOT + JUMP_IF_FALSE to JUMP_IF_TRUE
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 5
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+00:00 +56 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after return
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ReturnStmt
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +57 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after unconditional jump
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 4
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +58 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer Dead Code Elimination preserves jump targets (if-else)
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+00:00 +59 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer Dead Code Elimination eliminates code after throw
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ThrowStmt
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +60 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer Constant Folding Refinements unary negate
+00:00 +61 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer Constant Folding Refinements unary not
+00:00 +62 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer Constant Folding Refinements null equality
+00:00 +63 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/optimizer_test.dart: BytecodeOptimizer Constant Folding Refinements class method optimization
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+00:00 +64 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/rle_test.dart: Chunk RLE Line Mapping Empty chunk returns -1
+00:00 +65 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/rle_test.dart: Chunk RLE Line Mapping Single instruction
+00:00 +66 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/rle_test.dart: Chunk RLE Line Mapping Multiple instructions on same line
+00:00 +67 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/rle_test.dart: Chunk RLE Line Mapping Line changes
+00:00 +68 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/rle_test.dart: Chunk RLE Line Mapping Large run
+00:00 +69 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/rle_test.dart: Chunk RLE Line Mapping Non-sequential line numbers (e.g. loops/jumps)
+00:00 +70 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/serializer_test.dart: BytecodeSerializer/Deserializer Round-trip simple script round-trip
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +71 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/serializer_test.dart: BytecodeSerializer/Deserializer Round-trip function with parameters round-trip
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: add, isState: false
+00:00 +72 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/serializer_test.dart: BytecodeSerializer/Deserializer Round-trip class round-trip
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+00:00 +73 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/source_map_test.dart: SourceMapGenerator generates empty map
+00:00 +74 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/source_map_test.dart: SourceMapGenerator generates simple mappings
+DEBUG: Adding source url: source.dart
+00:00 +75 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/source_map_test.dart: SourceMapGenerator VLQ encoding logic manual check
+00:00 +76 -1: D:/OtherProject/mine/flux/packages/flux_compiler/test/widget_compilation_test.dart: Widget state access compiles to getState/setState
+DEBUG PARSER: Found state field: count
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget TestWidget, State: [count]
+BuildCompiler created. _stateFields: [count]
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: count, isState: true
+00:00 +77 -1: Some tests failed.

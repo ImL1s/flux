@@ -331,10 +331,19 @@ class ClassDecl extends Declaration {
   final int? nameColumn;
   final String? superclass;
   final List<String> interfaces;
+  final List<FieldDecl> fields;
   final List<Declaration> members;
 
   const ClassDecl(this.name, this.members,
-      {this.nameLine, this.nameColumn, this.superclass, this.interfaces = const [], required super.line, required super.column});
+      {this.nameLine, this.nameColumn, this.superclass, this.interfaces = const [], this.fields = const [], required super.line, required super.column});
+}
+
+/// Field declaration in a class
+class FieldDecl extends Declaration {
+  final String name;
+  final Expression? initializer;
+
+  const FieldDecl(this.name, this.initializer, {required super.line, required super.column});
 }
 
 /// Widget declaration (Flux-specific)

@@ -1,0 +1,577 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart
+00:00 +0: Class Fields - Basic Field with initializer
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Box, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 6
+DEBUG VM: getProperty value on FluxInstance
+DEBUG TEST: Box.value = 10
+DEBUG VM: getProperty value on FluxInstance
+00:00 +1: Class Fields - Basic Field initialization order (fields before init body)
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "start" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: start, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling variable: Point, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 12
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 11
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 13
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 12
+DEBUG VM: getProperty x on FluxInstance
+DEBUG VM: getProperty y on FluxInstance
+00:00 +2: Class Fields - Basic Field without initializer parses correctly
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Empty, isState: false
+00:00 +3: Class Fields - Basic Multiple fields
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: Config, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 8
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 7
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 9
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 8
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 10
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+DEBUG VM: getProperty host on FluxInstance
+DEBUG VM: getProperty port on FluxInstance
+DEBUG VM: getProperty debug on FluxInstance
+00:00 +4: Class Fields - Application Tests Counter class with field
+DEBUG COMPILER: Unit has 8 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 18
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 17
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 20
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 19
+DEBUG VM: Invoking method increment on instance FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: Invoking method increment on instance FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: Invoking method increment on instance FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: Invoking method decrement on instance FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+00:00 +5: Class Fields - Application Tests User model with fields and constructor
+DEBUG COMPILER: Unit has 7 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "userId" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "userName" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: userId, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: userName, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 17
+DEBUG COMPILER: Compiling variable: User, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 19
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 18
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 20
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 19
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 22
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 20
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 22
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 24
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 23
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:128:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 39
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 17]
+00:00 +5 -1: Class Fields - Application Tests User model with fields and constructor [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 128:7  main.<fn>.<fn>
+  
+00:00 +5 -1: Class Fields - Application Tests Stack data structure with field
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "item" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: item, isState: false
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 9
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Stack, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 18
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 17
+DEBUG VM: Invoking method push on instance FluxInstance
+DEBUG VM: getProperty items on FluxInstance
+DEBUG VM: Invoking method push on instance FluxInstance
+DEBUG VM: getProperty items on FluxInstance
+DEBUG VM: Invoking method push on instance FluxInstance
+DEBUG VM: getProperty items on FluxInstance
+DEBUG VM: Invoking method size on instance FluxInstance
+DEBUG VM: getProperty items on FluxInstance
+00:00 +6 -1: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 11
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 16
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 20
+DEBUG COMPILER: Compiling variable: Calculator, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 21
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 23
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 22
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG VM: Invoking method add on instance FluxInstance
+DEBUG VM: getProperty result on FluxInstance
+DEBUG VM: Invoking method add on instance FluxInstance
+DEBUG VM: getProperty result on FluxInstance
+DEBUG VM: Invoking method mul on instance FluxInstance
+DEBUG VM: getProperty result on FluxInstance
+DEBUG VM: getProperty result on FluxInstance
+00:00 +7 -1: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: Math, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 6
+DEBUG VM: getProperty doublepi on FluxInstance
+00:00 +8 -1: Class Fields - Edge Cases Field with list initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+DEBUG VM: getProperty data on FluxInstance
+00:00 +9 -1: Class Fields - Edge Cases Field with map initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Settings, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+DEBUG VM: getProperty config on FluxInstance
+00:00 +10 -1: Class Fields - Edge Cases Multiple instances have independent fields
+DEBUG COMPILER: Unit has 8 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 13
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+DEBUG VM: Invoking method inc on instance FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: Invoking method inc on instance FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: Invoking method inc on instance FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+DEBUG VM: getProperty count on FluxInstance
+00:00 +11 -1: Class Fields - Edge Cases Field overwritten in init
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: Wrapper, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 11
+DEBUG COMPILER: Compiling variable: w, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 10
+DEBUG VM: getProperty value on FluxInstance
+00:00 +12 -1: Class Fields - Edge Cases Class with only fields (no methods)
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: Point, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 9
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 8
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 10
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+DEBUG VM: getProperty x on FluxInstance
+DEBUG VM: getProperty y on FluxInstance
+00:00 +13 -1: Class Fields - Edge Cases Class with only init (no declared fields)
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: Dynamic, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 11
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 10
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 12
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 11
+DEBUG VM: getProperty a on FluxInstance
+DEBUG TEST: d.a = 10
+DEBUG VM: getProperty b on FluxInstance
+DEBUG TEST: d.b = <Dynamic instance>
+DEBUG VM: getProperty a on FluxInstance
+DEBUG VM: getProperty b on FluxInstance
+DEBUG VM RUNTIME EXCEPTION: b error
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1147:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:283:14)
+#5      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#6      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#7      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 70
+Last OpCode: OpCode.throw_
+Runtime Error: b error
+   at script() [line 11]
+00:00 +13 -2: Class Fields - Edge Cases Class with only init (no declared fields) [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 283:7  main.<fn>.<fn>
+  
+00:00 +13 -2: Class Fields - Edge Cases Field with nil initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Nullable, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+DEBUG VM: getProperty value on FluxInstance
+00:00 +14 -2: Class Fields - Edge Cases Field with boolean initializer
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: Flags, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 6
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 8
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 7
+DEBUG VM: getProperty enabled on FluxInstance
+DEBUG VM: getProperty visible on FluxInstance
+00:00 +15 -2: Class Fields - Edge Cases Field accessing another field in method
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: Rectangle, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 11
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 10
+DEBUG VM: Invoking method area on instance FluxInstance
+DEBUG VM: getProperty width on FluxInstance
+DEBUG VM: getProperty height on FluxInstance
+00:00 +16 -2: Class Fields - Edge Cases Chained field access after construction
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling variable: Node, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
+DEBUG COMPILER: Compiling variable: Node, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: n1, isState: false
+DEBUG COMPILER: Compiling variable: n2, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: n1, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+DEBUG VM: getProperty next on FluxInstance
+DEBUG VM: getProperty value on FluxInstance
+00:00 +17 -2: Class Fields - Stress Tests Many fields
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: BigClass, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 14
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 16
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 15
+DEBUG COMPILER: Compiling variable: str, isState: false
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG VM: getProperty a on FluxInstance
+DEBUG VM: getProperty b on FluxInstance
+DEBUG VM: getProperty c on FluxInstance
+DEBUG VM: getProperty d on FluxInstance
+DEBUG VM: getProperty e on FluxInstance
+DEBUG VM: getProperty f on FluxInstance
+DEBUG VM: getProperty g on FluxInstance
+DEBUG VM: getProperty h on FluxInstance
+DEBUG VM: getProperty i on FluxInstance
+DEBUG VM: getProperty j on FluxInstance
+00:00 +18 -2: Class Fields - Stress Tests Nested object creation
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 5
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Inner, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Outer, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: o, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:386:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 16
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 5]
+   at script() [line 13]
+00:00 +18 -3: Class Fields - Stress Tests Nested object creation [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 386:7  main.<fn>.<fn>
+  
+00:00 +18 -3: Some tests failed.

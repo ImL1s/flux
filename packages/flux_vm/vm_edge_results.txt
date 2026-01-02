@@ -1,0 +1,510 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart
+00:00 +0: VM Edge Cases - Stack Operations deep recursion (100 calls)
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 3
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: countdown, isState: false
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: countdown, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: result, isState: false
+00:00 +0 -1: VM Edge Cases - Stack Operations deep recursion (100 calls) [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher              expect
+  test\vm_edge_test.dart 32:7  main.<fn>.<fn>
+  
+00:00 +0 -1: VM Edge Cases - Stack Operations many local variables in scope
+DEBUG COMPILER: Unit has 51 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 12
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 14
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 15
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 16
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 17
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 18
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 19
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 20
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 21
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 22
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 23
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 24
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 25
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 26
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 27
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 28
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 29
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 30
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 31
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 32
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 33
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 34
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 35
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 36
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 37
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 38
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 39
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 40
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 41
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 42
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 43
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 44
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 45
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 46
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 47
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 48
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 49
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 50
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 51
+DEBUG COMPILER: Compiling variable: v49, isState: false
+00:00 +1 -1: VM Edge Cases - Stack Operations stress: 10000 iterations
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ForStmt
+DEBUG COMPILER: Compiling statement type: ForStmt at line 5
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 5
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: sum, isState: false
+00:00 +2 -1: VM Edge Cases - Type Coercion string + number concatenation
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +3 -1: VM Edge Cases - Type Coercion number + string concatenation
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +4 -1: VM Edge Cases - Type Coercion boolean in string context
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +5 -1: VM Edge Cases - Type Coercion nil in string context
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+00:00 +6 -1: VM Edge Cases - Collections nested lists (5 levels)
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: nested, isState: false
+00:00 +7 -1: VM Edge Cases - Collections list modification during iteration
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ForStmt
+DEBUG COMPILER: Compiling statement type: ForStmt at line 7
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+00:00 +8 -1: VM Edge Cases - Collections empty list operations
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: pop, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: list, isState: false
+00:00 +9 -1: VM Edge Cases - Collections map with various key types
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: map, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: map, isState: false
+00:00 +10 -1: VM Edge Cases - Closures closure capturing loop variable
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ForStmt
+DEBUG COMPILER: Compiling statement type: ForStmt at line 6
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "i" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Added local "captured" at slot 2 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: push, isState: false
+DEBUG COMPILER: Compiling variable: funcs, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+DEBUG COMPILER: Compiling variable: captured, isState: false
+DEBUG COMPILER: Resolving upvalue "captured" -> enclosing local 2. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 2 as captured.
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: true) [Depth: 2]
+DEBUG COMPILER: Compiling variable: i, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: funcs, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: funcs, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: funcs, isState: false
+00:00 +11 -1: VM Edge Cases - Closures closure modifying captured variable
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "count" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: count, isState: false
+DEBUG COMPILER: Resolving upvalue "count" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Resolving upvalue "count" -> enclosing local 1. Prev captured: true
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 5
+DEBUG COMPILER: Compiling variable: count, isState: false
+DEBUG COMPILER: Resolving upvalue "count" -> enclosing local 1. Prev captured: true
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: makeCounter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: c, isState: false
+00:00 +12 -1: VM Edge Cases - Closures multiple closures sharing same upvalue
+DEBUG COMPILER: Unit has 7 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "shared" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: shared, isState: false
+DEBUG COMPILER: Resolving upvalue "shared" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Resolving upvalue "shared" -> enclosing local 1. Prev captured: true
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: shared, isState: false
+DEBUG COMPILER: Resolving upvalue "shared" -> enclosing local 1. Prev captured: true
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "inc" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+DEBUG COMPILER: Compiling variable: shared, isState: false
+DEBUG COMPILER: Resolving upvalue "shared" -> enclosing local 1. Prev captured: true
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Added local "get" at slot 3 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 5
+DEBUG COMPILER: Compiling variable: inc, isState: false
+DEBUG COMPILER: Compiling variable: get, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: makePair, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: pair, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: pair, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: inc, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: inc, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: get, isState: false
+00:00 +13 -1: VM Edge Cases - Classes class field shadowing
+DEBUG PARSER: Error during parse: Expect expression. at 8:9
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart:16:32)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart:197:22)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: setLocalX, isState: false
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: Foo, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'setLocalX'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:913:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart:19:15)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart:197:22)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 7
+Last OpCode: OpCode.true_
+00:00 +13 -2: VM Edge Cases - Classes class field shadowing [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher               expect
+  test\vm_edge_test.dart 211:7  main.<fn>.<fn>
+  
+00:00 +13 -2: VM Edge Cases - Classes this in nested function
+DEBUG PARSER: Error during parse: Expect expression. at 10:9
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart:16:32)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart:216:22)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Compiling variable: self, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined method: Container.getValueViaCallback
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1328:17)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart:19:15)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/vm_edge_test.dart:216:22)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 17
+Last OpCode: OpCode.constant
+00:00 +13 -3: VM Edge Cases - Classes this in nested function [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher               expect
+  test\vm_edge_test.dart 230:7  main.<fn>.<fn>
+  
+00:00 +13 -3: VM Edge Cases - Exception Handling exception with nil value
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 2
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +14 -3: VM Edge Cases - Exception Handling exception with complex object
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 3
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 2
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 6
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +15 -3: VM Edge Cases - Exception Handling finally always runs on return
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: FunctionDecl
+DEBUG COMPILER: Compiling statement type: FunctionDecl at line 1
+DEBUG COMPILER: Compiling statement type: TryStmt at line 2
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 8
+DEBUG COMPILER: Compiling variable: test, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: r, isState: false
+00:00 +16 -3: Some tests failed.

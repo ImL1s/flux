@@ -1,0 +1,14 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart
+lib/src/compiler.dart:1036:36: Error: The setter 'arity' isn't defined for the class 'CompiledFunction'.
+ - 'CompiledFunction' is from 'package:flux_compiler/src/compiler.dart' ('lib/src/compiler.dart').
+Try correcting the name to the name of an existing setter, or defining a setter or field named 'arity'.
+          methodCompiler._function.arity = initMethod.parameters.length;
+                                   ^^^^^
+lib/src/compiler.dart:1071:34: Error: The setter 'arity' isn't defined for the class 'CompiledFunction'.
+ - 'CompiledFunction' is from 'package:flux_compiler/src/compiler.dart' ('lib/src/compiler.dart').
+Try correcting the name to the name of an existing setter, or defining a setter or field named 'arity'.
+        methodCompiler._function.arity = member.parameters.length;
+                                 ^^^^^
+00:00 +0 -1: loading D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart [E]
+  Failed to load "D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart": Compilation failed for testPath=D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart
+00:00 +0 -1: Some tests failed.

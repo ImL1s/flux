@@ -1,0 +1,762 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart: Async Exception Handling await on Future that completes with error
+test/debugger_control_test.dart:126:45: Error: Too many positional arguments: 1 allowed, but 2 found.
+Try removing the extra positional arguments.
+      expect(() => debugger.removeBreakpoint('nonexistent.flux', 999), returnsNormally);
+                                            ^
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: failingFetch, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +1: D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart: Async Exception Handling multiple sequential awaits
+00:00 +1 -1: loading D:/OtherProject/mine/flux/packages/flux_vm/test/debugger_control_test.dart [E]
+  Failed to load "D:/OtherProject/mine/flux/packages/flux_vm/test/debugger_control_test.dart": Compilation failed for testPath=D:/OtherProject/mine/flux/packages/flux_vm/test/debugger_control_test.dart
+00:00 +1 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart: Async Exception Handling multiple sequential awaits
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: fetch, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: fetch, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +2 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions basic lambda expression
+00:00 +2 -2: loading D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart [E]
+  Error: the Dart compiler exited unexpectedly.
+  package:flutter_tools/src/base/common.dart 10:3  throwToolExit
+  package:flutter_tools/src/compile.dart 893:9     DefaultResidentCompiler._compile.<fn>
+  dart:async/zone.dart 1422:47                     _rootRunUnary
+  dart:async/zone.dart 1324:19                     _CustomZone.runUnary
+  dart:async/future_impl.dart 902:45               Future._propagateToListeners.handleValueCallback
+  dart:async/future_impl.dart 931:13               Future._propagateToListeners
+  dart:async/future_impl.dart 827:9                Future._propagateToListeners
+  dart:async/future_impl.dart 707:5                Future._completeWithValue
+  dart:async/future_impl.dart 777:7                Future._asyncCompleteWithValue.<fn>
+  dart:async/zone.dart 1414:13                     _rootRun
+  dart:async/zone.dart 1317:19                     _CustomZone.run
+  dart:async/zone.dart 1225:7                      _CustomZone.runGuarded
+  dart:async/zone.dart 1265:23                     _CustomZone.bindCallbackGuarded.<fn>
+  dart:async/schedule_microtask.dart 40:21         _microtaskLoop
+  dart:async/schedule_microtask.dart 49:5          _startMicrotaskLoop
+  dart:isolate-patch/isolate_patch.dart 118:13     _runPendingImmediateCallback
+  dart:isolate-patch/isolate_patch.dart 185:5      _RawReceivePort._handleMessage
+  
+00:00 +2 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart: Async Exception Handling async inside try-catch
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: riskyFetch, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+00:00 +3 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions basic lambda expression
+DEBUG PARSER: Error during parse: Expect expression. at 1:26
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:25:7)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: double, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'x'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:913:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:21:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:25:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 2
+Last OpCode: OpCode.constant
+00:00 +3 -3: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions basic lambda expression [E]
+  Expected: '10'
+    Actual: 'Runtime Error: Undefined global \'x\'.'
+     Which: is different.
+            Expected: 10
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher             expect
+  test\lambda_test.dart 29:7  main.<fn>.<fn>
+  
+00:00 +3 -3: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda with multiple parameters
+DEBUG PARSER: Error during parse: Expect ")" after expression. at 1:21
+#0      Parser._consume (package:flux_compiler/src/parser.dart:753:5)
+#1      Parser._primary (package:flux_compiler/src/parser.dart:619:7)
+#2      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#3      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#4      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#5      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#6      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#7      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#8      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#9      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#10     Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#11     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#12     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#13     Parser._varDeclaration (package:flux_compiler/src/parser.dart:400:21)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:82:66)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:33:7)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: add, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'add'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:913:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:21:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:33:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 2
+Last OpCode: OpCode.constant
+00:00 +3 -4: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda with multiple parameters [E]
+  Expected: '10'
+    Actual: 'Runtime Error: Undefined global \'add\'.'
+     Which: is different.
+            Expected: 10
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher             expect
+  test\lambda_test.dart 37:7  main.<fn>.<fn>
+  
+00:00 +3 -4: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda captures variable (closure)
+DEBUG PARSER: Error during parse: Expect expression. at 2:26
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:41:7)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: triple, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'x'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:913:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:21:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:41:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 7
+Last OpCode: OpCode.true_
+00:00 +3 -5: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (int)
+00:00 +3 -5: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda captures variable (closure) [E]
+  Expected: '12'
+    Actual: 'Runtime Error: Undefined global \'x\'.'
+     Which: is different.
+            Expected: 12
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher             expect
+  test\lambda_test.dart 46:7  main.<fn>.<fn>
+  
+00:00 +3 -5: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda assigned and called later
+DEBUG PARSER: Error during parse: Expect expression. at 2:22
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._primary (package:flux_compiler/src/parser.dart:618:20)
+#13     Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#14     Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#15     Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#16     Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#17     Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#18     Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#19     Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#20     Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#21     Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#22     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#23     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#24     Parser._varDeclaration (package:flux_compiler/src/parser.dart:400:21)
+#25     Parser._declaration (package:flux_compiler/src/parser.dart:82:66)
+#26     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#27     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#28     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:50:7)
+#29     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#30     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#31     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG PARSER: Error during parse: Expect expression. at 4:16
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._primary (package:flux_compiler/src/parser.dart:618:20)
+#13     Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#14     Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#15     Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#16     Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#17     Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#18     Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#19     Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#20     Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#21     Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#22     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#23     Parser._assignment (package:flux_compiler/src/parser.dart:428:21)
+#24     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#25     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#26     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#27     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#28     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#29     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#30     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:50:7)
+#31     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#32     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#33     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG PARSER: Error during parse: Expect expression. at 5:9
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:50:7)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: setup, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'setup'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:913:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:21:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:50:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 11
+Last OpCode: OpCode.false_
+00:00 +3 -6: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (int)
+00:00 +3 -6: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda assigned and called later [E]
+  Expected: 'hello'
+    Actual: 'Runtime Error: Undefined global \'setup\'.'
+     Which: is different.
+            Expected: hello
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher             expect
+  test\lambda_test.dart 59:7  main.<fn>.<fn>
+  
+00:00 +3 -6: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda as immediate invocation (IIFE)
+DEBUG PARSER: Error during parse: Expect ")" after expression. at 1:27
+#0      Parser._consume (package:flux_compiler/src/parser.dart:753:5)
+#1      Parser._primary (package:flux_compiler/src/parser.dart:619:7)
+#2      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#3      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#4      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#5      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#6      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#7      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#8      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#9      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#10     Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#11     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#12     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#13     Parser._varDeclaration (package:flux_compiler/src/parser.dart:400:21)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:82:66)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:63:7)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: result, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'result'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:913:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:21:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:63:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 2
+Last OpCode: OpCode.constant
+00:00 +3 -7: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (int)
+00:00 +3 -7: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda as immediate invocation (IIFE) [E]
+  Expected: '11'
+    Actual: 'Runtime Error: Undefined global \'result\'.'
+     Which: is different.
+            Expected: 11
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher             expect
+  test\lambda_test.dart 67:7  main.<fn>.<fn>
+  
+00:00 +3 -7: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions nested lambdas
+DEBUG PARSER: Error during parse: Expect expression. at 1:25
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:71:7)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: outer, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: inner, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'x'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:913:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:21:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:71:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+00:00 +3 -7: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (int)
+DEBUG COMPILER: Unit has 2 declarations
+00:00 +3 -7: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions nested lambdas
+IP: 2
+Last OpCode: OpCode.constant
+00:00 +3 -7: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (int)
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+00:00 +3 -8: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (int)
+00:00 +3 -8: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions nested lambdas [E]
+  Expected: '15'
+    Actual: 'Runtime Error: Undefined global \'x\'.'
+     Which: is different.
+            Expected: 15
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher             expect
+  test\lambda_test.dart 76:7  main.<fn>.<fn>
+  
+00:00 +3 -8: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (int)
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +4 -8: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda returning lambda (currying)
+DEBUG PARSER: Error during parse: Expect expression. at 1:25
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:18:34)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:80:7)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: curry, isState: false
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'a'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:913:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:21:10)
+#3      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart:80:7)
+#4      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#5      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#6      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 2
+Last OpCode: OpCode.constant
+00:00 +4 -9: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (double)
+00:00 +4 -9: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions lambda returning lambda (currying) [E]
+  Expected: '6'
+    Actual: 'Runtime Error: Undefined global \'a\'.'
+     Which: is different.
+            Expected: 6
+              Actual: Runtime Er ...
+                      ^
+             Differ at offset 0
+  
+  package:matcher             expect
+  test\lambda_test.dart 84:7  main.<fn>.<fn>
+  
+00:00 +4 -9: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (double)
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +4 -10: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (double) [E]
+  Expected: 'NaN'
+    Actual: 'Infinity'
+     Which: is different.
+            Expected: NaN
+              Actual: Infinity
+                      ^
+             Differ at offset 0
+  
+  package:matcher                    expect
+  test\operator_edge_test.dart 42:7  main.<fn>.<fn>
+  
+00:00 +4 -10: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases integer division by zero
+DEBUG PARSER: Error during parse: Expect expression. at 1:21
+#0      Parser._primary (package:flux_compiler/src/parser.dart:674:5)
+#1      Parser._call (package:flux_compiler/src/parser.dart:526:16)
+#2      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#3      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#4      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#5      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#6      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#7      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#8      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#9      Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#10     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#11     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#12     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#13     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#14     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#15     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#16     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart:18:34)
+#17     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart:46:22)
+#18     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#19     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#20     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +4 -11: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases integer division by zero [E]
+  Expected: InterpretResult:<InterpretResult.runtimeError>
+    Actual: InterpretResult:<InterpretResult.ok>
+  
+  package:matcher                    expect
+  test\operator_edge_test.dart 52:7  main.<fn>.<fn>
+  
+00:00 +4 -11: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases operator precedence: add vs multiply
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +5 -11: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases modulo with negative numbers
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +5 -12: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases modulo with negative numbers [E]
+  Expected: '2'
+    Actual: '3'
+     Which: is different.
+            Expected: 2
+              Actual: 3
+                      ^
+             Differ at offset 0
+  
+  package:matcher                    expect
+  test\operator_edge_test.dart 70:7  main.<fn>.<fn>
+  
+00:00 +5 -12: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases comparison operators
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+00:00 +6 -12: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases string comparison
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+00:00 +7 -12: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases boolean operators
+DEBUG PARSER: Error during parse: Expect ")" after arguments. at 1:20
+#0      Parser._consume (package:flux_compiler/src/parser.dart:753:5)
+#1      Parser._finishCall (package:flux_compiler/src/parser.dart:579:19)
+#2      Parser._call (package:flux_compiler/src/parser.dart:530:16)
+#3      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#4      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#5      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#6      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#7      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#8      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#9      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#10     Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#11     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#12     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#13     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#14     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#15     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#16     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#17     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart:18:34)
+#18     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart:96:7)
+#19     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#20     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#21     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG PARSER: Error during parse: Expect ")" after arguments. at 2:20
+#0      Parser._consume (package:flux_compiler/src/parser.dart:753:5)
+#1      Parser._finishCall (package:flux_compiler/src/parser.dart:579:19)
+#2      Parser._call (package:flux_compiler/src/parser.dart:530:16)
+#3      Parser._await (package:flux_compiler/src/parser.dart:522:12)
+#4      Parser._unary (package:flux_compiler/src/parser.dart:513:12)
+#5      Parser._factor (package:flux_compiler/src/parser.dart:498:16)
+#6      Parser._term (package:flux_compiler/src/parser.dart:488:16)
+#7      Parser._comparison (package:flux_compiler/src/parser.dart:477:16)
+#8      Parser._equality (package:flux_compiler/src/parser.dart:467:16)
+#9      Parser._and (package:flux_compiler/src/parser.dart:457:16)
+#10     Parser._or (package:flux_compiler/src/parser.dart:447:16)
+#11     Parser._assignment (package:flux_compiler/src/parser.dart:424:18)
+#12     Parser._expression (package:flux_compiler/src/parser.dart:420:12)
+#13     Parser._expressionStatement (package:flux_compiler/src/parser.dart:410:18)
+#14     Parser._statement (package:flux_compiler/src/parser.dart:262:12)
+#15     Parser._declaration (package:flux_compiler/src/parser.dart:84:12)
+#16     Parser.parse (package:flux_compiler/src/parser.dart:34:24)
+#17     main.<anonymous closure>.runScript (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart:18:34)
+#18     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart:96:7)
+#19     Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#20     Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#21     Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+00:00 +7 -13: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases boolean operators [E]
+  Expected: ['false', 'true', 'false', 'true']
+    Actual: ['false', 'true']
+     Which: at location [2] is ['false', 'true'] which shorter than expected
+  
+  package:matcher                     expect
+  test\operator_edge_test.dart 102:7  main.<fn>.<fn>
+  
+00:00 +7 -13: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases unary negate
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +8 -13: Some tests failed.

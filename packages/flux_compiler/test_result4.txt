@@ -1,0 +1,942 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart
+00:00 +0: Class Fields - Basic Field with initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Box, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:28:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 4]
+00:00 +0 -1: Class Fields - Basic Field with initializer [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                   expect
+  test\class_fields_test.dart 28:7  main.<fn>.<fn>
+  
+00:00 +0 -1: Class Fields - Basic Field initialization order (fields before init body)
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "start" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: start, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling variable: Point, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 12
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 11
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 13
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 12
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:46:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 16
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 6]
+   at script() [line 10]
+00:00 +0 -2: Class Fields - Basic Field initialization order (fields before init body) [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                   expect
+  test\class_fields_test.dart 46:7  main.<fn>.<fn>
+  
+00:00 +0 -2: Class Fields - Basic Field without initializer parses correctly
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Empty, isState: false
+00:00 +1 -2: Class Fields - Basic Multiple fields
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: Config, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 8
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 7
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 9
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 8
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 10
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:71:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 3]
+   at script() [line 6]
+00:00 +1 -3: Class Fields - Basic Multiple fields [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                   expect
+  test\class_fields_test.dart 71:7  main.<fn>.<fn>
+  
+00:00 +1 -3: Class Fields - Application Tests Counter class with field
+DEBUG COMPILER: Unit has 8 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 18
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 17
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 18
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 20
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 19
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:98:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 13]
+00:00 +1 -4: Class Fields - Application Tests Counter class with field [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                   expect
+  test\class_fields_test.dart 98:7  main.<fn>.<fn>
+  
+00:00 +1 -4: Class Fields - Application Tests User model with fields and constructor
+DEBUG COMPILER: Unit has 7 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "userId" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "userName" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: userId, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: userName, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 17
+DEBUG COMPILER: Compiling variable: User, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 19
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 18
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 20
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 19
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 22
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 20
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 22
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 24
+DEBUG COMPILER: Compiling variable: u, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 23
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:127:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 22
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 7]
+   at script() [line 17]
+00:00 +1 -5: Class Fields - Application Tests User model with fields and constructor [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 127:7  main.<fn>.<fn>
+  
+00:00 +1 -5: Class Fields - Application Tests Stack data structure with field
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "item" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: item, isState: false
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 9
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Stack, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 16
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 18
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 17
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:150:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 13]
+00:00 +1 -6: Class Fields - Application Tests Stack data structure with field [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 150:7  main.<fn>.<fn>
+  
+00:00 +1 -6: Class Fields - Application Tests Calculator with state field
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 11
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "n" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 15
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 16
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 20
+DEBUG COMPILER: Compiling variable: Calculator, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 21
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 23
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 22
+DEBUG COMPILER: Compiling variable: str, isState: false
+DEBUG COMPILER: Compiling variable: calc, isState: false
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:178:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 20]
+00:00 +1 -7: Class Fields - Application Tests Calculator with state field [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 178:7  main.<fn>.<fn>
+  
+00:00 +1 -7: Class Fields - Edge Cases Field with expression initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: Math, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: m, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 6
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:192:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 3]
+   at script() [line 5]
+00:00 +1 -8: Class Fields - Edge Cases Field with expression initializer [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 192:7  main.<fn>.<fn>
+  
+00:00 +1 -8: Class Fields - Edge Cases Field with list initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: len, isState: false
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:203:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 15
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 4]
+00:00 +1 -9: Class Fields - Edge Cases Field with list initializer [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 203:7  main.<fn>.<fn>
+  
+00:00 +1 -9: Class Fields - Edge Cases Field with map initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Settings, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: s, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:214:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 17
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 4]
+00:00 +1 -10: Class Fields - Edge Cases Field with map initializer [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 214:7  main.<fn>.<fn>
+  
+00:00 +1 -10: Class Fields - Edge Cases Multiple instances have independent fields
+DEBUG COMPILER: Unit has 8 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: Counter, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 14
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 13
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:234:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 6]
+00:00 +1 -11: Class Fields - Edge Cases Multiple instances have independent fields [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 234:7  main.<fn>.<fn>
+  
+00:00 +1 -11: Class Fields - Edge Cases Field overwritten in init
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: Wrapper, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 11
+DEBUG COMPILER: Compiling variable: w, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 10
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:250:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 16
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 1]
+   at script() [line 9]
+00:00 +1 -12: Class Fields - Edge Cases Field overwritten in init [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 250:7  main.<fn>.<fn>
+  
+00:00 +1 -12: Class Fields - Edge Cases Class with only fields (no methods)
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: Point, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 9
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 8
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 10
+DEBUG COMPILER: Compiling variable: p, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:265:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 3]
+   at script() [line 5]
+00:00 +1 -13: Class Fields - Edge Cases Class with only fields (no methods) [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 265:7  main.<fn>.<fn>
+  
+00:00 +1 -13: Class Fields - Edge Cases Class with only init (no declared fields)
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 7
+DEBUG COMPILER: Compiling variable: Dynamic, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 9
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 8
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 10
+DEBUG COMPILER: Compiling variable: d, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 9
+DEBUG VM: getProperty a on FluxInstance
+DEBUG VM RUNTIME EXCEPTION: a error
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:1147:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:280:14)
+#5      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#6      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#7      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 29
+Last OpCode: OpCode.throw_
+Runtime Error: a error
+   at script() [line 8]
+00:00 +1 -14: Class Fields - Edge Cases Class with only init (no declared fields) [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 280:7  main.<fn>.<fn>
+  
+00:00 +1 -14: Class Fields - Edge Cases Field with nil initializer
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling variable: nil, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: Nullable, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 6
+DEBUG COMPILER: Compiling variable: n, isState: false
+DEBUG COMPILER: Compiling variable: nil, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 5
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'nil'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:912:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:291:14)
+#5      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#6      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#7      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 4
+Last OpCode: OpCode.constant
+Runtime Error: Undefined global 'nil'.
+   at init() [line 2]
+   at script() [line 4]
+00:00 +1 -15: Class Fields - Edge Cases Field with nil initializer [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 291:7  main.<fn>.<fn>
+  
+00:00 +1 -15: Class Fields - Edge Cases Field with boolean initializer
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 5
+DEBUG COMPILER: Compiling variable: Flags, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 7
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 6
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 8
+DEBUG COMPILER: Compiling variable: f, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 7
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:304:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 8
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 3]
+   at script() [line 5]
+00:00 +1 -16: Class Fields - Edge Cases Field with boolean initializer [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 304:7  main.<fn>.<fn>
+  
+00:00 +1 -16: Class Fields - Edge Cases Field accessing another field in method
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 6
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 9
+DEBUG COMPILER: Compiling variable: Rectangle, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 11
+DEBUG COMPILER: Compiling variable: r, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 10
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:320:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 3]
+   at script() [line 9]
+00:00 +1 -17: Class Fields - Edge Cases Field accessing another field in method [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 320:7  main.<fn>.<fn>
+  
+00:00 +1 -17: Class Fields - Edge Cases Chained field access after construction
+DEBUG COMPILER: Unit has 5 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling variable: nil, isState: false
+DEBUG COMPILER: Added local "v" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: v, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Compiling variable: Node, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
+DEBUG COMPILER: Compiling variable: Node, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 12
+DEBUG COMPILER: Compiling variable: n1, isState: false
+DEBUG COMPILER: Compiling variable: n2, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: n1, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'nil'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:912:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:340:14)
+#5      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#6      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#7      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 11
+Last OpCode: OpCode.true_
+Runtime Error: Undefined global 'nil'.
+   at init() [line 3]
+   at script() [line 10]
+00:00 +1 -18: Class Fields - Edge Cases Chained field access after construction [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 340:7  main.<fn>.<fn>
+  
+00:00 +1 -18: Class Fields - Stress Tests Many fields
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: BigClass, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 14
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling variable: bc, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 16
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 15
+DEBUG COMPILER: Compiling variable: str, isState: false
+DEBUG COMPILER: Compiling variable: sum, isState: false
+DEBUG VM RUNTIME EXCEPTION: RangeError (length): Invalid value: Only valid value is 0: 1
+Stack Trace: #0      List.[] (dart:core-patch/growable_array.dart)
+#1      VM._run (package:flux_vm/src/vm.dart:918:30)
+#2      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#3      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#4      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#5      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:363:14)
+#6      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#7      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#8      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 9
+Last OpCode: OpCode.constant
+Runtime Error: RangeError (length): Invalid value: Only valid value is 0: 1
+   at init() [line 3]
+   at script() [line 13]
+00:00 +1 -19: Class Fields - Stress Tests Many fields [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 363:7  main.<fn>.<fn>
+  
+00:00 +1 -19: Class Fields - Stress Tests Nested object creation
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 1
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling decl type: ClassDecl
+DEBUG COMPILER: Compiling statement type: ClassDecl at line 5
+DEBUG COMPILER: Added local "this" at slot 0 [Depth: 1]
+DEBUG COMPILER: Compiling variable: nil, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: Inner, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 13
+DEBUG COMPILER: Compiling variable: Outer, isState: false
+DEBUG COMPILER: Compiling decl type: IfStmt
+DEBUG COMPILER: Compiling statement type: IfStmt at line 15
+DEBUG COMPILER: Compiling variable: o, isState: false
+DEBUG COMPILER: Compiling statement type: ThrowStmt at line 14
+DEBUG VM RUNTIME EXCEPTION: Undefined global 'nil'.
+Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:912:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:356:12)
+#2      VM.interpret (package:flux_vm/src/vm.dart:325:14)
+#3      run (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:15:13)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart:383:14)
+#5      Declarer.test.<anonymous closure>.<anonymous closure> (package:test_api/src/backend/declarer.dart:242:19)
+<asynchronous suspension>
+#6      Declarer.test.<anonymous closure> (package:test_api/src/backend/declarer.dart:240:7)
+<asynchronous suspension>
+#7      Invoker._waitForOutstandingCallbacks.<anonymous closure> (package:test_api/src/backend/invoker.dart:282:9)
+<asynchronous suspension>
+
+IP: 4
+Last OpCode: OpCode.constant
+Runtime Error: Undefined global 'nil'.
+   at init() [line 6]
+   at script() [line 13]
+00:00 +1 -20: Class Fields - Stress Tests Nested object creation [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                    expect
+  test\class_fields_test.dart 383:7  main.<fn>.<fn>
+  
+00:00 +1 -20: Some tests failed.

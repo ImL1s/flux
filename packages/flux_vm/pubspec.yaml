@@ -1,7 +1,10 @@
 name: flux_vm
-publish_to: 'none'
-description: Virtual Machine for Flux language.x scripting language.
-version: 0.0.1
+description: Stack-based bytecode virtual machine for the Flux scripting language. Includes debugger, standard library, and async support.
+version: 1.0.0
+homepage: https://github.com/ImL1s/flux
+repository: https://github.com/ImL1s/flux
+issue_tracker: https://github.com/ImL1s/flux/issues
+
 environment:
   sdk: '>=3.0.0 <4.0.0'
 

@@ -1,6 +1,9 @@
 name: flux_compiler
-description: The compiler for the Flux scripting language.
-version: 0.0.1
+description: Lexer, Parser, AST, and Bytecode compiler for the Flux scripting language. Includes optimizer and source map generator.
+version: 1.0.0
+homepage: https://github.com/ImL1s/flux
+repository: https://github.com/ImL1s/flux
+
 environment:
   sdk: '>=3.0.0 <4.0.0'
 dev_dependencies:

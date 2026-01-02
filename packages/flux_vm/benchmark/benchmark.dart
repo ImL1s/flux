@@ -1,158 +1,146 @@
-#!/usr/bin/env dart
-/// Flux Language Performance Benchmarks
+/// Flux VM Performance Benchmarks
 /// 
-/// Industry-standard benchmarks for bytecode interpreter performance:
-/// 1. Fibonacci (recursive) - tests function call overhead
-/// 2. Ackermann function - tests deep recursion
-/// 
-/// Reference: https://github.com/drujensen/fib
+/// Run with: dart run benchmark/benchmark.dart
 
+import 'dart:io';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_vm/flux_vm.dart';
 
-class FluxCompiler {
-  static CompiledFunction compile(String source) {
-    final tokens = Lexer(source).tokenize();
-    final parser = Parser(tokens);
-    final unit = parser.parse();
-    final compiler = Compiler(unit: unit);
-    return compiler.endCompiler();
-  }
-}
-
-void main(List<String> args) {
-  print('╔════════════════════════════════════════╗');
-  print('║     Flux Performance Benchmarks        ║');
-  print('╚════════════════════════════════════════╝');
+void main() {
+  print('=' * 60);
+  print('Flux VM Performance Benchmarks');
+  print('=' * 60);
   print('');
   
-  // Parse args
-  int fibN = 30;
-  int ackM = 3;
-  int ackN = 8;
+  final results = <String, Duration>{};
   
-  if (args.isNotEmpty) {
-    fibN = int.tryParse(args[0]) ?? fibN;
-  }
-  
-  runFibonacciBenchmark(fibN);
-  print('');
-  runAckermannBenchmark(ackM, ackN);
-  print('');
-  runLoopBenchmark(1000000);
-}
-
-void runFibonacciBenchmark(int n) {
-  print('Benchmark: Fibonacci($n)');
-  print('─' * 40);
-  
-  final source = '''
+  // Fibonacci benchmark (recursive calls)
+  results['Fibonacci(25)'] = benchmark('Fibonacci(25)', '''
     fn fib(n) {
-      if (n <= 1) return n;
+      if (n <= 1) { return n; }
       return fib(n - 1) + fib(n - 2);
     }
-    
-    var result = fib($n);
-    print(result);
-  ''';
+    var result = fib(25);
+  ''', 1);
   
-  // Compilation time
-  final compileStart = DateTime.now();
-  final unit = FluxCompiler.compile(source);
-  final compileTime = DateTime.now().difference(compileStart);
-  print('  Compile time: ${compileTime.inMilliseconds}ms');
-  
-  // Execution time
-  final vm = VM();
-  var resultValue = 0;
-  vm.onPrint = (msg) {
-    resultValue = int.tryParse(msg) ?? 0;
-  };
-  
-  final execStart = DateTime.now();
-  final result = vm.runChunk(unit.chunk);
-  final execTime = DateTime.now().difference(execStart);
-  
-  if (result == InterpretResult.ok) {
-    print('  Execute time: ${execTime.inMilliseconds}ms');
-    print('  Result: fib($n) = $resultValue');
-  } else {
-    print('  Error during execution');
-  }
-}
-
-void runAckermannBenchmark(int m, int n) {
-  print('Benchmark: Ackermann($m, $n)');
-  print('─' * 40);
-  
-  final source = '''
-    fn ack(m, n) {
-      if (m == 0) return n + 1;
-      if (n == 0) return ack(m - 1, 1);
-      return ack(m - 1, ack(m, n - 1));
-    }
-    
-    var result = ack($m, $n);
-    print(result);
-  ''';
-  
-  // Compilation time
-  final compileStart = DateTime.now();
-  final unit = FluxCompiler.compile(source);
-  final compileTime = DateTime.now().difference(compileStart);
-  print('  Compile time: ${compileTime.inMilliseconds}ms');
-  
-  // Execution time
-  final vm = VM();
-  var resultValue = 0;
-  vm.onPrint = (msg) {
-    resultValue = int.tryParse(msg) ?? 0;
-  };
-  
-  final execStart = DateTime.now();
-  final result = vm.runChunk(unit.chunk);
-  final execTime = DateTime.now().difference(execStart);
-  
-  if (result == InterpretResult.ok) {
-    print('  Execute time: ${execTime.inMilliseconds}ms');
-    print('  Result: ack($m, $n) = $resultValue');
-  } else {
-    print('  Error during execution');
-  }
-}
-
-void runLoopBenchmark(int iterations) {
-  print('Benchmark: Loop ($iterations iterations)');
-  print('─' * 40);
-  
-  final source = '''
+  // Loop benchmark
+  results['Loop 100K'] = benchmark('Loop 100K iterations', '''
     var sum = 0;
-    for (var i = 0; i < $iterations; i = i + 1) {
-      sum = sum + 1;
+    for (var i = 0; i < 100000; i = i + 1) {
+      sum = sum + i;
     }
-    print(sum);
-  ''';
+  ''', 3);
   
-  // Compilation
-  final compileStart = DateTime.now();
-  final unit = FluxCompiler.compile(source);
-  final compileTime = DateTime.now().difference(compileStart);
-  print('  Compile time: ${compileTime.inMilliseconds}ms');
+  // Closure benchmark
+  results['Closures'] = benchmark('Closure creation and calls', '''
+    fn makeCounter() {
+      var count = 0;
+      return fn() {
+        count = count + 1;
+        return count;
+      };
+    }
+    
+    var counter = makeCounter();
+    for (var i = 0; i < 10000; i = i + 1) {
+      counter();
+    }
+  ''', 3);
   
-  // Execution
-  final vm = VM();
-  var resultValue = 0;
-  vm.onPrint = (msg) => resultValue = int.tryParse(msg) ?? 0;
+  // Class instantiation benchmark
+  results['Classes'] = benchmark('Class instantiation and methods', '''
+    class Point {
+      field x = 0;
+      field y = 0;
+      
+      init(px, py) {
+        this.x = px;
+        this.y = py;
+      }
+      
+      add(other) {
+        return Point(this.x + other.x, this.y + other.y);
+      }
+    }
+    
+    var p = Point(0, 0);
+    for (var i = 0; i < 5000; i = i + 1) {
+      p = Point(i, i);
+    }
+  ''', 3);
   
-  final execStart = DateTime.now();
-  final result = vm.runChunk(unit.chunk);
-  final execTime = DateTime.now().difference(execStart);
+  // List operations benchmark
+  results['List Ops'] = benchmark('List push/pop operations', '''
+    var list = [];
+    for (var i = 0; i < 10000; i = i + 1) {
+      push(list, i);
+    }
+    for (var i = 0; i < 10000; i = i + 1) {
+      pop(list);
+    }
+  ''', 3);
   
-  if (result == InterpretResult.ok) {
-    print('  Execute time: ${execTime.inMilliseconds}ms');
-    print('  Result: sum = $resultValue');
-    print('  Rate: ${(iterations / (execTime.inMicroseconds / 1000000)).round()} iterations/sec');
-  } else {
-    print('  Error during execution');
+  // String operations benchmark
+  results['String Ops'] = benchmark('String operations', '''
+    var s = "";
+    for (var i = 0; i < 1000; i = i + 1) {
+      s = s + "a";
+    }
+    var u = upper(s);
+    var parts = split(s, "a");
+  ''', 3);
+  
+  // Print summary
+  print('');
+  print('=' * 60);
+  print('Summary');
+  print('=' * 60);
+  print('');
+  print('| Benchmark | Time (avg) |');
+  print('|-----------|------------|');
+  for (final entry in results.entries) {
+    final ms = entry.value.inMicroseconds / 1000.0;
+    print('| ${entry.key.padRight(20)} | ${ms.toStringAsFixed(2).padLeft(8)} ms |');
   }
+  print('');
+  
+  // Save results to JSON
+  final json = results.map((k, v) => MapEntry(k, v.inMicroseconds));
+  final file = File('benchmark/results.json');
+  file.writeAsStringSync('${json.toString()}\n');
+  print('Results saved to benchmark/results.json');
+}
+
+Duration benchmark(String name, String source, int runs) {
+  print('Running: $name');
+  
+  // Compile once
+  final tokens = Lexer(source).tokenize();
+  final ast = Parser(tokens).parse();
+  final compiler = Compiler(unit: ast);
+  final function = compiler.endCompiler();
+  
+  // Warmup
+  for (var i = 0; i < 2; i++) {
+    final vm = VM();
+    vm.runChunk(function.chunk);
+  }
+  
+  // Benchmark runs
+  final times = <Duration>[];
+  for (var i = 0; i < runs; i++) {
+    final vm = VM();
+    final sw = Stopwatch()..start();
+    vm.runChunk(function.chunk);
+    sw.stop();
+    times.add(sw.elapsed);
+  }
+  
+  // Calculate average
+  final totalMicros = times.fold<int>(0, (sum, d) => sum + d.inMicroseconds);
+  final avgMicros = totalMicros ~/ runs;
+  final avgDuration = Duration(microseconds: avgMicros);
+  
+  print('  -> ${avgDuration.inMicroseconds / 1000.0} ms (avg of $runs runs)');
+  return avgDuration;
 }

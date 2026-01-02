@@ -202,6 +202,8 @@ class Parser {
 
     _consume(TokenType.leftBrace, 'Expect "{" before class body.');
     final members = <Declaration>[];
+    final fields = <FieldDecl>[];
+    
     while (!_check(TokenType.rightBrace) && !_isAtEnd) {
       // Parse methods, fields
       if (_match(TokenType.fn)) {
@@ -209,18 +211,25 @@ class Parser {
       } else if (_match(TokenType.async_)) {
          _consume(TokenType.fn, 'Expect "fn" after "async".');
          members.add(_functionDeclaration(true));
+      } else if (_match(TokenType.var_)) {
+         // Field declaration: var x [= val];
+         final nameToken = _consume(TokenType.identifier, 'Expect field name.');
+         Expression? initializer;
+         if (_match(TokenType.equal)) {
+           initializer = _expression();
+         }
+         _consume(TokenType.semicolon, 'Expect ";" after field declaration.');
+         fields.add(FieldDecl(nameToken.lexeme, initializer, line: nameToken.line, column: nameToken.column));
       } else {
-        // Fields? 
-        // var x = 1;
-        // For now, only methods.
-        _advance();
+         // For now, only methods and fields.
+         _advance();
       }
     }
     _consume(TokenType.rightBrace, 'Expect "}" after class body.');
 
     return ClassDecl(name, members, 
         nameLine: nameToken.line, nameColumn: nameToken.column,
-        superclass: superclass, line: classToken.line, column: classToken.column);
+        superclass: superclass, fields: fields, line: classToken.line, column: classToken.column);
   }
 
   ImportDecl _importDeclaration() {

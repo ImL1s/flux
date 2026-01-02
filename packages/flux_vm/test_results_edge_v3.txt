@@ -1,0 +1,204 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart: Async Exception Handling await on Future that completes with error
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: failingFetch, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +1: D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart: Async Exception Handling multiple sequential awaits
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling variable: fetch, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: fetch, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+00:00 +2: D:/OtherProject/mine/flux/packages/flux_vm/test/async_exception_test.dart: Async Exception Handling async inside try-catch
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: TryStmt
+DEBUG COMPILER: Compiling statement type: TryStmt at line 1
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 4
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling variable: riskyFetch, isState: false
+DEBUG COMPILER: Added local "data" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: data, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+DEBUG COMPILER: Added local "e" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 7
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: e, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 1]
+test/debugger_control_test.dart:126:46: Error: The argument type 'String' can't be assigned to the parameter type 'int'.
+      expect(() => debugger.removeBreakpoint('nonexistent.flux:999'), returnsNormally);
+                                             ^
+00:00 +3 -1: loading D:/OtherProject/mine/flux/packages/flux_vm/test/debugger_control_test.dart [E]
+  Failed to load "D:/OtherProject/mine/flux/packages/flux_vm/test/debugger_control_test.dart": Compilation failed for testPath=D:/OtherProject/mine/flux/packages/flux_vm/test/debugger_control_test.dart
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions basic anonymous function
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 1
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: double, isState: false
+00:00 +4 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions anonymous function with multiple parameters
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Added local "b" at slot 2 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 1
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: add, isState: false
+00:00 +5 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions anonymous function captures variable (closure)
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling variable: multiplier, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: triple, isState: false
+00:00 +6 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions anonymous function assigned and called later
+DEBUG COMPILER: Unit has 4 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 3
+DEBUG COMPILER: Added local "captured" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+DEBUG COMPILER: Compiling variable: captured, isState: false
+DEBUG COMPILER: Resolving upvalue "captured" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: true) [Depth: 2]
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: setup, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: f, isState: false
+00:00 +7 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions nested anonymous functions
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Added local "x" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Added local "y" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Resolving upvalue "x" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 4
+DEBUG COMPILER: Compiling variable: outer, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling variable: inner, isState: false
+00:00 +8 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/lambda_test.dart: Lambda Expressions anonymous function returning function (currying)
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Added local "a" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 2
+DEBUG COMPILER: Added local "b" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Added local "c" at slot 1 [Depth: 1]
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 3
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Resolving upvalue "a" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Resolving upvalue "b" -> enclosing local 1. Prev captured: false
+DEBUG COMPILER: Marked enclosing local 1 as captured.
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: curry, isState: false
+00:00 +9 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases division by zero (float)
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +10 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases operator precedence: add vs multiply
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +11 -1: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases modulo operator
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +11 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases modulo operator [E]
+  Expected: '1'
+    Actual: '3'
+     Which: is different.
+            Expected: 1
+              Actual: 3
+                      ^
+             Differ at offset 0
+  
+  package:matcher                    expect
+  test\operator_edge_test.dart 48:7  main.<fn>.<fn>
+  
+00:00 +11 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases comparison operators
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 4
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 5
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+00:00 +12 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases string comparison
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+00:00 +13 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases boolean operators
+DEBUG COMPILER: Unit has 2 declarations
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+00:00 +14 -2: D:/OtherProject/mine/flux/packages/flux_vm/test/operator_edge_test.dart: Operator Edge Cases unary negate
+DEBUG COMPILER: Unit has 3 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 2
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: x, isState: false
+00:00 +15 -2: Some tests failed.

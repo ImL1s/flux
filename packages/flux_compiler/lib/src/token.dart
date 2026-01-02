@@ -140,6 +140,7 @@ const keywords = <String, TokenType>{
   'true': TokenType.true_,
   'false': TokenType.false_,
   'null': TokenType.null_,
+  'nil': TokenType.null_,
   'try': TokenType.try_,
   'catch': TokenType.catch_,
   'finally': TokenType.finally_,

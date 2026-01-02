@@ -1,0 +1,4 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart
+00:00 +0 -1: loading D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart [E]
+  Failed to load "D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart": Compilation failed for testPath=D:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart
+00:00 +0 -1: Some tests failed.
