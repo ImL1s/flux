@@ -25,6 +25,13 @@ widget HomeBanner {
             ]
           ),
           SizedBox(height: 24.0),
+
+          Text(text: "🔗 原生代碼調用 (Interop)", style: {"fontSize": 18.0, "color": "white"}),
+          SizedBox(height: 8.0),
+          Button(text: "呼叫 Flutter 原生 Dialog", onPressed: fn() {
+            showNativeDialog("目前的計數是: " + count);
+          }),
+          SizedBox(height: 24.0),
           
           Text(text: "🎨 動態主題切換", style: {"fontSize": 18.0, "color": "white"}),
           SizedBox(height: 8.0),

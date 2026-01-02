@@ -140,3 +140,37 @@ try {
 - `pop(list)`: Remove last item
 - `now()`: Current timestamp
 - `toDouble(x)`, `toInt(x)`: Type conversion
+
+## Native Interop
+
+Flux allows seamless communication between the script and the host (Dart/Flutter).
+
+### Registering Native Functions (Dart Side)
+
+You can register native Dart functions to be called from Flux scripts:
+
+```dart
+// In your Flutter code
+runtime.vm.registerFunction('showNativeDialog', (args) {
+  final message = args[0] as String;
+  // Implement native logic...
+  return null;
+});
+```
+
+### Calling Native Functions (Flux Side)
+
+Once registered, you can call them like any other function:
+
+```dart
+// In your Flux script
+build {
+  Button(
+    text: "Show Native Dialog",
+    onPressed: fn() {
+      showNativeDialog("Hello from Flux!");
+    }
+  )
+}
+```
+

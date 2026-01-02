@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
+import 'package:flux_vm/flux_vm.dart'; // Import VM for interop
 import 'package:path/path.dart' as p;
 import 'package:http/http.dart' as http;
 
@@ -44,11 +45,12 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
   
   @override
-  State<HomePage> createState() => _HomeScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomePage> {
-  String _script = DEFAULT_SCRIPT;
+class _HomePageState extends State<HomePage> {
+  // Use FluxRuntime instead of raw script string to allow interop
+  FluxRuntime? _runtime; 
   String _status = 'Initializing...';
   bool _loading = false;
   int _reloadCount = 0;
@@ -75,17 +77,47 @@ class _HomeScreenState extends State<HomePage> {
     }
   }
 
+  void _initRuntime(String script) {
+    // 1. Create Runtime
+    final runtime = FluxRuntime(script, moduleName: 'HomeBanner');
+    
+    // 2. Register Native Function (Language Interop)
+    runtime.vm.registerFunction('showNativeDialog', (args) {
+      final message = args.isNotEmpty ? args[0].toString() : "Hello from Native!";
+      
+      // Use helper to show dialog from context
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Native Interop 🔗'),
+          content: Text('這是一個原生 Dart Dialog\n消息來自 Flux: "$message"'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('關閉'),
+            )
+          ],
+        ),
+      );
+      return null;
+    });
+
+    // 3. Update State
+    setState(() {
+      _runtime = runtime;
+      // _status updated by caller
+      _loading = false;
+      _reloadCount++;
+    });
+  }
+
   Future<void> _loadFromServer() async {
     try {
       final response = await http.get(Uri.parse(_serverUrl)).timeout(const Duration(seconds: 3));
       if (response.statusCode == 200) {
-        setState(() {
-          _script = response.body;
-          _resolvedPath = _serverUrl;
-          _status = '✅ 已從伺服器載入\n🕐 ${DateTime.now().toString().substring(11, 19)}';
-          _loading = false;
-          _reloadCount++;
-        });
+        _resolvedPath = _serverUrl;
+        _status = '✅ 已從伺服器載入\n🕐 ${DateTime.now().toString().substring(11, 19)}';
+        _initRuntime(response.body);
       } else {
         throw Exception('Server error: ${response.statusCode}');
       }
@@ -100,12 +132,12 @@ class _HomeScreenState extends State<HomePage> {
   Future<void> _loadFromLocal() async {
     File? scriptFile;
     
-    // Try common relative paths
+    // Try custom paths first (the ones user has open)
     final relativePaths = [
+      'C:/Users/aa223/flux_demo/scripts/home_banner.flux',
+      'D:/OtherProject/mine/flux/examples/hot_update_demo/scripts/home_banner.flux',
       '../scripts/home_banner.flux',
       'scripts/home_banner.flux',
-      './scripts/home_banner.flux',
-      '../../scripts/home_banner.flux',
     ];
     
     for (final path in relativePaths) {
@@ -131,25 +163,17 @@ class _HomeScreenState extends State<HomePage> {
     }
     
     if (scriptFile == null) {
-      setState(() {
-        _script = DEFAULT_SCRIPT;
-        _status = '⚠️ 使用預設腳本 (找不到本地檔案)';
-        _loading = false;
-        _reloadCount++;
-        _resolvedPath = null;
-      });
+      _resolvedPath = null;
+      _status = '⚠️ 使用預設腳本 (找不到本地檔案)';
+      _initRuntime(DEFAULT_SCRIPT);
       return;
     }
     
     try {
       final script = await scriptFile.readAsString();
-      setState(() {
-        _script = script;
-        _resolvedPath = scriptFile!.absolute.path;
-        _status = '✅ 已從本地載入: ${p.basename(scriptFile!.path)}\n🕐 ${DateTime.now().toString().substring(11, 19)}';
-        _loading = false;
-        _reloadCount++;
-      });
+      _resolvedPath = scriptFile!.absolute.path;
+      _status = '✅ 已從本地載入: ${p.basename(scriptFile!.path)}\n🕐 ${DateTime.now().toString().substring(11, 19)}';
+      _initRuntime(script);
     } catch (e) {
       setState(() {
         _status = '❌ 本地載入錯誤: $e';
@@ -232,7 +256,7 @@ class _HomeScreenState extends State<HomePage> {
                       ),
                       if (_resolvedPath != null) ...[
                         const Divider(),
-                        Text('來源: \$_resolvedPath', 
+                        Text('來源: $_resolvedPath', 
                              style: const TextStyle(fontSize: 10, color: Colors.grey, fontFamily: 'monospace')),
                       ]
                     ],
@@ -242,7 +266,7 @@ class _HomeScreenState extends State<HomePage> {
               const SizedBox(height: 16),
               
               // Flux Widget Area
-              if (!_loading)
+              if (!_loading && _runtime != null)
                 Card(
                   elevation: 4,
                   clipBehavior: Clip.antiAlias,
@@ -251,7 +275,7 @@ class _HomeScreenState extends State<HomePage> {
                     child: FluxWidget(
                       key: ValueKey(_reloadCount),
                       widgetName: 'HomeBanner',
-                      source: _script,
+                      runtime: _runtime, // Using runtime with registered functions
                     ),
                   ),
                 ),
