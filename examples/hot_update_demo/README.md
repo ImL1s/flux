@@ -33,19 +33,52 @@ hot_update_demo/
 
 ## 🚀 快速開始
 
-### 步驟 1：運行 Flutter App (推薦 Desktop)
+### 步驟 1：運行 Flutter App
 
-由於這個 Demo 模擬「本機文件」作為「後端伺服器」，請盡量使用 **Windows / macOS / Linux** 桌面端運行，以確保可以直接讀取代碼文件。
+這個 Demo 模擬「本機文件」作為「後端伺服器」。
+
+#### 🖥️ Windows / macOS / Linux (推薦)
+這是最簡單的方式，因為 App 可以直接讀取您的硬碟文件。
 
 ```bash
 cd flutter_app
-flutter pub get
-
-# 推薦：運行 Windows 桌面版
-flutter run -d windows
+flutter run -d windows  # 或 linux, macos
 ```
 
-> **注意**：如果您一定要在與電腦連接的 Android 真機或模擬器上運行，您需要使用 `adb push` 將 `scripts` 文件夾推送到手機的 `/sdcard/` 或應用私有目錄，並修改代碼路徑，否則手機無法讀取電腦硬碟的文件。為求簡便，**強烈建議直接跑 Windows 版**。
+#### 📱 Android (真機/模擬器)
+Android App 運行在沙盒中，無法直接讀取電腦硬碟。您需要用 `adb` 把腳本「推」到手機裡，模擬「下載」過程。
+
+1. **推送腳本到手機**：
+   ```bash
+   # 在 hot_update_demo/ 目錄下運行
+   adb push scripts/home_banner.flux /data/local/tmp/home_banner.flux
+   ```
+
+2. **修改 Flutter 讀取路徑**：
+   打開 `lib/main.dart`，將 `_loadBannerScript` 中的路徑改為：
+   ```dart
+   final file = File('/data/local/tmp/home_banner.flux');
+   ```
+
+3. **運行 App**：
+   ```bash
+   flutter run -d android
+   ```
+
+4. **如何更新？**
+   修改電腦上的 `scripts/home_banner.flux`，然後再次運行 `adb push` 命令，最後點擊 App 上的刷新按鈕。
+
+#### 🍎 iOS (模擬器)
+iOS 模擬器可以直接讀取電腦文件系統，但路徑會不同。
+
+1. 使用 `flutter run -d iphone` 運行。
+2. 如果 App 提示找不到文件，請手動將絕對路徑寫死在 `main.dart` 中用作測試，例如：
+   ```dart
+   final file = File('/Users/yourname/projects/flux/examples/hot_update_demo/scripts/home_banner.flux');
+   ```
+
+> **💡 生產環境提示**：
+> 在真實發布的 App 中，您不需要這麼麻煩！App 會使用 `http.get()` 從雲端下載腳本，所以**所有平台 (iOS/Android/Web/Desktop) 的代碼都是一樣的**，完全不需要處理文件路徑問題。本範例僅因為是「離線模擬」才需要處理文件權限。
 
 ### 步驟 2：觀察 App
 
