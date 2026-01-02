@@ -40,15 +40,14 @@ void main() {
       expect(logs[1], '20'); // 5 * 4
     });
 
-    // Skip: Modulo operator has a known bug - returns incorrect results
-    // TODO: Fix OpCode.modulo in VM
-    // test('modulo operator', () {
-    //   runScript('''
-    //     print(10 % 5);
-    //   ''');
-    //   expect(logs[0], '0');
-    // });
-
+    test('modulo operator', () {
+      runScript('''
+        print(10 % 3);
+        print(10 % 5);
+      ''');
+      expect(logs[0], '1');
+      expect(logs[1], '0');
+    });
 
     test('comparison operators', () {
       runScript('''

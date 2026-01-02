@@ -28,7 +28,7 @@ class CompilerUpvalue {
 class CompiledFunction {
   final Chunk chunk;
   final String name;
-  final int arity;
+  int arity;
   final bool isAsync;
   final String? moduleName;
   final List<String> paramNames;
@@ -721,8 +721,9 @@ class Compiler {
       case TokenType.minus: _emit(OpCode.sub, expr.line, expr.column); break;
       case TokenType.star: _emit(OpCode.mul, expr.line, expr.column); break;
       case TokenType.slash: _emit(OpCode.div, expr.line, expr.column); break;
+      case TokenType.percent: _emit(OpCode.mod, expr.line, expr.column); break;
       case TokenType.equalEqual: _emit(OpCode.equal, expr.line, expr.column); break;
-      case TokenType.bangEqual: 
+      case TokenType.notEqual: 
         _emit(OpCode.equal, expr.line, expr.column); 
         _emit(OpCode.not, expr.line, expr.column);
         break;
@@ -991,42 +992,104 @@ class Compiler {
     // Create a class constant with methods
     final methods = <String, CompiledFunction>{};
     
+    // Separate constructor (init) and other methods
+    FunctionDecl? initMethod;
+    final otherMethods = <FunctionDecl>[];
+    
     for (final member in stmt.members) {
       if (member is FunctionDecl) {
-        // Compile method
+        if (member.name == 'init') {
+          initMethod = member;
+        } else {
+          otherMethods.add(member);
+        }
+      }
+    }
+
+    // Compile 'init' method (constructor) with field initializers
+    {
+      final methodCompiler = Compiler._inner(this, '${stmt.name}.init');
+      methodCompiler._beginScope(); // Start a scope for 'this' and parameters
+      
+      // For methods, slot 0 is reserved for 'this' (no empty slot like functions)
+      // This matches how VM sets up the stack for method calls
+      methodCompiler._addLocal('this'); // 'this' is slot 0
+      
+      // 1. Compile field initializers property assignments
+      for (final field in stmt.fields) {
+        if (field.initializer != null) {
+          // this.field = initializer
+          methodCompiler._emit(OpCode.getLocal, field.line, field.column);
+          methodCompiler.chunk.write(0, field.line); // 'this' is slot 0
+          
+          methodCompiler._compileExpression(field.initializer!);
+          
+          final nameIdx = methodCompiler.chunk.addConstant(field.name);
+          methodCompiler._emit(OpCode.setProperty, field.line, field.column);
+          methodCompiler.chunk.write(nameIdx, field.line);
+          methodCompiler._emit(OpCode.pop, field.line, field.column); // Clean up stack (setProperty pushes value)
+        }
+      }
+
+      // 2. Compile explicit init body if it exists
+      if (initMethod != null) {
+          // Add parameters
+          methodCompiler._function.arity = initMethod.parameters.length;
+          for (final param in initMethod.parameters) {
+             methodCompiler._addLocal(param.name);
+          }
+          // Compile body
+          methodCompiler._compileBlock(initMethod.body);
+      } else {
+        // Default init just returns this
+      }
+
+      // 3. Ensure we return 'this' (implicit return)
+      methodCompiler._emit(OpCode.getLocal, stmt.line, stmt.column);
+      methodCompiler.chunk.write(0, stmt.line); // 'this' is slot 0
+      methodCompiler._emit(OpCode.return_, stmt.line, stmt.column);
+
+      methodCompiler._function = CompiledFunction(
+        'init',
+        methodCompiler.chunk,
+        arity: initMethod?.parameters.length ?? 0, // Arity is based on explicit init method, or 0 for default
+      );
+      
+      // Add local names for debugging
+      methodCompiler._function.localNames = methodCompiler._locals.map((l) => l.name).toList();
+      
+      methods['init'] = methodCompiler._function;
+      methodCompiler.endCompiler(stmt.line); // End the compiler for init
+    }
+
+    // Compile other methods
+    for (final member in otherMethods) {
         final methodCompiler = Compiler._inner(this, '${stmt.name}.${member.name}');
+        methodCompiler._beginScope(); // Start a scope for 'this' and parameters
+        
+        // For methods, slot 0 is 'this' (no empty slot like functions)
+        methodCompiler._addLocal('this'); // 'this' is slot 0
+        methodCompiler._function.arity = member.parameters.length;
+        for (final param in member.parameters) {
+           methodCompiler._addLocal(param.name);
+        }
+        
+        methodCompiler._compileBlock(member.body);
+        
+        // Add default return for methods (nil) if not present
+        if (methodCompiler.chunk.code.isEmpty || methodCompiler.chunk.code.last != OpCode.return_) {
+           methodCompiler._emit(OpCode.nil, member.line, member.column);
+           methodCompiler._emit(OpCode.return_, member.line, member.column);
+        }
+
         methodCompiler._function = CompiledFunction(
           member.name,
           methodCompiler.chunk,
           arity: member.parameters.length,
         );
-        
-        // Begin scope for 'this' and parameters
-        methodCompiler._beginScope();
-        
-        // Add 'this' as first local (slot 0)
-        methodCompiler._addLocal('this');
-        
-        // Add parameters
-        for (final param in member.parameters) {
-          methodCompiler._addLocal(param.name);
-        }
-        
-        // Compile method body
-        for (final s in member.body.statements) {
-          methodCompiler.compile(s);
-        }
-        
-        // If it's 'init', we must return 'this' explicitly
-        if (member.name == 'init') {
-          methodCompiler._emit(OpCode.getLocal, member.line, 0);
-          methodCompiler.chunk.write(0, member.line); // slot 0 (this)
-          methodCompiler._emit(OpCode.return_, member.line, 0);
-        }
-        
-        methods[member.name] = methodCompiler.endCompiler(member.line);
-      }
-      // TODO: Add field support when FieldDecl is available
+        methodCompiler._function.localNames = methodCompiler._locals.map((l) => l.name).toList();
+        methods[member.name] = methodCompiler._function;
+        methodCompiler.endCompiler(member.line); // End the compiler for this method
     }
     
     // Create CompiledClass object
