@@ -10,12 +10,15 @@
 
 ## 🚀 快速開始
 
+> 📋 **前置條件**：請確認您已安裝 [Flutter SDK](https://flutter.dev/docs/get-started/install) 和 [Dart SDK](https://dart.dev/get-dart)。
+
 ### 1. 啟動熱更新伺服器 (選用)
 
 如果您想測試真正的「遠端」更新，請先啟動伺服器：
 
 ```bash
 cd examples/hot_update_demo/server
+dart pub get
 dart server.dart
 ```
 伺服器將運行在 `http://localhost:8081`。
@@ -25,8 +28,9 @@ dart server.dart
 ```bash
 cd examples/hot_update_demo/flutter_app
 flutter pub get
-flutter run -d windows  # 或其他桌面平台
+flutter run -d windows  # 或 -d chrome, -d macos 等
 ```
+
 
 ### 3. 測試更新
 
