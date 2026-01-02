@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
 import 'package:path/path.dart' as p;
+import 'package:http/http.dart' as http;
 
 const String DEFAULT_SCRIPT = r'''
 widget HomeBanner {
@@ -14,6 +15,8 @@ widget HomeBanner {
   }
 }
 ''';
+
+enum LoadingMode { local, server }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +53,8 @@ class _HomeScreenState extends State<HomePage> {
   bool _loading = false;
   int _reloadCount = 0;
   String? _resolvedPath;
+  LoadingMode _mode = LoadingMode.local;
+  final String _serverUrl = 'http://localhost:8081/home_banner.flux';
   
   @override
   void initState() {
@@ -60,12 +65,42 @@ class _HomeScreenState extends State<HomePage> {
   Future<void> _loadBannerScript() async {
     setState(() {
       _loading = true;
-      _status = 'Loading script...';
+      _status = '正在載入腳本...';
     });
     
+    if (_mode == LoadingMode.server) {
+      await _loadFromServer();
+    } else {
+      await _loadFromLocal();
+    }
+  }
+
+  Future<void> _loadFromServer() async {
+    try {
+      final response = await http.get(Uri.parse(_serverUrl)).timeout(const Duration(seconds: 3));
+      if (response.statusCode == 200) {
+        setState(() {
+          _script = response.body;
+          _resolvedPath = _serverUrl;
+          _status = '✅ 已從伺服器載入\n🕐 ${DateTime.now().toString().substring(11, 19)}';
+          _loading = false;
+          _reloadCount++;
+        });
+      } else {
+        throw Exception('Server error: ${response.statusCode}');
+      }
+    } catch (e) {
+      setState(() {
+        _status = '❌ 伺服器載入錯誤: $e\n(請確認伺服器已啟動)';
+        _loading = false;
+      });
+    }
+  }
+
+  Future<void> _loadFromLocal() async {
     File? scriptFile;
     
-    // 1. Try common relative paths
+    // Try common relative paths
     final relativePaths = [
       '../scripts/home_banner.flux',
       'scripts/home_banner.flux',
@@ -81,7 +116,6 @@ class _HomeScreenState extends State<HomePage> {
       }
     }
     
-    // 2. Try to find by walking up from current directory (robust for compiled apps)
     if (scriptFile == null) {
       var current = Directory.current;
       for (int i = 0; i < 5; i++) {
@@ -99,7 +133,7 @@ class _HomeScreenState extends State<HomePage> {
     if (scriptFile == null) {
       setState(() {
         _script = DEFAULT_SCRIPT;
-        _status = '⚠️ 使用預設腳本 (找不到 scripts/home_banner.flux)';
+        _status = '⚠️ 使用預設腳本 (找不到本地檔案)';
         _loading = false;
         _reloadCount++;
         _resolvedPath = null;
@@ -112,13 +146,13 @@ class _HomeScreenState extends State<HomePage> {
       setState(() {
         _script = script;
         _resolvedPath = scriptFile!.absolute.path;
-        _status = '✅ 已載入: ${p.basename(scriptFile!.path)}\n🕐 ${DateTime.now().toString().substring(11, 19)}';
+        _status = '✅ 已從本地載入: ${p.basename(scriptFile!.path)}\n🕐 ${DateTime.now().toString().substring(11, 19)}';
         _loading = false;
         _reloadCount++;
       });
     } catch (e) {
       setState(() {
-        _status = '❌ 讀取錯誤: $e';
+        _status = '❌ 本地載入錯誤: $e';
         _loading = false;
       });
     }
@@ -151,6 +185,33 @@ class _HomeScreenState extends State<HomePage> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
+              // Mode Toggle
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('更新模式:', style: TextStyle(fontWeight: FontWeight.bold)),
+                      SegmentedButton<LoadingMode>(
+                        segments: const [
+                          ButtonSegment(value: LoadingMode.local, label: Text('本地檔案'), icon: Icon(Icons.description)),
+                          ButtonSegment(value: LoadingMode.server, label: Text('遠端伺服器'), icon: Icon(Icons.cloud)),
+                        ],
+                        selected: {_mode},
+                        onSelectionChanged: (Set<LoadingMode> newSelection) {
+                          setState(() {
+                            _mode = newSelection.first;
+                            _loadBannerScript();
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              
               // Status Card
               Card(
                 color: Colors.white,
@@ -171,7 +232,7 @@ class _HomeScreenState extends State<HomePage> {
                       ),
                       if (_resolvedPath != null) ...[
                         const Divider(),
-                        Text('路徑: \$_resolvedPath', 
+                        Text('來源: \$_resolvedPath', 
                              style: const TextStyle(fontSize: 10, color: Colors.grey, fontFamily: 'monospace')),
                       ]
                     ],
@@ -215,20 +276,20 @@ class _HomeScreenState extends State<HomePage> {
                         children: [
                           Icon(Icons.tips_and_updates, color: Colors.amber[700]),
                           const SizedBox(width: 8),
-                          Text('如何測試熱更新', 
+                          Text('測試說明', 
                                style: TextStyle(fontWeight: FontWeight.bold, 
                                                color: Colors.amber[900], 
                                                fontSize: 16)),
                         ],
                       ),
                       const SizedBox(height: 12),
-                      const Text('1️⃣ 開啟 scripts/home_banner.flux'),
+                      const Text('🌐 伺服器模式：需啟動 server/server.dart'),
                       const SizedBox(height: 4),
-                      const Text('2️⃣ 修改顏色、文字、功能或狀態初值'),
+                      const Text('1️⃣ 開啟 scripts/home_banner.flux 並修改'),
                       const SizedBox(height: 4),
-                      const Text('3️⃣ 儲存檔案'),
+                      const Text('2️⃣ 儲存後在 App 點擊刷新按鈕'),
                       const SizedBox(height: 4),
-                      const Text('4️⃣ 點擊右上角 🔄 即時套用更新'),
+                      const Text('3️⃣ 觀察 UI 如何從遠端/本地載入並套用'),
                     ],
                   ),
                 ),

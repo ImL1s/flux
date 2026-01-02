@@ -5,11 +5,22 @@
 ## 📁 目錄結構
 
 - `scripts/` - 存放 Flux 腳本 (`.flux`)。
+- `server/` - 一個簡單的 Dart HTTP 伺服器，模擬遠端更新伺服器。
 - `flutter_app/` - 載入並載入腳本的 Flutter 應用程序。
 
 ## 🚀 快速開始
 
-### 1. 安裝與執行
+### 1. 啟動熱更新伺服器 (選用)
+
+如果您想測試真正的「遠端」更新，請先啟動伺服器：
+
+```bash
+cd examples/hot_update_demo/server
+dart server.dart
+```
+伺服器將運行在 `http://localhost:8081`。
+
+### 2. 啟動 Flutter App
 
 ```bash
 cd examples/hot_update_demo/flutter_app
@@ -17,24 +28,19 @@ flutter pub get
 flutter run -d windows  # 或其他桌面平台
 ```
 
-### 2. 測試熱更新
+### 3. 測試更新
 
-1. 保持 App 運行。
-2. 使用編輯器開啟 `examples/hot_update_demo/scripts/home_banner.flux`。
-3. 修改任何內容（例如改變 `state theme` 的初值或修改 `Text` 文字）。
-4. 儲存檔案。
-5. 在 App 中點擊右上角的 **刷新按鈕 (🔄)**。
-
-### 3. 觀察結果
-
-UI 會立即根據新腳本重新渲染，且狀態（State）會重新初始化。
+1. 在 App 頂部切換 **「本地檔案」** 或 **「遠端伺服器」** 模式。
+2. 開啟並修改 `examples/hot_update_demo/scripts/home_banner.flux`。
+3. 儲存檔案。
+4. 點擊 App 右上角的 **刷新按鈕 (🔄)**。
 
 ## 💡 技術要點
 
-- **動態載入**：App 會從檔案系統動態讀取腳本內容。
-- **即時編譯**：Flux VM 在運行時將原始碼編譯為 Bytecode 並執行。
-- **跨平台**：同一份 `.flux` 腳本可以在所有支援的 Flutter 平台上運行。
-- **路徑搜尋**：`main.dart` 內建了路徑搜尋邏輯，會自動在當前目錄及其父目錄中尋找 `scripts` 文件夾。
+- **雙模式支援**：支援從本地檔案系統或遠端 HTTP URL 載入腳本。
+- **Bytecode 執行**：腳本在載入後會立即編譯為 Bytecode 並由專屬 VM 執行。
+- **路徑自動搜尋**：App 內建智慧路徑搜尋，自動定位 `scripts` 文件夾。
+- **完整腳本語言**：除了 UI，還能處理 State、函數邏輯等。
 
 ---
 
