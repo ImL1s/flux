@@ -89,14 +89,22 @@ widget Counter {
   state count = 0
   
   build {
-    Column {
-      Text("Counter Value: " + count)
-      Row {
-        Button("-") { count = count - 1 }
-        SizedBox(width: 16)
-        Button("+") { count = count + 1 }
-      }
-    }
+    Column(
+      children: [
+        Text(text: "計數器: " + count, style: {"fontSize": 24.0, "fontWeight": "bold"}),
+        SizedBox(height: 16.0),
+        Row(
+          mainAxisAlignment: "center",
+          children: [
+            Button(text: "➖", onPressed: fn() { count = count - 1; }),
+            SizedBox(width: 20.0),
+            Text(text: count, style: {"fontSize": 32.0, "fontWeight": "bold"}),
+            SizedBox(width: 20.0),
+            Button(text: "➕", onPressed: fn() { count = count + 1; })
+          ]
+        )
+      ]
+    )
   }
 }
 ''';
@@ -139,32 +147,34 @@ class FluxHttpDemo extends StatelessWidget {
 
   static const httpSource = '''
 widget HttpFetcher {
-  state data = "Loading..."
-  state loading = true
+  state data = "點擊按鈕取得資料"
+  state loading = false
   
-  fn fetchData() {
-    loading = true
-    try {
-      // Simulate fetch since we can't make real calls in this restricted demo env easily
-      // In real app: var res = await http.get("...")
-      await timer.delay(1000)
-      data = "Fetched content from API"
-    } catch (e) {
-      data = "Error: " + e
-    }
-    loading = false
+  async fn fetchData() {
+    loading = true;
+    await delay(1000);
+    data = "✅ 成功取得 API 資料！";
+    loading = false;
   }
 
   build {
-    Column {
-      Button("Fetch Data") { fetchData() }
-      
-      if (loading) {
-        Text("Please wait...")
-      } else {
-        Text("Result: " + data)
-      }
-    }
+    Container(
+      padding: 20.0,
+      color: "indigo",
+      child: Column(
+        children: [
+          Text(text: "🌐 HTTP 模擬展示", style: {"fontSize": 20.0, "color": "white", "fontWeight": "bold"}),
+          SizedBox(height: 16.0),
+          Button(text: "取得資料", onPressed: fn() { fetchData(); }),
+          SizedBox(height: 16.0),
+          Container(
+            padding: 12.0,
+            color: "white",
+            child: Text(text: data, style: {"fontSize": 16.0})
+          )
+        ]
+      )
+    )
   }
 }
 ''';
@@ -193,31 +203,47 @@ class FluxStorageDemo extends StatelessWidget {
   
   static const storageSource = '''
 widget StorageEditor {
-  state storedValue = "None"
+  state storedValue = "點擊儲存來建立資料"
+  state saveCount = 0
   
   fn load() {
-    var val = storage.get("demo_key")
-    if (val == nil) {
-      storedValue = "No value found"
+    if (saveCount == 0) {
+      storedValue = "尚未儲存任何資料";
     } else {
-      storedValue = val
+      storedValue = "已儲存 " + saveCount + " 次";
     }
   }
   
   fn save() {
-    storage.set("demo_key", "Saved at " + DateTime.now())
-    load()
+    saveCount = saveCount + 1;
+    storedValue = "✅ 第 " + saveCount + " 次儲存成功！";
   }
   
   build {
-    Column {
-      Text("Stored Value: " + storedValue)
-      Row {
-        Button("Load") { load() }
-        SizedBox(width: 8)
-        Button("Save New Timestamp") { save() }
-      }
-    }
+    Container(
+      padding: 20.0,
+      color: "teal",
+      child: Column(
+        children: [
+          Text(text: "💾 儲存模擬展示", style: {"fontSize": 20.0, "color": "white", "fontWeight": "bold"}),
+          SizedBox(height: 16.0),
+          Container(
+            padding: 12.0,
+            color: "white",
+            child: Text(text: storedValue, style: {"fontSize": 16.0})
+          ),
+          SizedBox(height: 16.0),
+          Row(
+            mainAxisAlignment: "center",
+            children: [
+              Button(text: "讀取", onPressed: fn() { load(); }),
+              SizedBox(width: 12.0),
+              Button(text: "儲存", onPressed: fn() { save(); })
+            ]
+          )
+        ]
+      )
+    )
   }
 }
 ''';
@@ -254,15 +280,22 @@ class FluxAboutPage extends StatelessWidget {
           const SizedBox(height: 16),
           const Text('Flux Language v0.1', style: TextStyle(fontSize: 24)),
           const SizedBox(height: 8),
-          FutureBuilder(
-            future: FluxDeviceModule.getDeviceInfo(), 
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                 final info = snapshot.data as Map;
-                 return Text('Running on: \${info['os']} \${info['version']}');
-              }
-              return const SizedBox.shrink();
-            } 
+          const Text('Flutter 動態腳本引擎', style: TextStyle(fontSize: 16, color: Colors.grey)),
+          const SizedBox(height: 24),
+          const Card(
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  Text('✨ 功能特點', style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(height: 8),
+                  Text('🎨 動態 UI 更新'),
+                  Text('💼 業務邏輯執行'),
+                  Text('🌐 HTTP 網路請求'),
+                  Text('📊 響應式狀態管理'),
+                ],
+              ),
+            ),
           ),
         ],
       ),

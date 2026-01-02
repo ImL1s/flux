@@ -1,0 +1,11 @@
+Launching lib\main.dart on Windows in debug mode...
+Building Windows application...                                 
+lib/main.dart(288,52): error G67247B7E: Expected ',' before this. [D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/main.dart(288,54): error G67247B7E: Expected ',' before this. [D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/main.dart(288,67): error G67247B7E: Expected ',' before this. [D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/main.dart(288,74): error G67247B7E: Expected ',' before this. [D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/main.dart(288,29): error G69EDD332: Too many positional arguments: 1 allowed, but 5 found. [D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\flutter\flutter_assemble.vcxproj]
+lib/main.dart(284,21): error G4127D1E8: The getter 'FluxDeviceModule' isn't defined for the class 'FluxAboutPage'. [D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\flutter\flutter_assemble.vcxproj]
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(254,5): error MSB8066: 'D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\CMakeFiles\7d7f6df67e9105f5a621359acb5a79d0\flutter_windows.dll.rule;D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\CMakeFiles\effc64359ecd13a5ca4e7be0a8ca860e\flutter_assemble.rule' 的自訂建置已結束，代碼為 1。 [D:\OtherProject\mine\flux\examples\flutter_demo\build\windows\x64\flutter\flutter_assemble.vcxproj]
+Building Windows application...                                     6.2s
+Error: Build process failed.
