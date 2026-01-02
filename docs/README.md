@@ -1,45 +1,135 @@
-# Flux Language
+# Flux 腳本語言
 
-A lightweight, embeddable scripting language for Flutter applications.
+一個輕量級、可嵌入的 Flutter 腳本語言。
 
-## Features
+## 這是什麼？
 
-- **Stack-based VM** - Efficient bytecode execution
-- **Flutter Integration** - Hot-reload, widget state management
-- **Full Debugger** - Breakpoints, stepping, expression evaluation
-- **Security** - Ed25519 script signing
-- **Developer Tools** - LSP, DevTools integration, Source Maps
+Flux 讓您可以在 Flutter 應用中運行動態腳本，實現：
+- 🔄 **熱重載** - 不重新編譯就更新 UI
+- 🎮 **遊戲邏輯** - 動態載入關卡配置
+- 📝 **用戶自定義** - 讓用戶編寫自己的規則
 
-## Quick Start
+## 30 秒快速入門
+
+### 第 1 步：創建測試項目
+
+```bash
+# 創建新的 Dart 項目
+dart create flux_demo
+cd flux_demo
+```
+
+### 第 2 步：添加依賴
+
+編輯 `pubspec.yaml`：
+
+```yaml
+dependencies:
+  flux_vm:
+    path: ../flux/packages/flux_vm
+  flux_compiler:
+    path: ../flux/packages/flux_compiler
+```
+
+### 第 3 步：編寫代碼
+
+編輯 `bin/flux_demo.dart`：
 
 ```dart
 import 'package:flux_vm/flux_vm.dart';
 
-final vm = VM();
-vm.interpret('''
-  var greeting = "Hello, Flux!";
-  print(greeting);
-''');
+void main() {
+  // 創建虛擬機
+  final vm = VM();
+  
+  // 設置 print 輸出處理
+  vm.onPrint = (message) => print('>>> $message');
+  
+  // 運行 Flux 腳本
+  vm.interpret('''
+    // 這是 Flux 腳本！
+    var name = "小明";
+    var age = 25;
+    
+    print("你好，" + name + "！");
+    print("你今年 " + age + " 歲");
+    
+    // 簡單計算
+    var result = (10 + 5) * 2;
+    print("計算結果: " + result);
+  ''');
+}
 ```
 
-## Documentation
+### 第 4 步：運行
 
-- [Getting Started](getting_started.md)
-- [Language Reference](language_reference.md)
-- [Standard Library](stdlib_reference.md)
-- [Flutter Integration](flutter_integration.md)
-- [Security Guide](security.md)
+```bash
+dart run
+```
 
-## Packages
+輸出：
+```
+>>> 你好，小明！
+>>> 你今年 25 歲
+>>> 計算結果: 30
+```
 
-| Package | Description |
-|---------|-------------|
-| `flux_compiler` | Lexer, Parser, Compiler |
-| `flux_vm` | Virtual Machine, Debugger, StdLib |
-| `flux_flutter` | Flutter bindings, Hot-reload |
-| `flux_cli` | Command-line tools |
-| `flux_vscode` | VSCode extension |
+---
 
-## License
+## Flux 語法速查
 
-MIT License
+```
+// 變量
+var x = 10;
+var message = "Hello";
+
+// 函數
+fn add(a, b) {
+  return a + b;
+}
+var result = add(3, 4);  // 7
+
+// 條件
+if (x > 5) {
+  print("大於 5");
+} else {
+  print("小於等於 5");
+}
+
+// 迴圈
+for (var i = 0; i < 5; i = i + 1) {
+  print(i);
+}
+
+// 類別
+class Person {
+  field name = "";
+  fn greet() {
+    print("我是 " + this.name);
+  }
+}
+var p = Person();
+p.name = "小華";
+p.greet();
+```
+
+---
+
+## 常用標準庫函數
+
+| 函數 | 說明 | 例子 |
+|------|------|------|
+| `print(x)` | 輸出 | `print("Hello")` |
+| `len(x)` | 長度 | `len([1,2,3])` → 3 |
+| `push(list, item)` | 添加元素 | `push(arr, 5)` |
+| `pop(list)` | 移除最後元素 | `pop(arr)` |
+| `upper(str)` | 轉大寫 | `upper("hi")` → "HI" |
+| `Math.sqrt(x)` | 平方根 | `Math.sqrt(16)` → 4 |
+
+---
+
+## 更多文檔
+
+- [語言完整參考](language_reference.md)
+- [標準庫參考](stdlib_reference.md)
+- [Flutter 整合](flutter_integration.md)
