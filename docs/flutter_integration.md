@@ -200,24 +200,37 @@ flux dev --watch ./scripts
 
 ### 實戰演練：體驗熱重載
 
-1. **運行 App**: 確保你已經按照上述步驟連接了熱重載服務。
-2. **創建腳本**: 在 `scripts/demo.flux` 中寫入：
-    ```dart
-    widget Demo {
-      state count = 0;
-      build {
-        return Button(text: "Count: " + count, onTap: fn(){ count = count + 1; });
-      }
-    }
-    ```
-3. **觀察 App**: 點擊幾次按鈕，讓 count 變成 `5`。
-4. **修改腳本**: 將 `count = count + 1` 改為 `count = count + 10`，**保存文件**。
-5. **神奇時刻**: 
-    - App **不需要** 重啟。
-    - 你的 count **依然是 5** (狀態被保留了！)。
-    - 再點擊按鈕，count 會變成 `15` (新的邏輯生效了！)。
+*(略...見上文)*
 
-這就是 Flux 的開發體驗：**邏輯更新，數據保留**。
+---
+
+## 7. 生產環境：遠端更新 (Remote Updates)
+
+您可能會問：「**熱重載是不是一定要連後端伺服器？**」
+
+- **開發時 (Development)**：是的，我們使用 `flux dev` 本地伺服器來實現秒級的 "Hot Reload"，讓你邊寫邊看。
+- **發布後 (Production)**：不需要 `flux dev`！你可以把 Flux 腳本放在**任何 HTTP 後端** (如 AWS S3, Firebase, 或你自己的 API)。
+
+### 如何實現「雲端更新」功能？
+
+在生產環境中，你只需要從網址下載腳本內容，然後傳給 `FluxWidget` 即可：
+
+```dart
+// 1. 從後端下載腳本
+final response = await http.get(Uri.parse('https://api.myapp.com/events/halloween.flux'));
+final scriptContent = response.body;
+
+// 2. 顯示組件
+return FluxWidget(
+  widgetName: 'EventCard',
+  source: scriptContent, // 直接使用下載的內容
+);
+```
+
+這讓你可以：
+- 🛠 **緊急修復 Bug**：不需重新發布 App Store 版本。
+- 運營活動**：每週更換不同的首頁活動區塊。
+- 🧪 **A/B 測試**：對不同用戶投放不同的腳本邏輯。
 
 ---
 
