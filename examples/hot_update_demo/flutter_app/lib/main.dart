@@ -38,29 +38,50 @@ class _HomePageState extends State<HomePage> {
   }
   
   /// 從「後端」載入腳本 (這裡用本地文件模擬)
-  /// 
-  /// 🔥 生產環境中，這裡改成：
-  /// ```dart
-  /// final response = await http.get(Uri.parse('https://api.yourapp.com/scripts/home_banner.flux'));
-  /// final script = response.body;
-  /// ```
   Future<void> _loadBannerScript() async {
-    setState(() => _status = '正在從後端載入腳本...');
+    setState(() => _status = '正在讀取腳本...');
     
+    // 嘗試多個可能的路徑 (因為不同的 IDE/終端 運行目錄可能不同)
+    final possiblePaths = [
+      '../scripts/home_banner.flux',           // 標準結構
+      'scripts/home_banner.flux',              // 如果在 root 運行
+      '../../scripts/home_banner.flux',        // 如果在 bin 運行
+      'examples/hot_update_demo/scripts/home_banner.flux' // 如果在 workspace root 運行
+    ];
+    
+    File? scriptFile;
+    String? loadedPath;
+    
+    // 1. 尋找正確的文件路徑
+    for (final path in possiblePaths) {
+      final file = File(path);
+      if (await file.exists()) {
+        scriptFile = file;
+        loadedPath = file.absolute.path;
+        break;
+      }
+    }
+    
+    if (scriptFile == null) {
+      setState(() {
+        _status = '❌ 找不到腳本文件！\n'
+                  '請確保運行在 Desktop (Windows/Mac) 且路徑正確。\n'
+                  '當前目錄: ${Directory.current.path}';
+        _bannerScript = null; // 清空，不使用 Demo Mode 欺騙
+      });
+      return;
+    }
+    
+    // 2. 讀取內容
     try {
-      // 模擬網絡延遲
-      await Future.delayed(const Duration(milliseconds: 500));
-      
-      // 讀取本地腳本文件 (模擬從後端下載)
-      final file = File('../scripts/home_banner.flux');
-      final script = await file.readAsString();
-      
+      final script = await scriptFile.readAsString();
       setState(() {
         _bannerScript = script;
-        _status = '✅ 腳本已載入 (${DateTime.now().toString().substring(11, 19)})';
+        _status = '✅ 已載入: .../${loadedPath!.split(Platform.pathSeparator).last}\n'
+                  '更新時間: ${DateTime.now().toString().substring(11, 19)}';
       });
     } catch (e) {
-      setState(() => _status = '❌ 載入失敗: $e');
+      setState(() => _status = '❌ 讀取錯誤: $e');
     }
   }
   

@@ -33,13 +33,19 @@ hot_update_demo/
 
 ## 🚀 快速開始
 
-### 步驟 1：運行 Flutter App
+### 步驟 1：運行 Flutter App (推薦 Desktop)
+
+由於這個 Demo 模擬「本機文件」作為「後端伺服器」，請盡量使用 **Windows / macOS / Linux** 桌面端運行，以確保可以直接讀取代碼文件。
 
 ```bash
 cd flutter_app
 flutter pub get
-flutter run
+
+# 推薦：運行 Windows 桌面版
+flutter run -d windows
 ```
+
+> **注意**：如果您一定要在與電腦連接的 Android 真機或模擬器上運行，您需要使用 `adb push` 將 `scripts` 文件夾推送到手機的 `/sdcard/` 或應用私有目錄，並修改代碼路徑，否則手機無法讀取電腦硬碟的文件。為求簡便，**強烈建議直接跑 Windows 版**。
 
 ### 步驟 2：觀察 App
 
