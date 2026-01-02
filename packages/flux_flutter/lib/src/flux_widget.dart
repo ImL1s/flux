@@ -107,25 +107,32 @@ class _FluxWidgetState extends State<FluxWidget> {
   }
   
   void _buildWidget() {
+    debugPrint('🔧 FluxWidget._buildWidget() START');
     try {
       final widgetDef = _runtime.getWidget(widget.widgetName);
+      debugPrint('🔧 Got widget definition: ${widgetDef?.name ?? "NULL"}');
       if (widgetDef == null) {
         throw Exception("Widget '${widget.widgetName}' not found in source.");
       }
       
       // Execute the build method and convert to Flutter widget
+      debugPrint('🔧 Executing build...');
       final fluxTree = _runtime.executeBuild(widgetDef);
+      debugPrint('🔧 executeBuild result: $fluxTree');
 
-
+      debugPrint('🔧 Converting to Flutter...');
       final flutterWidget = _runtime._convertToFlutter(fluxTree);
-
+      debugPrint('🔧 Converted widget: ${flutterWidget.runtimeType}');
 
       
       setState(() {
         _builtWidget = flutterWidget;
         _error = null;
       });
-    } catch (e) {
+      debugPrint('🔧 FluxWidget._buildWidget() SUCCESS');
+    } catch (e, stackTrace) {
+      debugPrint('❌ FluxWidget._buildWidget() ERROR: $e');
+      debugPrint('❌ StackTrace: $stackTrace');
       setState(() {
         _error = e.toString();
         _builtWidget = null;

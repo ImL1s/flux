@@ -93,10 +93,12 @@ class FluxBindings {
       final height = FluxCast.toDouble(args['height'] ?? args['1']);
       final child = args['child'] as Widget?;
       
+      // IMPORTANT: Flutter Container cannot have both color and decoration
+      // If decoration is provided, color must be part of decoration, not Container
       return Container(
         padding: padding,
         margin: margin,
-        color: color,
+        color: decoration == null ? color : null, // Only use color if no decoration
         decoration: decoration,
         width: width,
         height: height,
@@ -1815,6 +1817,44 @@ class FluxBindings {
     for (final entry in HttpBindings.functions.entries) {
       registerFunction(entry.key, entry.value as FluxFunction);
     }
+    
+    // BoxDecoration helper - returns a Map that _parseBoxDecoration can interpret
+    registerFunction('BoxDecoration', (args) {
+      // This is a metadata map, not a Flutter object
+      // The actual parsing happens in the Container binding via _parseBoxDecoration
+      final namedArgs = args.isNotEmpty && args[0] is Map ? args[0] as Map : {};
+      return {
+        'color': namedArgs['color'],
+        'borderRadius': namedArgs['borderRadius'],
+        'border': namedArgs['border'],
+        'boxShadow': namedArgs['boxShadow'],
+      };
+    });
+    
+    // BorderRadius.circular helper - returns a number for _parseBorderRadius
+    registerFunction('BorderRadius.circular', (args) {
+      if (args.isNotEmpty && args[0] is num) {
+        return args[0]!;
+      }
+      return 0.0;
+    });
+    
+    // Offset helper for BoxShadow
+    registerFunction('Offset', (args) {
+      final dx = args.isNotEmpty ? FluxCast.toDoubleOrZero(args[0]) : 0.0;
+      final dy = args.length > 1 ? FluxCast.toDoubleOrZero(args[1]) : 0.0;
+      return {'dx': dx, 'dy': dy};
+    });
+    
+    // BoxShadow helper
+    registerFunction('BoxShadow', (args) {
+      final namedArgs = args.isNotEmpty && args[0] is Map ? args[0] as Map : {};
+      return {
+        'color': namedArgs['color'],
+        'blurRadius': namedArgs['blurRadius'],
+        'offset': namedArgs['offset'],
+      };
+    });
   }
 }
 
