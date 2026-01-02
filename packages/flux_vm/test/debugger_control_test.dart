@@ -104,5 +104,30 @@ void main() {
       debugger.continue_();
       vm.resume();
     });
+
+    test('breakpoint on non-existent line does not crash', () {
+      final source = 'var a = 1;\nvar b = 2;';
+      
+      final ast = Parser(Lexer(source).tokenize()).parse();
+      final compiler = Compiler(unit: ast, moduleName: 'edge.flux');
+      compiler.compile(ast.declarations[0]);
+      final function = compiler.endCompiler();
+      
+      // Set breakpoint on line 100 (doesn't exist)
+      debugger.setBreakpoint('edge.flux', 100);
+      
+      // Should run without hitting breakpoint
+      final result = vm.executeClosure(ObjClosure(function, []));
+      expect(result, equals(InterpretResult.ok));
+    });
+
+    test('remove non-existent breakpoint does not crash', () {
+      // removeBreakpoint takes int id
+      expect(() => debugger.removeBreakpoint(9999), returnsNormally);
+    });
+
+    test('clear breakpoints on empty state', () {
+      expect(() => debugger.clearBreakpoints(), returnsNormally);
+    });
   });
 }
