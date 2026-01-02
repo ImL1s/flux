@@ -1,0 +1,26 @@
+name: hot_update_demo
+description: Flux 熱更新完整示範
+
+publish_to: 'none'
+
+environment:
+  sdk: ^3.0.0
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flux_flutter:
+    path: ../../../packages/flux_flutter
+  flux_vm:
+    path: ../../../packages/flux_vm
+  flux_compiler:
+    path: ../../../packages/flux_compiler
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
