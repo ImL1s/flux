@@ -171,9 +171,9 @@ FluxWidget(
 
 ---
 
-## 6. 熱重載 (Hot Reload) 開發
+## 6. 開發階段：熱重載 (Hot Reload)
 
-Flux 支援即時熱重載，讓你在調整 UI 時無需重啟 App。
+Flux 支援開發時的即時**熱重載 (Hot Reload)**，讓你在調整 UI 時無需重啟 App。
 
 ### 步驟 1: 設置熱重載服務
 
@@ -204,11 +204,17 @@ flux dev --watch ./scripts
 
 ---
 
-## 7. 生產環境：遠端更新 (Remote Updates)
+## 7. 生產環境：熱更新 (Hot Update)
 
-您可能會問：「**熱重載是不是一定要連後端伺服器？**」
+這就是大家常說的**「熱更新」** (或稱 OTA Updates, Code Push)。
 
-- **開發時 (Development)**：是的，我們使用 `flux dev` 本地伺服器來實現秒級的 "Hot Reload"，讓你邊寫邊看。
+### 什麼是熱更新？
+
+與開發時的 "Hot Reload" 不同，**熱更新**是指在**應用發布上線後**，不通過 App Store / Play Store 審核，直接從伺服器下發新的邏輯和 UI 給用戶。
+
+### 如何實現？
+
+- **開發時 (Development)**：我們使用 `flux dev` 本地伺服器來實現秒級的 "Hot Reload"。
 - **發布後 (Production)**：不需要 `flux dev`！你可以把 Flux 腳本放在**任何 HTTP 後端** (如 AWS S3, Firebase, 或你自己的 API)。
 
 ### 如何實現「雲端更新」功能？
@@ -227,14 +233,49 @@ return FluxWidget(
 );
 ```
 
-這讓你可以：
-- 🛠 **緊急修復 Bug**：不需重新發布 App Store 版本。
-- 運營活動**：每週更換不同的首頁活動區塊。
-- 🧪 **A/B 測試**：對不同用戶投放不同的腳本邏輯。
+### 實戰應用：為什麼這很重要？
+
+想像你是運營經理，下週是萬聖節，你需要把首頁 Banner 換成南瓜主題並送出優惠券。
+
+**傳統做法**：
+1. 請工程師改代碼。
+2. 提交 App Store 審核 (等待 1-2 天)。
+3. 用戶更新 App。
+
+**Flux 做法 (熱更新)**：
+1. 運營人員更新後端的 `home_banner.flux` 腳本。
+2. 用戶打開 App，自動下載新腳本。
+3. **首頁立刻變成萬聖節主題，無需更新 App！**
+
+#### 範例代碼：動態活動卡片
+
+```dart
+// home_banner.flux
+widget EventCard {
+  state themeColor = "orange";
+  state discount = "50%";
+  
+  build {
+    return Container(
+      color: themeColor,
+      padding: 16,
+      child: Column(
+        children: [
+          Text("🎃 萬聖節特價！"),
+          Text("全場 " + discount + " OFF"),
+          Button(text: "領取優惠", onTap: fn() { print("領取成功"); })
+        ]
+      )
+    );
+  }
+}
+```
+
+這就是 Flux 的核心價值：**極致的靈活性與運營效率。**
 
 ---
 
-## 7. 深入原理：Flux 如何實現熱重載？
+## 8. 技術原理：Flux 虛擬機機制
 
 你可能會好奇，為什麼 Flux 可以做到即時熱更新而不需要重新編譯整個 App？
 
