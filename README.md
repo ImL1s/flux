@@ -103,17 +103,14 @@ final counterProvider = NotifierProvider<FluxValueNotifier<int>, int>(
   () => FluxValueNotifier(0),
 );
 
-// 2. Use the FluxRiverpodWidget
-class MyApp extends ConsumerWidget {
+// 2. Use the FluxWidget
+class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: FluxRiverpodWidget(
+      body: FluxWidget(
         source: fluxSourceCode, // Load your .flux file string here
         widgetName: 'Counter',  // The widget class implementation to use
-        notifierProviders: {
-          'counter': counterProvider, // Bind native providers to Flux
-        },
       ),
     );
   }
@@ -141,6 +138,15 @@ The **Flux VSCode Extension** provides a premium development experience:
 - **Snippets**: Rapidly scaffold widgets and logic blocks.
 
 To install, see the [VSCode Extension README](packages/flux_vscode/README.md).
+
+---
+
+## 📚 Documentation
+
+- **[Language Guide](docs/LANGUAGE_GUIDE.md)**: Syntax, control flow, functions, and native interop.
+- **[Widget Catalog](docs/WIDGET_CATALOG.md)**: List of all supported Flutter widgets.
+- **[Flux vs Lua](docs/COMPARISON.md)**: Comparison with Lua hot update solutions.
+- **[Chinese Quick Start](docs/README.md)**: 30-second quick start guide in Chinese.
 
 ---
 
