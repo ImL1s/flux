@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter App (Windows)",
+            "type": "dart",
+            "request": "launch",
+            "program": "flutter_app/lib/main.dart",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-d",
+                "windows"
+            ]
+        },
+        {
+            "name": "Flutter App (Chrome)",
+            "type": "dart",
+            "request": "launch",
+            "program": "flutter_app/lib/main.dart",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "-d",
+                "chrome"
+            ]
+        },
+        {
+            "name": "Hot Update Server",
+            "type": "dart",
+            "request": "launch",
+            "program": "server/server.dart",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
