@@ -143,15 +143,15 @@ FluxWidget(
       state count = 0;
       
       build {
-        return Column(
+        Column(
           children: [
-            Text("點擊次數: " + count),
+            Text(text: "點擊次數: " + count),
             Button(
               text: "加一",
-              onTap: fn() { count = count + 1; }
+              onPressed: fn() { count = count + 1; }
             )
           ]
-        );
+        )
       }
     }
   ''',

@@ -77,17 +77,20 @@ Create a file named `counter.flux`:
 ```javascript
 // Define a widget component
 widget Counter {
-  build() {
-    return Column(children: () => [
-      Text("Count: " + getProvider("counter")),
-      Button(
-        text: "Increment",
-        onPressed: () => {
-          var current = getProvider("counter");
-          setProvider("counter", current + 1);
-        }
-      )
-    ]);
+  state count = 0;
+  
+  build {
+    Column(
+      children: [
+        Text(text: "Count: " + count),
+        Button(
+          text: "Increment",
+          onPressed: fn() {
+            count = count + 1;
+          }
+        )
+      ]
+    )
   }
 }
 ```

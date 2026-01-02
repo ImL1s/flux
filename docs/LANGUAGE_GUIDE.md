@@ -53,13 +53,18 @@ widget Counter {
   state count = 0;
 
   build {
-    Column {
-      Text("Count: " + toString(count));
-      
-      Button("Increment", onPressed: fn() {
-        count = count + 1; // UI automatically rebuilds
-      });
-    }
+    Column(
+      children: [
+        Text(text: "Count: " + toString(count)),
+        SizedBox(height: 16.0),
+        Button(
+          text: "Increment", 
+          onPressed: fn() {
+            count = count + 1; // UI automatically rebuilds
+          }
+        )
+      ]
+    )
   }
 }
 ```
@@ -74,14 +79,15 @@ widget Greeting {
   props color;
 
   build {
-    Container(color: color) {
-      Text("Hello, " + name + "!");
-    }
+    Container(
+      color: color,
+      child: Text(text: "Hello, " + name + "!")
+    )
   }
 }
 
 // Usage
-Greeting(name: "Alice", color: Colors.blue);
+Greeting(name: "Alice", color: "blue");
 ```
 
 ## Asynchronous Programming
@@ -98,12 +104,17 @@ widget DataLoader {
   state data = "Loading...";
 
   build {
-    Column {
-      Text(data);
-      Button("Load", onPressed: async fn() {
-        data = await fetchData();
-      });
-    }
+    Column(
+      children: [
+        Text(text: data),
+        Button(
+          text: "Load", 
+          onPressed: async fn() {
+            data = await fetchData();
+          }
+        )
+      ]
+    )
   }
 }
 ```
