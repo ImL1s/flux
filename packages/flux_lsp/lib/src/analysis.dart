@@ -197,6 +197,47 @@ class FluxAnalyzer {
     return RegExp(r'[a-zA-Z0-9_]').hasMatch(c);
   }
   
+  /// Get completion context at position
+  CompletionContext getCompletionContext(String source, Position position) {
+    final lines = source.split('\n');
+    if (position.line >= lines.length) return CompletionContext();
+    
+    // Look back to find if we are in a widget property context
+    // heurstic: look for "WidgetName {" or "WidgetName("
+    
+    String textBefore = "";
+    for (int i = 0; i < position.line; i++) {
+      textBefore += lines[i] + "\n";
+    }
+    textBefore += lines[position.line].substring(0, position.character);
+    
+    // Check if we are inside a brace
+    int braceCount = 0;
+    for (int i = 0; i < textBefore.length; i++) {
+      if (textBefore[i] == '{') braceCount++;
+      if (textBefore[i] == '}') braceCount--;
+    }
+    
+    if (braceCount > 0) {
+      // Find the last opening brace and what comes before it
+      int lastBrace = textBefore.lastIndexOf('{');
+      if (lastBrace > 0) {
+        String beforeBrace = textBefore.substring(0, lastBrace).trim();
+        // Get the last word before {
+        final matches = RegExp(r'([a-zA-Z0-9_]+)\s*$').allMatches(beforeBrace);
+        if (matches.isNotEmpty) {
+          String widgetName = matches.last.group(1)!;
+          // Simple check: starts with uppercase -> Widget
+          if (widgetName.isNotEmpty && widgetName[0].toUpperCase() == widgetName[0]) {
+            return CompletionContext(isWidgetProperty: true, widgetName: widgetName);
+          }
+        }
+      }
+    }
+    
+    return CompletionContext();
+  }
+  
   /// Keyword documentation
   static const _keywordDocs = <String, String>{
     'widget': '''

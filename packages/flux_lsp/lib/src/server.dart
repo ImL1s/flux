@@ -7,6 +7,7 @@ import 'dart:io';
 
 import 'protocol.dart';
 import 'analysis.dart';
+import 'widget_catalog.dart';
 
 /// Flux Language Server implementation
 class FluxLanguageServer {
@@ -261,8 +262,31 @@ class FluxLanguageServer {
   
   /// Handle textDocument/completion
   List<Map<String, dynamic>> _handleCompletion(Map<String, dynamic> params) {
+    final textDocument = params['textDocument'];
+    final uri = textDocument['uri'];
+    final position = params['position'];
+    final doc = _documents[uri];
+    
+    if (doc == null) return [];
+
     final items = <Map<String, dynamic>>[];
     
+    // Simple context analysis: check if we are inside a widget Map
+    // This is a basic implementation for the demo
+    final pos = Position(position['line'], position['character']);
+    final context = _analyzer.getCompletionContext(doc, pos);
+    
+    if (context.isWidgetProperty && context.widgetName != null) {
+      final properties = WidgetCatalog.getProperties(context.widgetName!);
+      if (properties != null) {
+        for (final prop in properties) {
+          items.add(prop.toCompletionItem());
+        }
+        return items;
+      }
+    }
+    
+    // Global scope completions
     // Add keyword completions
     for (final keyword in _keywords) {
       items.add(CompletionItem(
@@ -273,7 +297,7 @@ class FluxLanguageServer {
     }
     
     // Add widget completions
-    for (final widget in _widgets) {
+    for (final widget in WidgetCatalog.widgetNames) {
       items.add(CompletionItem(
         label: widget,
         kind: CompletionItemKind.classKind,
