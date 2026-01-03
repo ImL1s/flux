@@ -15,7 +15,7 @@ dependencies:
     path: ../flux_compiler
   flux_vm:
     path: ../flux_vm
-  flutter_riverpod: ^3.0.0
+  flutter_riverpod: ^2.6.1
   web_socket_channel: ^3.0.3
   http: ^1.6.0
   crypto: ^3.0.3
