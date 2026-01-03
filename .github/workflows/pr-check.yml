@@ -37,6 +37,7 @@ jobs:
       flutter: ${{ steps.filter.outputs.flutter }}
       lsp: ${{ steps.filter.outputs.lsp }}
       dap: ${{ steps.filter.outputs.dap }}
+      cli: ${{ steps.filter.outputs.cli }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v2
