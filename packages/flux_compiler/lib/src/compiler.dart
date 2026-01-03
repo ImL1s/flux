@@ -6,7 +6,6 @@ import 'ast.dart';
 import 'token.dart';
 import 'bytecode.dart';
 import 'lexer.dart';
-import 'lexer.dart';
 import 'parser.dart';
 import 'optimizer.dart';
 import 'source_map_generator.dart';

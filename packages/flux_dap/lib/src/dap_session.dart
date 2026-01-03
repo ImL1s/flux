@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'dart:isolate';
 import 'package:flux_dap/src/dap_worker.dart';
 
@@ -19,7 +20,7 @@ class DapSession {
   ReceivePort? _receivePort;
   
   final Completer<void> _launchCompleter = Completer<void>();
-  final Completer<List<Map<String, dynamic>>> _stackTraceCompleter = Completer();
+
   // _scopesCompleter etc were removed as we key by ID now, which is correct.
   
   int _nextRequestId = 1;

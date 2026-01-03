@@ -3,7 +3,7 @@ import 'dart:async' as async;
 import 'dart:isolate';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_vm/flux_vm.dart';
-import 'package:flux_vm/src/debugger.dart'; // Direct access for types
+
 
 /// Command to send to the worker
 class DapCommand {

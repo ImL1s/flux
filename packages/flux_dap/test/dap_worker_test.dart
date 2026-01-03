@@ -81,7 +81,7 @@ print("Result: " + z);
       expect(stack.first['line'], equals(4));
       
       // Validate variables
-      final scopes = await session.getStackTrace(); 
+      await session.getStackTrace(); 
       // Wait, getScopes is not exposed in session for this test yet? 
       // I can call getVariables directly if I knew the ref.
       // But let's just resize.

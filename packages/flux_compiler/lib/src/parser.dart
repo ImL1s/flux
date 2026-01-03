@@ -183,7 +183,7 @@ class Parser {
       throw _error(_previous, 'Widget must have a build block.');
     }
 
-    return WidgetDecl(name, props, stateFields, buildBlock!, 
+    return WidgetDecl(name, props, stateFields, buildBlock, 
         nameLine: nameToken.line, nameColumn: nameToken.column,
         line: widgetToken.line, column: widgetToken.column);
   }
@@ -576,7 +576,7 @@ class Parser {
         }
       } while (_match(TokenType.comma));
     }
-    final paren = _consume(TokenType.rightParen, 'Expect ")" after arguments.');
+    _consume(TokenType.rightParen, 'Expect ")" after arguments.');
 
     // Trailing lambda or widget block syntax
     if (_match(TokenType.leftBrace)) {
