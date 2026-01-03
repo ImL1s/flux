@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'utils/flux_cast.dart';
 import 'http_bindings.dart';
+import 'modules/camera_preview.dart';
 
 /// Registry for Flux -> Flutter widget bindings
 class FluxBindings {
@@ -45,6 +46,7 @@ class FluxBindings {
     _initFunctions();
     _initDateTimePickers();
     _initFormWidgets();
+    _initCameraWidgets();
   }
   
   static void _initWidgets() {
@@ -1866,8 +1868,32 @@ typedef FluxWidgetBuilder = Widget Function(
 
 /// Function type for Dart functions callable from Flux
 typedef FluxFunction = FutureOr<Object?> Function(List<Object?> args);
+  // ========== Camera Widgets ==========
+  
+  static void _initCameraWidgets() {
+    // CameraPreview widget - Live camera preview
+    register('CameraPreview', (args, children) {
+      final cameraId = FluxCast.toInt(args['cameraId']) ?? 0;
+      final fitStr = FluxCast.toStringNullable(args['fit']);
+      final onInitialized = args['onInitialized'];
+      final onError = args['onError'];
+      
+      BoxFit fit = BoxFit.cover;
+      if (fitStr != null) {
+        fit = _parseBoxFit(fitStr) ?? BoxFit.cover;
+      }
+      
+      return FluxCameraPreview(
+        cameraId: cameraId,
+        fit: fit,
+        onInitialized: onInitialized is Function ? () => _invokeCallback(onInitialized, []) : null,
+        onError: onError is Function ? (error) => _invokeCallback(onError, [error]) : null,
+      );
+    });
+  }
+}
 
-/// Wrapper for Dart Futures that can be used in Flux
+/// Represents a Future that can be passed to/from Flux scripts
 class FluxFuture {
   final Future<Object?> _future;
   final Completer<Object?> _completer;
