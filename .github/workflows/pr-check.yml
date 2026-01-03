@@ -67,8 +67,7 @@ jobs:
           sdk: stable
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.0'
-          channel: 'stable'
+          channel: 'master'
       
       - name: Test flux_compiler
         if: needs.detect-changes.outputs.compiler == 'true'
