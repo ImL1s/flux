@@ -1858,16 +1858,7 @@ class FluxBindings {
       };
     });
   }
-}
 
-/// Builder function type for Flux widgets
-typedef FluxWidgetBuilder = Widget Function(
-  Map<String, dynamic> args,
-  List<Widget> children,
-);
-
-/// Function type for Dart functions callable from Flux
-typedef FluxFunction = FutureOr<Object?> Function(List<Object?> args);
   // ========== Camera Widgets ==========
   
   static void _initCameraWidgets() {
@@ -1880,7 +1871,7 @@ typedef FluxFunction = FutureOr<Object?> Function(List<Object?> args);
       
       BoxFit fit = BoxFit.cover;
       if (fitStr != null) {
-        fit = _parseBoxFit(fitStr) ?? BoxFit.cover;
+        fit = _parseBoxFit(fitStr);
       }
       
       return FluxCameraPreview(
@@ -1892,6 +1883,16 @@ typedef FluxFunction = FutureOr<Object?> Function(List<Object?> args);
     });
   }
 }
+
+/// Builder function type for Flux widgets
+typedef FluxWidgetBuilder = Widget Function(
+  Map<String, dynamic> args,
+  List<Widget> children,
+);
+
+/// Function type for Dart functions callable from Flux
+typedef FluxFunction = FutureOr<Object?> Function(List<Object?> args);
+
 
 /// Represents a Future that can be passed to/from Flux scripts
 class FluxFuture {
