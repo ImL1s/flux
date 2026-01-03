@@ -1,0 +1,19 @@
+name: flux_dap
+description: Debug Adapter Protocol implementation for Flux language
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.0.0
+
+dependencies:
+  flux_vm:
+    path: ../flux_vm
+  flux_compiler:
+    path: ../flux_compiler
+  stream_channel: ^2.1.0
+  args: ^2.4.0
+
+dev_dependencies:
+  test: ^1.24.0
+  lints: ^3.0.0

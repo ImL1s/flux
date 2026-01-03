@@ -11,6 +11,8 @@ class HttpModule extends FluxModule {
   HttpModule() : super('http') {
     register('get', AsyncNativeFunction('http.get', 1, _get));
     register('post', AsyncNativeFunction('http.post', 2, _post));
+    register('put', AsyncNativeFunction('http.put', 2, _put));
+    register('delete', AsyncNativeFunction('http.delete', 1, _delete));
   }
 
   Future<Object?> _get(List<Object?> args) async {
@@ -48,5 +50,34 @@ class HttpModule extends FluxModule {
       'body': response.body,
       'headers': response.headers,
     };
+  }
+
+  Future<Object?> _put(List<Object?> args) async {
+    final url = args[0] as String;
+    final options = args.length > 1 ? args[1] as Map : {};
+    
+    final headers = (options['headers'] as Map?)?.cast<String, String>() ?? {};
+    final body = options['body'];
+
+    try {
+      final response = await http.put(
+        Uri.parse(url),
+        headers: headers,
+        body: body,
+      );
+      return _formatResponse(response);
+    } catch (e) {
+      throw 'http.put error: $e';
+    }
+  }
+
+  Future<Object?> _delete(List<Object?> args) async {
+    final url = args[0] as String;
+    try {
+      final response = await http.delete(Uri.parse(url));
+      return _formatResponse(response);
+    } catch (e) {
+      throw 'http.delete error: $e';
+    }
   }
 }

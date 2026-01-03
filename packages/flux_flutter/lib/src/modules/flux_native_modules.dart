@@ -3,6 +3,7 @@ import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_flutter/src/modules/http_module.dart';
 import 'package:flux_flutter/src/modules/storage_module.dart';
 import 'package:flux_flutter/src/modules/dialog_module.dart';
+import 'package:flux_flutter/src/modules/navigation_module.dart';
 
 // Conditional import: use stub in web, real module in io environments
 import 'package:flux_flutter/src/modules/device_info_module_stub.dart'
@@ -16,6 +17,6 @@ class FluxNativeModules {
     vm.registerModule(StorageModule());
     vm.registerModule(DialogModule());
     vm.registerModule(DeviceInfoModule());
+    vm.registerModule(NavigationModule());
   }
 }
-
