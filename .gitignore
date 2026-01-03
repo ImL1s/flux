@@ -9,6 +9,22 @@
 .history
 .svn/
 
+# Debug and temporary files
+*_log.txt
+*_log*.txt
+*_errors.txt
+*_output.txt
+*_results.txt
+*_trace.txt
+run_*.json
+jobs.json
+check_*.txt
+analyzer*.txt
+analysis.txt
+test_fail*.txt
+vm_*.txt
+
+
 # IntelliJ related
 *.iml
 *.ipr
