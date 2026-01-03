@@ -70,10 +70,38 @@ print(x + y);
 
       // Run flux build command
       final flxPath = '${tempDir.path}/build_test.flx';
+
+      // Find flux_cli package directory dynamically
+      String? cliDir;
+      final candidates = [
+        '../flux_cli',
+        'packages/flux_cli',
+      ];
+
+      for (final candidate in candidates) {
+        if (Directory(candidate).existsSync()) {
+          cliDir = candidate;
+          break;
+        }
+      }
+
+      if (cliDir == null) {
+        // Search upwards for repo root
+        var current = Directory.current;
+        while (current.path != current.parent.path) {
+          final repoCli = Directory('${current.path}/packages/flux_cli');
+          if (repoCli.existsSync()) {
+            cliDir = repoCli.path;
+            break;
+          }
+          current = current.parent;
+        }
+      }
+
       final result = Process.runSync(
         'dart',
         ['run', 'bin/flux.dart', 'build', sourcePath, '-o', flxPath],
-        workingDirectory: 'd:\\OtherProject\\mine\\flux\\packages\\flux_cli',
+        workingDirectory: cliDir,
       );
 
       // Check build succeeded
