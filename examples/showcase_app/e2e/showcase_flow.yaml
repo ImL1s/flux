@@ -1,0 +1,16 @@
+appId: com.example.showcase_app
+---
+- launchApp
+- assertVisible: "商品"
+- tapOn: "待辦"
+- assertVisible: "待辦事項"
+- tapOn: "Add Task" # Assuming there's a button with this text in todo_page.flux
+- inputText: "Buy Milk"
+- pressKey: Enter
+- assertVisible: "Buy Milk"
+- tapOn: "設定"
+- assertVisible: "應用設定"
+- tapOn: "儀表板"
+- assertVisible: "數據儀表板"
+- scroll
+- assertVisible: "統計數據"
