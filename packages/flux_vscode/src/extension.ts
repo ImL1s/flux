@@ -70,6 +70,34 @@ export function activate(context: vscode.ExtensionContext) {
             }
         })
     );
+
+    // Register Debug Adapter
+    const factory = new FluxDebugAdapterDescriptorFactory(context);
+    context.subscriptions.push(vscode.debug.registerDebugAdapterDescriptorFactory('flux', factory));
+}
+
+class FluxDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescriptorFactory {
+    constructor(private readonly context: vscode.ExtensionContext) { }
+
+    createDebugAdapterDescriptor(session: vscode.DebugSession, executable: vscode.DebugAdapterExecutable | undefined): vscode.ProviderResult<vscode.DebugAdapterDescriptor> {
+        // Use DAP path from config if available
+        const config = vscode.workspace.getConfiguration('flux');
+        let dapPath = config.get<string>('dapPath');
+
+        // Fallback to bundled dap in dev environment
+        if (!dapPath) {
+            const dapPackagePath = path.join(this.context.extensionPath, '..', 'flux_dap');
+            dapPath = path.join(dapPackagePath, 'bin', 'flux_dap.dart');
+        }
+
+        // Spawn 'dart run flux_dap_path'
+        // Actually 'dart run' expects a package or file. If file, just 'dart file'.
+        // But 'flux_dap.dart' is a script.
+
+        return new vscode.DebugAdapterExecutable('dart', ['run', dapPath], {
+            cwd: path.dirname(dapPath)
+        });
+    }
 }
 
 export function deactivate(): Thenable<void> | undefined {
