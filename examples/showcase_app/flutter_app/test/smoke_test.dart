@@ -31,11 +31,11 @@ void main() {
         ),
       );
       
-      final tabs = ['待辦', '設定', '儀表板', '商品'];
+      final tabs = ['待辦', '設定', '儀表板', '商品', '實驗室'];
       for (final tab in tabs) {
         await tester.tap(find.text(tab));
         await tester.pump();
-        await tester.pump(const Duration(milliseconds: 300));
+        await tester.pump(const Duration(milliseconds: 500));
         // Verify we are not on an error screen (basic check)
         expect(find.textContaining('❌ 錯誤'), findsNothing);
       }

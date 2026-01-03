@@ -84,6 +84,7 @@ class MainScaffold extends ConsumerWidget {
           TodoPageHost(),
           SettingsPageHost(),
           DashboardPageHost(),
+          PowerPageHost(),
         ],
       ),
       bottomNavigationBar: NavigationBar(
@@ -96,6 +97,7 @@ class MainScaffold extends ConsumerWidget {
           NavigationDestination(icon: Icon(Icons.checklist), label: '待辦'),
           NavigationDestination(icon: Icon(Icons.settings), label: '設定'),
           NavigationDestination(icon: Icon(Icons.dashboard), label: '儀表板'),
+          NavigationDestination(icon: Icon(Icons.science), label: '實驗室'),
         ],
       ),
     );
@@ -354,3 +356,21 @@ class DashboardPageHost extends FluxPageHost {
 }
 
 class _DashboardPageHostState extends FluxPageHostState<DashboardPageHost> {}
+
+class PowerPageHost extends FluxPageHost {
+  const PowerPageHost({super.key});
+  
+  @override
+  String get scriptName => 'power_page.flux';
+  @override
+  String get widgetName => 'PowerPage';
+  @override
+  String get pageTitle => 'Flux 實驗室';
+  @override
+  IconData get pageIcon => Icons.science;
+  
+  @override
+  ConsumerState<PowerPageHost> createState() => _PowerPageHostState();
+}
+
+class _PowerPageHostState extends FluxPageHostState<PowerPageHost> {}
