@@ -8,6 +8,7 @@ import 'stdlib.dart';
 import 'closure.dart';
 import 'coroutine.dart';
 import 'debugger.dart';
+import 'inline_cache.dart';
 
 typedef WidgetCallHandler = Object? Function(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack);
 
@@ -98,6 +99,12 @@ class VM {
   bool _awaitingFuture = false;
   Future<dynamic>? _pendingFuture;
   CallFrame? _pendingFrame;
+  
+  // Runtime Optimizations
+  final InlineCacheManager _inlineCacheManager = InlineCacheManager();
+  
+  /// Get current inline cache stats for debugging
+  Map<String, dynamic> get cacheStats => _inlineCacheManager.getStats();
   
   // Exception handling state
   final List<_ExceptionHandler> _exceptionHandlers = [];
@@ -1232,13 +1239,45 @@ class VM {
             }
             break;
             
+
           case OpCode.getProperty:
             final nameIdx = readByte();
             final name = frame.chunk.constants[nameIdx] as String;
             final obj = _stack.removeLast();
             if (obj is FluxInstance) {
-              final value = obj.getProperty(name);
-              _stack.add(value);
+              // Try Inline Cache first for methods
+              // (Field names are not cached yet as getProperty checks fields first, then methods)
+              // But if we cache, we need to know if it's field or method.
+              // Current InlineCache handles both.
+              
+              // Cache key is the PC of this instruction (OpCode.getProperty)
+              final callSiteOffset = frame.ip - 2; // -1 for index, -1 for opcode
+              final cache = _inlineCacheManager.getCache(callSiteOffset, name);
+              
+              // 1. Fast Path: Check fields first (Dynamic check)
+              if (obj.fields.containsKey(name)) {
+                 _stack.add(obj.fields[name]);
+                 // We could cache "isField" in inline cache to skip method lookup entirely if repeated
+                 // cache.cacheField(obj.klass);
+                 break;
+              }
+              
+              // 2. Inline Cache Path: Check for cached method
+              final cachedMethod = cache.lookupMethod(obj.klass);
+              if (cachedMethod != null) {
+                _stack.add(cachedMethod);
+                break;
+              }
+              
+              // 3. Slow Path: Look up in class
+              if (obj.klass.methods.containsKey(name)) {
+                final method = obj.klass.methods[name]!;
+                // Update Cache
+                cache.cacheMethod(obj.klass, method);
+                _stack.add(method);
+              } else {
+                 throw 'Undefined property: ${obj.klass.name}.$name';
+              }
             } else if (obj is List) {
               if (name == 'length') {
                 _stack.add(obj.length);
