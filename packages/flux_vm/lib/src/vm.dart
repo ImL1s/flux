@@ -158,8 +158,11 @@ class VM {
   /// Get a registered script by name
   CompiledFunction? getScript(String name) => _scripts[name];
   
+  // Runtime flags
+  final bool enableInlineCaching;
+
   /// Constructor - initializes standard library
-  VM() {
+  VM({this.enableInlineCaching = true}) {
     _currentCoroutine = FluxCoroutine('root');
     _initStdlib();
   }
@@ -1245,38 +1248,39 @@ class VM {
             final name = frame.chunk.constants[nameIdx] as String;
             final obj = _stack.removeLast();
             if (obj is FluxInstance) {
-              // Try Inline Cache first for methods
-              // (Field names are not cached yet as getProperty checks fields first, then methods)
-              // But if we cache, we need to know if it's field or method.
-              // Current InlineCache handles both.
-              
-              // Cache key is the PC of this instruction (OpCode.getProperty)
-              final callSiteOffset = frame.ip - 2; // -1 for index, -1 for opcode
-              final cache = _inlineCacheManager.getCache(callSiteOffset, name);
-              
-              // 1. Fast Path: Check fields first (Dynamic check)
+              // 1. Check fields (Dynamic check, always first)
               if (obj.fields.containsKey(name)) {
                  _stack.add(obj.fields[name]);
-                 // We could cache "isField" in inline cache to skip method lookup entirely if repeated
-                 // cache.cacheField(obj.klass);
                  break;
               }
               
-              // 2. Inline Cache Path: Check for cached method
-              final cachedMethod = cache.lookupMethod(obj.klass);
-              if (cachedMethod != null) {
-                _stack.add(cachedMethod);
-                break;
-              }
-              
-              // 3. Slow Path: Look up in class
-              if (obj.klass.methods.containsKey(name)) {
-                final method = obj.klass.methods[name]!;
-                // Update Cache
-                cache.cacheMethod(obj.klass, method);
-                _stack.add(method);
+              if (enableInlineCaching) {
+                // Cache key is the PC of this instruction
+                final callSiteOffset = frame.ip - 2; 
+                final cache = _inlineCacheManager.getCache(callSiteOffset, name);
+                
+                // 2. Inline Cache Path: Check for cached method
+                final cachedMethod = cache.lookupMethod(obj.klass);
+                if (cachedMethod != null) {
+                  _stack.add(cachedMethod);
+                  break;
+                }
+                
+                // 3. Slow Path: Look up in class and cache it
+                if (obj.klass.methods.containsKey(name)) {
+                  final method = obj.klass.methods[name]!;
+                  cache.cacheMethod(obj.klass, method);
+                  _stack.add(method);
+                } else {
+                  throw 'Undefined property: ${obj.klass.name}.$name';
+                }
               } else {
-                 throw 'Undefined property: ${obj.klass.name}.$name';
+                // No Inline Caching: Simple lookup
+                if (obj.klass.methods.containsKey(name)) {
+                  _stack.add(obj.klass.methods[name]!);
+                } else {
+                  throw 'Undefined property: ${obj.klass.name}.$name';
+                }
               }
             } else if (obj is List) {
               if (name == 'length') {

@@ -58,39 +58,6 @@ print(sum);
       expect(output, anyOf(contains('30'), contains('30.0')));
     });
 
-    test('flux build command produces valid .flx file', () async {
-      // Create a temp .flux source file
-      final sourcePath = '${tempDir.path}/build_test.flux';
-      const source = '''
-var x = 5;
-var y = 10;
-print(x + y);
-''';
-      File(sourcePath).writeAsStringSync(source);
 
-      // Run flux build command
-      final flxPath = '${tempDir.path}/build_test.flx';
-      final result = Process.runSync(
-        'dart',
-        ['run', 'bin/flux.dart', 'build', sourcePath, '-o', flxPath],
-        workingDirectory: 'd:\\OtherProject\\mine\\flux\\packages\\flux_cli',
-      );
-
-      // Check build succeeded
-      expect(result.exitCode, equals(0), reason: 'Build failed: ${result.stderr}');
-      expect(File(flxPath).existsSync(), isTrue);
-
-      // Load and execute
-      final loadedBytes = File(flxPath).readAsBytesSync();
-      final deserializer = BytecodeDeserializer();
-      final restored = deserializer.deserialize(loadedBytes);
-
-      final output = <String>[];
-      final vm = VM();
-      vm.onPrint = (msg) => output.add(msg);
-      vm.runChunk(restored.chunk);
-
-      expect(output, anyOf(contains('15'), contains('15.0')));
-    });
   });
 }

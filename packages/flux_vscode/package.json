@@ -63,6 +63,11 @@
                     "default": "",
                     "description": "Path to the Flux LSP server executable. Leave empty to use the bundled server."
                 },
+                "flux.dapPath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Path to the Flux DAP server executable. Leave empty to use the bundled server."
+                },
                 "flux.trace.server": {
                     "type": "string",
                     "enum": [
@@ -74,19 +79,73 @@
                     "description": "Traces the communication between VS Code and the Flux language server."
                 }
             }
-        }
+        },
+        "debuggers": [
+            {
+                "type": "flux",
+                "label": "Flux Debugger",
+                "program": "./out/extension.js",
+                "runtime": "node",
+                "languages": [
+                    "flux"
+                ],
+                "configurationAttributes": {
+                    "launch": {
+                        "required": [
+                            "program"
+                        ],
+                        "properties": {
+                            "program": {
+                                "type": "string",
+                                "description": "Absolute path to a text file.",
+                                "default": "${workspaceFolder}/main.flux"
+                            },
+                            "stopOnEntry": {
+                                "type": "boolean",
+                                "description": "Automatically stop after launch.",
+                                "default": true
+                            },
+                            "enableInlineCaching": {
+                                "type": "boolean",
+                                "description": "Enable inline caching optimization.",
+                                "default": true
+                            }
+                        }
+                    }
+                },
+                "initialConfigurations": [
+                    {
+                        "type": "flux",
+                        "request": "launch",
+                        "name": "Run Flux Script",
+                        "program": "${workspaceFolder}/main.flux",
+                        "stopOnEntry": true
+                    }
+                ]
+            }
+        ],
+        "breakpoints": [
+            {
+                "language": "flux"
+            }
+        ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./"
+        "watch": "tsc -watch -p ./",
+        "test": "npm run compile && node ./out/test/runTest.js"
     },
     "dependencies": {
         "vscode-languageclient": "^9.0.1"
     },
     "devDependencies": {
+        "@types/mocha": "^10.0.10",
         "@types/node": "^20.0.0",
         "@types/vscode": "^1.75.0",
+        "@vscode/test-electron": "^2.5.2",
+        "glob": "^13.0.0",
+        "mocha": "^11.7.5",
         "typescript": "^5.0.0"
     }
 }

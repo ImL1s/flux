@@ -48,7 +48,7 @@ void main() {
     });
     
     test('VLQ encoding logic manual check', () {
-        final generator = SourceMapGenerator(file: 'test');
+        SourceMapGenerator(file: 'test');
         // 0 -> A
         // 1 -> C
         // -1 -> D

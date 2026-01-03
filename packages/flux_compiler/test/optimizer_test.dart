@@ -79,7 +79,7 @@ void main() {
            }
            test();
         ''';
-        final chunk = compile(source);
+        compile(source);
         // "dead" string constant might exist, but the Print opcode should be gone (replaced by NO_OP)
         // Actually, since we don't remove constants map entries, checking opcode is safer.
         
@@ -114,7 +114,7 @@ void main() {
          // If we have `if (true) { return; } print("dead");`
          
          // Let's use early return.
-         final chunk = compile('''
+         compile('''
             if (true) {
                return;
             }

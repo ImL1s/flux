@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_compiler/flux_compiler.dart';
-import 'dart:math' as math;
+
 
 void main() {
   group('StdLib Math Operations', () {

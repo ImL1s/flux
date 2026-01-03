@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flux_compiler/src/compiler.dart';
 import 'package:flux_compiler/src/lexer.dart';
 import 'package:flux_compiler/src/parser.dart';
-import 'package:flux_compiler/src/bytecode.dart';
+
 import 'package:test/test.dart';
 
 CompiledFunction compileFluxScript(String source) {

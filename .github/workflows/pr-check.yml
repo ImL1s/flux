@@ -37,6 +37,7 @@ jobs:
       flutter: ${{ steps.filter.outputs.flutter }}
       lsp: ${{ steps.filter.outputs.lsp }}
       dap: ${{ steps.filter.outputs.dap }}
+      cli: ${{ steps.filter.outputs.cli }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v2
@@ -53,6 +54,8 @@ jobs:
               - 'packages/flux_lsp/**'
             dap:
               - 'packages/flux_dap/**'
+            cli:
+              - 'packages/flux_cli/**'
 
   quick-test:
     name: Quick Test for Changed Packages
@@ -65,8 +68,7 @@ jobs:
           sdk: stable
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.0'
-          channel: 'stable'
+          channel: 'master'
       
       - name: Test flux_compiler
         if: needs.detect-changes.outputs.compiler == 'true'
@@ -95,6 +97,13 @@ jobs:
           cd packages/flux_lsp
           dart pub get
           dart test --reporter=compact
+
+      - name: Test flux_cli
+        if: needs.detect-changes.outputs.cli == 'true'
+        run: |
+          cd packages/flux_cli
+          dart pub get
+          dart test --reporter=compact
       
       - name: No packages changed
         if: |
@@ -102,5 +111,6 @@ jobs:
           needs.detect-changes.outputs.vm != 'true' &&
           needs.detect-changes.outputs.flutter != 'true' &&
           needs.detect-changes.outputs.lsp != 'true' &&
-          needs.detect-changes.outputs.dap != 'true'
+          needs.detect-changes.outputs.dap != 'true' &&
+          needs.detect-changes.outputs.cli != 'true'
         run: echo "No package changes detected, skipping tests."

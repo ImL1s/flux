@@ -14,7 +14,7 @@ class FluxLanguageServer {
   final FluxAnalyzer _analyzer = FluxAnalyzer();
   final Map<String, String> _documents = {};
   
-  bool _initialized = false;
+
   bool _shutdown = false;
   
   /// Start the server, listening on stdin/stdout
@@ -124,7 +124,7 @@ class FluxLanguageServer {
   
   /// Handle initialize request
   Map<String, dynamic> _handleInitialize(Map<String, dynamic> params) {
-    _initialized = true;
+
     
     return {
       'capabilities': {
@@ -368,12 +368,7 @@ class FluxLanguageServer {
     'true', 'false', 'null',
   ];
   
-  static const _widgets = [
-    'Column', 'Row', 'Container', 'Text', 'Button', 'TextField',
-    'ListView', 'ListTile', 'Scaffold', 'AppBar', 'Drawer',
-    'Card', 'Icon', 'Image', 'Padding', 'Center', 'Expanded',
-    'SizedBox', 'Stack', 'Positioned', 'GestureDetector',
-  ];
+
   
   static const _stdlibFunctions = [
     'print', 'http.get', 'http.post', 'json.parse', 'json.stringify',
