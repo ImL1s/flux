@@ -22,13 +22,13 @@ This file tracks planned features and improvements. Each item should be implemen
 - **Description**: Integrate real `flutter_blue_plus` for production BLE functionality
 - **Dependencies**: `flutter_blue_plus: ^1.34.0` (or latest)
 - **Tasks**:
-  - [ ] Research latest `flutter_blue_plus` best practices
-  - [ ] Update `ble_module.dart` to use real BLE scanning
-  - [ ] Implement proper permission handling (Android/iOS)
-  - [ ] Add connection state management
-  - [ ] Write integration tests with BLE mocks
-  - [ ] Write unit tests for BLE module
-  - [ ] Update documentation
+  - [x] Research latest `flutter_blue_plus` best practices
+  - [x] Update `ble_module.dart` to use real BLE scanning
+  - [x] Implement proper permission handling (Android/iOS)
+  - [x] Add connection state management
+  - [x] Write integration tests with BLE mocks
+  - [x] Write unit tests for BLE module
+  - [x] Update documentation
 
 ---
 

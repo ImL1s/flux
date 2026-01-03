@@ -1,17 +1,21 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:flux_vm/flux_vm.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 /// Bluetooth Low Energy (BLE) module for Flux scripting language.
 /// 
 /// Provides BLE functionality accessible from Flux scripts:
-/// - `ble.isAvailable()` - Check if BLE is available on device
-/// - `ble.startScan({timeout, serviceUuids})` - Start scanning for devices
+/// - `ble.isAvailable()` - Check if BLE is available
+/// - `ble.startScan({timeout, serviceUuids})` - Start scanning
 /// - `ble.stopScan()` - Stop scanning
-/// - `ble.connect(deviceId)` - Connect to a device
-/// - `ble.disconnect(deviceId)` - Disconnect from a device
-/// - `ble.discoverServices(deviceId)` - Discover services on connected device
-/// - `ble.read(deviceId, serviceUuid, charUuid)` - Read characteristic value
-/// - `ble.write(deviceId, serviceUuid, charUuid, data)` - Write to characteristic
+/// - `ble.connect(deviceId)` - Connect to device
+/// - `ble.disconnect(deviceId)` - Disconnect
+/// - `ble.discoverServices(deviceId)` - Discover services
+/// - `ble.read(deviceId, serviceUuid, charUuid)` - Read value
+/// - `ble.write(deviceId, serviceUuid, charUuid, data)` - Write value
 /// - `ble.subscribe(deviceId, serviceUuid, charUuid, callback)` - Subscribe to notifications
 class BleModule extends FluxModule {
   static BleModule? _instance;
@@ -19,14 +23,14 @@ class BleModule extends FluxModule {
   /// Singleton instance
   static BleModule get instance => _instance ??= BleModule._();
   
-  // Store discovered devices
-  final List<Map<String, dynamic>> _discoveredDevices = [];
-  
   // Store connected devices
-  final Set<String> _connectedDevices = {};
+  final Map<String, BluetoothDevice> _connectedDevices = {};
   
   // Store subscriptions
-  final Map<String, Function> _subscriptions = {};
+  final Map<String, StreamSubscription> _subscriptions = {};
+  
+  // Store discovered devices for retrieval
+  final List<ScanResult> _scanResults = [];
   
   BleModule._() : super('ble') {
     register('isAvailable', AsyncNativeFunction('ble.isAvailable', 0, _isAvailable));
@@ -42,229 +46,268 @@ class BleModule extends FluxModule {
     register('unsubscribe', AsyncNativeFunction('ble.unsubscribe', 3, _unsubscribe));
   }
   
-  // Check if BLE is available
   Future<Object?> _isAvailable(List<Object?> args) async {
-    // TODO: Integrate with flutter_blue_plus
-    // return await FlutterBluePlus.isAvailable;
-    debugPrint('[BleModule] Checking BLE availability');
-    return true;
+    try {
+      // Check if hardware supports BLE
+      if (!await FlutterBluePlus.isSupported) {
+        return false;
+      }
+      
+      // Check if Bluetooth is on
+      return await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on;
+    } catch (e) {
+      debugPrint('[BleModule] Error checking availability: $e');
+      return false;
+    }
   }
   
-  // Start scanning for BLE devices
   Future<Object?> _startScan(List<Object?> args) async {
     final options = args.isNotEmpty && args[0] is Map ? args[0] as Map : {};
-    final timeout = options['timeout'] ?? 5000; // Default 5 seconds
-    final serviceUuids = options['serviceUuids'] as List? ?? [];
+    final timeout = options['timeout'] ?? 5000;
+    final serviceUuidsStr = options['serviceUuids'] as List? ?? [];
     
-    debugPrint('[BleModule] Starting scan with timeout: ${timeout}ms, filters: $serviceUuids');
+    // Convert UUID strings to Guids
+    final serviceGuids = serviceUuidsStr
+        .map((s) => Guid(s.toString()))
+        .toList();
     
-    // TODO: Integrate with flutter_blue_plus
-    // FlutterBluePlus.startScan(
-    //   timeout: Duration(milliseconds: timeout),
-    //   withServices: serviceUuids.map((s) => Guid(s)).toList(),
-    // );
-    
-    // Simulate discovering devices
-    _discoveredDevices.clear();
-    await Future.delayed(Duration(milliseconds: (timeout as int).clamp(100, 5000)));
-    
-    // Add mock devices for testing
-    _discoveredDevices.addAll([
-      {
-        'id': 'mock-device-001',
-        'name': 'Flux Sensor',
-        'rssi': -65,
-        'services': ['180d', '180f'], // Heart Rate, Battery
-      },
-      {
-        'id': 'mock-device-002', 
-        'name': 'Smart LED',
-        'rssi': -72,
-        'services': ['1800'], // Generic Access
-      },
-    ]);
-    
-    return _discoveredDevices.length;
+    try {
+      // Clear previous results
+      _scanResults.clear();
+      
+      // Listen to scan results
+      final subscription = FlutterBluePlus.scanResults.listen((results) {
+        _scanResults.clear();
+        _scanResults.addAll(results);
+      });
+      
+      debugPrint('[BleModule] Starting scan...');
+      
+      // Start scanning
+      await FlutterBluePlus.startScan(
+        timeout: Duration(milliseconds: (timeout as num).toInt()),
+        withServices: serviceGuids,
+      );
+      
+      // Wait for scan to complete
+      await Future.delayed(Duration(milliseconds: (timeout as num).toInt()));
+      
+      subscription.cancel();
+      
+      return {
+        'success': true,
+        'count': _scanResults.length,
+      };
+    } catch (e) {
+      debugPrint('[BleModule] Scan error: $e');
+      return {'success': false, 'error': e.toString()};
+    }
   }
   
-  // Stop scanning
   Future<Object?> _stopScan(List<Object?> args) async {
-    debugPrint('[BleModule] Stopping scan');
-    // TODO: FlutterBluePlus.stopScan();
+    try {
+      await FlutterBluePlus.stopScan();
+      return {'success': true};
+    } catch (e) {
+      return {'success': false, 'error': e.toString()};
+    }
+  }
+  
+  Object? _getDiscoveredDevices(List<Object?> args) {
+    return _scanResults.map((result) => {
+      'id': result.device.remoteId.str,
+      'name': result.device.platformName,
+      'rssi': result.rssi,
+      'services': result.advertisementData.serviceUuids.map((u) => u.toString()).toList(),
+      'connectable': result.advertisementData.connectable,
+    }).toList();
+  }
+  
+  Future<Object?> _connect(List<Object?> args) async {
+    final deviceId = args.isNotEmpty ? args[0].toString() : '';
+    if (deviceId.isEmpty) return {'success': false, 'error': 'Device ID required'};
+    
+    try {
+      // Find device instance not just from scan results but generically
+      // FlutterBluePlus requires a device instance.
+      // If found in scan results use that, otherwise verify ID format
+      
+      final device = BluetoothDevice.fromId(deviceId);
+      
+      await device.connect();
+      _connectedDevices[deviceId] = device;
+      
+      return {'success': true};
+    } catch (e) {
+      debugPrint('[BleModule] Connect error: $e');
+      return {'success': false, 'error': e.toString()};
+    }
+  }
+  
+  Future<Object?> _disconnect(List<Object?> args) async {
+    final deviceId = args.isNotEmpty ? args[0].toString() : '';
+    final device = _connectedDevices[deviceId];
+    
+    if (device == null) {
+      return {'success': false, 'error': 'Device not connected'};
+    }
+    
+    try {
+      await device.disconnect();
+      _connectedDevices.remove(deviceId);
+      return {'success': true};
+    } catch (e) {
+      return {'success': false, 'error': e.toString()};
+    }
+  }
+  
+  Future<Object?> _discoverServices(List<Object?> args) async {
+    final deviceId = args.isNotEmpty ? args[0].toString() : '';
+    final device = _connectedDevices[deviceId];
+    
+    if (device == null) {
+      return {'success': false, 'error': 'Device not connected'};
+    }
+    
+    try {
+      final services = await device.discoverServices();
+      
+      return {
+        'success': true,
+        'services': services.map((s) => {
+          'uuid': s.serviceUuid.toString(),
+          'characteristics': s.characteristics.map((c) => {
+            'uuid': c.characteristicUuid.toString(),
+            'properties': _getPropertiesList(c.properties),
+          }).toList(),
+        }).toList(),
+      };
+    } catch (e) {
+      return {'success': false, 'error': e.toString()};
+    }
+  }
+  
+  List<String> _getPropertiesList(CharacteristicProperties props) {
+    final List<String> list = [];
+    if (props.read) list.add('read');
+    if (props.write) list.add('write');
+    if (props.writeWithoutResponse) list.add('writeWithoutResponse');
+    if (props.notify) list.add('notify');
+    if (props.indicate) list.add('indicate');
+    return list;
+  }
+  
+  Future<BluetoothCharacteristic?> _findCharacteristic(
+    String deviceId, String serviceUuid, String charUuid) async {
+    final device = _connectedDevices[deviceId];
+    if (device == null) return null;
+    
+    // We assume services are discovered
+    for (final service in device.servicesList) {
+      if (service.serviceUuid.toString().toLowerCase() == serviceUuid.toLowerCase()) {
+        for (final char in service.characteristics) {
+          if (char.characteristicUuid.toString().toLowerCase() == charUuid.toLowerCase()) {
+            return char;
+          }
+        }
+      }
+    }
     return null;
   }
   
-  // Get list of discovered devices
-  Object? _getDiscoveredDevices(List<Object?> args) {
-    return List<Map<String, dynamic>>.from(_discoveredDevices);
-  }
-  
-  // Connect to a device
-  Future<Object?> _connect(List<Object?> args) async {
-    final deviceId = args.isNotEmpty ? args[0].toString() : '';
-    if (deviceId.isEmpty) {
-      throw 'ble.connect: deviceId is required';
-    }
-    
-    debugPrint('[BleModule] Connecting to $deviceId');
-    
-    // TODO: Integrate with flutter_blue_plus
-    // final device = BluetoothDevice(remoteId: DeviceIdentifier(deviceId));
-    // await device.connect();
-    
-    // Simulate connection
-    await Future.delayed(const Duration(milliseconds: 500));
-    _connectedDevices.add(deviceId);
-    
-    return true;
-  }
-  
-  // Disconnect from a device
-  Future<Object?> _disconnect(List<Object?> args) async {
-    final deviceId = args.isNotEmpty ? args[0].toString() : '';
-    if (deviceId.isEmpty) {
-      throw 'ble.disconnect: deviceId is required';
-    }
-    
-    debugPrint('[BleModule] Disconnecting from $deviceId');
-    
-    // TODO: Integrate with flutter_blue_plus
-    // final device = BluetoothDevice(remoteId: DeviceIdentifier(deviceId));
-    // await device.disconnect();
-    
-    _connectedDevices.remove(deviceId);
-    
-    // Remove subscriptions for this device
-    _subscriptions.removeWhere((key, _) => key.startsWith(deviceId));
-    
-    return true;
-  }
-  
-  // Discover services on connected device
-  Future<Object?> _discoverServices(List<Object?> args) async {
-    final deviceId = args.isNotEmpty ? args[0].toString() : '';
-    if (deviceId.isEmpty) {
-      throw 'ble.discoverServices: deviceId is required';
-    }
-    
-    if (!_connectedDevices.contains(deviceId)) {
-      throw 'ble.discoverServices: device not connected';
-    }
-    
-    debugPrint('[BleModule] Discovering services on $deviceId');
-    
-    // TODO: Integrate with flutter_blue_plus
-    // final device = BluetoothDevice(remoteId: DeviceIdentifier(deviceId));
-    // final services = await device.discoverServices();
-    // return services.map((s) => { 'uuid': s.serviceUuid.toString(), ... }).toList();
-    
-    // Mock services
-    return [
-      {
-        'uuid': '180d',
-        'characteristics': [
-          {'uuid': '2a37', 'properties': ['read', 'notify']},
-          {'uuid': '2a38', 'properties': ['read']},
-        ],
-      },
-      {
-        'uuid': '180f',
-        'characteristics': [
-          {'uuid': '2a19', 'properties': ['read', 'notify']},
-        ],
-      },
-    ];
-  }
-  
-  // Read characteristic value
   Future<Object?> _read(List<Object?> args) async {
-    if (args.length < 3) {
-      throw 'ble.read: requires deviceId, serviceUuid, charUuid';
-    }
-    
+    if (args.length < 3) return {'success': false, 'error': 'Missing arguments'};
     final deviceId = args[0].toString();
     final serviceUuid = args[1].toString();
     final charUuid = args[2].toString();
     
-    debugPrint('[BleModule] Reading $charUuid from $serviceUuid on $deviceId');
-    
-    // TODO: Integrate with flutter_blue_plus
-    // final char = await _getCharacteristic(deviceId, serviceUuid, charUuid);
-    // final value = await char.read();
-    // return value;
-    
-    // Mock read value (e.g., heart rate)
-    return [72]; // 72 bpm
+    try {
+      final char = await _findCharacteristic(deviceId, serviceUuid, charUuid);
+      if (char == null) return {'success': false, 'error': 'Characteristic not found'};
+      
+      final value = await char.read();
+      return {'success': true, 'value': value};
+    } catch (e) {
+      return {'success': false, 'error': e.toString()};
+    }
   }
   
-  // Write to characteristic
   Future<Object?> _write(List<Object?> args) async {
-    if (args.length < 4) {
-      throw 'ble.write: requires deviceId, serviceUuid, charUuid, data';
-    }
-    
+    if (args.length < 4) return {'success': false, 'error': 'Missing arguments'};
     final deviceId = args[0].toString();
     final serviceUuid = args[1].toString();
     final charUuid = args[2].toString();
     final data = args[3];
     
-    debugPrint('[BleModule] Writing to $charUuid on $serviceUuid ($deviceId): $data');
+    if (data is! List) return {'success': false, 'error': 'Data must be a list of bytes'};
+    final bytes = data.map((e) => (e as num).toInt()).toList();
     
-    // TODO: Integrate with flutter_blue_plus
-    // final char = await _getCharacteristic(deviceId, serviceUuid, charUuid);
-    // final bytes = data is List ? data.cast<int>() : utf8.encode(data.toString());
-    // await char.write(bytes);
-    
-    return true;
+    try {
+      final char = await _findCharacteristic(deviceId, serviceUuid, charUuid);
+      if (char == null) return {'success': false, 'error': 'Characteristic not found'};
+      
+      await char.write(bytes);
+      return {'success': true};
+    } catch (e) {
+      return {'success': false, 'error': e.toString()};
+    }
   }
   
-  // Subscribe to characteristic notifications
   Future<Object?> _subscribe(List<Object?> args) async {
-    if (args.length < 4) {
-      throw 'ble.subscribe: requires deviceId, serviceUuid, charUuid, callback';
-    }
-    
+    if (args.length < 4) return {'success': false, 'error': 'Missing arguments'};
     final deviceId = args[0].toString();
     final serviceUuid = args[1].toString();
     final charUuid = args[2].toString();
     final callback = args[3];
     
-    if (callback is! Function) {
-      throw 'ble.subscribe: callback must be a function';
-    }
+    if (callback is! Function) return {'success': false, 'error': 'Callback required'};
     
     final key = '$deviceId:$serviceUuid:$charUuid';
-    debugPrint('[BleModule] Subscribing to $key');
     
-    // TODO: Integrate with flutter_blue_plus
-    // final char = await _getCharacteristic(deviceId, serviceUuid, charUuid);
-    // await char.setNotifyValue(true);
-    // char.onValueReceived.listen((value) => callback([value]));
-    
-    _subscriptions[key] = callback;
-    
-    return true;
+    try {
+      final char = await _findCharacteristic(deviceId, serviceUuid, charUuid);
+      if (char == null) return {'success': false, 'error': 'Characteristic not found'};
+      
+      await char.setNotifyValue(true);
+      
+      final sub = char.lastValueStream.listen((value) {
+        try {
+          // Invoke callback
+          // Note: In strict mode we might need to check function type,
+          // but here we rely on runtime dynamic invocation
+          (callback as dynamic)([value]);
+        } catch (e) {
+          debugPrint('Error in notification callback: $e');
+        }
+      });
+      
+      _subscriptions[key] = sub;
+      return {'success': true};
+    } catch (e) {
+      return {'success': false, 'error': e.toString()};
+    }
   }
   
-  // Unsubscribe from characteristic notifications
   Future<Object?> _unsubscribe(List<Object?> args) async {
-    if (args.length < 3) {
-      throw 'ble.unsubscribe: requires deviceId, serviceUuid, charUuid';
-    }
-    
+    if (args.length < 3) return {'success': false, 'error': 'Missing arguments'};
     final deviceId = args[0].toString();
     final serviceUuid = args[1].toString();
     final charUuid = args[2].toString();
     
     final key = '$deviceId:$serviceUuid:$charUuid';
-    debugPrint('[BleModule] Unsubscribing from $key');
     
-    // TODO: Integrate with flutter_blue_plus
-    // final char = await _getCharacteristic(deviceId, serviceUuid, charUuid);
-    // await char.setNotifyValue(false);
-    
-    _subscriptions.remove(key);
-    
-    return true;
+    try {
+      await _subscriptions[key]?.cancel();
+      _subscriptions.remove(key);
+      
+      final char = await _findCharacteristic(deviceId, serviceUuid, charUuid);
+      if (char != null) {
+        await char.setNotifyValue(false);
+      }
+      
+      return {'success': true};
+    } catch (e) {
+      return {'success': false, 'error': e.toString()};
+    }
   }
 }
