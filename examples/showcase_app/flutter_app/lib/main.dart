@@ -20,10 +20,29 @@ final dioProvider = Provider<Dio>((ref) {
   return dio;
 });
 
-final currentPageProvider = StateProvider<int>((ref) => 0);
+// Navigation Notifier
+final currentPageProvider = NotifierProvider<CurrentPageNotifier, int>(CurrentPageNotifier.new);
 
-// Storage simulation
-final storageProvider = StateProvider<Map<String, String>>((ref) => {});
+class CurrentPageNotifier extends Notifier<int> {
+  @override
+  int build() => 0;
+  
+  void set(int index) => state = index;
+}
+
+// Storage Simulation Notifier
+final storageProvider = NotifierProvider<StorageNotifier, Map<String, String>>(StorageNotifier.new);
+
+class StorageNotifier extends Notifier<Map<String, String>> {
+  @override
+  Map<String, String> build() => {};
+  
+  void save(String key, String value) {
+    state = {...state, key: value};
+  }
+  
+  void clear() => state = {};
+}
 
 // ============================================================================
 // Main App
@@ -70,7 +89,7 @@ class MainScaffold extends ConsumerWidget {
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentPage,
         onDestinationSelected: (index) {
-          ref.read(currentPageProvider.notifier).state = index;
+          ref.read(currentPageProvider.notifier).set(index);
         },
         destinations: const [
           NavigationDestination(icon: Icon(Icons.shopping_bag), label: '商品'),
@@ -142,7 +161,7 @@ abstract class FluxPageHostState<T extends FluxPageHost> extends ConsumerState<T
 
   void _registerNativeFunctions(FluxRuntime runtime) {
     // showToast
-    runtime.vm.registerFunction('showToast', (args) {
+    runtime.vm.globals['showToast'] = NativeFunction('showToast', 1, (args) {
       final message = args.isNotEmpty ? args[0].toString() : 'Toast';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(message), duration: const Duration(seconds: 2)),
@@ -151,18 +170,18 @@ abstract class FluxPageHostState<T extends FluxPageHost> extends ConsumerState<T
     });
 
     // saveToStorage
-    runtime.vm.registerFunction('saveToStorage', (args) {
+    runtime.vm.globals['saveToStorage'] = NativeFunction('saveToStorage', 2, (args) {
       if (args.length >= 2) {
         final key = args[0].toString();
         final value = args[1].toString();
-        ref.read(storageProvider.notifier).update((state) => {...state, key: value});
+        ref.read(storageProvider.notifier).save(key, value);
         debugPrint('💾 Saved: $key = $value');
       }
       return null;
     });
 
     // loadFromStorage
-    runtime.vm.registerFunction('loadFromStorage', (args) {
+    runtime.vm.globals['loadFromStorage'] = NativeFunction('loadFromStorage', 1, (args) {
       if (args.isNotEmpty) {
         final key = args[0].toString();
         final value = ref.read(storageProvider)[key];
@@ -173,7 +192,7 @@ abstract class FluxPageHostState<T extends FluxPageHost> extends ConsumerState<T
     });
 
     // fetchData (async simulation)
-    runtime.vm.registerFunction('fetchData', (args) async {
+    runtime.vm.globals['fetchData'] = AsyncNativeFunction('fetchData', 0, (args) async {
       try {
         final dio = ref.read(dioProvider);
         final response = await dio.get('/api/dashboard');

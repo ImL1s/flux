@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_router/shelf_router.dart';
-import 'package:shelf_cors/shelf_cors.dart' as cors;
+import 'package:shelf_cors_headers/shelf_cors_headers.dart';
 import 'package:path/path.dart' as p;
 
 void main() async {
@@ -13,7 +13,7 @@ void main() async {
   // Middleware pipeline
   final handler = const Pipeline()
       .addMiddleware(logRequests())
-      .addMiddleware(cors.corsHeaders())
+      .addMiddleware(corsHeaders())
       .addHandler(app.call);
 
   // 1. Serve Flux Scripts
