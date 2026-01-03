@@ -1,0 +1,116 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (92.0.0 available)
+  analyzer 7.7.1 (9.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  matcher 0.12.17 (0.12.18 available)
+  test 1.26.3 (1.28.0 available)
+  test_api 0.7.7 (0.7.8 available)
+  test_core 0.6.12 (0.6.14 available)
+Got dependencies!
+7 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing flux_compiler 0.1.0 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (<1 KB)
+├── analyze_output.txt (3 KB)
+├── compiler_tests.txt (18 KB)
+├── compiler_tests_v2.txt (17 KB)
+├── debug_error.txt (<1 KB)
+├── flx_integration_output.txt (<1 KB)
+├── golden_results.txt (3 KB)
+├── lib
+│   ├── flux_compiler.dart (<1 KB)
+│   └── src
+│       ├── ast.dart (11 KB)
+│       ├── bytecode.dart (5 KB)
+│       ├── compiler.dart (38 KB)
+│       ├── deserializer.dart (4 KB)
+│       ├── lexer.dart (8 KB)
+│       ├── optimizer.dart (11 KB)
+│       ├── parser.dart (27 KB)
+│       ├── serializer.dart (3 KB)
+│       ├── source_map_generator.dart (4 KB)
+│       └── token.dart (2 KB)
+├── publish_compiler_log.txt (<1 KB)
+├── pubspec.yaml (<1 KB)
+├── serializer_test_output.txt (1 KB)
+├── test
+│   ├── class_fields_test.dart (9 KB)
+│   ├── compiler_edge_test.dart (4 KB)
+│   ├── compiler_source_map_test.dart (2 KB)
+│   ├── compiler_test.dart (6 KB)
+│   ├── flx_integration_test.dart (2 KB)
+│   ├── golden_test.dart (4 KB)
+│   ├── helpers
+│   │   ├── ast_printer.dart (3 KB)
+│   │   └── bytecode_printer.dart (2 KB)
+│   ├── opcode_debug.dart (<1 KB)
+│   ├── optimizer_test.dart (7 KB)
+│   ├── parser_edge_test.dart (4 KB)
+│   ├── rle_test.dart (2 KB)
+│   ├── serializer_test.dart (3 KB)
+│   ├── source_map_test.dart (2 KB)
+│   └── widget_compilation_test.dart (1 KB)
+├── test_compiler_output.txt (11 KB)
+├── test_output.txt (<1 KB)
+├── test_result.txt (51 KB)
+├── test_result10.txt (30 KB)
+├── test_result11.txt (30 KB)
+├── test_result12.txt (30 KB)
+├── test_result13.txt (33 KB)
+├── test_result14.txt (36 KB)
+├── test_result15.txt (63 KB)
+├── test_result16.txt (26 KB)
+├── test_result2.txt (51 KB)
+├── test_result3.txt (51 KB)
+├── test_result4.txt (51 KB)
+├── test_result5.txt (50 KB)
+├── test_result6.txt (50 KB)
+├── test_result7.txt (33 KB)
+├── test_result8.txt (31 KB)
+├── test_result9.txt (1 KB)
+├── test_results_compiler.txt (53 KB)
+├── tool
+└── widget_test_output.txt (1 KB)
+
+Total compressed archive size: 78 KB.
+Validating package...
+Package validation found the following potential issues:
+* `dart analyze` found the following issue(s):
+  Analyzing lib, pubspec.yaml...
+  
+  warning - lib\src\compiler.dart:9:8 - Duplicate import. Try removing all but one import of the library. - duplicate_import
+  warning - lib\src\optimizer.dart:275:7 - This default clause is covered by the previous cases. Try removing the default clause, or restructuring the preceding patterns. - unreachable_switch_default
+  warning - lib\src\optimizer.dart:362:16 - The operand can't be 'null', so the condition is always 'true'. Remove the condition. - unnecessary_nul[...]d_null_aware_expression
+  warning - lib\src\parser.dart:186:59 - The '!' will have no effect because the receiver can't be null. Try removing the '!' operator. - unnecessary_non_null_assertion
+  warning - lib\src\parser.dart:579:11 - The value of the local variable 'paren' isn't used. Try removing the variable or using it. - unused_local_variable
+  warning - lib\src\source_map_generator.dart:2:8 - Unused import: 'dart:typed_data'. Try removing the import directive. - unused_import
+  
+  7 issues found.
+  
+* 1 checked-in file is modified in git.
+  
+  Usually you want to publish from a clean git state.
+  
+  Consider committing these files or reverting the changes.
+  
+  Modified files:
+  
+  pubspec.yaml
+  
+  Run `git status` for more information.
+  
+* line 4, column 1 of d:/OtherProject/mine/flux/packages/flux_compiler/test/flx_integration_test.dart: This package does not have flux_vm in the `dependencies` or `dev_dependencies` section of `pubspec.yaml`.
+    ╷
+  4 │ import 'package:flux_vm/flux_vm.dart';
+    │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+* line 3, column 1 of d:/OtherProject/mine/flux/packages/flux_compiler/test/class_fields_test.dart: This package does not have flux_vm in the `dependencies` or `dev_dependencies` section of `pubspec.yaml`.
+    ╷
+  3 │ import 'package:flux_vm/flux_vm.dart';
+    │ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ╵
+Uploading...
+Message from server: Version 0.1.0 of package flux_compiler already exists.

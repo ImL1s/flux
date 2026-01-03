@@ -1,7 +1,7 @@
 /// Flux 快速示例
 /// 運行: dart run example/quick_demo.dart
 
-import 'package:flux_compiler/flux_compiler.dart';
+
 import 'package:flux_vm/flux_vm.dart';
 
 void main() {

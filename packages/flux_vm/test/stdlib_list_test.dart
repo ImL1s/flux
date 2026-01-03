@@ -46,7 +46,7 @@ void main() {
     });
     
     test('list.pop throws on empty list', () {
-       bool caught = false;
+
        final vm = VM();
        vm.onPrint = (msg) {};
        

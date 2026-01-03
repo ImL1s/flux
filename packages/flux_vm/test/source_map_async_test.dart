@@ -1,8 +1,6 @@
 import 'package:test/test.dart';
 import 'package:flux_vm/flux_vm.dart';
-import 'package:flux_compiler/flux_compiler.dart';
 import 'dart:async';
-import 'dart:io';
 
 void main() {
   group('Async Source Maps', () {
