@@ -1,0 +1,22 @@
+# Flux Codeowners
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything
+* @ImL1s
+
+# Compiler team
+packages/flux_compiler/ @ImL1s
+
+# VM team
+packages/flux_vm/ @ImL1s
+
+# Flutter bindings
+packages/flux_flutter/ @ImL1s
+
+# Developer tools
+packages/flux_lsp/ @ImL1s
+packages/flux_dap/ @ImL1s
+
+# Documentation
+docs/ @ImL1s
+*.md @ImL1s

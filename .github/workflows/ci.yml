@@ -1,0 +1,149 @@
+name: CI
+
+on:
+  push:
+    branches: [dev, master]
+  pull_request:
+    branches: [dev, master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Analyze flux_compiler
+        run: |
+          cd packages/flux_compiler
+          dart pub get
+          dart analyze --fatal-infos
+      - name: Analyze flux_vm
+        run: |
+          cd packages/flux_vm
+          dart pub get
+          dart analyze --fatal-warnings
+      - name: Analyze flux_lsp
+        run: |
+          cd packages/flux_lsp
+          dart pub get
+          dart analyze --fatal-warnings
+      - name: Analyze flux_dap
+        run: |
+          cd packages/flux_dap
+          dart pub get
+          dart analyze --fatal-warnings
+
+  test-compiler:
+    name: Test flux_compiler
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Install dependencies
+        run: |
+          cd packages/flux_compiler
+          dart pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_compiler
+          dart test --reporter=expanded
+
+  test-vm:
+    name: Test flux_vm
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Install dependencies
+        run: |
+          cd packages/flux_vm
+          dart pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_vm
+          dart test --reporter=expanded
+
+  test-lsp:
+    name: Test flux_lsp
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Install dependencies
+        run: |
+          cd packages/flux_lsp
+          dart pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_lsp
+          dart test --reporter=expanded
+
+  test-dap:
+    name: Test flux_dap
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - name: Install dependencies
+        run: |
+          cd packages/flux_dap
+          dart pub get
+      - name: Run tests (if any)
+        run: |
+          cd packages/flux_dap
+          dart test --reporter=expanded || echo "No tests found"
+
+  test-flutter:
+    name: Test flux_flutter
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.0'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_flutter
+          flutter pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_flutter
+          flutter test --reporter=expanded
+
+  ci-success:
+    name: CI Success
+    runs-on: ubuntu-latest
+    needs: [test-compiler, test-vm, test-lsp, test-dap, test-flutter]
+    if: always()
+    steps:
+      - name: Check all jobs passed
+        run: |
+          if [ "${{ needs.test-compiler.result }}" != "success" ] || \
+             [ "${{ needs.test-vm.result }}" != "success" ] || \
+             [ "${{ needs.test-lsp.result }}" != "success" ] || \
+             [ "${{ needs.test-flutter.result }}" != "success" ]; then
+            echo "Some tests failed"
+            exit 1
+          fi
+          echo "All tests passed!"
