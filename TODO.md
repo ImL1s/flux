@@ -9,13 +9,13 @@ This file tracks planned features and improvements. Each item should be implemen
 - **Description**: Integrate real `camera` package for production camera functionality
 - **Dependencies**: `camera: ^0.11.0` (or latest)
 - **Tasks**:
-  - [ ] Research latest `camera` package best practices
-  - [ ] Update `camera_module.dart` to use real `CameraController`
-  - [ ] Update `camera_preview.dart` with proper lifecycle management
-  - [ ] Add platform-specific configurations (Android/iOS permissions)
-  - [ ] Write integration tests with mock camera
-  - [ ] Write widget tests for `FluxCameraPreview`
-  - [ ] Update documentation
+  - [x] Research latest `camera` package best practices
+  - [x] Update `camera_module.dart` to use real `CameraController`
+  - [x] Update `camera_preview.dart` with proper lifecycle management
+  - [x] Add platform-specific configurations (Android/iOS permissions)
+  - [x] Write integration tests with mock camera
+  - [x] Write widget tests for `FluxCameraPreview`
+  - [x] Update documentation
 
 ### Feature: BLE Integration
 - **Branch**: `feature/ble-integration`
