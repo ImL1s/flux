@@ -1,5 +1,0 @@
-Analyzing 2 items...                                            
-
-  error - The argument type 'List<Guid>?' can't be assigned to the parameter type 'List<Guid>'.  - lib\src\modules\ble_module.dart:29:70 - argument_type_not_assignable
-warning - Unnecessary cast - lib\src\modules\ble_module.dart:126:52 - unnecessary_cast
-
