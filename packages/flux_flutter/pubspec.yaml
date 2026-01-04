@@ -26,6 +26,8 @@ dependencies:
   camera: ^0.10.5+9
   flutter_blue_plus: ^1.32.0
   permission_handler: ^11.3.1
+  hive: ^2.2.3
+  flutter_secure_storage: ^10.0.0
 
 dev_dependencies:
   flutter_test:

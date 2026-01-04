@@ -9,6 +9,7 @@ Flutter bindings for the Flux scripting language, enabling server-driven UI and 
 - **Camera Integration**: Real camera functionality via `camera` package
 - **Hot Reload**: Live update scripts without app restart
 - **Riverpod Integration**: Seamless state management with Riverpod 3.x
+- **State Persistence**: Secure storage, Hive integration, and versioned state migration (v3.0)
 
 ## Getting Started
 
