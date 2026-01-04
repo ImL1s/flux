@@ -3,6 +3,7 @@
 # Test output files
 *.txt
 !README.txt
+*.skip
 
 # Debug/temp files
 debug_*.txt

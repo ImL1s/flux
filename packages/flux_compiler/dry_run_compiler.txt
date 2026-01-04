@@ -1,0 +1,85 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (92.0.0 available)
+  analyzer 7.7.1 (9.0.0 available)
+  js 0.7.1 (0.7.2 available)
+  matcher 0.12.17 (0.12.18 available)
+  test 1.26.3 (1.28.0 available)
+  test_api 0.7.7 (0.7.8 available)
+  test_core 0.6.12 (0.6.14 available)
+Got dependencies!
+7 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing flux_compiler 2.0.0 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (<1 KB)
+├── example
+│   └── example.dart (<1 KB)
+├── lib
+│   ├── flux_compiler.dart (<1 KB)
+│   └── src
+│       ├── ast.dart (11 KB)
+│       ├── bytecode.dart (5 KB)
+│       ├── compiler.dart (38 KB)
+│       ├── deserializer.dart (4 KB)
+│       ├── lexer.dart (8 KB)
+│       ├── optimizer.dart (11 KB)
+│       ├── parser.dart (27 KB)
+│       ├── serializer.dart (3 KB)
+│       ├── source_map_generator.dart (4 KB)
+│       └── token.dart (2 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+    ├── class_fields_test.dart.skip (9 KB)
+    ├── compiler_edge_test.dart (4 KB)
+    ├── compiler_source_map_test.dart (2 KB)
+    ├── compiler_test.dart (6 KB)
+    ├── flx_integration_test.dart.skip (1 KB)
+    ├── golden_test.dart (4 KB)
+    ├── helpers
+    │   ├── ast_printer.dart (3 KB)
+    │   └── bytecode_printer.dart (2 KB)
+    ├── opcode_debug.dart (<1 KB)
+    ├── optimizer_test.dart (7 KB)
+    ├── parser_edge_test.dart (4 KB)
+    ├── rle_test.dart (2 KB)
+    ├── serializer_test.dart (3 KB)
+    ├── source_map_test.dart (1 KB)
+    └── widget_compilation_test.dart (1 KB)
+
+Total compressed archive size: 38 KB.
+Validating package...
+Package validation found the following potential issue:
+* 8 checked-in files are ignored by a `.gitignore`.
+  Previous versions of Pub would include those in the published package.
+  
+  Consider adjusting your `.gitignore` files to not ignore those files, and if you do not wish to
+  publish these files use `.pubignore`. See also dart.dev/go/pubignore
+  
+  Files that are checked in while gitignored:
+  
+  analyze_output.txt
+  flx_integration_output.txt
+  golden_results.txt
+  publish_compiler_log.txt
+  serializer_test_output.txt
+  test_compiler_output.txt
+  test_output.txt
+  widget_test_output.txt
+  
+  
+
+Package validation found the following hint:
+* The previous version is 0.1.0.
+  
+  It seems you are not publishing an incremental update.
+  
+  Consider one of:
+  * 1.0.0 for a first major release.
+  * 0.2.0 for a breaking release.
+  * 0.1.1 for a minor release.
+  
+The server may enforce additional checks.
+
+Package has 1 warning and 1 hint.
