@@ -1,7 +1,6 @@
 name: flux_cli
 description: Command line interface for the Flux language including REPL
-version: 0.1.0
-publish_to: none
+version: 2.0.0
 
 environment:
   sdk: ^3.5.0

@@ -1,8 +1,17 @@
 # Flux ⚡
 
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/ImL1s/flux)
+[![CI](https://github.com/ImL1s/flux/workflows/CI/badge.svg)](https://github.com/ImL1s/flux/actions)
+
 > **A Dynamic Scripting Language for Flutter Server-Driven UI**
 
 Flux is a lightweight, stack-based scripting language designed specifically to enable **dynamic updates** and **server-driven UI** logic within Flutter applications. It decouples business logic and UI layout from the app binary, allowing for instant updates without App Store submission.
+
+### 🆕 What's New in v2.0.0
+- **FluxUI Component Library**: Complete set of UI components (Button, Card, Input, Badge, Row, Column, Grid, Stack)
+- **BLE Integration**: Full Bluetooth Low Energy support via `flutter_blue_plus`
+- **Camera Integration**: Real camera functionality via `camera` package
+- **Enhanced CLI**: Project scaffolding, hot-reload, and static analysis
 
 ---
 
@@ -61,13 +70,19 @@ The project is organized as a monorepo containing the following core packages:
 
 ### 1. Installation
 
-Flux is currently in active development. To use it, add the packages locally to your `pubspec.yaml`:
+Add Flux to your `pubspec.yaml`:
 
+```yaml
+dependencies:
+  flux_flutter: ^2.0.0
+  flutter_riverpod: ^3.0.0
+```
+
+Or for local development:
 ```yaml
 dependencies:
   flux_flutter:
     path: ../packages/flux_flutter
-  flutter_riverpod: ^2.6.1
 ```
 
 ### 2. Writing a Flux Script

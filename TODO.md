@@ -2,56 +2,87 @@
 
 This file tracks planned features and improvements. Each item should be implemented on a separate feature branch with a corresponding PR.
 
-## 🔴 Pending Features (v2.0+)
+## ✅ Completed Features (v2.0.0)
 
-### Feature: FluxUI (Component Library) - COMPLETED
-- **Branch**: `feature/flux-ui`
-- **Description**: Standard library of UI components for Flux
-- **Goals**: 
-  - [x] Implement core components (Button, Card, Input, Badge)
-  - [x] Implement layout components (Column, Row, Stack, Grid)
-  - [x] Design System support (Theme, Typography, Colors)
+### FluxUI Component Library
+- [x] Core components (Button, Card, Input, Badge)
+- [x] Layout components (Column, Row, Stack, Grid)
+- [x] Design System support (Theme, Typography, Colors)
 
-### Feature: CLI Enhancement (Phase 10) - COMPLETED
-- **Branch**: `feature/cli-enhancement`
-- **Description**: Enhance developer experience with improved CLI tools
-- **Goals**:
-  - [x] `flux create` - Project scaffolding
-  - [x] `flux run` - Enhanced execution with hot-reload
-  - [x] `flux analyze` - Static analysis integration
+### CLI Enhancement
+- [x] `flux create` - Project scaffolding
+- [x] `flux run` - Enhanced execution with hot-reload
+- [x] `flux analyze` - Static analysis integration
+
+### BLE Integration
+- [x] Real `flutter_blue_plus` integration
+- [x] Connection state management
+- [x] Permission handling (Android/iOS)
+- [x] Unit tests with BLE mocks
+
+### Camera Integration
+- [x] Real `camera` package integration
+- [x] Lifecycle management
+- [x] Platform-specific configurations
+
+### Infrastructure
+- [x] DAP Debugger
+- [x] LSP Intelligence
+- [x] Compiler Optimizations
+- [x] VM Inline Caching
+- [x] CI/CD Pipeline
+- [x] Pub.dev Publishing
 
 ---
 
-## ✅ Completed Features
+## 🔵 Planned Features (v3.0)
 
-### Feature: BLE Integration (v2.0)
-- **Description**: Integrated real `flutter_blue_plus` for production BLE functionality
-- **Tasks**:
-  - [x] Research latest `flutter_blue_plus` best practices
-  - [x] Update `ble_module.dart` to use real BLE scanning
-  - [x] Implement proper permission handling (Android/iOS)
-  - [x] Add connection state management
-  - [x] Write integration tests with BLE mocks
-  - [x] Write unit tests for BLE module
-  - [x] Update documentation
+### Feature: State Persistence
+- **Description**: Automatic state persistence and restoration
+- **Goals**:
+  - [ ] SharedPreferences integration for simple state
+  - [ ] Hive/Isar database integration for complex state
+  - [ ] State migration utilities
+  - [ ] Encryption for sensitive data
 
-### Feature: Camera Integration (v2.0)
-- **Description**: Integrated real `camera` package for production camera functionality
-- **Tasks**:
-  - [x] Research latest `camera` package best practices
-  - [x] Update `camera_module.dart` to use real `CameraController`
-  - [x] Update `camera_preview.dart` with proper lifecycle management
-  - [x] Add platform-specific configurations (Android/iOS permissions)
-  - [x] Write integration tests with mock camera
-  - [x] Write widget tests for `FluxCameraPreview`
-  - [x] Update documentation
+### Feature: Network Layer
+- **Description**: Built-in HTTP/WebSocket support in Flux scripts
+- **Goals**:
+  - [ ] HTTP client bindings (GET, POST, PUT, DELETE)
+  - [ ] WebSocket real-time communication
+  - [ ] Request/Response interceptors
+  - [ ] Caching strategies
 
-- [x] DAP Debugger (v2.2)
-- [x] LSP Intelligence (v2.1)
-- [x] Compiler Optimizations (v2.1)
-- [x] VM Inline Caching (v2.1)
-- [x] CI/CD Pipeline
-- [x] Pub.dev Publishing
+### Feature: Animation System
+- **Description**: Declarative animations in Flux scripts
+- **Goals**:
+  - [ ] Tween animations
+  - [ ] Spring physics
+  - [ ] Staggered animations
+  - [ ] Hero transitions via script
+
+### Feature: Multi-Platform Extensions
+- **Description**: Platform-specific features
+- **Goals**:
+  - [ ] Web platform support
+  - [ ] Desktop (Windows/macOS/Linux) support
+  - [ ] Platform-specific bindings API
+
+### Feature: Plugin System
+- **Description**: Third-party plugin architecture
+- **Goals**:
+  - [ ] Plugin registry
+  - [ ] Plugin lifecycle management
+  - [ ] Plugin sandboxing
+  - [ ] Community plugin marketplace
+
+### Feature: Developer Experience
+- **Description**: Enhanced DX tooling
+- **Goals**:
+  - [ ] FluxDevTools browser extension
+  - [ ] Performance profiler
+  - [ ] Memory leak detection
+  - [ ] Visual widget inspector
 
 ---
 
