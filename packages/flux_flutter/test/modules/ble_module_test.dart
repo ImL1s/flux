@@ -1,88 +1,214 @@
+import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:flux_flutter/src/modules/ble_module.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+
+// Mocks
+class MockBleWrapper extends Mock implements BleWrapper {}
+class MockBluetoothDevice extends Mock implements BluetoothDevice {}
+class MockBluetoothService extends Mock implements BluetoothService {}
+class MockBluetoothCharacteristic extends Mock implements BluetoothCharacteristic {}
 
 void main() {
   group('BleModule', () {
     late BleModule module;
-    
+    late MockBleWrapper mockWrapper;
+
     setUp(() {
-      module = BleModule.instance;
-    });
-    
-    test('should be a singleton', () {
-      final instance1 = BleModule.instance;
-      final instance2 = BleModule.instance;
-      expect(identical(instance1, instance2), isTrue);
+      mockWrapper = MockBleWrapper();
+      module = BleModule.test(mockWrapper);
+      
+      // Register fallback values if needed
+      registerFallbackValue(Guid('0000'));
     });
 
-    test('should have correct module name', () {
-      expect(module.name, equals('ble'));
+    test('isAvailable returns true when supported and adapter is on', () async {
+      when(() => mockWrapper.isSupported()).thenAnswer((_) async => true);
+      when(() => mockWrapper.adapterState)
+          .thenAnswer((_) => Stream.value(BluetoothAdapterState.on));
+
+      final result = await module.get('isAvailable')?.call([]);
+      expect(result, isTrue);
     });
 
-    test('should have all required functions registered', () {
-      expect(module.get('isAvailable'), isNotNull);
-      expect(module.get('startScan'), isNotNull);
-      expect(module.get('stopScan'), isNotNull);
-      expect(module.get('connect'), isNotNull);
-      expect(module.get('disconnect'), isNotNull);
-      expect(module.get('discoverServices'), isNotNull);
-      expect(module.get('read'), isNotNull);
-      expect(module.get('write'), isNotNull);
-      expect(module.get('subscribe'), isNotNull);
-      expect(module.get('unsubscribe'), isNotNull);
-      expect(module.get('getDiscoveredDevices'), isNotNull);
-    });
-    
-    test('isAvailable should return false in test environment', () async {
-      // In tests, real bluetooth is not available
+    test('isAvailable returns false when not supported', () async {
+      when(() => mockWrapper.isSupported()).thenAnswer((_) async => false);
+
       final result = await module.get('isAvailable')?.call([]);
       expect(result, isFalse);
     });
-    
-    group('Scan Operations', () {
-      test('stopScan should handle error gracefully when no adapter', () async {
-        final result = await module.get('stopScan')?.call([]);
+
+    group('Scanning', () {
+      test('startScan invokes wrapper and returns success', () async {
+        when(() => mockWrapper.scanResults).thenAnswer((_) => Stream.empty());
+        when(() => mockWrapper.startScan(
+              timeout: any(named: 'timeout'),
+              withServices: any(named: 'withServices'),
+            )).thenAnswer((_) async {});
+
+        final result = await module.get('startScan')?.call([
+          {'timeout': 100}
+        ]);
+
+        verify(() => mockWrapper.startScan(
+              timeout: any(named: 'timeout'),
+              withServices: any(named: 'withServices'),
+            )).called(1);
+        
         expect(result, isA<Map>());
-        // In test env, this might return success false
+        expect((result as Map)['success'], isTrue);
       });
       
-      test('getDiscoveredDevices should be empty initially', () {
-        final result = module.get('getDiscoveredDevices')?.call([]);
-        expect(result, isA<List>());
-        expect((result as List).isEmpty, isTrue);
+       test('stopScan invokes wrapper', () async {
+        when(() => mockWrapper.stopScan()).thenAnswer((_) async {});
+
+        await module.get('stopScan')?.call([]);
+
+        verify(() => mockWrapper.stopScan()).called(1);
+      });
+    });
+
+    group('Connection', () {
+      late MockBluetoothDevice mockDevice;
+      final deviceId = 'test-device-id';
+
+      setUp(() {
+        mockDevice = MockBluetoothDevice();
+        when(() => mockWrapper.fromId(deviceId)).thenReturn(mockDevice);
+        when(() => mockDevice.connect()).thenAnswer((_) async {});
+        when(() => mockDevice.disconnect()).thenAnswer((_) async {});
+        when(() => mockDevice.remoteId).thenReturn(DeviceIdentifier(deviceId));
+      });
+
+      test('connect calls device connect', () async {
+        final result = await module.get('connect')?.call([deviceId]);
+        
+        verify(() => mockDevice.connect()).called(1);
+        expect((result as Map)['success'], isTrue);
+      });
+
+      test('disconnect calls device disconnect', () async {
+        // First connect
+        await module.get('connect')?.call([deviceId]);
+        
+        final result = await module.get('disconnect')?.call([deviceId]);
+        
+        verify(() => mockDevice.disconnect()).called(1);
+        expect((result as Map)['success'], isTrue);
       });
     });
     
-    group('Connection Operations', () {
-      test('connect should fail without deviceId', () async {
-        final result = await module.get('connect')?.call([]);
-        expect(result, isA<Map>());
-        expect((result as Map)['success'], isFalse);
-        expect(result['error'], contains('Device ID required'));
+    group('Services & Characteristics', () {
+      late MockBluetoothDevice mockDevice;
+      late MockBluetoothService mockService;
+      late MockBluetoothCharacteristic mockChar;
+      final deviceId = 'test-device-id';
+      final serviceUuid = '180d';
+      final charUuid = '2a37';
+
+      setUp(() async {
+        mockDevice = MockBluetoothDevice();
+        mockService = MockBluetoothService();
+        mockChar = MockBluetoothCharacteristic();
+        
+        when(() => mockWrapper.fromId(deviceId)).thenReturn(mockDevice);
+        when(() => mockDevice.connect()).thenAnswer((_) async {});
+        
+        // Mock service discovery
+        when(() => mockDevice.discoverServices()).thenAnswer((_) async => [mockService]);
+        when(() => mockService.serviceUuid).thenReturn(Guid(serviceUuid));
+        when(() => mockService.characteristics).thenReturn([mockChar]);
+        
+        // Mock characteristic
+        when(() => mockChar.characteristicUuid).thenReturn(Guid(charUuid));
+        when(() => mockChar.properties).thenReturn(CharacteristicProperties(read: true, write: false, notify: true, indicate: false, broadcast: false, extendedProperties: false, authenticatedSignedWrites: false, writeWithoutResponse: false));
+        
+        // Connect device first logic
+        await module.get('connect')?.call([deviceId]);
+        // Also ensure servicesList returns the discovered services
+        when(() => mockDevice.servicesList).thenReturn([mockService]);
       });
-      
-      test('disconnect should fail for non-connected device', () async {
-        final result = await module.get('disconnect')?.call(['invalid-id']);
-        expect(result, isA<Map>());
+
+      test('discoverServices returns mapped services', () async {
+         final result = await module.get('discoverServices')?.call([deviceId]);
+         expect((result as Map)['success'], isTrue);
+         final services = result['services'] as List;
+         expect(services.length, 1);
+         expect(services[0]['uuid'], equals(serviceUuid));
+      });
+
+      test('read calls characteristic read', () async {
+        when(() => mockChar.read()).thenAnswer((_) async => [123]);
+        
+        final result = await module.get('read')?.call([deviceId, serviceUuid, charUuid]);
+        
+        verify(() => mockChar.read()).called(1);
+        expect((result as Map)['success'], isTrue);
+        expect(result['value'], equals([123]));
+      });
+
+      test('write calls characteristic write', () async {
+        when(() => mockChar.write(any())).thenAnswer((_) async {});
+        
+        final result = await module.get('write')?.call([deviceId, serviceUuid, charUuid, [1, 2, 3]]);
+        
+        verify(() => mockChar.write([1, 2, 3])).called(1);
+        expect((result as Map)['success'], isTrue);
+      });
+
+      test('subscribe and unsubscribe logic', () async {
+        final controller = StreamController<List<int>>();
+        when(() => mockChar.setNotifyValue(any())).thenAnswer((_) async => true);
+        when(() => mockChar.lastValueStream).thenAnswer((_) => controller.stream);
+        
+        var callbackCalled = false;
+        void callback(List<dynamic> args) {
+          callbackCalled = true;
+          expect(args[0], equals([42]));
+        }
+
+        // Subscribe
+        final subResult = await module.get('subscribe')?.call([deviceId, serviceUuid, charUuid, callback]);
+        expect((subResult as Map)['success'], isTrue);
+        verify(() => mockChar.setNotifyValue(true)).called(1);
+
+        // Trigger notification
+        controller.add([42]);
+        await Future.delayed(Duration.zero); // Let stream deliver
+        expect(callbackCalled, isTrue);
+
+        // Unsubscribe
+        final unsubResult = await module.get('unsubscribe')?.call([deviceId, serviceUuid, charUuid]);
+        expect((unsubResult as Map)['success'], isTrue);
+        verify(() => mockChar.setNotifyValue(false)).called(1);
+        
+        controller.close();
+      });
+
+      test('read/write/subscribe fail if characteristic not found', () async {
+        final result = await module.get('read')?.call([deviceId, serviceUuid, 'invalid-char']);
         expect((result as Map)['success'], isFalse);
+        expect(result['error'], contains('Characteristic not found'));
       });
     });
-    
-    group('Data Operations', () {
-      test('read should require arguments', () async {
-        final result = await module.get('read')?.call([]);
+
+    group('Error Handling Edge Cases', () {
+      test('connect fails gracefully on exception', () async {
+        final deviceId = 'fail-device';
+        final mockDevice = MockBluetoothDevice();
+        when(() => mockWrapper.fromId(deviceId)).thenReturn(mockDevice);
+        when(() => mockDevice.connect()).thenThrow(Exception('Connection failed'));
+
+        final result = await module.get('connect')?.call([deviceId]);
         expect((result as Map)['success'], isFalse);
+        expect(result['error'], contains('Connection failed'));
       });
-      
-      test('write should require arguments', () async {
-        final result = await module.get('write')?.call([]);
+
+      test('discoverServices fails if device not connected', () async {
+        final result = await module.get('discoverServices')?.call(['not-connected']);
         expect((result as Map)['success'], isFalse);
-      });
-      
-      test('subscribe should require arguments', () async {
-        final result = await module.get('subscribe')?.call([]);
-        expect((result as Map)['success'], isFalse);
+        expect(result['error'], contains('Device not connected'));
       });
     });
   });

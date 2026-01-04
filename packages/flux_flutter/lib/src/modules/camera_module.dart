@@ -1,30 +1,66 @@
 import 'package:flutter/widgets.dart';
 import 'package:flux_vm/flux_vm.dart';
-import 'package:camera/camera.dart';
+import 'package:camera/camera.dart' as cam;
+
+/// Wrapper interface for camera package static methods and factory functionality.
+abstract class CameraWrapper {
+  Future<List<cam.CameraDescription>> availableCameras();
+  cam.CameraController createController(
+    cam.CameraDescription description,
+    cam.ResolutionPreset resolutionPreset, {
+    bool enableAudio = true,
+    cam.ImageFormatGroup? imageFormatGroup,
+  });
+}
+
+/// Real implementation of CameraWrapper using the camera package.
+class RealCameraWrapper implements CameraWrapper {
+  @override
+  Future<List<cam.CameraDescription>> availableCameras() => cam.availableCameras();
+
+  @override
+  cam.CameraController createController(
+    cam.CameraDescription description,
+    cam.ResolutionPreset resolutionPreset, {
+    bool enableAudio = true,
+    cam.ImageFormatGroup? imageFormatGroup,
+  }) {
+    return cam.CameraController(
+      description,
+      resolutionPreset,
+      enableAudio: enableAudio,
+      imageFormatGroup: imageFormatGroup,
+    );
+  }
+}
 
 /// Camera module for Flux scripting language.
-/// 
-/// Provides camera functionality accessible from Flux scripts:
-/// - `camera.availableCameras()` - Get list of available cameras
-/// - `camera.initialize(options)` - Initialize camera with options
-/// - `camera.takePicture()` - Capture a photo
-/// - `camera.startVideoRecording()` - Start video recording
-/// - `camera.stopVideoRecording()` - Stop video recording
-/// - `camera.setFlashMode(mode)` - Set flash mode ('off', 'auto', 'on', 'torch')
-/// - `camera.dispose()` - Dispose camera resources
 class CameraModule extends FluxModule {
   static CameraModule? _instance;
   
+  /// The wrapper instance used for camera operations.
+  final CameraWrapper cameraWrapper;
+  
   /// Singleton instance
-  static CameraModule get instance => _instance ??= CameraModule._();
+  static CameraModule get instance => _instance ??= CameraModule._(RealCameraWrapper());
   
   /// The active camera controller
-  CameraController? _controller;
+  cam.CameraController? _controller;
   
   /// Cached list of available cameras
-  List<CameraDescription>? _cameras;
+  List<cam.CameraDescription>? _cameras;
+
+  /// Constructor for testing with mock wrapper
+  @visibleForTesting
+  CameraModule.test(this.cameraWrapper) : super('camera') {
+    _registerFunctions();
+  }
   
-  CameraModule._() : super('camera') {
+  CameraModule._(this.cameraWrapper) : super('camera') {
+    _registerFunctions();
+  }
+
+  void _registerFunctions() {
     register('availableCameras', AsyncNativeFunction('camera.availableCameras', 0, _availableCameras));
     register('initialize', AsyncNativeFunction('camera.initialize', 1, _initialize));
     register('takePicture', AsyncNativeFunction('camera.takePicture', 0, _takePicture));
@@ -35,14 +71,14 @@ class CameraModule extends FluxModule {
   }
   
   /// Get the current camera controller (for preview widget)
-  CameraController? get controller => _controller;
+  cam.CameraController? get controller => _controller;
   
   /// Check if camera is initialized
   bool get isInitialized => _controller?.value.isInitialized ?? false;
   
   Future<Object?> _availableCameras(List<Object?> args) async {
     try {
-      _cameras = await availableCameras();
+      _cameras = await cameraWrapper.availableCameras();
       return _cameras!.asMap().entries.map((entry) => {
         'id': entry.key,
         'name': entry.value.name,
@@ -65,7 +101,7 @@ class CameraModule extends FluxModule {
       await _controller?.dispose();
       
       // Get cameras if not cached
-      _cameras ??= await availableCameras();
+      _cameras ??= await cameraWrapper.availableCameras();
       
       if (_cameras!.isEmpty) {
         debugPrint('[CameraModule] No cameras available');
@@ -78,8 +114,8 @@ class CameraModule extends FluxModule {
       // Parse resolution preset
       final resolution = _parseResolutionPreset(resolutionStr);
       
-      // Create and initialize controller
-      _controller = CameraController(
+      // Create and initialize controller via wrapper
+      _controller = cameraWrapper.createController(
         _cameras![cameraIndex],
         resolution,
         enableAudio: options['enableAudio'] != false,
@@ -109,7 +145,7 @@ class CameraModule extends FluxModule {
     }
     
     try {
-      final XFile image = await _controller!.takePicture();
+      final cam.XFile image = await _controller!.takePicture();
       debugPrint('[CameraModule] Picture taken: ${image.path}');
       return {
         'success': true,
@@ -151,7 +187,7 @@ class CameraModule extends FluxModule {
     }
     
     try {
-      final XFile video = await _controller!.stopVideoRecording();
+      final cam.XFile video = await _controller!.stopVideoRecording();
       debugPrint('[CameraModule] Stopped video recording: ${video.path}');
       return {
         'success': true,
@@ -194,38 +230,38 @@ class CameraModule extends FluxModule {
     }
   }
   
-  ResolutionPreset _parseResolutionPreset(String value) {
+  cam.ResolutionPreset _parseResolutionPreset(String value) {
     switch (value.toLowerCase()) {
       case 'low':
-        return ResolutionPreset.low;
+        return cam.ResolutionPreset.low;
       case 'medium':
-        return ResolutionPreset.medium;
+        return cam.ResolutionPreset.medium;
       case 'high':
-        return ResolutionPreset.high;
+        return cam.ResolutionPreset.high;
       case 'veryhigh':
-        return ResolutionPreset.veryHigh;
+        return cam.ResolutionPreset.veryHigh;
       case 'ultrahigh':
-        return ResolutionPreset.ultraHigh;
+        return cam.ResolutionPreset.ultraHigh;
       case 'max':
-        return ResolutionPreset.max;
+        return cam.ResolutionPreset.max;
       default:
-        return ResolutionPreset.medium;
+        return cam.ResolutionPreset.medium;
     }
   }
   
-  FlashMode _parseFlashMode(String value) {
+  cam.FlashMode _parseFlashMode(String value) {
     switch (value.toLowerCase()) {
       case 'off':
-        return FlashMode.off;
+        return cam.FlashMode.off;
       case 'auto':
-        return FlashMode.auto;
+        return cam.FlashMode.auto;
       case 'on':
       case 'always':
-        return FlashMode.always;
+        return cam.FlashMode.always;
       case 'torch':
-        return FlashMode.torch;
+        return cam.FlashMode.torch;
       default:
-        return FlashMode.off;
+        return cam.FlashMode.off;
     }
   }
 }

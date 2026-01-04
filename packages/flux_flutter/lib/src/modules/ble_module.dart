@@ -1,38 +1,62 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/widgets.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
+
+/// Wrapper interface for FlutterBluePlus static methods to enable mocking.
+abstract class BleWrapper {
+  Future<bool> isSupported();
+  Stream<BluetoothAdapterState> get adapterState;
+  Stream<List<ScanResult>> get scanResults;
+  Future<void> startScan({Duration? timeout, List<Guid>? withServices});
+  Future<void> stopScan();
+  BluetoothDevice fromId(String remoteId);
+}
+
+/// Real implementation of BleWrapper using FlutterBluePlus.
+class RealBleWrapper implements BleWrapper {
+  @override
+  Future<bool> isSupported() => FlutterBluePlus.isSupported;
+
+  @override
+  Stream<BluetoothAdapterState> get adapterState => FlutterBluePlus.adapterState;
+
+  @override
+  Stream<List<ScanResult>> get scanResults => FlutterBluePlus.scanResults;
+
+  @override
+  Future<void> startScan({Duration? timeout, List<Guid>? withServices}) {
+    return FlutterBluePlus.startScan(timeout: timeout, withServices: withServices ?? []);
+  }
+
+  @override
+  Future<void> stopScan() => FlutterBluePlus.stopScan();
+
+  @override
+  BluetoothDevice fromId(String remoteId) => BluetoothDevice.fromId(remoteId);
+}
 
 /// Bluetooth Low Energy (BLE) module for Flux scripting language.
-/// 
-/// Provides BLE functionality accessible from Flux scripts:
-/// - `ble.isAvailable()` - Check if BLE is available
-/// - `ble.startScan({timeout, serviceUuids})` - Start scanning
-/// - `ble.stopScan()` - Stop scanning
-/// - `ble.connect(deviceId)` - Connect to device
-/// - `ble.disconnect(deviceId)` - Disconnect
-/// - `ble.discoverServices(deviceId)` - Discover services
-/// - `ble.read(deviceId, serviceUuid, charUuid)` - Read value
-/// - `ble.write(deviceId, serviceUuid, charUuid, data)` - Write value
-/// - `ble.subscribe(deviceId, serviceUuid, charUuid, callback)` - Subscribe to notifications
 class BleModule extends FluxModule {
   static BleModule? _instance;
   
+  /// The wrapper instance used for BLE operations.
+  final BleWrapper _bleWrapper;
+  
   /// Singleton instance
-  static BleModule get instance => _instance ??= BleModule._();
-  
-  // Store connected devices
-  final Map<String, BluetoothDevice> _connectedDevices = {};
-  
-  // Store subscriptions
-  final Map<String, StreamSubscription> _subscriptions = {};
-  
-  // Store discovered devices for retrieval
-  final List<ScanResult> _scanResults = [];
-  
-  BleModule._() : super('ble') {
+  static BleModule get instance => _instance ??= BleModule._(RealBleWrapper());
+
+  /// Constructor for testing with mock wrapper
+  @visibleForTesting
+  BleModule.test(this._bleWrapper) : super('ble') {
+    _registerFunctions();
+  }
+
+  BleModule._(this._bleWrapper) : super('ble') {
+    _registerFunctions();
+  }
+
+  void _registerFunctions() {
     register('isAvailable', AsyncNativeFunction('ble.isAvailable', 0, _isAvailable));
     register('startScan', AsyncNativeFunction('ble.startScan', 1, _startScan));
     register('stopScan', AsyncNativeFunction('ble.stopScan', 0, _stopScan));
@@ -46,15 +70,24 @@ class BleModule extends FluxModule {
     register('unsubscribe', AsyncNativeFunction('ble.unsubscribe', 3, _unsubscribe));
   }
   
+  // Store connected devices
+  final Map<String, BluetoothDevice> _connectedDevices = {};
+  
+  // Store subscriptions
+  final Map<String, StreamSubscription> _subscriptions = {};
+  
+  // Store discovered devices for retrieval
+  final Map<String, ScanResult> _scanResults = {};
+  
   Future<Object?> _isAvailable(List<Object?> args) async {
     try {
       // Check if hardware supports BLE
-      if (!await FlutterBluePlus.isSupported) {
+      if (!await _bleWrapper.isSupported()) {
         return false;
       }
       
       // Check if Bluetooth is on
-      return await FlutterBluePlus.adapterState.first == BluetoothAdapterState.on;
+      return await _bleWrapper.adapterState.first == BluetoothAdapterState.on;
     } catch (e) {
       debugPrint('[BleModule] Error checking availability: $e');
       return false;
@@ -63,34 +96,33 @@ class BleModule extends FluxModule {
   
   Future<Object?> _startScan(List<Object?> args) async {
     final options = args.isNotEmpty && args[0] is Map ? args[0] as Map : {};
-    final timeout = options['timeout'] ?? 5000;
-    final serviceUuidsStr = options['serviceUuids'] as List? ?? [];
+    final timeout = (options['timeout'] as num? ?? 10000).toInt();
+    final withServices = options['withServices'] as List?;
     
-    // Convert UUID strings to Guids
-    final serviceGuids = serviceUuidsStr
-        .map((s) => Guid(s.toString()))
-        .toList();
-    
+    final List<Guid> serviceGuids = [];
+    if (withServices != null) {
+      for (var s in withServices) {
+        serviceGuids.add(Guid(s.toString()));
+      }
+    }
+
     try {
-      // Clear previous results
-      _scanResults.clear();
-      
-      // Listen to scan results
-      final subscription = FlutterBluePlus.scanResults.listen((results) {
-        _scanResults.clear();
-        _scanResults.addAll(results);
+      final subscription = _bleWrapper.scanResults.listen((results) {
+        for (var r in results) {
+          _scanResults[r.device.remoteId.toString()] = r;
+        }
       });
       
       debugPrint('[BleModule] Starting scan...');
       
       // Start scanning
-      await FlutterBluePlus.startScan(
-        timeout: Duration(milliseconds: (timeout as num).toInt()),
+      await _bleWrapper.startScan(
+        timeout: Duration(milliseconds: timeout),
         withServices: serviceGuids,
       );
       
       // Wait for scan to complete
-      await Future.delayed(Duration(milliseconds: (timeout as num).toInt()));
+      await Future.delayed(Duration(milliseconds: timeout));
       
       subscription.cancel();
       
@@ -106,7 +138,7 @@ class BleModule extends FluxModule {
   
   Future<Object?> _stopScan(List<Object?> args) async {
     try {
-      await FlutterBluePlus.stopScan();
+      await _bleWrapper.stopScan();
       return {'success': true};
     } catch (e) {
       return {'success': false, 'error': e.toString()};
@@ -114,7 +146,7 @@ class BleModule extends FluxModule {
   }
   
   Object? _getDiscoveredDevices(List<Object?> args) {
-    return _scanResults.map((result) => {
+    return _scanResults.values.map((result) => {
       'id': result.device.remoteId.str,
       'name': result.device.platformName,
       'rssi': result.rssi,
@@ -128,11 +160,7 @@ class BleModule extends FluxModule {
     if (deviceId.isEmpty) return {'success': false, 'error': 'Device ID required'};
     
     try {
-      // Find device instance not just from scan results but generically
-      // FlutterBluePlus requires a device instance.
-      // If found in scan results use that, otherwise verify ID format
-      
-      final device = BluetoothDevice.fromId(deviceId);
+      final device = _bleWrapper.fromId(deviceId);
       
       await device.connect();
       _connectedDevices[deviceId] = device;

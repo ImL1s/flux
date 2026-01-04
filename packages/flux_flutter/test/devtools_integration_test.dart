@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_flutter/src/dev_tools/flux_service_extensions.dart';
-import 'dart:io';
 
 void main() {
   group('DevTools Integration Test', () {

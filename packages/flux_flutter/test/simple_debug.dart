@@ -1,6 +1,5 @@
 
 import 'dart:convert';
-import 'dart:io';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_flutter/src/dev_tools/flux_service_extensions.dart';

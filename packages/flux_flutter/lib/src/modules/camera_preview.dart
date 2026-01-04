@@ -36,6 +36,9 @@ class FluxCameraPreview extends StatefulWidget {
   /// Callback when an error occurs
   final void Function(String error)? onError;
   
+  /// The wrapper instance used for camera operations (for testing)
+  final CameraWrapper? wrapper;
+  
   const FluxCameraPreview({
     super.key,
     this.cameraId = 0,
@@ -44,6 +47,7 @@ class FluxCameraPreview extends StatefulWidget {
     this.enableAudio = true,
     this.onInitialized,
     this.onError,
+    this.wrapper,
   });
   
   @override
@@ -109,8 +113,10 @@ class _FluxCameraPreviewState extends State<FluxCameraPreview> with WidgetsBindi
       await _controller?.dispose();
       _controller = null;
       
+      final wrapper = widget.wrapper ?? CameraModule.instance.cameraWrapper;
+      
       // Get available cameras
-      _cameras = await availableCameras();
+      _cameras = await wrapper.availableCameras();
       
       if (_cameras == null || _cameras!.isEmpty) {
         throw Exception('No cameras available on this device');
@@ -122,8 +128,8 @@ class _FluxCameraPreviewState extends State<FluxCameraPreview> with WidgetsBindi
       // Parse resolution
       final resolution = _parseResolutionPreset(widget.resolution);
       
-      // Create controller
-      _controller = CameraController(
+      // Create controller via wrapper
+      _controller = wrapper.createController(
         _cameras![cameraIndex],
         resolution,
         enableAudio: widget.enableAudio,

@@ -1,134 +1,188 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:flux_flutter/src/modules/camera_module.dart';
+import 'package:camera/camera.dart';
+
+// Mocks
+class MockCameraWrapper extends Mock implements CameraWrapper {}
+class MockCameraController extends Mock implements CameraController {}
+
+class FakeCameraDescription extends Fake implements CameraDescription {
+  @override
+  final String name;
+  @override
+  final CameraLensDirection lensDirection;
+  @override
+  final int sensorOrientation;
+
+  FakeCameraDescription({
+    required this.name,
+    required this.lensDirection,
+    required this.sensorOrientation,
+  });
+}
 
 void main() {
+  setUpAll(() {
+    registerFallbackValue(ResolutionPreset.medium);
+    registerFallbackValue(FlashMode.off);
+    registerFallbackValue(FakeCameraDescription(
+      name: 'dummy',
+      lensDirection: CameraLensDirection.back,
+      sensorOrientation: 0,
+    ));
+  });
+
   group('CameraModule', () {
     late CameraModule module;
-    
+    late MockCameraWrapper mockWrapper;
+    late MockCameraController mockController;
+    late List<CameraDescription> mockCameras;
+
     setUp(() {
-      module = CameraModule.instance;
+      mockWrapper = MockCameraWrapper();
+      mockController = MockCameraController();
+      module = CameraModule.test(mockWrapper);
+      
+      mockCameras = [
+        FakeCameraDescription(
+          name: 'Camera 0',
+          lensDirection: CameraLensDirection.back,
+          sensorOrientation: 90,
+        ),
+      ];
+
+      // Setup default mock behaviors
+      when(() => mockWrapper.availableCameras()).thenAnswer((_) async => mockCameras);
+      when(() => mockWrapper.createController(any(), any(), enableAudio: any(named: 'enableAudio')))
+          .thenReturn(mockController);
+      
+      when(() => mockController.initialize()).thenAnswer((_) async {});
+      when(() => mockController.dispose()).thenAnswer((_) async {});
+      when(() => mockController.value).thenReturn(CameraValue(
+        description: mockCameras.first,
+        isInitialized: true,
+        errorDescription: null,
+        previewSize: null,
+        isRecordingVideo: false,
+        isTakingPicture: false,
+        isStreamingImages: false,
+        isRecordingPaused: false,
+        flashMode: FlashMode.off,
+        exposureMode: ExposureMode.auto,
+        focusMode: FocusMode.auto,
+        exposurePointSupported: true,
+        focusPointSupported: true,
+        deviceOrientation: DeviceOrientation.portraitUp,
+        lockedCaptureOrientation: null,
+        recordingOrientation: null,
+        isPreviewPaused: false,
+        previewPauseOrientation: null,
+      ));
     });
-    
-    test('should be a singleton', () {
-      final instance1 = CameraModule.instance;
-      final instance2 = CameraModule.instance;
-      expect(identical(instance1, instance2), isTrue);
+    test('availableCameras returns mapped data', () async {
+      final result = await module.get('availableCameras')?.call([]);
+      expect(result, isA<List>());
+      final list = result as List;
+      expect(list.length, 1);
+      expect(list[0]['name'], equals('Camera 0'));
     });
 
-    test('should have correct module name', () {
-      expect(module.name, equals('camera'));
+    test('initialize creates and initializes controller', () async {
+      final result = await module.get('initialize')?.call([
+        {'cameraId': 0, 'resolution': 'high'}
+      ]);
+
+      verify(() => mockWrapper.createController(any(), ResolutionPreset.high, enableAudio: true)).called(1);
+      verify(() => mockController.initialize()).called(1);
+      
+      expect((result as Map)['success'], isTrue);
+      expect(module.controller, equals(mockController));
     });
 
-    test('should have all required functions registered', () {
-      // Verify key camera functions are registered
-      expect(module.get('availableCameras'), isNotNull);
-      expect(module.get('initialize'), isNotNull);
-      expect(module.get('takePicture'), isNotNull);
-      expect(module.get('startVideoRecording'), isNotNull);
-      expect(module.get('stopVideoRecording'), isNotNull);
-      expect(module.get('setFlashMode'), isNotNull);
-      expect(module.get('dispose'), isNotNull);
+    test('takePicture returns path on success', () async {
+      final mockFile = XFile('test_path.jpg', name: 'test_path.jpg');
+      when(() => mockController.takePicture()).thenAnswer((_) async => mockFile);
+      
+      // Initialize first
+      await module.get('initialize')?.call([{}]);
+      
+      final result = await module.get('takePicture')?.call([]);
+      
+      verify(() => mockController.takePicture()).called(1);
+      expect((result as Map)['success'], isTrue);
+      expect(result['path'], equals('test_path.jpg'));
     });
-    
-    test('controller should be null initially', () {
-      // Fresh instance should not have controller
-      expect(module.controller, isNull);
-    });
-    
-    test('isInitialized should be false initially', () {
-      expect(module.isInitialized, isFalse);
-    });
-    
-    group('availableCameras', () {
-      test('should return a list', () async {
-        // Note: In test environment without real cameras, this may return empty list
-        final result = await module.get('availableCameras')?.call([]);
-        expect(result, isA<List>());
+
+    group('Video Recording', () {
+      setUp(() async {
+        await module.get('initialize')?.call([{}]);
       });
-    });
-    
-    group('initialize without cameras', () {
-      test('should handle initialization gracefully in test environment', () async {
-        // In test environment, cameras may not be available
-        final result = await module.get('initialize')?.call([
-          {'cameraId': 0, 'resolution': 'medium'}
-        ]);
-        
-        // Should return a Map with success/error info
-        expect(result, isA<Map>());
-      });
-    });
-    
-    group('takePicture without initialization', () {
-      test('should return error when camera not initialized', () async {
-        // Reset state by disposing first
-        await module.get('dispose')?.call([]);
-        
-        final result = await module.get('takePicture')?.call([]);
-        
-        expect(result, isA<Map>());
-        final resultMap = result as Map;
-        expect(resultMap['success'], isFalse);
-        expect(resultMap['error'], contains('not initialized'));
-      });
-    });
-    
-    group('startVideoRecording without initialization', () {
-      test('should return error when camera not initialized', () async {
-        await module.get('dispose')?.call([]);
+
+      test('startVideoRecording calls controller', () async {
+        when(() => mockController.startVideoRecording()).thenAnswer((_) async {});
         
         final result = await module.get('startVideoRecording')?.call([]);
         
-        expect(result, isA<Map>());
-        final resultMap = result as Map;
-        expect(resultMap['success'], isFalse);
-        expect(resultMap['error'], contains('not initialized'));
+        verify(() => mockController.startVideoRecording()).called(1);
+        expect((result as Map)['success'], isTrue);
       });
-    });
-    
-    group('stopVideoRecording without initialization', () {
-      test('should return error when camera not initialized', () async {
-        await module.get('dispose')?.call([]);
+
+      test('stopVideoRecording returns video file', () async {
+         // Mock recording state
+        when(() => mockController.value).thenReturn(CameraValue(
+          description: mockCameras.first,
+          isInitialized: true,
+          errorDescription: null,
+          previewSize: null,
+          isRecordingVideo: true, // Recording!
+          isTakingPicture: false,
+          isStreamingImages: false,
+          isRecordingPaused: false,
+          flashMode: FlashMode.off,
+          exposureMode: ExposureMode.auto,
+          focusMode: FocusMode.auto,
+          exposurePointSupported: true,
+          focusPointSupported: true,
+          deviceOrientation: DeviceOrientation.portraitUp,
+          lockedCaptureOrientation: null,
+          recordingOrientation: null,
+          isPreviewPaused: false,
+          previewPauseOrientation: null,
+        ));
+
+        final mockFile = XFile('video.mp4', name: 'video.mp4');
+        when(() => mockController.stopVideoRecording()).thenAnswer((_) async => mockFile);
         
         final result = await module.get('stopVideoRecording')?.call([]);
         
-        expect(result, isA<Map>());
-        final resultMap = result as Map;
-        expect(resultMap['success'], isFalse);
-        expect(resultMap['error'], contains('not initialized'));
+        verify(() => mockController.stopVideoRecording()).called(1);
+        expect((result as Map)['success'], isTrue);
+        expect(result['path'], equals('video.mp4'));
       });
     });
-    
-    group('setFlashMode without initialization', () {
-      test('should return error when camera not initialized', () async {
-        await module.get('dispose')?.call([]);
-        
-        final result = await module.get('setFlashMode')?.call(['auto']);
-        
-        expect(result, isA<Map>());
-        final resultMap = result as Map;
-        expect(resultMap['success'], isFalse);
-        expect(resultMap['error'], contains('not initialized'));
-      });
-    });
-    
-    group('dispose', () {
-      test('should complete without error', () async {
-        final result = await module.get('dispose')?.call([]);
-        
-        expect(result, isA<Map>());
-        final resultMap = result as Map;
-        expect(resultMap['success'], isTrue);
-      });
+
+    test('setFlashMode mapping', () async {
+      await module.get('initialize')?.call([{}]);
+      when(() => mockController.setFlashMode(any())).thenAnswer((_) async {});
       
-      test('should be safe to call multiple times', () async {
-        await module.get('dispose')?.call([]);
-        final result = await module.get('dispose')?.call([]);
-        
-        expect(result, isA<Map>());
-        final resultMap = result as Map;
-        expect(resultMap['success'], isTrue);
-      });
+      registerFallbackValue(FlashMode.always);
+      
+      final result = await module.get('setFlashMode')?.call(['torch']);
+      
+      verify(() => mockController.setFlashMode(FlashMode.torch)).called(1);
+      expect((result as Map)['success'], isTrue);
+    });
+
+    test('dispose cleans up controller', () async {
+      await module.get('initialize')?.call([{}]);
+      
+      final result = await module.get('dispose')?.call([]);
+      
+      verify(() => mockController.dispose()).called(1);
+      expect((result as Map)['success'], isTrue);
+      expect(module.controller, isNull);
     });
   });
 }

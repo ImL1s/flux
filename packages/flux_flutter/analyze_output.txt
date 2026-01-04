@@ -1,15 +1,5 @@
-Analyzing flux_flutter...                                       
+Analyzing 2 items...                                            
 
-warning - The left operand can't be null, so the right operand is never executed - lib\src\bindings.dart:46:49 - dead_null_aware_expression
-warning - The left operand can't be null, so the right operand is never executed - lib\src\bindings.dart:47:51 - dead_null_aware_expression
-warning - The left operand can't be null, so the right operand is never executed - lib\src\bindings.dart:57:49 - dead_null_aware_expression
-warning - The left operand can't be null, so the right operand is never executed - lib\src\bindings.dart:58:51 - dead_null_aware_expression
-   info - Don't invoke 'print' in production code - lib\src\flux_widget.dart:193:5 - avoid_print
-   info - Don't invoke 'print' in production code - lib\src\flux_widget.dart:198:5 - avoid_print
-   info - Don't invoke 'print' in production code - lib\src\flux_widget.dart:202:5 - avoid_print
-warning - The operand can't be 'null', so the condition is always 'true' - lib\src\flux_widget.dart:285:20 - unnecessary_null_comparison
-warning - Unnecessary cast - lib\src\flux_widget.dart:361:32 - unnecessary_cast
-warning - Unnecessary cast - lib\src\flux_widget.dart:399:31 - unnecessary_cast
-warning - The operand can't be 'null', so the condition is always 'true' - lib\src\riverpod_integration.dart:248:39 - unnecessary_null_comparison
+  error - The argument type 'List<Guid>?' can't be assigned to the parameter type 'List<Guid>'.  - lib\src\modules\ble_module.dart:29:70 - argument_type_not_assignable
+warning - Unnecessary cast - lib\src\modules\ble_module.dart:126:52 - unnecessary_cast
 
-11 issues found. (ran in 1.2s)

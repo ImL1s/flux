@@ -1,0 +1,61 @@
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart
+00:00 +0: (setUpAll)
+00:00 +0: CameraModule availableCameras returns mapped data
+00:00 +1: CameraModule initialize creates and initializes controller
+[CameraModule] Initialized camera 0 with high resolution
+00:00 +2: CameraModule takePicture returns path on success
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Picture taken: test_path.jpg
+00:00 +3: CameraModule Video Recording startVideoRecording calls controller
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Started video recording
+00:00 +4: CameraModule Video Recording stopVideoRecording returns video file
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Stopped video recording: video.mp4
+00:00 +5: CameraModule setFlashMode mapping
+[CameraModule] Initialized camera 0 with medium resolution
+00:00 +5 -1: CameraModule setFlashMode mapping [E]
+  Bad state: A test tried to use `any` or `captureAny` on a parameter of type `FlashMode`, but
+  registerFallbackValue was not previously called to register a fallback value for `FlashMode`.
+  
+  To fix, do:
+  
+  ```
+  void main() {
+    setUpAll(() {
+      registerFallbackValue(/* create a dummy instance of `FlashMode` */);
+    });
+  }
+  ```
+  
+  This instance of `FlashMode` will only be passed around, but never be interacted with.
+  Therefore, if `FlashMode` is a function, it does not have to return a valid object and
+  could throw unconditionally.
+  If you cannot easily create an instance of `FlashMode`, consider defining a `Fake`:
+  
+  ```
+  class MyTypeFake extends Fake implements MyType {}
+  
+  void main() {
+    setUpAll(() {
+      registerFallbackValue(MyTypeFake());
+    });
+  }
+  ```
+  
+  Fallbacks are required because mocktail has to know of a valid `FlashMode` to prevent
+  TypeErrors from being thrown in Dart's sound null safe mode, while still
+  providing a convenient syntax.
+  
+  package:mocktail/src/_register_matcher.dart 49:5    _getFallbackValue
+  package:mocktail/src/_register_matcher.dart 160:25  _registerMatcher
+  package:mocktail/src/_register_matcher.dart 104:10  any
+  test\modules\camera_module_test.dart 167:46         main.<fn>.<fn>.<fn>
+  package:mocktail/src/mocktail.dart 211:9            when.<fn>
+  test\modules\camera_module_test.dart 167:11         main.<fn>.<fn>
+  
+00:00 +5 -1: CameraModule dispose cleans up controller
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Disposed camera
+00:00 +6 -1: (tearDownAll)
+00:00 +6 -1: Some tests failed.

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_flutter/flux_flutter.dart';
-import 'package:flux_vm/flux_vm.dart';
 import 'server.dart';
 
 /// A wrapper widget that connects to a Flux Hot Reload server and updates the
@@ -13,12 +12,12 @@ class FluxHotReloadWidget extends StatefulWidget {
   final FluxRuntime runtime;
 
   const FluxHotReloadWidget({
-    Key? key,
+    super.key,
     this.host = 'ws://localhost:8080',
     required this.initialSource,
     required this.widgetName,
     required this.runtime,
-  }) : super(key: key);
+  });
 
   @override
   State<FluxHotReloadWidget> createState() => _FluxHotReloadWidgetState();
@@ -43,7 +42,7 @@ class _FluxHotReloadWidgetState extends State<FluxHotReloadWidget> {
   void _handleHotReload(Map<String, dynamic> data) async {
     if (data['type'] == 'reload') {
       final source = data['content'] as String;
-      print('🔥 Flux Hot Reload: Received update (${source.length} bytes)');
+      debugPrint('🔥 Flux Hot Reload: Received update (${source.length} bytes)');
 
       try {
         // 1. Compile new source
@@ -57,19 +56,12 @@ class _FluxHotReloadWidgetState extends State<FluxHotReloadWidget> {
         if (mounted) {
           setState(() {
             _parseError = null;
-            // We need a way to swap the chunk in the runtime
-            // For now, we assume the runtime has a `hotReload` method
-            // or we just re-run the chunk if it's safe.
-            // But optimal way is to swap code while keeping state.
-            
-            // For MVP: We just re-execute the chunk to update declarations
-            // This might reset global state if not careful, but `hotReload`
-            // method in VM should handle "update declarations but keep data".
+            // Use the hotReload method on runtime
             widget.runtime.hotReload(function.chunk);
           });
         }
       } catch (e) {
-        print('❌ Hot Reload Error: $e');
+        debugPrint('❌ Hot Reload Error: $e');
         if (mounted) {
           setState(() {
             _parseError = e.toString();

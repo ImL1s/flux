@@ -4,23 +4,20 @@ This file tracks planned features and improvements. Each item should be implemen
 
 ## 🔴 Pending Features (v2.0+)
 
-### Feature: Camera Integration
-- **Branch**: `feature/camera-integration`
-- **Description**: Integrate real `camera` package for production camera functionality
-- **Dependencies**: `camera: ^0.11.0` (or latest)
-- **Tasks**:
-  - [x] Research latest `camera` package best practices
-  - [x] Update `camera_module.dart` to use real `CameraController`
-  - [x] Update `camera_preview.dart` with proper lifecycle management
-  - [x] Add platform-specific configurations (Android/iOS permissions)
-  - [x] Write integration tests with mock camera
-  - [x] Write widget tests for `FluxCameraPreview`
-  - [x] Update documentation
+### Feature: FluxUI (Component Library)
+- **Branch**: `feature/flux-ui`
+- **Description**: Standard library of UI components for Flux
+- **Goals**: 
+  - [ ] Implement core components (Button, Card, Input, etc.)
+  - [ ] Implement layout components (Column, Row, Stack, Grid)
+  - [ ] Design System support (Theme, Typography, Colors)
 
-### Feature: BLE Integration
-- **Branch**: `feature/ble-integration`
-- **Description**: Integrate real `flutter_blue_plus` for production BLE functionality
-- **Dependencies**: `flutter_blue_plus: ^1.34.0` (or latest)
+---
+
+## ✅ Completed Features
+
+### Feature: BLE Integration (v2.0)
+- **Description**: Integrated real `flutter_blue_plus` for production BLE functionality
 - **Tasks**:
   - [x] Research latest `flutter_blue_plus` best practices
   - [x] Update `ble_module.dart` to use real BLE scanning
@@ -30,9 +27,16 @@ This file tracks planned features and improvements. Each item should be implemen
   - [x] Write unit tests for BLE module
   - [x] Update documentation
 
----
-
-## ✅ Completed Features
+### Feature: Camera Integration (v2.0)
+- **Description**: Integrated real `camera` package for production camera functionality
+- **Tasks**:
+  - [x] Research latest `camera` package best practices
+  - [x] Update `camera_module.dart` to use real `CameraController`
+  - [x] Update `camera_preview.dart` with proper lifecycle management
+  - [x] Add platform-specific configurations (Android/iOS permissions)
+  - [x] Write integration tests with mock camera
+  - [x] Write widget tests for `FluxCameraPreview`
+  - [x] Update documentation
 
 - [x] DAP Debugger (v2.2)
 - [x] LSP Intelligence (v2.1)
