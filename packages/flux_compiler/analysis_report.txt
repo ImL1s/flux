@@ -1,0 +1,33 @@
+Analyzing ....
+
+  error - example\example.dart:20:20 - The function 'FluxParser' isn't defined. Try importing the library that defines 'FluxParser', correcting the name to the name of an existing function, or defining a function named 'FluxParser'. - undefined_function
+  error - example\example.dart:20:31 - The function 'FluxLexer' isn't defined. Try importing the library that defines 'FluxLexer', correcting the name to the name of an existing function, or defining a function named 'FluxLexer'. - undefined_function
+  error - example\example.dart:26:22 - The function 'FluxCompiler' isn't defined. Try importing the library that defines 'FluxCompiler', correcting the name to the name of an existing function, or defining a function named 'FluxCompiler'. - undefined_function
+  error - test\class_fields_test.dart:3:8 - Target of URI doesn't exist: 'package:flux_vm/flux_vm.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - test\class_fields_test.dart:13:1 - Undefined class 'InterpretResult'. Try changing the name to the name of an existing class, or creating a class with the name 'InterpretResult'. - undefined_class
+  error - test\class_fields_test.dart:14:14 - The function 'VM' isn't defined. Try importing the library that defines 'VM', correcting the name to the name of an existing function, or defining a function named 'VM'. - undefined_function
+  error - test\class_fields_test.dart:28:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:46:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:71:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:98:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:127:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:150:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:178:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:192:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:203:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:214:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:234:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:250:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:265:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:280:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:291:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:304:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:320:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:340:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:363:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\class_fields_test.dart:383:27 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - test\flx_integration_test.dart:4:8 - Target of URI doesn't exist: 'package:flux_vm/flux_vm.dart'. Try creating the file referenced by the URI, or try using a URI for a file that does exist. - uri_does_not_exist
+  error - test\flx_integration_test.dart:50:18 - The function 'VM' isn't defined. Try importing the library that defines 'VM', correcting the name to the name of an existing function, or defining a function named 'VM'. - undefined_function
+  error - test\flx_integration_test.dart:56:29 - Undefined name 'InterpretResult'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+
+29 issues found.
