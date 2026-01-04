@@ -1,4 +1,4 @@
-# Flux CLI
+# Flux CLI (flux_lang_cli)
 
 Command-line interface for the Flux scripting language.
 

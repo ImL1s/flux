@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:test/test.dart';
 import 'package:args/command_runner.dart';
-import 'package:flux_cli/src/commands/create_command.dart';
-import 'package:flux_cli/src/commands/run_command.dart';
-import 'package:flux_cli/src/commands/analyze_command.dart';
+import 'package:flux_lang_cli/src/commands/create_command.dart';
+import 'package:flux_lang_cli/src/commands/run_command.dart';
+import 'package:flux_lang_cli/src/commands/analyze_command.dart';
 
 void main() {
   late Directory tempDir;

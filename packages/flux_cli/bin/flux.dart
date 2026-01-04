@@ -6,16 +6,16 @@
 import 'dart:io';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_vm/flux_vm.dart';
-import 'package:flux_cli/src/commands/serve_command.dart';
-import 'package:flux_cli/src/commands/key_command.dart';
-import 'package:flux_cli/src/commands/sign_command.dart';
-import 'package:flux_cli/src/commands/verify_command.dart';
-import 'package:flux_cli/src/commands/build_command.dart';
-import 'package:flux_cli/src/commands/create_command.dart';
-import 'package:flux_cli/src/commands/run_command.dart';
-import 'package:flux_cli/src/commands/analyze_command.dart';
+import 'package:flux_lang_cli/src/commands/serve_command.dart';
+import 'package:flux_lang_cli/src/commands/key_command.dart';
+import 'package:flux_lang_cli/src/commands/sign_command.dart';
+import 'package:flux_lang_cli/src/commands/verify_command.dart';
+import 'package:flux_lang_cli/src/commands/build_command.dart';
+import 'package:flux_lang_cli/src/commands/create_command.dart';
+import 'package:flux_lang_cli/src/commands/run_command.dart';
+import 'package:flux_lang_cli/src/commands/analyze_command.dart';
 import 'package:args/command_runner.dart';
-import 'package:flux_cli/src/dev_server.dart' as dev_server;
+import 'package:flux_lang_cli/src/dev_server.dart' as dev_server;
 
 const String version = '2.0.0';
 
