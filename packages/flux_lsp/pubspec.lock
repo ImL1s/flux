@@ -95,7 +95,7 @@ packages:
       path: "../flux_compiler"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   frontend_server_client:
     dependency: transitive
     description:

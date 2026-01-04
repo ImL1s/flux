@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flux_flutter/flux_flutter.dart';
 
 void main() {
   testWidgets('FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton', (tester) async {

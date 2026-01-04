@@ -178,6 +178,12 @@ class VM {
     for (final entry in StdLib.modules.entries) {
       _globals[entry.key] = entry.value;
     }
+
+    // Register built-in print that uses onPrint
+    _globals['print'] = NativeFunction('print', 1, (args) {
+      onPrint(args[0].toString());
+      return null;
+    });
   }
   
   /// Get the pending Future (for external await handling)

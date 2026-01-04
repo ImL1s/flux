@@ -139,6 +139,29 @@ The **Flux VSCode Extension** provides a premium development experience:
 
 To install, see the [VSCode Extension README](packages/flux_vscode/README.md).
 
+### Command-Line Interface (CLI)
+
+The Flux CLI provides tools for development and deployment:
+
+```bash
+# Install globally
+cd packages/flux_cli && dart pub global activate --source path .
+
+# Create a new project
+flux create my_app --template flutter
+
+# Run with hot-reload
+flux run main.flux --watch
+
+# Static analysis
+flux analyze ./src/
+
+# Build to bytecode
+flux build script.flux
+```
+
+For complete documentation, see [Flux CLI README](packages/flux_cli/README.md).
+
 ---
 
 ## 📚 Documentation
