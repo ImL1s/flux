@@ -6,10 +6,8 @@ environment:
   sdk: ^3.0.0
 
 dependencies:
-  flux_vm:
-    path: ../flux_vm
-  flux_compiler:
-    path: ../flux_compiler
+  flux_vm: ^2.0.0
+  flux_compiler: ^2.0.0
   stream_channel: ^2.1.0
   args: ^2.4.0
 

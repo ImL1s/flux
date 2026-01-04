@@ -1,5 +1,0 @@
-name: flux_flutter
-issueTracker: https://github.com/ImL1s/flux/issues
-version: 0.1.0
-materialIconCodePoint: '0xe86f' # code icon
-requiresConnection: true

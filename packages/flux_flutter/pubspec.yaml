@@ -1,7 +1,8 @@
 name: flux_flutter
 description: "Flutter bindings for the Flux scripting language."
 version: 2.0.0
-homepage: https://github.com/user/flux
+homepage: https://github.com/ImL1s/flux
+repository: https://github.com/ImL1s/flux
 
 environment:
   sdk: ^3.6.0
@@ -10,10 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flux_compiler:
-    path: ../flux_compiler
-  flux_vm:
-    path: ../flux_vm
+  flux_compiler: ^2.0.0
+  flux_vm: ^2.0.0
   flutter_riverpod: ^3.0.0
   web_socket_channel: ^3.0.3
   http: ^1.6.0

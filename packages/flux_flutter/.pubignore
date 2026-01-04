@@ -1,0 +1,5 @@
+# Files to ignore when publishing to pub.dev
+*.txt
+*.log
+build/
+.dart_tool/

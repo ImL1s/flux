@@ -1,39 +1,57 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flux Flutter
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Flutter bindings for the Flux scripting language, enabling server-driven UI and hot-reload capabilities.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **FluxUI Component Library**: Complete set of UI components (Button, Card, Input, Badge, Row, Column, Grid, Stack)
+- **BLE Integration**: Bluetooth Low Energy support via `flutter_blue_plus`
+- **Camera Integration**: Real camera functionality via `camera` package
+- **Hot Reload**: Live update scripts without app restart
+- **Riverpod Integration**: Seamless state management with Riverpod 3.x
 
-## Getting started
+## Getting Started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  flux_flutter: ^2.0.0
+  flutter_riverpod: ^3.0.0
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+import 'package:flux_flutter/flux_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ProviderScope(
+      child: MaterialApp(
+        home: FluxWidget(
+          source: '''
+            widget Counter {
+              state count = 0;
+              build {
+                Column(children: [
+                  Text(count),
+                  Button(text: "Increment", onPressed: fn() { count = count + 1; })
+                ])
+              }
+            }
+          ''',
+          widgetName: 'Counter',
+        ),
+      ),
+    );
+  }
+}
 ```
 
-## Additional information
+## Additional Information
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+- [GitHub Repository](https://github.com/ImL1s/flux)
+- [Documentation](https://github.com/ImL1s/flux/tree/main/docs)

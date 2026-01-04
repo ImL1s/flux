@@ -108,17 +108,19 @@ packages:
   flux_compiler:
     dependency: "direct main"
     description:
-      path: "../flux_compiler"
-      relative: true
-    source: path
-    version: "1.0.0"
+      name: flux_compiler
+      sha256: "93ac141b2c72c63ddd7440624af827614c61da5d921dfc66f34fafa7d3a07468"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   flux_vm:
     dependency: "direct main"
     description:
-      path: "../flux_vm"
-      relative: true
-    source: path
-    version: "1.0.0"
+      name: flux_vm
+      sha256: b78d4645c3a411abbd79bddbbd801d8e1cb0c2d0fde57deadbab133f681e81e5
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   frontend_server_client:
     dependency: transitive
     description:

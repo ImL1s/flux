@@ -1,8 +1,14 @@
 # Changelog
 
-## 0.1.0
+## [2.0.0] - 2026-01-04
 
-- Initial release of Flux LSP.
-- Implements Language Server Protocol for Flux.
-- Supports autocomplete, hover, definition, and references.
-- Context-aware suggestions for Widget properties.
+### Added
+- Full LSP 3.17 support
+- Go to Definition
+- Find All References
+- Code completion
+- Diagnostics
+
+### Changed
+- Upgraded to stable v2.0.0 release
+- Better error recovery

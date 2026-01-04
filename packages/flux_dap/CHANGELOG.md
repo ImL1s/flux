@@ -1,7 +1,12 @@
 # Changelog
 
-## 0.1.0
+## [2.0.0] - 2026-01-04
 
-- Initial release of Flux DAP.
-- Implements Debug Adapter Protocol for Flux.
-- Supports breakpoints, stack traces, and variable inspection.
+### Added
+- Full DAP support for VS Code
+- Breakpoint management
+- Variable inspection
+- Step debugging
+
+### Changed
+- Upgraded to stable v2.0.0 release
