@@ -1,0 +1,160 @@
+Resolving dependencies...
+Downloading packages...
+  boolean_selector 2.1.1 (2.1.2 available)
+  camera 0.10.6 (0.11.3 available)
+  device_info_plus 10.1.2 (12.3.0 available)
+  device_info_plus_platform_interface 7.0.2 (7.0.3 available)
+  ffi 2.1.3 (2.1.4 available)
+  flutter_blue_plus 1.36.8 (2.1.0 available)
+  flutter_blue_plus_android 7.0.4 (8.1.0 available)
+  flutter_blue_plus_darwin 7.0.3 (8.1.0 available)
+  flutter_blue_plus_linux 7.0.3 (8.1.0 available)
+  flutter_blue_plus_platform_interface 7.0.0 (8.1.0 available)
+  flutter_blue_plus_web 7.0.2 (8.1.0 available)
+  flutter_lints 5.0.0 (6.0.0 available)
+  flutter_riverpod 2.6.1 (3.1.0 available)
+  lints 5.1.1 (6.0.0 available)
+  package_info_plus 8.3.1 (9.0.0 available)
+  permission_handler 11.4.0 (12.0.1 available)
+  permission_handler_android 12.1.0 (13.0.1 available)
+  riverpod 2.6.1 (3.1.0 available)
+  shared_preferences 2.5.3 (2.5.4 available)
+  shared_preferences_android 2.4.11 (2.4.18 available)
+  shared_preferences_foundation 2.5.4 (2.5.6 available)
+  source_span 1.10.0 (1.10.1 available)
+  string_scanner 1.3.0 (1.4.1 available)
+  term_glyph 1.2.1 (1.2.2 available)
+  vm_service 14.3.0 (15.0.2 available)
+  web_socket_channel 2.4.0 (3.0.3 available)
+  win32 5.10.1 (5.15.0 available)
+  win32_registry 1.1.5 (2.1.0 available)
+Got dependencies!
+28 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Publishing flux_flutter 2.0.0 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (1 KB)
+├── analysis_options.yaml (<1 KB)
+├── analysis_report.json (9 KB)
+├── doc
+│   ├── BLE_INTEGRATION.md (3 KB)
+│   └── CAMERA_INTEGRATION.md (4 KB)
+├── example
+│   ├── lib
+│   │   └── main.dart (1 KB)
+│   └── pubspec.yaml (<1 KB)
+├── lib
+│   ├── flux_flutter.dart (<1 KB)
+│   └── src
+│       ├── bindings.dart (72 KB)
+│       ├── dev_tools
+│       │   └── flux_service_extensions.dart (5 KB)
+│       ├── devtools.dart (6 KB)
+│       ├── flux_context.dart (<1 KB)
+│       ├── flux_widget.dart (19 KB)
+│       ├── hot_reload
+│       │   ├── server.dart (2 KB)
+│       │   └── widget.dart (3 KB)
+│       ├── hot_reload.dart (3 KB)
+│       ├── hot_reload_service.dart (5 KB)
+│       ├── http_bindings.dart (2 KB)
+│       ├── modules
+│       │   ├── ble_module.dart (11 KB)
+│       │   ├── camera_module.dart (9 KB)
+│       │   ├── camera_preview.dart (7 KB)
+│       │   ├── device_info_module.dart (1 KB)
+│       │   ├── device_info_module_stub.dart (<1 KB)
+│       │   ├── dialog_module.dart (2 KB)
+│       │   ├── flux_native_modules.dart (1 KB)
+│       │   ├── http_module.dart (2 KB)
+│       │   ├── navigation_module.dart (1 KB)
+│       │   └── storage_module.dart (1 KB)
+│       ├── riverpod_integration.dart (14 KB)
+│       ├── security.dart (10 KB)
+│       ├── ui
+│       │   ├── components
+│       │   │   ├── flux_badge.dart (3 KB)
+│       │   │   ├── flux_button.dart (6 KB)
+│       │   │   ├── flux_card.dart (2 KB)
+│       │   │   └── flux_input.dart (7 KB)
+│       │   ├── flux_ui.dart (1 KB)
+│       │   ├── layout
+│       │   │   ├── flux_column.dart (1 KB)
+│       │   │   ├── flux_grid.dart (1 KB)
+│       │   │   ├── flux_row.dart (1 KB)
+│       │   │   └── flux_stack.dart (<1 KB)
+│       │   └── theme
+│       │       ├── flux_colors.dart (4 KB)
+│       │       ├── flux_spacing.dart (2 KB)
+│       │       ├── flux_theme.dart (6 KB)
+│       │       └── flux_typography.dart (6 KB)
+│       └── utils
+│           └── flux_cast.dart (3 KB)
+├── pubspec.yaml (2 KB)
+└── test
+    ├── async_await_test.dart (16 KB)
+    ├── debug_index_test.dart (<1 KB)
+    ├── decoration_test.dart (2 KB)
+    ├── deep_inspection_test.dart (3 KB)
+    ├── devtools_integration_test.dart (3 KB)
+    ├── e2e_test.dart (4 KB)
+    ├── extended_bindings_test.dart (4 KB)
+    ├── flux_cast_test.dart (4 KB)
+    ├── flux_flutter_test.dart (<1 KB)
+    ├── generic_test.dart (1 KB)
+    ├── hot_reload_comprehensive_test.dart (5 KB)
+    ├── hot_reload_test.dart (2 KB)
+    ├── http_test_sketch.dart (3 KB)
+    ├── inputs_test.dart (2 KB)
+    ├── layout_test.dart (1 KB)
+    ├── modules
+    │   ├── ble_module_test.dart (8 KB)
+    │   ├── camera_module_test.dart (6 KB)
+    │   ├── camera_preview_test.dart (6 KB)
+    │   ├── http_module_test.dart (1 KB)
+    │   └── storage_module_test.dart (1 KB)
+    ├── riverpod_test.dart (3 KB)
+    ├── scroll_test.dart (2 KB)
+    ├── security_test.dart (4 KB)
+    ├── simple_debug.dart (2 KB)
+    ├── text_style_test.dart (2 KB)
+    ├── todo_demo_test.dart (1 KB)
+    ├── ui
+    │   └── flux_ui_test.dart (4 KB)
+    ├── v2_widgets_test.dart (3 KB)
+    └── widget_test.dart (2 KB)
+
+Total compressed archive size: 77 KB.
+Validating package...
+Package validation found the following potential issue:
+* 6 checked-in files are ignored by a `.gitignore`.
+  Previous versions of Pub would include those in the published package.
+  
+  Consider adjusting your `.gitignore` files to not ignore those files, and if you do not wish to
+  publish these files use `.pubignore`. See also dart.dev/go/pubignore
+  
+  Files that are checked in while gitignored:
+  
+  all_tests_output.txt
+  analysis_output.txt
+  analyze_output.txt
+  final_verification_output.txt
+  riverpod_test_output.txt
+  test_output.txt
+  
+  
+
+Package validation found the following hint:
+* The previous version is 0.1.0.
+  
+  It seems you are not publishing an incremental update.
+  
+  Consider one of:
+  * 1.0.0 for a first major release.
+  * 0.2.0 for a breaking release.
+  * 0.1.1 for a minor release.
+  
+The server may enforce additional checks.
+
+Package has 1 warning and 1 hint.

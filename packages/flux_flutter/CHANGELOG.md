@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.1] - 2026-01-05
+
+### Fixed
+- Switched to `lints` package for stricter pub.dev compliance
+- Removed duplicate `flutter_lints` dev dependency
+
 ## [2.0.0] - 2026-01-04
 
 ### Added
