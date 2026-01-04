@@ -111,14 +111,14 @@ packages:
       path: "../flux_compiler"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   flux_vm:
     dependency: "direct main"
     description:
       path: "../flux_vm"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0"
   frontend_server_client:
     dependency: transitive
     description:

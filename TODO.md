@@ -4,13 +4,21 @@ This file tracks planned features and improvements. Each item should be implemen
 
 ## 🔴 Pending Features (v2.0+)
 
-### Feature: FluxUI (Component Library)
+### Feature: FluxUI (Component Library) - COMPLETED
 - **Branch**: `feature/flux-ui`
 - **Description**: Standard library of UI components for Flux
 - **Goals**: 
-  - [ ] Implement core components (Button, Card, Input, etc.)
-  - [ ] Implement layout components (Column, Row, Stack, Grid)
-  - [ ] Design System support (Theme, Typography, Colors)
+  - [x] Implement core components (Button, Card, Input, Badge)
+  - [x] Implement layout components (Column, Row, Stack, Grid)
+  - [x] Design System support (Theme, Typography, Colors)
+
+### Feature: CLI Enhancement (Phase 10) - COMPLETED
+- **Branch**: `feature/cli-enhancement`
+- **Description**: Enhance developer experience with improved CLI tools
+- **Goals**:
+  - [x] `flux create` - Project scaffolding
+  - [x] `flux run` - Enhanced execution with hot-reload
+  - [x] `flux analyze` - Static analysis integration
 
 ---
 

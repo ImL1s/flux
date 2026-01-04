@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:ui' show lerpDouble;
 import 'utils/flux_cast.dart';
 import 'http_bindings.dart';
 import 'modules/camera_preview.dart';
+import 'ui/flux_ui.dart';
 
 /// Registry for Flux -> Flutter widget bindings
 class FluxBindings {
@@ -47,6 +49,7 @@ class FluxBindings {
     _initDateTimePickers();
     _initFormWidgets();
     _initCameraWidgets();
+    _initFluxUiWidgets();
   }
   
   static void _initWidgets() {
@@ -1862,23 +1865,179 @@ class FluxBindings {
   // ========== Camera Widgets ==========
   
   static void _initCameraWidgets() {
-    // CameraPreview widget - Live camera preview
     register('CameraPreview', (args, children) {
-      final cameraId = FluxCast.toInt(args['cameraId']) ?? 0;
-      final fitStr = FluxCast.toStringNullable(args['fit']);
-      final onInitialized = args['onInitialized'];
-      final onError = args['onError'];
+      return const FluxCameraPreview();
+    });
+  }
+
+  static void _initFluxUiWidgets() {
+    // FluxButton
+    register('FluxButton', (args, children) {
+      final label = args['label'] as String? ?? args['text'] as String?;
+      final iconName = args['icon'] as String?;
+      final onTap = args['onTap'];
+      final variantStr = args['variant'] as String?;
+      final sizeStr = args['size'] as String?;
+      final isLoading = FluxCast.toBool(args['isLoading']);
+      final isDisabled = FluxCast.toBool(args['isDisabled']);
+      final isFullWidth = FluxCast.toBool(args['isFullWidth']);
       
-      BoxFit fit = BoxFit.cover;
-      if (fitStr != null) {
-        fit = _parseBoxFit(fitStr);
-      }
+      final variant = FluxButtonVariant.values.firstWhere(
+        (e) => e.name == variantStr,
+        orElse: () => FluxButtonVariant.primary,
+      );
       
-      return FluxCameraPreview(
-        cameraId: cameraId,
-        fit: fit,
-        onInitialized: onInitialized is Function ? () => _invokeCallback(onInitialized, []) : null,
-        onError: onError is Function ? (error) => _invokeCallback(onError, [error]) : null,
+      final size = FluxButtonSize.values.firstWhere(
+        (e) => e.name == sizeStr,
+        orElse: () => FluxButtonSize.md,
+      );
+
+      return FluxButton(
+        label: label,
+        icon: iconName != null ? _parseIconData(iconName) : null,
+        onTap: onTap is Function ? () => _invokeCallback(onTap, []) : null,
+        variant: variant,
+        size: size,
+        isLoading: isLoading,
+        isDisabled: isDisabled,
+        isFullWidth: isFullWidth,
+      );
+    });
+
+    // FluxInput
+    register('FluxInput', (args, children) {
+      final initialValue = args['initialValue'] as String? ?? args['value'] as String?;
+      final onChanged = args['onChanged'];
+      final onSubmitted = args['onSubmitted'];
+      final label = args['label'] as String?;
+      final hint = args['hint'] as String?;
+      final errorText = args['errorText'] as String?;
+      final prefixIconName = args['prefixIcon'] as String?;
+      final suffixIconName = args['suffixIcon'] as String?;
+      final typeStr = args['type'] as String?;
+      final enabled = args['enabled'] != false;
+      final autofocus = FluxCast.toBool(args['autofocus']);
+      final showClearButton = FluxCast.toBool(args['showClearButton']);
+
+      final type = FluxInputType.values.firstWhere(
+        (e) => e.name == typeStr,
+        orElse: () => FluxInputType.text,
+      );
+
+      return FluxInput(
+        initialValue: initialValue,
+        onChanged: onChanged != null ? (val) => _invokeCallback(onChanged, [val]) : null,
+        onSubmitted: onSubmitted != null ? (val) => _invokeCallback(onSubmitted, [val]) : null,
+        label: label,
+        hint: hint,
+        errorText: errorText,
+        prefixIcon: prefixIconName != null ? _parseIconData(prefixIconName) : null,
+        suffixIcon: suffixIconName != null ? _parseIconData(suffixIconName) : null,
+        type: type,
+        enabled: enabled,
+        autofocus: autofocus,
+        showClearButton: showClearButton,
+      );
+    });
+
+    // FluxCard
+    register('FluxCard', (args, children) {
+      final variantStr = args['variant'] as String?;
+      final padding = _parseEdgeInsets(args['padding']);
+      final onTap = args['onTap'];
+      final backgroundColor = FluxCast.toColor(args['backgroundColor']);
+      
+      final variant = FluxCardVariant.values.firstWhere(
+        (e) => e.name == variantStr,
+        orElse: () => FluxCardVariant.elevated,
+      );
+
+      return FluxCard(
+        variant: variant,
+        padding: padding,
+        onTap: onTap is Function ? () => _invokeCallback(onTap, []) : null,
+        backgroundColor: backgroundColor,
+        child: children.isNotEmpty ? children.first : const SizedBox.shrink(),
+      );
+    });
+
+    // FluxBadge
+    register('FluxBadge', (args, children) {
+      final variantStr = args['variant'] as String?;
+      final label = args['label'] as String?;
+      final count = FluxCast.toInt(args['count']);
+      final color = FluxCast.toColor(args['color']);
+      final textColor = FluxCast.toColor(args['textColor']);
+      final alignment = _parseAlignment(args['alignment']) as Alignment? ?? Alignment.topRight;
+       // Offset parsing simplified for standard cases, assuming simple x,y overrides if needed
+       // Not exposing full offset map for now to keep it simple, defaulting to standard
+      
+      final variant = FluxBadgeVariant.values.firstWhere(
+        (e) => e.name == variantStr,
+        orElse: () => FluxBadgeVariant.dot,
+      );
+
+      return FluxBadge(
+        variant: variant,
+        label: label,
+        count: count,
+        color: color,
+        textColor: textColor,
+        alignment: alignment,
+        child: children.isNotEmpty ? children.first : null,
+      );
+    });
+
+    // FluxRow
+    register('FluxRow', (args, children) {
+      final mainAxisAlignment = _parseMainAxisAlignment(FluxCast.toStringNullable(args['mainAxisAlignment']));
+      final crossAxisAlignment = _parseCrossAxisAlignment(FluxCast.toStringNullable(args['crossAxisAlignment']));
+      final spacing = FluxCast.toDoubleNullable(args['spacing']);
+      
+      return FluxRow(
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        spacing: spacing,
+        children: children,
+      );
+    });
+
+    // FluxColumn
+    register('FluxColumn', (args, children) {
+      final mainAxisAlignment = _parseMainAxisAlignment(FluxCast.toStringNullable(args['mainAxisAlignment']));
+      final crossAxisAlignment = _parseCrossAxisAlignment(FluxCast.toStringNullable(args['crossAxisAlignment']));
+      final spacing = FluxCast.toDoubleNullable(args['spacing']);
+      
+      return FluxColumn(
+        mainAxisAlignment: mainAxisAlignment,
+        crossAxisAlignment: crossAxisAlignment,
+        spacing: spacing,
+        children: children,
+      );
+    });
+
+    // FluxStack
+    register('FluxStack', (args, children) {
+      final alignment = _parseAlignment(args['alignment']) ?? AlignmentDirectional.topStart;
+      return FluxStack(
+        alignment: alignment,
+        children: children,
+      );
+    });
+
+    // FluxGrid
+    register('FluxGrid', (args, children) {
+      final spacing = FluxCast.toDoubleNullable(args['spacing']) ?? FluxSpacing.md;
+      final runSpacing = FluxCast.toDoubleNullable(args['runSpacing']) ?? FluxSpacing.md;
+      final crossAxisCount = FluxCast.toInt(args['crossAxisCount']);
+      final maxCrossAxisExtent = FluxCast.toDoubleNullable(args['maxCrossAxisExtent']);
+      
+      return FluxGrid(
+        spacing: spacing,
+        runSpacing: runSpacing,
+        crossAxisCount: crossAxisCount,
+        maxCrossAxisExtent: maxCrossAxisExtent,
+        children: children,
       );
     });
   }
