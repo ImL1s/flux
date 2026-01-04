@@ -36,7 +36,7 @@ void main() {
     final result = await getFn.call(['key2']);
     expect(result, null);
   });
-  
+
   test('storage.clear works', () async {
     final setFn = storageModule.get('set') as AsyncNativeFunction;
     final clearFn = storageModule.get('clear') as AsyncNativeFunction;

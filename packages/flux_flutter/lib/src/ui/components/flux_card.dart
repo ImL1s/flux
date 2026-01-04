@@ -32,7 +32,7 @@ class FluxCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = FluxTheme.of(context);
     final colors = theme.colorScheme;
-    
+
     final effectivePadding = padding ?? const EdgeInsets.all(FluxSpacing.md);
     final shape = RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(FluxRadius.md),
@@ -43,7 +43,7 @@ class FluxCard extends StatelessWidget {
 
     Color? color;
     double? elevation;
-    
+
     switch (variant) {
       case FluxCardVariant.elevated:
         color = backgroundColor ?? colors.surface;
@@ -63,7 +63,8 @@ class FluxCard extends StatelessWidget {
       color: color,
       elevation: elevation,
       shape: shape,
-      margin: EdgeInsets.zero, // FluxCard manages its own spacing externally usually
+      margin: EdgeInsets
+          .zero, // FluxCard manages its own spacing externally usually
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
@@ -73,7 +74,7 @@ class FluxCard extends StatelessWidget {
         ),
       ),
     );
-    
+
     return card;
   }
 }

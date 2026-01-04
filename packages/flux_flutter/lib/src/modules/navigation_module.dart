@@ -3,7 +3,7 @@ import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_flutter/src/flux_context.dart';
 
 /// Navigation module for Flux
-/// 
+///
 /// Usage:
 /// navigation.push("/details");
 /// navigation.pop();
@@ -23,7 +23,7 @@ class NavigationModule extends FluxModule {
       debugPrint('Flux NavigationModule: No context available for push.');
       return false;
     }
-    
+
     Navigator.of(context).pushNamed(route);
     return true;
   }
@@ -34,7 +34,7 @@ class NavigationModule extends FluxModule {
       debugPrint('Flux NavigationModule: No context available for pop.');
       return false;
     }
-    
+
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
       return true;
@@ -49,11 +49,11 @@ class NavigationModule extends FluxModule {
       debugPrint('Flux NavigationModule: No context available for replace.');
       return false;
     }
-    
+
     Navigator.of(context).pushReplacementNamed(route);
     return true;
   }
-  
+
   Object? _canPop(List<Object?> args) {
     final context = fluxNavigatorKey.currentContext;
     if (context == null) {

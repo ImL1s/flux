@@ -57,7 +57,8 @@ class FluxBadge extends StatelessWidget {
         padding = EdgeInsets.zero;
         break;
       case FluxBadgeVariant.count:
-        final displayCount = count != null && count! > 99 ? '99+' : count.toString();
+        final displayCount =
+            count != null && count! > 99 ? '99+' : count.toString();
         badgeContent = Text(
           displayCount,
           style: typography.labelSmall.copyWith(
@@ -94,7 +95,9 @@ class FluxBadge extends StatelessWidget {
       decoration: BoxDecoration(
         color: badgeColor,
         borderRadius: borderRadius,
-        border: Border.all(color: colors.background, width: 1.5), // white border for separation
+        border: Border.all(
+            color: colors.background,
+            width: 1.5), // white border for separation
       ),
       child: Center(
         widthFactor: 1,

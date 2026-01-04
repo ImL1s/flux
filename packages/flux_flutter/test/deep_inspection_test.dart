@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_vm/flux_vm.dart';
@@ -34,7 +33,7 @@ main();
       debugger.attach();
 
       debugger.setBreakpoint('deep_test', 4); // Line 4: var x = 100
-      
+
       bool paused = false;
       debugger.addListener((event, context) {
         if (event == DebugEvent.breakpoint) {
@@ -44,43 +43,47 @@ main();
 
       // 4. Run
       vm.executeClosure(ObjClosure(function, []));
-      
-      expect(paused, isTrue, reason: "Debugger should pause");
-      
-      if (paused) {
-         // 5. Get Locals
-         final localsResponse = await FluxServiceExtensionHandlers.getLocals(vm, {'frameIndex': '0'});
-         final localsJson = jsonDecode(localsResponse.result as String);
-         final locals = localsJson['locals'] as Map;
-         
-         // Verify List
-         expect(locals.containsKey('list'), true);
-         final listRef = locals['list'];
-         expect(listRef['type'], 'ref');
-         expect(listRef['kind'], contains('List'));
-         final listHandle = listRef['handle'];
-         
-         final listObjResponse = await FluxServiceExtensionHandlers.getObject(vm, {'handle': listHandle.toString()});
-         final listObj = jsonDecode(listObjResponse.result as String)['object'];
-         expect(listObj['kind'], 'List');
-         expect(listObj['length'], 3);
-         expect(listObj['elements'][0]['value']['value'], '1');
 
-         // Verify Map
-         expect(locals.containsKey('map'), true);
-         final mapRef = locals['map'];
-         expect(mapRef['type'], 'ref');
-         expect(mapRef['kind'], contains('Map'));
-         final mapHandle = mapRef['handle'];
-         
-         final mapObjResponse = await FluxServiceExtensionHandlers.getObject(vm, {'handle': mapHandle.toString()});
-         final mapObj = jsonDecode(mapObjResponse.result as String)['object'];
-         expect(mapObj['kind'], 'Map');
-         
-         final entries = mapObj['entries'] as List;
-         final entryA = entries.firstWhere((e) => e['key']['value'] == 'a', orElse: () => null);
-         expect(entryA, isNotNull, reason: "Map should contain key 'a'");
-         expect(entryA['value']['value'], '10');
+      expect(paused, isTrue, reason: "Debugger should pause");
+
+      if (paused) {
+        // 5. Get Locals
+        final localsResponse = await FluxServiceExtensionHandlers.getLocals(
+            vm, {'frameIndex': '0'});
+        final localsJson = jsonDecode(localsResponse.result as String);
+        final locals = localsJson['locals'] as Map;
+
+        // Verify List
+        expect(locals.containsKey('list'), true);
+        final listRef = locals['list'];
+        expect(listRef['type'], 'ref');
+        expect(listRef['kind'], contains('List'));
+        final listHandle = listRef['handle'];
+
+        final listObjResponse = await FluxServiceExtensionHandlers.getObject(
+            vm, {'handle': listHandle.toString()});
+        final listObj = jsonDecode(listObjResponse.result as String)['object'];
+        expect(listObj['kind'], 'List');
+        expect(listObj['length'], 3);
+        expect(listObj['elements'][0]['value']['value'], '1');
+
+        // Verify Map
+        expect(locals.containsKey('map'), true);
+        final mapRef = locals['map'];
+        expect(mapRef['type'], 'ref');
+        expect(mapRef['kind'], contains('Map'));
+        final mapHandle = mapRef['handle'];
+
+        final mapObjResponse = await FluxServiceExtensionHandlers.getObject(
+            vm, {'handle': mapHandle.toString()});
+        final mapObj = jsonDecode(mapObjResponse.result as String)['object'];
+        expect(mapObj['kind'], 'Map');
+
+        final entries = mapObj['entries'] as List;
+        final entryA = entries.firstWhere((e) => e['key']['value'] == 'a',
+            orElse: () => null);
+        expect(entryA, isNotNull, reason: "Map should contain key 'a'");
+        expect(entryA['value']['value'], '10');
       }
     });
   });

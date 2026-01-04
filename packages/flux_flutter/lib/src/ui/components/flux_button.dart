@@ -45,12 +45,12 @@ class FluxButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = FluxTheme.of(context);
     final colors = theme.colorScheme;
-    
+
     // Determine effective callback
     final effectiveOnTap = (isDisabled || isLoading) ? null : onTap;
 
     Widget buttonContent = _buildContent(theme);
-    
+
     if (isLoading) {
       buttonContent = Row(
         mainAxisSize: MainAxisSize.min,
@@ -73,7 +73,7 @@ class FluxButton extends StatelessWidget {
     }
 
     ButtonStyle style = _getButtonStyle(theme);
-    
+
     Widget button;
     switch (variant) {
       case FluxButtonVariant.primary:
@@ -104,7 +104,7 @@ class FluxButton extends StatelessWidget {
     if (isFullWidth) {
       return SizedBox(width: double.infinity, child: button);
     }
-    
+
     return button;
   }
 
@@ -127,60 +127,82 @@ class FluxButton extends StatelessWidget {
 
   double _getIconSize() {
     switch (size) {
-      case FluxButtonSize.sm: return 16.0;
-      case FluxButtonSize.md: return 20.0;
-      case FluxButtonSize.lg: return 24.0;
+      case FluxButtonSize.sm:
+        return 16.0;
+      case FluxButtonSize.md:
+        return 20.0;
+      case FluxButtonSize.lg:
+        return 24.0;
     }
   }
 
   double _getSpinnerSize() {
     switch (size) {
-      case FluxButtonSize.sm: return 12.0;
-      case FluxButtonSize.md: return 16.0;
-      case FluxButtonSize.lg: return 20.0;
+      case FluxButtonSize.sm:
+        return 12.0;
+      case FluxButtonSize.md:
+        return 16.0;
+      case FluxButtonSize.lg:
+        return 20.0;
     }
   }
 
   EdgeInsetsGeometry _getPadding() {
     switch (size) {
       case FluxButtonSize.sm:
-        return const EdgeInsets.symmetric(horizontal: FluxSpacing.md, vertical: FluxSpacing.xs);
+        return const EdgeInsets.symmetric(
+            horizontal: FluxSpacing.md, vertical: FluxSpacing.xs);
       case FluxButtonSize.md:
-        return const EdgeInsets.symmetric(horizontal: FluxSpacing.lg, vertical: FluxSpacing.sm);
+        return const EdgeInsets.symmetric(
+            horizontal: FluxSpacing.lg, vertical: FluxSpacing.sm);
       case FluxButtonSize.lg:
-        return const EdgeInsets.symmetric(horizontal: FluxSpacing.xl, vertical: FluxSpacing.md);
+        return const EdgeInsets.symmetric(
+            horizontal: FluxSpacing.xl, vertical: FluxSpacing.md);
     }
   }
 
   TextStyle _getTextStyle(FluxTheme theme) {
     switch (size) {
-      case FluxButtonSize.sm: return theme.typography.labelSmall;
-      case FluxButtonSize.md: return theme.typography.labelMedium;
-      case FluxButtonSize.lg: return theme.typography.labelLarge;
+      case FluxButtonSize.sm:
+        return theme.typography.labelSmall;
+      case FluxButtonSize.md:
+        return theme.typography.labelMedium;
+      case FluxButtonSize.lg:
+        return theme.typography.labelLarge;
     }
   }
 
   Color _getContentColor(FluxColorScheme colors) {
     if (isDisabled) return colors.onSurface.withValues(alpha: 0.38);
-    
+
     switch (variant) {
-      case FluxButtonVariant.primary: return colors.onPrimary;
-      case FluxButtonVariant.secondary: return colors.onSecondary;
-      case FluxButtonVariant.outlined: return colors.primary;
-      case FluxButtonVariant.text: return colors.primary;
-      case FluxButtonVariant.ghost: return colors.onSurface;
+      case FluxButtonVariant.primary:
+        return colors.onPrimary;
+      case FluxButtonVariant.secondary:
+        return colors.onSecondary;
+      case FluxButtonVariant.outlined:
+        return colors.primary;
+      case FluxButtonVariant.text:
+        return colors.primary;
+      case FluxButtonVariant.ghost:
+        return colors.onSurface;
     }
   }
-  
+
   Color? _getBackgroundColor(FluxColorScheme colors) {
     if (isDisabled) return colors.onSurface.withValues(alpha: 0.12);
 
     switch (variant) {
-      case FluxButtonVariant.primary: return colors.primary;
-      case FluxButtonVariant.secondary: return colors.secondary;
-      case FluxButtonVariant.outlined: return null;
-      case FluxButtonVariant.text: return null;
-      case FluxButtonVariant.ghost: return null; // Transparent initially
+      case FluxButtonVariant.primary:
+        return colors.primary;
+      case FluxButtonVariant.secondary:
+        return colors.secondary;
+      case FluxButtonVariant.outlined:
+        return null;
+      case FluxButtonVariant.text:
+        return null;
+      case FluxButtonVariant.ghost:
+        return null; // Transparent initially
     }
   }
 
@@ -196,8 +218,9 @@ class FluxButton extends StatelessWidget {
         if (states.contains(WidgetState.disabled)) {
           return colors.onSurface.withValues(alpha: 0.12);
         }
-        if (variant == FluxButtonVariant.ghost && states.contains(WidgetState.hovered)) {
-           return colors.surfaceVariant.withValues(alpha: 0.5);
+        if (variant == FluxButtonVariant.ghost &&
+            states.contains(WidgetState.hovered)) {
+          return colors.surfaceVariant.withValues(alpha: 0.5);
         }
         return backgroundColor;
       }),
@@ -208,12 +231,14 @@ class FluxButton extends StatelessWidget {
         return contentColor;
       }),
       shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(FluxRadius.full)),
+        RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(FluxRadius.full)),
       ),
       side: variant == FluxButtonVariant.outlined
           ? WidgetStateProperty.resolveWith((states) {
               if (states.contains(WidgetState.disabled)) {
-                 return BorderSide(color: colors.onSurface.withValues(alpha: 0.12));
+                return BorderSide(
+                    color: colors.onSurface.withValues(alpha: 0.12));
               }
               return BorderSide(color: colors.outline);
             })

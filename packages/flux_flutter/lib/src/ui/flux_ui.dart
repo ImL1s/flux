@@ -1,12 +1,12 @@
 /// FluxUI - A design system and component library for Flux applications.
-/// 
+///
 /// This library provides:
 /// - Design tokens (colors, typography, spacing, radius)
 /// - Theme system with light/dark mode support
 /// - Reusable UI components
-/// 
+///
 /// ## Getting Started
-/// 
+///
 /// Wrap your app with [FluxThemeProvider]:
 /// ```dart
 /// FluxThemeProvider(

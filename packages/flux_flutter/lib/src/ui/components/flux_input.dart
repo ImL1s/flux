@@ -63,7 +63,8 @@ class _FluxInputState extends State<FluxInput> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? TextEditingController(text: widget.initialValue);
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initialValue);
     _obscureText = widget.type == FluxInputType.password;
     _hasValue = _controller.text.isNotEmpty;
     _controller.addListener(_onTextChanged);
@@ -101,25 +102,33 @@ class _FluxInputState extends State<FluxInput> {
 
   TextInputType _getKeyboardType() {
     switch (widget.type) {
-      case FluxInputType.email: return TextInputType.emailAddress;
-      case FluxInputType.number: return TextInputType.number;
-      case FluxInputType.multiline: return TextInputType.multiline;
-      case FluxInputType.search: return TextInputType.text; // handled by action
-      default: return TextInputType.text;
+      case FluxInputType.email:
+        return TextInputType.emailAddress;
+      case FluxInputType.number:
+        return TextInputType.number;
+      case FluxInputType.multiline:
+        return TextInputType.multiline;
+      case FluxInputType.search:
+        return TextInputType.text; // handled by action
+      default:
+        return TextInputType.text;
     }
   }
 
   TextInputAction _getInputAction() {
     switch (widget.type) {
-      case FluxInputType.search: return TextInputAction.search;
-      case FluxInputType.multiline: return TextInputAction.newline;
-      default: return TextInputAction.done;
+      case FluxInputType.search:
+        return TextInputAction.search;
+      case FluxInputType.multiline:
+        return TextInputAction.newline;
+      default:
+        return TextInputAction.done;
     }
   }
-  
+
   List<TextInputFormatter>? _getFormatters() {
     if (widget.type == FluxInputType.number) {
-       return [FilteringTextInputFormatter.allow(RegExp(r'[0-9.-]'))];
+      return [FilteringTextInputFormatter.allow(RegExp(r'[0-9.-]'))];
     }
     return null;
   }
@@ -134,7 +143,9 @@ class _FluxInputState extends State<FluxInput> {
     if (widget.type == FluxInputType.password) {
       suffix = IconButton(
         icon: Icon(
-          _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+          _obscureText
+              ? Icons.visibility_outlined
+              : Icons.visibility_off_outlined,
           color: colors.onSurfaceVariant,
         ),
         onPressed: _toggleObscure,
@@ -156,7 +167,9 @@ class _FluxInputState extends State<FluxInput> {
           Text(
             widget.label!,
             style: typography.labelMedium.copyWith(
-              color: widget.enabled ? colors.onSurface : colors.onSurface.withValues(alpha: 0.38),
+              color: widget.enabled
+                  ? colors.onSurface
+                  : colors.onSurface.withValues(alpha: 0.38),
             ),
           ),
           const SizedBox(height: FluxSpacing.xs),
@@ -173,7 +186,9 @@ class _FluxInputState extends State<FluxInput> {
           maxLines: widget.type == FluxInputType.multiline ? null : 1,
           autofocus: widget.autofocus,
           style: typography.bodyLarge.copyWith(
-            color: widget.enabled ? colors.onSurface : colors.onSurface.withValues(alpha: 0.38),
+            color: widget.enabled
+                ? colors.onSurface
+                : colors.onSurface.withValues(alpha: 0.38),
           ),
           decoration: InputDecoration(
             hintText: widget.hint,
@@ -181,25 +196,25 @@ class _FluxInputState extends State<FluxInput> {
               color: colors.onSurfaceVariant.withValues(alpha: 0.6),
             ),
             errorText: widget.errorText,
-            prefixIcon: widget.prefixIcon != null 
-                ? Icon(widget.prefixIcon, color: colors.onSurfaceVariant) 
+            prefixIcon: widget.prefixIcon != null
+                ? Icon(widget.prefixIcon, color: colors.onSurfaceVariant)
                 : null,
             suffixIcon: suffix,
             filled: true,
-            fillColor: widget.enabled 
+            fillColor: widget.enabled
                 ? colors.surfaceVariant.withValues(alpha: 0.3)
-                : colors.onSurface.withValues(alpha: 0.04), // lighter for disabled
+                : colors.onSurface
+                    .withValues(alpha: 0.04), // lighter for disabled
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: FluxSpacing.md, 
-              vertical: FluxSpacing.md
-            ),
+                horizontal: FluxSpacing.md, vertical: FluxSpacing.md),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(FluxRadius.sm),
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(FluxRadius.sm),
-              borderSide: BorderSide(color: colors.outline.withValues(alpha: 0.3)),
+              borderSide:
+                  BorderSide(color: colors.outline.withValues(alpha: 0.3)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(FluxRadius.sm),

@@ -9,6 +9,7 @@ import 'package:flux_flutter/src/modules/camera_module.dart';
 
 // Mocks
 class MockCameraWrapper extends Mock implements CameraWrapper {}
+
 class MockCameraController extends Mock implements CameraController {}
 
 class FakeCameraDescription extends Fake implements CameraDescription {
@@ -44,7 +45,7 @@ void main() {
     setUp(() {
       mockWrapper = MockCameraWrapper();
       mockController = MockCameraController();
-      
+
       mockCameras = [
         FakeCameraDescription(
           name: 'Camera 0',
@@ -54,10 +55,11 @@ void main() {
       ];
 
       // Setup default mock behaviors
-      when(() => mockWrapper.availableCameras()).thenAnswer((_) async => mockCameras);
-      when(() => mockWrapper.createController(any(), any(), enableAudio: any(named: 'enableAudio')))
-          .thenReturn(mockController);
-      
+      when(() => mockWrapper.availableCameras())
+          .thenAnswer((_) async => mockCameras);
+      when(() => mockWrapper.createController(any(), any(),
+          enableAudio: any(named: 'enableAudio'))).thenReturn(mockController);
+
       when(() => mockController.initialize()).thenAnswer((_) async {});
       when(() => mockController.dispose()).thenAnswer((_) async {});
       when(() => mockController.buildPreview()).thenReturn(const SizedBox());
@@ -83,10 +85,12 @@ void main() {
       ));
     });
 
-    testWidgets('should show loading indicator and then preview', (tester) async {
+    testWidgets('should show loading indicator and then preview',
+        (tester) async {
       // Use a completer to control initialization timing
       final initCompleter = Completer<void>();
-      when(() => mockController.initialize()).thenAnswer((_) => initCompleter.future);
+      when(() => mockController.initialize())
+          .thenAnswer((_) => initCompleter.future);
 
       await tester.pumpWidget(
         MaterialApp(
@@ -95,7 +99,7 @@ void main() {
           ),
         ),
       );
-      
+
       // Should show loading state initially
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
       expect(find.text('Initializing camera...'), findsOneWidget);
@@ -111,10 +115,10 @@ void main() {
       expect(find.byType(CameraPreview), findsOneWidget);
     });
 
-    testWidgets('should show error state when initialization fails', (tester) async {
-      when(() => mockController.initialize()).thenThrow(
-        CameraException('error_code', 'error description')
-      );
+    testWidgets('should show error state when initialization fails',
+        (tester) async {
+      when(() => mockController.initialize())
+          .thenThrow(CameraException('error_code', 'error description'));
 
       await tester.pumpWidget(
         MaterialApp(
@@ -123,7 +127,7 @@ void main() {
           ),
         ),
       );
-      
+
       await tester.pump(); // Try initialize
       await tester.pump(const Duration(milliseconds: 100)); // Process error
 
@@ -133,7 +137,8 @@ void main() {
       expect(find.text('Retry'), findsOneWidget);
     });
 
-    testWidgets('retry button should attempt re-initialization', (tester) async {
+    testWidgets('retry button should attempt re-initialization',
+        (tester) async {
       int initCount = 0;
       when(() => mockController.initialize()).thenAnswer((_) async {
         initCount++;
@@ -147,14 +152,14 @@ void main() {
           ),
         ),
       );
-      
+
       await tester.pumpAndSettle();
       expect(find.text('Retry'), findsOneWidget);
 
       // Tap retry
       await tester.tap(find.text('Retry'));
       await tester.pump();
-      
+
       expect(initCount, equals(2));
     });
 
@@ -176,11 +181,12 @@ void main() {
           ),
         ),
       );
-      
+
       await tester.pumpAndSettle();
-      
+
       // Verify first initialization
-      verify(() => mockWrapper.createController(mockCameras[0], any(), enableAudio: any(named: 'enableAudio'))).called(1);
+      verify(() => mockWrapper.createController(mockCameras[0], any(),
+          enableAudio: any(named: 'enableAudio'))).called(1);
     });
   });
 }

@@ -29,7 +29,8 @@ class FluxGrid extends StatelessWidget {
         crossAxisSpacing: spacing,
         padding: padding,
         shrinkWrap: true,
-        physics: const ClampingScrollPhysics(), // Provide predictable behavior if nested
+        physics:
+            const ClampingScrollPhysics(), // Provide predictable behavior if nested
         children: children,
       );
     }

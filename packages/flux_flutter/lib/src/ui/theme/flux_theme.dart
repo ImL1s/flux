@@ -9,10 +9,10 @@ export 'flux_typography.dart';
 export 'flux_spacing.dart';
 
 /// FluxUI Theme - A complete design system for Flux applications.
-/// 
+///
 /// [FluxTheme] provides a centralized way to define and access design tokens
 /// including colors, typography, spacing, and more.
-/// 
+///
 /// Example usage:
 /// ```dart
 /// FluxThemeProvider(
@@ -43,9 +43,10 @@ class FluxTheme {
   /// Create a light theme with optional seed color
   factory FluxTheme.light({Color? seedColor}) {
     final colors = seedColor != null
-        ? FluxColorScheme.fromSeed(seedColor: seedColor, brightness: Brightness.light)
+        ? FluxColorScheme.fromSeed(
+            seedColor: seedColor, brightness: Brightness.light)
         : FluxColorScheme.light;
-    
+
     return FluxTheme(
       colorScheme: colors,
       typography: FluxTypography.defaults(color: colors.onBackground),
@@ -55,9 +56,10 @@ class FluxTheme {
   /// Create a dark theme with optional seed color
   factory FluxTheme.dark({Color? seedColor}) {
     final colors = seedColor != null
-        ? FluxColorScheme.fromSeed(seedColor: seedColor, brightness: Brightness.dark)
+        ? FluxColorScheme.fromSeed(
+            seedColor: seedColor, brightness: Brightness.dark)
         : FluxColorScheme.dark;
-    
+
     return FluxTheme(
       colorScheme: colors,
       typography: FluxTypography.defaults(color: colors.onBackground),
@@ -73,7 +75,7 @@ class FluxTheme {
       seedColor: seedColor,
       brightness: brightness,
     );
-    
+
     return FluxTheme(
       colorScheme: colors,
       typography: FluxTypography.defaults(color: colors.onBackground),
@@ -143,7 +145,8 @@ class FluxTheme {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(FluxRadius.sm),
-          borderSide: BorderSide(color: colorScheme.outline.withValues(alpha: 0.5)),
+          borderSide:
+              BorderSide(color: colorScheme.outline.withValues(alpha: 0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(FluxRadius.sm),
@@ -188,12 +191,14 @@ class FluxThemeProvider extends InheritedWidget {
   });
 
   static FluxTheme of(BuildContext context) {
-    final provider = context.dependOnInheritedWidgetOfExactType<FluxThemeProvider>();
+    final provider =
+        context.dependOnInheritedWidgetOfExactType<FluxThemeProvider>();
     return provider?.theme ?? FluxTheme.light();
   }
 
   static FluxTheme? maybeOf(BuildContext context) {
-    final provider = context.dependOnInheritedWidgetOfExactType<FluxThemeProvider>();
+    final provider =
+        context.dependOnInheritedWidgetOfExactType<FluxThemeProvider>();
     return provider?.theme;
   }
 

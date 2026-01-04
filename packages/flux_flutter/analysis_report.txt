@@ -1,0 +1,52 @@
+Analyzing flux_flutter...                                       
+
+  error - The named parameter 'onError' isn't defined - example\lib\main.dart:50:7 - undefined_named_parameter
+  error - The named parameter 'onLoading' isn't defined - example\lib\main.dart:51:7 - undefined_named_parameter
+warning - Unused import: 'dart:ui' - lib\src\bindings.dart:3:8 - unused_import
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre - lib\src\bindings.dart:254:9 - deprecated_member_use
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:899:9 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:900:9 - deprecated_member_use
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:931:9 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:932:9 - deprecated_member_use
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre - lib\src\bindings.dart:1001:9 - deprecated_member_use
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\bindings.dart:1315:9 - deprecated_member_use
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:23:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:26:9 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:34:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:38:13 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:44:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:51:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:53:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:59:23 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:60:25 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:63:7 - avoid_print
+   info - Don't invoke 'print' in production code - lib\src\hot_reload\server.dart:73:9 - avoid_print
+warning - The value of the local variable 'buildFunc' isn't used - lib\src\riverpod_integration.dart:250:11 - unused_local_variable
+warning - Unnecessary cast - lib\src\riverpod_integration.dart:359:20 - unnecessary_cast
+   info - The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' - lib\src\utils\flux_cast.dart:1:8 - unnecessary_import
+   info - Angle brackets will be interpreted as HTML - lib\src\utils\flux_cast.dart:110:22 - unintended_html_in_doc_comment
+   info - Dangling library doc comment - test\async_await_test.dart:1:1 - dangling_library_doc_comments
+   info - Don't invoke 'print' in production code - test\debug_index_test.dart:35:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\debug_index_test.dart:37:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\debug_index_test.dart:38:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\e2e_test.dart:80:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\e2e_test.dart:83:7 - avoid_print
+warning - The value of the local variable 'callbackInvoked' isn't used - test\inputs_test.dart:40:12 - unused_local_variable
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor or activeTrackColor instead. This feature was deprecated after v3.31.0-2.0.pre - test\inputs_test.dart:67:28 - deprecated_member_use
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:8:3 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:25:9 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:56:11 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:61:7 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:66:10 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:68:10 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:73:10 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:77:13 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:81:16 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:87:13 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:91:16 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:95:9 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:99:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:100:5 - avoid_print
+   info - The import of 'package:flux_flutter/src/bindings.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flux_flutter/flux_flutter.dart' - test\todo_demo_test.dart:4:8 - unnecessary_import
+warning - Unused import: 'package:flux_vm/flux_vm.dart' - test\v2_widgets_test.dart:4:8 - unused_import
+

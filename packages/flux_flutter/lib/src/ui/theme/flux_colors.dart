@@ -1,67 +1,67 @@
 import 'package:flutter/material.dart';
 
 /// FluxUI color scheme based on Material 3 color system.
-/// 
+///
 /// Use [FluxColorScheme.fromSeed] to generate a harmonious color palette
 /// from a single seed color.
 class FluxColorScheme {
   /// Primary brand color
   final Color primary;
-  
+
   /// Color for content on primary
   final Color onPrimary;
-  
+
   /// Primary container color
   final Color primaryContainer;
-  
+
   /// Color for content on primary container
   final Color onPrimaryContainer;
 
   /// Secondary accent color
   final Color secondary;
-  
+
   /// Color for content on secondary
   final Color onSecondary;
-  
+
   /// Secondary container color
   final Color secondaryContainer;
-  
+
   /// Color for content on secondary container
   final Color onSecondaryContainer;
 
   /// Tertiary accent color
   final Color tertiary;
-  
+
   /// Color for content on tertiary
   final Color onTertiary;
 
   /// Surface color for cards, sheets, dialogs
   final Color surface;
-  
+
   /// Color for content on surface
   final Color onSurface;
-  
+
   /// Variant surface color
   final Color surfaceVariant;
-  
+
   /// Color for content on surface variant
   final Color onSurfaceVariant;
 
   /// Background color
   final Color background;
-  
+
   /// Color for content on background
   final Color onBackground;
 
   /// Error color
   final Color error;
-  
+
   /// Color for content on error
   final Color onError;
 
   /// Outline color for borders
   final Color outline;
-  
+
   /// Variant outline color
   final Color outlineVariant;
 

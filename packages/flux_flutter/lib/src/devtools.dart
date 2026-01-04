@@ -8,13 +8,13 @@ import 'package:flux_vm/flux_vm.dart';
 class FluxDebugConfig {
   /// 是否啟用調試模式
   static bool debugMode = true;
-  
+
   /// 是否顯示 Widget 邊界
   static bool showWidgetBounds = false;
-  
+
   /// 是否記錄編譯時間
   static bool logCompileTime = true;
-  
+
   /// 是否記錄執行時間
   static bool logExecutionTime = true;
 }
@@ -22,14 +22,14 @@ class FluxDebugConfig {
 /// Flux VM 狀態檢視器
 class FluxStateInspector extends StatelessWidget {
   final VM vm;
-  
+
   const FluxStateInspector({super.key, required this.vm});
-  
+
   @override
   Widget build(BuildContext context) {
     final state = vm.widgetState;
     final globals = vm.globals;
-    
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -41,17 +41,23 @@ class FluxStateInspector extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const Divider(),
-            const Text('Widget State:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text('Widget State:',
+                style: TextStyle(fontWeight: FontWeight.bold)),
             if (state.isEmpty)
-              const Text('  (empty)', style: TextStyle(fontStyle: FontStyle.italic))
+              const Text('  (empty)',
+                  style: TextStyle(fontStyle: FontStyle.italic))
             else
               ...state.entries.map((e) => Text('  ${e.key}: ${e.value}')),
             const SizedBox(height: 8),
-            const Text('Globals:', style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text('Globals:',
+                style: TextStyle(fontWeight: FontWeight.bold)),
             if (globals.isEmpty)
-              const Text('  (empty)', style: TextStyle(fontStyle: FontStyle.italic))
+              const Text('  (empty)',
+                  style: TextStyle(fontStyle: FontStyle.italic))
             else
-              ...globals.entries.take(10).map((e) => Text('  ${e.key}: ${e.value}')),
+              ...globals.entries
+                  .take(10)
+                  .map((e) => Text('  ${e.key}: ${e.value}')),
             if (globals.length > 10)
               Text('  ... and ${globals.length - 10} more'),
           ],
@@ -65,40 +71,42 @@ class FluxStateInspector extends StatelessWidget {
 class FluxPerformanceMonitor {
   static final Stopwatch _compileWatch = Stopwatch();
   static final Stopwatch _executeWatch = Stopwatch();
-  
+
   static Duration? lastCompileTime;
   static Duration? lastExecuteTime;
-  
+
   /// 開始編譯計時
   static void startCompile() {
     _compileWatch.reset();
     _compileWatch.start();
   }
-  
+
   /// 結束編譯計時
   static void endCompile() {
     _compileWatch.stop();
     lastCompileTime = _compileWatch.elapsed;
     if (FluxDebugConfig.logCompileTime) {
-      debugPrint('[Flux Perf] Compile time: ${lastCompileTime!.inMicroseconds}μs');
+      debugPrint(
+          '[Flux Perf] Compile time: ${lastCompileTime!.inMicroseconds}μs');
     }
   }
-  
+
   /// 開始執行計時
   static void startExecute() {
     _executeWatch.reset();
     _executeWatch.start();
   }
-  
+
   /// 結束執行計時
   static void endExecute() {
     _executeWatch.stop();
     lastExecuteTime = _executeWatch.elapsed;
     if (FluxDebugConfig.logExecutionTime) {
-      debugPrint('[Flux Perf] Execute time: ${lastExecuteTime!.inMicroseconds}μs');
+      debugPrint(
+          '[Flux Perf] Execute time: ${lastExecuteTime!.inMicroseconds}μs');
     }
   }
-  
+
   /// 獲取性能報告
   static String getReport() {
     return '''
@@ -114,20 +122,20 @@ Execute Time: ${lastExecuteTime?.inMicroseconds ?? 'N/A'}μs
 class FluxErrorBoundary extends StatefulWidget {
   final Widget child;
   final Widget Function(Object error)? errorBuilder;
-  
+
   const FluxErrorBoundary({
     super.key,
     required this.child,
     this.errorBuilder,
   });
-  
+
   @override
   State<FluxErrorBoundary> createState() => _FluxErrorBoundaryState();
 }
 
 class _FluxErrorBoundaryState extends State<FluxErrorBoundary> {
   Object? _error;
-  
+
   @override
   void initState() {
     super.initState();
@@ -138,7 +146,7 @@ class _FluxErrorBoundaryState extends State<FluxErrorBoundary> {
       });
     };
   }
-  
+
   @override
   Widget build(BuildContext context) {
     if (_error != null) {
@@ -146,7 +154,7 @@ class _FluxErrorBoundaryState extends State<FluxErrorBoundary> {
     }
     return widget.child;
   }
-  
+
   Widget _defaultErrorWidget() {
     return Material(
       color: Colors.red.shade100,
@@ -181,27 +189,27 @@ class _FluxErrorBoundaryState extends State<FluxErrorBoundary> {
 class FluxLogger {
   static final List<FluxLogEntry> _logs = [];
   static const int maxLogs = 100;
-  
+
   static void log(String message, {FluxLogLevel level = FluxLogLevel.info}) {
     _logs.add(FluxLogEntry(
       message: message,
       level: level,
       timestamp: DateTime.now(),
     ));
-    
+
     // Trim old logs
     if (_logs.length > maxLogs) {
       _logs.removeAt(0);
     }
-    
+
     // Print to console in debug mode
     if (FluxDebugConfig.debugMode) {
       debugPrint('[Flux ${level.name.toUpperCase()}] $message');
     }
   }
-  
+
   static List<FluxLogEntry> get logs => List.unmodifiable(_logs);
-  
+
   static void clear() => _logs.clear();
 }
 
@@ -210,7 +218,7 @@ class FluxLogEntry {
   final String message;
   final FluxLogLevel level;
   final DateTime timestamp;
-  
+
   const FluxLogEntry({
     required this.message,
     required this.level,

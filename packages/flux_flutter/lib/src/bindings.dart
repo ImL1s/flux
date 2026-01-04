@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dart:ui' show lerpDouble;
+
 import 'utils/flux_cast.dart';
 import 'http_bindings.dart';
 import 'modules/camera_preview.dart';
@@ -10,38 +10,40 @@ import 'ui/flux_ui.dart';
 class FluxBindings {
   static final Map<String, FluxWidgetBuilder> _builders = {};
   static final Map<String, FluxFunction> _functions = {};
-  
+
   /// Global navigator key for Flux navigation
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
+
   /// Register a widget builder
   static void register(String name, FluxWidgetBuilder builder) {
     _builders[name] = builder;
   }
-  
+
   /// Register a Dart function for Flux to call
   static void registerFunction(String name, FluxFunction function) {
     _functions[name] = function;
   }
-  
+
   /// Register an async Dart function for Flux to call
   /// This is a convenience method that wraps async functions properly
-  static void registerAsyncFunction(String name, Future<Object?> Function(List<Object?>) function) {
+  static void registerAsyncFunction(
+      String name, Future<Object?> Function(List<Object?>) function) {
     _functions[name] = function;
   }
-  
+
   /// Get a widget builder by name
   static FluxWidgetBuilder? get(String name) => _builders[name];
-  
+
   /// Get a function by name
   static FluxFunction? getFunction(String name) => _functions[name];
-  
+
   /// Get all registered functions
   static Map<String, FluxFunction> get functions => _functions;
 
   /// Get all registered widget names
   static Set<String> get registeredWidgets => _builders.keys.toSet();
-  
+
   /// Initialize default bindings
   static void initDefaults() {
     _initWidgets();
@@ -51,7 +53,7 @@ class FluxBindings {
     _initCameraWidgets();
     _initFluxUiWidgets();
   }
-  
+
   static void _initWidgets() {
     // Text widget
     register('Text', (args, children) {
@@ -63,31 +65,39 @@ class FluxBindings {
         style: _parseTextStyle(styleMap),
       );
     });
-    
+
     // Column widget
     register('Column', (args, children) {
-      final mainAxisAlignment = _parseMainAxisAlignment(FluxCast.toStringNullable(args['mainAxisAlignment']));
-      final crossAxisAlignment = _parseCrossAxisAlignment(FluxCast.toStringNullable(args['crossAxisAlignment']));
+      final mainAxisAlignment = _parseMainAxisAlignment(
+          FluxCast.toStringNullable(args['mainAxisAlignment']));
+      final crossAxisAlignment = _parseCrossAxisAlignment(
+          FluxCast.toStringNullable(args['crossAxisAlignment']));
       final widgetChildren = FluxCast.toWidgetList(args['children']);
       return Column(
         mainAxisAlignment: mainAxisAlignment,
         crossAxisAlignment: crossAxisAlignment,
-        children: widgetChildren.isNotEmpty ? widgetChildren : children.cast<Widget>(),
+        children: widgetChildren.isNotEmpty
+            ? widgetChildren
+            : children.cast<Widget>(),
       );
     });
-    
+
     // Row widget
     register('Row', (args, children) {
-      final mainAxisAlignment = _parseMainAxisAlignment(FluxCast.toStringNullable(args['mainAxisAlignment']));
-      final crossAxisAlignment = _parseCrossAxisAlignment(FluxCast.toStringNullable(args['crossAxisAlignment']));
+      final mainAxisAlignment = _parseMainAxisAlignment(
+          FluxCast.toStringNullable(args['mainAxisAlignment']));
+      final crossAxisAlignment = _parseCrossAxisAlignment(
+          FluxCast.toStringNullable(args['crossAxisAlignment']));
       final widgetChildren = FluxCast.toWidgetList(args['children']);
       return Row(
         mainAxisAlignment: mainAxisAlignment,
         crossAxisAlignment: crossAxisAlignment,
-        children: widgetChildren.isNotEmpty ? widgetChildren : children.cast<Widget>(),
+        children: widgetChildren.isNotEmpty
+            ? widgetChildren
+            : children.cast<Widget>(),
       );
     });
-    
+
     // Container widget
     register('Container', (args, children) {
       final padding = _parseEdgeInsets(args['padding']);
@@ -97,34 +107,34 @@ class FluxBindings {
       final width = FluxCast.toDouble(args['width'] ?? args['0']);
       final height = FluxCast.toDouble(args['height'] ?? args['1']);
       final child = args['child'] as Widget?;
-      
+
       // IMPORTANT: Flutter Container cannot have both color and decoration
       // If decoration is provided, color must be part of decoration, not Container
       return Container(
         padding: padding,
         margin: margin,
-        color: decoration == null ? color : null, // Only use color if no decoration
+        color: decoration == null
+            ? color
+            : null, // Only use color if no decoration
         decoration: decoration,
         width: width,
         height: height,
         child: child ?? (children.isNotEmpty ? children.first : null),
       );
     });
-    
+
     // Button widget (ElevatedButton)
     register('Button', (args, children) {
       final label = args['text'] as String? ?? args['0'] as String?;
       final childWidget = args['child'] as Widget?;
       final onPressed = args['onPressed'];
-      
+
       return ElevatedButton(
         onPressed: onPressed is Function ? () => onPressed([]) : null,
         child: childWidget ?? Text(label ?? 'Button'),
       );
     });
-    
 
-    
     register('Expanded', (args, children) {
       final flex = FluxCast.toIntOrZero(args['flex']);
       return Expanded(
@@ -132,7 +142,7 @@ class FluxBindings {
         child: children.isNotEmpty ? children.first : const SizedBox.shrink(),
       );
     });
-    
+
     register('Flexible', (args, children) {
       final flex = args['flex'] as int? ?? 1;
       return Flexible(
@@ -140,7 +150,7 @@ class FluxBindings {
         child: children.isNotEmpty ? children.first : const SizedBox.shrink(),
       );
     });
-    
+
     register('SizedBox', (args, children) {
       final width = FluxCast.toDouble(args['width'] ?? args['0']);
       final height = FluxCast.toDouble(args['height'] ?? args['1']);
@@ -154,9 +164,10 @@ class FluxBindings {
     });
 
     register('Padding', (args, children) {
-      final padding = _parseEdgeInsets(args['padding']) ?? const EdgeInsets.all(8.0);
+      final padding =
+          _parseEdgeInsets(args['padding']) ?? const EdgeInsets.all(8.0);
       final child = args['child'] as Widget?;
-      
+
       return Padding(
         padding: padding,
         child: child ?? (children.isNotEmpty ? children.first : null),
@@ -164,10 +175,11 @@ class FluxBindings {
     });
 
     register('Card', (args, children) {
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
       final color = FluxCast.toColor(args['color']);
       final margin = _parseEdgeInsets(args['margin']);
-      
+
       return Card(
         color: color,
         margin: margin,
@@ -176,27 +188,28 @@ class FluxBindings {
     });
 
     register('ListTile', (args, children) {
-       final title = args['title'] as Widget?;
-       final subtitle = args['subtitle'] as Widget?;
-       final leading = args['leading'] as Widget?;
-       final trailing = args['trailing'] as Widget?;
-       final onTap = args['onTap'];
+      final title = args['title'] as Widget?;
+      final subtitle = args['subtitle'] as Widget?;
+      final leading = args['leading'] as Widget?;
+      final trailing = args['trailing'] as Widget?;
+      final onTap = args['onTap'];
 
-       return ListTile(
-         title: title,
-         subtitle: subtitle,
-         leading: leading,
-         trailing: trailing,
-         onTap: onTap is Function ? () => onTap([]) : null,
-       );
+      return ListTile(
+        title: title,
+        subtitle: subtitle,
+        leading: leading,
+        trailing: trailing,
+        onTap: onTap is Function ? () => onTap([]) : null,
+      );
     });
 
     register('Center', (args, children) {
       return Center(
-        child: args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null),
+        child: args['child'] as Widget? ??
+            (children.isNotEmpty ? children.first : null),
       );
     });
-    
+
     // TextField widget with enhanced properties
     register('TextField', (args, children) {
       final hint = args['hint'] as String? ?? args['0'] as String? ?? '';
@@ -206,14 +219,15 @@ class FluxBindings {
       final obscureText = FluxCast.toBool(args['obscureText']);
       final keyboardType = _parseTextInputType(args['keyboardType']);
       final style = _parseTextStyle(args['style']);
-      final decoration = _parseInputDecoration(args['decoration']) ?? InputDecoration(
-        hintText: hint,
-        labelText: label,
-      );
-      
+      final decoration = _parseInputDecoration(args['decoration']) ??
+          InputDecoration(
+            hintText: hint,
+            labelText: label,
+          );
+
       return TextField(
         decoration: decoration,
-        onChanged: onChanged != null 
+        onChanged: onChanged != null
             ? (value) => _invokeCallback(onChanged, [value])
             : null,
         onSubmitted: onSubmitted != null
@@ -230,11 +244,11 @@ class FluxBindings {
       final value = FluxCast.toBool(args['value']);
       final onChanged = args['onChanged'];
       final activeColor = FluxCast.toColor(args['activeColor']);
-      
+
       return Checkbox(
         value: value,
-        onChanged: onChanged != null 
-            ? (val) => _invokeCallback(onChanged, [val]) 
+        onChanged: onChanged != null
+            ? (val) => _invokeCallback(onChanged, [val])
             : null,
         activeColor: activeColor,
       );
@@ -245,17 +259,17 @@ class FluxBindings {
       final value = FluxCast.toBool(args['value']);
       final onChanged = args['onChanged'];
       final activeColor = FluxCast.toColor(args['activeColor']);
-      
+
       return Switch(
         value: value,
-        onChanged: onChanged != null 
-            ? (val) => _invokeCallback(onChanged, [val]) 
+        onChanged: onChanged != null
+            ? (val) => _invokeCallback(onChanged, [val])
             : null,
+// ignore: deprecated_member_use
         activeColor: activeColor,
       );
     });
 
-    
     // Image widget (network and asset)
     register('Image', (args, children) {
       final src = args['src'] as String? ?? args['0'] as String? ?? '';
@@ -264,7 +278,7 @@ class FluxBindings {
       final fit = _parseBoxFit(args['fit'] as String?);
       final alignment = _parseAlignment(args['alignment']) ?? Alignment.center;
       final color = FluxCast.toColor(args['color']);
-      
+
       if (src.startsWith('http://') || src.startsWith('https://')) {
         return Image.network(
           src,
@@ -287,71 +301,72 @@ class FluxBindings {
         );
       }
     });
-    
+
     // Icon widget
     register('Icon', (args, children) {
       final name = args['name'] as String? ?? args['0'] as String? ?? 'star';
       final size = FluxCast.toDouble(args['size']) ?? 24.0;
       final color = FluxCast.toColor(args['color']);
-      
+
       return Icon(
         _parseIconData(name),
         size: size,
         color: color,
       );
     });
-    
+
     // Card widget
     register('Card', (args, children) {
       final elevation = args['elevation'] as double? ?? 1.0;
       final colorValue = args['color'];
-      
+
       return Card(
         elevation: elevation,
         color: FluxCast.toColor(colorValue),
         child: children.isNotEmpty ? children.first : null,
       );
     });
-    
+
     // ListView widget
     register('ListView', (args, children) {
-      final scrollDirection = args['horizontal'] == true 
-          ? Axis.horizontal 
-          : Axis.vertical;
+      final scrollDirection =
+          args['horizontal'] == true ? Axis.horizontal : Axis.vertical;
       final padding = args['padding'] as double?;
-      
+
       return ListView(
         scrollDirection: scrollDirection,
         padding: padding != null ? EdgeInsets.all(padding) : null,
         children: args['children'] as List<Widget>? ?? children,
       );
     });
-    
+
     // GestureDetector for tap events
     register('GestureDetector', (args, children) {
       final onTap = args['onTap'];
       final onDoubleTap = args['onDoubleTap'];
       final onLongPress = args['onLongPress'];
-      
+
       return GestureDetector(
         onTap: onTap != null ? () => _invokeCallback(onTap, []) : null,
-        onDoubleTap: onDoubleTap != null ? () => _invokeCallback(onDoubleTap, []) : null,
-        onLongPress: onLongPress != null ? () => _invokeCallback(onLongPress, []) : null,
+        onDoubleTap:
+            onDoubleTap != null ? () => _invokeCallback(onDoubleTap, []) : null,
+        onLongPress:
+            onLongPress != null ? () => _invokeCallback(onLongPress, []) : null,
         child: children.isNotEmpty ? children.first : null,
       );
     });
-    
+
     // Enhanced Container with color support
     register('ColoredBox', (args, children) {
       final colorValue = args['color'] ?? args['0'];
       final color = FluxCast.toColor(colorValue) ?? Colors.transparent;
-      
+
       return ColoredBox(
         color: color,
         child: children.isNotEmpty ? children.first : null,
       );
     });
-    
+
     // Expanded widget
     register('Expanded', (args, children) {
       final flex = args['flex'] as int? ?? 1;
@@ -360,23 +375,24 @@ class FluxBindings {
         child: children.isNotEmpty ? children.first : const SizedBox.shrink(),
       );
     });
-    
+
     // Spacer widget
     register('Spacer', (args, children) {
       final flex = args['flex'] as int? ?? 1;
       return Spacer(flex: flex);
     });
-    
+
     // Divider widget
     register('Divider', (args, children) {
       final height = args['height'] as double?;
       final color = FluxCast.toColor(args['color']);
       return Divider(height: height, color: color);
     });
-    
+
     // Stack widget
     register('Stack', (args, children) {
-      final alignment = _parseAlignment(args['alignment']) ?? AlignmentDirectional.topStart;
+      final alignment =
+          _parseAlignment(args['alignment']) ?? AlignmentDirectional.topStart;
       return Stack(
         alignment: alignment,
         children: children,
@@ -391,7 +407,7 @@ class FluxBindings {
       final bottom = FluxCast.toDouble(args['bottom']);
       final width = FluxCast.toDouble(args['width']);
       final height = FluxCast.toDouble(args['height']);
-      
+
       return Positioned(
         left: left,
         top: top,
@@ -405,11 +421,13 @@ class FluxBindings {
 
     // Wrap widget
     register('Wrap', (args, children) {
-      final direction = args['direction'] == 'vertical' ? Axis.vertical : Axis.horizontal;
+      final direction =
+          args['direction'] == 'vertical' ? Axis.vertical : Axis.horizontal;
       final spacing = FluxCast.toDoubleOrZero(args['spacing']);
       final runSpacing = FluxCast.toDoubleOrZero(args['runSpacing']);
-      final alignment = _parseWrapAlignment(args['alignment']) ?? WrapAlignment.start;
-      
+      final alignment =
+          _parseWrapAlignment(args['alignment']) ?? WrapAlignment.start;
+
       return Wrap(
         direction: direction,
         spacing: spacing,
@@ -423,8 +441,9 @@ class FluxBindings {
     register('SingleChildScrollView', (args, children) {
       final direction = _parseAxis(args['scrollDirection']);
       final padding = _parseEdgeInsets(args['padding']);
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return SingleChildScrollView(
         scrollDirection: direction,
         padding: padding,
@@ -438,7 +457,8 @@ class FluxBindings {
       final padding = _parseEdgeInsets(args['padding']);
       // Advanced: ListView.builder support
       final itemCount = args['itemCount'] as int?;
-      final itemBuilder = args['itemBuilder']; // Expected to be Function(int) -> Widget
+      final itemBuilder =
+          args['itemBuilder']; // Expected to be Function(int) -> Widget
 
       if (itemCount != null && itemBuilder is Function) {
         return ListView.builder(
@@ -446,7 +466,8 @@ class FluxBindings {
           padding: padding,
           itemCount: itemCount,
           itemBuilder: (context, index) {
-            final result = itemBuilder([index]); // Invoke Flux function (wrapped or direct)
+            final result = itemBuilder(
+                [index]); // Invoke Flux function (wrapped or direct)
             if (result is Widget) return result;
             return const SizedBox.shrink(); // Fallback
           },
@@ -463,36 +484,38 @@ class FluxBindings {
     // Scaffold
     register('Scaffold', (args, children) {
       final appBar = args['appBar'] as PreferredSizeWidget?;
-      final body = args['body'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final body = args['body'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
       final floatingActionButton = args['floatingActionButton'] as Widget?;
-      
+
       return Scaffold(
         appBar: appBar,
         body: body,
         floatingActionButton: floatingActionButton,
       );
     });
-    
+
     // AppBar
     register('AppBar', (args, children) {
       final titleArg = args['title'];
       final title = titleArg is String ? Text(titleArg) : titleArg as Widget?;
-      
-      final actions = args['actions'] as List<Widget>? ?? 
+
+      final actions = args['actions'] as List<Widget>? ??
           (args['actions'] as List?)?.whereType<Widget>().toList();
-      
+
       return AppBar(
         title: title,
         actions: actions,
       );
     });
-    
+
     // FloatingActionButton
     register('FloatingActionButton', (args, children) {
       final onPressed = args['onPressed'];
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
       final tooltip = args['tooltip'] as String?;
-      
+
       return FloatingActionButton(
         onPressed: onPressed is Function ? () => onPressed([]) : null,
         tooltip: tooltip,
@@ -503,8 +526,9 @@ class FluxBindings {
     // GestureDetector
     register('GestureDetector', (args, children) {
       final onTap = args['onTap'];
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return GestureDetector(
         onTap: onTap is Function ? () => onTap([]) : null,
         child: child,
@@ -514,8 +538,9 @@ class FluxBindings {
     // InkWell
     register('InkWell', (args, children) {
       final onTap = args['onTap'];
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return InkWell(
         onTap: onTap is Function ? () => onTap([]) : null,
         child: child,
@@ -527,7 +552,7 @@ class FluxBindings {
       final titleRaw = args['title'];
       final contentRaw = args['content'];
       final actionsRaw = args['actions'];
-      
+
       Widget? title;
       if (titleRaw is Widget) {
         title = titleRaw;
@@ -541,12 +566,12 @@ class FluxBindings {
       } else if (contentRaw != null) {
         content = Text(contentRaw.toString());
       }
-      
+
       List<Widget> actionWidgets = [];
       if (actionsRaw is List) {
         actionWidgets = actionsRaw.whereType<Widget>().toList();
       }
-      
+
       return AlertDialog(
         title: title,
         content: content,
@@ -557,14 +582,14 @@ class FluxBindings {
     // SimpleDialog widget
     register('SimpleDialog', (args, children) {
       final titleRaw = args['title'];
-      
+
       Widget? title;
       if (titleRaw is Widget) {
         title = titleRaw;
       } else if (titleRaw != null) {
         title = Text(titleRaw.toString());
       }
-      
+
       return SimpleDialog(
         title: title,
         children: children,
@@ -572,16 +597,17 @@ class FluxBindings {
     });
 
     // ========== Scaffold & AppBar (Phase 24: Extended Widget Library) ==========
-    
+
     // Scaffold widget - The basic Material Design visual layout structure
     register('Scaffold', (args, children) {
       final appBar = args['appBar'] as Widget?;
-      final body = args['body'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final body = args['body'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
       final floatingActionButton = args['floatingActionButton'] as Widget?;
       final drawer = args['drawer'] as Widget?;
       final bottomNavigationBar = args['bottomNavigationBar'] as Widget?;
       final backgroundColor = FluxCast.toColor(args['backgroundColor']);
-      
+
       return Scaffold(
         appBar: appBar is PreferredSizeWidget ? appBar : null,
         body: body,
@@ -600,21 +626,21 @@ class FluxBindings {
       final backgroundColor = FluxCast.toColor(args['backgroundColor']);
       final centerTitle = FluxCast.toBool(args['centerTitle']);
       final elevation = FluxCast.toDoubleNullable(args['elevation']);
-      
+
       final bottomRaw = args['bottom'] as Widget?;
-      
+
       Widget? title;
       if (titleRaw is Widget) {
         title = titleRaw;
       } else if (titleRaw != null) {
         title = Text(titleRaw.toString());
       }
-      
+
       List<Widget> actions = [];
       if (actionsRaw is List) {
         actions = actionsRaw.whereType<Widget>().toList();
       }
-      
+
       return AppBar(
         title: title,
         leading: leadingRaw,
@@ -628,11 +654,12 @@ class FluxBindings {
 
     // Drawer widget - Material Design drawer
     register('Drawer', (args, children) {
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
       final backgroundColor = FluxCast.toColor(args['backgroundColor']);
       final elevation = FluxCast.toDoubleNullable(args['elevation']);
       final width = FluxCast.toDoubleNullable(args['width']);
-      
+
       return Drawer(
         backgroundColor: backgroundColor,
         elevation: elevation,
@@ -643,11 +670,14 @@ class FluxBindings {
 
     // DrawerHeader widget
     register('DrawerHeader', (args, children) {
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
       final decoration = _parseBoxDecoration(args['decoration']);
-      final padding = _parseEdgeInsets(args['padding']) ?? const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0);
-      final margin = _parseEdgeInsets(args['margin']) ?? const EdgeInsets.only(bottom: 8.0);
-      
+      final padding = _parseEdgeInsets(args['padding']) ??
+          const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0);
+      final margin = _parseEdgeInsets(args['margin']) ??
+          const EdgeInsets.only(bottom: 8.0);
+
       return DrawerHeader(
         decoration: decoration,
         padding: padding,
@@ -659,13 +689,15 @@ class FluxBindings {
     // FloatingActionButton widget
     register('FloatingActionButton', (args, children) {
       final onPressed = args['onPressed'];
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
       final backgroundColor = FluxCast.toColor(args['backgroundColor']);
       final tooltip = FluxCast.toStringNullable(args['tooltip']);
       final mini = FluxCast.toBool(args['mini']);
-      
+
       return FloatingActionButton(
-        onPressed: onPressed is Function ? () => _invokeCallback(onPressed, []) : null,
+        onPressed:
+            onPressed is Function ? () => _invokeCallback(onPressed, []) : null,
         backgroundColor: backgroundColor,
         tooltip: tooltip,
         mini: mini,
@@ -682,7 +714,7 @@ class FluxBindings {
       final selectedItemColor = FluxCast.toColor(args['selectedItemColor']);
       final unselectedItemColor = FluxCast.toColor(args['unselectedItemColor']);
       final typeStr = FluxCast.toStringNullable(args['type']);
-      
+
       List<BottomNavigationBarItem> items = [];
       if (itemsRaw != null) {
         for (final item in itemsRaw) {
@@ -700,15 +732,19 @@ class FluxBindings {
           }
         }
       }
-      
+
       return BottomNavigationBar(
         items: items,
         currentIndex: currentIndex,
-        onTap: onTap is Function ? (index) => _invokeCallback(onTap, [index]) : null,
+        onTap: onTap is Function
+            ? (index) => _invokeCallback(onTap, [index])
+            : null,
         backgroundColor: backgroundColor,
         selectedItemColor: selectedItemColor,
         unselectedItemColor: unselectedItemColor,
-        type: typeStr == 'shifting' ? BottomNavigationBarType.shifting : BottomNavigationBarType.fixed,
+        type: typeStr == 'shifting'
+            ? BottomNavigationBarType.shifting
+            : BottomNavigationBarType.fixed,
       );
     });
 
@@ -733,21 +769,21 @@ class FluxBindings {
       final onTap = args['onTap'];
       final dense = FluxCast.toBool(args['dense']);
       final enabled = args['enabled'] != false;
-      
+
       Widget? title;
       if (titleRaw is Widget) {
         title = titleRaw;
       } else if (titleRaw != null) {
         title = Text(titleRaw.toString());
       }
-      
+
       Widget? subtitle;
       if (subtitleRaw is Widget) {
         subtitle = subtitleRaw;
       } else if (subtitleRaw != null) {
         subtitle = Text(subtitleRaw.toString());
       }
-      
+
       return ListTile(
         title: title,
         subtitle: subtitle,
@@ -766,7 +802,7 @@ class FluxBindings {
       final indent = FluxCast.toDoubleNullable(args['indent']);
       final endIndent = FluxCast.toDoubleNullable(args['endIndent']);
       final color = FluxCast.toColor(args['color']);
-      
+
       return Divider(
         height: height,
         thickness: thickness,
@@ -788,8 +824,9 @@ class FluxBindings {
       final width = FluxCast.toDoubleNullable(args['width']);
       final height = FluxCast.toDoubleNullable(args['height']);
       final alignment = _parseAlignment(args['alignment']);
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return AnimatedContainer(
         duration: Duration(milliseconds: duration),
         padding: padding,
@@ -807,8 +844,9 @@ class FluxBindings {
     register('AnimatedOpacity', (args, children) {
       final opacity = FluxCast.toDouble(args['opacity']) ?? 1.0;
       final duration = FluxCast.toInt(args['duration']) ?? 300;
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return AnimatedOpacity(
         opacity: opacity.clamp(0.0, 1.0),
         duration: Duration(milliseconds: duration),
@@ -819,8 +857,9 @@ class FluxBindings {
     // AnimatedSwitcher widget
     register('AnimatedSwitcher', (args, children) {
       final duration = FluxCast.toInt(args['duration']) ?? 300;
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return AnimatedSwitcher(
         duration: Duration(milliseconds: duration),
         child: child,
@@ -839,14 +878,17 @@ class FluxBindings {
       final onChanged = args['onChanged'];
       final activeColor = FluxCast.toColor(args['activeColor']);
       final inactiveColor = FluxCast.toColor(args['inactiveColor']);
-      
+
       return Slider(
         value: value.clamp(min, max),
         min: min,
         max: max,
         divisions: divisions,
         label: label,
-        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        onChanged: onChanged is Function
+            ? (v) => _invokeCallback(onChanged, [v])
+            : null,
+// ignore: deprecated_member_use
         activeColor: activeColor,
         inactiveColor: inactiveColor,
       );
@@ -859,7 +901,7 @@ class FluxBindings {
       final onChanged = args['onChanged'];
       final hint = args['hint'];
       final isExpanded = FluxCast.toBool(args['isExpanded']);
-      
+
       List<DropdownMenuItem<String>> items = [];
       if (itemsRaw != null) {
         for (final item in itemsRaw) {
@@ -870,18 +912,20 @@ class FluxBindings {
           ));
         }
       }
-      
+
       Widget? hintWidget;
       if (hint is Widget) {
         hintWidget = hint;
       } else if (hint != null) {
         hintWidget = Text(hint.toString());
       }
-      
+
       return DropdownButton<String>(
         value: items.any((i) => i.value == value) ? value : null,
         items: items,
-        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        onChanged: onChanged is Function
+            ? (v) => _invokeCallback(onChanged, [v])
+            : null,
         hint: hintWidget,
         isExpanded: isExpanded,
       );
@@ -893,11 +937,16 @@ class FluxBindings {
       final groupValue = args['groupValue'];
       final onChanged = args['onChanged'];
       final activeColor = FluxCast.toColor(args['activeColor']);
-      
+
       return Radio<dynamic>(
         value: value,
+        // ignore: deprecated_member_use
         groupValue: groupValue,
-        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        // ignore: deprecated_member_use
+        onChanged: onChanged is Function
+            ? (v) => _invokeCallback(onChanged, [v])
+            : null,
+        // ignore: deprecated_member_use
         activeColor: activeColor,
       );
     });
@@ -905,33 +954,40 @@ class FluxBindings {
     // RadioListTile widget
     register('RadioListTile', (args, children) {
       final value = args['value'];
+      // groupValue and onChanged are handled by parent RadioGroup or custom logic in Flux
+      // For now, we bind 'value' and 'groupValue' directly if provided
       final groupValue = args['groupValue'];
       final onChanged = args['onChanged'];
       final titleRaw = args['title'];
       final subtitleRaw = args['subtitle'];
       final activeColor = FluxCast.toColor(args['activeColor']);
       final dense = FluxCast.toBool(args['dense']);
-      
+
       Widget? title;
       if (titleRaw is Widget) {
         title = titleRaw;
       } else if (titleRaw != null) {
         title = Text(titleRaw.toString());
       }
-      
+
       Widget? subtitle;
       if (subtitleRaw is Widget) {
         subtitle = subtitleRaw;
       } else if (subtitleRaw != null) {
         subtitle = Text(subtitleRaw.toString());
       }
-      
+
       return RadioListTile<dynamic>(
         value: value,
+        // ignore: deprecated_member_use
         groupValue: groupValue,
-        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        // ignore: deprecated_member_use
+        onChanged: onChanged is Function
+            ? (v) => _invokeCallback(onChanged, [v])
+            : null,
         title: title,
         subtitle: subtitle,
+// ignore: deprecated_member_use
         activeColor: activeColor,
         dense: dense,
       );
@@ -945,32 +1001,35 @@ class FluxBindings {
       final subtitleRaw = args['subtitle'];
       final activeColor = FluxCast.toColor(args['activeColor']);
       final dense = FluxCast.toBool(args['dense']);
-      
+
       Widget? title;
       if (titleRaw is Widget) {
         title = titleRaw;
       } else if (titleRaw != null) {
         title = Text(titleRaw.toString());
       }
-      
+
       Widget? subtitle;
       if (subtitleRaw is Widget) {
         subtitle = subtitleRaw;
       } else if (subtitleRaw != null) {
         subtitle = Text(subtitleRaw.toString());
       }
-      
+
       return CheckboxListTile(
         value: value,
-        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        onChanged: onChanged is Function
+            ? (v) => _invokeCallback(onChanged, [v])
+            : null,
         title: title,
         subtitle: subtitle,
+// ignore: deprecated_member_use
         activeColor: activeColor,
         dense: dense,
       );
     });
 
-    // SwitchListTile widget  
+    // SwitchListTile widget
     register('SwitchListTile', (args, children) {
       final value = FluxCast.toBool(args['value']);
       final onChanged = args['onChanged'];
@@ -978,26 +1037,29 @@ class FluxBindings {
       final subtitleRaw = args['subtitle'];
       final activeColor = FluxCast.toColor(args['activeColor']);
       final dense = FluxCast.toBool(args['dense']);
-      
+
       Widget? title;
       if (titleRaw is Widget) {
         title = titleRaw;
       } else if (titleRaw != null) {
         title = Text(titleRaw.toString());
       }
-      
+
       Widget? subtitle;
       if (subtitleRaw is Widget) {
         subtitle = subtitleRaw;
       } else if (subtitleRaw != null) {
         subtitle = Text(subtitleRaw.toString());
       }
-      
+
       return SwitchListTile(
         value: value,
-        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
+        onChanged: onChanged is Function
+            ? (v) => _invokeCallback(onChanged, [v])
+            : null,
         title: title,
         subtitle: subtitle,
+        // ignore: deprecated_member_use
         activeColor: activeColor,
         dense: dense,
       );
@@ -1008,8 +1070,9 @@ class FluxBindings {
       final color = FluxCast.toColor(args['color']);
       final elevation = FluxCast.toDoubleNullable(args['elevation']);
       final margin = _parseEdgeInsets(args['margin']);
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return Card(
         color: color,
         elevation: elevation,
@@ -1024,7 +1087,7 @@ class FluxBindings {
       final color = FluxCast.toColor(args['color']);
       final backgroundColor = FluxCast.toColor(args['backgroundColor']);
       final strokeWidth = FluxCast.toDouble(args['strokeWidth']) ?? 4.0;
-      
+
       return CircularProgressIndicator(
         value: value,
         color: color,
@@ -1039,7 +1102,7 @@ class FluxBindings {
       final color = FluxCast.toColor(args['color']);
       final backgroundColor = FluxCast.toColor(args['backgroundColor']);
       final minHeight = FluxCast.toDoubleNullable(args['minHeight']);
-      
+
       return LinearProgressIndicator(
         value: value,
         color: color,
@@ -1056,19 +1119,20 @@ class FluxBindings {
       final onDeleted = args['onDeleted'];
       final backgroundColor = FluxCast.toColor(args['backgroundColor']);
       final padding = _parseEdgeInsets(args['padding']);
-      
+
       Widget label;
       if (labelRaw is Widget) {
         label = labelRaw;
       } else {
         label = Text(labelRaw?.toString() ?? '');
       }
-      
+
       return Chip(
         label: label,
         avatar: avatar,
         deleteIcon: deleteIcon,
-        onDeleted: onDeleted is Function ? () => _invokeCallback(onDeleted, []) : null,
+        onDeleted:
+            onDeleted is Function ? () => _invokeCallback(onDeleted, []) : null,
         backgroundColor: backgroundColor,
         padding: padding,
       );
@@ -1080,8 +1144,9 @@ class FluxBindings {
     register('DefaultTabController', (args, children) {
       final length = FluxCast.toInt(args['length']) ?? 2;
       final initialIndex = FluxCast.toInt(args['initialIndex']) ?? 0;
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return DefaultTabController(
         length: length,
         initialIndex: initialIndex,
@@ -1095,9 +1160,10 @@ class FluxBindings {
       final isScrollable = FluxCast.toBool(args['isScrollable']);
       final indicatorColor = FluxCast.toColor(args['indicatorColor']);
       final labelColor = FluxCast.toColor(args['labelColor']);
-      final unselectedLabelColor = FluxCast.toColor(args['unselectedLabelColor']);
+      final unselectedLabelColor =
+          FluxCast.toColor(args['unselectedLabelColor']);
       final onTap = args['onTap'];
-      
+
       List<Widget> tabs = [];
       if (tabsRaw != null) {
         for (final tab in tabsRaw) {
@@ -1115,14 +1181,16 @@ class FluxBindings {
         // Use children as tabs
         tabs = children.whereType<Widget>().toList();
       }
-      
+
       return TabBar(
         tabs: tabs,
         isScrollable: isScrollable,
         indicatorColor: indicatorColor,
         labelColor: labelColor,
         unselectedLabelColor: unselectedLabelColor,
-        onTap: onTap is Function ? (index) => _invokeCallback(onTap, [index]) : null,
+        onTap: onTap is Function
+            ? (index) => _invokeCallback(onTap, [index])
+            : null,
       );
     });
 
@@ -1130,8 +1198,9 @@ class FluxBindings {
     register('Tab', (args, children) {
       final text = FluxCast.toStringNullable(args['text'] ?? args['0']);
       final icon = args['icon'] as Widget?;
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return Tab(
         text: text,
         icon: icon,
@@ -1142,14 +1211,14 @@ class FluxBindings {
     // TabBarView widget
     register('TabBarView', (args, children) {
       final childrenRaw = args['children'] as List?;
-      
+
       List<Widget> tabChildren = [];
       if (childrenRaw != null) {
         tabChildren = childrenRaw.whereType<Widget>().toList();
       } else {
         tabChildren = children.whereType<Widget>().toList();
       }
-      
+
       return TabBarView(
         children: tabChildren,
       );
@@ -1159,9 +1228,11 @@ class FluxBindings {
 
     // Hero widget for shared element transitions
     register('Hero', (args, children) {
-      final tag = args['tag']?.toString() ?? 'hero_${DateTime.now().millisecondsSinceEpoch}';
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
-      
+      final tag = args['tag']?.toString() ??
+          'hero_${DateTime.now().millisecondsSinceEpoch}';
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
       return Hero(
         tag: tag,
         child: child ?? const SizedBox.shrink(),
@@ -1173,24 +1244,27 @@ class FluxBindings {
   }
 
   // ========== Date/Time Picker Functions ==========
-  
+
   static void _initDateTimePickers() {
     // showDatePicker function
     registerFunction('showDatePicker', (args) async {
       final context = _currentContext;
       if (context == null) return null;
-      
-      final initialDate = _parseDate(args.isNotEmpty ? args[0] : null) ?? DateTime.now();
-      final firstDate = _parseDate(args.length > 1 ? args[1] : null) ?? DateTime(2000);
-      final lastDate = _parseDate(args.length > 2 ? args[2] : null) ?? DateTime(2100);
-      
+
+      final initialDate =
+          _parseDate(args.isNotEmpty ? args[0] : null) ?? DateTime.now();
+      final firstDate =
+          _parseDate(args.length > 1 ? args[1] : null) ?? DateTime(2000);
+      final lastDate =
+          _parseDate(args.length > 2 ? args[2] : null) ?? DateTime(2100);
+
       final result = await showDatePicker(
         context: context,
         initialDate: initialDate,
         firstDate: firstDate,
         lastDate: lastDate,
       );
-      
+
       return result?.toIso8601String();
     });
 
@@ -1198,15 +1272,15 @@ class FluxBindings {
     registerFunction('showTimePicker', (args) async {
       final context = _currentContext;
       if (context == null) return null;
-      
+
       final hour = args.isNotEmpty ? FluxCast.toInt(args[0]) ?? 12 : 12;
       final minute = args.length > 1 ? FluxCast.toInt(args[1]) ?? 0 : 0;
-      
+
       final result = await showTimePicker(
         context: context,
         initialTime: TimeOfDay(hour: hour, minute: minute),
       );
-      
+
       if (result != null) {
         return {'hour': result.hour, 'minute': result.minute};
       }
@@ -1223,27 +1297,28 @@ class FluxBindings {
 
   // Current build context for dialogs/pickers
   static BuildContext? _currentContext;
-  
+
   /// Set the current build context (called by FluxWidget before building)
   static void setContext(BuildContext context) {
     _currentContext = context;
   }
 
   // ========== Form Widgets ==========
-  
+
   static void _initFormWidgets() {
     // Form widget
     register('Form', (args, children) {
-      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
       final autovalidateMode = args['autovalidateMode']?.toString();
-      
+
       AutovalidateMode mode = AutovalidateMode.disabled;
       if (autovalidateMode == 'always') {
         mode = AutovalidateMode.always;
       } else if (autovalidateMode == 'onUserInteraction') {
         mode = AutovalidateMode.onUserInteraction;
       }
-      
+
       return Form(
         autovalidateMode: mode,
         child: child ?? const SizedBox.shrink(),
@@ -1256,13 +1331,14 @@ class FluxBindings {
       final label = FluxCast.toStringNullable(args['label']);
       final initialValue = FluxCast.toStringNullable(args['initialValue']);
       final obscureText = FluxCast.toBool(args['obscureText']);
-      final keyboardType = _parseKeyboardType(FluxCast.toStringNullable(args['keyboardType']));
+      final keyboardType =
+          _parseKeyboardType(FluxCast.toStringNullable(args['keyboardType']));
       final onChanged = args['onChanged'];
       final onSaved = args['onSaved'];
       final validator = args['validator'];
       final maxLines = FluxCast.toInt(args['maxLines']) ?? 1;
       final enabled = args['enabled'] != false;
-      
+
       return TextFormField(
         initialValue: initialValue,
         obscureText: obscureText,
@@ -1273,13 +1349,18 @@ class FluxBindings {
           hintText: hint,
           labelText: label,
         ),
-        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
-        onSaved: onSaved is Function ? (v) => _invokeCallback(onSaved, [v]) : null,
-        validator: validator is Function ? (v) {
-          final result = validator([v]);
-          if (result is String) return result;
-          return null;
-        } : null,
+        onChanged: onChanged is Function
+            ? (v) => _invokeCallback(onChanged, [v])
+            : null,
+        onSaved:
+            onSaved is Function ? (v) => _invokeCallback(onSaved, [v]) : null,
+        validator: validator is Function
+            ? (v) {
+                final result = validator([v]);
+                if (result is String) return result;
+                return null;
+              }
+            : null,
       );
     });
 
@@ -1292,7 +1373,7 @@ class FluxBindings {
       final hint = args['hint'];
       final label = FluxCast.toStringNullable(args['label']);
       final validator = args['validator'];
-      
+
       List<DropdownMenuItem<String>> items = [];
       if (itemsRaw != null) {
         for (final item in itemsRaw) {
@@ -1303,28 +1384,34 @@ class FluxBindings {
           ));
         }
       }
-      
+
       Widget? hintWidget;
       if (hint is Widget) {
         hintWidget = hint;
       } else if (hint != null) {
         hintWidget = Text(hint.toString());
       }
-      
+
       return DropdownButtonFormField<String>(
+        // ignore: deprecated_member_use
         value: items.any((i) => i.value == value) ? value : null,
         items: items,
-        onChanged: onChanged is Function ? (v) => _invokeCallback(onChanged, [v]) : null,
-        onSaved: onSaved is Function ? (v) => _invokeCallback(onSaved, [v]) : null,
+        onChanged: onChanged is Function
+            ? (v) => _invokeCallback(onChanged, [v])
+            : null,
+        onSaved:
+            onSaved is Function ? (v) => _invokeCallback(onSaved, [v]) : null,
         hint: hintWidget,
         decoration: InputDecoration(
           labelText: label,
         ),
-        validator: validator is Function ? (v) {
-          final result = validator([v]);
-          if (result is String) return result;
-          return null;
-        } : null,
+        validator: validator is Function
+            ? (v) {
+                final result = validator([v]);
+                if (result is String) return result;
+                return null;
+              }
+            : null,
       );
     });
   }
@@ -1332,43 +1419,54 @@ class FluxBindings {
   static TextInputType? _parseKeyboardType(String? type) {
     if (type == null) return null;
     switch (type.toLowerCase()) {
-      case 'email': return TextInputType.emailAddress;
-      case 'number': return TextInputType.number;
-      case 'phone': return TextInputType.phone;
-      case 'url': return TextInputType.url;
-      case 'multiline': return TextInputType.multiline;
-      default: return TextInputType.text;
+      case 'email':
+        return TextInputType.emailAddress;
+      case 'number':
+        return TextInputType.number;
+      case 'phone':
+        return TextInputType.phone;
+      case 'url':
+        return TextInputType.url;
+      case 'multiline':
+        return TextInputType.multiline;
+      default:
+        return TextInputType.text;
     }
   }
 
-  
   // Helper to invoke Flux callbacks
   static void _invokeCallback(dynamic callback, List<Object?> args) {
     if (callback is Function) {
       callback(args);
     }
   }
-  
 
-  
   // Parse BoxFit
   static BoxFit _parseBoxFit(String? value) {
     switch (value) {
-      case 'contain': return BoxFit.contain;
-      case 'cover': return BoxFit.cover;
-      case 'fill': return BoxFit.fill;
-      case 'fitWidth': return BoxFit.fitWidth;
-      case 'fitHeight': return BoxFit.fitHeight;
-      case 'none': return BoxFit.none;
-      case 'scaleDown': return BoxFit.scaleDown;
-      default: return BoxFit.contain;
+      case 'contain':
+        return BoxFit.contain;
+      case 'cover':
+        return BoxFit.cover;
+      case 'fill':
+        return BoxFit.fill;
+      case 'fitWidth':
+        return BoxFit.fitWidth;
+      case 'fitHeight':
+        return BoxFit.fitHeight;
+      case 'none':
+        return BoxFit.none;
+      case 'scaleDown':
+        return BoxFit.scaleDown;
+      default:
+        return BoxFit.contain;
     }
   }
-  
+
   // Parse TextStyle
   static TextStyle? _parseTextStyle(dynamic value) {
     if (value is! Map) return null;
-    
+
     return TextStyle(
       color: FluxCast.toColor(value['color']),
       fontSize: FluxCast.toDouble(value['fontSize']),
@@ -1380,30 +1478,50 @@ class FluxBindings {
   static FontWeight? _parseFontWeight(dynamic value) {
     if (value is int) {
       switch (value) {
-        case 100: return FontWeight.w100;
-        case 200: return FontWeight.w200;
-        case 300: return FontWeight.w300;
-        case 400: return FontWeight.w400;
-        case 500: return FontWeight.w500;
-        case 600: return FontWeight.w600;
-        case 700: return FontWeight.w700;
-        case 800: return FontWeight.w800;
-        case 900: return FontWeight.w900;
+        case 100:
+          return FontWeight.w100;
+        case 200:
+          return FontWeight.w200;
+        case 300:
+          return FontWeight.w300;
+        case 400:
+          return FontWeight.w400;
+        case 500:
+          return FontWeight.w500;
+        case 600:
+          return FontWeight.w600;
+        case 700:
+          return FontWeight.w700;
+        case 800:
+          return FontWeight.w800;
+        case 900:
+          return FontWeight.w900;
       }
     }
     if (value is String) {
       switch (value.toLowerCase()) {
-        case 'bold': return FontWeight.bold;
-        case 'normal': return FontWeight.normal;
-        case 'w100': return FontWeight.w100;
-        case 'w200': return FontWeight.w200;
-        case 'w300': return FontWeight.w300;
-        case 'w400': return FontWeight.w400;
-        case 'w500': return FontWeight.w500;
-        case 'w600': return FontWeight.w600;
-        case 'w700': return FontWeight.w700;
-        case 'w800': return FontWeight.w800;
-        case 'w900': return FontWeight.w900;
+        case 'bold':
+          return FontWeight.bold;
+        case 'normal':
+          return FontWeight.normal;
+        case 'w100':
+          return FontWeight.w100;
+        case 'w200':
+          return FontWeight.w200;
+        case 'w300':
+          return FontWeight.w300;
+        case 'w400':
+          return FontWeight.w400;
+        case 'w500':
+          return FontWeight.w500;
+        case 'w600':
+          return FontWeight.w600;
+        case 'w700':
+          return FontWeight.w700;
+        case 'w800':
+          return FontWeight.w800;
+        case 'w900':
+          return FontWeight.w900;
       }
     }
     return null;
@@ -1412,13 +1530,14 @@ class FluxBindings {
   static FontStyle? _parseFontStyle(dynamic value) {
     if (value is String) {
       switch (value.toLowerCase()) {
-        case 'italic': return FontStyle.italic;
-        case 'normal': return FontStyle.normal;
+        case 'italic':
+          return FontStyle.italic;
+        case 'normal':
+          return FontStyle.normal;
       }
     }
     return null;
   }
-  
 
   // Parse icon name to IconData
   static IconData _parseIconData(String name) {
@@ -1459,7 +1578,9 @@ class FluxBindings {
     if (value == null) return null;
     if (value is num) return EdgeInsets.all(value.toDouble());
     if (value is Map) {
-      if (value.containsKey('all')) return EdgeInsets.all(FluxCast.toDoubleOrZero(value['all']));
+      if (value.containsKey('all')) {
+        return EdgeInsets.all(FluxCast.toDoubleOrZero(value['all']));
+      }
       return EdgeInsets.only(
         left: FluxCast.toDoubleOrZero(value['left'] ?? value['horizontal']),
         right: FluxCast.toDoubleOrZero(value['right'] ?? value['horizontal']),
@@ -1498,36 +1619,49 @@ class FluxBindings {
 
   static MainAxisAlignment _parseMainAxisAlignment(String? value) {
     switch (value) {
-      case 'start': return MainAxisAlignment.start;
-      case 'end': return MainAxisAlignment.end;
-      case 'center': return MainAxisAlignment.center;
-      case 'spaceBetween': return MainAxisAlignment.spaceBetween;
-      case 'spaceAround': return MainAxisAlignment.spaceAround;
-      case 'spaceEvenly': return MainAxisAlignment.spaceEvenly;
-      default: return MainAxisAlignment.start;
+      case 'start':
+        return MainAxisAlignment.start;
+      case 'end':
+        return MainAxisAlignment.end;
+      case 'center':
+        return MainAxisAlignment.center;
+      case 'spaceBetween':
+        return MainAxisAlignment.spaceBetween;
+      case 'spaceAround':
+        return MainAxisAlignment.spaceAround;
+      case 'spaceEvenly':
+        return MainAxisAlignment.spaceEvenly;
+      default:
+        return MainAxisAlignment.start;
     }
   }
 
   static TextInputType? _parseTextInputType(dynamic value) {
     if (value is String) {
       switch (value.toLowerCase()) {
-        case 'text': return TextInputType.text;
-        case 'number': return TextInputType.number;
-        case 'email': return TextInputType.emailAddress;
-        case 'phone': return TextInputType.phone;
-        case 'multiline': return TextInputType.multiline;
-        case 'url': return TextInputType.url;
+        case 'text':
+          return TextInputType.text;
+        case 'number':
+          return TextInputType.number;
+        case 'email':
+          return TextInputType.emailAddress;
+        case 'phone':
+          return TextInputType.phone;
+        case 'multiline':
+          return TextInputType.multiline;
+        case 'url':
+          return TextInputType.url;
       }
     }
     return null;
   }
 
   static Axis _parseAxis(dynamic value) {
-     if (value is String) {
-       final lower = value.toLowerCase();
-       if (lower == 'horizontal') return Axis.horizontal;
-     }
-     return Axis.vertical;
+    if (value is String) {
+      final lower = value.toLowerCase();
+      if (lower == 'horizontal') return Axis.horizontal;
+    }
+    return Axis.vertical;
   }
 
   static InputDecoration? _parseInputDecoration(dynamic value) {
@@ -1547,9 +1681,12 @@ class FluxBindings {
   static InputBorder? _parseInputBorder(dynamic value) {
     if (value is String) {
       switch (value.toLowerCase()) {
-        case 'none': return InputBorder.none;
-        case 'outline': return const OutlineInputBorder();
-        case 'underline': return const UnderlineInputBorder();
+        case 'none':
+          return InputBorder.none;
+        case 'outline':
+          return const OutlineInputBorder();
+        case 'underline':
+          return const UnderlineInputBorder();
       }
     }
     if (value is Map) {
@@ -1557,15 +1694,18 @@ class FluxBindings {
       // For now, simple types
       final type = value['type'];
       if (type == 'outline') {
-         return OutlineInputBorder(
-           borderRadius: _parseBorderRadius(value['borderRadius']) ?? const BorderRadius.all(Radius.circular(4.0)),
-           borderSide: _parseBorderSide(value['borderSide']) ?? const BorderSide(),
-         );
+        return OutlineInputBorder(
+          borderRadius: _parseBorderRadius(value['borderRadius']) ??
+              const BorderRadius.all(Radius.circular(4.0)),
+          borderSide:
+              _parseBorderSide(value['borderSide']) ?? const BorderSide(),
+        );
       }
       if (type == 'underline') {
-         return UnderlineInputBorder(
-           borderSide: _parseBorderSide(value['borderSide']) ?? const BorderSide(),
-         );
+        return UnderlineInputBorder(
+          borderSide:
+              _parseBorderSide(value['borderSide']) ?? const BorderSide(),
+        );
       }
     }
     return null;
@@ -1575,7 +1715,9 @@ class FluxBindings {
     if (value is! Map) return null;
     return BorderSide(
       color: FluxCast.toColor(value['color']) ?? const Color(0xFF000000),
-      width: FluxCast.toDoubleOrZero(value['width']) > 0 ? FluxCast.toDoubleOrZero(value['width']) : 1.0,
+      width: FluxCast.toDoubleOrZero(value['width']) > 0
+          ? FluxCast.toDoubleOrZero(value['width'])
+          : 1.0,
       style: BorderStyle.solid,
     );
   }
@@ -1583,15 +1725,24 @@ class FluxBindings {
   static AlignmentGeometry? _parseAlignment(dynamic value) {
     if (value is String) {
       switch (value.toLowerCase()) {
-        case 'topleft': return Alignment.topLeft;
-        case 'topcenter': return Alignment.topCenter;
-        case 'topright': return Alignment.topRight;
-        case 'centerleft': return Alignment.centerLeft;
-        case 'center': return Alignment.center;
-        case 'centerright': return Alignment.centerRight;
-        case 'bottomleft': return Alignment.bottomLeft;
-        case 'bottomcenter': return Alignment.bottomCenter;
-        case 'bottomright': return Alignment.bottomRight;
+        case 'topleft':
+          return Alignment.topLeft;
+        case 'topcenter':
+          return Alignment.topCenter;
+        case 'topright':
+          return Alignment.topRight;
+        case 'centerleft':
+          return Alignment.centerLeft;
+        case 'center':
+          return Alignment.center;
+        case 'centerright':
+          return Alignment.centerRight;
+        case 'bottomleft':
+          return Alignment.bottomLeft;
+        case 'bottomcenter':
+          return Alignment.bottomCenter;
+        case 'bottomright':
+          return Alignment.bottomRight;
       }
     }
     return null;
@@ -1600,12 +1751,18 @@ class FluxBindings {
   static WrapAlignment? _parseWrapAlignment(dynamic value) {
     if (value is String) {
       switch (value.toLowerCase()) {
-        case 'start': return WrapAlignment.start;
-        case 'end': return WrapAlignment.end;
-        case 'center': return WrapAlignment.center;
-        case 'spacebetween': return WrapAlignment.spaceBetween;
-        case 'spacearound': return WrapAlignment.spaceAround;
-        case 'spaceevenly': return WrapAlignment.spaceEvenly;
+        case 'start':
+          return WrapAlignment.start;
+        case 'end':
+          return WrapAlignment.end;
+        case 'center':
+          return WrapAlignment.center;
+        case 'spacebetween':
+          return WrapAlignment.spaceBetween;
+        case 'spacearound':
+          return WrapAlignment.spaceAround;
+        case 'spaceevenly':
+          return WrapAlignment.spaceEvenly;
       }
     }
     return null;
@@ -1613,15 +1770,21 @@ class FluxBindings {
 
   static CrossAxisAlignment _parseCrossAxisAlignment(String? value) {
     switch (value) {
-      case 'start': return CrossAxisAlignment.start;
-      case 'end': return CrossAxisAlignment.end;
-      case 'center': return CrossAxisAlignment.center;
-      case 'stretch': return CrossAxisAlignment.stretch;
-      case 'baseline': return CrossAxisAlignment.baseline;
-      default: return CrossAxisAlignment.center;
+      case 'start':
+        return CrossAxisAlignment.start;
+      case 'end':
+        return CrossAxisAlignment.end;
+      case 'center':
+        return CrossAxisAlignment.center;
+      case 'stretch':
+        return CrossAxisAlignment.stretch;
+      case 'baseline':
+        return CrossAxisAlignment.baseline;
+      default:
+        return CrossAxisAlignment.center;
     }
   }
-  
+
   static void _initFunctions() {
     // delay(ms) - Returns a Future that completes after delay
     registerFunction('delay', (args) async {
@@ -1629,29 +1792,29 @@ class FluxBindings {
       await Future.delayed(Duration(milliseconds: ms));
       return null;
     });
-    
+
     // now() - Returns current timestamp
     registerFunction('now', (args) {
       return DateTime.now().millisecondsSinceEpoch;
     });
-    
+
     // toString(value) - Convert value to string
     registerFunction('toString', (args) {
       return args.isNotEmpty ? args[0].toString() : '';
     });
-    
+
     // parseInt(str) - Parse string to int
     registerFunction('parseInt', (args) {
       if (args.isEmpty) return 0;
       return int.tryParse(args[0].toString()) ?? 0;
     });
-    
+
     // parseDouble(str) - Parse string to double
     registerFunction('parseDouble', (args) {
       if (args.isEmpty) return 0.0;
       return double.tryParse(args[0].toString()) ?? 0.0;
     });
-    
+
     // length(str or list) - Get length
     registerFunction('length', (args) {
       if (args.isEmpty) return 0;
@@ -1660,14 +1823,14 @@ class FluxBindings {
       if (value is List) return value.length;
       return 0;
     });
-    
+
     // log(message) - Debug logging
     registerFunction('log', (args) {
       final message = args.isNotEmpty ? args[0].toString() : '';
       debugPrint('[Flux Log]: $message');
       return null;
     });
-    
+
     // List functions
     // push(list, item) - Add item to list
     registerFunction('push', (args) {
@@ -1686,7 +1849,7 @@ class FluxBindings {
       list.add(args[1]);
       return null;
     });
-    
+
     // removeAt(list, index) - Remove item at index
     registerFunction('removeAt', (args) {
       if (args.length < 2) return null;
@@ -1712,7 +1875,8 @@ class FluxBindings {
       if (args.isEmpty) return null;
       final routeName = args[0].toString();
       final routeArgs = args.length > 1 ? args[1] : null;
-      return navigatorKey.currentState?.pushNamed(routeName, arguments: routeArgs);
+      return navigatorKey.currentState
+          ?.pushNamed(routeName, arguments: routeArgs);
     });
 
     // Navigation: push with a simple screen widget
@@ -1722,11 +1886,12 @@ class FluxBindings {
       if (args.isEmpty) return null;
       final context = navigatorKey.currentContext;
       if (context == null) return null;
-      
+
       final routeName = args[0].toString();
       final routeArgs = args.length > 1 ? args[1] : null;
-      
-      return navigatorKey.currentState?.pushNamed(routeName, arguments: routeArgs);
+
+      return navigatorKey.currentState
+          ?.pushNamed(routeName, arguments: routeArgs);
     });
 
     // Dialog: showAlert(title, content) -> Future<bool?>
@@ -1737,7 +1902,7 @@ class FluxBindings {
 
       final title = args.isNotEmpty ? args[0]?.toString() : 'Alert';
       final content = args.length > 1 ? args[1]?.toString() : '';
-      
+
       return showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -1766,7 +1931,7 @@ class FluxBindings {
       final content = args.length > 1 ? args[1]?.toString() : '';
       final confirmText = args.length > 2 ? args[2]?.toString() : 'OK';
       final cancelText = args.length > 3 ? args[3]?.toString() : 'Cancel';
-      
+
       return showDialog<bool>(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -1794,7 +1959,7 @@ class FluxBindings {
       final title = args.isNotEmpty ? args[0]?.toString() : 'Input';
       final hint = args.length > 1 ? args[1]?.toString() : '';
       final controller = TextEditingController();
-      
+
       return showDialog<String>(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -1822,7 +1987,7 @@ class FluxBindings {
     for (final entry in HttpBindings.functions.entries) {
       registerFunction(entry.key, entry.value as FluxFunction);
     }
-    
+
     // BoxDecoration helper - returns a Map that _parseBoxDecoration can interpret
     registerFunction('BoxDecoration', (args) {
       // This is a metadata map, not a Flutter object
@@ -1835,7 +2000,7 @@ class FluxBindings {
         'boxShadow': namedArgs['boxShadow'],
       };
     });
-    
+
     // BorderRadius.circular helper - returns a number for _parseBorderRadius
     registerFunction('BorderRadius.circular', (args) {
       if (args.isNotEmpty && args[0] is num) {
@@ -1843,14 +2008,14 @@ class FluxBindings {
       }
       return 0.0;
     });
-    
+
     // Offset helper for BoxShadow
     registerFunction('Offset', (args) {
       final dx = args.isNotEmpty ? FluxCast.toDoubleOrZero(args[0]) : 0.0;
       final dy = args.length > 1 ? FluxCast.toDoubleOrZero(args[1]) : 0.0;
       return {'dx': dx, 'dy': dy};
     });
-    
+
     // BoxShadow helper
     registerFunction('BoxShadow', (args) {
       final namedArgs = args.isNotEmpty && args[0] is Map ? args[0] as Map : {};
@@ -1863,7 +2028,7 @@ class FluxBindings {
   }
 
   // ========== Camera Widgets ==========
-  
+
   static void _initCameraWidgets() {
     register('CameraPreview', (args, children) {
       return const FluxCameraPreview();
@@ -1881,12 +2046,12 @@ class FluxBindings {
       final isLoading = FluxCast.toBool(args['isLoading']);
       final isDisabled = FluxCast.toBool(args['isDisabled']);
       final isFullWidth = FluxCast.toBool(args['isFullWidth']);
-      
+
       final variant = FluxButtonVariant.values.firstWhere(
         (e) => e.name == variantStr,
         orElse: () => FluxButtonVariant.primary,
       );
-      
+
       final size = FluxButtonSize.values.firstWhere(
         (e) => e.name == sizeStr,
         orElse: () => FluxButtonSize.md,
@@ -1906,7 +2071,8 @@ class FluxBindings {
 
     // FluxInput
     register('FluxInput', (args, children) {
-      final initialValue = args['initialValue'] as String? ?? args['value'] as String?;
+      final initialValue =
+          args['initialValue'] as String? ?? args['value'] as String?;
       final onChanged = args['onChanged'];
       final onSubmitted = args['onSubmitted'];
       final label = args['label'] as String?;
@@ -1926,13 +2092,19 @@ class FluxBindings {
 
       return FluxInput(
         initialValue: initialValue,
-        onChanged: onChanged != null ? (val) => _invokeCallback(onChanged, [val]) : null,
-        onSubmitted: onSubmitted != null ? (val) => _invokeCallback(onSubmitted, [val]) : null,
+        onChanged: onChanged != null
+            ? (val) => _invokeCallback(onChanged, [val])
+            : null,
+        onSubmitted: onSubmitted != null
+            ? (val) => _invokeCallback(onSubmitted, [val])
+            : null,
         label: label,
         hint: hint,
         errorText: errorText,
-        prefixIcon: prefixIconName != null ? _parseIconData(prefixIconName) : null,
-        suffixIcon: suffixIconName != null ? _parseIconData(suffixIconName) : null,
+        prefixIcon:
+            prefixIconName != null ? _parseIconData(prefixIconName) : null,
+        suffixIcon:
+            suffixIconName != null ? _parseIconData(suffixIconName) : null,
         type: type,
         enabled: enabled,
         autofocus: autofocus,
@@ -1946,7 +2118,7 @@ class FluxBindings {
       final padding = _parseEdgeInsets(args['padding']);
       final onTap = args['onTap'];
       final backgroundColor = FluxCast.toColor(args['backgroundColor']);
-      
+
       final variant = FluxCardVariant.values.firstWhere(
         (e) => e.name == variantStr,
         orElse: () => FluxCardVariant.elevated,
@@ -1968,10 +2140,11 @@ class FluxBindings {
       final count = FluxCast.toInt(args['count']);
       final color = FluxCast.toColor(args['color']);
       final textColor = FluxCast.toColor(args['textColor']);
-      final alignment = _parseAlignment(args['alignment']) as Alignment? ?? Alignment.topRight;
-       // Offset parsing simplified for standard cases, assuming simple x,y overrides if needed
-       // Not exposing full offset map for now to keep it simple, defaulting to standard
-      
+      final alignment = _parseAlignment(args['alignment']) as Alignment? ??
+          Alignment.topRight;
+      // Offset parsing simplified for standard cases, assuming simple x,y overrides if needed
+      // Not exposing full offset map for now to keep it simple, defaulting to standard
+
       final variant = FluxBadgeVariant.values.firstWhere(
         (e) => e.name == variantStr,
         orElse: () => FluxBadgeVariant.dot,
@@ -1990,10 +2163,12 @@ class FluxBindings {
 
     // FluxRow
     register('FluxRow', (args, children) {
-      final mainAxisAlignment = _parseMainAxisAlignment(FluxCast.toStringNullable(args['mainAxisAlignment']));
-      final crossAxisAlignment = _parseCrossAxisAlignment(FluxCast.toStringNullable(args['crossAxisAlignment']));
+      final mainAxisAlignment = _parseMainAxisAlignment(
+          FluxCast.toStringNullable(args['mainAxisAlignment']));
+      final crossAxisAlignment = _parseCrossAxisAlignment(
+          FluxCast.toStringNullable(args['crossAxisAlignment']));
       final spacing = FluxCast.toDoubleNullable(args['spacing']);
-      
+
       return FluxRow(
         mainAxisAlignment: mainAxisAlignment,
         crossAxisAlignment: crossAxisAlignment,
@@ -2004,10 +2179,12 @@ class FluxBindings {
 
     // FluxColumn
     register('FluxColumn', (args, children) {
-      final mainAxisAlignment = _parseMainAxisAlignment(FluxCast.toStringNullable(args['mainAxisAlignment']));
-      final crossAxisAlignment = _parseCrossAxisAlignment(FluxCast.toStringNullable(args['crossAxisAlignment']));
+      final mainAxisAlignment = _parseMainAxisAlignment(
+          FluxCast.toStringNullable(args['mainAxisAlignment']));
+      final crossAxisAlignment = _parseCrossAxisAlignment(
+          FluxCast.toStringNullable(args['crossAxisAlignment']));
       final spacing = FluxCast.toDoubleNullable(args['spacing']);
-      
+
       return FluxColumn(
         mainAxisAlignment: mainAxisAlignment,
         crossAxisAlignment: crossAxisAlignment,
@@ -2018,7 +2195,8 @@ class FluxBindings {
 
     // FluxStack
     register('FluxStack', (args, children) {
-      final alignment = _parseAlignment(args['alignment']) ?? AlignmentDirectional.topStart;
+      final alignment =
+          _parseAlignment(args['alignment']) ?? AlignmentDirectional.topStart;
       return FluxStack(
         alignment: alignment,
         children: children,
@@ -2027,11 +2205,14 @@ class FluxBindings {
 
     // FluxGrid
     register('FluxGrid', (args, children) {
-      final spacing = FluxCast.toDoubleNullable(args['spacing']) ?? FluxSpacing.md;
-      final runSpacing = FluxCast.toDoubleNullable(args['runSpacing']) ?? FluxSpacing.md;
+      final spacing =
+          FluxCast.toDoubleNullable(args['spacing']) ?? FluxSpacing.md;
+      final runSpacing =
+          FluxCast.toDoubleNullable(args['runSpacing']) ?? FluxSpacing.md;
       final crossAxisCount = FluxCast.toInt(args['crossAxisCount']);
-      final maxCrossAxisExtent = FluxCast.toDoubleNullable(args['maxCrossAxisExtent']);
-      
+      final maxCrossAxisExtent =
+          FluxCast.toDoubleNullable(args['maxCrossAxisExtent']);
+
       return FluxGrid(
         spacing: spacing,
         runSpacing: runSpacing,
@@ -2052,43 +2233,41 @@ typedef FluxWidgetBuilder = Widget Function(
 /// Function type for Dart functions callable from Flux
 typedef FluxFunction = FutureOr<Object?> Function(List<Object?> args);
 
-
 /// Represents a Future that can be passed to/from Flux scripts
 class FluxFuture {
   final Future<Object?> _future;
   final Completer<Object?> _completer;
-  
+
   FluxFuture._(this._future, this._completer);
-  
+
   /// Create from an existing Dart Future
   factory FluxFuture.fromDart(Future<Object?> future) {
     final completer = Completer<Object?>();
     future.then(completer.complete).catchError(completer.completeError);
     return FluxFuture._(future, completer);
   }
-  
+
   /// Create a pending future that can be completed later
   factory FluxFuture.pending() {
     final completer = Completer<Object?>();
     return FluxFuture._(completer.future, completer);
   }
-  
+
   bool get isCompleted => _completer.isCompleted;
   Future<Object?> get dartFuture => _future;
-  
+
   void complete(Object? value) {
     if (!_completer.isCompleted) {
       _completer.complete(value);
     }
   }
-  
+
   void completeError(Object error) {
     if (!_completer.isCompleted) {
       _completer.completeError(error);
     }
   }
-  
+
   @override
   String toString() => '<FluxFuture>';
 }
-

@@ -84,4 +84,3 @@ class DialogModule extends FluxModule {
     return null;
   }
 }
-

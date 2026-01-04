@@ -4,10 +4,10 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flux_flutter/src/riverpod_integration.dart';
 
 /// A wrapper widget that enables Hot Reload for Flux scripts.
-/// 
+///
 /// It connects to a WebSocket server (default: ws://localhost:8080) to receive
 /// updates to the Flux source code.
-/// 
+///
 /// Usage:
 /// ```dart
 /// FluxHotReloadWidget(
@@ -20,7 +20,8 @@ class FluxHotReloadWidget extends StatefulWidget {
   final String initialSource;
   final String widgetName;
   final Map<String, dynamic> props;
-  final Map<String, NotifierProvider<Notifier<Object?>, Object?>> notifierProviders;
+  final Map<String, NotifierProvider<Notifier<Object?>, Object?>>
+      notifierProviders;
   final String hotReloadUrl;
 
   const FluxHotReloadWidget({
@@ -57,7 +58,8 @@ class _FluxHotReloadWidgetState extends State<FluxHotReloadWidget> {
       _channel!.stream.listen(
         (data) {
           if (data is String) {
-            debugPrint('Flux Hot Reload: Received update (${data.length} bytes)');
+            debugPrint(
+                'Flux Hot Reload: Received update (${data.length} bytes)');
             setState(() {
               _currentSource = data;
             });

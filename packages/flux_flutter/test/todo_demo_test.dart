@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_flutter/flux_flutter.dart';
-import 'package:flux_flutter/src/bindings.dart';
 
 void main() {
   setUpAll(() {
@@ -50,19 +49,18 @@ void main() {
         ),
         routes: {
           '/add': (context) => const FluxWidget(
-             source: fluxCode,
-             widgetName: 'AddTaskParam',
-          ),
+                source: fluxCode,
+                widgetName: 'AddTaskParam',
+              ),
         },
       ));
-      
+
       await tester.pump();
 
       // 3. Verify Initial State
       expect(find.text('Debug Message'), findsOneWidget);
-      
+
       // End test for now
     });
   });
 }
-

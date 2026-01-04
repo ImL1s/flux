@@ -42,7 +42,8 @@ class _FluxHotReloadWidgetState extends State<FluxHotReloadWidget> {
   void _handleHotReload(Map<String, dynamic> data) async {
     if (data['type'] == 'reload') {
       final source = data['content'] as String;
-      debugPrint('🔥 Flux Hot Reload: Received update (${source.length} bytes)');
+      debugPrint(
+          '🔥 Flux Hot Reload: Received update (${source.length} bytes)');
 
       try {
         // 1. Compile new source
@@ -91,8 +92,11 @@ class _FluxHotReloadWidgetState extends State<FluxHotReloadWidget> {
                 children: [
                   const Icon(Icons.error_outline, color: Colors.red, size: 48),
                   const SizedBox(height: 16),
-                  const Text('Flux Compilation Error', 
-                    style: TextStyle(color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold)),
+                  const Text('Flux Compilation Error',
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   Text(_parseError!, style: const TextStyle(color: Colors.red)),
                 ],

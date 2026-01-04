@@ -6,10 +6,11 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 
 /// Callback signature for hot-reload events.
-typedef HotReloadCallback = void Function(String scriptName, CompiledFunction newFunction);
+typedef HotReloadCallback = void Function(
+    String scriptName, CompiledFunction newFunction);
 
 /// Hot-reload service that connects to the Flux dev server.
-/// 
+///
 /// Usage:
 /// ```dart
 /// final service = HotReloadService(
@@ -24,12 +25,12 @@ class HotReloadService {
   final void Function(String error)? onError;
   final VoidCallback? onConnected;
   final VoidCallback? onDisconnected;
-  
+
   WebSocketChannel? _channel;
   StreamSubscription? _subscription;
   Timer? _reconnectTimer;
   bool _disposed = false;
-  
+
   HotReloadService({
     required this.serverUrl,
     required this.onReload,
@@ -41,14 +42,14 @@ class HotReloadService {
   /// Connects to the dev server.
   Future<bool> connect() async {
     if (_disposed) return false;
-    
+
     try {
       _channel = WebSocketChannel.connect(Uri.parse(serverUrl));
       await _channel!.ready;
-      
+
       debugPrint('[HotReload] Connected to $serverUrl');
       onConnected?.call();
-      
+
       _subscription = _channel!.stream.listen(
         _handleMessage,
         onDone: _handleDisconnect,
@@ -58,7 +59,7 @@ class HotReloadService {
           _handleDisconnect();
         },
       );
-      
+
       return true;
     } catch (e) {
       debugPrint('[HotReload] Connection failed: $e');
@@ -82,7 +83,7 @@ class HotReloadService {
     try {
       final data = jsonDecode(message as String) as Map<String, dynamic>;
       final type = data['type'] as String;
-      
+
       switch (type) {
         case 'reload':
           _handleReload(data);
@@ -108,13 +109,12 @@ class HotReloadService {
     try {
       final scriptName = data['script'] as String;
       final bytecodeData = data['bytecode'] as Map<String, dynamic>;
-      
+
       // Deserialize the compiled function
       final function = _deserializeFunction(bytecodeData);
-      
+
       debugPrint('[HotReload] Reloading: $scriptName');
       onReload(scriptName, function);
-      
     } catch (e) {
       debugPrint('[HotReload] Reload error: $e');
       onError?.call('Failed to apply reload: $e');
@@ -129,21 +129,21 @@ class HotReloadService {
     final paramNames = (data['paramNames'] as List?)?.cast<String>() ?? [];
     final localNames = (data['localNames'] as List?)?.cast<String>() ?? [];
     final chunkData = data['chunk'] as Map<String, dynamic>;
-    
+
     final chunk = Chunk();
-    
+
     // Deserialize bytecode
     final code = (chunkData['code'] as List).cast<int>();
     for (final byte in code) {
       chunk.code.add(byte);
     }
-    
+
     // Deserialize lines
     final lines = (chunkData['lines'] as List).cast<int>();
     for (final line in lines) {
       chunk.lines.add(line);
     }
-    
+
     // Deserialize constants
     final constants = chunkData['constants'] as List;
     for (final constant in constants) {
@@ -153,12 +153,13 @@ class HotReloadService {
         chunk.addConstant(constant);
       } else if (constant is Map && constant['type'] == 'function') {
         // Recursively deserialize nested functions
-        chunk.addConstant(_deserializeFunction(constant['data'] as Map<String, dynamic>));
+        chunk.addConstant(
+            _deserializeFunction(constant['data'] as Map<String, dynamic>));
       } else {
         chunk.addConstant(constant.toString());
       }
     }
-    
+
     return CompiledFunction(
       name,
       chunk,
@@ -178,7 +179,7 @@ class HotReloadService {
 
   void _scheduleReconnect() {
     if (_disposed) return;
-    
+
     _reconnectTimer?.cancel();
     _reconnectTimer = Timer(const Duration(seconds: 3), () {
       debugPrint('[HotReload] Attempting to reconnect...');

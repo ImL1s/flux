@@ -4,7 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_flutter/flux_flutter.dart';
 
 void main() {
-  testWidgets('FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton', (tester) async {
+  testWidgets(
+      'FluxRiverpodWidget renders Scaffold with AppBar and FloatingActionButton',
+      (tester) async {
     const source = r'''
       widget App {
         build {
@@ -41,7 +43,9 @@ void main() {
     expect(find.byIcon(Icons.add), findsOneWidget);
   });
 
-  testWidgets('FluxRiverpodWidget handles recursive argument conversion (nested widgets)', (tester) async {
+  testWidgets(
+      'FluxRiverpodWidget handles recursive argument conversion (nested widgets)',
+      (tester) async {
     // This tests _preprocessArgs converting FluxWidgetNodes in arguments
     const source = r'''
       widget CustomContainer {
@@ -79,7 +83,8 @@ void main() {
     expect(find.text('Header Text'), findsOneWidget);
   });
 
-  testWidgets('FluxRiverpodWidget handles Button onPressed callback', (tester) async {
+  testWidgets('FluxRiverpodWidget handles Button onPressed callback',
+      (tester) async {
     const source = r'''
       widget CounterApp {
         state count = 0;
@@ -119,7 +124,8 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 
-  testWidgets('FluxRiverpodWidget handles ListView with children', (tester) async {
+  testWidgets('FluxRiverpodWidget handles ListView with children',
+      (tester) async {
     const source = r'''
       widget ListApp {
         build {

@@ -7,6 +7,7 @@
 /// - try/catch with async errors
 /// - Sequential and parallel awaits
 /// - State updates during async operations
+library;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,7 +19,8 @@ void main() {
   });
 
   group('Basic Async/Await', () {
-    testWidgets('simple await resolves and updates state', (WidgetTester tester) async {
+    testWidgets('simple await resolves and updates state',
+        (WidgetTester tester) async {
       // Register a simple async function that returns after a delay
       FluxBindings.registerAsyncFunction('delay_return', (args) async {
         await Future.delayed(const Duration(milliseconds: 10));
@@ -41,7 +43,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'AsyncTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'AsyncTest', runtime: runtime)));
 
       expect(find.text('pending'), findsOneWidget);
 
@@ -74,7 +77,9 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'ImmediateAsyncTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home:
+              FluxWidget(widgetName: 'ImmediateAsyncTest', runtime: runtime)));
 
       expect(find.text('waiting'), findsOneWidget);
 
@@ -87,7 +92,8 @@ void main() {
   });
 
   group('Sequential Awaits', () {
-    testWidgets('multiple sequential awaits execute in order', (WidgetTester tester) async {
+    testWidgets('multiple sequential awaits execute in order',
+        (WidgetTester tester) async {
       FluxBindings.registerAsyncFunction('append_async', (args) async {
         await Future.delayed(const Duration(milliseconds: 5));
         return args[0].toString() + args[1].toString();
@@ -111,7 +117,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'SequentialTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'SequentialTest', runtime: runtime)));
 
       expect(find.text(''), findsOneWidget);
 
@@ -156,7 +163,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'TryCatchAsyncTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'TryCatchAsyncTest', runtime: runtime)));
 
       expect(find.text('idle'), findsOneWidget);
 
@@ -169,7 +177,8 @@ void main() {
       expect(find.textContaining('Async failure'), findsOneWidget);
     });
 
-    testWidgets('try/catch with successful async recovers', (WidgetTester tester) async {
+    testWidgets('try/catch with successful async recovers',
+        (WidgetTester tester) async {
       FluxBindings.registerAsyncFunction('may_fail', (args) async {
         await Future.delayed(const Duration(milliseconds: 5));
         if (args.isNotEmpty && args[0] == true) {
@@ -198,7 +207,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'RecoveryTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'RecoveryTest', runtime: runtime)));
 
       await tester.tap(find.text('Safe'));
       await tester.pump();
@@ -237,7 +247,9 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'ConditionalAwaitTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(
+              widgetName: 'ConditionalAwaitTest', runtime: runtime)));
 
       expect(find.text('0'), findsOneWidget);
 
@@ -249,7 +261,8 @@ void main() {
       expect(find.text('42'), findsOneWidget);
     });
 
-    testWidgets('multiple state updates in single async function', (WidgetTester tester) async {
+    testWidgets('multiple state updates in single async function',
+        (WidgetTester tester) async {
       FluxBindings.registerAsyncFunction('step_delay', (args) async {
         await Future.delayed(const Duration(milliseconds: 5));
         return args[0];
@@ -278,7 +291,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'MultiStateTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'MultiStateTest', runtime: runtime)));
 
       expect(find.text('0'), findsOneWidget);
       expect(find.text(''), findsOneWidget);
@@ -321,7 +335,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'NullAwaitTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'NullAwaitTest', runtime: runtime)));
 
       await tester.tap(find.text('Nullify'));
       await tester.pump();
@@ -331,7 +346,8 @@ void main() {
       expect(find.text('got_null'), findsOneWidget);
     });
 
-    testWidgets('await returning complex nested data', (WidgetTester tester) async {
+    testWidgets('await returning complex nested data',
+        (WidgetTester tester) async {
       FluxBindings.registerAsyncFunction('get_nested', (args) async {
         await Future.delayed(const Duration(milliseconds: 5));
         return {
@@ -359,7 +375,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'NestedDataTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'NestedDataTest', runtime: runtime)));
 
       await tester.tap(find.text('Load'));
       await tester.pump();
@@ -400,7 +417,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'TimeoutTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'TimeoutTest', runtime: runtime)));
 
       await tester.tap(find.text('Run'));
       await tester.pump(); // Update to "waiting"
@@ -420,7 +438,7 @@ void main() {
       // Concurrent coroutines share the same _stack and _frames, causing state corruption.
       // Proper coroutine isolation requires significant architectural changes.
       // See async_await_plan.md for future improvements.
-      
+
       // Simulate two async operations modifying the same state
       FluxBindings.registerAsyncFunction('async_incr', (args) async {
         await Future.delayed(Duration(milliseconds: args[0] as int));
@@ -450,7 +468,8 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'RaceTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'RaceTest', runtime: runtime)));
 
       // Trigger both correctly
       // Trigger both correctly
@@ -458,9 +477,9 @@ void main() {
       await tester.tap(find.text('B'));
       await tester.pump();
 
-      // Wait for both to complete. The key verification is that we reach '2' 
+      // Wait for both to complete. The key verification is that we reach '2'
       // without crashing or losing updates (race condition check).
-      await tester.pump(const Duration(milliseconds: 100)); 
+      await tester.pump(const Duration(milliseconds: 100));
       await tester.pumpAndSettle();
       expect(find.text('2'), findsOneWidget);
     });
@@ -497,11 +516,12 @@ void main() {
       ''';
 
       final runtime = FluxRuntime(source);
-      await tester.pumpWidget(MaterialApp(home: FluxWidget(widgetName: 'RethrowTest', runtime: runtime)));
+      await tester.pumpWidget(MaterialApp(
+          home: FluxWidget(widgetName: 'RethrowTest', runtime: runtime)));
 
       await tester.tap(find.text('Throw'));
       await tester.pumpAndSettle();
-      
+
       // Currently verifying inner catch works as we don't have rethrow syntax yet
       expect(find.text('caught_inner'), findsOneWidget);
     });

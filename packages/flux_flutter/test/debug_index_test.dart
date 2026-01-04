@@ -1,9 +1,11 @@
 import 'dart:io';
+// ignore_for_file: avoid_print
+
 import 'package:flux_flutter/flux_flutter.dart';
 
 void main() {
   FluxBindings.initDefaults();
-  
+
   const source = r'''
     widget TestWidget {
       state todos = [];
@@ -29,7 +31,7 @@ void main() {
   final runtime = FluxRuntime(
     source,
   );
-  
+
   try {
     final widget = runtime.renderWidget('TestWidget');
     print('SUCCESS: Built widget: ${widget.runtimeType}');

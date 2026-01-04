@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// FluxUI typography system based on Material 3 type scale.
-/// 
+///
 /// Follows the 5-group, 3-scale pattern:
 /// - Display (Large, Medium, Small)
 /// - Headline (Large, Medium, Small)
@@ -11,46 +11,46 @@ import 'package:flutter/material.dart';
 class FluxTypography {
   /// Display Large - Hero text, biggest headlines
   final TextStyle displayLarge;
-  
+
   /// Display Medium - Large section headers
   final TextStyle displayMedium;
-  
+
   /// Display Small - Prominent headers
   final TextStyle displaySmall;
 
   /// Headline Large - Screen titles
   final TextStyle headlineLarge;
-  
+
   /// Headline Medium - Section headers
   final TextStyle headlineMedium;
-  
+
   /// Headline Small - Subsection headers
   final TextStyle headlineSmall;
 
   /// Title Large - Card titles, dialog titles
   final TextStyle titleLarge;
-  
+
   /// Title Medium - List item titles
   final TextStyle titleMedium;
-  
+
   /// Title Small - Small titles
   final TextStyle titleSmall;
 
   /// Body Large - Primary paragraph text
   final TextStyle bodyLarge;
-  
+
   /// Body Medium - Secondary paragraph text
   final TextStyle bodyMedium;
-  
+
   /// Body Small - Caption, helper text
   final TextStyle bodySmall;
 
   /// Label Large - Button text, tabs
   final TextStyle labelLarge;
-  
+
   /// Label Medium - Chips, badges
   final TextStyle labelMedium;
-  
+
   /// Label Small - Footnotes, timestamps
   final TextStyle labelSmall;
 
@@ -75,7 +75,7 @@ class FluxTypography {
   /// Default typography using system fonts
   factory FluxTypography.defaults({Color? color}) {
     final textColor = color ?? Colors.black87;
-    
+
     return FluxTypography(
       displayLarge: TextStyle(
         fontSize: 57,

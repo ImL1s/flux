@@ -20,7 +20,8 @@ void main() {
       );
 
       expect(find.text('Test Button'), findsOneWidget);
-      expect(find.byType(ElevatedButton), findsOneWidget); // Default is primary -> ElevatedButton
+      expect(find.byType(ElevatedButton),
+          findsOneWidget); // Default is primary -> ElevatedButton
     });
 
     testWidgets('FluxButton loading state', (tester) async {
@@ -111,8 +112,8 @@ void main() {
               body: FluxRow(
                 spacing: 10,
                 children: [
-                   Text('1'),
-                   Text('2'),
+                  Text('1'),
+                  Text('2'),
                 ],
               ),
             ),
