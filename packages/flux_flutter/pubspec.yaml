@@ -6,7 +6,7 @@ repository: https://github.com/ImL1s/flux
 
 environment:
   sdk: ^3.6.0
-  flutter: ">=1.17.0"
+  flutter: ">=3.27.0"
 
 dependencies:
   flutter:
@@ -17,17 +17,17 @@ dependencies:
     path: ../flux_compiler
   path_provider: ^2.1.2
   path: ^1.9.0
-  flutter_riverpod: ^2.5.1
-  web_socket_channel: ^2.4.0
+  flutter_riverpod: ^3.1.0
+  web_socket_channel: ^3.0.3
   http: ^1.6.0
   crypto: ^3.0.3
   shared_preferences: ^2.4.0
   uuid: ^4.3.3
-  device_info_plus: ^10.1.0
-  package_info_plus: ^8.0.0
-  camera: ^0.10.5+9
-  flutter_blue_plus: ^1.32.0
-  permission_handler: ^11.3.1
+  device_info_plus: ^12.3.0
+  package_info_plus: ^9.0.0
+  camera: ^0.11.3
+  flutter_blue_plus: ^2.1.0
+  permission_handler: ^12.0.1
   hive: ^2.2.3
   flutter_secure_storage: ^10.0.0
 
@@ -35,7 +35,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^1.0.0
-  lints: ^5.1.1
+  lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -6,7 +6,7 @@ repository: https://github.com/ImL1s/flux
 issue_tracker: https://github.com/ImL1s/flux/issues
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
   flux_compiler:

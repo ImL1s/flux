@@ -175,7 +175,7 @@ class BleModule extends FluxModule {
       final device = _bleWrapper.fromId(deviceId);
 
       // device is non-null from fromId
-      await device.connect();
+      await device.connect(license: License.free);
       _connectedDevices[deviceId] = device;
 
       return {'success': true};

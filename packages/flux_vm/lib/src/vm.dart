@@ -812,7 +812,6 @@ class VM {
         switch (op) {
           case OpCode.constant:
             final constant = readConstant();
-            onPrint?.call("DEBUG VM: OpCode.constant value=$constant (${constant.runtimeType})");
             _stack.add(constant);
             break;
 
@@ -1001,7 +1000,6 @@ class VM {
           case OpCode.call:
             final argCount = readByte();
             final callee = _stack[_stack.length - 1 - argCount];
-            onPrint?.call("DEBUG VM: OpCode.call callee=$callee arity=$argCount");
             if (!_callValue(callee, argCount)) {
               return InterpretResult.runtimeError;
             }
@@ -1020,7 +1018,6 @@ class VM {
             for (int i = 0; i < namedCount; i++) {
               final value = _stack.removeLast();
               final nameObj = _stack.removeLast();
-              onPrint?.call("DEBUG VM: callNamed pop[$i] name=$nameObj (${nameObj.runtimeType}), value=$value");
               if (nameObj is! String) {
                 _runtimeError("type '${nameObj.runtimeType}' (value: $nameObj) is not a subtype of type 'String' in type cast. i=$i, namedCount=$namedCount");
                 return InterpretResult.runtimeError;
