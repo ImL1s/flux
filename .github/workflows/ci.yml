@@ -50,6 +50,11 @@ jobs:
           cd packages/flux_updater
           dart pub get
           dart analyze --fatal-warnings
+      - name: Analyze flux_flutter
+        run: |
+          cd packages/flux_flutter
+          flutter pub get
+          flutter analyze --fatal-warnings
 
   test-compiler:
     name: Test flux_compiler
