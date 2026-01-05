@@ -1,124 +1,173 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flux_flutter/flux_flutter.dart';
+import 'demos/language_view.dart';
+import 'demos/ui_view.dart';
+import 'demos/storage_view.dart';
+import 'demos/device_view.dart';
+import 'demos/ota_view.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: FluxShowcaseApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FluxShowcaseApp extends StatelessWidget {
+  const FluxShowcaseApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flux OTA Demo',
+      title: 'Flux Showcase',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF6200EE),
+          brightness: Brightness.light,
+        ),
+        appBarTheme: const AppBarTheme(
+          centerTitle: true,
+          elevation: 2,
+        ),
+        cardTheme: CardThemeData(
+          elevation: 4,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          clipBehavior: Clip.antiAlias,
+        ),
       ),
-      home: const HomePage(),
+      home: const DashboardPage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
+  final List<DemoItem> demos = const [
+    DemoItem(
+      title: 'Language',
+      subtitle: 'Syntax & Performance benchmarks',
+      icon: Icons.code,
+      color: Colors.blue,
+      destination: LanguageView(),
+    ),
+    DemoItem(
+      title: 'UI Components',
+      subtitle: 'Widgets, Layouts & Themes',
+      icon: Icons.widgets,
+      color: Colors.orange,
+      destination: UIView(),
+    ),
+    DemoItem(
+      title: 'Storage',
+      subtitle: 'SharedPrefs, Hive, SecureStorage',
+      icon: Icons.storage,
+      color: Colors.green,
+      destination: StorageView(),
+    ),
+    DemoItem(
+      title: 'Device',
+      subtitle: 'Camera & BLE Integration',
+      icon: Icons.phonelink_setup,
+      color: Colors.purple,
+      destination: DeviceView(),
+    ),
+    DemoItem(
+      title: 'OTA Updates',
+      subtitle: 'Hot Reload & Patching',
+      icon: Icons.system_update,
+      color: Colors.red,
+      destination: OTAView(),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flux Flutter Example'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: const [
-          FluxOtaDemo(),
-          FluxCounter(),
+        title: const Text('Flux Gallery'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => showAboutDialog(
+              context: context,
+              applicationName: 'Flux Gallery',
+              applicationVersion: '1.0.0',
+              children: [
+                const Text('A showcase of the Flux scripting language capabilities on Flutter.'),
+              ],
+            ),
+          ),
         ],
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: (index) {
-          setState(() => _selectedIndex = index);
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: demos.length,
+        itemBuilder: (context, index) {
+          final demo = demos[index];
+          return Card(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => demo.destination),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: demo.color.withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(demo.icon, color: demo.color, size: 32),
+                    ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            demo.title,
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            demo.subtitle,
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: Colors.grey[600],
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 16),
+                  ],
+                ),
+              ),
+            ),
+          );
         },
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.system_update),
-            label: 'OTA Demo',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.storage),
-            label: 'Storage Demo',
-          ),
-        ],
       ),
     );
   }
 }
 
-class FluxCounter extends StatelessWidget {
-  const FluxCounter({super.key});
+class DemoItem {
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Color color;
+  final Widget destination;
 
-  @override
-  Widget build(BuildContext context) {
-    const fluxSource = '''
-      widget Counter {
-        state sharedVal = "";
-        state hiveVal = "";
-        state secureVal = "";
-        
-        build {
-          Column {
-            Text("Storage Demo");
-            Row {
-              Text("Shared Prefs: ");
-              Text(sharedVal);
-            }
-            Button("Save SP", onPressed: fn() {
-                 await storage.set("demo_key", "SP Saved!");
-                 sharedVal = await storage.get("demo_key");
-            })
-            
-            Row {
-              Text("Hive: ");
-              Text(hiveVal);
-            }
-            Button("Save Hive", onPressed: fn() {
-                 await hive.openBox("demo_box");
-                 await hive.put("demo_box", "demo_hive", "Hive Saved!");
-                 await hive.closeBox("demo_box");
-                 
-                 // Re-open to verify
-                 await hive.openBox("demo_box");
-                 hiveVal = await hive.get("demo_box", "demo_hive");
-            })
-            
-            Row {
-              Text("Secure: ");
-              Text(secureVal);
-            }
-            Button("Save Secure", onPressed: fn() {
-                 await secure.set("demo_secure", "Secure Saved!");
-                 secureVal = await secure.get("demo_secure");
-            })
-          }
-        }
-      }
-    ''';
-
-    return FluxWidget(
-      source: fluxSource,
-      widgetName: 'Counter',
-    );
-  }
+  const DemoItem({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.color,
+    required this.destination,
+  });
 }

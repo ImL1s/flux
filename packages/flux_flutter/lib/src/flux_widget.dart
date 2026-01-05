@@ -125,18 +125,28 @@ class _FluxWidgetState extends State<FluxWidget> {
       final flutterWidget = _runtime._convertToFlutter(fluxTree);
       debugPrint('🔧 Converted widget: ${flutterWidget.runtimeType}');
 
-      setState(() {
+      if (mounted) {
+        setState(() {
+          _builtWidget = flutterWidget;
+          _error = null;
+        });
+      } else {
         _builtWidget = flutterWidget;
         _error = null;
-      });
+      }
       debugPrint('🔧 FluxWidget._buildWidget() SUCCESS');
     } catch (e, stackTrace) {
       debugPrint('❌ FluxWidget._buildWidget() ERROR: $e');
       debugPrint('❌ StackTrace: $stackTrace');
-      setState(() {
+      if (mounted) {
+        setState(() {
+          _error = e.toString();
+          _builtWidget = null;
+        });
+      } else {
         _error = e.toString();
         _builtWidget = null;
-      });
+      }
     }
   }
 

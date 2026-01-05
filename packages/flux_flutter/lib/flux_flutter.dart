@@ -12,5 +12,8 @@ export 'src/flux_ota_demo.dart';
 export 'src/modules/storage_module.dart';
 export 'src/modules/hive_storage_module.dart';
 export 'src/modules/secure_storage_module.dart';
+export 'src/modules/camera_module.dart';
+export 'src/modules/camera_preview.dart';
+export 'src/modules/ble_module.dart';
 export 'src/utils/state_migration.dart';
 
