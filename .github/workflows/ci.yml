@@ -23,33 +23,33 @@ jobs:
       - name: Analyze flux_compiler
         run: |
           cd packages/flux_compiler
-          flutter pub get
-          flutter analyze --fatal-infos
+          dart pub get
+          dart analyze --fatal-infos
       - name: Analyze flux_vm
         run: |
           cd packages/flux_vm
-          flutter pub get
-          flutter analyze --fatal-infos
+          dart pub get
+          dart analyze --fatal-infos
       - name: Analyze flux_lsp
         run: |
           cd packages/flux_lsp
-          flutter pub get
-          flutter analyze --fatal-infos
+          dart pub get
+          dart analyze --fatal-infos
       - name: Analyze flux_dap
         run: |
           cd packages/flux_dap
-          flutter pub get
-          flutter analyze --fatal-infos
+          dart pub get
+          dart analyze --fatal-infos
       - name: Analyze flux_cli
         run: |
           cd packages/flux_cli
-          flutter pub get
-          flutter analyze --fatal-infos
+          dart pub get
+          dart analyze --fatal-infos
       - name: Analyze flux_updater
         run: |
           cd packages/flux_updater
-          flutter pub get
-          flutter analyze --fatal-infos
+          dart pub get
+          dart analyze --fatal-infos
       - name: Analyze flux_flutter
         run: |
           cd packages/flux_flutter
