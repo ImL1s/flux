@@ -12,9 +12,55 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Flux Flutter Example')),
-        body: const FluxCounter(),
+      title: 'Flux OTA Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Flux Flutter Example'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: const [
+          FluxOtaDemo(),
+          FluxCounter(),
+        ],
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _selectedIndex,
+        onDestinationSelected: (index) {
+          setState(() => _selectedIndex = index);
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.system_update),
+            label: 'OTA Demo',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.storage),
+            label: 'Storage Demo',
+          ),
+        ],
       ),
     );
   }
@@ -25,7 +71,6 @@ class FluxCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Demo for State Persistence Features (v3.0)
     const fluxSource = '''
       widget Counter {
         state sharedVal = "";

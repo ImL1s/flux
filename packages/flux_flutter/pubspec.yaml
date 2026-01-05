@@ -11,8 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flux_vm: ^2.0.0
-  flux_compiler: ^2.0.0
+  flux_vm:
+    path: ../flux_vm
+  flux_compiler:
+    path: ../flux_compiler
   path_provider: ^2.1.2
   path: ^1.9.0
   flutter_riverpod: ^2.5.1

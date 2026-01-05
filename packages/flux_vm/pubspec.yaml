@@ -9,7 +9,8 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  flux_compiler: ^2.0.0
+  flux_compiler:
+    path: ../flux_compiler
   crypto: ^3.0.3
   cryptography: ^2.9.0
 dev_dependencies:

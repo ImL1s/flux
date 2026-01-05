@@ -812,6 +812,7 @@ class VM {
         switch (op) {
           case OpCode.constant:
             final constant = readConstant();
+            onPrint?.call("DEBUG VM: OpCode.constant value=$constant (${constant.runtimeType})");
             _stack.add(constant);
             break;
 
@@ -898,8 +899,12 @@ class VM {
             break;
 
           case OpCode.greaterEqual:
-            final b = _stack.removeLast() as num;
-            final a = _stack.removeLast() as num;
+            final b = _stack.removeLast();
+            final a = _stack.removeLast();
+            if (a is! num || b is! num) {
+              _runtimeError("Operands to '>=' must be numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              return InterpretResult.runtimeError;
+            }
             _stack.add(a >= b);
             break;
 
@@ -916,13 +921,23 @@ class VM {
 
           case OpCode.setGlobal:
             final nameIdx = readByte(); // Index in constants
-            final name = frame.chunk.constants[nameIdx] as String;
+            final nameObj = frame.chunk.constants[nameIdx];
+            if (nameObj is! String) {
+               _runtimeError("Global name must be a string, got ${nameObj.runtimeType} ($nameObj) at index $nameIdx");
+               return InterpretResult.runtimeError;
+            }
+            final name = nameObj;
             _globals[name] = _stack.last;
             break;
 
           case OpCode.getGlobal:
             final nameIdx = readByte();
-            final name = frame.chunk.constants[nameIdx] as String;
+            final nameObj = frame.chunk.constants[nameIdx];
+             if (nameObj is! String) {
+               _runtimeError("Global name must be a string, got ${nameObj.runtimeType} ($nameObj) at index $nameIdx");
+               return InterpretResult.runtimeError;
+            }
+            final name = nameObj;
             if (_globals.containsKey(name)) {
               _stack.add(_globals[name]);
             } else {
@@ -986,6 +1001,7 @@ class VM {
           case OpCode.call:
             final argCount = readByte();
             final callee = _stack[_stack.length - 1 - argCount];
+            onPrint?.call("DEBUG VM: OpCode.call callee=$callee arity=$argCount");
             if (!_callValue(callee, argCount)) {
               return InterpretResult.runtimeError;
             }
@@ -1004,8 +1020,9 @@ class VM {
             for (int i = 0; i < namedCount; i++) {
               final value = _stack.removeLast();
               final nameObj = _stack.removeLast();
+              onPrint?.call("DEBUG VM: callNamed pop[$i] name=$nameObj (${nameObj.runtimeType}), value=$value");
               if (nameObj is! String) {
-                _runtimeError("type '${nameObj.runtimeType}' is not a subtype of type 'String' in type cast");
+                _runtimeError("type '${nameObj.runtimeType}' (value: $nameObj) is not a subtype of type 'String' in type cast. i=$i, namedCount=$namedCount");
                 return InterpretResult.runtimeError;
               }
               namedArgs[nameObj] = value;

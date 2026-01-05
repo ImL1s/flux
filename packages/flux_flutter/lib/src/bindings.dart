@@ -125,7 +125,7 @@ class FluxBindings {
 
     // Button widget (ElevatedButton)
     register('Button', (args, children) {
-      final label = args['text'] as String? ?? args['0'] as String?;
+      final label = FluxCast.toStringNullable(args['text'] ?? args['0']);
       final childWidget = args['child'] as Widget?;
       final onPressed = args['onPressed'];
 
@@ -144,7 +144,7 @@ class FluxBindings {
     });
 
     register('Flexible', (args, children) {
-      final flex = args['flex'] as int? ?? 1;
+      final flex = FluxCast.toInt(args['flex']) ?? 1;
       return Flexible(
         flex: flex,
         child: children.isNotEmpty ? children.first : const SizedBox.shrink(),
@@ -272,10 +272,10 @@ class FluxBindings {
 
     // Image widget (network and asset)
     register('Image', (args, children) {
-      final src = args['src'] as String? ?? args['0'] as String? ?? '';
+      final src = FluxCast.toStr(args['src'] ?? args['0']);
       final width = FluxCast.toDouble(args['width']);
       final height = FluxCast.toDouble(args['height']);
-      final fit = _parseBoxFit(args['fit'] as String?);
+      final fit = _parseBoxFit(FluxCast.toStringNullable(args['fit']));
       final alignment = _parseAlignment(args['alignment']) ?? Alignment.center;
       final color = FluxCast.toColor(args['color']);
 
@@ -304,7 +304,7 @@ class FluxBindings {
 
     // Icon widget
     register('Icon', (args, children) {
-      final name = args['name'] as String? ?? args['0'] as String? ?? 'star';
+      final name = FluxCast.toStr(args['name'] ?? args['0'] ?? 'star');
       final size = FluxCast.toDouble(args['size']) ?? 24.0;
       final color = FluxCast.toColor(args['color']);
 
@@ -317,7 +317,7 @@ class FluxBindings {
 
     // Card widget
     register('Card', (args, children) {
-      final elevation = args['elevation'] as double? ?? 1.0;
+      final elevation = FluxCast.toDouble(args['elevation']) ?? 1.0;
       final colorValue = args['color'];
 
       return Card(
@@ -331,7 +331,7 @@ class FluxBindings {
     register('ListView', (args, children) {
       final scrollDirection =
           args['horizontal'] == true ? Axis.horizontal : Axis.vertical;
-      final padding = args['padding'] as double?;
+      final padding = FluxCast.toDouble(args['padding']);
 
       return ListView(
         scrollDirection: scrollDirection,
@@ -369,7 +369,7 @@ class FluxBindings {
 
     // Expanded widget
     register('Expanded', (args, children) {
-      final flex = args['flex'] as int? ?? 1;
+      final flex = FluxCast.toInt(args['flex']) ?? 1;
       return Expanded(
         flex: flex,
         child: children.isNotEmpty ? children.first : const SizedBox.shrink(),
@@ -378,13 +378,13 @@ class FluxBindings {
 
     // Spacer widget
     register('Spacer', (args, children) {
-      final flex = args['flex'] as int? ?? 1;
+      final flex = FluxCast.toInt(args['flex']) ?? 1;
       return Spacer(flex: flex);
     });
 
     // Divider widget
     register('Divider', (args, children) {
-      final height = args['height'] as double?;
+      final height = FluxCast.toDouble(args['height']);
       final color = FluxCast.toColor(args['color']);
       return Divider(height: height, color: color);
     });
@@ -505,7 +505,7 @@ class FluxBindings {
 
       return AppBar(
         title: title,
-        actions: actions,
+        actions: actions ?? children.cast<Widget>(),
       );
     });
 
@@ -2024,6 +2024,13 @@ class FluxBindings {
         'blurRadius': namedArgs['blurRadius'],
         'offset': namedArgs['offset'],
       };
+    });
+
+    // TextStyle helper
+    registerFunction('TextStyle', (args) {
+      final namedArgs = args.isNotEmpty && args[0] is Map ? args[0] as Map : {};
+      // Pass through the map for _parseTextStyle to handle
+      return namedArgs;
     });
   }
 
