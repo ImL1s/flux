@@ -25,20 +25,47 @@ class FluxCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // A simple Flux script that defines a widget with state
+    // Demo for State Persistence Features (v3.0)
     const fluxSource = '''
       widget Counter {
-        state count = 0;
+        state sharedVal = "";
+        state hiveVal = "";
+        state secureVal = "";
         
         build {
           Column {
-            Text("Count: \${count}");
-            
-            Button("Increment") {
-               onPressed: fn() {
-                 count = count + 1;
-               }
+            Text("Storage Demo");
+            Row {
+              Text("Shared Prefs: ");
+              Text(sharedVal);
             }
+            Button("Save SP", onPressed: fn() {
+                 await storage.set("demo_key", "SP Saved!");
+                 sharedVal = await storage.get("demo_key");
+            })
+            
+            Row {
+              Text("Hive: ");
+              Text(hiveVal);
+            }
+            Button("Save Hive", onPressed: fn() {
+                 await hive.openBox("demo_box");
+                 await hive.put("demo_box", "demo_hive", "Hive Saved!");
+                 await hive.closeBox("demo_box");
+                 
+                 // Re-open to verify
+                 await hive.openBox("demo_box");
+                 hiveVal = await hive.get("demo_box", "demo_hive");
+            })
+            
+            Row {
+              Text("Secure: ");
+              Text(secureVal);
+            }
+            Button("Save Secure", onPressed: fn() {
+                 await secure.set("demo_secure", "Secure Saved!");
+                 secureVal = await secure.get("demo_secure");
+            })
           }
         }
       }
