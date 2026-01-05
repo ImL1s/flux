@@ -144,8 +144,8 @@ void main() {
           }
         }
       ''';
+      _compileSource(source);
       final chunkBytes = _compileSource(source);
-      final chunk = ChunkSerializer.deserialize(chunkBytes);
 
       // Register release directly in server
       final release = FluxRelease(

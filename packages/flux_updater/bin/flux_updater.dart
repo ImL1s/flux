@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:path/path.dart' as p;
 
-import '../src/chunk_serializer.dart';
-import '../src/signature_utils.dart';
+import 'package:flux_updater/src/chunk_serializer.dart';
+import 'package:flux_updater/src/signature_utils.dart';
 
 /// CLI tool for managing Flux OTA releases.
 ///

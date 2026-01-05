@@ -1,15 +1,12 @@
-import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelf_router/shelf_router.dart';
 
-import '../src/chunk_serializer.dart';
-import '../src/diff_manager.dart';
-import '../src/flux_release.dart';
-import '../src/signature_utils.dart';
+import 'diff_manager.dart';
+import 'flux_release.dart';
+import 'signature_utils.dart';
 
 /// Simple in-memory OTA server for development and testing.
 ///

@@ -16,9 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Analyze flux_compiler
         run: |
           cd packages/flux_compiler
@@ -56,9 +57,10 @@ jobs:
     needs: analyze
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Install dependencies
         run: |
           cd packages/flux_compiler
@@ -74,9 +76,10 @@ jobs:
     needs: analyze
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Install dependencies
         run: |
           cd packages/flux_vm
@@ -92,9 +95,10 @@ jobs:
     needs: analyze
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Install dependencies
         run: |
           cd packages/flux_lsp
@@ -110,9 +114,10 @@ jobs:
     needs: analyze
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Install dependencies
         run: |
           cd packages/flux_dap
@@ -128,9 +133,10 @@ jobs:
     needs: analyze
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Install dependencies
         run: |
           cd packages/flux_cli
@@ -165,9 +171,10 @@ jobs:
     needs: analyze
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Install dependencies
         run: |
           cd packages/flux_updater

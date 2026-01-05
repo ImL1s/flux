@@ -2,6 +2,7 @@ name: flux_flutter
 description: "Flutter bindings for the Flux scripting language."
 version: 2.0.1
 homepage: https://github.com/ImL1s/flux
+publish_to: none
 repository: https://github.com/ImL1s/flux
 
 environment:

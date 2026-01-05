@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:shelf/shelf_io.dart' as shelf_io;
-import 'ota_server.dart';
+import 'package:flux_updater/src/ota_server.dart';
 
 /// Starts the Flux OTA development server.
 ///

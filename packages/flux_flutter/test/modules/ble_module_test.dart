@@ -80,7 +80,8 @@ void main() {
       setUp(() {
         mockDevice = MockBluetoothDevice();
         when(() => mockWrapper.fromId(deviceId)).thenReturn(mockDevice);
-        when(() => mockDevice.connect()).thenAnswer((_) async {});
+        when(() => mockDevice.connect(license: any(named: 'license')))
+            .thenAnswer((_) async {});
         when(() => mockDevice.disconnect()).thenAnswer((_) async {});
         when(() => mockDevice.remoteId).thenReturn(DeviceIdentifier(deviceId));
       });
@@ -88,7 +89,8 @@ void main() {
       test('connect calls device connect', () async {
         final result = await module.get('connect')?.call([deviceId]);
 
-        verify(() => mockDevice.connect()).called(1);
+        verify(() => mockDevice.connect(license: any(named: 'license')))
+            .called(1);
         expect((result as Map)['success'], isTrue);
       });
 
@@ -117,7 +119,8 @@ void main() {
         mockChar = MockBluetoothCharacteristic();
 
         when(() => mockWrapper.fromId(deviceId)).thenReturn(mockDevice);
-        when(() => mockDevice.connect()).thenAnswer((_) async {});
+        when(() => mockDevice.connect(license: any(named: 'license')))
+            .thenAnswer((_) async {});
 
         // Mock service discovery
         when(() => mockDevice.discoverServices())
@@ -225,7 +228,7 @@ void main() {
         final deviceId = 'fail-device';
         final mockDevice = MockBluetoothDevice();
         when(() => mockWrapper.fromId(deviceId)).thenReturn(mockDevice);
-        when(() => mockDevice.connect())
+        when(() => mockDevice.connect(license: any(named: 'license')))
             .thenThrow(Exception('Connection failed'));
 
         final result = await module.get('connect')?.call([deviceId]);

@@ -10,9 +10,6 @@
 /// Run with: dart run example/main.dart
 library;
 
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_updater/flux_updater.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;

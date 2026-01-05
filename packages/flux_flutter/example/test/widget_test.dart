@@ -1,11 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter/material.dart';
 import 'package:example/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:flux_flutter/src/modules/secure_storage_module.dart';
-import 'package:flux_flutter/flux_flutter.dart';
 
 // We need to mock SharedPreferences and potentially others if they don't work in widget test environment well.
 // But SharedPreferences.setMockInitialValues works.

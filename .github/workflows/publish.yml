@@ -15,6 +15,7 @@ on:
           - flutter
           - lsp
           - dap
+          - updater
       dry_run:
         description: 'Dry run (do not actually publish)'
         required: false
@@ -79,7 +80,7 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.package == 'all' }}
     strategy:
       matrix:
-        package: [flux_lsp, flux_dap]
+        package: [flux_lsp, flux_dap, flux_updater]
     steps:
       - uses: actions/checkout@v4
       - uses: dart-lang/setup-dart@v1

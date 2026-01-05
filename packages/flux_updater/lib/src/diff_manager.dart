@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:archive/archive.dart';
@@ -60,13 +59,13 @@ class FluxDiffManager {
 
       // Compress the diff
       final compressed = GZipEncoder().encode(diff);
-      buffer.add(compressed!);
+      buffer.add(compressed);
     } else {
       buffer.addByte(1); // Marker: full replacement
 
       // Just compress the new bytes
       final compressed = GZipEncoder().encode(newBytes);
-      buffer.add(compressed!);
+      buffer.add(compressed);
     }
 
     return buffer.toBytes();

@@ -1,5 +1,6 @@
 name: flux_dap
 description: Debug Adapter Protocol implementation for Flux language
+publish_to: none
 version: 2.0.0
 
 environment:

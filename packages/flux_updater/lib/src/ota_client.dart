@@ -3,8 +3,6 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 
-import 'chunk_serializer.dart';
-import 'diff_manager.dart';
 import 'flux_release.dart';
 
 /// HTTP client for communicating with the Flux OTA server.

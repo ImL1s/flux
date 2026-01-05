@@ -2,6 +2,7 @@ name: flux_lang_cli
 description: Command line interface for the Flux language including REPL
 version: 2.0.0
 homepage: https://github.com/ImL1s/flux
+publish_to: none
 repository: https://github.com/ImL1s/flux
 
 environment:

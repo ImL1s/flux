@@ -3,6 +3,7 @@ description: Lexer, Parser, AST, and Bytecode compiler for the Flux scripting la
 version: 2.0.0
 homepage: https://github.com/ImL1s/flux
 repository: https://github.com/ImL1s/flux
+publish_to: none
 
 environment:
   sdk: ^3.6.0

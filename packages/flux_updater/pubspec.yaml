@@ -3,6 +3,7 @@ description: OTA update system for Flux with bytecode diff and version control.
 version: 1.0.0
 homepage: https://github.com/ImL1s/flux
 repository: https://github.com/ImL1s/flux
+publish_to: none
 
 environment:
   sdk: ^3.6.0
