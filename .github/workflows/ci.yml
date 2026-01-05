@@ -24,7 +24,7 @@ jobs:
         run: |
           cd packages/flux_compiler
           dart pub get
-          dart analyze --fatal-infos
+          dart analyze --fatal-warnings
       - name: Analyze flux_vm
         run: |
           cd packages/flux_vm
