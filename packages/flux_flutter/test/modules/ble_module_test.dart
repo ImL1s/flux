@@ -25,6 +25,7 @@ void main() {
 
       // Register fallback values if needed
       registerFallbackValue(Guid('0000'));
+      registerFallbackValue(License.free);
     });
 
     test('isAvailable returns true when supported and adapter is on', () async {
