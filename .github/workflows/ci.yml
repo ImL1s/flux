@@ -23,7 +23,6 @@ jobs:
       - name: Analyze flux_compiler
         run: |
           cd packages/flux_compiler
-          ls -R
           dart pub get
           dart analyze --fatal-infos
       - name: Analyze flux_vm
