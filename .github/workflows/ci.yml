@@ -21,47 +21,40 @@ jobs:
           flutter-version: '3.38.5'
           channel: 'stable'
       - name: Analyze flux_compiler
-        continue-on-error: true
         run: |
           cd packages/flux_compiler
-          dart pub get
-          dart analyze --fatal-warnings
+          flutter pub get
+          flutter analyze --fatal-infos
       - name: Analyze flux_vm
-        continue-on-error: true
         run: |
           cd packages/flux_vm
-          dart pub get
-          dart analyze --fatal-warnings
+          flutter pub get
+          flutter analyze --fatal-infos
       - name: Analyze flux_lsp
-        continue-on-error: true
         run: |
           cd packages/flux_lsp
-          dart pub get
-          dart analyze --fatal-warnings
+          flutter pub get
+          flutter analyze --fatal-infos
       - name: Analyze flux_dap
-        continue-on-error: true
         run: |
           cd packages/flux_dap
-          dart pub get
-          dart analyze --fatal-warnings
+          flutter pub get
+          flutter analyze --fatal-infos
       - name: Analyze flux_cli
-        continue-on-error: true
         run: |
           cd packages/flux_cli
-          dart pub get
-          dart analyze --fatal-warnings
+          flutter pub get
+          flutter analyze --fatal-infos
       - name: Analyze flux_updater
-        continue-on-error: true
         run: |
           cd packages/flux_updater
-          dart pub get
-          dart analyze --fatal-warnings
+          flutter pub get
+          flutter analyze --fatal-infos
       - name: Analyze flux_flutter
-        continue-on-error: true
         run: |
           cd packages/flux_flutter
           flutter pub get
-          flutter analyze --fatal-warnings
+          flutter analyze --fatal-infos
 
   test-compiler:
     name: Test flux_compiler
