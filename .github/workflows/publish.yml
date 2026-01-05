@@ -10,11 +10,9 @@ on:
         type: choice
         options:
           - all
-          - compiler
-          - vm
-          - flutter
           - lsp
           - dap
+          - updater
           - updater
       dry_run:
         description: 'Dry run (do not actually publish)'
@@ -32,9 +30,10 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.package == 'all' || github.event.inputs.package == 'compiler' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Setup pub credentials
         run: |
           mkdir -p ~/.config/dart
@@ -56,9 +55,10 @@ jobs:
     if: ${{ github.event_name == 'push' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vm' }}
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Setup pub credentials
         run: |
           mkdir -p ~/.config/dart
@@ -83,9 +83,10 @@ jobs:
         package: [flux_lsp, flux_dap, flux_updater]
     steps:
       - uses: actions/checkout@v4
-      - uses: dart-lang/setup-dart@v1
+      - uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: '3.38.5'
+          channel: 'stable'
       - name: Setup pub credentials
         run: |
           mkdir -p ~/.config/dart
