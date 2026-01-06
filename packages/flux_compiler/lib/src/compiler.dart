@@ -57,12 +57,14 @@ class CompiledWidget {
     final CompiledFunction buildMethod;
     final List<String> stateFields;
     final List<CompiledFunction> stateInitializers;
+    final Set<String> persistentFields; // New: metadata for persistence
     
     CompiledWidget(
       this.name, 
       this.buildMethod, {
       this.stateFields = const [],
       this.stateInitializers = const [],
+      this.persistentFields = const {},
     });
     
     @override
@@ -240,14 +242,18 @@ class Compiler {
   void _compileWidgetDecl(WidgetDecl stmt) {
      // Collect state field names for the build compiler
      final stateNames = <String>[];
+     final persistentStateNames = <String>{};
      
      // Compile state field initializers
      for (final stateField in stmt.stateFields) {
        stateNames.add(stateField.name);
+       if (stateField.isPersistent) {
+         persistentStateNames.add(stateField.name);
+       }
      }
      
      // DEBUG
-     print('Compiling Widget ${stmt.name}, State: $stateNames');
+     print('Compiling Widget ${stmt.name}, State: $stateNames, Persistent: $persistentStateNames');
      
      // Create build method compiler with state context
       final buildCompiler = Compiler._inner(this, "${stmt.name}.build");
@@ -285,7 +291,8 @@ class Compiler {
          initCompiler._compileExpression(f.initialValue);
          initCompiler._emit(OpCode.return_, stmt.line, stmt.column);
           return initCompiler.endCompiler(stmt.line);
-        }).toList(),
+       }).toList(),
+       persistentFields: persistentStateNames,
      );
      
      final idx = chunk.addConstant(widgetObj);

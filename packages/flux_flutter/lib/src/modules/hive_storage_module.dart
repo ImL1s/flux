@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flux_vm/flux_vm.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Hive-based storage module for Flux

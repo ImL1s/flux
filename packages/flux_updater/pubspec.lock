@@ -108,10 +108,9 @@ packages:
   flux_compiler:
     dependency: "direct main"
     description:
-      name: flux_compiler
-      sha256: "93ac141b2c72c63ddd7440624af827614c61da5d921dfc66f34fafa7d3a07468"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../flux_compiler"
+      relative: true
+    source: path
     version: "2.0.0"
   frontend_server_client:
     dependency: transitive

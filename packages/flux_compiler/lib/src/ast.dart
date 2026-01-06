@@ -394,8 +394,10 @@ class StateField {
   final int? column;
   final String? type;
   final Expression initialValue;
+  final bool isPersistent;  // New: marks field for automatic persistence
 
-  const StateField(this.name, this.initialValue, {this.line, this.column, this.type});
+  const StateField(this.name, this.initialValue, 
+      {this.line, this.column, this.type, this.isPersistent = false});
 }
 
 /// Build block in a widget

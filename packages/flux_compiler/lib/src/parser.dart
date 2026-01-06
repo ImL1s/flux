@@ -139,10 +139,20 @@ class Parser {
     BuildBlock? buildBlock;
 
     while (!_check(TokenType.rightBrace) && !_isAtEnd) {
+      // Check for persistent modifier before state
+      bool isPersistent = false;
+      if (_match(TokenType.persistent)) {
+        isPersistent = true;
+        if (!_check(TokenType.state)) {
+          _error(_peek, 'Expected "state" after "persistent".');
+          continue;
+        }
+      }
+      
       if (_match(TokenType.state)) {
         final fieldToken = _consume(TokenType.identifier, 'Expect state variable name.');
         final fieldName = fieldToken.lexeme;
-        print('DEBUG PARSER: Found state field: $fieldName'); // DEBUG
+        print('DEBUG PARSER: Found state field: $fieldName${isPersistent ? ' (persistent)' : ''}'); // DEBUG
         String? type;
         if (_match(TokenType.colon)) {
           type = _consume(TokenType.identifier, 'Expect state type.').lexeme;
@@ -150,7 +160,8 @@ class Parser {
         _consume(TokenType.equal, 'State fields must be initialized.');
         final initializer = _expression();
         _match(TokenType.semicolon); 
-        stateFields.add(StateField(fieldName, initializer, line: fieldToken.line, column: fieldToken.column, type: type));
+        stateFields.add(StateField(fieldName, initializer, 
+            line: fieldToken.line, column: fieldToken.column, type: type, isPersistent: isPersistent));
       } else if (_match(TokenType.props)) {
         do {
           final propToken = _consume(TokenType.identifier, 'Expect property name.');

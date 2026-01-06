@@ -45,6 +45,7 @@ enum TokenType {
   break_,
   continue_,
   props,
+  persistent,  // New: for persistent state
 
   // Operators
   plus, // +
@@ -148,4 +149,5 @@ const keywords = <String, TokenType>{
   'break': TokenType.break_,
   'continue': TokenType.continue_,
   'props': TokenType.props,
+  'persistent': TokenType.persistent,
 };

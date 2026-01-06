@@ -9,6 +9,7 @@ import 'closure.dart';
 import 'coroutine.dart';
 import 'debugger.dart';
 import 'inline_cache.dart';
+import 'persistence_delegate.dart';
 
 typedef WidgetCallHandler = Object? Function(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack);
 
@@ -127,6 +128,12 @@ class VM {
   
   /// Callback triggered after a hot swap is applied
   void Function(String scriptName)? onHotSwap;
+
+  /// Delegate for persisting state across app restarts
+  PersistenceDelegate? persistenceDelegate;
+
+  /// Current widget name (for persistence keys)
+  String? _currentWidgetName;
   
   /// Loaded scripts registry (for hot-swap)
   final Map<String, CompiledFunction> _scripts = {};
@@ -297,14 +304,49 @@ class VM {
   Map<String, Object?> get widgetState => _widgetState;
   
   /// Initialize widget state from CompiledWidget
-  void initializeState(CompiledWidget widget) {
+  dynamic initializeState(CompiledWidget widget) {
+    _currentWidgetName = widget.name;
+    _persistentFields.clear();
+    _persistentFields.addAll(widget.persistentFields);
+    
+    final futures = <Future<void>>[];
     for (int i = 0; i < widget.stateFields.length; i++) {
       final name = widget.stateFields[i];
       final initializer = widget.stateInitializers[i];
+      
+      bool isPersistent = _persistentFields.contains(name);
+
+      if (isPersistent && persistenceDelegate != null) {
+        final key = "flux_state_${widget.name}_$name";
+        final future = persistenceDelegate!.load(key);
+        if (future is Future<dynamic>) {
+          futures.add(future.then((persistedValue) {
+            if (persistedValue != null) {
+              _widgetState[name] = persistedValue;
+            } else {
+              // Fallback to initializer if load returns null
+              runChunk(initializer.chunk);
+              _widgetState[name] = _stack.isNotEmpty ? _stack.removeLast() : null;
+            }
+          }));
+          continue;
+        } else {
+          // Synchronous load (e.g. from in-memory delegate)
+          final persistedValue = future;
+          if (persistedValue != null) {
+            _widgetState[name] = persistedValue;
+            continue;
+          }
+        }
+      }
+
       // Execute initializer to get initial value
       runChunk(initializer.chunk);
       _widgetState[name] = _stack.isNotEmpty ? _stack.removeLast() : null;
     }
+    
+    if (futures.isEmpty) return null;
+    return Future.wait(futures);
   }
   
   /// Clear state (for new widget instance)
@@ -1373,6 +1415,13 @@ class VM {
             final value = _stack.last; // Peek/Assigned value
             if (_widgetState.containsKey(name)) {
                _widgetState[name] = value;
+               
+               // Persistence check
+               final currentWidget = _currentWidgetName;
+               if (currentWidget != null && persistenceDelegate != null && _persistentFields.contains(name)) {
+                 persistenceDelegate!.save("flux_state_${currentWidget}_$name", value);
+               }
+
                if (onStateChange != null) onStateChange!(name, value);
             } else {
                throw "Undefined state variable '$name'.";
@@ -1644,4 +1693,6 @@ class VM {
     final newFrame = CallFrame(closure, slotBase: _stack.length - args.length - 1);
     _frames.add(newFrame);
   }
+
+  final Set<String> _persistentFields = {};
 }

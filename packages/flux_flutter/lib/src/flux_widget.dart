@@ -4,6 +4,7 @@ import 'package:flux_vm/flux_vm.dart';
 import 'bindings.dart';
 import 'dev_tools/flux_service_extensions.dart';
 import 'modules/flux_native_modules.dart';
+import 'persistence/hive_persistence.dart';
 import 'modules/animation_module.dart';
 
 
@@ -37,12 +38,20 @@ class FluxWidget extends StatefulWidget {
   /// Optional external runtime
   final FluxRuntime? runtime;
 
+  /// Whether to enable automatic state persistence (requires [persistenceDelegate])
+  final bool enablePersistence;
+
+  /// Custom persistence delegate (defaults to Hive if [enablePersistence] is true)
+  final PersistenceDelegate? persistenceDelegate;
+
   const FluxWidget({
     super.key,
     this.source,
     required this.widgetName,
     this.initialState,
     this.runtime,
+    this.enablePersistence = false,
+    this.persistenceDelegate,
   }) : assert(source != null || runtime != null,
             'Either source or runtime must be provided');
 
@@ -86,6 +95,13 @@ class _FluxWidgetState extends State<FluxWidget> with TickerProviderStateMixin {
         // This ensures widget rebuilds when state changes in the shared runtime
         _runtime._vm.onStateChange = _handleStateChange;
       } else {
+        PersistenceDelegate? delegate = widget.persistenceDelegate;
+        if (delegate == null && widget.enablePersistence) {
+          final hiveDelegate = HivePersistenceDelegate();
+          // Note: init() will be called internally by HivePersistenceDelegate
+          delegate = hiveDelegate;
+        }
+
         _runtime = FluxRuntime(
           widget.source!,
           onStateChange: _handleStateChange,
@@ -93,16 +109,31 @@ class _FluxWidgetState extends State<FluxWidget> with TickerProviderStateMixin {
           onRegisterModules: (vm) {
             FluxNativeModules.register(vm, this);
           },
+          persistenceDelegate: delegate,
         );
       }
 
-      _buildWidget();
+      final future = _runtime.ensureInitialized();
+      if (future is Future) {
+        future.then((_) {
+          if (mounted) {
+            _buildWidget();
+          }
+        });
+      } else {
+        _buildWidget();
+      }
       _error = null;
     } catch (e) {
-      setState(() {
+      if (mounted) {
+        setState(() {
+          _error = e.toString();
+          _builtWidget = null;
+        });
+      } else {
         _error = e.toString();
         _builtWidget = null;
-      });
+      }
     }
   }
 
@@ -228,10 +259,20 @@ class FluxRuntime {
   // Stack for collecting children in nested widgets
   final List<List<FluxWidgetNode>> _childrenStack = [];
 
+  Future<void>? _initializationFuture;
+  
+  /// Wait for the runtime to finish initializing (including persistent state)
+  dynamic ensureInitialized() {
+     return _initializationFuture;
+  }
+
   FluxRuntime(String source,
       {this.onStateChange,
       String? moduleName,
-      void Function(VM vm)? onRegisterModules}) {
+      void Function(VM vm)? onRegisterModules,
+      PersistenceDelegate? persistenceDelegate}) {
+    // Set up persistence if provided
+    _vm.persistenceDelegate = persistenceDelegate;
     // Set up state change callback
     _vm.onStateChange = onStateChange;
 
@@ -286,18 +327,27 @@ class FluxRuntime {
 
     _vm.runChunk(function.chunk);
 
-    // Extract widget definitions from globals
+    // Extract widget definitions and initialize state
+    final initFuture = _initAllWidgets();
+    if (initFuture is Future) {
+      _initializationFuture = initFuture;
+    }
+  }
+
+  dynamic _initAllWidgets() {
+    final futures = <Future<void>>[];
     for (final entry in _vm.globals.entries) {
       if (entry.value is CompiledWidget) {
         final widget = entry.value as CompiledWidget;
         _widgets[entry.key] = widget;
-
-        // Initialize state for THIS widget if it hasn't been initialized
-        // Note: For top-level widgets, this happens here.
-        // For nested widgets, initialization happens in _handleWidgetCall.
-        _initializeWidgetState(widget);
+        final res = _initializeWidgetState(widget);
+        if (res is Future) {
+          futures.add(res);
+        }
       }
     }
+    if (futures.isEmpty) return null;
+    return Future.wait(futures);
   }
 
   /// Hot reload the runtime with new code.
@@ -345,19 +395,10 @@ class FluxRuntime {
     _vm.onStateChange?.call('*', null);
   }
 
-  void _initializeWidgetState(CompiledWidget widget) {
-    for (int i = 0; i < widget.stateFields.length; i++) {
-      final fieldName = widget.stateFields[i];
-      if (_vm.widgetState.containsKey(fieldName)) continue;
-
-      if (i < widget.stateInitializers.length) {
-        _vm.runChunk(widget.stateInitializers[i].chunk);
-        final initValue = _vm.stack.isNotEmpty ? _vm.stack.removeLast() : null;
-        _vm.widgetState[fieldName] = initValue;
-      } else {
-        _vm.widgetState[fieldName] = null;
-      }
-    }
+  dynamic _initializeWidgetState(CompiledWidget widget) {
+    // Delegate to VM for state initialization
+    final res = _vm.initializeState(widget);
+    return res;
   }
 
   void dispose() {
