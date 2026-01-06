@@ -168,4 +168,4 @@ Flux 不是從零發明的新概念，而是將**遊戲產業驗證過的 Lua �
 
 ---
 
-📚 [返回主文檔](../README.md)
+📚 [返回主文檔](../README.md) | [Lua 遷移指南](./lua_migration.md)

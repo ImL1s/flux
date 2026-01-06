@@ -1,5 +1,8 @@
 # Flux Compiler
 
+[![pub package](https://img.shields.io/pub/v/flux_compiler.svg)](https://pub.dev/packages/flux_compiler)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 The official compiler for the Flux programming language.
 
 Converts Flux source code into bytecode chunks that can be executed by the Flux VM.

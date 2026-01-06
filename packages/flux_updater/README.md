@@ -1,18 +1,21 @@
 # Flux Updater
 
+[![pub package](https://img.shields.io/pub/v/flux_updater.svg)](https://pub.dev/packages/flux_updater)
 [![Dart](https://img.shields.io/badge/Dart-3.6+-blue.svg)](https://dart.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Over-the-Air (OTA) update system for Flux applications. Enables efficient bytecode diff transmission, version control, and seamless updates for both development and production environments.
 
+Part of the [Flux](https://github.com/ImL1s/flux) ecosystem - a dynamic scripting language for Flutter Server-Driven UI.
+
 ## Features
 
-- 🔄 **Bytecode Diffing** - XOR + GZip compression achieving ~5-10% patch sizes
-- 📦 **Version Control** - Semantic versioning with rollback support
-- 🔐 **Code Signing** - HMAC-SHA256 signature verification
-- 🌐 **OTA Server** - Shelf-based REST API for release management
-- 🛠️ **CLI Tools** - Compile, release, and push commands
-- 📱 **Flutter Integration** - Seamless integration with Flutter apps
+- **Bytecode Diffing** - XOR + GZip compression achieving ~5-10% patch sizes
+- **Version Control** - Semantic versioning with rollback support
+- **Code Signing** - HMAC-SHA256 signature verification
+- **OTA Server** - Shelf-based REST API for release management
+- **CLI Tools** - Compile, release, and push commands
+- **Flutter Integration** - Seamless integration with Flutter apps
 
 ## Installation
 
@@ -20,8 +23,13 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flux_updater:
-    path: packages/flux_updater
+  flux_updater: ^1.0.0
+```
+
+Or install via command line:
+
+```bash
+dart pub add flux_updater
 ```
 
 ## Quick Start

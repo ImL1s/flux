@@ -1,5 +1,8 @@
 # Flux Flutter
 
+[![pub package](https://img.shields.io/pub/v/flux_flutter.svg)](https://pub.dev/packages/flux_flutter)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 Flutter bindings for the Flux scripting language, enabling server-driven UI and hot-reload capabilities.
 
 ## Features
@@ -17,7 +20,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flux_flutter: ^2.0.0
+  flux_flutter: ^2.0.1
   flutter_riverpod: ^3.0.0
 ```
 

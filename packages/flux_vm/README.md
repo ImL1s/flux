@@ -1,5 +1,8 @@
 # Flux VM
 
+[![pub package](https://img.shields.io/pub/v/flux_vm.svg)](https://pub.dev/packages/flux_vm)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 A high-performance virtual machine for the Flux programming language, written in Dart.
 
 Flux is a modern, reactive scripting language designed for UI development. This package `flux_vm` serves as the runtime engine that executes Flux bytecode chunks.

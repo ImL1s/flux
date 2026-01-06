@@ -1,0 +1,14 @@
+# Build artifacts
+build/
+.dart_tool/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Test coverage
+coverage/
+
+# Lock file (for packages)
+pubspec.lock

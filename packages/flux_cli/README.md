@@ -1,5 +1,8 @@
 # Flux CLI (flux_lang_cli)
 
+[![pub package](https://img.shields.io/pub/v/flux_lang_cli.svg)](https://pub.dev/packages/flux_lang_cli)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 Command-line interface for the Flux scripting language.
 
 ## Installation

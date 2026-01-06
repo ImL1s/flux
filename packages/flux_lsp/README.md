@@ -1,5 +1,8 @@
 # Flux Language Server (LSP)
 
+[![pub package](https://img.shields.io/pub/v/flux_lsp.svg)](https://pub.dev/packages/flux_lsp)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 > A Language Server Protocol implementation for the Flux scripting language.
 
 This package provides the core intelligence for Flux editor support, including syntax validation, autocompletion, hover documentation, and symbol navigation.

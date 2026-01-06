@@ -55,14 +55,15 @@ graph TD
 
 The project is organized as a monorepo containing the following core packages:
 
-| Package | Description |
-|---------|-------------|
-| **[`flux_compiler`](packages/flux_compiler)** | Lexer, Parser, and Code Generator. Converts source to bytecode. |
-| **[`flux_vm`](packages/flux_vm)** | The runtime engine. A stack machine that executes Flux bytecode. |
-| **[`flux_flutter`](packages/flux_flutter)** | Flutter integration layer. Contains widget bindings and the Riverpod runtime adapter. |
-| **[`flux_cli`](packages/flux_cli)** | Command-line tool for running `.flux` scripts directly in the terminal. |
-| **[`flux_lsp`](packages/flux_lsp)** | Language Server Protocol (LSP) implementation for editor intelligence. |
-| **[`flux_vscode`](packages/flux_vscode)** | VSCode Extension providing syntax highlighting, snippets, and LSP integration. |
+| Package | Description | pub.dev |
+|---------|-------------|---------|
+| **[`flux_compiler`](packages/flux_compiler)** | Lexer, Parser, and Code Generator. Converts source to bytecode. | [![pub](https://img.shields.io/pub/v/flux_compiler.svg)](https://pub.dev/packages/flux_compiler) |
+| **[`flux_vm`](packages/flux_vm)** | The runtime engine. A stack machine that executes Flux bytecode. | [![pub](https://img.shields.io/pub/v/flux_vm.svg)](https://pub.dev/packages/flux_vm) |
+| **[`flux_flutter`](packages/flux_flutter)** | Flutter integration layer. Contains widget bindings and the Riverpod runtime adapter. | [![pub](https://img.shields.io/pub/v/flux_flutter.svg)](https://pub.dev/packages/flux_flutter) |
+| **[`flux_lang_cli`](packages/flux_cli)** | Command-line tool for running `.flux` scripts directly in the terminal. | [![pub](https://img.shields.io/pub/v/flux_lang_cli.svg)](https://pub.dev/packages/flux_lang_cli) |
+| **[`flux_lsp`](packages/flux_lsp)** | Language Server Protocol (LSP) implementation for editor intelligence. | [![pub](https://img.shields.io/pub/v/flux_lsp.svg)](https://pub.dev/packages/flux_lsp) |
+| **[`flux_vscode`](packages/flux_vscode)** | VSCode Extension providing syntax highlighting, snippets, and LSP integration. | - |
+| **[`flux_updater`](packages/flux_updater)** | OTA update system with bytecode diff and version control. | [![pub](https://img.shields.io/pub/v/flux_updater.svg)](https://pub.dev/packages/flux_updater) |
 
 ---
 
@@ -74,8 +75,13 @@ Add Flux to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flux_flutter: ^2.0.0
+  flux_flutter: ^2.0.1
   flutter_riverpod: ^3.0.0
+```
+
+Install from pub.dev:
+```bash
+flutter pub add flux_flutter
 ```
 
 Or for local development:
@@ -184,6 +190,7 @@ For complete documentation, see [Flux CLI README](packages/flux_cli/README.md).
 - **[Language Guide](docs/LANGUAGE_GUIDE.md)**: Syntax, control flow, functions, and native interop.
 - **[Widget Catalog](docs/WIDGET_CATALOG.md)**: List of all supported Flutter widgets.
 - **[Flux vs Lua](docs/COMPARISON.md)**: Comparison with Lua hot update solutions.
+- **[Lua Migration Guide](docs/lua_migration.md)**: For developers migrating from Lua.
 - **[Chinese Quick Start](docs/README.md)**: 30-second quick start guide in Chinese.
 
 ---
