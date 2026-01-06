@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// This handles cleaning up data coming from the Flux VM (which is untyped)
 /// before passing it to Flutter widgets (which expect strict types).
 class FluxCast {
-  /// Parses a string to an integer, or returns null if parsing fails.
+  /// Converts a value to a string, or returns null if the value is null.
   static String? toStringNullable(dynamic value) {
     if (value == null) return null;
     return value.toString();
