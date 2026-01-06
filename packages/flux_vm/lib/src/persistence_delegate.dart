@@ -3,6 +3,8 @@
 /// This interface allows the VM to persist and restore state values.
 /// Implementations can use various storage backends (Hive, SharedPreferences, etc.)
 
+import 'dart:async';
+
 /// Abstract interface for state persistence.
 ///
 /// The VM calls these methods when reading/writing persistent state values.
@@ -12,7 +14,7 @@ abstract class PersistenceDelegate {
   ///
   /// Returns `null` if the key doesn't exist or loading fails.
   /// The key format is typically: `{widgetName}_{fieldName}`
-  Future<dynamic> load(String key);
+  FutureOr<dynamic> load(String key);
 
   /// Save a value with the given key.
   ///
@@ -48,7 +50,7 @@ class InMemoryPersistenceDelegate implements PersistenceDelegate {
   final Map<String, dynamic> _store = {};
 
   @override
-  Future<dynamic> load(String key) async => _store[key];
+  FutureOr<dynamic> load(String key) async => _store[key];
 
   @override
   Future<void> save(String key, dynamic value) async {

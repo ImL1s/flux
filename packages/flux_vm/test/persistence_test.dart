@@ -15,7 +15,7 @@ void main() {
 
     test('initializeState loads persisted value', () async {
       // Create a widget with a persistent field 'count'
-      final compiler = Compiler(moduleName: 'test');
+      // Create a widget with a persistent field 'count'
       
       // Mocking a widget with persistent fields. 
       // In a real scenario, this would come from the compiler.
