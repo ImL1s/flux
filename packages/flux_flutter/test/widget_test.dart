@@ -27,7 +27,8 @@ void main() {
       expect(find.text('Hello Flux'), findsOneWidget);
     });
 
-    testWidgets('renders nested column with children', (WidgetTester tester) async {
+    testWidgets('renders nested column with children',
+        (WidgetTester tester) async {
       const source = '''
         widget Main {
           build {
@@ -55,7 +56,8 @@ void main() {
       expect(find.text('Item 2'), findsOneWidget);
     });
 
-    testWidgets('handles state changes and interaction', (WidgetTester tester) async {
+    testWidgets('handles state changes and interaction',
+        (WidgetTester tester) async {
       // Logic:
       // 1. Define state 'count' = 0
       // 2. Display 'Count: ' + count
@@ -86,7 +88,7 @@ void main() {
       // Initial state - just verify state is accessed correctly
       expect(find.text('Count: 0'), findsOneWidget);
     });
-    
+
     testWidgets('handles text field input', (WidgetTester tester) async {
       // Simplified: Just verify state access works with a string state
       const source = '''
@@ -111,7 +113,7 @@ void main() {
           ),
         ),
       );
-      
+
       // Verify state is accessed correctly
       expect(find.text('You typed: Hello'), findsOneWidget);
     });

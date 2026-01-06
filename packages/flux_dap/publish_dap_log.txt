@@ -1,0 +1,68 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (92.0.0 available)
+  analyzer 7.7.1 (9.0.0 available)
++ cryptography 2.9.0
++ ffi 2.1.3 (2.1.4 available)
+! flux_compiler 0.1.0 from path ..\flux_compiler (overridden)
+! flux_vm 0.1.0 from path ..\flux_vm (overridden)
+  js 0.7.1 (0.7.2 available)
+  lints 3.0.0 (6.0.0 available)
+  matcher 0.12.17 (0.12.18 available)
+  test 1.26.3 (1.28.0 available)
+  test_api 0.7.7 (0.7.8 available)
+  test_core 0.6.12 (0.6.14 available)
+Changed 2 dependencies!
+9 packages have newer versions incompatible with dependency constraints.
+Try `dart pub outdated` for more information.
+Publishing flux_dap 0.1.0 to https://pub.dev:
+├── CHANGELOG.md (<1 KB)
+├── LICENSE (1 KB)
+├── README.md (<1 KB)
+├── bin
+│   └── flux_dap.dart (<1 KB)
+├── lib
+│   ├── flux_dap.dart (<1 KB)
+│   └── src
+│       ├── dap_protocol.dart (1 KB)
+│       ├── dap_server.dart (7 KB)
+│       └── dap_session.dart (3 KB)
+├── publish_dap_log.txt (<1 KB)
+├── pubspec.yaml (<1 KB)
+└── test
+
+Total compressed archive size: 5 KB.
+Validating package...
+Package validation found the following potential issues:
+* `dart analyze` found the following issue(s):
+  Analyzing bin, lib, pubspec.yaml...
+  
+    error - lib\src\dap_session.dart:27:36 - The argument type 'String' can't be assigned to the parameter type 'Statement'.  - argument_type_not_assignable
+    error - lib\src\dap_session.dart:27:45 - Too many positional arguments: 1 expected, but 2 found. Try removing the extra arguments. - extra_positional_arguments
+    error - lib\src\dap_session.dart:35:10 - The method 'run' isn't defined for the type 'VM'. Try correcting the name to the name of an existing method, or defining a method named 'run'. - undefined_method
+  
+  3 issues found.
+  
+* 1 checked-in file is modified in git.
+  
+  Usually you want to publish from a clean git state.
+  
+  Consider committing these files or reverting the changes.
+  
+  Modified files:
+  
+  pubspec.yaml
+  
+  Run `git status` for more information.
+  
+Package validation found the following hint:
+* Non-dev dependencies are overridden in pubspec.yaml.
+  
+  This indicates you are not testing your package against the same versions of its
+  dependencies that users will have when they use it.
+  
+  This might be necessary for packages with cyclic dependencies.
+  
+  Please be extra careful when publishing.
+Uploading...
+Message from server: Successfully uploaded https://pub.dev/packages/flux_dap version 0.1.0, it may take up-to 10 minutes before the new version is available.

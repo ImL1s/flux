@@ -1,12 +1,13 @@
 name: flux_vm
 description: Stack-based bytecode virtual machine for the Flux scripting language. Includes debugger, standard library, and async support.
-version: 1.0.0
+version: 2.0.0
 homepage: https://github.com/ImL1s/flux
 repository: https://github.com/ImL1s/flux
 issue_tracker: https://github.com/ImL1s/flux/issues
+publish_to: none
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: ^3.6.0
 
 dependencies:
   flux_compiler:

@@ -148,3 +148,11 @@ class Hover {
     if (range != null) 'range': range!.toJson(),
   };
 }
+
+/// Context for code completion
+class CompletionContext {
+  final bool isWidgetProperty;
+  final String? widgetName;
+  
+  CompletionContext({this.isWidgetProperty = false, this.widgetName});
+}

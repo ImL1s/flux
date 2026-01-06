@@ -1,0 +1,8 @@
+# Files to ignore when publishing to pub.dev
+
+# Test output files
+*.txt
+!README.txt
+
+# Debug/temp files
+*.log

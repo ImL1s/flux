@@ -13,30 +13,42 @@ class FluxServiceExtensions {
     _registered = true;
 
     // 1. Get Version
-    registerExtension('ext.flux.getVersion', (method, parameters) => 
-        FluxServiceExtensionHandlers.getVersion(vm, parameters));
+    registerExtension(
+        'ext.flux.getVersion',
+        (method, parameters) =>
+            FluxServiceExtensionHandlers.getVersion(vm, parameters));
 
     // 2. Eval
-    registerExtension('ext.flux.eval', (method, parameters) => 
-        FluxServiceExtensionHandlers.eval(vm, parameters));
+    registerExtension(
+        'ext.flux.eval',
+        (method, parameters) =>
+            FluxServiceExtensionHandlers.eval(vm, parameters));
 
     // 3. Get Status
-    registerExtension('ext.flux.getStatus', (method, parameters) => 
-        FluxServiceExtensionHandlers.getStatus(vm, parameters));
-    
+    registerExtension(
+        'ext.flux.getStatus',
+        (method, parameters) =>
+            FluxServiceExtensionHandlers.getStatus(vm, parameters));
+
     // ... existing getScripts ...
-    
+
     // 10. Get Stack
-    registerExtension('ext.flux.getStack', (method, parameters) => 
-        FluxServiceExtensionHandlers.getStack(vm, parameters));
+    registerExtension(
+        'ext.flux.getStack',
+        (method, parameters) =>
+            FluxServiceExtensionHandlers.getStack(vm, parameters));
 
     // 11. Get Locals
-    registerExtension('ext.flux.getLocals', (method, parameters) => 
-        FluxServiceExtensionHandlers.getLocals(vm, parameters));
+    registerExtension(
+        'ext.flux.getLocals',
+        (method, parameters) =>
+            FluxServiceExtensionHandlers.getLocals(vm, parameters));
 
     // 12. Get Object
-    registerExtension('ext.flux.getObject', (method, parameters) => 
-        FluxServiceExtensionHandlers.getObject(vm, parameters));
+    registerExtension(
+        'ext.flux.getObject',
+        (method, parameters) =>
+            FluxServiceExtensionHandlers.getObject(vm, parameters));
 
     // Setup Listener
     vm.debugger?.addListener((event, context) {
@@ -46,132 +58,131 @@ class FluxServiceExtensions {
         'line': context.line,
       });
     });
-    
+
     log('Flux Service Extensions registered', name: 'Flux');
   }
 }
 
 /// Testable handlers for Flux service extensions
 class FluxServiceExtensionHandlers {
-  
-  static Future<ServiceExtensionResponse> getVersion(VM vm, Map<String, String> parameters) async {
-      return ServiceExtensionResponse.result(jsonEncode({
-        'type': 'FluxVersion',
-        'version': '2.0.0',
-        'details': 'Flux V2.0 with DevTools Support'
-      }));
+  static Future<ServiceExtensionResponse> getVersion(
+      VM vm, Map<String, String> parameters) async {
+    return ServiceExtensionResponse.result(jsonEncode({
+      'type': 'FluxVersion',
+      'version': '2.0.0',
+      'details': 'Flux V2.0 with DevTools Support'
+    }));
   }
 
-  static Future<ServiceExtensionResponse> eval(VM vm, Map<String, String> parameters) async {
-      final expr = parameters['expr'];
-      final frameIndexStr = parameters['frameIndex'];
-      final frameIndex = frameIndexStr != null ? int.tryParse(frameIndexStr) : 0;
-      
-      if (expr == null) {
-        return ServiceExtensionResponse.error(
-          ServiceExtensionResponse.invalidParams, 
-          'Expression "expr" is required'
-        );
-      }
+  static Future<ServiceExtensionResponse> eval(
+      VM vm, Map<String, String> parameters) async {
+    final expr = parameters['expr'];
+    final frameIndexStr = parameters['frameIndex'];
+    final frameIndex = frameIndexStr != null ? int.tryParse(frameIndexStr) : 0;
 
-      try {
-        final result = vm.debugger?.evaluate(expr, frameIndex: frameIndex ?? 0);
-        final isError = result is String && result.startsWith('Error: ');
-        
-        return ServiceExtensionResponse.result(jsonEncode({
-          'type': 'EvalResult',
-          'result': result.toString(),
-          'isError': isError
-        }));
-      } catch (e) {
-        return ServiceExtensionResponse.result(jsonEncode({
-          'type': 'EvalResult',
-          'result': e.toString(),
-          'isError': true
-        }));
-      }
-  }
+    if (expr == null) {
+      return ServiceExtensionResponse.error(
+          ServiceExtensionResponse.invalidParams,
+          'Expression "expr" is required');
+    }
 
-  static Future<ServiceExtensionResponse> getStatus(VM vm, Map<String, String> parameters) async {
-      final isPaused = vm.debugger?.isPaused ?? false;
-      String? pausedScript;
-      int? pausedLine;
-      
-      if (isPaused) {
-        final stack = vm.debugger?.getCallStack() ?? [];
-        if (stack.isNotEmpty) {
-           final top = stack.first;
-           pausedScript = top.source;
-           pausedLine = top.line;
-        }
-      }
+    try {
+      final result = vm.debugger?.evaluate(expr, frameIndex: frameIndex ?? 0);
+      final isError = result is String && result.startsWith('Error: ');
 
       return ServiceExtensionResponse.result(jsonEncode({
-        'type': 'FluxStatus',
-        'vmState': isPaused ? 'Paused' : 'Running',
-        'debuggerAttached': vm.debugger != null,
-        'isPaused': isPaused,
-        'pausedScript': pausedScript,
-        'pausedLine': pausedLine,
+        'type': 'EvalResult',
+        'result': result.toString(),
+        'isError': isError
       }));
+    } catch (e) {
+      return ServiceExtensionResponse.result(jsonEncode(
+          {'type': 'EvalResult', 'result': e.toString(), 'isError': true}));
+    }
   }
 
-  static Future<ServiceExtensionResponse> getStack(VM vm, Map<String, String> parameters) async {
-      final frames = vm.debugger?.getCallStack() ?? [];
-      final framesJson = <Map<String, dynamic>>[];
-      
-      for (var i = 0; i < frames.length; i++) {
-        final f = frames[i];
-        framesJson.add({
-          'index': i,
-          'function': f.functionName,
-          'script': f.source,
-          'line': f.line,
-        });
+  static Future<ServiceExtensionResponse> getStatus(
+      VM vm, Map<String, String> parameters) async {
+    final isPaused = vm.debugger?.isPaused ?? false;
+    String? pausedScript;
+    int? pausedLine;
+
+    if (isPaused) {
+      final stack = vm.debugger?.getCallStack() ?? [];
+      if (stack.isNotEmpty) {
+        final top = stack.first;
+        pausedScript = top.source;
+        pausedLine = top.line;
       }
-      
-      return ServiceExtensionResponse.result(jsonEncode({
-        'type': 'Stack',
-        'frames': framesJson,
-      }));
+    }
+
+    return ServiceExtensionResponse.result(jsonEncode({
+      'type': 'FluxStatus',
+      'vmState': isPaused ? 'Paused' : 'Running',
+      'debuggerAttached': vm.debugger != null,
+      'isPaused': isPaused,
+      'pausedScript': pausedScript,
+      'pausedLine': pausedLine,
+    }));
   }
 
-  static Future<ServiceExtensionResponse> getLocals(VM vm, Map<String, String> parameters) async {
-      final frameIndexStr = parameters['frameIndex'];
-      final frameIndex = frameIndexStr != null ? int.tryParse(frameIndexStr) ?? 0 : 0;
-      
-      final locals = vm.debugger?.getLocals(frameIndex) ?? {};
-      
-      // Locals are now already serialized by FluxDebugger
-      return ServiceExtensionResponse.result(jsonEncode({
-        'type': 'Locals',
-        'locals': locals,
-      }));
+  static Future<ServiceExtensionResponse> getStack(
+      VM vm, Map<String, String> parameters) async {
+    final frames = vm.debugger?.getCallStack() ?? [];
+    final framesJson = <Map<String, dynamic>>[];
+
+    for (var i = 0; i < frames.length; i++) {
+      final f = frames[i];
+      framesJson.add({
+        'index': i,
+        'function': f.functionName,
+        'script': f.source,
+        'line': f.line,
+      });
+    }
+
+    return ServiceExtensionResponse.result(jsonEncode({
+      'type': 'Stack',
+      'frames': framesJson,
+    }));
   }
 
-  static Future<ServiceExtensionResponse> getObject(VM vm, Map<String, String> parameters) async {
-      final handleStr = parameters['handle'];
-      final handle = handleStr != null ? int.tryParse(handleStr) : null;
-      
-      if (handle == null) {
-         return ServiceExtensionResponse.error(
-          ServiceExtensionResponse.invalidParams, 
-          'Handle "handle" is required'
-        );
-      }
-      
-      final obj = vm.debugger?.getObject(handle);
-      if (obj == null) {
-         return ServiceExtensionResponse.error(
-          ServiceExtensionResponse.extensionError, 
-          'Object with handle $handle not found (or expired)'
-        );
-      }
-      
-      return ServiceExtensionResponse.result(jsonEncode({
-        'type': 'Object',
-        'object': obj,
-      }));
+  static Future<ServiceExtensionResponse> getLocals(
+      VM vm, Map<String, String> parameters) async {
+    final frameIndexStr = parameters['frameIndex'];
+    final frameIndex =
+        frameIndexStr != null ? int.tryParse(frameIndexStr) ?? 0 : 0;
+
+    final locals = vm.debugger?.getLocals(frameIndex) ?? {};
+
+    // Locals are now already serialized by FluxDebugger
+    return ServiceExtensionResponse.result(jsonEncode({
+      'type': 'Locals',
+      'locals': locals,
+    }));
+  }
+
+  static Future<ServiceExtensionResponse> getObject(
+      VM vm, Map<String, String> parameters) async {
+    final handleStr = parameters['handle'];
+    final handle = handleStr != null ? int.tryParse(handleStr) : null;
+
+    if (handle == null) {
+      return ServiceExtensionResponse.error(
+          ServiceExtensionResponse.invalidParams,
+          'Handle "handle" is required');
+    }
+
+    final obj = vm.debugger?.getObject(handle);
+    if (obj == null) {
+      return ServiceExtensionResponse.error(
+          ServiceExtensionResponse.extensionError,
+          'Object with handle $handle not found (or expired)');
+    }
+
+    return ServiceExtensionResponse.result(jsonEncode({
+      'type': 'Object',
+      'object': obj,
+    }));
   }
 }
-

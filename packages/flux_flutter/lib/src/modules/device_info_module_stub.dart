@@ -4,8 +4,10 @@ import 'package:flux_vm/flux_vm.dart';
 /// where dart:io Platform APIs are unavailable.
 class DeviceInfoModule extends FluxModule {
   DeviceInfoModule() : super('device') {
-    register('getDeviceInfo', AsyncNativeFunction('device.getDeviceInfo', 0, _stubGetDeviceInfo));
-    register('getPackageInfo', AsyncNativeFunction('device.getPackageInfo', 0, _stubGetPackageInfo));
+    register('getDeviceInfo',
+        AsyncNativeFunction('device.getDeviceInfo', 0, _stubGetDeviceInfo));
+    register('getPackageInfo',
+        AsyncNativeFunction('device.getPackageInfo', 0, _stubGetPackageInfo));
   }
 
   Future<Object?> _stubGetDeviceInfo(List<Object?> args) async {
@@ -25,4 +27,3 @@ class DeviceInfoModule extends FluxModule {
     };
   }
 }
-

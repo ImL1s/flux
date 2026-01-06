@@ -1,0 +1,6 @@
+name: test_flutter
+version: 1.0.0
+description: A Flux Flutter project
+
+entry: main.flux
+type: flutter

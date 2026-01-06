@@ -1,32 +1,42 @@
 name: flux_flutter
 description: "Flutter bindings for the Flux scripting language."
-version: 0.0.1
+version: 2.0.1
+homepage: https://github.com/ImL1s/flux
 publish_to: none
-homepage: https://github.com/user/flux
+repository: https://github.com/ImL1s/flux
 
 environment:
   sdk: ^3.6.0
-  flutter: ">=1.17.0"
+  flutter: ">=3.27.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  flux_compiler:
-    path: ../flux_compiler
   flux_vm:
     path: ../flux_vm
-  flutter_riverpod: ^3.0.0
+  flux_compiler:
+    path: ../flux_compiler
+  path_provider: ^2.1.2
+  path: ^1.9.0
+  flutter_riverpod: ^3.1.0
   web_socket_channel: ^3.0.3
   http: ^1.6.0
   crypto: ^3.0.3
   shared_preferences: ^2.4.0
-  device_info_plus: ^10.1.0
-  package_info_plus: ^8.0.0
+  uuid: ^4.3.3
+  device_info_plus: ^12.3.0
+  package_info_plus: ^9.0.0
+  camera: ^0.11.3
+  flutter_blue_plus: ^2.1.0
+  permission_handler: ^12.0.1
+  hive: ^2.2.3
+  flutter_secure_storage: ^10.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  mocktail: ^1.0.0
+  lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

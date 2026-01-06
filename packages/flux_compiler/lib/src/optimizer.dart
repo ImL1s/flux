@@ -272,8 +272,7 @@ static bool _isSideEffectFree(OpCode op) {
         final upvalueCount = chunk.code[offset + 2];
         return 3 + (2 * upvalueCount);
         
-      default:
-        return 1; 
+
     }
   }
 
@@ -359,12 +358,9 @@ static bool _isSideEffectFree(OpCode op) {
       return null;
     }
 
-    if (result != null || (val1 == null && val2 == null && op3 == OpCode.equal)) {
-      result ??= (val1 == val2); // Handle explicit null == null
-      return _FoldingPattern(result, [offset2, offset3]);
-    }
+    return _FoldingPattern(result, [offset2, offset3]);
 
-    return null;
+
   }
 
   static void _applyConstantFolding(Chunk chunk, int offset, _FoldingPattern pattern) {

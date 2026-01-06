@@ -4,6 +4,11 @@ import 'package:flux_flutter/src/modules/http_module.dart';
 import 'package:flux_flutter/src/modules/storage_module.dart';
 import 'package:flux_flutter/src/modules/dialog_module.dart';
 import 'package:flux_flutter/src/modules/navigation_module.dart';
+import 'package:flux_flutter/src/modules/camera_module.dart';
+import 'package:flux_flutter/src/modules/ble_module.dart';
+import 'package:flux_flutter/src/modules/time_module.dart';
+import 'package:flux_flutter/src/modules/hive_storage_module.dart';
+import 'package:flux_flutter/src/modules/secure_storage_module.dart';
 
 // Conditional import: use stub in web, real module in io environments
 import 'package:flux_flutter/src/modules/device_info_module_stub.dart'
@@ -13,10 +18,23 @@ import 'package:flux_flutter/src/modules/device_info_module_stub.dart'
 class FluxNativeModules {
   /// Register all available native modules with the VM
   static void register(VM vm) {
-    vm.registerModule(HttpModule());
-    vm.registerModule(StorageModule());
-    vm.registerModule(DialogModule());
-    vm.registerModule(DeviceInfoModule());
-    vm.registerModule(NavigationModule());
+    void reg(String name, FluxModule module) {
+      try {
+        vm.registerModule(module);
+      } catch (e) {
+        debugPrint('❌ FluxNativeModules: Failed to register $name: $e');
+      }
+    }
+
+    reg('HttpModule', HttpModule());
+    reg('StorageModule', StorageModule());
+    reg('DialogModule', DialogModule());
+    reg('DeviceInfoModule', DeviceInfoModule());
+    reg('NavigationModule', NavigationModule());
+    reg('CameraModule', CameraModule.instance);
+    reg('BleModule', BleModule.instance);
+    reg('TimeModule', TimeModule());
+    reg('HiveStorageModule', HiveStorageModule());
+    reg('SecureStorageModule', SecureStorageModule());
   }
 }

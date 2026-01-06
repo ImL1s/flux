@@ -39,7 +39,7 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-      
+
       // Should display text
       expect(find.text('Count is set'), findsOneWidget);
     });
@@ -108,12 +108,14 @@ void main() {
 }
 
 // Test Notifiers
-class _TestCounterNotifier extends Notifier<int> with FluxSettableNotifier<int> {
+class _TestCounterNotifier extends Notifier<int>
+    with FluxSettableNotifier<int> {
   @override
   int build() => 0;
 }
 
-class _TestNameNotifier extends Notifier<String> with FluxSettableNotifier<String> {
+class _TestNameNotifier extends Notifier<String>
+    with FluxSettableNotifier<String> {
   @override
   String build() => 'Guest';
 }

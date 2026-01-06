@@ -16,13 +16,10 @@ void main() {
 
     testWidgets('renders Positioned with props', (tester) async {
       final builder = FluxBindings.get('Positioned')!;
-      final positioned = builder({
-        'left': 10,
-        'top': 20,
-        'width': 100,
-        'height': 50
-      }, []) as Positioned;
-      
+      final positioned =
+          builder({'left': 10, 'top': 20, 'width': 100, 'height': 50}, [])
+              as Positioned;
+
       expect(positioned.left, 10.0);
       expect(positioned.top, 20.0);
       expect(positioned.width, 100.0);
@@ -37,17 +34,17 @@ void main() {
         'runSpacing': 8,
         'alignment': 'center',
       }, []) as Wrap;
-      
+
       expect(wrap.direction, Axis.vertical);
       expect(wrap.spacing, 16.0);
       expect(wrap.runSpacing, 8.0);
       expect(wrap.alignment, WrapAlignment.center);
     });
-    
+
     testWidgets('Wrap defaults', (tester) async {
       final builder = FluxBindings.get('Wrap')!;
       final wrap = builder({}, []) as Wrap;
-      
+
       expect(wrap.direction, Axis.horizontal);
       expect(wrap.spacing, 0.0);
       expect(wrap.runSpacing, 0.0);

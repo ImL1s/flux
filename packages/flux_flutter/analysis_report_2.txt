@@ -1,0 +1,54 @@
+Analyzing flux_flutter...                                       
+
+warning - The value of the local variable 'activeColor' isn't used - lib\src\bindings.dart:261:13 - unused_local_variable
+  error - Undefined name 'activeThumbColor' - lib\src\bindings.dart:268:27 - undefined_identifier
+  error - The named parameter 'activeThumbColor' isn't defined - lib\src\bindings.dart:890:9 - undefined_named_parameter
+  error - The named parameter 'inactiveThumbColor' isn't defined - lib\src\bindings.dart:891:9 - undefined_named_parameter
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:941:9 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:942:9 - deprecated_member_use
+  error - The named parameter 'activeThumbColor' isn't defined - lib\src\bindings.dart:945:9 - undefined_named_parameter
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:977:9 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:978:9 - deprecated_member_use
+  error - The named parameter 'activeThumbColor' isn't defined - lib\src\bindings.dart:983:9 - undefined_named_parameter
+  error - The named parameter 'activeThumbColor' isn't defined - lib\src\bindings.dart:1018:9 - undefined_named_parameter
+   info - 'value' is deprecated and shouldn't be used. Use initialValue instead. This will set the initial value for the form field. This feature was deprecated after v3.33.0-1.0.pre - lib\src\bindings.dart:1386:9 - deprecated_member_use
+   info - Statements in an if should be enclosed in a block - lib\src\bindings.dart:1571:9 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:172:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:266:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:274:9 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:285:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:292:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:298:9 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:309:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:316:7 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:323:9 - curly_braces_in_flow_control_structures
+   info - Statements in an if should be enclosed in a block - lib\src\modules\ble_module.dart:347:7 - curly_braces_in_flow_control_structures
+warning - The value of the local variable 'buildFunc' isn't used - lib\src\riverpod_integration.dart:274:11 - unused_local_variable
+warning - Unnecessary cast - lib\src\riverpod_integration.dart:385:20 - unnecessary_cast
+   info - The import of 'dart:ui' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' - lib\src\utils\flux_cast.dart:1:8 - unnecessary_import
+   info - Angle brackets will be interpreted as HTML - lib\src\utils\flux_cast.dart:121:22 - unintended_html_in_doc_comment
+   info - Dangling library doc comment - test\async_await_test.dart:1:1 - dangling_library_doc_comments
+   info - Don't invoke 'print' in production code - test\debug_index_test.dart:35:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\debug_index_test.dart:37:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\debug_index_test.dart:38:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\e2e_test.dart:80:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\e2e_test.dart:83:7 - avoid_print
+warning - The value of the local variable 'callbackInvoked' isn't used - test\inputs_test.dart:40:12 - unused_local_variable
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor or activeTrackColor instead. This feature was deprecated after v3.31.0-2.0.pre - test\inputs_test.dart:67:27 - deprecated_member_use
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:7:3 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:24:7 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:55:9 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:60:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:65:7 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:68:7 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:73:7 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:77:9 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:82:11 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:88:9 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:93:11 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:97:7 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:100:5 - avoid_print
+   info - Don't invoke 'print' in production code - test\simple_debug.dart:101:5 - avoid_print
+   info - The import of 'package:flux_flutter/src/bindings.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flux_flutter/flux_flutter.dart' - test\todo_demo_test.dart:4:8 - unnecessary_import
+warning - Unused import: 'package:flux_vm/flux_vm.dart' - test\v2_widgets_test.dart:4:8 - unused_import
+

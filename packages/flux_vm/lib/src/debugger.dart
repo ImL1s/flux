@@ -158,8 +158,7 @@ class FluxDebugger {
   void attach() {
     if (_attached) return;
     _attached = true;
-    // Hook into VM execution - in a real implementation, we would
-    // intercept the VM's step function
+    vm.debugger = this;
   }
   
   /// Detach the debugger from the VM

@@ -2,7 +2,7 @@ import 'package:flux_vm/flux_vm.dart';
 import 'package:http/http.dart' as http;
 
 /// HTTP client module for Flux
-/// 
+///
 /// Usage:
 /// var res = await http.get("https://example.com");
 /// print(res["statusCode"]);
@@ -28,7 +28,7 @@ class HttpModule extends FluxModule {
   Future<Object?> _post(List<Object?> args) async {
     final url = args[0] as String;
     final options = args[1] as Map;
-    
+
     final headers = (options['headers'] as Map?)?.cast<String, String>() ?? {};
     final body = options['body'];
 
@@ -55,7 +55,7 @@ class HttpModule extends FluxModule {
   Future<Object?> _put(List<Object?> args) async {
     final url = args[0] as String;
     final options = args.length > 1 ? args[1] as Map : {};
-    
+
     final headers = (options['headers'] as Map?)?.cast<String, String>() ?? {};
     final body = options['body'];
 

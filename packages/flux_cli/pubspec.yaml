@@ -1,16 +1,16 @@
-name: flux_cli
+name: flux_lang_cli
 description: Command line interface for the Flux language including REPL
-version: 0.1.0
+version: 2.0.0
+homepage: https://github.com/ImL1s/flux
 publish_to: none
+repository: https://github.com/ImL1s/flux
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.6.0
 
 dependencies:
-  flux_compiler:
-    path: ../flux_compiler
-  flux_vm:
-    path: ../flux_vm
+  flux_compiler: ^2.0.0
+  flux_vm: ^2.0.0
   args: ^2.4.0
   shelf: ^1.4.2
   shelf_web_socket: ^3.0.0

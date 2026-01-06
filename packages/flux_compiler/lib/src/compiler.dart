@@ -6,7 +6,6 @@ import 'ast.dart';
 import 'token.dart';
 import 'bytecode.dart';
 import 'lexer.dart';
-import 'lexer.dart';
 import 'parser.dart';
 import 'optimizer.dart';
 import 'source_map_generator.dart';
@@ -135,7 +134,7 @@ class Compiler {
       if (_enclosing?._sourceMapGenerator != null) {
         _sourceMapGenerator = SourceMapGenerator(file: _moduleName ?? 'script');
         // Copy sources/names or just add the file again (it handles dupes)
-        if (_moduleName != null) _sourceMapGenerator!.addSource(_moduleName!);
+        if (_moduleName != null) _sourceMapGenerator!.addSource(_moduleName);
       }
       _function = CompiledFunction(name, Chunk(), moduleName: _moduleName);
   }

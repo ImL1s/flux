@@ -7,9 +7,10 @@ void main() {
       final package = FluxScriptPackage(
         version: '1.0.0',
         content: 'print("hello");',
-        contentHash: 'hash_will_be_recalculated_if_from_json_but_here_we_pass_it',
+        contentHash:
+            'hash_will_be_recalculated_if_from_json_but_here_we_pass_it',
       );
-      
+
       // Known hash for 'print("hello");'
       // We can verify the verifyHash() method calculates logic correctly
       expect(package.content, 'print("hello");');
@@ -20,7 +21,7 @@ void main() {
         'version': '1.0.0',
         'content': 'test content',
       };
-      
+
       final package = FluxScriptPackage.fromJson(json);
       expect(package.contentHash, isNotEmpty);
       expect(package.verifyHash(), isTrue);
@@ -32,7 +33,7 @@ void main() {
         content: 'real content',
         contentHash: 'fake_hash',
       );
-      
+
       expect(package.verifyHash(), isFalse);
     });
   });
@@ -45,15 +46,19 @@ void main() {
     });
 
     test('caches packages and rotates old ones', () {
-      final p1 = FluxScriptPackage(version: '1.0.0', content: 'c1', contentHash: 'h1');
-      final p2 = FluxScriptPackage(version: '1.1.0', content: 'c2', contentHash: 'h2');
-      final p3 = FluxScriptPackage(version: '1.2.0', content: 'c3', contentHash: 'h3');
-      final p4 = FluxScriptPackage(version: '1.3.0', content: 'c4', contentHash: 'h4');
+      final p1 =
+          FluxScriptPackage(version: '1.0.0', content: 'c1', contentHash: 'h1');
+      final p2 =
+          FluxScriptPackage(version: '1.1.0', content: 'c2', contentHash: 'h2');
+      final p3 =
+          FluxScriptPackage(version: '1.2.0', content: 'c3', contentHash: 'h3');
+      final p4 =
+          FluxScriptPackage(version: '1.3.0', content: 'c4', contentHash: 'h4');
 
       manager.cache(p1);
       manager.cache(p2);
       manager.cache(p3);
-      
+
       expect(manager.cachedVersions, equals(['1.2.0', '1.1.0', '1.0.0']));
       expect(manager.latest, p3);
 
@@ -64,8 +69,10 @@ void main() {
     });
 
     test('supports rollback', () {
-      final p1 = FluxScriptPackage(version: '1.0.0', content: 'c1', contentHash: 'h1');
-      final p2 = FluxScriptPackage(version: '1.1.0', content: 'c2', contentHash: 'h2');
+      final p1 =
+          FluxScriptPackage(version: '1.0.0', content: 'c1', contentHash: 'h1');
+      final p2 =
+          FluxScriptPackage(version: '1.1.0', content: 'c2', contentHash: 'h2');
 
       manager.cache(p1);
       manager.cache(p2);
@@ -77,19 +84,18 @@ void main() {
 
   group('FluxSandboxConfig', () {
     test('validates allowed hosts with wildcards', () {
-      final config = FluxSandboxConfig(
-        allowedHosts: ['*.example.com', 'api.google.com']
-      );
+      final config =
+          FluxSandboxConfig(allowedHosts: ['*.example.com', 'api.google.com']);
 
       expect(config.isHostAllowed('api.example.com'), isTrue);
       expect(config.isHostAllowed('www.example.com'), isTrue);
       expect(config.isHostAllowed('example.com'), isTrue);
       expect(config.isHostAllowed('api.google.com'), isTrue);
-      
+
       expect(config.isHostAllowed('google.com'), isFalse);
       expect(config.isHostAllowed('evil.com'), isFalse);
     });
-    
+
     test('wildcard * allows all', () {
       final config = FluxSandboxConfig(allowedHosts: ['*']);
       expect(config.isHostAllowed('any.com'), isTrue);
@@ -126,7 +132,8 @@ void main() {
       final signedJson = {
         'version': '1.0.0',
         'content': 'code',
-        'signature': 'valid_sig', // Placeholder validation only checks isNotEmpty
+        'signature':
+            'valid_sig', // Placeholder validation only checks isNotEmpty
       };
 
       final package = loader.loadPackage(signedJson);

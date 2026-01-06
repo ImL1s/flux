@@ -1,0 +1,15 @@
+# Files to ignore when publishing to pub.dev
+
+# Test output files
+*.txt
+!README.txt
+*.skip
+
+# Debug/temp files
+debug_*.txt
+test_result*.txt
+*_output.txt
+*_log.txt
+
+# Tool directory (internal tools only)
+tool/

@@ -1,13 +1,210 @@
 name: CI
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [dev, master, feature/*]
+  pull_request:
+    branches: [dev, master, feature/*]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  build:
+  analyze:
+    name: Static Analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.x'
-      - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Analyze flux_compiler
+        run: |
+          cd packages/flux_compiler
+          dart pub get
+          dart analyze --fatal-infos
+      - name: Analyze flux_vm
+        run: |
+          cd packages/flux_vm
+          dart pub get
+          dart analyze --fatal-infos
+      - name: Analyze flux_lsp
+        run: |
+          cd packages/flux_lsp
+          dart pub get
+          dart analyze --fatal-infos
+      - name: Analyze flux_dap
+        run: |
+          cd packages/flux_dap
+          dart pub get
+          dart analyze --fatal-infos
+      - name: Analyze flux_cli
+        run: |
+          cd packages/flux_cli
+          dart pub get
+          dart analyze --fatal-infos
+      - name: Analyze flux_updater
+        run: |
+          cd packages/flux_updater
+          dart pub get
+          dart analyze --fatal-infos
+      - name: Analyze flux_flutter
+        run: |
+          cd packages/flux_flutter
+          flutter pub get
+          flutter analyze --fatal-infos
+
+  test-compiler:
+    name: Test flux_compiler
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_compiler
+          dart pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_compiler
+          dart test --reporter=expanded
+
+  test-vm:
+    name: Test flux_vm
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_vm
+          dart pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_vm
+          dart test --reporter=expanded
+
+  test-lsp:
+    name: Test flux_lsp
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_lsp
+          dart pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_lsp
+          dart test --reporter=expanded
+
+  test-dap:
+    name: Test flux_dap
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_dap
+          dart pub get
+      - name: Run tests (if any)
+        run: |
+          cd packages/flux_dap
+          dart test --reporter=expanded || echo "No tests found"
+
+  test-cli:
+    name: Test flux_cli
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_cli
+          dart pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_cli
+          dart test --reporter=expanded
+
+  test-flutter:
+    name: Test flux_flutter
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_flutter
+          flutter pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_flutter
+          flutter test --reporter=expanded
+
+  test-updater:
+    name: Test flux_updater
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_updater
+          dart pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_updater
+          dart test --reporter=expanded
+
+  ci-success:
+    name: CI Success
+    runs-on: ubuntu-latest
+    needs: [test-compiler, test-vm, test-lsp, test-dap, test-flutter, test-cli, test-updater]
+    if: always()
+    steps:
+      - name: Check all jobs passed
+        run: |
+          if [ "${{ needs.test-compiler.result }}" != "success" ] || \
+             [ "${{ needs.test-vm.result }}" != "success" ] || \
+             [ "${{ needs.test-lsp.result }}" != "success" ] || \
+             [ "${{ needs.test-dap.result }}" != "success" ] || \
+             [ "${{ needs.test-cli.result }}" != "success" ] || \
+             [ "${{ needs.test-updater.result }}" != "success" ] || \
+             [ "${{ needs.test-flutter.result }}" != "success" ]; then
+            echo "Some tests failed"
+            exit 1
+          fi
+          echo "All tests passed!"

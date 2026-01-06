@@ -11,7 +11,7 @@ void main() {
     testWidgets('renders primitive Text without style', (tester) async {
       final builder = FluxBindings.get('Text')!;
       final textWidget = builder({'text': 'Hello'}, []) as Text;
-      
+
       expect(textWidget.data, 'Hello');
       expect(textWidget.style, isNull);
     });
@@ -24,9 +24,10 @@ void main() {
         'fontWeight': 'bold',
         'fontStyle': 'italic',
       };
-      
-      final textWidget = builder({'text': 'Styled', 'style': style}, []) as Text;
-      
+
+      final textWidget =
+          builder({'text': 'Styled', 'style': style}, []) as Text;
+
       expect(textWidget.data, 'Styled');
       expect(textWidget.style, isNotNull);
       expect(textWidget.style!.color, Colors.red);
@@ -40,7 +41,7 @@ void main() {
       final style = {
         'fontWeight': 100,
       };
-      
+
       final textWidget = builder({'text': 'Thin', 'style': style}, []) as Text;
       expect(textWidget.style!.fontWeight, FontWeight.w100);
     });
@@ -50,16 +51,17 @@ void main() {
       final style = {
         'color': '#00FF00',
       };
-      
+
       final textWidget = builder({'text': 'Green', 'style': style}, []) as Text;
       expect(textWidget.style!.color, const Color(0xFF00FF00));
     });
 
     testWidgets('gracefully handles invalid style', (tester) async {
-       final builder = FluxBindings.get('Text')!;
-       // Non-map style should be ignored or result in null
-       final textWidget = builder({'text': 'Bad Style', 'style': 'not-a-map'}, []) as Text;
-       expect(textWidget.style, isNull);
+      final builder = FluxBindings.get('Text')!;
+      // Non-map style should be ignored or result in null
+      final textWidget =
+          builder({'text': 'Bad Style', 'style': 'not-a-map'}, []) as Text;
+      expect(textWidget.style, isNull);
     });
   });
 }

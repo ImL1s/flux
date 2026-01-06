@@ -1,0 +1,105 @@
+00:00 +0: loading test/dap_worker_test.dart
+00:00 +0: DAP Worker Integration Should launch and run to completion
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: function, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: add, isState: false
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: add, isState: false
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: z, isState: false
+[Output] DEBUG VM RUNTIME EXCEPTION: Undefined global 'function'.
+
+[Output] Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:923:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:366:12)
+#2      _DapWorker._launch.<anonymous closure> (package:flux_dap/src/dap_worker.dart:157:16)
+#3      _rootRun (dart:async/zone.dart:1414:13)
+#4      _CustomZone.run (dart:async/zone.dart:1317:19)
+#5      _runZoned (dart:async/zone.dart:1838:10)
+#6      runZoned (dart:async/zone.dart:1777:10)
+#7      _DapWorker._launch (package:flux_dap/src/dap_worker.dart:155:13)
+#8      _DapWorker._handleCommand (package:flux_dap/src/dap_worker.dart:56:15)
+#9      _DapWorker.run (package:flux_dap/src/dap_worker.dart:48:15)
+<asynchronous suspension>
+
+
+[Output] IP: 12
+
+[Output] Last OpCode: OpCode.pop
+
+[Output] Runtime Error: Undefined global 'function'.
+
+[Output]    at script() [line 3]
+
+00:00 +1: DAP Worker Integration Should hit breakpoint and resume
+DEBUG COMPILER: Unit has 6 declarations
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 1
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 2
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: function, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 3
+DEBUG COMPILER: Compiling variable: add, isState: false
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling statement type: ReturnStmt at line 4
+DEBUG COMPILER: Compiling variable: a, isState: false
+DEBUG COMPILER: Compiling variable: b, isState: false
+DEBUG COMPILER: Compiling decl type: VarDeclStmt
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 6
+DEBUG COMPILER: Compiling variable: add, isState: false
+DEBUG COMPILER: Compiling variable: x, isState: false
+DEBUG COMPILER: Compiling variable: y, isState: false
+DEBUG COMPILER: Compiling decl type: ExpressionStmt
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: z, isState: false
+[Output] DEBUG VM RUNTIME EXCEPTION: Undefined global 'function'.
+
+[Output] Stack Trace: #0      VM._run (package:flux_vm/src/vm.dart:923:15)
+#1      VM.runChunk (package:flux_vm/src/vm.dart:366:12)
+#2      _DapWorker._launch.<anonymous closure> (package:flux_dap/src/dap_worker.dart:157:16)
+#3      _rootRun (dart:async/zone.dart:1414:13)
+#4      _CustomZone.run (dart:async/zone.dart:1317:19)
+#5      _runZoned (dart:async/zone.dart:1838:10)
+#6      runZoned (dart:async/zone.dart:1777:10)
+#7      _DapWorker._launch (package:flux_dap/src/dap_worker.dart:155:13)
+#8      _DapWorker._handleCommand (package:flux_dap/src/dap_worker.dart:56:15)
+#9      _DapWorker.run (package:flux_dap/src/dap_worker.dart:48:15)
+<asynchronous suspension>
+
+
+[Output] IP: 12
+
+[Output] Last OpCode: OpCode.pop
+
+[Output] Runtime Error: Undefined global 'function'.
+
+[Output]    at script() [line 3]
+
+00:05 +1 -1: DAP Worker Integration Should hit breakpoint and resume [E]
+  TimeoutException after 0:00:05.000000: Future not completed
+  test\dap_worker_test.dart 75:7  main.<fn>.<fn>
+  
+00:05 +1 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

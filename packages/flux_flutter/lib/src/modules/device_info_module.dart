@@ -5,13 +5,15 @@ import 'package:flux_vm/flux_vm.dart';
 
 class DeviceInfoModule extends FluxModule {
   DeviceInfoModule() : super('device') {
-    register('getDeviceInfo', AsyncNativeFunction('device.getDeviceInfo', 0, _getDeviceInfo));
-    register('getPackageInfo', AsyncNativeFunction('device.getPackageInfo', 0, _getPackageInfo));
+    register('getDeviceInfo',
+        AsyncNativeFunction('device.getDeviceInfo', 0, _getDeviceInfo));
+    register('getPackageInfo',
+        AsyncNativeFunction('device.getPackageInfo', 0, _getPackageInfo));
   }
 
   Future<Object?> _getDeviceInfo(List<Object?> args) async {
     final deviceInfo = DeviceInfoPlugin();
-    
+
     if (Platform.isAndroid) {
       final androidInfo = await deviceInfo.androidInfo;
       return {
@@ -35,18 +37,18 @@ class DeviceInfoModule extends FluxModule {
     } else if (Platform.isWindows) {
       final windowsInfo = await deviceInfo.windowsInfo;
       return {
-          'os': 'windows',
-          'computerName': windowsInfo.computerName,
+        'os': 'windows',
+        'computerName': windowsInfo.computerName,
       };
     } else if (Platform.isMacOS) {
-        final macInfo = await deviceInfo.macOsInfo;
-        return {
-            'os': 'macos',
-            'model': macInfo.model,
-            'computerName': macInfo.computerName,
-        };
+      final macInfo = await deviceInfo.macOsInfo;
+      return {
+        'os': 'macos',
+        'model': macInfo.model,
+        'computerName': macInfo.computerName,
+      };
     }
-    
+
     return {'os': 'unknown'};
   }
 
@@ -60,4 +62,3 @@ class DeviceInfoModule extends FluxModule {
     };
   }
 }
-

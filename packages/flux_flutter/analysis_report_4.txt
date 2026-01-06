@@ -1,0 +1,12 @@
+Analyzing flux_flutter...                                       
+
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:943:9 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:944:9 - deprecated_member_use
+   info - 'groupValue' is deprecated and shouldn't be used. Use a RadioGroup ancestor to manage group value instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:980:9 - deprecated_member_use
+   info - 'onChanged' is deprecated and shouldn't be used. Use RadioGroup to handle value change instead. This feature was deprecated after v3.32.0-0.0.pre - lib\src\bindings.dart:981:9 - deprecated_member_use
+   info - Dangling library doc comment - test\async_await_test.dart:1:1 - dangling_library_doc_comments
+warning - Unused import: 'package:flutter_test/flutter_test.dart' - test\debug_index_test.dart:3:8 - unused_import
+warning - The value of the local variable 'callbackInvoked' isn't used - test\inputs_test.dart:40:12 - unused_local_variable
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor or activeTrackColor instead. This feature was deprecated after v3.31.0-2.0.pre - test\inputs_test.dart:67:27 - deprecated_member_use
+warning - Unused import: 'package:flutter/material.dart' - test\simple_debug.dart:3:8 - unused_import
+

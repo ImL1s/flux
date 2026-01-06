@@ -13,7 +13,7 @@ void main() {
       expect(FluxBindings.get('Row'), isNotNull);
       expect(FluxBindings.get('Button'), isNotNull);
     });
-    
+
     test('returns null for unknown widget', () {
       expect(FluxBindings.get('UnknownWidget'), isNull);
     });

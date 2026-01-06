@@ -8,6 +8,7 @@ import 'stdlib.dart';
 import 'closure.dart';
 import 'coroutine.dart';
 import 'debugger.dart';
+import 'inline_cache.dart';
 
 typedef WidgetCallHandler = Object? Function(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack);
 
@@ -99,6 +100,12 @@ class VM {
   Future<dynamic>? _pendingFuture;
   CallFrame? _pendingFrame;
   
+  // Runtime Optimizations
+  final InlineCacheManager _inlineCacheManager = InlineCacheManager();
+  
+  /// Get current inline cache stats for debugging
+  Map<String, dynamic> get cacheStats => _inlineCacheManager.getStats();
+  
   // Exception handling state
   final List<_ExceptionHandler> _exceptionHandlers = [];
   
@@ -151,8 +158,11 @@ class VM {
   /// Get a registered script by name
   CompiledFunction? getScript(String name) => _scripts[name];
   
+  // Runtime flags
+  final bool enableInlineCaching;
+
   /// Constructor - initializes standard library
-  VM() {
+  VM({this.enableInlineCaching = true}) {
     _currentCoroutine = FluxCoroutine('root');
     _initStdlib();
   }
@@ -168,6 +178,12 @@ class VM {
     for (final entry in StdLib.modules.entries) {
       _globals[entry.key] = entry.value;
     }
+
+    // Register built-in print that uses onPrint
+    _globals['print'] = NativeFunction('print', 1, (args) {
+      onPrint(args[0].toString());
+      return null;
+    });
   }
   
   /// Get the pending Future (for external await handling)
@@ -882,8 +898,12 @@ class VM {
             break;
 
           case OpCode.greaterEqual:
-            final b = _stack.removeLast() as num;
-            final a = _stack.removeLast() as num;
+            final b = _stack.removeLast();
+            final a = _stack.removeLast();
+            if (a is! num || b is! num) {
+              _runtimeError("Operands to '>=' must be numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              return InterpretResult.runtimeError;
+            }
             _stack.add(a >= b);
             break;
 
@@ -900,13 +920,23 @@ class VM {
 
           case OpCode.setGlobal:
             final nameIdx = readByte(); // Index in constants
-            final name = frame.chunk.constants[nameIdx] as String;
+            final nameObj = frame.chunk.constants[nameIdx];
+            if (nameObj is! String) {
+               _runtimeError("Global name must be a string, got ${nameObj.runtimeType} ($nameObj) at index $nameIdx");
+               return InterpretResult.runtimeError;
+            }
+            final name = nameObj;
             _globals[name] = _stack.last;
             break;
 
           case OpCode.getGlobal:
             final nameIdx = readByte();
-            final name = frame.chunk.constants[nameIdx] as String;
+            final nameObj = frame.chunk.constants[nameIdx];
+             if (nameObj is! String) {
+               _runtimeError("Global name must be a string, got ${nameObj.runtimeType} ($nameObj) at index $nameIdx");
+               return InterpretResult.runtimeError;
+            }
+            final name = nameObj;
             if (_globals.containsKey(name)) {
               _stack.add(_globals[name]);
             } else {
@@ -989,7 +1019,7 @@ class VM {
               final value = _stack.removeLast();
               final nameObj = _stack.removeLast();
               if (nameObj is! String) {
-                _runtimeError("type '${nameObj.runtimeType}' is not a subtype of type 'String' in type cast");
+                _runtimeError("type '${nameObj.runtimeType}' (value: $nameObj) is not a subtype of type 'String' in type cast. i=$i, namedCount=$namedCount");
                 return InterpretResult.runtimeError;
               }
               namedArgs[nameObj] = value;
@@ -1232,13 +1262,46 @@ class VM {
             }
             break;
             
+
           case OpCode.getProperty:
             final nameIdx = readByte();
             final name = frame.chunk.constants[nameIdx] as String;
             final obj = _stack.removeLast();
             if (obj is FluxInstance) {
-              final value = obj.getProperty(name);
-              _stack.add(value);
+              // 1. Check fields (Dynamic check, always first)
+              if (obj.fields.containsKey(name)) {
+                 _stack.add(obj.fields[name]);
+                 break;
+              }
+              
+              if (enableInlineCaching) {
+                // Cache key is the PC of this instruction
+                final callSiteOffset = frame.ip - 2; 
+                final cache = _inlineCacheManager.getCache(callSiteOffset, name);
+                
+                // 2. Inline Cache Path: Check for cached method
+                final cachedMethod = cache.lookupMethod(obj.klass);
+                if (cachedMethod != null) {
+                  _stack.add(cachedMethod);
+                  break;
+                }
+                
+                // 3. Slow Path: Look up in class and cache it
+                if (obj.klass.methods.containsKey(name)) {
+                  final method = obj.klass.methods[name]!;
+                  cache.cacheMethod(obj.klass, method);
+                  _stack.add(method);
+                } else {
+                  throw 'Undefined property: ${obj.klass.name}.$name';
+                }
+              } else {
+                // No Inline Caching: Simple lookup
+                if (obj.klass.methods.containsKey(name)) {
+                  _stack.add(obj.klass.methods[name]!);
+                } else {
+                  throw 'Undefined property: ${obj.klass.name}.$name';
+                }
+              }
             } else if (obj is List) {
               if (name == 'length') {
                 _stack.add(obj.length);

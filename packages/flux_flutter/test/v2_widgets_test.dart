@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_flutter/flux_flutter.dart';
-import 'package:flux_vm/flux_vm.dart';
 
 void main() {
-  testWidgets('Phase 24: TabBar and Scaffold layout', (WidgetTester tester) async {
+  testWidgets('Phase 24: TabBar and Scaffold layout',
+      (WidgetTester tester) async {
     final fluxCode = r'''
     widget Main {
       build {
@@ -45,17 +45,17 @@ void main() {
     expect(find.text("Tabs Demo"), findsOneWidget);
     expect(find.text("Tab 1"), findsOneWidget);
     expect(find.text("Tab 2"), findsOneWidget);
-    
+
     // TabBarView usually renders current page. "Page 1" should be visible.
     // We might need to wait for async machinery, but FluxWidget is synchronous usually.
     await tester.pumpAndSettle();
-    
+
     expect(find.text("Page 1"), findsOneWidget);
-    
+
     // Tap second tab
     await tester.tap(find.text("Tab 2"));
     await tester.pumpAndSettle();
-    
+
     expect(find.text("Page 2"), findsOneWidget);
   });
 
@@ -86,7 +86,7 @@ void main() {
         ),
       ),
     );
-    
+
     await tester.pumpAndSettle();
 
     expect(find.byType(Form), findsOneWidget);
@@ -96,7 +96,8 @@ void main() {
     expect(find.byType(Slider), findsOneWidget);
   });
 
-  testWidgets('Phase 24: Animation widgets (Hero)', (WidgetTester tester) async {
+  testWidgets('Phase 24: Animation widgets (Hero)',
+      (WidgetTester tester) async {
     final fluxCode = r'''
     widget Main {
       build {
@@ -116,7 +117,7 @@ void main() {
         ),
       ),
     );
-    
+
     await tester.pumpAndSettle();
 
     expect(find.byType(Hero), findsOneWidget);

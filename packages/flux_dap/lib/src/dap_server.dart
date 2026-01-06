@@ -125,7 +125,7 @@ class DapServer {
         
       case 'stackTrace':
         final session = _sessions.values.firstOrNull;
-        final frames = session?.getStackTrace() ?? [];
+        final frames = await session?.getStackTrace() ?? [];
         _sendResponse(seq, command, body: {
           'stackFrames': frames,
           'totalFrames': frames.length,
@@ -145,7 +145,7 @@ class DapServer {
       case 'variables':
         final ref = args['variablesReference'] as int? ?? 0;
         final session = _sessions.values.firstOrNull;
-        final variables = session?.getVariables(ref) ?? [];
+        final variables = await session?.getVariables(ref) ?? [];
         _sendResponse(seq, command, body: {'variables': variables});
         break;
         
