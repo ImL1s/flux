@@ -1,60 +1,62 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/testing.dart';
+import 'package:dio/dio.dart';
+import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:flux_flutter/src/modules/http_module.dart';
 import 'package:flux_vm/flux_vm.dart';
 
 void main() {
   late HttpModule httpModule;
+  late Dio dio;
+  late DioAdapter dioAdapter;
 
   setUp(() {
-    httpModule = HttpModule();
+    dio = Dio();
+    dioAdapter = DioAdapter(dio: dio);
+    httpModule = HttpModule(dio: dio);
   });
 
   test('http.get returns standardized response map', () async {
-    final args = ['https://example.com'];
+    final url = 'https://example.com';
+    final args = [url];
     final fn = httpModule.get('get') as AsyncNativeFunction;
 
-    final mockClient = MockClient((request) async {
-      if (request.method == 'GET' &&
-          request.url.toString() == 'https://example.com') {
-        return http.Response('{"foo": "bar"}', 200,
-            headers: {'content-type': 'application/json'});
-      }
-      return http.Response('Not Found', 404);
-    });
+    dioAdapter.onGet(
+      url,
+      (server) => server.reply(
+        200,
+        '{"foo": "bar"}',
+        headers: {'content-type': ['application/json']},
+      ),
+    );
 
-    await http.runWithClient(() async {
-      final result = await fn.call(args);
+    final result = await fn.call(args);
 
-      expect(result, isA<Map>());
-      final map = result as Map;
-      expect(map['statusCode'], 200);
-      expect(map['body'], '{"foo": "bar"}');
-      expect(map['headers'], containsPair('content-type', 'application/json'));
-    }, () => mockClient);
+    expect(result, isA<Map>());
+    final map = result as Map;
+    expect(map['statusCode'], 200);
+    expect(map['body'], {'foo': 'bar'});
+    expect(map['headers'], containsPair('content-type', 'application/json'));
+    expect(map['ok'], true);
   });
 
   test('http.post returns response', () async {
+    final url = 'https://api.com';
     final args = [
-      'https://api.com',
+      url,
       {'body': 'data'}
     ];
     final fn = httpModule.get('post') as AsyncNativeFunction;
 
-    final mockClient = MockClient((request) async {
-      if (request.method == 'POST' &&
-          request.url.toString() == 'https://api.com') {
-        return http.Response('ok', 201);
-      }
-      return http.Response('Error', 500);
-    });
+    dioAdapter.onPost(
+      url,
+      (server) => server.reply(201, 'ok'),
+      data: 'data',
+    );
 
-    await http.runWithClient(() async {
-      final result = await fn.call(args);
+    final result = await fn.call(args);
 
-      expect(result, isA<Map>());
-      expect((result as Map)['statusCode'], 201);
-    }, () => mockClient);
+    expect(result, isA<Map>());
+    expect((result as Map)['statusCode'], 201);
+    expect((result as Map)['ok'], true);
   });
 }

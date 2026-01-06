@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.0.0] - 2026-01-07
+
+### Added
+- **Network Enhancement (Dio Migration)**:
+  - Migrated `HttpModule` to Dio for robust networking.
+  - Added support for `connectTimeout` and `receiveTimeout`.
+  - Integrated `LogInterceptor` for better debugging.
+  - Added request cancellation support via `cancel()` and `cancelAll()`.
+  - Implemented automatic JSON decoding for `application/json` responses.
+  - Added `ok` boolean to response maps for easier status checking.
+- **Animation System (V2)**:
+  - Added `Animation.spring()` for physics-based animations.
+  - Added `Animation.stagger()` for easy staggered animation sequences.
+  - Added `Animation.colorTween()` and `Animation.sizeTween()`.
+  - Synchronized all Flutter `Curves` (e.g., `fastOutSlowIn`, `easeInBack`) to Flux.
+
+### Changed
+- Refactored `HttpModule` to allow Dio instance injection for better testability.
+- Flattened HTTP response headers to `Map<String, String>` for backward compatibility.
+
 ## [2.0.1] - 2026-01-07
 
 ### Added

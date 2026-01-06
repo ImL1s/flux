@@ -263,6 +263,12 @@ class AnimationModule extends FluxModule {
       case 'easeIn': return Curves.easeIn;
       case 'easeOut': return Curves.easeOut;
       case 'easeInOut': return Curves.easeInOut;
+      case 'easeInBack': return Curves.easeInBack;
+      case 'easeOutBack': return Curves.easeOutBack;
+      case 'easeInOutBack': return Curves.easeInOutBack;
+      case 'fastOutSlowIn': return Curves.fastOutSlowIn;
+      case 'fastLinearToSlowEaseIn': return Curves.fastLinearToSlowEaseIn;
+      case 'fastEaseInToSlowEaseOut': return Curves.fastEaseInToSlowEaseOut;
       case 'slowMiddle': return Curves.slowMiddle;
       case 'bounceIn': return Curves.bounceIn;
       case 'bounceOut': return Curves.bounceOut;

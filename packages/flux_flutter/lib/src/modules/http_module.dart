@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flux_vm/flux_vm.dart';
 
@@ -25,10 +26,11 @@ class HttpModule extends FluxModule {
   late Dio _dio;
   final Map<String, CancelToken> _cancelTokens = {};
 
-  HttpModule() : super('http') {
-    _dio = Dio(BaseOptions(
+  HttpModule({Dio? dio}) : super('http') {
+    _dio = dio ?? Dio(BaseOptions(
       connectTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 30),
+      responseType: ResponseType.plain, // Keep compatibility with existing tests expecting string body
     ));
 
     // Add logging interceptor
@@ -235,13 +237,34 @@ class HttpModule extends FluxModule {
   }
 
   Map<String, dynamic> _formatResponse(Response response) {
+    final headers = <String, String>{};
+    response.headers.forEach((key, values) {
+      headers[key] = values.join(', ');
+    });
+
+    dynamic data = response.data;
+    if (data is String) {
+      final contentType = response.headers.value('content-type')?.toLowerCase();
+      if (contentType?.contains('application/json') == true || 
+          (data.trim().startsWith('{') && data.trim().endsWith('}')) || 
+          (data.trim().startsWith('[') && data.trim().endsWith(']'))) {
+        try {
+          data = jsonDecode(data);
+        } catch (_) {
+          // Keep as string if decoding fails
+        }
+      }
+    }
+
+    final isOk = response.statusCode != null && 
+                 response.statusCode! >= 200 && 
+                 response.statusCode! < 300;
+
     return {
       'statusCode': response.statusCode,
-      'body': response.data,
-      'headers': response.headers.map,
-      'ok': response.statusCode != null && 
-            response.statusCode! >= 200 && 
-            response.statusCode! < 300,
+      'body': data,
+      'headers': headers,
+      'ok': isOk,
     };
   }
 

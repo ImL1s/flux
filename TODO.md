@@ -51,15 +51,20 @@ This file tracks planned features and improvements. Each item should be implemen
 - **Goals**:
   - [ ] HTTP client bindings (GET, POST, PUT, DELETE)
   - [ ] WebSocket real-time communication
-  - [ ] Request/Response interceptors
-  - [ ] Caching strategies
+  - [x] **Network Module Enhancement**
+    - [x] Migrate to Dio client
+    - [x] BaseUrl & Timeout configuration
+    - [x] Response interceptors (Log, Error)
+    - [x] Request cancellation support
 
 ### Feature: Animation System
 - **Description**: Declarative animations in Flux scripts
 - **Goals**:
-  - [ ] Tween animations
-  - [ ] Spring physics
-  - [ ] Staggered animations
+  - [x] **Animation Module Enhancement**
+    - [x] Spring physics simulation (`Animation.spring`)
+    - [x] Staggered animations (`Animation.stagger`)
+    - [x] Color & Size tweens
+    - [x] Full curve synchronization
   - [ ] Hero transitions via script
 
 ### Feature: Multi-Platform Extensions
