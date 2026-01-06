@@ -926,7 +926,14 @@ class VM {
                return InterpretResult.runtimeError;
             }
             final name = nameObj;
-            _globals[name] = _stack.last;
+            
+            // Check if it's a state field first
+            if (_widgetState.containsKey(name)) {
+              _widgetState[name] = _stack.last;
+              onStateChange?.call(name, _stack.last);
+            } else {
+              _globals[name] = _stack.last;
+            }
             break;
 
           case OpCode.getGlobal:
@@ -937,7 +944,11 @@ class VM {
                return InterpretResult.runtimeError;
             }
             final name = nameObj;
-            if (_globals.containsKey(name)) {
+            
+            // Check widget state first, then globals
+            if (_widgetState.containsKey(name)) {
+              _stack.add(_widgetState[name]);
+            } else if (_globals.containsKey(name)) {
               _stack.add(_globals[name]);
             } else {
               throw "Undefined global '$name'.";
@@ -1434,8 +1445,28 @@ class VM {
                } else {
                  throw 'Undefined method: ${instance.name}.$name';
                }
+            } else if (instance is Map) {
+                if (instance.containsKey(name)) {
+                   final member = instance[name];
+                   if (member is NativeFunction) {
+                      try {
+                        final result = member.call(args);
+                        _stack.add(result);
+                      } catch (e) {
+                         _runtimeError(e.toString());
+                         return InterpretResult.runtimeError;
+                      }
+                   } else if (member is AsyncNativeFunction) {
+                      final result = member.call(args);
+                      _stack.add(result);
+                   } else {
+                      throw 'Member $name in Map is not a function';
+                   }
+                } else {
+                   throw 'Undefined field/method: $name on Map';
+                }
             } else {
-              throw 'Cannot invoke method on ${instance.runtimeType}';
+              throw 'Cannot invoke method on ${instance.runtimeType} ($instance)';
             }
             break;
 

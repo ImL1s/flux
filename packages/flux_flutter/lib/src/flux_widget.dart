@@ -4,6 +4,8 @@ import 'package:flux_vm/flux_vm.dart';
 import 'bindings.dart';
 import 'dev_tools/flux_service_extensions.dart';
 import 'modules/flux_native_modules.dart';
+import 'modules/animation_module.dart';
+
 
 /// A Flutter widget that executes and renders a Flux widget definition.
 ///
@@ -48,7 +50,7 @@ class FluxWidget extends StatefulWidget {
   State<FluxWidget> createState() => _FluxWidgetState();
 }
 
-class _FluxWidgetState extends State<FluxWidget> {
+class _FluxWidgetState extends State<FluxWidget> with TickerProviderStateMixin {
   late FluxRuntime _runtime;
   Widget? _builtWidget;
   String? _error;
@@ -70,6 +72,12 @@ class _FluxWidgetState extends State<FluxWidget> {
     }
   }
 
+  @override
+  void dispose() {
+    _runtime.dispose();
+    super.dispose();
+  }
+
   void _initRuntime() {
     try {
       if (widget.runtime != null) {
@@ -82,11 +90,11 @@ class _FluxWidgetState extends State<FluxWidget> {
           widget.source!,
           onStateChange: _handleStateChange,
           moduleName: widget.widgetName,
+          onRegisterModules: (vm) {
+            FluxNativeModules.register(vm, this);
+          },
         );
       }
-
-      // Register native modules (http, storage)
-      FluxNativeModules.register(_runtime._vm);
 
       _buildWidget();
       _error = null;
@@ -220,7 +228,10 @@ class FluxRuntime {
   // Stack for collecting children in nested widgets
   final List<List<FluxWidgetNode>> _childrenStack = [];
 
-  FluxRuntime(String source, {this.onStateChange, String? moduleName}) {
+  FluxRuntime(String source,
+      {this.onStateChange,
+      String? moduleName,
+      void Function(VM vm)? onRegisterModules}) {
     // Set up state change callback
     _vm.onStateChange = onStateChange;
 
@@ -242,8 +253,6 @@ class FluxRuntime {
     // Register script for DevTools
     _vm.registerScript(moduleName ?? 'script_${source.hashCode}', function);
 
-    // Execute to populate globals (including widget definitions)
-
     // Inject widget names into globals so they can be resolved
     final allWidgetNames = {
       ..._widgetConstructors,
@@ -259,29 +268,21 @@ class FluxRuntime {
     // Inject registered global functions
     for (final entry in FluxBindings.functions.entries) {
       _vm.globals[entry.key] = NativeFunction(entry.key, -1, (args) {
-        // NativeFunction logic wraps FluxFunction
-        // FluxFunction takes List<Object?> and returns FutureOr<Object?>
-        // We pass arguments dynamically.
-        // NativeFunction in VM usually has fixed arity, but we can use generic 0 or -1?
-        // Wait, NativeFunction constructor takes arity.
-        // Our FluxBindings don't specify arity.
-        // We can pass -1 or similar if VM supports variable arity,
-        // OR we just set a high arity and let VM pass all args?
-        // Actually VM._callValue checks arity?
-        // VM._callValue passes `argCount` to helper, but NativeFunction.call(args) just takes list.
-        // VM._callValue line 304: final args = _stack.sublist...
-        // It DOES NOT check NativeFunction.arity against argCount explicitly in _callValue!
-        // So arity in NativeFunction is metadata or used by compiler?
-        // Let's pass 0 or a placeholder.
         return entry.value(args);
       });
     }
 
-    // Set widget handler before initial execution to intercept any widget calls during compilation
+    // Set widget handler before initial execution
     _vm.widgetCallHandler = _handleWidgetCall;
 
     // Set coroutine resume callback for async/await support
     _vm.coroutineResumeCallback = _handleCoroutineResume;
+
+    // 🚀 Register native modules BEFORE running the chunk
+    // This allows state initialization to access native modules (like Animation)
+    if (onRegisterModules != null) {
+      onRegisterModules(_vm);
+    }
 
     _vm.runChunk(function.chunk);
 
@@ -358,6 +359,21 @@ class FluxRuntime {
       }
     }
   }
+
+  void dispose() {
+    debugPrint('🗑️ FluxRuntime.dispose()');
+    // Look for AnimationControllers in widgetState and dispose them
+    for (final value in _vm.widgetState.values) {
+      if (value is Map && value.containsKey('__native__')) {
+        final native = value['__native__'];
+        if (native is FluxAnimationController) {
+          debugPrint('🗑️ Disposing FluxAnimationController in state');
+          native.dispose();
+        }
+      }
+    }
+  }
+
 
   /// Handle coroutine resume callback from VM
   ///
@@ -511,7 +527,29 @@ class FluxRuntime {
         }
       }
 
-      return builder(processedArgs, children);
+      // 3. Check for animation dependencies in processedArgs
+      final anims = <Listenable>[];
+      processedArgs.forEach((k, v) {
+        if (v is Listenable) {
+          anims.add(v);
+        } else if (v is Map &&
+            v.containsKey('__native__') &&
+            v['__native__'] is Listenable) {
+          anims.add(v['__native__'] as Listenable);
+        }
+      });
+
+      if (anims.isEmpty) {
+        return builder(processedArgs, children);
+      }
+
+      // If we have animations, wrap in ListenableBuilder for reactive updates
+      return ListenableBuilder(
+        listenable: Listenable.merge(anims),
+        builder: (context, _) {
+          return builder(processedArgs, children);
+        },
+      );
     }
 
     // Fallback for primitives (e.g., strings become Text)

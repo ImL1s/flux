@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
+import 'code_preview.dart';
 
 class UIView extends StatelessWidget {
   const UIView({super.key});
@@ -103,7 +104,25 @@ class UIView extends StatelessWidget {
     ''';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('UI Demo')),
+      appBar: AppBar(
+        title: const Text('UI Demo'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.code),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CodePreviewScreen(
+                    title: 'UI Components',
+                    source: fluxSource,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: FluxWidget(
         source: fluxSource,
         widgetName: 'UIDemo',

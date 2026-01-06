@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
+import 'code_preview.dart';
 
 class LanguageView extends StatelessWidget {
   const LanguageView({super.key});
@@ -77,7 +78,25 @@ class LanguageView extends StatelessWidget {
     ''';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Language Demo')),
+      appBar: AppBar(
+        title: const Text('Language Demo'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.code),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CodePreviewScreen(
+                    title: 'Language',
+                    source: fluxSource,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: FluxWidget(

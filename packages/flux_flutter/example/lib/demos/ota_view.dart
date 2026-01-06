@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
+import 'code_preview.dart';
 
 class OTAView extends StatelessWidget {
   const OTAView({super.key});
@@ -59,7 +60,25 @@ class OTAView extends StatelessWidget {
     ''';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('OTA Demo')),
+      appBar: AppBar(
+        title: const Text('OTA Demo'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.code),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CodePreviewScreen(
+                    title: 'OTA',
+                    source: fluxSource,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: FluxWidget(
         source: fluxSource,
         widgetName: 'OTADemo',

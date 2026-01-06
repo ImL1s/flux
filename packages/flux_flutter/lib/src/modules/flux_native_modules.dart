@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_flutter/src/modules/http_module.dart';
@@ -14,10 +15,12 @@ import 'package:flux_flutter/src/modules/secure_storage_module.dart';
 import 'package:flux_flutter/src/modules/device_info_module_stub.dart'
     if (dart.library.io) 'package:flux_flutter/src/modules/device_info_module.dart';
 
+import 'package:flux_flutter/src/modules/animation_module.dart';
+
 /// Registry for Flux native modules that depend on Flutter/Dart ecosystem
 class FluxNativeModules {
   /// Register all available native modules with the VM
-  static void register(VM vm) {
+  static void register(VM vm, TickerProvider vsync) {
     void reg(String name, FluxModule module) {
       try {
         vm.registerModule(module);
@@ -36,5 +39,6 @@ class FluxNativeModules {
     reg('TimeModule', TimeModule());
     reg('HiveStorageModule', HiveStorageModule());
     reg('SecureStorageModule', SecureStorageModule());
+    reg('AnimationModule', AnimationModule(vsync));
   }
 }

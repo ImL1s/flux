@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
+import 'code_preview.dart';
 
 class StorageView extends StatelessWidget {
   const StorageView({super.key});
@@ -82,7 +83,25 @@ class StorageView extends StatelessWidget {
     ''';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Storage Demo')),
+      appBar: AppBar(
+        title: const Text('Storage Demo'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.code),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CodePreviewScreen(
+                    title: 'Storage',
+                    source: fluxSource,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: FluxWidget(
           source: fluxSource,

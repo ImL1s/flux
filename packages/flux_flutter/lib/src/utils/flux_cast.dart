@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flux_flutter/src/modules/animation_module.dart';
 
 /// Utility class for safe type casting and conversion in Flux.
 ///
 /// This handles cleaning up data coming from the Flux VM (which is untyped)
 /// before passing it to Flutter widgets (which expect strict types).
 class FluxCast {
+  /// Resolves the final value if it's an animation, otherwise returns the value
+  static dynamic resolveValue(dynamic value) {
+    if (value is FluxAnimationBase) {
+      return value.value;
+    }
+    return value;
+  }
+
   /// Converts a value to a string, or returns null if the value is null.
   static String? toStringNullable(dynamic value) {
-    if (value == null) return null;
-    return value.toString();
+    final resolved = resolveValue(value);
+    if (resolved == null) return null;
+    return resolved.toString();
   }
 
   /// Convert to String, returning empty string if value is null.
   static String toStr(dynamic value) {
-    return value?.toString() ?? '';
+    return resolveValue(value)?.toString() ?? '';
   }
 
   /// Convert to double, returning null on failure/null.
   static double? toDouble(dynamic value) {
-    if (value == null) return null;
-    if (value is num) return value.toDouble();
-    if (value is String) return double.tryParse(value);
+    final resolved = resolveValue(value);
+    if (resolved == null) return null;
+    if (resolved is num) return resolved.toDouble();
+    if (resolved is String) return double.tryParse(resolved);
     return null;
   }
 
@@ -31,9 +42,10 @@ class FluxCast {
 
   /// Convert to int, returning null on failure/null.
   static int? toInt(dynamic value) {
-    if (value == null) return null;
-    if (value is num) return value.toInt();
-    if (value is String) return int.tryParse(value);
+    final resolved = resolveValue(value);
+    if (resolved == null) return null;
+    if (resolved is num) return resolved.toInt();
+    if (resolved is String) return int.tryParse(resolved);
     return null;
   }
 
@@ -55,10 +67,11 @@ class FluxCast {
   /// num -> != 0
   /// string -> 'true'
   static bool toBool(dynamic value) {
-    if (value == null) return false;
-    if (value is bool) return value;
-    if (value is String) return value.toLowerCase() == 'true';
-    if (value is num) return value != 0;
+    final resolved = resolveValue(value);
+    if (resolved == null) return false;
+    if (resolved is bool) return resolved;
+    if (resolved is String) return resolved.toLowerCase() == 'true';
+    if (resolved is num) return resolved != 0;
     return true; // Any other non-null object is truthy
   }
 
@@ -68,13 +81,14 @@ class FluxCast {
   /// - int (0xAARRGGBB)
   /// - String ('red', '#RRGGBB', '#AARRGGBB')
   static Color? toColor(dynamic value) {
-    if (value == null) return null;
-    if (value is Color) return value;
-    if (value is int) return Color(value);
+    final resolved = resolveValue(value);
+    if (resolved == null) return null;
+    if (resolved is Color) return resolved;
+    if (resolved is int) return Color(resolved);
 
-    if (value is String) {
+    if (resolved is String) {
       // 1. Handle Named Colors
-      switch (value.toLowerCase()) {
+      switch (resolved.toLowerCase()) {
         case 'red':
           return Colors.red;
         case 'blue':
@@ -101,17 +115,21 @@ class FluxCast {
       }
 
       // 2. Handle Hex Colors
-      String hex = value;
+      String hex = resolved;
       if (hex.startsWith('#')) {
         hex = hex.substring(1);
       }
 
-      if (hex.length == 6) {
-        // RRGGBB -> FF(RRGGBB)
-        return Color(int.parse('FF$hex', radix: 16));
-      } else if (hex.length == 8) {
-        // AARRGGBB
-        return Color(int.parse(hex, radix: 16));
+      try {
+        if (hex.length == 6) {
+          // RRGGBB -> FF(RRGGBB)
+          return Color(int.parse('FF$hex', radix: 16));
+        } else if (hex.length == 8) {
+          // AARRGGBB
+          return Color(int.parse(hex, radix: 16));
+        }
+      } catch (_) {
+        return null;
       }
     }
     return null;

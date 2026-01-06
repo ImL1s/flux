@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
+import 'code_preview.dart';
 
 class DeviceView extends StatelessWidget {
   const DeviceView({super.key});
@@ -143,7 +144,25 @@ class DeviceView extends StatelessWidget {
     ''';
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Device Demo')),
+      appBar: AppBar(
+        title: const Text('Device Demo'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.code),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CodePreviewScreen(
+                    title: 'Device',
+                    source: fluxSource,
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
       body: FluxWidget(
         source: fluxSource,
         widgetName: 'DeviceDemo',
