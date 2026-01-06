@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_flutter/src/modules/http_module.dart';
 import 'package:flux_flutter/src/modules/storage_module.dart';

@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+
 import 'package:flutter/animation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flux_vm/flux_vm.dart';
 
 /// Base class for animation objects exposed to Flux
