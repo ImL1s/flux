@@ -116,22 +116,22 @@ class _FluxWidgetState extends State<FluxWidget> with TickerProviderStateMixin {
   }
 
   void _buildWidget() {
-    debugPrint('🔧 FluxWidget._buildWidget() START');
+    // debugPrint('🔧 FluxWidget._buildWidget() START');
     try {
       final widgetDef = _runtime.getWidget(widget.widgetName);
-      debugPrint('🔧 Got widget definition: ${widgetDef?.name ?? "NULL"}');
+      // debugPrint('🔧 Got widget definition: ${widgetDef?.name ?? "NULL"}');
       if (widgetDef == null) {
         throw Exception("Widget '${widget.widgetName}' not found in source.");
       }
 
       // Execute the build method and convert to Flutter widget
-      debugPrint('🔧 Executing build...');
+      // debugPrint('🔧 Executing build...');
       final fluxTree = _runtime.executeBuild(widgetDef);
-      debugPrint('🔧 executeBuild result: $fluxTree');
+      // debugPrint('🔧 executeBuild result: $fluxTree');
 
-      debugPrint('🔧 Converting to Flutter...');
+      // debugPrint('🔧 Converting to Flutter...');
       final flutterWidget = _runtime._convertToFlutter(fluxTree);
-      debugPrint('🔧 Converted widget: ${flutterWidget.runtimeType}');
+      // debugPrint('🔧 Converted widget: ${flutterWidget.runtimeType}');
 
       if (mounted) {
         setState(() {
@@ -142,7 +142,7 @@ class _FluxWidgetState extends State<FluxWidget> with TickerProviderStateMixin {
         _builtWidget = flutterWidget;
         _error = null;
       }
-      debugPrint('🔧 FluxWidget._buildWidget() SUCCESS');
+      // debugPrint('🔧 FluxWidget._buildWidget() SUCCESS');
     } catch (e, stackTrace) {
       debugPrint('❌ FluxWidget._buildWidget() ERROR: $e');
       debugPrint('❌ StackTrace: $stackTrace');

@@ -34,18 +34,16 @@ void main() {
     final root = parser.parse();
     print('Parse successful!');
     
-    if (root is BlockStmt) {
-        print('Statements: ${root.statements.length}');
-        for (final stmt in root.statements) {
-          print(' - ${stmt.runtimeType}');
-          if (stmt is FunctionDecl) {
-            print('   Function: ${stmt.name}, Async: ${stmt.isAsync}');
-          } else if (stmt is WidgetDecl) {
-            print('   Widget: ${stmt.name}');
-          } else if (stmt is VarDeclStmt) {
-            print('   Var: ${stmt.name}');
-          }
-        }
+    print('Declarations: ${root.declarations.length}');
+    for (final stmt in root.declarations) {
+      print(' - ${stmt.runtimeType}');
+      if (stmt is FunctionDecl) {
+        print('   Function: ${stmt.name}, Async: ${stmt.isAsync}');
+      } else if (stmt is WidgetDecl) {
+        print('   Widget: ${stmt.name}');
+      } else if (stmt is VarDeclStmt) {
+        print('   Var: ${stmt.name}');
+      }
     }
 
   } catch (e) {

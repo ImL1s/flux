@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flux_flutter/flux_flutter.dart';
-import 'package:flux_vm/flux_vm.dart'; // Import VM for interop
+import 'package:flux_vm/flux_vm.dart';
 import 'package:path/path.dart' as p;
 import 'package:http/http.dart' as http;
 
@@ -82,25 +82,7 @@ class _HomePageState extends State<HomePage> {
     final runtime = FluxRuntime(script, moduleName: 'HomeBanner');
     
     // 2. Register Native Function (Language Interop)
-    runtime.vm.registerFunction('showNativeDialog', (args) {
-      final message = args.isNotEmpty ? args[0].toString() : "Hello from Native!";
-      
-      // Use helper to show dialog from context
-      showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Native Interop 🔗'),
-          content: Text('這是一個原生 Dart Dialog\n消息來自 Flux: "$message"'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('關閉'),
-            )
-          ],
-        ),
-      );
-      return null;
-    });
+    runtime.vm.registerModule(DialogInteropModule(context));
 
     // 3. Update State
     setState(() {
@@ -171,8 +153,8 @@ class _HomePageState extends State<HomePage> {
     
     try {
       final script = await scriptFile.readAsString();
-      _resolvedPath = scriptFile!.absolute.path;
-      _status = '✅ 已從本地載入: ${p.basename(scriptFile!.path)}\n🕐 ${DateTime.now().toString().substring(11, 19)}';
+      _resolvedPath = scriptFile.absolute.path;
+      _status = '✅ 已從本地載入: ${p.basename(scriptFile.path)}\n🕐 ${DateTime.now().toString().substring(11, 19)}';
       _initRuntime(script);
     } catch (e) {
       setState(() {
@@ -346,5 +328,28 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+}
+
+class DialogInteropModule extends FluxModule {
+  final BuildContext context;
+  DialogInteropModule(this.context) : super('NativeInterop') {
+    register('showNativeDialog', NativeFunction('showNativeDialog', -1, (args) {
+      final message = args.isNotEmpty ? args[0].toString() : "Hello from Native!";
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Native Interop 🔗'),
+          content: Text('這是一個原生 Dart Dialog\n消息來自 Flux: "$message"'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('關閉'),
+            )
+          ],
+        ),
+      );
+      return null;
+    }));
   }
 }

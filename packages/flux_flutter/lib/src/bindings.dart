@@ -1239,6 +1239,51 @@ class FluxBindings {
       );
     });
 
+    // ========== Implicit Animations ==========
+
+    register('AnimatedOpacity', (args, children) {
+      final key = args['key'] != null ? ValueKey(args['key']) : null;
+      final opacity = FluxCast.toDouble(args['opacity']) ?? 1.0;
+      final duration = FluxCast.toInt(args['duration']) ?? 250;
+      final curve = _parseCurve(args['curve']) ?? Curves.linear;
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+
+      return AnimatedOpacity(
+        key: key,
+        opacity: opacity,
+        duration: Duration(milliseconds: duration),
+        curve: curve,
+        child: child,
+      );
+    });
+
+    register('AnimatedContainer', (args, children) {
+      final key = args['key'] != null ? ValueKey(args['key']) : null;
+      final duration = FluxCast.toInt(args['duration']) ?? 250;
+      final curve = _parseCurve(args['curve']) ?? Curves.linear;
+      
+      final width = FluxCast.toDouble(args['width']);
+      final height = FluxCast.toDouble(args['height']);
+      final color = FluxCast.toColor(args['color']);
+      final padding = FluxCast.toEdgeInsets(args['padding']);
+      final margin = FluxCast.toEdgeInsets(args['margin']);
+      final alignment = FluxCast.toAlignment(args['alignment']);
+      final child = args['child'] as Widget? ?? (children.isNotEmpty ? children.first : null);
+
+      return AnimatedContainer(
+        key: key,
+        duration: Duration(milliseconds: duration),
+        curve: curve,
+        width: width,
+        height: height,
+        color: color,
+        padding: padding,
+        margin: margin,
+        alignment: alignment,
+        child: child,
+      );
+    });
+
     // ========== Date/Time Pickers (as functions) ==========
     // Note: These are registered as functions since they return Futures
   }
@@ -1460,6 +1505,34 @@ class FluxBindings {
         return BoxFit.scaleDown;
       default:
         return BoxFit.contain;
+    }
+  }
+
+  // Parse Curve
+  static Curve? _parseCurve(dynamic value) {
+    if (value == null) return null;
+    final name = value.toString();
+    switch (name) {
+      case 'linear': return Curves.linear;
+      case 'decelerate': return Curves.decelerate;
+      case 'ease': return Curves.ease;
+      case 'easeIn': return Curves.easeIn;
+      case 'easeOut': return Curves.easeOut;
+      case 'easeInOut': return Curves.easeInOut;
+      case 'easeInBack': return Curves.easeInBack;
+      case 'easeOutBack': return Curves.easeOutBack;
+      case 'easeInOutBack': return Curves.easeInOutBack;
+      case 'fastOutSlowIn': return Curves.fastOutSlowIn;
+      case 'fastLinearToSlowEaseIn': return Curves.fastLinearToSlowEaseIn;
+      case 'fastEaseInToSlowEaseOut': return Curves.fastEaseInToSlowEaseOut;
+      case 'slowMiddle': return Curves.slowMiddle;
+      case 'bounceIn': return Curves.bounceIn;
+      case 'bounceOut': return Curves.bounceOut;
+      case 'bounceInOut': return Curves.bounceInOut;
+      case 'elasticIn': return Curves.elasticIn;
+      case 'elasticOut': return Curves.elasticOut;
+      case 'elasticInOut': return Curves.elasticInOut;
+      default: return Curves.linear;
     }
   }
 

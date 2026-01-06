@@ -13,7 +13,7 @@ dependencies:
     path: ../../../packages/flux_flutter
   flux_vm:
     path: ../../../packages/flux_vm
-  flutter_riverpod: ^3.0.1
+  flutter_riverpod: ^2.5.1
   dio: ^5.7.0
   path: ^1.9.0
 

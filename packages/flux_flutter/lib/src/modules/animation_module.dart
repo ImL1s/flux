@@ -97,6 +97,36 @@ class AnimationModule extends FluxModule {
       };
     }));
 
+    register('curved', NativeFunction('Animation.curved', 2, (args) {
+      final parentArg = args[0];
+      final curveName = args[1].toString();
+
+      Animation<double>? parent;
+
+      if (parentArg is Map && parentArg.containsKey('__native__')) {
+        final nativeObj = parentArg['__native__'];
+        if (nativeObj is FluxAnimationController) {
+          parent = nativeObj.native;
+        } else if (nativeObj is FluxAnimation) {
+          final anim = nativeObj.native;
+          if (anim is Animation<double>) {
+            parent = anim;
+          }
+        }
+      }
+
+      if (parent == null) {
+        throw 'Animation.curved requires an AnimationController or Animation<double>';
+      }
+
+      final curve = _getCurve(curveName);
+      final curvedAnim = CurvedAnimation(parent: parent, curve: curve);
+      return {
+        '__native__': FluxAnimation(curvedAnim),
+        'value': FluxAnimation(curvedAnim),
+      };
+    }));
+
     register('tween', NativeFunction('Animation.tween', 2, (args) {
       final begin = (args[0] as num).toDouble();
       final end = (args[1] as num).toDouble();
@@ -105,25 +135,49 @@ class AnimationModule extends FluxModule {
 
       return {
         'animate': NativeFunction('Tween.animate', 1, (args) {
-          final controllerArg = args[0];
-          AnimationController? nativeController;
+          final parentArg = args[0];
+          Animation<double>? parent;
           
-          if (controllerArg is Map && controllerArg.containsKey('__native__')) {
-            final nativeObj = controllerArg['__native__'];
+          if (parentArg is Map && parentArg.containsKey('__native__')) {
+            final nativeObj = parentArg['__native__'];
             if (nativeObj is FluxAnimationController) {
-              nativeController = nativeObj.native;
+              parent = nativeObj.native;
+            } else if (nativeObj is FluxAnimation) {
+               final anim = nativeObj.native;
+               if (anim is Animation<double>) {
+                 parent = anim;
+               }
             }
           }
 
-          if (nativeController == null) {
-            throw 'Tween.animate requires an AnimationController';
+          if (parent == null) {
+            throw 'Tween.animate requires an Animation parent';
           }
 
-          final anim = tween.animate(nativeController);
+          final anim = tween.animate(parent);
           return FluxAnimation(anim);
         }),
       };
     }));
+  }
+
+  Curve _getCurve(String name) {
+    switch (name) {
+      case 'linear': return Curves.linear;
+      case 'decelerate': return Curves.decelerate;
+      case 'ease': return Curves.ease;
+      case 'easeIn': return Curves.easeIn;
+      case 'easeOut': return Curves.easeOut;
+      case 'easeInOut': return Curves.easeInOut;
+      case 'slowMiddle': return Curves.slowMiddle;
+      case 'bounceIn': return Curves.bounceIn;
+      case 'bounceOut': return Curves.bounceOut;
+      case 'bounceInOut': return Curves.bounceInOut;
+      case 'elasticIn': return Curves.elasticIn;
+      case 'elasticOut': return Curves.elasticOut;
+      case 'elasticInOut': return Curves.elasticInOut;
+      default: return Curves.linear;
+    }
   }
 
   int? _asInt(dynamic value) {

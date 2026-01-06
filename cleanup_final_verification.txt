@@ -1,0 +1,6 @@
+Analyzing flux...                                               
+
+warning - Warning in the included options file C:\Users\aa223\AppData\Local\Pub\Cache\hosted\pub.dev\lints-6.0.0\lib\core.yaml(1124..1149): 'strict_top_level_inference' is not a recognized lint rule - packages\flux_devtools_extension\analysis_options.yaml:10:10 - included_file_warning
+warning - Warning in the included options file C:\Users\aa223\AppData\Local\Pub\Cache\hosted\pub.dev\lints-6.0.0\lib\recommended.yaml(2273..2295): 'unnecessary_underscores' is not a recognized lint rule - packages\flux_devtools_extension\analysis_options.yaml:10:10 - included_file_warning
+
+2 issues found. (ran in 9.0s)

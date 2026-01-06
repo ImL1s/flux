@@ -144,4 +144,88 @@ class FluxCast {
     }
     return [];
   }
+
+  /// Convert to [EdgeInsets].
+  ///
+  /// Supports:
+  /// - num: EdgeInsets.all(value)
+  /// - List: [all], [horiz, vert], [left, top, right, bottom]
+  static EdgeInsets? toEdgeInsets(dynamic value) {
+    final resolved = resolveValue(value);
+    if (resolved == null) return null;
+    if (resolved is EdgeInsets) return resolved;
+
+    if (resolved is num) {
+      return EdgeInsets.all(resolved.toDouble());
+    }
+
+    if (resolved is List) {
+      if (resolved.length == 1 && resolved[0] is num) {
+        return EdgeInsets.all((resolved[0] as num).toDouble());
+      } else if (resolved.length == 2 &&
+          resolved[0] is num &&
+          resolved[1] is num) {
+        return EdgeInsets.symmetric(
+          horizontal: (resolved[0] as num).toDouble(),
+          vertical: (resolved[1] as num).toDouble(),
+        );
+      } else if (resolved.length == 4 &&
+          resolved[0] is num &&
+          resolved[1] is num &&
+          resolved[2] is num &&
+          resolved[3] is num) {
+        return EdgeInsets.fromLTRB(
+          (resolved[0] as num).toDouble(),
+          (resolved[1] as num).toDouble(),
+          (resolved[2] as num).toDouble(),
+          (resolved[3] as num).toDouble(),
+        );
+      }
+    }
+    return null;
+  }
+
+  /// Convert to [AlignmentGeometry].
+  ///
+  /// Supports:
+  /// - String: 'center', 'bottomRight', etc.
+  /// - List: [x, y]
+  static AlignmentGeometry? toAlignment(dynamic value) {
+    final resolved = resolveValue(value);
+    if (resolved == null) return null;
+    if (resolved is AlignmentGeometry) return resolved;
+
+    if (resolved is String) {
+      switch (resolved) {
+        case 'topLeft':
+          return Alignment.topLeft;
+        case 'topCenter':
+          return Alignment.topCenter;
+        case 'topRight':
+          return Alignment.topRight;
+        case 'centerLeft':
+          return Alignment.centerLeft;
+        case 'center':
+          return Alignment.center;
+        case 'centerRight':
+          return Alignment.centerRight;
+        case 'bottomLeft':
+          return Alignment.bottomLeft;
+        case 'bottomCenter':
+          return Alignment.bottomCenter;
+        case 'bottomRight':
+          return Alignment.bottomRight;
+      }
+    } else if (resolved is List &&
+        resolved.length == 2 &&
+        resolved[0] is num &&
+        resolved[1] is num) {
+      return Alignment(
+        (resolved[0] as num).toDouble(),
+        (resolved[1] as num).toDouble(),
+      );
+    }
+
+    return null;
+  }
 }

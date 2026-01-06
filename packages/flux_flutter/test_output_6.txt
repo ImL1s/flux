@@ -1,74 +1,273 @@
-[ +146 ms] Found 1 files which will be executed as Widget Tests.
-[   +9 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
-[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
-[   +3 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
-[  +50 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
-[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
-[        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
-[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
-[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
-[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
-[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
-[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
-[  +27 ms] Skipping pub get: version match.
-[ +237 ms] running test package with arguments: [--no-color, --chain-stack-traces, --, file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart?]
-00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart
-[ +124 ms] test 0: starting test D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart
-[   +5 ms] Stopping scan for flutter_test_config.dart; found project root at D:\OtherProject\mine\flux\packages\flux_flutter
-[   +2 ms] Compiler will use the following file as its incremental dill file: C:\Users\aa223\AppData\Local\Temp\flutter_tools.c00d767b\flutter_test_compiler.22164cec\output.dill
-[        ] Listening to compiler controller...
-[   +6 ms] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.c00d767b/flutter_test_listener.7a9b75e9/listener.dart
-[ +105 ms] No packages with native assets. Skipping native assets compilation.
-[        ] Writing native assets yaml to file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml.
-[  +10 ms] Writing D:\OtherProject\mine\flux\packages\flux_flutter\build\native_assets\windows\native_assets.yaml done.
-[   +2 ms] D:\APP\flutter\bin\cache\dart-sdk\bin\dartaotruntime.exe D:\APP\flutter\bin\cache\dart-sdk\bin\snapshots\frontend_server_aot.dart.snapshot --sdk-root D:\APP\flutter\bin\cache\artifacts\engine\common\flutter_patched_sdk/ --incremental --no-print-incremental-dependencies --target=flutter --experimental-emit-debug-metadata --output-dill C:\Users\aa223\AppData\Local\Temp\flutter_tools.c00d767b\flutter_test_compiler.22164cec\output.dill --packages D:\OtherProject\mine\flux\packages\flux_flutter\.dart_tool\package_config.json -Ddart.vm.profile=false -Ddart.vm.product=false --enable-asserts --track-widget-creation --initialize-from-dill D:\OtherProject\mine\flux\packages\flux_flutter\build\test_cache\build\cache.dill.track.dill --native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml --verbosity=error
-[   +9 ms] <- native-assets file:///D:/OtherProject/mine/flux/packages/flux_flutter/build/native_assets/windows/native_assets.yaml
-[        ] <- compile file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.c00d767b/flutter_test_listener.7a9b75e9/listener.dart
-[  +66 ms] killing pid 161776
-[   +1 ms] test 0: cleaning up...
-[        ] test 0: deleting temporary directory
-[   +2 ms] test 0: waiting for controller sink to close
-00:00 +0 -1: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart [E]
-  Failed to load "D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart": Compilation failed for testPath=D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart
-00:00 +0 -1: Some tests failed.
-[  +10 ms] Deleting C:\Users\aa223\AppData\Local\Temp\flutter_tools.c00d767b\flutter_test_compiler.22164cec...
-[   +5 ms] killing pid 161776
-[   +1 ms] Compiling file:///C:/Users/aa223/AppData/Local/Temp/flutter_tools.c00d767b/flutter_test_listener.7a9b75e9/listener.dart took 1416ms
-[   +1 ms] test package returned with exit code 1
-[        ] Runtime for phase TestRunner: Wall-clock: 0:00:01.562358; combined: 0:00:01.562369.
-[        ] Runtime for phase Compile: Wall-clock: 0:00:01.416893; combined: 0:00:01.416905.
-[        ] Runtime for phase Run: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[        ] Runtime for phase CoverageTotal: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[        ] Runtime for phase CoverageCollect: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[        ] Runtime for phase CoverageParseJson: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[        ] Runtime for phase CoverageAddHitmap: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[        ] Runtime for phase CoverageDataCollect: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[        ] Runtime for phase WatcherFinishedTest: Wall-clock: 0:00:00.000000; combined: 0:00:00.000000.
-[   +4 ms] "flutter test" took 1,897ms.
-[  +32 ms] ensureAnalyticsSent: 31ms
-[        ] Running 2 shutdown hooks
-[   +1 ms] Shutdown hooks complete
-[   +3 ms] exiting with code 1
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart
+00:00 +0: Flux Animation System Test
+DEBUG RUNTIME: Source:       widget AnimDemo {
+        state controller = Animation.createController(500);
+        state anim = Animation.tween(0.0, 100.0).animate(controller);
+        
+        build {
+          Column {
+            Button("Start", onPressed: fn() { 
+              controller.forward(); 
+            });
+            Container(width: anim, height: 50, color: "blue");
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: controller
+DEBUG PARSER: Found state field: anim
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget AnimDemo, State: [controller, anim]
+BuildCompiler created. _stateFields: [controller, anim]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: controller, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: anim, isState: true
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: controller, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget AnimDemo, State: [controller, anim]
+BuildCompiler created. _stateFields: [controller, anim]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: controller, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: anim, isState: true
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: controller, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 FluxWidget._buildWidget() START
+🔧 Got widget definition: AnimDemo
+🔧 Executing build...
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: blue, height: 50, width: Instance of 'FluxAnimation'}, children: [])]) (Type: FluxWidgetNode)
+🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: blue, height: 50, width: Instance of 'FluxAnimation'}, children: [])])
+🔧 Converting to Flutter...
+🔧 Converted widget: Column
+🔧 FluxWidget._buildWidget() SUCCESS
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 FluxWidget._buildWidget() START
+🔧 Got widget definition: AnimDemo
+🔧 Executing build...
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: blue, height: 50, width: Instance of 'FluxAnimation'}, children: [])]) (Type: FluxWidgetNode)
+🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: blue, height: 50, width: Instance of 'FluxAnimation'}, children: [])])
+🔧 Converting to Flutter...
+🔧 Converted widget: Column
+🔧 FluxWidget._buildWidget() SUCCESS
+🗑️ FluxRuntime.dispose()
+🗑️ Disposing FluxAnimationController in state
+00:00 +1: Flux Animation Curves Test
+DEBUG RUNTIME: Source:       widget CurvedDemo {
+        state controller = Animation.createController(1000);
+        state curved = Animation.curved(controller, "bounceOut");
+        state anim = Animation.tween(0.0, 100.0).animate(curved);
+        
+        build {
+          Column {
+            Button("Start", onPressed: fn() { 
+              controller.forward(); 
+            });
+            Container(width: anim, height: 50, color: "red");
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: controller
+DEBUG PARSER: Found state field: curved
+DEBUG PARSER: Found state field: anim
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget CurvedDemo, State: [controller, curved, anim]
+BuildCompiler created. _stateFields: [controller, curved, anim]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: controller, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: anim, isState: true
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: controller, isState: false
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: curved, isState: false
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget CurvedDemo, State: [controller, curved, anim]
+BuildCompiler created. _stateFields: [controller, curved, anim]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
+DEBUG COMPILER: Compiling variable: controller, isState: true
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
+DEBUG COMPILER: Compiling variable: Container, isState: false
+DEBUG COMPILER: Compiling variable: anim, isState: true
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: controller, isState: false
+DEBUG COMPILER: Compiling variable: Animation, isState: false
+DEBUG COMPILER: Compiling variable: curved, isState: false
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 FluxWidget._buildWidget() START
+🔧 Got widget definition: CurvedDemo
+🔧 Executing build...
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: red, height: 50, width: Instance of 'FluxAnimation'}, children: [])]) (Type: FluxWidgetNode)
+🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: red, height: 50, width: Instance of 'FluxAnimation'}, children: [])])
+🔧 Converting to Flutter...
+🔧 Converted widget: Column
+🔧 FluxWidget._buildWidget() SUCCESS
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 FluxWidget._buildWidget() START
+🔧 Got widget definition: CurvedDemo
+🔧 Executing build...
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: red, height: 50, width: Instance of 'FluxAnimation'}, children: [])]) (Type: FluxWidgetNode)
+🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: red, height: 50, width: Instance of 'FluxAnimation'}, children: [])])
+🔧 Converting to Flutter...
+🔧 Converted widget: Column
+🔧 FluxWidget._buildWidget() SUCCESS
+🗑️ FluxRuntime.dispose()
+🗑️ Disposing FluxAnimationController in state
+00:00 +2: Flux Implicit Animation Test
+DEBUG RUNTIME: Source:       widget ImplicitDemo {
+        state toggled = false;
+        
+        build {
+          Column {
+            Button("Toggle", onPressed: fn() { 
+              toggled = !toggled; 
+            });
+            
+            var w = 50.0;
+            var c = "blue";
+            if (toggled) {
+              w = 100.0;
+              c = "red";
+            }
+            
+            AnimatedContainer(
+              duration: 500,
+              curve: "easeIn",
+              width: w,
+              height: 50.0,
+              color: c
+            );
+          }
+        }
+      }
+    
+DEBUG PARSER: Found state field: toggled
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG COMPILER: Unit has 1 declarations
+DEBUG COMPILER: Compiling decl type: WidgetDecl
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ImplicitDemo, State: [toggled]
+BuildCompiler created. _stateFields: [toggled]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: toggled, isState: true
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Added local "w" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
+DEBUG COMPILER: Added local "c" at slot 2 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 17
+DEBUG COMPILER: Compiling variable: toggled, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling variable: AnimatedContainer, isState: false
+DEBUG COMPILER: Compiling variable: w, isState: false
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 2]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
+Compiling Widget ImplicitDemo, State: [toggled]
+BuildCompiler created. _stateFields: [toggled]
+DEBUG COMPILER: Compiling variable: Column, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
+DEBUG COMPILER: Compiling variable: Button, isState: false
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
+DEBUG COMPILER: Compiling variable: toggled, isState: true
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
+DEBUG COMPILER: Added local "w" at slot 1 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
+DEBUG COMPILER: Added local "c" at slot 2 [Depth: 2]
+DEBUG COMPILER: Compiling statement type: IfStmt at line 17
+DEBUG COMPILER: Compiling variable: toggled, isState: true
+DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
+DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
+DEBUG COMPILER: Compiling variable: AnimatedContainer, isState: false
+DEBUG COMPILER: Compiling variable: w, isState: false
+DEBUG COMPILER: Compiling variable: c, isState: false
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 2]
+DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 FluxWidget._buildWidget() START
+🔧 Got widget definition: ImplicitDemo
+🔧 Executing build...
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 50.0, curve: easeIn, duration: 500}, children: [])]) (Type: FluxWidgetNode)
+🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 50.0, curve: easeIn, duration: 500}, children: [])])
+🔧 Converting to Flutter...
+🔧 Converted widget: Column
+🔧 FluxWidget._buildWidget() SUCCESS
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 FluxWidget._buildWidget() START
+🔧 Got widget definition: ImplicitDemo
+🔧 Executing build...
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 100.0, curve: easeIn, duration: 500}, children: [])]) (Type: FluxWidgetNode)
+🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 100.0, curve: easeIn, duration: 500}, children: [])])
+🔧 Converting to Flutter...
+🔧 Converted widget: Column
+🔧 FluxWidget._buildWidget() SUCCESS
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 FluxWidget._buildWidget() START
+🔧 Got widget definition: ImplicitDemo
+🔧 Executing build...
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 100.0, curve: easeIn, duration: 500}, children: [])]) (Type: FluxWidgetNode)
+🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 100.0, curve: easeIn, duration: 500}, children: [])])
+🔧 Converting to Flutter...
+🔧 Converted widget: Column
+🔧 FluxWidget._buildWidget() SUCCESS
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+AnimatedContainer did not animate, width is 100.0
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:149:31)
+#1      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart:168:8)
+<asynchronous suspension>
+#2      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  Flux Implicit Animation Test
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +2 -1: Flux Implicit Animation Test [E]
+  Test failed. See exception logs above.
+  The test description was: Flux Implicit Animation Test
+  
+00:00 +2 -1: Some tests failed.
