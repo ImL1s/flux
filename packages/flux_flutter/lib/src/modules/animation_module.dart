@@ -1,6 +1,7 @@
 
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/physics.dart';
 import 'package:flux_vm/flux_vm.dart';
 
 /// Base class for animation objects exposed to Flux
@@ -159,6 +160,99 @@ class AnimationModule extends FluxModule {
         }),
       };
     }));
+
+    register('colorTween', NativeFunction('Animation.colorTween', 2, (args) {
+      final beginHex = args[0].toString();
+      final endHex = args[1].toString();
+      
+      final tween = ColorTween(
+        begin: _parseColor(beginHex),
+        end: _parseColor(endHex),
+      );
+
+      return {
+        'animate': NativeFunction('ColorTween.animate', 1, (args) {
+          final parent = _extractAnimation(args[0]);
+          if (parent == null) {
+            throw 'ColorTween.animate requires an Animation parent';
+          }
+          final anim = tween.animate(parent);
+          return FluxAnimation(anim);
+        }),
+      };
+    }));
+
+    register('sizeTween', NativeFunction('Animation.sizeTween', 2, (args) {
+      final begin = args[0] as Map;
+      final end = args[1] as Map;
+      
+      final tween = SizeTween(
+        begin: Size((begin['width'] as num).toDouble(), (begin['height'] as num).toDouble()),
+        end: Size((end['width'] as num).toDouble(), (end['height'] as num).toDouble()),
+      );
+
+      return {
+        'animate': NativeFunction('SizeTween.animate', 1, (args) {
+          final parent = _extractAnimation(args[0]);
+          if (parent == null) {
+            throw 'SizeTween.animate requires an Animation parent';
+          }
+          final anim = tween.animate(parent);
+          return FluxAnimation(anim);
+        }),
+      };
+    }));
+
+    register('spring', NativeFunction('Animation.spring', 1, (args) {
+      final parent = args[0] as Map;
+      final parentController = _extractController(parent);
+      if (parentController == null) {
+        throw 'Animation.spring requires an AnimationController';
+      }
+
+      final mass = 1.0;
+      final stiffness = 100.0;
+      final damping = 10.0;
+
+      final spring = SpringSimulation(
+        SpringDescription(
+          mass: mass,
+          stiffness: stiffness,
+          damping: damping,
+        ),
+        0.0,
+        1.0,
+        0.0,
+      );
+
+      parentController.animateWith(spring);
+      return null;
+    }));
+
+    register('stagger', NativeFunction('Animation.stagger', 3, (args) {
+      final animations = args[0] as List;
+      final delayMs = (args[1] as num).toInt();
+      final durationMs = (args[2] as num).toInt();
+
+      final results = [];
+      for (var i = 0; i < animations.length; i++) {
+        final anim = animations[i];
+        if (anim is Map && anim.containsKey('__native__')) {
+          final controller = _extractController(anim);
+          if (controller != null) {
+            if (durationMs > 0) {
+              controller.duration = Duration(milliseconds: durationMs);
+            }
+            final delay = Duration(milliseconds: delayMs * i);
+            Future.delayed(delay, () {
+              controller.forward();
+            });
+            results.add(anim);
+          }
+        }
+      }
+      return results;
+    }));
   }
 
   Curve _getCurve(String name) {
@@ -183,6 +277,39 @@ class AnimationModule extends FluxModule {
   int? _asInt(dynamic value) {
     if (value is num) return value.toInt();
     if (value is String) return int.tryParse(value);
+    return null;
+  }
+
+  Color _parseColor(String hex) {
+    hex = hex.replaceAll('#', '');
+    if (hex.length == 6) {
+      hex = 'FF$hex';
+    }
+    return Color(int.parse(hex, radix: 16));
+  }
+
+  Animation<double>? _extractAnimation(dynamic arg) {
+    if (arg is Map && arg.containsKey('__native__')) {
+      final nativeObj = arg['__native__'];
+      if (nativeObj is FluxAnimationController) {
+        return nativeObj.native;
+      } else if (nativeObj is FluxAnimation) {
+        final anim = nativeObj.native;
+        if (anim is Animation<double>) {
+          return anim;
+        }
+      }
+    }
+    return null;
+  }
+
+  AnimationController? _extractController(dynamic arg) {
+    if (arg is Map && arg.containsKey('__native__')) {
+      final nativeObj = arg['__native__'];
+      if (nativeObj is FluxAnimationController) {
+        return nativeObj.native;
+      }
+    }
     return null;
   }
 }
