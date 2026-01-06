@@ -37,13 +37,14 @@ This file tracks planned features and improvements. Each item should be implemen
 
 ## 🔵 Planned Features (v3.0)
 
-### Feature: State Persistence
+### Feature: State Persistence ✅
 - **Description**: Automatic state persistence and restoration
-- **Goals**:
-  - [ ] SharedPreferences integration for simple state
-  - [ ] Hive/Isar database integration for complex state
-  - [ ] State migration utilities
-  - [ ] Encryption for sensitive data
+- **Status**: Completed in v2.0.1
+- **Implemented**:
+  - [x] `persistent` keyword in Flux language
+  - [x] Hive CE integration for complex state
+  - [x] PersistenceDelegate abstraction
+  - [x] HivePersistenceDelegate implementation
 
 ### Feature: Network Layer
 - **Description**: Built-in HTTP/WebSocket support in Flux scripts

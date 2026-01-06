@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2026-01-07
+
+### Added
+- **State Persistence**: `persistent` keyword for automatic state persistence via Hive CE
+- **PersistenceDelegate**: Abstract interface for custom persistence backends
+- **HivePersistenceDelegate**: Default implementation using Hive CE
+
+### Fixed
+- CI/CD pipeline dependency conflicts (`flux_updater` path dependencies)
+- Static analysis warnings (`flux_vm` unnecessary type checks)
+- Missing explicit dependency (`flux_flutter` Hive CE import)
+
 ## [2.0.0] - 2026-01-04
 
 ### Added
