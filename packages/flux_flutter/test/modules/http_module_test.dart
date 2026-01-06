@@ -56,7 +56,9 @@ void main() {
     final result = await fn.call(args);
 
     expect(result, isA<Map>());
-    expect((result as Map)['statusCode'], 201);
-    expect((result as Map)['ok'], true);
+    // Cast might be redundant if flow analysis works, but assigning to typed var is clean
+    final map = result as Map; 
+    expect(map['statusCode'], 201);
+    expect(map['ok'], true);
   });
 }
