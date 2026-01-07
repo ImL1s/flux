@@ -31,8 +31,8 @@ void main() {
 
     final result = await fn.call(args);
 
-    expect(result, isA<Map>());
-    final map = result as Map;
+    expect(result, isA<Map<String, dynamic>>());
+    final map = result! as Map<String, dynamic>;
     expect(map['statusCode'], 200);
     expect(map['body'], {'foo': 'bar'});
     expect(map['headers'], containsPair('content-type', 'application/json'));
@@ -55,9 +55,8 @@ void main() {
 
     final result = await fn.call(args);
 
-    expect(result, isA<Map>());
-    // Cast might be redundant if flow analysis works, but assigning to typed var is clean
-    final map = result as Map; 
+    expect(result, isA<Map<String, dynamic>>());
+    final map = result! as Map<String, dynamic>;
     expect(map['statusCode'], 201);
     expect(map['ok'], true);
   });

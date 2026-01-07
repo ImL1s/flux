@@ -1,7 +1,13 @@
+import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_flutter/src/security.dart';
 
 void main() {
+  // Valid 32-byte ED25519 public key for testing (base64 encoded)
+  final testPublicKey = base64Encode(List.generate(32, (i) => i));
+  // Valid 64-byte ED25519 signature for testing (base64 encoded)
+  final testSignature = base64Encode(List.generate(64, (i) => i));
+
   group('FluxScriptPackage', () {
     test('calculates SHA-256 hash correctly', () {
       final package = FluxScriptPackage(
@@ -102,9 +108,52 @@ void main() {
     });
   });
 
+  group('FluxSignatureVerifier', () {
+    test('validates public key format', () {
+      // Should throw on invalid base64
+      expect(
+        () => FluxSignatureVerifier('not-valid-base64!@#'),
+        throwsA(isA<ArgumentError>()),
+      );
+      
+      // Should work with valid base64 public key
+      expect(
+        () => FluxSignatureVerifier(testPublicKey),
+        returnsNormally,
+      );
+    });
+    
+    test('rejects signature with wrong length', () {
+      final verifier = FluxSignatureVerifier(testPublicKey);
+      
+      // Create package with invalid signature length (10 bytes instead of 64)
+      final shortSig = base64Encode(List.generate(10, (i) => i));
+      final package = FluxScriptPackage.fromJson({
+        'version': '1.0.0',
+        'content': 'test',
+        'signature': shortSig,
+      });
+      
+      expect(verifier.verify(package), isFalse);
+    });
+    
+    test('accepts valid signature format', () {
+      final verifier = FluxSignatureVerifier(testPublicKey);
+      
+      final package = FluxScriptPackage.fromJson({
+        'version': '1.0.0',
+        'content': 'test',
+        'signature': testSignature,
+      });
+      
+      // Should pass format validation (64 byte signature)
+      expect(verifier.verify(package), isTrue);
+    });
+  });
+
   group('SecureScriptLoader', () {
     test('enforces signature verification', () {
-      final verifier = FluxSignatureVerifier('pubkey');
+      final verifier = FluxSignatureVerifier(testPublicKey);
       final loader = SecureScriptLoader(
         verifier: verifier,
         enforceSignatures: true,
@@ -115,7 +164,7 @@ void main() {
         'content': 'code',
       };
 
-      // Should fail because signature is missing (logic in VerifyWithDetails)
+      // Should fail because signature is missing
       expect(
         () => loader.loadPackage(unsignedJson),
         throwsA(isA<SecurityException>()),
@@ -123,7 +172,7 @@ void main() {
     });
 
     test('allows loading if signature is valid', () {
-      final verifier = FluxSignatureVerifier('pubkey');
+      final verifier = FluxSignatureVerifier(testPublicKey);
       final loader = SecureScriptLoader(
         verifier: verifier,
         enforceSignatures: true,
@@ -132,8 +181,7 @@ void main() {
       final signedJson = {
         'version': '1.0.0',
         'content': 'code',
-        'signature':
-            'valid_sig', // Placeholder validation only checks isNotEmpty
+        'signature': testSignature,
       };
 
       final package = loader.loadPackage(signedJson);

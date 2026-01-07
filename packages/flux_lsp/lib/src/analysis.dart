@@ -134,18 +134,42 @@ class FluxAnalyzer {
 
   
   /// Get the token at the given offset in the source
+  /// 
+  /// Properly calculates offset by tracking line positions and matching
+  /// against token line/column information.
   Token? getTokenAt(String source, int offset) {
     final lexer = Lexer(source);
     final tokens = lexer.tokenize();
     
-    for (final token in tokens) {
-      // Approximate: check if offset is within token range
-      // Note: Token doesn't have direct offset, so we use line/column heuristically
-      if (token.line > 0) {
-        // For now, return token if we're on the same line
-        // TODO: Implement proper offset tracking
+    // Calculate line offsets for offset-to-position conversion
+    final lines = source.split('\n');
+    final lineOffsets = <int>[0];
+    for (int i = 0; i < lines.length - 1; i++) {
+      lineOffsets.add(lineOffsets.last + lines[i].length + 1); // +1 for newline
+    }
+    
+    // Convert offset to line and column
+    int targetLine = 0;
+    int targetColumn = 0;
+    for (int i = 0; i < lineOffsets.length; i++) {
+      if (i == lineOffsets.length - 1 || offset < lineOffsets[i + 1]) {
+        targetLine = i + 1; // 1-indexed
+        targetColumn = offset - lineOffsets[i]; // 0-indexed
+        break;
       }
     }
+    
+    // Find the token at this position
+    for (final token in tokens) {
+      if (token.line == targetLine) {
+        final tokenStart = token.column - 1; // Convert to 0-indexed
+        final tokenEnd = tokenStart + token.lexeme.length;
+        if (targetColumn >= tokenStart && targetColumn < tokenEnd) {
+          return token;
+        }
+      }
+    }
+    
     return null;
   }
   
