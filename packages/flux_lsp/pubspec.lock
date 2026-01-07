@@ -92,10 +92,9 @@ packages:
   flux_compiler:
     dependency: "direct main"
     description:
-      name: flux_compiler
-      sha256: "93ac141b2c72c63ddd7440624af827614c61da5d921dfc66f34fafa7d3a07468"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../flux_compiler"
+      relative: true
+    source: path
     version: "2.0.0"
   frontend_server_client:
     dependency: transitive
@@ -145,6 +144,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.1"
+  lints:
+    dependency: "direct dev"
+    description:
+      name: lints
+      sha256: c35bb79562d980e9a453fc715854e1ed39e24e7d0297a880ef54e17f9874a9d7
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.1"
   logging:
     dependency: transitive
     description:
