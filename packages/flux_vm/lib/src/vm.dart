@@ -3,6 +3,7 @@
 /// Executes Flux bytecode using a stack-based architecture.
 /// Based on Crafting Interpreters bytecode VM pattern.
 
+import 'dart:io';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'stdlib.dart';
 import 'closure.dart';
@@ -72,6 +73,8 @@ class FluxInstance {
 }
 
 class VM {
+  static const String version = '3.0.0';
+
   final Map<String, Object?> _globals = {};
   
   /// Widget state storage (keyed by state field name)
@@ -100,6 +103,7 @@ class VM {
   bool _awaitingFuture = false;
   Future<dynamic>? _pendingFuture;
   CallFrame? _pendingFrame;
+  InterpretResult _lastResult = InterpretResult.ok;
   
   // Runtime Optimizations
   final InlineCacheManager _inlineCacheManager = InlineCacheManager();
@@ -211,8 +215,32 @@ class VM {
     _pendingFrame = null;
     
     // Continue execution
-    return _run();
+    _lastResult = _run();
+    return _lastResult;
   }
+
+/// Resume execution after an awaited Future completes with an error
+InterpretResult resumeFromAwaitWithError(Object error) {
+  if (!_awaitingFuture || _pendingFrame == null) {
+    onPrint('DEBUG: resumeFromAwait failed: _awaitingFuture=$_awaitingFuture, _pendingFrame=$_pendingFrame');
+     return InterpretResult.runtimeError;
+  }
+  
+  // Clear awaiting state
+  _awaitingFuture = false;
+  _pendingFuture = null;
+  _pendingFrame = null;
+  
+  // Try to handle exception in VM
+  if (_handleException(error)) {
+    _lastResult = _run();
+    return _lastResult;
+  }
+  
+  _runtimeError('Unhandled async error: $error');
+  _lastResult = InterpretResult.runtimeError;
+  return _lastResult;
+}
   
   /// Suspend current execution and create a coroutine snapshot
   /// 
@@ -252,7 +280,8 @@ class VM {
     coroutine.state = CoroutineState.running;
     
     // Continue execution
-    final interpretResult = _run();
+    _lastResult = _run();
+    final interpretResult = _lastResult;
     
     // Mark coroutine as completed
     if (interpretResult == InterpretResult.ok) {
@@ -289,7 +318,8 @@ class VM {
     
     coroutine.state = CoroutineState.error;
     _runtimeError('Unhandled async error: $error');
-    return InterpretResult.runtimeError;
+    _lastResult = InterpretResult.runtimeError;
+    return _lastResult;
   }
   
 
@@ -358,13 +388,6 @@ class VM {
   InterpretResult interpret(String source) {
     try {
       final lexer = Lexer(source);
-      _globals['push'] = NativeFunction('push', 2, (args) {
-      final list = args[0] as List;
-      final value = args[1];
-      list.add(value);
-      print('DEBUG STDLIB: push added $value, list is now $list');
-      return list.length;
-    });
       final tokens = lexer.tokenize();
 
       final parser = Parser(tokens);
@@ -379,12 +402,31 @@ class VM {
 
       final compiler = Compiler(unit: ast);
       final function = compiler.endCompiler();
-
-      return runChunk(function.chunk);
-    } catch (e) {
+    _lastResult = runChunk(function.chunk);
+    return _lastResult;
+  } catch (e) {
       _runtimeError(e.toString());
       return InterpretResult.runtimeError;
     }
+  }
+
+  /// Interpret source code asynchronously
+  Future<InterpretResult> interpret_async(String source) async {
+    _lastResult = interpret(source);
+    if (_lastResult == InterpretResult.awaiting) {
+      while (_awaitingFuture) {
+        final future = _pendingFuture;
+        if (future == null) break;
+        try {
+          final futureResult = await future;
+          _lastResult = resumeFromAwait(futureResult);
+        } catch (e) {
+          _lastResult = resumeFromAwaitWithError(e);
+        }
+        if (_lastResult != InterpretResult.awaiting) break;
+      }
+    }
+    return _lastResult;
   }
 
   /// Run a pre-compiled chunk directly
@@ -411,7 +453,8 @@ class VM {
 
     _callFunction(closure, 0);
 
-    return _run();
+  _lastResult = _run();
+  return _lastResult;
   }
 
   /// Execute a closure with arguments.
@@ -634,10 +677,8 @@ class VM {
     }
 
     if (callee is ObjClosure) {
-      if (profiler != null) profiler!.recordFunctionEntry(callee.function.name);
-      final result = _callFunction(callee, argCount, namedArgs);
-      if (profiler != null) profiler!.recordFunctionExit(callee.function.name);
-      return result;
+      // Profiler hooks are now in _callFunction (entry) and OpCode.return (exit)
+      return _callFunction(callee, argCount, namedArgs);
     }
 
     // Support calling raw CompiledFunctions by wrapping them (e.g. from tests or old code)
@@ -651,17 +692,30 @@ class VM {
     }
 
     if (callee is NativeFunction) {
+      // if (callee.name.contains('http')) {
+      //    print('DEBUG PRE_CALL: name=${callee.name} expectedArgs=$argCount');
+      //    exit(0);
+      // }
       final args = _stack.sublist(_stack.length - argCount);
       // Again, named args were already popped, so we just pop positional and the function
       _stack.length -= argCount + 1;
       try {
         final result = callee.call(args);
-        // print('DEBUG RUNTIME: NativeFunction ${callee.name} returned $result');
+        // If it's an AsyncNativeFunction, it will return a Future.
+        // The VM should handle this by suspending if it's in an 'await' context.
+        if (result is Future) {
+          _awaitingFuture = true;
+          _pendingFuture = result;
+          _pendingFrame = _frames.last;
+          return false; // Suspend
+        }
         _stack.add(result);
         return true;
-      } catch (e) {
+      } catch (e, st) {
+        // stdout.writeln('DEBUG NATIVE ERROR: callee=${callee.name} expectedArgs=$argCount stackTop=${_stack.length} stack=${_stack.sublist(_stack.length > 5 ? _stack.length - 5 : 0)}');
+        // stdout.writeln('Error: $e');
         _runtimeError(e.toString());
-        return false;
+        rethrow;
       }
     }
     
@@ -708,6 +762,10 @@ class VM {
   }
 
   bool _callFunction(ObjClosure closure, int argCount, [Map<String, dynamic> namedArgs = const {}]) {
+    if (profiler != null) {
+      profiler!.recordFunctionEntry(closure.function.name);
+    }
+
     final totalProvided = argCount + namedArgs.length;
     // print('DEBUG RUNTIME: _callFunction: ${closure.function.name}, arity: ${closure.function.arity}, totalProvided: $totalProvided (pos: $argCount, named: ${namedArgs.length})');
     if (totalProvided != closure.function.arity) {
@@ -835,6 +893,10 @@ class VM {
           continue; // Continue in caller's frame
         }
 
+        if (profiler != null) {
+          profiler!.recordInstruction();
+        }
+
         final instruction = frame.chunk.code[frame.ip];
         final op = OpCode.values[instruction];
         frame.ip++; 
@@ -888,31 +950,51 @@ class VM {
             break;
 
           case OpCode.sub:
-            final b = _stack.removeLast() as num;
-            final a = _stack.removeLast() as num;
+            final b = _stack.removeLast();
+            final a = _stack.removeLast();
+            if (a is! num || b is! num) {
+              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              return InterpretResult.runtimeError;
+            }
             _stack.add(a - b);
             break;
 
           case OpCode.mul:
-            final b = _stack.removeLast() as num;
-            final a = _stack.removeLast() as num;
+            final b = _stack.removeLast();
+            final a = _stack.removeLast();
+            if (a is! num || b is! num) {
+              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              return InterpretResult.runtimeError;
+            }
             _stack.add(a * b);
             break;
 
           case OpCode.div:
-            final b = _stack.removeLast() as num;
-            final a = _stack.removeLast() as num;
+            final b = _stack.removeLast();
+            final a = _stack.removeLast();
+            if (a is! num || b is! num) {
+              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              return InterpretResult.runtimeError;
+            }
             _stack.add(a / b);
             break;
 
           case OpCode.mod:
-            final b = _stack.removeLast() as num;
-            final a = _stack.removeLast() as num;
+            final b = _stack.removeLast();
+            final a = _stack.removeLast();
+            if (a is! num || b is! num) {
+              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              return InterpretResult.runtimeError;
+            }
             _stack.add(a % b);
             break;
 
           case OpCode.negate:
-            final a = _stack.removeLast() as num;
+            final a = _stack.removeLast();
+            if (a is! num) {
+              _runtimeError("Operand must be a number, got ${a.runtimeType}");
+              return InterpretResult.runtimeError;
+            }
             _stack.add(-a);
             break;
 
@@ -922,8 +1004,12 @@ class VM {
             break;
 
           case OpCode.less:
-            final b = _stack.removeLast() as num;
-            final a = _stack.removeLast() as num;
+            final b = _stack.removeLast();
+            final a = _stack.removeLast();
+            if (a is! num || b is! num) {
+              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              return InterpretResult.runtimeError;
+            }
             _stack.add(a < b);
             break;
 
@@ -1054,7 +1140,11 @@ class VM {
             final argCount = readByte();
             final callee = _stack[_stack.length - 1 - argCount];
             if (!_callValue(callee, argCount)) {
-              return InterpretResult.runtimeError;
+              if (_awaitingFuture) {
+                return InterpretResult.awaiting;
+              } else {
+                return InterpretResult.runtimeError;
+              }
             }
             // Update frame reference after call returns
             if (_frames.isNotEmpty) {
@@ -1082,7 +1172,11 @@ class VM {
             final callee = _stack[_stack.length - 1 - totalArgSlots];
 
             if (!_callValue(callee, argCount, namedArgs)) {
-              return InterpretResult.runtimeError;
+              if (_awaitingFuture) {
+                return InterpretResult.awaiting;
+              } else {
+                return InterpretResult.runtimeError;
+              }
             }
             // Update frame reference after call returns
             if (_frames.isNotEmpty) {
@@ -1101,6 +1195,10 @@ class VM {
 
             // Pop frame
             final returningFrame = _frames.removeLast();
+            
+            if (profiler != null) {
+              profiler!.recordFunctionExit(returningFrame.closure.function.name);
+            }
 
              if (_frames.length <= minDepth) {
                 // Finished execution for this nested run() or top-level script
@@ -1120,6 +1218,8 @@ class VM {
             // Push result back (always, including nil)
             _stack.add(result);
             break; // Continue in caller's frame
+
+
 
           case OpCode.newList:
             final count = readByte();
@@ -1377,7 +1477,6 @@ class VM {
             } else if (_widgetState.containsKey(name)) { 
                _stack.add(_widgetState[name]);
             } else {
-              print('DEBUG VM: getProperty $name on ${obj.runtimeType}');
               throw 'Cannot get property from ${obj.runtimeType}';
             }
             break;
@@ -1390,12 +1489,16 @@ class VM {
             if (obj is FluxInstance) {
               obj.setProperty(name, value);
               _stack.add(value); // Standardized: Assignment leaves value on stack
-            } else if (obj is Map) {
-              obj[name] = value;
-              _stack.add(value);
             } else {
               throw 'Cannot set property on ${obj.runtimeType}';
             }
+            break;
+
+          case OpCode.defineState:
+            final nameIdx = readByte();
+            final name = frame.chunk.constants[nameIdx] as String;
+            final initialValue = _stack.removeLast();
+            _widgetState[name] = initialValue;
             break;
 
           case OpCode.getState:
@@ -1433,89 +1536,43 @@ class VM {
             final argCount = readByte();
             final name = frame.chunk.constants[nameIdx] as String;
             
-            // Get arguments
-            final args = <Object?>[];
-            for (int i = 0; i < argCount; i++) {
-              args.insert(0, _stack.removeLast());
-            }
-            
-            // Get instance
-            final instance = _stack.removeLast();
+            // Peek at instance (below args)
+            final instance = _stack[_stack.length - argCount - 1];
+
             if (instance is FluxInstance) {
+              // Methods need instance as 'this', and we need to pop args into a list
+              final args = <Object?>[];
+              for (int i = 0; i < argCount; i++) {
+                args.insert(0, _stack.removeLast());
+              }
+              _stack.removeLast(); // Pop instance
+              
               final method = instance.klass.methods[name];
               if (method != null) {
-                // Call method with instance as 'this'
-                print('DEBUG VM: Invoking method $name on instance ${instance.runtimeType}');
                 _callMethod(instance, method, args);
               } else {
-                throw 'Undefined method: ${instance.klass.name}.$name';
+                _runtimeError('Undefined method: ${instance.klass.name}.$name');
+                return InterpretResult.runtimeError;
               }
             } else if (instance is FluxModule) {
                final member = instance.get(name);
                if (member != null) {
-                  // It's a NativeFunction or AsyncNativeFunction.
-                  // We need to call it.
-                  // _callValue expects the function to be on top of stack?
-                  // No, _callValue(callee, argCount).
-                  // But here we are in OpCode.invoke.
-                  // We have 'instance' and 'args'.
-                  // We can just call _callValue(member, argCount) ?
-                  // But _callValue pops args from stack. We already popped them into 'args' list in invoke.
-                  // This OpCode.invoke implementation is specific for FluxInstance which handles args differently?
-                  // Wait, OpCode.invoke implementation in vm.dart lines 1306-1310 POPS args into a List<Object?> named 'args'.
-                  // Then it calls _callMethod(instance, method, args).
-                  
-                  // For NativeFunction, we can just call it directly with 'args'.
-                  if (member is NativeFunction) {
-                     try {
-                        final result = member.call(args);
-                        _stack.add(result);
-                     } catch (e) {
-                        _runtimeError(e.toString());
-                        return InterpretResult.runtimeError;
-                     }
-                  } else if (member is AsyncNativeFunction) {
-                      // Async support in invoke?
-                      // The current VM seems synchronous for invoke?
-                      // _callMethod is synchronous.
-                      // If we support async, we need to await. 
-                      // For now stdlib json is sync. timer is async but usually not called as method on module?
-                      // timer.delay(100) -> FluxModule('timer').get('delay') -> AsyncNativeFunction.
-                      
-                      // if usage is `await timer.delay(100)`, compiler emits `await` opcode?
-                      // If usage is `timer.delay(100)`, it returns a Future.
-                      // We should push the specific result.
-                      
-                      final result = member.call(args); // This returns a Future
-                      _stack.add(result);
-                  } else {
-                     throw 'Member $name in module ${instance.name} is not a function/method';
+                  // Replace module on stack with the member function
+                  _stack[_stack.length - argCount - 1] = member;
+                  if (!_callValue(member, argCount)) {
+                    if (_awaitingFuture) {
+                      return InterpretResult.awaiting;
+                    } else {
+                      return InterpretResult.runtimeError;
+                    }
                   }
                } else {
-                 throw 'Undefined method: ${instance.name}.$name';
+                  _runtimeError('Undefined module member: ${instance.name}.$name');
+                  return InterpretResult.runtimeError;
                }
-            } else if (instance is Map) {
-                if (instance.containsKey(name)) {
-                   final member = instance[name];
-                   if (member is NativeFunction) {
-                      try {
-                        final result = member.call(args);
-                        _stack.add(result);
-                      } catch (e) {
-                         _runtimeError(e.toString());
-                         return InterpretResult.runtimeError;
-                      }
-                   } else if (member is AsyncNativeFunction) {
-                      final result = member.call(args);
-                      _stack.add(result);
-                   } else {
-                      throw 'Member $name in Map is not a function';
-                   }
-                } else {
-                   throw 'Undefined field/method: $name on Map';
-                }
             } else {
-              throw 'Cannot invoke method on ${instance.runtimeType} ($instance)';
+               _runtimeError('Cannot invoke $name on ${instance.runtimeType}');
+               return InterpretResult.runtimeError;
             }
             break;
 
@@ -1583,30 +1640,16 @@ class VM {
               // Register callback for when Future completes
               value.then((result) {
                 coroutine.awaitResult = result;
-                
-                // Notify external handler for resume scheduling
                 if (coroutineResumeCallback != null) {
                   coroutineResumeCallback!(coroutine, result, null);
-                } else {
-                  // Fallback: direct resume (for non-Flutter contexts)
-                  _awaitingFuture = false;
-                  _pendingFuture = null;
-                  _pendingFrame = null;
-                  resumeCoroutine(coroutine, result);
                 }
               }).catchError((error) {
                 coroutine.awaitError = error;
-                
-                // Notify external handler for error handling
                 if (coroutineResumeCallback != null) {
                   coroutineResumeCallback!(coroutine, null, error);
-                } else {
-                  // Fallback: direct error handling
-                  _awaitingFuture = false;
-                  _pendingFuture = null;
-                  _pendingFrame = null;
-                  resumeCoroutineWithError(coroutine, error);
                 }
+                // In standalone mode, we don't resume automatically, 
+                // but we must catch the error to prevent uncaught exception crash.
               });
               
               // Return awaiting status - VM loop exits
@@ -1622,22 +1665,9 @@ class VM {
         }
       }
     } catch (e, stack) {
-      print('DEBUG VM RUNTIME EXCEPTION: $e');
-      print('Stack Trace: $stack');
-      if (_frames.isNotEmpty) {
-        final frame = _frames.last;
-        print('IP: ${frame.ip}');
-        if (frame.ip > 0 && frame.ip <= frame.chunk.code.length) {
-             try {
-                 final opCode = frame.chunk.code[frame.ip - 1]; // -1 as ip was incremented
-                 print('Last OpCode: ${OpCode.values[opCode]}');
-             } catch (_) {}
-        }
-      }
       _runtimeError(e.toString());
       return InterpretResult.runtimeError;
     }
-    // return InterpretResult.ok; // Unreachable
   }
 
   // Helper method for isAwaiting check (used in tests)

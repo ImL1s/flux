@@ -52,7 +52,10 @@ void main() {
         var f;
         var setup = fn () {
           var captured = "hello";
-          f = fn () { return captured; };
+          f = fn () { 
+            return captured; 
+          };
+          return null;
         };
         setup();
         print(f());

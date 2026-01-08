@@ -39,6 +39,7 @@ void main() {
       expect(result, InterpretResult.awaiting);
       
       // Now complete with error
+      completer.future.catchError((_) => 0); // Suppress unhandled error in test runner (return dummy int)
       completer.completeError('Network Error');
       
       // Resume should propagate error

@@ -122,10 +122,8 @@ class Compiler {
       _locals.add(Local("", 0));
       
       if (unit != null) {
-          print('DEBUG COMPILER: Unit has ${unit.declarations.length} declarations');
           // compile everything
           for (final decl in unit.declarations) {
-              print('DEBUG COMPILER: Compiling decl type: ${decl.runtimeType}');
               compile(decl);
           }
       }
@@ -147,7 +145,7 @@ class Compiler {
   /// [variableNames] is the list of local variables available in the scope,
   /// ordered by their stack slot index.
   void compile(Statement statement) {
-    print('DEBUG COMPILER: Compiling statement type: ${statement.runtimeType} at line ${statement.line}');
+
     if (statement is BlockStmt) {
       _compileBlock(statement);
     } else if (statement is ExpressionStmt) {
@@ -253,7 +251,7 @@ class Compiler {
      }
      
      // DEBUG
-     print('Compiling Widget ${stmt.name}, State: $stateNames, Persistent: $persistentStateNames');
+
      
      // Create build method compiler with state context
       final buildCompiler = Compiler._inner(this, "${stmt.name}.build");
@@ -267,7 +265,7 @@ class Compiler {
       );
       
       // DEBUG
-      print('BuildCompiler created. _stateFields: ${buildCompiler._stateFields}');
+
       
       // Begin scope and add props as local variables
       buildCompiler._beginScope();
@@ -764,7 +762,7 @@ class Compiler {
 
   void _compileVariable(VariableExpr expr) {
       final isState = _isStateField(expr.name);
-      print('DEBUG COMPILER: Compiling variable: ${expr.name}, isState: $isState');
+
       if (isState) {
         _emit(OpCode.getState, expr.line, expr.column);
         chunk.write(chunk.addConstant(expr.name), expr.line);
@@ -921,9 +919,8 @@ class Compiler {
     
     final local = _enclosing!._resolveLocal(name);
     if (local != -1) {
-      print('DEBUG COMPILER: Resolving upvalue "$name" -> enclosing local $local. Prev captured: ${_enclosing!._locals[local].isCaptured}');
+      // Mark the local as captured so it gets closed properly
       _enclosing!._locals[local].isCaptured = true;
-      print('DEBUG COMPILER: Marked enclosing local $local as captured.');
       return _addUpvalue(local, true);
     }
     
@@ -959,7 +956,7 @@ class Compiler {
       // Slot computation
       final slot = _locals.length - 1;
       final local = _locals.removeLast();
-      print('DEBUG COMPILER: Pop/Close local "$local.name" at slot $slot (captured: ${local.isCaptured}) [Depth: ${local.depth}]');
+
 
       // If captured, close it using closeUpvalue. Otherwise just pop.
       // Note: closeUpvalue also pops the value from stack.
@@ -974,7 +971,7 @@ class Compiler {
   void _addLocal(String name) {
     final slot = _locals.length;
     _locals.add(Local(name, _scopeDepth));
-    print('DEBUG COMPILER: Added local "$name" at slot $slot [Depth: $_scopeDepth]');
+
   }
 
   int _resolveLocal(String name) {

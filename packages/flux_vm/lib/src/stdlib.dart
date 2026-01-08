@@ -5,6 +5,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math' as math;
+import 'package:http/http.dart' as http;
 
 /// Native function wrapper (synchronous)
 class NativeFunction {
@@ -55,6 +56,8 @@ class StdLib {
   
   /// Initialize all standard library functions
   static void init() {
+    functions.clear();
+    modules.clear();
     // Core functions
     _registerCore();
     // Math functions
@@ -70,6 +73,44 @@ class StdLib {
     _registerBase64Module();
     _registerRegexModule();
     _registerDateModule();
+    _registerHttpModule();
+  }
+
+  static void _registerHttpModule() {
+    final httpModule = FluxModule('http');
+    
+    // Import http package here or at top level. Top level is safer for StdLib.
+    // For now, using a dynamic approach if preferred, or standard imports.
+    
+    httpModule.register('get', AsyncNativeFunction('http.get', 1, (args) async {
+      final url = Uri.parse(args[0] as String);
+      final response = await _httpClient.get(url);
+      return {
+        'status': response.statusCode,
+        'body': response.body,
+        'headers': response.headers,
+      };
+    }));
+
+    httpModule.register('post', AsyncNativeFunction('http.post', 2, (args) async {
+      final url = Uri.parse(args[0] as String);
+      final body = args[1];
+      final response = await _httpClient.post(url, body: body);
+      return {
+        'status': response.statusCode,
+        'body': response.body,
+        'headers': response.headers,
+      };
+    }));
+
+    modules['http'] = httpModule;
+  }
+
+  static http.Client _httpClient = http.Client();
+  
+  /// Set a custom HTTP client (for testing)
+  static void setHttpClient(http.Client client) {
+    _httpClient = client;
   }
   
   static void _registerCore() {

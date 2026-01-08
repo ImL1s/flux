@@ -30,14 +30,7 @@ void main() {
       // returns InterpretResult.awaiting for top-level awaits.
       // But here test() is called without await at top level, so test() returns a Coroutine.
       
-      vm.interpret(source);
-      
-      // Wait for async execution
-      for (int i = 0; i < 10; i++) {
-        await Future.delayed(Duration(milliseconds: 20));
-        if (logs.any((l) => l.contains('Runtime Error'))) break;
-      }
-      
+      await vm.interpret_async(source);
       
       // Check if error was logged
       expect(logs.any((l) => l.contains('Runtime Error')), isTrue);
@@ -67,13 +60,7 @@ void main() {
         level1()         // Line 10
       ''';
 
-      vm.interpret(source);
-      
-      for (int i = 0; i < 10; i++) {
-        await Future.delayed(Duration(milliseconds: 20));
-        if (logs.any((l) => l.contains('Runtime Error'))) break;
-      }
-
+      await vm.interpret_async(source);
       
       expect(logs.any((l) => l.contains('at level2() [line 3]')), isTrue);
       expect(logs.any((l) => l.contains('at level1() [line 7]')), isTrue);
