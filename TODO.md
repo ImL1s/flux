@@ -1,5 +1,7 @@
 # Flux TODO
 
+[漢文文檔](TODO_ZH.md)
+
 This file tracks planned features and improvements. Each item should be implemented on a separate feature branch with a corresponding PR.
 
 ## ✅ Completed Features (v2.0.0)
