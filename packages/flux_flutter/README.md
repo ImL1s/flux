@@ -1,5 +1,7 @@
 # Flux Flutter
 
+[漢文文檔](README_ZH.md)
+
 [![pub package](https://img.shields.io/pub/v/flux_flutter.svg)](https://pub.dev/packages/flux_flutter)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 

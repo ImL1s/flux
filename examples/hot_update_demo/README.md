@@ -1,51 +1,52 @@
-# 🔥 Flux 熱更新展示 (Hot Update Demo)
+# 🔥 Flux Hot Update Demo
 
-這個範例展示了 Flux 的核心能力：在不重新編譯 App 的情況下，透過修改外部腳本即時更新 UI 和業務邏輯。
+[漢文文檔](README_ZH.md)
 
-## 📁 目錄結構
+This example demonstrates Flux's core capability: instantly updating UI and business logic by modifying external scripts without recompiling the App.
 
-- `scripts/` - 存放 Flux 腳本 (`.flux`)。
-- `server/` - 一個簡單的 Dart HTTP 伺服器，模擬遠端更新伺服器。
-- `flutter_app/` - 載入並載入腳本的 Flutter 應用程序。
+## 📁 Directory Structure
 
-## 🚀 快速開始
+- `scripts/` - Stores Flux scripts (`.flux`).
+- `server/` - A simple Dart HTTP server simulating a remote update server.
+- `flutter_app/` - The Flutter application that loads and executes scripts.
 
-> 📋 **前置條件**：請確認您已安裝 [Flutter SDK](https://flutter.dev/docs/get-started/install) 和 [Dart SDK](https://dart.dev/get-dart)。
+## 🚀 Quick Start
 
-### 1. 啟動熱更新伺服器 (選用)
+> 📋 **Prerequisites**: Ensure you have [Flutter SDK](https://flutter.dev/docs/get-started/install) and [Dart SDK](https://dart.dev/get-dart) installed.
 
-如果您想測試真正的「遠端」更新，請先啟動伺服器：
+### 1. Start Hot Update Server (Optional)
+
+If you want to test true "remote" updates, start the server first:
 
 ```bash
 cd examples/hot_update_demo/server
 dart pub get
 dart server.dart
 ```
-伺服器將運行在 `http://localhost:8081`。
+The server will run at `http://localhost:8081`.
 
-### 2. 啟動 Flutter App
+### 2. Launch Flutter App
 
 ```bash
 cd examples/hot_update_demo/flutter_app
 flutter pub get
-flutter run -d windows  # 或 -d chrome, -d macos 等
+flutter run -d windows  # or -d chrome, -d macos, etc.
 ```
 
+### 3. Test the Update
 
-### 3. 測試更新
+1. Toggle between **"Local File"** or **"Remote Server"** mode at the top of the App.
+2. Open and modify `examples/hot_update_demo/scripts/home_banner.flux`.
+3. Save the file.
+4. Click the **Refresh button (🔄)** in the top right corner of the App.
 
-1. 在 App 頂部切換 **「本地檔案」** 或 **「遠端伺服器」** 模式。
-2. 開啟並修改 `examples/hot_update_demo/scripts/home_banner.flux`。
-3. 儲存檔案。
-4. 點擊 App 右上角的 **刷新按鈕 (🔄)**。
+## 💡 Technical Highlights
 
-## 💡 技術要點
-
-- **雙模式支援**：支援從本地檔案系統或遠端 HTTP URL 載入腳本。
-- **Bytecode 執行**：腳本在載入後會立即編譯為 Bytecode 並由專屬 VM 執行。
-- **路徑自動搜尋**：App 內建智慧路徑搜尋，自動定位 `scripts` 文件夾。
-- **完整腳本語言**：除了 UI，還能處理 State、函數邏輯等。
+- **Dual-Mode Support**: Supports loading scripts from both the local file system and remote HTTP URLs.
+- **Bytecode Execution**: Scripts are compiled to Bytecode immediately upon loading and executed by a dedicated VM.
+- **Auto Path Discovery**: Built-in smart path searching to locate the `scripts` folder automatically.
+- **Full Scripting Language**: Handles State and functional logic in addition to UI.
 
 ---
 
-更多資訊請參考 [GitHub Repo](https://github.com/ImL1s/flux)
+For more information, please refer to the [GitHub Repo](https://github.com/ImL1s/flux)

@@ -1,113 +1,115 @@
-# Flux vs Lua 熱更新：技術對比
+# Flux vs Lua Hot Updates: Technical Comparison
 
-Flux 的設計理念借鏡了遊戲產業中成熟的 Lua 熱更新模式，並針對 Flutter 生態系統進行了專門優化。
+[漢文文檔](COMPARISON_ZH.md)
 
-## 核心概念對比
+Flux draws inspiration from the mature Lua hot update pattern used in the game industry and optimizes it specifically for the Flutter ecosystem.
 
-| 特性 | Lua 熱更新 | Flux 熱更新 |
+## Core Concept Comparison
+
+| Feature | Lua Hot Update | Flux Hot Update |
 |------|----------|------------|
-| **腳本化邏輯** | 遊戲邏輯寫在 `.lua` 腳本中 | UI 和邏輯寫在 `.flux` 腳本中 |
-| **嵌入式 VM** | App 內嵌 Lua VM 執行腳本 | App 內嵌 Flux VM 執行 Bytecode |
-| **動態載入** | 從伺服器下載新腳本並重新載入 | 從伺服器下載新腳本並重新載入 |
-| **繞過審核** | 可繞過 App Store 審核推送更新 | 同樣可繞過審核（腳本不改變核心功能） |
-| **沙箱執行** | 在隔離環境中執行，不影響宿主 App | 同樣設計為沙箱化執行 |
+| **Scripted Logic** | Game logic written in `.lua` scripts | UI and logic written in `.flux` scripts |
+| **Embedded VM** | App embeds Lua VM to run scripts | App embeds Flux VM to run Bytecode |
+| **Dynamic Loading** | Download new scripts from server and reload | Download new scripts from server and reload |
+| **Review Bypass** | Updates bypass App Store review | Similarly bypasses review (logic only) |
+| **Sandbox Execution** | Runs in isolated environment | Designed as sandboxed execution |
 
-## 技術差異
+## Technical Differences
 
-| 特性 | Lua 方案 | Flux 方案 |
+| Feature | Lua Solutions | Flux Solution |
 |------|---------|----------|
-| **主要用途** | 遊戲邏輯（Unity/Cocos2d-x） | Flutter UI + 業務邏輯 |
-| **Flutter 整合** | 需第三方套件如 `LuaDardo` | 原生設計專為 Flutter |
-| **語法風格** | Lua 語法（學習曲線較高） | 類 Dart/JS 語法（學習成本低） |
-| **Widget 支援** | 需自行橋接 Flutter Widget | 內建完整 Flutter Widget 綁定 |
-| **狀態管理** | 需自行實現 | 內建 `state` 關鍵字 + Riverpod 整合 |
+| **Primary Use** | Game Logic (Unity/Cocos2d-x) | Flutter UI + Business Logic |
+| **Flutter Integration** | Requires 3rd-party libs like `LuaDardo` | Native design specifically for Flutter |
+| **Syntax Style** | Lua Syntax (Higher learning curve) | Dart/JS-like syntax (Low learning cost) |
+| **Widget Support** | Requires manual bridging | Built-in Flutter widget bindings |
+| **State Management** | Manual implementation | Built-in `state` keyword + Riverpod |
 
-## 業界方案對比
+## Industry Solutions
 
-### 🎮 遊戲領域
-- **xLua（騰訊）**：用於 Unity 遊戲熱更新，廣泛應用於中國手遊市場。
-- **Cocos2d-x + Lua**：許多 2D 遊戲使用 Lua 腳本化遊戲邏輯。
-- **ToLua / SLua**：Unity 的其他 Lua 整合方案。
+### 🎮 Gaming
+- **xLua (Tencent)**: Used for Unity hot updates, widely in mobile games.
+- **Cocos2d-x + Lua**: Many 2D games use Lua for scripting logic.
+- **ToLua / SLua**: Other Lua integrations for Unity.
 
-### 📱 Flutter 領域
-- **LuaDardo**：純 Dart 實現的 Lua 5.3 VM，需自行處理 Widget 橋接。
-- **flutter_embed_lua**：嵌入式 Lua 解譯器，但缺乏 UI 整合。
-- **Shorebird**：Flutter 專屬的 Dart Code Push 方案，只能推送 Dart 代碼。
+### 📱 Flutter
+- **LuaDardo**: Pure Dart implementation of Lua 5.3 VM.
+- **flutter_embed_lua**: Embedded Lua interpreter lacking UI integration.
+- **Shorebird**: Dart Code Push solution for Flutter (pushes Dart code).
 
-## Flux 的獨特優勢
+## Unique Advantages of Flux
 
-1. **專為 Flutter 設計**
-   - 不需要額外的橋接層，直接支援 Flutter Widget。
-   - 與 Flutter 的響應式 UI 模型完美契合。
+1. **Designed for Flutter**
+   - No extra bridging layer; native support for Flutter Widgets.
+   - Perfectly fits the reactive UI model of Flutter.
 
-2. **類 Dart 語法**
-   - 對 Flutter 開發者幾乎零學習成本。
-   - 使用 `widget`、`state`、`build` 等熟悉的關鍵字。
+2. **Dart-like Syntax**
+   - Almost zero learning curve for Flutter developers.
+   - Uses familiar keywords like `widget`, `state`, and `build`.
 
-3. **完整工具鏈**
-   - LSP 支援（智能補全、跳轉定義）
-   - VS Code Extension（語法高亮、程式碼片段）
-   - CLI 工具（腳本執行與調試）
+3. **Complete Toolchain**
+   - LSP Support (Intelligent completion, Go to definition).
+   - VS Code Extension (Syntax highlighting, snippets).
+   - CLI Tool (Script execution and debugging).
 
-4. **輕量級整合**
-   - 不需要像 xLua 那樣複雜的設置。
-   - 單一 `FluxWidget` 即可嵌入任何 Flutter 頁面。
+4. **Lightweight Integration**
+   - No complex setup required.
+   - A single `FluxWidget` can embed any Flutter page.
 
-## 語言對接機制
+## Language Interop Mechanisms
 
-### Lua 如何與宿主語言對接
+### How Lua Connects to Host
 
-Lua 之所以能在遊戲產業廣泛使用，關鍵在於它優秀的**嵌入式設計**和**雙向綁定機制**：
+Lua's success in gaming is due to its **embedded design** and **bidirectional binding**:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                    宿主應用程式                      │
+│                    Host Application                  │
 │  ┌───────────┐        ┌───────────────────────────┐ │
 │  │  C/C++    │◄──────►│     Lua VM               │ │
-│  │  代碼     │ Stack  │  ┌─────────────────────┐  │ │
-│  │           │ API    │  │   Lua 腳本          │  │ │
+│  │  Code     │ Stack  │  ┌─────────────────────┐  │ │
+│  │           │ API    │  │   Lua Script        │  │ │
 │  └───────────┘        │  └─────────────────────┘  │ │
 │                       └───────────────────────────┘ │
 └─────────────────────────────────────────────────────┘
 ```
 
-**Lua 的 C API 特點：**
-1. **Stack-based 通訊**：透過一個虛擬「堆棧」在 C 和 Lua 之間傳遞數據。
-2. **註冊 C 函數**：可以將 C 函數暴露給 Lua 腳本調用。
-3. **調用 Lua 函數**：C 代碼可以執行 Lua 腳本中的函數。
-4. **完整類型轉換**：自動處理 Lua table ↔ C struct 等轉換。
+**Lua C API Features:**
+1. **Stack-based Communication**: Pass data via a virtual stack.
+2. **C Function Registration**: Expose C functions to Lua scripts.
+3. **Lua Function Call**: C code can execute Lua functions.
+4. **Type Conversion**: Automatic Lua table ↔ C struct conversion.
 
-### Flux 如何與 Dart/Flutter 對接
+### How Flux Connects to Dart/Flutter
 
-Flux 採用類似的設計理念，但針對 Dart 和 Flutter 進行了優化：
+Flux adopts similar principles but optimized for Dart:
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                   Flutter 應用程式                   │
+│                   Flutter Application                │
 │  ┌───────────┐        ┌───────────────────────────┐ │
 │  │   Dart    │◄──────►│     Flux VM              │ │
-│  │   代碼    │Bindings│  ┌─────────────────────┐  │ │
-│  │  (Widget) │        │  │   .flux 腳本        │  │ │
+│  │   Code    │Bindings│  ┌─────────────────────┐  │ │
+│  │  (Widget) │        │  │   .flux Script      │  │ │
 │  └───────────┘        │  └─────────────────────┘  │ │
 │                       └───────────────────────────┘ │
 └─────────────────────────────────────────────────────┘
 ```
 
-**Flux 的綁定系統：**
+**Flux Binding System:**
 
-| 能力 | Lua (C API) | Flux (Dart Bindings) |
+| Capability | Lua (C API) | Flux (Dart Bindings) |
 |------|-------------|---------------------|
-| 從腳本調用宿主函數 | `lua_register()` | `registerFunction()` |
-| 從宿主調用腳本函數 | `lua_pcall()` | `vm.callFunction()` |
-| 傳遞複雜數據 | Stack push/pop | 直接 Dart 物件映射 |
-| UI 組件整合 | 需自行橋接 | 內建 Widget Bindings |
+| Call host from script | `lua_register()` | `registerFunction()` |
+| Call script from host | `lua_pcall()` | `vm.callFunction()` |
+| Pass complex data | Stack push/pop | Direct Dart object mapping |
+| UI Component Integration | Manual bridge | Built-in Widget Bindings |
 
-### Flux 綁定範例
+### Interop Examples
 
-**1. 從 Flux 調用 Dart 函數：**
+**1. Calling Dart from Flux:**
 
 ```dart
-// Dart 側：註冊一個原生函數
+// Dart side
 final vm = VM();
 vm.registerFunction('showToast', (args) {
   final message = args[0] as String;
@@ -119,28 +121,15 @@ vm.registerFunction('showToast', (args) {
 ```
 
 ```javascript
-// Flux 腳本中調用
+// Flux side
 showToast("Hello from Flux!")
 ```
 
-**2. 從 Dart 讀取 Flux 狀態：**
+**2. Built-in Widget Bindings:**
 
-```dart
-// 透過 Riverpod Provider 雙向同步
-final counterProvider = NotifierProvider<FluxValueNotifier<int>, int>(
-  () => FluxValueNotifier(0),
-);
-
-// Flux 腳本可以讀寫這個 Provider
-// Dart 側也可以監聽變化
-```
-
-**3. 內建 Widget 綁定：**
-
-Flux 已內建 50+ Flutter Widget 的綁定，無需手動橋接：
+Flux includes bindings for 50+ Flutter Widgets natively:
 
 ```javascript
-// 直接在 Flux 中使用 Flutter Widget
 Container(
   color: "blue",
   child: Column(
@@ -152,20 +141,10 @@ Container(
 )
 ```
 
-### 擴展性對比
+## Conclusion
 
-| 擴展場景 | Lua | Flux |
-|---------|-----|------|
-| 新增原生函數 | ✅ 透過 C API 註冊 | ✅ 透過 `registerFunction` |
-| 新增 Widget 類型 | ❌ 需手動實現 | ✅ 可擴展 Widget Bindings |
-| 雙向狀態同步 | ⚠️ 需自行實現 | ✅ 內建 Riverpod 整合 |
-| 異步操作 | ⚠️ 需 coroutine 配合 | ✅ 原生 `async/await` |
-
-## 結論
-
-
-Flux 不是從零發明的新概念，而是將**遊戲產業驗證過的 Lua 熱更新模式**，專門為 **Flutter 生態系統**重新設計的方案。它結合了 Lua 方案的成熟性與 Flutter 開發的便利性，為跨平台應用提供了一個優雅的動態更新解決方案。
+Flux is not a reinvention but a redesign of the **Lua hot update pattern** specifically for the **Flutter ecosystem**. It combines the maturity of Lua patterns with the convenience of Flutter development.
 
 ---
 
-📚 [返回主文檔](../README.md) | [Lua 遷移指南](./lua_migration.md)
+📚 [Back to README](../README.md) | [Lua Migration Guide](./lua_migration.md)

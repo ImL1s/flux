@@ -1,4 +1,6 @@
-# flutter_demo
+# Flutter Demo (flutter_demo)
+
+[漢文文檔](README_ZH.md)
 
 A new Flutter project.
 

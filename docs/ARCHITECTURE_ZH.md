@@ -1,5 +1,7 @@
 # Flux 架構設計
 
+[English Documentation](ARCHITECTURE.md)
+
 Flux 是一個多組件系統，旨在為 Flutter 提供具有響應式指令碼功能的 **服務端驅動 UI (Server-Driven UI)**。本文件提供系統架構的深度概覽。
 
 ## 高層資料流

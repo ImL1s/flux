@@ -1,5 +1,7 @@
 # Flux DAP
 
+[漢文文檔](README_ZH.md)
+
 Debug Adapter Protocol implementation for the Flux programming language.
 
 Enables debugging of Flux scripts in VS Code, including breakpoints, stepping, and variable inspection.

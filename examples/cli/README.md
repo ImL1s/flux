@@ -1,5 +1,7 @@
 # Flux CLI Guide
 
+[漢文文檔](README_ZH.md)
+
 The **Flux CLI** is the primary tool for developing, compiling, and running Flux applications.
 
 ## Installation

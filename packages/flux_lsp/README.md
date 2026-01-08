@@ -1,5 +1,7 @@
 # Flux Language Server (LSP)
 
+[漢文文檔](README_ZH.md)
+
 [![pub package](https://img.shields.io/pub/v/flux_lsp.svg)](https://pub.dev/packages/flux_lsp)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 

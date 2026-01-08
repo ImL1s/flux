@@ -1,5 +1,7 @@
 # Flux Language Guide
 
+[漢文文檔](LANGUAGE_GUIDE_ZH.md)
+
 Flux is a dynamic scripting language designed for Flutter Server-Driven UI. It combines a Dart-like syntax with a reactive execution model similar to React or Flutter.
 
 ## Basics

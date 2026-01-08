@@ -1,18 +1,18 @@
-# Standard Library Reference
+# 標準庫參考 (Standard Library Reference)
 
-[漢文文檔](stdlib_reference_ZH.md)
+[English Documentation](stdlib_reference.md)
 
-## Built-in Functions
+## 核心內建函式 (Built-in Functions)
 
 ### print(value)
-Output a value to the console.
+將值輸出到控制台。
 ```flux
 print("Hello");
 print(42);
 ```
 
 ### len(collection)
-Get length of a list, string, or map.
+獲取列表、字串或映射的長度。
 ```flux
 len([1, 2, 3])     // 3
 len("hello")       // 5
@@ -20,7 +20,7 @@ len({"a": 1})      // 1
 ```
 
 ### type(value)
-Get the type of a value as a string.
+獲取值的類型（以字串形式返回）。
 ```flux
 type(42)           // "number"
 type("hi")         // "string"
@@ -29,191 +29,191 @@ type([1,2])        // "list"
 
 ---
 
-## List Functions
+## 列表函式 (List Functions)
 
 ### push(list, value)
-Add element to end of list.
+在列表末尾添加元素。
 ```flux
 var l = [1, 2];
 push(l, 3);  // l = [1, 2, 3]
 ```
 
 ### pop(list)
-Remove and return last element.
+移除並返回最後一個元素。
 ```flux
 var l = [1, 2, 3];
 var x = pop(l);  // x = 3, l = [1, 2]
 ```
 
 ### insert(list, index, value)
-Insert element at index.
+在指定索引處插入元素。
 ```flux
 var l = [1, 3];
 insert(l, 1, 2);  // l = [1, 2, 3]
 ```
 
 ### remove(list, index)
-Remove element at index.
+移除指定索引處的元素。
 ```flux
 var l = [1, 2, 3];
 remove(l, 1);  // l = [1, 3]
 ```
 
 ### indexOf(list, value)
-Find index of value (-1 if not found).
+查找值的索引（如果未找到則返回 -1）。
 ```flux
 indexOf([1, 2, 3], 2)  // 1
 ```
 
 ### sort(list)
-Sort list in place.
+原地排序列表。
 ```flux
 var l = [3, 1, 2];
 sort(l);  // l = [1, 2, 3]
 ```
 
 ### reverse(list)
-Reverse list in place.
+原地翻轉列表。
 ```flux
 var l = [1, 2, 3];
 reverse(l);  // l = [3, 2, 1]
 ```
 
 ### join(list, separator)
-Join list elements into string.
+將列表元素連接成字串。
 ```flux
 join(["a", "b", "c"], "-")  // "a-b-c"
 ```
 
 ---
 
-## String Functions
+## 字串函式 (String Functions)
 
 ### upper(string)
-Convert to uppercase.
+轉換為大寫。
 ```flux
 upper("hello")  // "HELLO"
 ```
 
 ### lower(string)
-Convert to lowercase.
+轉換為小寫。
 ```flux
 lower("HELLO")  // "hello"
 ```
 
 ### trim(string)
-Remove whitespace from both ends.
+移除兩端的空白字元。
 ```flux
 trim("  hi  ")  // "hi"
 ```
 
 ### split(string, delimiter)
-Split string into list.
+將字串分割成列表。
 ```flux
 split("a,b,c", ",")  // ["a", "b", "c"]
 ```
 
 ### contains(string, substring)
-Check if string contains substring.
+檢查字串是否包含子字串。
 ```flux
 contains("hello", "ell")  // true
 ```
 
 ### replace(string, old, new)
-Replace occurrences.
+替換出現的子字串。
 ```flux
 replace("hello", "l", "L")  // "heLLo"
 ```
 
 ### substring(string, start, end)
-Extract substring.
+提取子字串。
 ```flux
 substring("hello", 1, 4)  // "ell"
 ```
 
 ### toInt(string)
-Parse string to integer.
+將字串解析為整數。
 ```flux
 toInt("42")  // 42
 ```
 
 ### toDouble(string)
-Parse string to double.
+將字串解析為浮點數 (double)。
 ```flux
 toDouble("3.14")  // 3.14
 ```
 
 ---
 
-## Math Functions
+## 數學函式 (Math Functions)
 
 ### abs(number)
-Absolute value.
+絕對值。
 ```flux
 abs(-5)  // 5
 ```
 
 ### min(a, b)
-Minimum of two numbers.
+兩個數字中的最小值。
 ```flux
 min(3, 7)  // 3
 ```
 
 ### max(a, b)
-Maximum of two numbers.
+兩個數字中的最大值。
 ```flux
 max(3, 7)  // 7
 ```
 
 ### floor(number)
-Round down.
+向下取整。
 ```flux
 floor(3.7)  // 3
 ```
 
 ### ceil(number)
-Round up.
+向上取整。
 ```flux
 ceil(3.2)  // 4
 ```
 
 ### sqrt(number)
-Square root.
+平方根。
 ```flux
 sqrt(16)  // 4
 ```
 
 ### pow(base, exponent)
-Power.
+冪運算。
 ```flux
 pow(2, 3)  // 8
 ```
 
 ### random()
-Random number between 0 and 1.
+返回 0 到 1 之間的隨機數。
 ```flux
 random()  // 0.123...
 ```
 
 ### randomInt(min, max)
-Random integer in range [min, max].
+返回 [min, max] 範圍內的隨機整數。
 ```flux
 randomInt(1, 10)  // 7
 ```
 
 ---
 
-## JSON Module
+## JSON 模組 (JSON Module)
 
 ### json.parse(string)
-Parse JSON string to map.
+將 JSON 字串解析為映射 (Map)。
 ```flux
 var data = json.parse('{"name": "Flux"}');
 print(data["name"]);  // "Flux"
 ```
 
 ### json.stringify(value)
-Convert value to JSON string.
+將值轉換為 JSON 字串。
 ```flux
 var s = json.stringify({"x": 1, "y": 2});
 // '{"x":1,"y":2}'
@@ -221,89 +221,89 @@ var s = json.stringify({"x": 1, "y": 2});
 
 ---
 
-## HTTP Module
+## HTTP 模組 (HTTP Module)
 
 ### http.get(url)
-HTTP GET request (async).
+HTTP GET 請求（非同步）。
 ```flux
 var response = await http.get("https://api.example.com/data");
 print(response);
 ```
 
 ### http.post(url, body)
-HTTP POST request (async).
+HTTP POST 請求（非同步）。
 ```flux
 var response = await http.post("https://api.example.com/data", {"key": "value"});
 ```
 
 ---
 
-## Storage Module
+## 儲存模組 (Storage Module)
 
 ### storage.get(key)
-Get stored value (async).
+獲取存儲的值（非同步）。
 ```flux
 var value = await storage.get("username");
 ```
 
 ### storage.set(key, value)
-Store value (async).
+存儲值（非同步）。
 ```flux
 await storage.set("username", "john");
 ```
 
 ---
 
-## Timer Module
+## 計時器模組 (Timer Module)
 
 ### timer.delay(ms)
-Delay execution (async).
+延遲執行（非同步）。
 ```flux
-await timer.delay(1000);  // Wait 1 second
+await timer.delay(1000);  // 等待 1 秒
 print("Done!");
 ```
 
 ---
 
-## Device Module (Flutter)
+## 設備模組 (Device Module - Flutter)
 
 ### device.os
-Get operating system.
+獲取作業系統。
 ```flux
-print(device.os);  // "android" or "ios"
+print(device.os);  // "android" 或 "ios"
 ```
 
 ### device.version
-Get OS version.
+獲取作業系統版本。
 ```flux
 print(device.version);  // "13"
 ```
 
 ### device.model
-Get device model.
+獲取設備型號。
 ```flux
 print(device.model);  // "Pixel 7"
 ```
 
 ---
 
-## Dialog Module (Flutter)
+## 對話框模組 (Dialog Module - Flutter)
 
 ### dialog.alert(title, message)
-Show alert dialog (async).
+顯示警報對話框（非同步）。
 ```flux
-await dialog.alert("Notice", "Task completed!");
+await dialog.alert("注意", "任務已完成！");
 ```
 
 ### dialog.confirm(title, message)
-Show confirm dialog (async).
+顯示確認對話框（非同步）。
 ```flux
-var result = await dialog.confirm("Delete", "Are you sure?");
-if (result) { /* delete */ }
+var result = await dialog.confirm("刪除", "您確定嗎？");
+if (result) { /* 執行刪除 */ }
 ```
 
 ### dialog.toast(message)
-Show toast notification.
+顯示 Toast 提示。
 ```flux
-dialog.toast("Saved!");
+dialog.toast("已儲存！");
 ```

@@ -1,5 +1,7 @@
 # Flux VM
 
+[漢文文檔](README_ZH.md)
+
 [![pub package](https://img.shields.io/pub/v/flux_vm.svg)](https://pub.dev/packages/flux_vm)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 

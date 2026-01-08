@@ -1,5 +1,7 @@
 # Flux ⚡
 
+[漢文文檔](README_ZH.md)
+
 [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/ImL1s/flux)
 [![CI](https://github.com/ImL1s/flux/workflows/CI/badge.svg)](https://github.com/ImL1s/flux/actions)
 

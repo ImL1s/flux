@@ -1,5 +1,7 @@
 # Flux CLI (flux_lang_cli)
 
+[漢文文檔](README_ZH.md)
+
 [![pub package](https://img.shields.io/pub/v/flux_lang_cli.svg)](https://pub.dev/packages/flux_lang_cli)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 

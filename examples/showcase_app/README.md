@@ -1,28 +1,30 @@
-# Flux 綜合展示應用 (Showcase App)
+# Flux Showcase App
 
-這是一個功能完整的範例應用，展示了 Flux 腳本在真實場景中的強大能力。
+[漢文文檔](README_ZH.md)
 
-## 📱 包含頁面
+This is a full-featured example application demonstrating the power of Flux scripts in real-world scenarios.
 
-| 頁面 | 描述 | 展示技術 | 腳本路徑 |
+## 📱 Included Pages
+
+| Page | Description | Technologies Demonstrated | Script Path |
 |------|------|----------|----------|
-| **🛒 電商產品** | 產品詳情與互動 | 圖片輪播、狀態管理、Toast 調用 | `scripts/product_page.flux` |
-| **✅ 待辦事項** | 簡易 CRUD | 列表操作、條件渲染 | `scripts/todo_page.flux` |
-| **⚙️ 應用設定** | 系統偏好設定 | 開關、滑桿、原生儲存存取 | `scripts/settings_page.flux` |
-| **📊 數據儀表板** | 異步數據展示 | **Async/Await**、**Dio API 請求** | `scripts/dashboard_page.flux` |
+| **🛒 E-commerce** | Product details and interaction | Image carousel, State management, Toast notifications | `scripts/product_page.flux` |
+| **✅ Todo List** | Simple CRUD | List operations, conditional rendering | `scripts/todo_page.flux` |
+| **⚙️ Settings** | System preferences | Switches, sliders, native storage access | `scripts/settings_page.flux` |
+| **📊 Dashboard** | Async data display | **Async/Await**, **Dio API requests** | `scripts/dashboard_page.flux` |
 
-## 🚀 如何運行
+## 🚀 How to Run
 
-### 1. 啟動後端伺服器 (提供 API 與腳本)
+### 1. Start Backend Server (Provides API & Scripts)
 
 ```bash
 cd examples/showcase_app/server
 dart pub get
 dart server.dart
 ```
-> 伺服器運行於 `http://localhost:8082`
+> Server runs at `http://localhost:8082`
 
-### 2. 啟動 App
+### 2. Launch App
 
 ```bash
 cd examples/showcase_app/flutter_app
@@ -30,16 +32,16 @@ flutter pub get
 flutter run -d windows
 ```
 
-## 🔥 嘗試熱更新
+## 🔥 Try Hot Update
 
-1. 保持 App 運行在「數據儀表板」頁面。
-2. 開啟 `scripts/dashboard_page.flux`。
-3. 修改標題文字，例如將「營運總覽」改為「即時戰情室」。
-4. 儲存檔案，點擊 App 右上角的重新整理按鈕。
-5. **見證 UI 瞬間更新！**
+1. Keep the App running on the "Dashboard" page.
+2. Open `scripts/dashboard_page.flux`.
+3. Modify the title text, for example, change "Operations Overview" to "Real-time War Room".
+4. Save the file and click the refresh button in the top right corner of the App.
+5. **Witness the UI update instantly!**
 
-## 🏗️ 系統架構
+## 🏗️ System Architecture
 
-- **Flutter (Dart)**: 負責 App 骨架、導航 (`BottomNavigationBar`) 與原生功能 (Dio, Storage)。
-- **Flux**: 負責所有頁面的 UI 佈局與業務邏輯。
-- **Riverpod**: 作為狀態中介，雖然此範例主要由 Flux 內部 State 管理，但架構上支援雙向綁定。
+- **Flutter (Dart)**: Handles the App skeleton, navigation (`BottomNavigationBar`), and native features (Dio, Storage).
+- **Flux**: Responsible for all page UI layouts and business logic.
+- **Riverpod**: Acts as a state mediator. While this example primarily uses Flux's internal State, the architecture supports two-way binding.

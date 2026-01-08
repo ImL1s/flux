@@ -1,5 +1,7 @@
 # Flux Updater
 
+[漢文文檔](README_ZH.md)
+
 [![pub package](https://img.shields.io/pub/v/flux_updater.svg)](https://pub.dev/packages/flux_updater)
 [![Dart](https://img.shields.io/badge/Dart-3.6+-blue.svg)](https://dart.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)

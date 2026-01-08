@@ -1,5 +1,7 @@
 # Flux Architecture
 
+[漢文文檔](ARCHITECTURE_ZH.md)
+
 Flux is a multi-component system designed to enable **Server-Driven UI** for Flutter with a reactive scripting capability. This document provides an in-depth overview of the system architecture.
 
 ## High-Level Data Flow

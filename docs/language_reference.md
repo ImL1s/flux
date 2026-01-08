@@ -1,5 +1,7 @@
 # Flux Language Reference
 
+[漢文文檔](language_reference_ZH.md)
+
 ## Variables
 
 ```flux

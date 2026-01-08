@@ -1,5 +1,7 @@
 # Flux Standard Library
 
+[漢文文檔](STANDARD_LIBRARY_ZH.md)
+
 Flux supports a core set of built-in functions for manipulating data and interacting with the system.
 
 ## Generic

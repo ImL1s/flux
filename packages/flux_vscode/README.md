@@ -1,5 +1,7 @@
 # Flux VSCode Extension
 
+[漢文文檔](README_ZH.md)
+
 > Syntax highlighting, snippets, and language support for [Flux](https://github.com/ImL1s/flux) - A dynamic scripting language for Flutter Server-Driven UI.
 
 ## Features

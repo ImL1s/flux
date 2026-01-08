@@ -1,5 +1,7 @@
 # Security Guide
 
+[漢文文檔](security_ZH.md)
+
 ## Script Signing
 
 Flux supports Ed25519 digital signatures to ensure script integrity.

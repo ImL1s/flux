@@ -1,32 +1,34 @@
-# Flutter 整合指南
+# Flutter Integration Guide
 
-本指南將教你如何在 Flutter 應用中嵌入和使用 Flux 腳本。
+[漢文文檔](flutter_integration_ZH.md)
 
-## 1. 安裝與設定
+This guide will teach you how to embed and use Flux scripts in your Flutter application.
 
-在你的 Flutter 項目的 `pubspec.yaml` 中添加依賴：
+## 1. Installation & Setup
+
+Add dependencies to your Flutter project's `pubspec.yaml`:
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  # 添加 Flux 依賴
+  # Add Flux dependencies
   flux_vm: ^1.0.0
   flux_flutter: ^1.0.0
 ```
 
-然後運行：
+Then run:
 ```bash
 flutter pub get
 ```
 
 ---
 
-## 2. 最基礎的用法 (FluxWidget)
+## 2. Basic Usage (FluxWidget)
 
-`FluxWidget` 是核心組件，用於在 Flutter 界面中渲染 Flux 代碼。
+`FluxWidget` is the core component used to render Flux code within the Flutter interface.
 
-### 顯示簡單文字
+### Display Simple Text
 
 ```dart
 import 'package:flutter/material.dart';
@@ -36,16 +38,16 @@ class MyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flux 示例")),
+      appBar: AppBar(title: Text("Flux Example")),
       body: Center(
         child: FluxWidget(
-          // 定義 Flux Widget 名稱
+          // Define Flux Widget name
           widgetName: 'Greeting',
-          // Flux 源代碼
+          // Flux source code
           source: '''
             widget Greeting {
               build {
-                return Text("你好，Flutter！");
+                return Text("Hello, Flutter!");
               }
             }
           ''',
@@ -58,36 +60,36 @@ class MyScreen extends StatelessWidget {
 
 ---
 
-## 3. 狀態管理 (State)
+## 3. State Management
 
-Flux 擁有自己的狀態管理系統。當 `state` 變量改變時，UI 會自動更新。
+Flux has its own state management system. When a `state` variable changes, the UI updates automatically.
 
-### 計數器示例
+### Counter Example
 
 ```dart
 FluxWidget(
   widgetName: 'Counter',
   source: '''
     widget Counter {
-      // 定義狀態變量
+      // Define state variable
       state count = 0;
       
       build {
         return Column(
           children: [
-            Text("目前計數: " + count),
+            Text("Current count: " + count),
             
-            // 按鈕觸發狀態改變
+            // Buttons trigger state changes
             Row(
               children: [
                 Button(
-                  text: "增加",
+                  text: "Increment",
                   onTap: fn() { 
                     count = count + 1; 
                   }
                 ),
                 Button(
-                  text: "減少",
+                  text: "Decrement",
                   onTap: fn() { 
                     count = count - 1; 
                   }
@@ -104,14 +106,14 @@ FluxWidget(
 
 ---
 
-## 4. 支援的組件 (Widgets)
+## 4. Supported Widgets
 
-目前 Flux 支援以下基礎 Flutter 組件：
+Flux currently supports several basic Flutter widgets:
 
-| Flux 組件 | 對應 Flutter | 屬性範例 |
+| Flux Widget | Equivalent Flutter | Property Example |
 |-----------|--------------|----------|
 | `Text` | `Text` | `text: "Hello"`, `style: {...}` |
-| `Button` | `ElevatedButton` | `text: "按我"`, `onTap: fn() {...}` |
+| `Button` | `ElevatedButton` | `text: "Press me"`, `onTap: fn() {...}` |
 | `Column` | `Column` | `children: [...]` |
 | `Row` | `Row` | `children: [...]` |
 | `Container` | `Container` | `padding: 10`, `color: "red"`, `child: ...` |
@@ -119,7 +121,7 @@ FluxWidget(
 | `TextField` | `TextField` | `onChanged: fn(val) { ... }` |
 | `Center` | `Center` | `child: ...` |
 
-### 樣式示例
+### Styling Example
 
 ```dart
 widget StyledBox {
@@ -128,7 +130,7 @@ widget StyledBox {
       color: "blue",
       padding: 20,
       child: Text(
-        text: "白色文字",
+        text: "White text",
         style: {
           "color": "white",
           "fontSize": 24,
@@ -142,27 +144,27 @@ widget StyledBox {
 
 ---
 
-## 5. 進階：Flutter 與 Flux 交互
+## 5. Advanced: Flutter & Flux Interop
 
-### 從 Flutter 傳入初始數據
+### Passing Initial Data from Flutter
 
-你可以通過 `initialState` 將數據傳入 Flux：
+You can pass data into Flux via `initialState`:
 
 ```dart
 FluxWidget(
   widgetName: 'UserProfile',
   initialState: {
-    'username': '小明',
+    'username': 'John',
     'level': 5
   },
   source: '''
     widget UserProfile {
-      // 這些變量會被 initialState 初始化
+      // These variables will be initialized by initialState
       state username = "";
       state level = 0;
       
       build {
-        return Text("用戶: " + username + " (Lv." + level + ")");
+        return Text("User: " + username + " (Lv." + level + ")");
       }
     }
   ''',
@@ -171,156 +173,119 @@ FluxWidget(
 
 ---
 
-## 6. 開發階段：熱重載 (Hot Reload)
+## 6. Development: Hot Reload
 
-Flux 支援開發時的即時**熱重載 (Hot Reload)**，讓你在調整 UI 時無需重啟 App。
+Flux supports real-time **Hot Reload** during development, allowing you to adjust the UI without restarting the App.
 
-### 步驟 1: 設置熱重載服務
+### Step 1: Set Up Hot Reload Service
 
-在你的 Flutter `main.dart` 中：
+In your Flutter `main.dart`:
 
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // 連接到開發服務器 (模擬器用 10.0.2.2，真機用電腦 IP)
+  // Connect to dev server (use 10.0.2.2 for emulator, or your device's IP)
   final hotReload = await HotReloadService.connect('ws://127.0.0.1:8080');
   
   runApp(MyApp(hotReload: hotReload));
 }
 ```
 
-### 步驟 2: 使用 Flux CLI 啟動服務器 (在終端機)
+### Step 2: Start Server using Flux CLI (in terminal)
 
 ```bash
-# 監控 scripts 資料夾
+# Monitor the scripts folder
 flux dev --watch ./scripts
 ```
-現在，當你修改 `./scripts` 中的 `.flux` 文件時，App 會自動更新！
-
-### 實戰演練：體驗熱重載
-
-*(略...見上文)*
+Now, when you modify `.flux` files in `./scripts`, the App updates automatically!
 
 ---
 
-## 7. 生產環境：熱更新 (Hot Update)
+## 7. Production: Hot Update (OTA)
 
-這就是大家常說的**「熱更新」** (或稱 OTA Updates, Code Push)。
+This is what's commonly known as **"Hot Update"** (or OTA Updates, Code Push).
 
-### 什麼是熱更新？
+### What is Hot Update?
 
-與開發時的 "Hot Reload" 不同，**熱更新**是指在**應用發布上線後**，不通過 App Store / Play Store 審核，直接從伺服器下發新的邏輯和 UI 給用戶。
+Unlike "Hot Reload" during development, **Hot Update** refers to pushing new logic and UI directly from the server to users **after the app is released**, without passing through App Store / Play Store review.
 
-### 如何實現？
+### How to Implement?
 
-- **開發時 (Development)**：我們使用 `flux dev` 本地伺服器來實現秒級的 "Hot Reload"。
-- **發布後 (Production)**：不需要 `flux dev`！你可以把 Flux 腳本放在**任何 HTTP 後端** (如 AWS S3, Firebase, 或你自己的 API)。
+- **Development**: We use the `flux dev` local server for near-instant "Hot Reload".
+- **Production**: No `flux dev` needed! You can host Flux scripts on **any HTTP backend** (e.g., AWS S3, Firebase, or your own API).
 
-### 如何實現「雲端更新」功能？
+### How to Achieve "Cloud Updates"?
 
-在生產環境中，你只需要從網址下載腳本內容，然後傳給 `FluxWidget` 即可：
+In production, you just need to download the script content from a URL and pass it to `FluxWidget`:
 
 ```dart
-// 1. 從後端下載腳本
+// 1. Download script from backend
 final response = await http.get(Uri.parse('https://api.myapp.com/events/halloween.flux'));
 final scriptContent = response.body;
 
-// 2. 顯示組件
+// 2. Display the widget
 return FluxWidget(
   widgetName: 'EventCard',
-  source: scriptContent, // 直接使用下載的內容
+  source: scriptContent, // Use downloaded content directly
 );
 ```
 
-### 實戰應用：為什麼這很重要？
+### Real-world Application: Why it matters?
 
-想像你是運營經理，下週是萬聖節，你需要把首頁 Banner 換成南瓜主題並送出優惠券。
+Imagine you are an operations manager. Halloween is next week, and you need to change the home banner to a pumpkin theme and send out coupons.
 
-**傳統做法**：
-1. 請工程師改代碼。
-2. 提交 App Store 審核 (等待 1-2 天)。
-3. 用戶更新 App。
+**Traditional Way**:
+1. Ask engineers to change code.
+2. Submit to App Store for review (wait 1-2 days).
+3. Users update the App.
 
-**Flux 做法 (熱更新)**：
-1. 運營人員更新後端的 `home_banner.flux` 腳本。
-2. 用戶打開 App，自動下載新腳本。
-3. **首頁立刻變成萬聖節主題，無需更新 App！**
-
-#### 範例代碼：動態活動卡片
-
-```dart
-// home_banner.flux
-widget EventCard {
-  state themeColor = "orange";
-  state discount = "50%";
-  
-  build {
-    return Container(
-      color: themeColor,
-      padding: 16,
-      child: Column(
-        children: [
-          Text("🎃 萬聖節特價！"),
-          Text("全場 " + discount + " OFF"),
-          Button(text: "領取優惠", onTap: fn() { print("領取成功"); })
-        ]
-      )
-    );
-  }
-}
-```
-
-這就是 Flux 的核心價值：**極致的靈活性與運營效率。**
+**Flux Way (Hot Update)**:
+1. Operations staff updates the `home_banner.flux` script on the backend.
+2. Users open the App, which automatically downloads the new script.
+3. **The home page instantly becomes Halloween-themed without an App update!**
 
 ---
 
-## 8. 技術原理：Flux 虛擬機機制
+## 8. Technical Principles: Flux VM Mechanism
 
-你可能會好奇，為什麼 Flux 可以做到即時熱更新而不需要重新編譯整個 App？
+You might wonder how Flux achieves real-time hot updates without recompiling the entire App.
 
-### 核心概念：資料 (Data) vs 代碼 (Code)
+### Core Concept: Data vs Code
 
-Flux 的魔法在於：**對 Flutter 而言，Flux 腳本只是「資料」而非「代碼」。**
+The magic of Flux is: **To Flutter, a Flux script is just "Data", not "Code".**
 
-1. **腳本即數據**：就像 Word 讀取 .docx 文件一樣，Flux VM 讀取 .flux 腳本。修改腳本對 App 來說只是換了一組數據，不需要重新編譯 Dart 代碼。
-2. **虛擬機 (VM)**：`FluxWidget` 內部運行著一個微型虛擬機。當腳本改變時，VM 只是丟棄舊指令，加載新指令。
-3. **狀態保留 (State Preservation)**：這是最關鍵的一點。Flux 的熱重載流程如下：
+1. **Script as Data**: Just like Word reads a `.docx` file, Flux VM reads a `.flux` script. Modifying the script is just changing a data set for the App, requiring no Dart recompilation.
+2. **Virtual Machine (VM)**: `FluxWidget` runs a micro-VM inside. When a script changes, the VM just discards old instructions and loads new ones.
+3. **State Preservation**: This is the key. The hot reload process works as follows:
 
 ```mermaid
 graph TD
-    A[修改腳本] -->|WebSocket| B(Flux VM 收到更新)
-    B -->|1. 暫停| C[暫停執行]
-    C -->|2. 備份| D[備份當前 state 變量]
-    D -->|3. 替換| E[加載新的腳本邏輯]
-    E -->|4. 還原| F[將變量填回新腳本]
-    F -->|5. 重繪| G[通知 Flutter 更新 UI]
+    A[Modify Script] -->|WebSocket| B(Flux VM receives update)
+    B -->|1. Pause| C[Pause execution]
+    C -->|2. Backup| D[Backup current state variables]
+    D -->|3. Replace| E[Load new script logic]
+    E -->|4. Restore| F[Restore variables to new script]
+    F -->|5. Redraw| G[Notify Flutter to update UI]
 ```
 
-**結果**：你的應用邏輯變了（例如按鈕點擊從 `+1` 變成 `+10`），但你的數據還在（計數器還是保持在 `50`），這就是完美的熱重載體驗。
+**Result**: Your app logic has changed (e.g., button click changed from `+1` to `+10`), but your data persists (counter remains at `50`). This is a perfect hot reload experience.
 
 ---
 
-## 常見問題
+## FAQ
 
-### Q: 為什麼我的 UI 沒有更新？
-A: 確保你修改的是 `state` 變量。只有 `state` 關鍵字聲明的變量才會觸發重繪。普通 `var` 變量不會。
+### Q: Why is my UI not updating?
+A: Ensure you are modifying a `state` variable. Only variables declared with the `state` keyword trigger a redraw. Normal `var` variables do not.
 
-### Q: 支援自定義 Flutter 組件嗎？
-A: 支援！你可以在 `FluxBindings` 中註冊自己的 Flutter 組件供 Flux 使用。
+### Q: Does it support custom Flutter widgets?
+A: Yes! You can register your own Flutter widgets in `FluxBindings` for use in Flux.
 
 ```dart
-// 在 Flutter 中註冊
+// Register in Flutter
 FluxBindings.register('MyCustomWidget', (args, children) {
   return MyCustomFlutterWidget(
     title: args['title'],
   );
 });
-
-// 在 Flux 中使用
-widget Demo {
-  build {
-    return MyCustomWidget(title: "測試");
-  }
-}
 ```

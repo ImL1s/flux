@@ -1,5 +1,7 @@
 # Flux Widget Catalog
 
+[漢文文檔](WIDGET_CATALOG_ZH.md)
+
 This catalog lists all Flux widgets currently supported by the Flutter runtime.
 
 ## Layout Widgets

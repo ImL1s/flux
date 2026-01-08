@@ -1,5 +1,7 @@
 # Flux 語言指南
 
+[English Documentation](LANGUAGE_GUIDE.md)
+
 Flux 是一種專為 Flutter 服務端驅動 UI (Server-Driven UI) 設計的動態指令碼語言。它將類 Dart 語法與類似 React 或 Flutter 的響應式執行模型相結合。
 
 ## 基礎語法

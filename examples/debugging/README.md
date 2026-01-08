@@ -1,5 +1,7 @@
 # Debugging Flux Applications
 
+[漢文文檔](README_ZH.md)
+
 Flux supports full debugging capabilities in VSCode via the **Flux Extension**.
 
 ## Features

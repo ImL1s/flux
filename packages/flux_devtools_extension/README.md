@@ -1,4 +1,6 @@
-# flux_devtools_extension
+# Flux DevTools Extension
+
+[漢文文檔](README_ZH.md)
 
 A new Flutter project.
 
