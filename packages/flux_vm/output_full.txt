@@ -1,0 +1,342 @@
+00:00 +0: loading test\async_exception_test.dart
+00:00 +0: test\async_exception_test.dart: Async Exception Handling await on Future that completes with error
+00:00 +0 -1: test\class_test.dart: Class System Class instantiation and method call
+00:00 +1 -1: test\closure_test.dart: Basic closure
+00:00 +2 -1: test\closure_test.dart: Basic closure
+00:00 +2 -1: test\async_exception_test.dart: Async Exception Handling await on Future that completes with error [E]
+  Invalid argument(s) (onError): The error handler of Future.catchError must return a value of the future's type
+  dart:isolate  _RawReceivePort._handleMessage
+  
+00:00 +3 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +4 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +5 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +6 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +7 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +8 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +9 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +10 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +11 -1: test\concurrency_test.dart: VM Concurrency await on non-future value returns immediately
+00:00 +12 -1: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +13 -1: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +14 -1: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +15 -1: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +16 -1: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +17 -1: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +18 -1: test\debugger_control_test.dart: Debugger Control Pauses at breakpoint with moduleName
+00:00 +19 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +20 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +21 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +22 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +23 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +24 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +25 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +26 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +27 -1: test\debugger_strict_test.dart: Debugger Strict Tests Step Over skips function body and stops at next line
+00:00 +28 -1: test\exception_edge_test.dart: Exception Handling Edge Cases Nested try-catch blocks
+00:00 +29 -1: test\exception_edge_test.dart: Exception Handling Edge Cases Nested try-catch blocks
+00:00 +29 -1: test\debugger_strict_test.dart: Debugger Strict Tests Multiple breakpoints in a loop
+TEST: Multiple breakpoints in a loop START
+00:00 +30 -1: test\exception_edge_test.dart: Exception Handling Edge Cases Nested try-catch blocks
+00:00 +31 -1: test\exception_edge_test.dart: Exception Handling Edge Cases Nested try-catch blocks
+00:00 +32 -1: test\exception_edge_test.dart: Exception Handling Edge Cases Nested try-catch blocks
+00:00 +33 -1: test\debugger_test.dart: FluxProfiler Records function timing
+00:00 +34 -1: test\debugger_test.dart: FluxProfiler Records function timing
+00:00 +35 -1: test\exception_test.dart: Exception Handling Basic try-catch
+00:00 +36 -1: test\exception_test.dart: Exception Handling Basic try-catch
+00:00 +37 -1: test\exception_test.dart: Exception Handling Basic try-catch
+00:00 +38 -1: test\exception_test.dart: Exception Handling Basic try-catch
+00:00 +39 -1: test\exception_test.dart: Exception Handling Basic try-catch
+00:00 +40 -1: test\exception_test.dart: Exception Handling Basic try-catch
+00:00 +41 -1: test\expression_eval_test.dart: Expression Evaluation evaluates expressions with local variables
+00:00 +41 -1: test\http_test.dart: HTTP Module simple sync test
+DEBUG SYNC: result=InterpretResult.ok, stack=[null]
+00:00 +42 -1: test\http_test.dart: HTTP Module simple sync test
+00:00 +43 -1: test\http_test.dart: HTTP Module simple sync test
+00:00 +43 -2: test\inline_cache_test.dart: PolymorphicInlineCache returns null on cache miss
+00:00 +44 -2: test\inline_cache_test.dart: PolymorphicInlineCache returns cached method on cache hit
+00:00 +45 -2: test\inline_cache_test.dart: PolymorphicInlineCache tracks hit statistics
+00:00 +46 -2: test\inline_cache_test.dart: PolymorphicInlineCache supports polymorphic caching (multiple types)
+00:00 +47 -2: test\inline_cache_test.dart: PolymorphicInlineCache evicts least-used entry when full
+00:00 +48 -2: test\inline_cache_test.dart: PolymorphicInlineCache caches field access separately from methods
+00:00 +49 -2: test\inline_cache_test.dart: InlineCacheManager creates cache for new call site
+00:00 +50 -2: test\integration_test.dart: Class System defines and instantiates a simple class
+00:00 +51 -2: test\integration_test.dart: Class System defines and instantiates a simple class
+00:00 +52 -2: test\integration_test.dart: Class System defines and instantiates a simple class
+00:00 +52 -2: test\http_test.dart: HTTP Module simple sync test [E]
+  Expected: <43>
+    Actual: <null>
+  
+  package:matcher           expect
+  test\http_test.dart 41:7  main.<fn>.<fn>
+  
+00:00 +52 -2: test\http_test.dart: HTTP Module http.get records response correctly
+DEBUG: Entered testFetch
+00:00 +53 -2: test\http_test.dart: HTTP Module http.get records response correctly
+00:00 +54 -2: test\http_test.dart: HTTP Module http.get records response correctly
+DEBUG: Got response
+DEBUG: result=InterpretResult.ok, stack=[null]
+00:00 +54 -3: test\lambda_test.dart: Lambda Expressions basic anonymous function
+00:00 +54 -3: test\http_test.dart: HTTP Module http.get records response correctly [E]
+  Expected: <200>
+    Actual: <null>
+  
+  package:matcher           expect
+  test\http_test.dart 67:7  main.<fn>.<fn>
+  
+00:00 +55 -3: test\lambda_test.dart: Lambda Expressions basic anonymous function
+00:00 +55 -3: test\http_test.dart: HTTP Module http.post sends body and receives response
+DEBUG: Entered testPost
+00:00 +56 -3: test\lambda_test.dart: Lambda Expressions basic anonymous function
+00:00 +57 -3: test\lambda_test.dart: Lambda Expressions basic anonymous function
+00:00 +57 -3: test\http_test.dart: HTTP Module http.post sends body and receives response
+DEBUG: Got response
+DEBUG: result=InterpretResult.ok, stack=[null]
+00:00 +57 -4: test\lambda_test.dart: Lambda Expressions basic anonymous function
+00:00 +57 -4: test\http_test.dart: HTTP Module http.post sends body and receives response [E]
+  Expected: 'received'
+    Actual: <null>
+     Which: not an <Instance of 'String'>
+  
+  package:matcher           expect
+  test\http_test.dart 93:7  main.<fn>.<fn>
+  
+00:00 +58 -4: test\lambda_test.dart: Lambda Expressions basic anonymous function
+00:00 +59 -4: test\lambda_test.dart: Lambda Expressions basic anonymous function
+00:00 +60 -4: test\lambda_test.dart: Lambda Expressions basic anonymous function
+00:00 +61 -4: test\list_test.dart: List Operations List concatenation
+00:00 +62 -4: test\list_test.dart: List Operations List concatenation
+00:00 +63 -4: test\list_test.dart: List Operations List concatenation
+00:00 +64 -4: test\operator_edge_test.dart: Operator Edge Cases division by zero (float)
+00:00 +65 -4: test\operator_edge_test.dart: Operator Edge Cases division by zero (float)
+00:00 +66 -4: test\persistence_test.dart: VM State Persistence initializeState loads persisted value
+00:00 +67 -4: test\persistence_test.dart: VM State Persistence initializeState loads persisted value
+00:00 +67 -5: test\persistence_test.dart: VM State Persistence initializeState loads persisted value
+00:00 +68 -5: test\persistence_test.dart: VM State Persistence initializeState loads persisted value
+00:00 +69 -5: test\persistence_test.dart: VM State Persistence initializeState loads persisted value
+00:00 +70 -5: test\persistence_test.dart: VM State Persistence initializeState loads persisted value
+00:00 +71 -5: test\operator_edge_test.dart: Operator Edge Cases boolean operators
+00:00 +72 -5: test\persistence_test.dart: VM State Persistence setState saves persistent value
+00:00 +73 -5: test\persistence_test.dart: VM State Persistence setState saves persistent value
+00:00 +74 -5: test\profiler_test.dart: FluxProfiler records instructions
+00:00 +75 -5: test\profiler_test.dart: FluxProfiler records instructions
+00:00 +75 -5: test\lambda_test.dart: Lambda Expressions anonymous function assigned and called later [E]
+  Expected: 'hello'
+    Actual: 'null'
+     Which: is different.
+            Expected: hello
+              Actual: null
+                      ^
+             Differ at offset 0
+  
+  package:matcher             expect
+  test\lambda_test.dart 60:7  main.<fn>.<fn>
+  
+00:00 +76 -5: test\profiler_test.dart: FluxProfiler records instructions
+00:00 +77 -5: test\profiler_test.dart: FluxProfiler records instructions
+DEBUG: Instructions=13
+=== Flux Profiler Report ===
+Total Time: 12ms
+Total Instructions: 13
+
+Top Functions:
+  script
+    Calls: 1
+    Total: 5ms (42.1%)
+    Avg: 5316µs
+
+00:00 +78 -5: test\recursion_test.dart: Recursion and Limits Recursion within limits succeeds
+00:00 +79 -5: test\recursion_test.dart: Recursion and Limits Recursion within limits succeeds
+00:00 +80 -5: test\recursion_test.dart: Recursion and Limits Recursion within limits succeeds
+00:00 +81 -5: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+00:00 +81 -5: test\recursion_test.dart: Recursion and Limits Deep recursion triggers Stack Overflow
+Runtime Error: Stack overflow.
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at diverge() [line 2]
+   at script() [line 4]
+00:00 +81 -6: test\regression_test.dart: Regression Tests try-finally exception propagation (Fix: Exception Swallowing)
+Runtime Error: error
+   at script() [line 2]
+00:00 +82 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +83 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +84 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +84 -6: test\recursion_test.dart: Recursion and Limits Deep recursion triggers Stack Overflow [E]
+  Expected: InterpretResult:<InterpretResult.runtimeError>
+    Actual: InterpretResult:<InterpretResult.awaiting>
+  
+  package:matcher                expect
+  test\recursion_test.dart 20:7  main.<fn>.runScript
+  test\recursion_test.dart 45:7  main.<fn>.<fn>
+  
+00:00 +85 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +86 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +87 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +88 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +89 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +90 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +91 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +92 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +93 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +94 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +95 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +96 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +97 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +98 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +99 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +100 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +101 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +102 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +103 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +104 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +105 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +106 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +107 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +108 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +109 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +110 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +111 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +112 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +113 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +114 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +115 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +116 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +117 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +118 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +119 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +120 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +121 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +122 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +123 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +124 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +125 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +126 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +127 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +128 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +129 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +130 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +131 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +132 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +133 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +134 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +135 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +136 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +137 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +138 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +139 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +140 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +141 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +142 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +143 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +144 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +145 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +145 -6: test\vm_test.dart: VM Execution executes print statement
+Hello
+00:00 +146 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +146 -6: test\vm_test.dart: VM Execution executes arithmetic
+14
+00:00 +147 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +148 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +149 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +150 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +151 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +152 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +153 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +154 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +155 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +156 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +157 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +158 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +159 -6: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +159 -7: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +159 -7: test\vm_edge_test.dart: VM Edge Cases - Closures closure capturing loop variable [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher               expect
+  test\vm_edge_test.dart 153:7  main.<fn>.<fn>
+  
+00:00 +160 -7: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +161 -7: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +162 -7: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +163 -7: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +164 -7: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +165 -7: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line
+00:00 +165 -8: test\source_map_async_test.dart: Async Source Maps Error after await reports correct line [E]
+  Expected: true
+    Actual: <false>
+  
+  package:matcher                       expect
+  test\source_map_async_test.dart 43:7  main.<fn>.<fn>
+  
+00:00 +165 -8: test\source_map_async_test.dart: Async Source Maps Nested async traces
+00:00 +165 -9: test\source_map_async_test.dart: Async Source Maps Nested async traces [E]
+  Expected: true
+    Actual: <false>
+  
+  package:matcher                       expect
+  test\source_map_async_test.dart 78:7  main.<fn>.<fn>
+  
+00:00 +165 -9: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

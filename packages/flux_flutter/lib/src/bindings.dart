@@ -596,6 +596,26 @@ class FluxBindings {
       );
     });
 
+    // Hero widget (Animation)
+    register('Hero', (args, children) {
+      final tag = args['tag']?.toString();
+      final child = args['child'] as Widget? ??
+          (children.isNotEmpty ? children.first : null);
+
+      if (tag == null) {
+        return ErrorWidget('Hero requires a tag');
+      }
+
+      if (child == null) {
+        return ErrorWidget('Hero requires a child');
+      }
+
+      return Hero(
+        tag: tag,
+        child: child,
+      );
+    });
+
     // ========== Scaffold & AppBar (Phase 24: Extended Widget Library) ==========
 
     // Scaffold widget - The basic Material Design visual layout structure

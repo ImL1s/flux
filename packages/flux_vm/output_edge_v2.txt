@@ -1,0 +1,31 @@
+00:00 +0: loading test/vm_edge_test.dart
+00:00 +0: VM Edge Cases - Stack Operations deep recursion (50 calls)
+00:00 +1: VM Edge Cases - Stack Operations many local variables in scope
+00:00 +2: VM Edge Cases - Stack Operations stress: 10000 iterations
+00:00 +3: VM Edge Cases - Type Coercion string + number concatenation
+00:00 +4: VM Edge Cases - Type Coercion number + string concatenation
+00:00 +5: VM Edge Cases - Type Coercion boolean in string context
+00:00 +6: VM Edge Cases - Type Coercion nil in string context
+00:00 +7: VM Edge Cases - Collections nested lists (5 levels)
+00:00 +8: VM Edge Cases - Collections list modification during iteration
+00:00 +9: VM Edge Cases - Collections empty list operations
+00:00 +10: VM Edge Cases - Collections map with various key types
+00:00 +11: VM Edge Cases - Closures closure capturing loop variable
+Runtime Error Logs: [Runtime Error: RangeError (length): Invalid value: Not in inclusive range 0..1: 2,    at lambda() [line 4],    at script() [line 6]]
+00:00 +11 -1: VM Edge Cases - Closures closure capturing loop variable [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher               expect
+  test\vm_edge_test.dart 157:7  main.<fn>.<fn>
+  
+00:00 +11 -1: VM Edge Cases - Closures closure modifying captured variable
+00:00 +12 -1: VM Edge Cases - Closures multiple closures sharing same upvalue
+00:00 +13 -1: VM Edge Cases - Classes simple class instantiation
+00:00 +14 -1: VM Edge Cases - Exception Handling exception with nil value
+00:00 +15 -1: VM Edge Cases - Exception Handling exception with complex object
+00:00 +16 -1: VM Edge Cases - Exception Handling finally always runs on return
+00:00 +17 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

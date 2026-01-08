@@ -12,6 +12,8 @@ environment:
 dependencies:
   flux_compiler:
     path: ../flux_compiler
+  flux_vm:
+    path: ../flux_vm
   crypto: ^3.0.3
   path: ^1.9.0
   archive: ^4.0.7

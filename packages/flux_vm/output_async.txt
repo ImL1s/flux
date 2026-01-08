@@ -1,0 +1,11 @@
+00:00 +0: loading test/async_exception_test.dart
+00:00 +0: Async Exception Handling await on Future that completes with error
+00:00 +0 -1: Async Exception Handling await on Future that completes with error [E]
+  Network Error
+  
+00:00 +0 -1: Async Exception Handling multiple sequential awaits
+00:00 +1 -1: Async Exception Handling async inside try-catch
+00:00 +2 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

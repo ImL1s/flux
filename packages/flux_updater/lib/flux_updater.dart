@@ -11,3 +11,4 @@ export 'src/signature_utils.dart';
 export 'src/update_manager.dart';
 export 'src/ota_server.dart';
 export 'src/ota_client.dart';
+export 'src/cache_manager.dart';

@@ -15,6 +15,8 @@ import 'package:flux_flutter/src/modules/device_info_module_stub.dart'
     if (dart.library.io) 'package:flux_flutter/src/modules/device_info_module.dart';
 
 import 'package:flux_flutter/src/modules/animation_module.dart';
+import 'package:flux_flutter/src/modules/websocket_module.dart';
+import 'package:flux_flutter/src/modules/file_module.dart';
 
 /// Registry for Flux native modules that depend on Flutter/Dart ecosystem
 class FluxNativeModules {
@@ -39,5 +41,7 @@ class FluxNativeModules {
     reg('HiveStorageModule', HiveStorageModule());
     reg('SecureStorageModule', SecureStorageModule());
     reg('AnimationModule', AnimationModule(vsync));
+    reg('WebSocketModule', WebSocketModule());
+    reg('FileModule', FileModule());
   }
 }

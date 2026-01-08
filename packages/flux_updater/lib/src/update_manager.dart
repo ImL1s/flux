@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:flux_compiler/flux_compiler.dart';
+import 'package:flux_vm/flux_vm.dart';
+
 
 import 'chunk_serializer.dart';
 import 'diff_manager.dart';
 import 'flux_release.dart';
 import 'signature_utils.dart';
 import 'version_manager.dart';
+import 'cache_manager.dart';
 
 /// Status of an update check or download.
 enum UpdateStatus {
@@ -95,6 +98,9 @@ class FluxUpdateManager {
   /// Pending update waiting to be applied.
   PendingUpdate? _pendingUpdate;
 
+  /// Cache manager for offline support.
+  final FluxCacheManager? cacheManager;
+
   FluxUpdateManager({
     required this.appId,
     required this.serverUrl,
@@ -103,6 +109,7 @@ class FluxUpdateManager {
     this.onChunkReady,
     Chunk? currentChunk,
     VersionManager? versionManager,
+    this.cacheManager,
   })  : _currentBuildNumber = currentBuildNumber,
         _currentChunk = currentChunk,
         versionManager = versionManager ?? VersionManager();
@@ -116,13 +123,27 @@ class FluxUpdateManager {
   /// Whether an update is pending.
   bool get hasPendingUpdate => _pendingUpdate != null;
 
+  /// Initialize manager (load cache).
+  Future<void> initialize() async {
+    if (cacheManager != null) {
+      final state = await cacheManager!.loadVersionState();
+      if (state != null) {
+        versionManager.importFromJson(state);
+      }
+    }
+  }
+
   /// Check for available updates.
   Future<UpdateStatus> checkForUpdates() async {
     _emitProgress(UpdateStatus.upToDate, message: 'Checking for updates...');
 
     try {
-      // In a real implementation, this would make an HTTP request
-      // For now, check local version manager
+      // TODO: Real implementation would verify with server
+      // For now, check local version manager (populated via initialization or previous checks)
+      
+      // If we have connectivity, we should try to fetch manifest from server here.
+      // But adhering to the current simplified design that assumes versionManager is updated:
+
       if (versionManager.hasUpdate(appId, _currentBuildNumber)) {
         _emitProgress(UpdateStatus.updateAvailable,
             message: 'Update available');
@@ -133,6 +154,7 @@ class FluxUpdateManager {
       return UpdateStatus.upToDate;
     } catch (e) {
       _emitProgress(UpdateStatus.error, error: e, message: 'Check failed: $e');
+      // If offline, we might still be "up to date" relative to what we have locally
       return UpdateStatus.error;
     }
   }
@@ -161,6 +183,11 @@ class FluxUpdateManager {
 
       _emitProgress(UpdateStatus.downloading,
           progress: 0.5, message: 'Verifying...');
+
+      // Verify compatibility
+      if (!await checkCompatibility(latest)) {
+         throw Exception('Incompatible VM version. Required: ${latest.minVmVersion}, Current: ${VM.version}');
+      }
 
       // Determine if we should use patch or full chunk
       Chunk newChunk;
@@ -195,6 +222,16 @@ class FluxUpdateManager {
       _currentBuildNumber = latest.buildNumber;
       versionManager.setCurrentVersion(appId, latest.version);
 
+      // Persist to cache
+      if (cacheManager != null) {
+        // Save the full chunk
+        final bytes = ChunkSerializer.serialize(newChunk);
+        await cacheManager!.saveChunk(appId, latest.version, bytes);
+        
+        // Save version state
+        await cacheManager!.saveVersionState(versionManager.exportToJson());
+      }
+
       _emitProgress(UpdateStatus.applied,
           progress: 1.0, message: 'Update applied successfully');
 
@@ -203,6 +240,41 @@ class FluxUpdateManager {
       _emitProgress(UpdateStatus.error, error: e, message: 'Update failed: $e');
       return UpdateStatus.error;
     }
+  }
+
+  /// Load the latest cached version for offline support.
+  /// 
+  /// Returns `true` if a cached version was successfully loaded.
+  Future<bool> loadFromCache() async {
+    if (cacheManager == null) return false;
+
+    // Ensure version manager is loaded
+    await initialize();
+
+    final currentVersion = versionManager.getCurrentVersion(appId);
+    if (currentVersion == null) return false;
+
+    final release = versionManager.getRelease(appId, currentVersion);
+    if (release == null) return false;
+
+    try {
+      final bytes = await cacheManager!.loadChunk(appId, currentVersion);
+      if (bytes != null) {
+        final chunk = ChunkSerializer.deserialize(bytes);
+        
+        // Apply
+        if (onChunkReady != null) {
+          onChunkReady!(chunk);
+        }
+
+        _currentChunk = chunk;
+        _currentBuildNumber = release.buildNumber;
+        return true;
+      }
+    } catch (e) {
+      _emitProgress(UpdateStatus.error, error: e, message: 'Failed to load cache: $e');
+    }
+    return false;
   }
 
   /// Stage an update for later application.
@@ -247,6 +319,14 @@ class FluxUpdateManager {
     } catch (e) {
       return false;
     }
+  }
+
+  /// Check if the release is compatible with the current VM.
+  Future<bool> checkCompatibility(FluxRelease release) async {
+    final minVersion = release.minVmVersion;
+    if (minVersion == null) return true;
+
+    return VersionManager.compareVersions(VM.version, minVersion) >= 0;
   }
 
   void _emitProgress(

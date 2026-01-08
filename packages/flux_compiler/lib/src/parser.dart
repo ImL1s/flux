@@ -36,8 +36,8 @@ class Parser {
         if (e is ParseError) {
             errors.add(e);
         }
-        print('DEBUG PARSER: Error during parse: $e');
-        print(stack);
+        // print('DEBUG PARSER: Error during parse: $e');
+        // print(stack);
         _synchronize();
       }
     }
@@ -152,7 +152,7 @@ class Parser {
       if (_match(TokenType.state)) {
         final fieldToken = _consume(TokenType.identifier, 'Expect state variable name.');
         final fieldName = fieldToken.lexeme;
-        print('DEBUG PARSER: Found state field: $fieldName${isPersistent ? ' (persistent)' : ''}'); // DEBUG
+        // print('DEBUG PARSER: Found state field: $fieldName${isPersistent ? ' (persistent)' : ''}'); // DEBUG
         String? type;
         if (_match(TokenType.colon)) {
           type = _consume(TokenType.identifier, 'Expect state type.').lexeme;

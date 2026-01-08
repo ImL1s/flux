@@ -94,6 +94,26 @@ class VersionManager {
     final data = jsonDecode(json) as Map<String, dynamic>;
     _currentVersions.clear();
     _currentVersions.addAll(Map<String, String>.from(data['currentVersions']));
+
+    if (data.containsKey('releases')) {
+      final releases = data['releases'] as Map<String, dynamic>;
+      releases.forEach((key, value) {
+        // Reconstruct FluxRelease from metadata
+        // Note: Chunk is not stored in metadata, so we use empty bytes.
+        // The actual chunk is stored/loaded via CacheManager.
+        _releases[key] = FluxRelease(
+          appId: value['appId'],
+          version: value['version'],
+          buildNumber: value['buildNumber'],
+          chunk: Uint8List(0), // Placeholder
+          signature: value['signature'] ?? '', 
+          createdAt: DateTime.parse(value['createdAt']),
+          patchBaseVersion: value['patchBaseVersion'],
+          rollbackTo: value['rollbackTo'],
+          minVmVersion: value['minVmVersion'],
+        );
+      });
+    }
   }
 }
 

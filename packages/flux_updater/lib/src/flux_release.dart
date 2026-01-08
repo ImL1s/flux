@@ -34,6 +34,9 @@ class FluxRelease {
   /// Additional metadata.
   final Map<String, dynamic> metadata;
 
+  /// Minimum VM version required to run this release.
+  final String? minVmVersion;
+
   FluxRelease({
     required this.appId,
     required this.version,
@@ -45,6 +48,7 @@ class FluxRelease {
     required this.createdAt,
     this.rollbackTo,
     this.metadata = const {},
+    this.minVmVersion,
   });
 
   /// Whether this release has a diff patch available.
@@ -75,6 +79,7 @@ class FluxRelease {
       createdAt: DateTime.parse(json['createdAt'] as String),
       rollbackTo: json['rollbackTo'] as String?,
       metadata: Map<String, dynamic>.from(json['metadata'] ?? {}),
+      minVmVersion: json['minVmVersion'] as String?,
     );
   }
 
@@ -91,6 +96,7 @@ class FluxRelease {
       'createdAt': createdAt.toIso8601String(),
       if (rollbackTo != null) 'rollbackTo': rollbackTo,
       if (metadata.isNotEmpty) 'metadata': metadata,
+      if (minVmVersion != null) 'minVmVersion': minVmVersion,
     };
   }
 
@@ -105,6 +111,7 @@ class FluxRelease {
       'hasPatch': hasPatch,
       'patchBaseVersion': patchBaseVersion,
       'createdAt': createdAt.toIso8601String(),
+      'signature': signature,
     };
   }
 

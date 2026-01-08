@@ -1,0 +1,24 @@
+00:00 +0: loading test/concurrency_test.dart
+00:00 +0: VM Concurrency await on non-future value returns immediately
+00:00 +1: VM Concurrency await on Dart Future suspends execution
+DEBUG: resumeFromAwait failed: _awaitingFuture=true, _pendingFrame=null
+00:00 +1 -1: VM Concurrency await on Dart Future suspends execution [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                  expect
+  test\concurrency_test.dart 62:7  main.<fn>.<fn>
+  
+00:00 +1 -1: VM Concurrency async function call flow
+DEBUG: resumeFromAwait failed: _awaitingFuture=true, _pendingFrame=null
+00:00 +1 -2: VM Concurrency async function call flow [E]
+  Expected: InterpretResult:<InterpretResult.ok>
+    Actual: InterpretResult:<InterpretResult.runtimeError>
+  
+  package:matcher                  expect
+  test\concurrency_test.dart 94:7  main.<fn>.<fn>
+  
+00:00 +1 -2: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.
