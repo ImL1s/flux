@@ -32,7 +32,7 @@ class Parser {
     while (!_isAtEnd) {
       try {
         statements.add(_declaration());
-      } catch (e, stack) {
+      } catch (e) {
         if (e is ParseError) {
             errors.add(e);
         }

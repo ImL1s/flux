@@ -954,7 +954,7 @@ class Compiler {
     // print('DEBUG COMPILER: Ending scope depth $_scopeDepth');
     while (_locals.isNotEmpty && _locals.last.depth > _scopeDepth) {
       // Slot computation
-      final slot = _locals.length - 1;
+
       final local = _locals.removeLast();
 
 
@@ -969,7 +969,7 @@ class Compiler {
   }
 
   void _addLocal(String name) {
-    final slot = _locals.length;
+
     _locals.add(Local(name, _scopeDepth));
 
   }
