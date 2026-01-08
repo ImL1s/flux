@@ -691,6 +691,17 @@ InterpretResult resumeFromAwaitWithError(Object error) {
       return _callFunction(closure, argCount, namedArgs);
     }
 
+    // Handle async native functions (like timer.delay)
+    if (callee is AsyncNativeFunction) {
+      final args = _stack.sublist(_stack.length - argCount);
+      _stack.length -= argCount + 1;
+      
+      // Create Future and push it to stack (will be awaited by OpCode.await_)
+      final future = callee.call(args);
+      _stack.add(future);
+      return true;
+    }
+
     if (callee is NativeFunction) {
       // if (callee.name.contains('http')) {
       //    print('DEBUG PRE_CALL: name=${callee.name} expectedArgs=$argCount');
@@ -717,17 +728,6 @@ InterpretResult resumeFromAwaitWithError(Object error) {
         _runtimeError(e.toString());
         rethrow;
       }
-    }
-    
-    // Handle async native functions (like timer.delay)
-    if (callee is AsyncNativeFunction) {
-      final args = _stack.sublist(_stack.length - argCount);
-      _stack.length -= argCount + 1;
-      
-      // Create Future and push it to stack (will be awaited by OpCode.await_)
-      final future = callee.call(args);
-      _stack.add(future);
-      return true;
     }
 
     if (callee is CompiledClass) {
@@ -1568,6 +1568,23 @@ InterpretResult resumeFromAwaitWithError(Object error) {
                   }
                } else {
                   _runtimeError('Undefined module member: ${instance.name}.$name');
+                  return InterpretResult.runtimeError;
+               }
+            } else if (instance is Map) {
+               // Support for method-like calls on Maps (e.g. Animation module objects)
+               if (instance.containsKey(name)) {
+                  final method = instance[name];
+                   // Replace instance on stack with the member function
+                  _stack[_stack.length - argCount - 1] = method;
+                  if (!_callValue(method, argCount)) {
+                    if (_awaitingFuture) {
+                      return InterpretResult.awaiting;
+                    } else {
+                      return InterpretResult.runtimeError;
+                    }
+                  }
+               } else {
+                  _runtimeError('Undefined method "$name" on Map');
                   return InterpretResult.runtimeError;
                }
             } else {

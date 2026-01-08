@@ -10,6 +10,7 @@ import 'ui/flux_ui.dart';
 class FluxBindings {
   static final Map<String, FluxWidgetBuilder> _builders = {};
   static final Map<String, FluxFunction> _functions = {};
+  static final Set<String> _asyncFunctions = {};
 
   /// Global navigator key for Flux navigation
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -30,7 +31,11 @@ class FluxBindings {
   static void registerAsyncFunction(
       String name, Future<Object?> Function(List<Object?>) function) {
     _functions[name] = function;
+    _asyncFunctions.add(name);
   }
+
+  /// Check if a registered function is async
+  static bool isAsync(String name) => _asyncFunctions.contains(name);
 
   /// Get a widget builder by name
   static FluxWidgetBuilder? get(String name) => _builders[name];

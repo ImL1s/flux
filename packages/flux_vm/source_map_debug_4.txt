@@ -1,0 +1,31 @@
+00:00 +0: loading test/source_map_async_test.dart
+00:00 +0: Async Source Maps Error after await reports correct line
+DEBUG TEST: Calling interpret_async
+DEBUG: interpret returned awaiting, starting while loop
+DEBUG: Awaiting future: Instance of 'Future<Null>'
+DEBUG: Future completed, resuming with: null
+DEBUG VM: _runtimeError: type 'String' is not a subtype of type 'num' in type cast
+DEBUG VM TRACE:    at test() [line 5]
+DEBUG VM TRACE:    at script() [line 8]
+DEBUG: Resume result: InterpretResult.runtimeError
+DEBUG TEST: interpret_async finished with InterpretResult.runtimeError
+00:00 +0 -1: Async Source Maps Error after await reports correct line [E]
+  Expected: true
+    Actual: <false>
+  
+  package:matcher                       expect
+  test\source_map_async_test.dart 43:7  main.<fn>.<fn>
+  
+00:00 +0 -1: Async Source Maps Nested async traces
+DEBUG: interpret returned awaiting, starting while loop
+DEBUG: Awaiting future: Instance of 'Future<Null>'
+DEBUG: Future completed, resuming with: null
+DEBUG VM: _runtimeError: type 'String' is not a subtype of type 'num' in type cast
+DEBUG VM TRACE:    at level2() [line 3]
+DEBUG VM TRACE:    at level1() [line 7]
+DEBUG VM TRACE:    at script() [line 10]
+DEBUG: Resume result: InterpretResult.runtimeError
+00:00 +1 -1: Some tests failed.
+
+Consider enabling the flag chain-stack-traces to receive more detailed exceptions.
+For example, 'dart test --chain-stack-traces'.

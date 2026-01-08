@@ -1,10 +1,8 @@
-import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_flutter/src/modules/websocket_module.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart' as status;
 
 // Mock classes
 class MockWebSocketChannel extends Mock implements WebSocketChannel {}

@@ -52,8 +52,7 @@ class WebSocketModule extends FluxModule {
   /// Args:
   ///   - url: WebSocket URL (ws:// or wss://)
   ///   - options (optional): Map with:
-  ///     - protocols: List<String> of subprotocols
-  ///     - headers: Map<String, String> of custom headers
+  ///     - protocols: `List<String>` of subprotocols
   ///     - pingInterval: int (milliseconds) for keep-alive pings
   Future<Object?> _connect(List<Object?> args) async {
     final url = args[0] as String;
@@ -64,7 +63,6 @@ class WebSocketModule extends FluxModule {
       
       // Extract options
       final protocols = options?['protocols'] as List?;
-      final headers = options?['headers'] as Map?;
       final pingIntervalMs = options?['pingInterval'] as int?;
 
       // Create channel
@@ -165,7 +163,7 @@ class WebSocketModule extends FluxModule {
       throw 'WebSocket connection not found: $connectionId';
     }
 
-    if (!(callback is Function)) {
+    if (callback is! Function) {
       throw 'Second argument must be a callback function';
     }
 

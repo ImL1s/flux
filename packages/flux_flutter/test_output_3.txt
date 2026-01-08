@@ -1,5 +1,16 @@
 00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart
-00:00 +0: Flux Animation System Test
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart: Flux Animation System Test
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/debug_index_test.dart
+DEBUG RUNTIME: Source:     widget TestWidget {
+      state todos = [];
+      
+      build {
+        Column {
+          Button("Add", onPressed: fn() {
+            push(todos, "Item 1");
+          })
+          Column {
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart: Flux Animation System Test
 DEBUG RUNTIME: Source:       widget AnimDemo {
         state controller = Animation.createController(500);
         state anim = Animation.tween(0.0, 100.0).animate(controller);
@@ -14,61 +25,34 @@ DEBUG RUNTIME: Source:       widget AnimDemo {
         }
       }
     
-DEBUG PARSER: Found state field: controller
-DEBUG PARSER: Found state field: anim
+00:00 +0: loading D:/OtherProject/mine/flux/packages/flux_flutter/test/debug_index_test.dart
+            var i = 0;
+            while (i < todos.length) {
+              var todo = todos[i];
+              Text(todo)
+              i = i + 1;
+            }
+          }
+        }
+      }
+    }
+  
 DEBUG RUNTIME: Parsed unit with 1 declarations
-DEBUG COMPILER: Unit has 1 declarations
-DEBUG COMPILER: Compiling decl type: WidgetDecl
-DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
-Compiling Widget AnimDemo, State: [controller, anim]
-BuildCompiler created. _stateFields: [controller, anim]
-DEBUG COMPILER: Compiling variable: Column, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
-DEBUG COMPILER: Compiling variable: Button, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
-DEBUG COMPILER: Compiling variable: controller, isState: true
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
-DEBUG COMPILER: Compiling variable: Container, isState: false
-DEBUG COMPILER: Compiling variable: anim, isState: true
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: controller, isState: false
-DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
-Compiling Widget AnimDemo, State: [controller, anim]
-BuildCompiler created. _stateFields: [controller, anim]
-DEBUG COMPILER: Compiling variable: Column, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
-DEBUG COMPILER: Compiling variable: Button, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
-DEBUG COMPILER: Compiling variable: controller, isState: true
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 10
-DEBUG COMPILER: Compiling variable: Container, isState: false
-DEBUG COMPILER: Compiling variable: anim, isState: true
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: controller, isState: false
 DEBUG RUNTIME: Compilation finished. Bytecode size: 12
-🔧 FluxWidget._buildWidget() START
-🔧 Got widget definition: AnimDemo
-🔧 Executing build...
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: []), FluxWidgetNode(Column, args: {}, children: [])]) (Type: FluxWidgetNode)
+DEBUG renderWidget: node=FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: []), FluxWidgetNode(Column, args: {}, children: [])])
+SUCCESS: Built widget: Column
+00:00 +0: D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart: Flux Animation System Test
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
 🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: blue, height: 50, width: Instance of 'FluxAnimation'}, children: [])]) (Type: FluxWidgetNode)
-🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: blue, height: 50, width: Instance of 'FluxAnimation'}, children: [])])
-🔧 Converting to Flutter...
-🔧 Converted widget: Column
-🔧 FluxWidget._buildWidget() SUCCESS
 DEBUG CLOSURE: Executing onPressed closure, args=0
 DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
-🔧 FluxWidget._buildWidget() START
-🔧 Got widget definition: AnimDemo
-🔧 Executing build...
 🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: blue, height: 50, width: Instance of 'FluxAnimation'}, children: [])]) (Type: FluxWidgetNode)
-🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: blue, height: 50, width: Instance of 'FluxAnimation'}, children: [])])
-🔧 Converting to Flutter...
-🔧 Converted widget: Column
-🔧 FluxWidget._buildWidget() SUCCESS
 🗑️ FluxRuntime.dispose()
 🗑️ Disposing FluxAnimationController in state
-00:00 +1: Flux Animation Curves Test
+00:00 +1: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +1: D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart: Flux Animation Curves Test
 DEBUG RUNTIME: Source:       widget CurvedDemo {
         state controller = Animation.createController(1000);
         state curved = Animation.curved(controller, "bounceOut");
@@ -84,66 +68,16 @@ DEBUG RUNTIME: Source:       widget CurvedDemo {
         }
       }
     
-DEBUG PARSER: Found state field: controller
-DEBUG PARSER: Found state field: curved
-DEBUG PARSER: Found state field: anim
 DEBUG RUNTIME: Parsed unit with 1 declarations
-DEBUG COMPILER: Unit has 1 declarations
-DEBUG COMPILER: Compiling decl type: WidgetDecl
-DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
-Compiling Widget CurvedDemo, State: [controller, curved, anim]
-BuildCompiler created. _stateFields: [controller, curved, anim]
-DEBUG COMPILER: Compiling variable: Column, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
-DEBUG COMPILER: Compiling variable: Button, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
-DEBUG COMPILER: Compiling variable: controller, isState: true
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
-DEBUG COMPILER: Compiling variable: Container, isState: false
-DEBUG COMPILER: Compiling variable: anim, isState: true
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: controller, isState: false
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: curved, isState: false
-DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
-Compiling Widget CurvedDemo, State: [controller, curved, anim]
-BuildCompiler created. _stateFields: [controller, curved, anim]
-DEBUG COMPILER: Compiling variable: Column, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 8
-DEBUG COMPILER: Compiling variable: Button, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 9
-DEBUG COMPILER: Compiling variable: controller, isState: true
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 11
-DEBUG COMPILER: Compiling variable: Container, isState: false
-DEBUG COMPILER: Compiling variable: anim, isState: true
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: controller, isState: false
-DEBUG COMPILER: Compiling variable: Animation, isState: false
-DEBUG COMPILER: Compiling variable: curved, isState: false
 DEBUG RUNTIME: Compilation finished. Bytecode size: 12
-🔧 FluxWidget._buildWidget() START
-🔧 Got widget definition: CurvedDemo
-🔧 Executing build...
 🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: red, height: 50, width: Instance of 'FluxAnimation'}, children: [])]) (Type: FluxWidgetNode)
-🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: red, height: 50, width: Instance of 'FluxAnimation'}, children: [])])
-🔧 Converting to Flutter...
-🔧 Converted widget: Column
-🔧 FluxWidget._buildWidget() SUCCESS
 DEBUG CLOSURE: Executing onPressed closure, args=0
 DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
-🔧 FluxWidget._buildWidget() START
-🔧 Got widget definition: CurvedDemo
-🔧 Executing build...
 🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: red, height: 50, width: Instance of 'FluxAnimation'}, children: [])]) (Type: FluxWidgetNode)
-🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: []), FluxWidgetNode(Container, args: {color: red, height: 50, width: Instance of 'FluxAnimation'}, children: [])])
-🔧 Converting to Flutter...
-🔧 Converted widget: Column
-🔧 FluxWidget._buildWidget() SUCCESS
 🗑️ FluxRuntime.dispose()
 🗑️ Disposing FluxAnimationController in state
-00:00 +2: Flux Implicit Animation Test
+00:00 +2: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+00:00 +2: D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart: Flux Implicit Animation Test
 DEBUG RUNTIME: Source:       widget ImplicitDemo {
         state toggled = false;
         
@@ -161,6 +95,7 @@ DEBUG RUNTIME: Source:       widget ImplicitDemo {
             }
             
             AnimatedContainer(
+              key: "ac",
               duration: 500,
               curve: "easeIn",
               width: w,
@@ -171,74 +106,41 @@ DEBUG RUNTIME: Source:       widget ImplicitDemo {
         }
       }
     
-DEBUG PARSER: Found state field: toggled
 DEBUG RUNTIME: Parsed unit with 1 declarations
-DEBUG COMPILER: Unit has 1 declarations
-DEBUG COMPILER: Compiling decl type: WidgetDecl
-DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
-Compiling Widget ImplicitDemo, State: [toggled]
-BuildCompiler created. _stateFields: [toggled]
-DEBUG COMPILER: Compiling variable: Column, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
-DEBUG COMPILER: Compiling variable: Button, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
-DEBUG COMPILER: Compiling variable: toggled, isState: true
-DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
-DEBUG COMPILER: Added local "w" at slot 1 [Depth: 2]
-DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
-DEBUG COMPILER: Added local "c" at slot 2 [Depth: 2]
-DEBUG COMPILER: Compiling statement type: IfStmt at line 17
-DEBUG COMPILER: Compiling variable: toggled, isState: true
-DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
-DEBUG COMPILER: Compiling variable: AnimatedContainer, isState: false
-DEBUG COMPILER: Compiling variable: w, isState: false
-DEBUG COMPILER: Compiling variable: c, isState: false
-DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 2]
-DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
-DEBUG COMPILER: Compiling statement type: WidgetDecl at line 1
-Compiling Widget ImplicitDemo, State: [toggled]
-BuildCompiler created. _stateFields: [toggled]
-DEBUG COMPILER: Compiling variable: Column, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 6
-DEBUG COMPILER: Compiling variable: Button, isState: false
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 7
-DEBUG COMPILER: Compiling variable: toggled, isState: true
-DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 10
-DEBUG COMPILER: Added local "w" at slot 1 [Depth: 2]
-DEBUG COMPILER: Compiling statement type: VarDeclStmt at line 11
-DEBUG COMPILER: Added local "c" at slot 2 [Depth: 2]
-DEBUG COMPILER: Compiling statement type: IfStmt at line 17
-DEBUG COMPILER: Compiling variable: toggled, isState: true
-DEBUG COMPILER: Compiling statement type: BlockStmt at line 17
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 13
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 14
-DEBUG COMPILER: Compiling statement type: ExpressionStmt at line 17
-DEBUG COMPILER: Compiling variable: AnimatedContainer, isState: false
-DEBUG COMPILER: Compiling variable: w, isState: false
-DEBUG COMPILER: Compiling variable: c, isState: false
-DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 2 (captured: false) [Depth: 2]
-DEBUG COMPILER: Pop/Close local "Instance of 'Local'.name" at slot 1 (captured: false) [Depth: 2]
 DEBUG RUNTIME: Compilation finished. Bytecode size: 12
-🔧 FluxWidget._buildWidget() START
-🔧 Got widget definition: ImplicitDemo
-🔧 Executing build...
-🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 50.0, curve: easeIn, duration: 500}, children: [])]) (Type: FluxWidgetNode)
-🔧 executeBuild result: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 50.0, curve: easeIn, duration: 500}, children: [])])
-🔧 Converting to Flutter...
-🔧 Converted widget: Column
-🔧 FluxWidget._buildWidget() SUCCESS
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 50.0, curve: easeIn, duration: 500, key: ac}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 100.0, curve: easeIn, duration: 500, key: ac}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 100.0, curve: easeIn, duration: 500, key: ac}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:00 +3: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state
+DEBUG RUNTIME: Source:         widget AsyncTest {
+          state result = "pending";
+
+          build {
+            Column {
+              Text(result)
+              Button("Start", onPressed: async fn() {
+                result = await delay_return("completed");
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: pending}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Start}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
 ══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following TestFailure was thrown running a test:
-Expected: Color:<Color(alpha: 1.0000, red: 0.0000, green: 0.0000, blue: 1.0000, colorSpace:
-ColorSpace.sRGB)>
-  Actual: MaterialColor:<MaterialColor(primary value: Color(alpha: 1.0000, red: 0.1294, green:
-0.5882, blue: 0.9529, colorSpace: ColorSpace.sRGB))>
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "completed": []>
+   Which: means none were found but one was expected
 
 When the exception was thrown, this was the stack:
-#4      main.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart:156:5)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:56:7)
 <asynchronous suspension>
 #5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
 <asynchronous suspension>
@@ -248,12 +150,2220 @@ When the exception was thrown, this was the stack:
 (elided one frame from package:stack_trace)
 
 This was caught by the test expectation on the following line:
-  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/animation_integration_test.dart line 156
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 56
 The test description was:
-  Flux Implicit Animation Test
+  simple await resolves and updates state
 ════════════════════════════════════════════════════════════════════════════════════════════════════
-00:00 +2 -1: Flux Implicit Animation Test [E]
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: (setUpAll)
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await simple await resolves and updates state [E]
   Test failed. See exception logs above.
-  The test description was: Flux Implicit Animation Test
+  The test description was: simple await resolves and updates state
   
-00:00 +2 -1: Some tests failed.
+00:00 +3 -1: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await await with immediate resolution
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget ImmediateAsyncTest {
+          state value = "waiting";
+
+          build {
+            Column {
+              Text(value)
+              Button("Go", onPressed: async fn() {
+                value = await immediate_return();
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: waiting}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Go}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "instant": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:90:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 90
+The test description was:
+  await with immediate resolution
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +3 -2: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: Flux Decoration & EdgeInsets renders Container with simple padding (numeric)
+00:00 +3 -2: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Basic Async/Await await with immediate resolution [E]
+  Test failed. See exception logs above.
+  The test description was: await with immediate resolution
+  
+00:00 +3 -2: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Sequential Awaits multiple sequential awaits execute in order
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget SequentialTest {
+          state log = "";
+
+          build {
+            Column {
+              Text(log)
+              Button("Run", onPressed: async fn() {
+                log = await append_async(log, "A");
+                log = await append_async(log, "B");
+                log = await append_async(log, "C");
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: }, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Run}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "ABC": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:130:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 130
+The test description was:
+  multiple sequential awaits execute in order
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:00 +3 -3: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: Flux Decoration & EdgeInsets renders Container with simple padding (numeric)
+00:00 +3 -3: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Sequential Awaits multiple sequential awaits execute in order [E]
+  Test failed. See exception logs above.
+  The test description was: multiple sequential awaits execute in order
+  
+00:01 +3 -3: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget TryCatchAsyncTest {
+          state status = "idle";
+          state errorMsg = "";
+
+          build {
+            Column {
+              Text(status)
+              Text(errorMsg)
+              Button("Trigger", onPressed: async fn() {
+                status = "running";
+                try {
+                  var result = await throw_error();
+                  status = "success";
+                } catch (e) {
+                  status = "failed";
+                  errorMsg = toString(e);
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: idle}, children: []), FluxWidgetNode(Text, args: {0: }, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Trigger}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: running}, children: []), FluxWidgetNode(Text, args: {0: }, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Trigger}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test:
+Exception: Async failure
+
+When the exception was thrown, this was the stack:
+#0      main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:138:9)
+<asynchronous suspension>
+
+The test description was:
+  try/catch catches async errors
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +3 -4: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: Flux Decoration & EdgeInsets renders Container with simple padding (numeric)
+00:01 +3 -4: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch catches async errors [E]
+  Test failed. See exception logs above.
+  The test description was: try/catch catches async errors
+  
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test (but after the test had completed):
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "failed": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:149:31)
+#1      _expect (package:matcher/src/expect/expect.dart:144:3)
+#2      expect (package:matcher/src/expect/expect.dart:56:3)
+#3      expect (package:flutter_test/src/widget_tester.dart:480:18)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:176:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: try/catch catches async errors
+  
+00:01 +4 -4: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch with successful async recovers
+00:01 +5 -4: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch with successful async recovers
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget RecoveryTest {
+          state result = "pending";
+
+          build {
+            Column {
+              Text(result)
+              Button("Safe", onPressed: async fn() {
+                try {
+                  result = await may_fail(false);
+                } catch (e) {
+                  result = "error";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: pending}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Safe}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "ok": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:218:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 218
+The test description was:
+  try/catch with successful async recovers
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +5 -5: D:/OtherProject/mine/flux/packages/flux_flutter/test/deep_inspection_test.dart: Deep Object Inspection Test Verifies deep inspection of List and Map
+00:01 +5 -5: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Try/Catch with Async try/catch with successful async recovers [E]
+  Test failed. See exception logs above.
+  The test description was: try/catch with successful async recovers
+  
+00:01 +6 -5: D:/OtherProject/mine/flux/packages/flux_flutter/test/deep_inspection_test.dart: Deep Object Inspection Test Verifies deep inspection of List and Map
+00:01 +7 -5: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await await inside conditional branch
+00:01 +8 -5: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await await inside conditional branch
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget ConditionalAwaitTest {
+          state output = 0;
+
+          build {
+            Column {
+              Text(toString(output))
+              Button("Fetch", onPressed: async fn() {
+                var data = await fetch_data();
+                if (data["success"] == true) {
+                  output = data["value"];
+                } else {
+                  output = -1;
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Fetch}, children: [])]) (Type: FluxWidgetNode)
+00:01 +9 -5: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await await inside conditional branch
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "42": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:261:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 261
+The test description was:
+  await inside conditional branch
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +9 -6: D:/OtherProject/mine/flux/packages/flux_flutter/test/decoration_test.dart: (tearDownAll)
+00:01 +9 -6: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await await inside conditional branch [E]
+  Test failed. See exception logs above.
+  The test description was: await inside conditional branch
+  
+00:01 +9 -6: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await multiple state updates in single async function
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget MultiStateTest {
+          state step = 0;
+          state message = "";
+
+          build {
+            Column {
+              Text(toString(step))
+              Text(message)
+              Button("Process", onPressed: async fn() {
+                step = 1;
+                message = await step_delay("loading");
+                step = 2;
+                message = await step_delay("processing");
+                step = 3;
+                message = await step_delay("done");
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: 0}, children: []), FluxWidgetNode(Text, args: {0: }, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Process}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: 1}, children: []), FluxWidgetNode(Text, args: {0: }, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Process}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "3": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:305:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 305
+The test description was:
+  multiple state updates in single async function
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +9 -7: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Nested Await multiple state updates in single async function [E]
+  Test failed. See exception logs above.
+  The test description was: multiple state updates in single async function
+  
+00:01 +9 -7: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await with null result
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget NullAwaitTest {
+          state value = "initial";
+
+          build {
+            Column {
+              Text(value)
+              Button("Nullify", onPressed: async fn() {
+                var result = await return_null();
+                if (result == null) {
+                  value = "got_null";
+                } else {
+                  value = "got_value";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: initial}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Nullify}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "got_null": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:346:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 346
+The test description was:
+  await with null result
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +9 -8: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await with null result [E]
+  Test failed. See exception logs above.
+  The test description was: await with null result
+  
+00:01 +9 -8: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await returning complex nested data
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget NestedDataTest {
+          state userName = "";
+
+          build {
+            Column {
+              Text(userName)
+              Button("Load", onPressed: async fn() {
+                var data = await get_nested();
+                userName = data["user"]["name"];
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: }, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Load}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Alice": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:386:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 386
+The test description was:
+  await returning complex nested data
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +9 -9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Edge Cases await returning complex nested data [E]
+  Test failed. See exception logs above.
+  The test description was: await returning complex nested data
+  
+00:01 +9 -9: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios async timeout simulation
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget TimeoutTest {
+          state status = "start";
+
+          build {
+            Column {
+              Text(status)
+              Button("Run", onPressed: async fn() {
+                // Determine if we should wait long or short
+                // Note: Flux doesn't have Future.timeout built-in yet, 
+                // so we simulate checking "too long" via a racing pattern manually if needed.
+                // Here we just verify long delays work correctly.
+                status = "waiting";
+                var res = await delayed_msg(50); 
+                status = res;
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: start}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Run}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: waiting}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Run}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "done": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:433:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 433
+The test description was:
+  async timeout simulation
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +9 -10: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios async timeout simulation [E]
+  Test failed. See exception logs above.
+  The test description was: async timeout simulation
+  
+00:01 +9 -10: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios race condition on shared state
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget RaceTest {
+          state counter = 0;
+
+          build {
+            Column {
+              Text(toString(counter))
+              // Button A takes 50ms to add 1
+              Button("A", onPressed: async fn() {
+                var v = await async_incr(50);
+                counter = counter + v;
+              })
+              // Button B takes 10ms to add 1
+              Button("B", onPressed: async fn() {
+                var v = await async_incr(10);
+                counter = counter + v;
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: A}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: B}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "2": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:484:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart line 484
+The test description was:
+  race condition on shared state
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +9 -11: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios race condition on shared state [E]
+  Test failed. See exception logs above.
+  The test description was: race condition on shared state
+  
+00:01 +9 -11: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios error re-throwing
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget RethrowTest {
+          state error = "none";
+
+          build {
+            Column {
+              Text(error)
+              Button("Throw", onPressed: async fn() {
+                try {
+                  try {
+                    await fail_async();
+                  } catch (e) {
+                    // Rethrow implicitly or handle
+                    // Since Flux doesn't have 'throw e' yet, we simulate nested handling
+                    error = "caught_inner";
+                    // In a real rethrow scenario, we would need 'throw' support
+                  }
+                } catch (e2) {
+                  error = "caught_outer";
+                }
+              })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: none}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Throw}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+DEBUG CLOSURE: onPressed closure returned InterpretResult.awaiting
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following _Exception was thrown running a test:
+Exception: Original Error
+
+When the exception was thrown, this was the stack:
+#0      main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:489:9)
+#1      new FluxRuntime.<anonymous closure> (package:flux_flutter/src/flux_widget.dart:312:27)
+#2      VM._callValue (package:flux_vm/src/vm.dart:714:35)
+#3      VM._run (package:flux_vm/src/vm.dart:1142:18)
+#4      VM.executeClosure (package:flux_vm/src/vm.dart:477:20)
+#5      FluxRuntime._convertToFlutter.<anonymous closure> (package:flux_flutter/src/flux_widget.dart:560:32)
+#6      FluxBindings._initWidgets.<anonymous closure>.<anonymous closure> (package:flux_flutter/src/bindings.dart:133:59)
+#7      _InkResponseState.handleTap (package:flutter/src/material/ink_well.dart:1176:21)
+#8      GestureRecognizer.invokeCallback (package:flutter/src/gestures/recognizer.dart:351:24)
+#9      TapGestureRecognizer.handleTapUp (package:flutter/src/gestures/tap.dart:656:11)
+#10     BaseTapGestureRecognizer._checkUp (package:flutter/src/gestures/tap.dart:313:5)
+#11     BaseTapGestureRecognizer.handlePrimaryPointer (package:flutter/src/gestures/tap.dart:246:7)
+#12     PrimaryPointerGestureRecognizer.handleEvent (package:flutter/src/gestures/recognizer.dart:703:9)
+#13     PointerRouter._dispatch (package:flutter/src/gestures/pointer_router.dart:98:12)
+#14     PointerRouter._dispatchEventToRoutes.<anonymous closure> (package:flutter/src/gestures/pointer_router.dart:143:9)
+#15     _LinkedHashMapMixin.forEach (dart:_compact_hash:726:13)
+#16     PointerRouter._dispatchEventToRoutes (package:flutter/src/gestures/pointer_router.dart:141:18)
+#17     PointerRouter.route (package:flutter/src/gestures/pointer_router.dart:127:7)
+#18     GestureBinding.handleEvent (package:flutter/src/gestures/binding.dart:502:19)
+#19     GestureBinding.dispatchEvent (package:flutter/src/gestures/binding.dart:482:22)
+#20     RendererBinding.dispatchEvent (package:flutter/src/rendering/binding.dart:457:11)
+#21     GestureBinding._handlePointerEventImmediately (package:flutter/src/gestures/binding.dart:427:7)
+#22     GestureBinding.handlePointerEvent (package:flutter/src/gestures/binding.dart:390:5)
+#23     TestWidgetsFlutterBinding.handlePointerEventForSource.<anonymous closure> (package:flutter_test/src/binding.dart:677:42)
+#24     TestWidgetsFlutterBinding.withPointerEventSource (package:flutter_test/src/binding.dart:687:11)
+#25     TestWidgetsFlutterBinding.handlePointerEventForSource (package:flutter_test/src/binding.dart:677:5)
+#26     WidgetTester.sendEventToBinding.<anonymous closure> (package:flutter_test/src/widget_tester.dart:878:15)
+#29     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#30     WidgetTester.sendEventToBinding (package:flutter_test/src/widget_tester.dart:877:27)
+#31     TestGesture.up.<anonymous closure> (package:flutter_test/src/test_pointer.dart:558:26)
+#34     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#35     TestGesture.up (package:flutter_test/src/test_pointer.dart:551:27)
+#36     WidgetController.tapAt.<anonymous closure> (package:flutter_test/src/controller.dart:1096:21)
+<asynchronous suspension>
+#37     TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:120:7)
+<asynchronous suspension>
+#38     main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:522:7)
+<asynchronous suspension>
+#39     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#40     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 5 frames from dart:async and package:stack_trace)
+
+The test description was:
+  error re-throwing
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:01 +9 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+00:01 +9 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart: Advanced Async Scenarios error re-throwing [E]
+  Test failed. See exception logs above.
+  The test description was: error re-throwing
+  
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following TestFailure was thrown running a test (but after the test had completed):
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "caught_inner": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#0      fail (package:matcher/src/expect/expect.dart:149:31)
+#1      _expect (package:matcher/src/expect/expect.dart:144:3)
+#2      expect (package:matcher/src/expect/expect.dart:56:3)
+#3      expect (package:flutter_test/src/widget_tester.dart:480:18)
+#4      main.<anonymous closure>.<anonymous closure> (file:///D:/OtherProject/mine/flux/packages/flux_flutter/test/async_await_test.dart:526:7)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:189:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1027:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+  Test failed. See exception logs above.
+  The test description was: error re-throwing
+  
+00:01 +9 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/devtools_integration_test.dart: DevTools Integration Test Verifies service extension responses match UI expectations
+Runtime Error: Undefined global 'unknown_var'.
+   at script() [line 1]
+00:01 +10 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e/animation_e2e_test.dart: E2E: Interactive Dashboard Animation sidebar expand/collapse animation
+DEBUG RUNTIME: Source:         widget Dashboard {
+          state sidebarOpen = false;
+          
+          build {
+            Row {
+              var sidebarWidth = 60.0;
+              if (sidebarOpen) {
+                sidebarWidth = 200.0;
+              }
+              
+              AnimatedContainer(
+                key: "sidebar",
+                duration: 300,
+                curve: "easeInOut",
+                width: sidebarWidth,
+                height: 400.0,
+                color: "gray"
+              ) {
+                Column {
+                  Button("☰", onPressed: fn() { sidebarOpen = !sidebarOpen; });
+                }
+              }
+              
+              Container(width: 300.0, height: 400.0, color: "white");
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 400.0, width: 60.0, curve: easeInOut, duration: 300, key: sidebar}, children: [FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: ☰}, children: [])])]), FluxWidgetNode(Container, args: {color: white, height: 400.0, width: 300.0}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 400.0, width: 200.0, curve: easeInOut, duration: 300, key: sidebar}, children: [FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: ☰}, children: [])])]), FluxWidgetNode(Container, args: {color: white, height: 400.0, width: 300.0}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 400.0, width: 200.0, curve: easeInOut, duration: 300, key: sidebar}, children: [FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: ☰}, children: [])])]), FluxWidgetNode(Container, args: {color: white, height: 400.0, width: 300.0}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 400.0, width: 60.0, curve: easeInOut, duration: 300, key: sidebar}, children: [FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: ☰}, children: [])])]), FluxWidgetNode(Container, args: {color: white, height: 400.0, width: 300.0}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 400.0, width: 60.0, curve: easeInOut, duration: 300, key: sidebar}, children: [FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: ☰}, children: [])])]), FluxWidgetNode(Container, args: {color: white, height: 400.0, width: 300.0}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:02 +11 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +11 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e/animation_e2e_test.dart: E2E: Card Reveal Animation fades in and expands on tap
+DEBUG RUNTIME: Source:         widget CardReveal {
+          state revealed = false;
+          
+          build {
+            Column {
+              Button("Reveal", onPressed: fn() { revealed = true; });
+              
+              var op = 0.0;
+              var h = 0.0;
+              if (revealed) {
+                op = 1.0;
+                h = 200.0;
+              }
+              
+              AnimatedOpacity(
+                key: "cardOpacity",
+                duration: 400,
+                curve: "easeOut",
+                opacity: op
+              ) {
+                AnimatedContainer(
+                  key: "cardSize",
+                  duration: 400,
+                  curve: "easeOut",
+                  width: 300.0,
+                  height: h,
+                  color: "blue"
+                );
+              }
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Reveal}, children: []), FluxWidgetNode(AnimatedOpacity, args: {opacity: 0.0, curve: easeOut, duration: 400, key: cardOpacity}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 0.0, width: 300.0, curve: easeOut, duration: 400, key: cardSize}, children: [])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Reveal}, children: []), FluxWidgetNode(AnimatedOpacity, args: {opacity: 1.0, curve: easeOut, duration: 400, key: cardOpacity}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 200.0, width: 300.0, curve: easeOut, duration: 400, key: cardSize}, children: [])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Reveal}, children: []), FluxWidgetNode(AnimatedOpacity, args: {opacity: 1.0, curve: easeOut, duration: 400, key: cardOpacity}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 200.0, width: 300.0, curve: easeOut, duration: 400, key: cardSize}, children: [])])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:02 +12 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +13 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +14 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +15 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +16 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +17 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +18 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +19 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +20 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +21 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +22 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +23 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +24 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +25 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +26 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +27 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +28 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +29 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +30 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +30 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e/animation_e2e_test.dart: E2E: Loading State Transition spinner to content crossfade
+DEBUG RUNTIME: Source:         widget LoadingState {
+          state isLoading = true;
+          
+          build {
+            Column {
+              Button("Load", onPressed: fn() { isLoading = false; });
+              
+              var spinnerOp = 1.0;
+              var contentOp = 0.0;
+              if (!isLoading) {
+                spinnerOp = 0.0;
+                contentOp = 1.0;
+              }
+              
+              AnimatedOpacity(
+                key: "spinner",
+                duration: 300,
+                opacity: spinnerOp
+              ) {
+                Text("⏳ Loading...");
+              }
+              
+              AnimatedOpacity(
+                key: "content",
+                duration: 300,
+                opacity: contentOp
+              ) {
+                Text("✅ Loaded!");
+              }
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Load}, children: []), FluxWidgetNode(AnimatedOpacity, args: {opacity: 1.0, duration: 300, key: spinner}, children: [FluxWidgetNode(Text, args: {0: ⏳ Loading...}, children: [])]), FluxWidgetNode(AnimatedOpacity, args: {opacity: 0.0, duration: 300, key: content}, children: [FluxWidgetNode(Text, args: {0: ✅ Loaded!}, children: [])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Load}, children: []), FluxWidgetNode(AnimatedOpacity, args: {opacity: 0.0, duration: 300, key: spinner}, children: [FluxWidgetNode(Text, args: {0: ⏳ Loading...}, children: [])]), FluxWidgetNode(AnimatedOpacity, args: {opacity: 1.0, duration: 300, key: content}, children: [FluxWidgetNode(Text, args: {0: ✅ Loaded!}, children: [])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+00:02 +31 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +31 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e/animation_e2e_test.dart: E2E: Loading State Transition spinner to content crossfade
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Load}, children: []), FluxWidgetNode(AnimatedOpacity, args: {opacity: 0.0, duration: 300, key: spinner}, children: [FluxWidgetNode(Text, args: {0: ⏳ Loading...}, children: [])]), FluxWidgetNode(AnimatedOpacity, args: {opacity: 1.0, duration: 300, key: content}, children: [FluxWidgetNode(Text, args: {0: ✅ Loaded!}, children: [])])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:02 +32 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +33 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +34 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +35 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +36 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +37 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +38 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +39 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +39 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e/animation_e2e_test.dart: E2E: Multi-Step Form Wizard step indicator slides between steps
+DEBUG RUNTIME: Source:         widget FormWizard {
+          state step = 0;
+          
+          build {
+            Column {
+              Row {
+                Button("Prev", onPressed: fn() { 
+                  if (step > 0) { step = step - 1; }
+                });
+                Button("Next", onPressed: fn() { 
+                  if (step < 2) { step = step + 1; }
+                });
+              }
+              
+              var indicatorX = 0.0;
+              if (step == 1) { indicatorX = 100.0; }
+              if (step == 2) { indicatorX = 200.0; }
+              
+              Row {
+                AnimatedContainer(
+                  key: "indicator",
+                  duration: 250,
+                  curve: "fastOutSlowIn",
+                  margin: [0, indicatorX, 0, 0],
+                  width: 80.0,
+                  height: 4.0,
+                  color: "blue"
+                );
+              }
+              
+              var stepText = "Step 1";
+              if (step == 1) { stepText = "Step 2"; }
+              if (step == 2) { stepText = "Step 3"; }
+              
+              Text(stepText);
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 0.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 1}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 100.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 2}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 100.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 2}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 200.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 3}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 200.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 3}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 100.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 2}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 100.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 2}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 0.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 1}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Prev}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Next}, children: [])]), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 4.0, width: 80.0, margin: [0, 0.0, 0, 0], curve: fastOutSlowIn, duration: 250, key: indicator}, children: [])]), FluxWidgetNode(Text, args: {0: Step 1}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:02 +40 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +40 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e/animation_e2e_test.dart: E2E: Stress Tests rapid toggle does not break animation state
+DEBUG RUNTIME: Source:         widget RapidToggle {
+          state on = false;
+          
+          build {
+            Column {
+              Button("Toggle", onPressed: fn() { on = !on; });
+              
+              var w = 50.0;
+              var c = "red";
+              if (on) { 
+                w = 150.0; 
+                c = "green";
+              }
+              
+              AnimatedContainer(
+                key: "box",
+                duration: 500,
+                width: w,
+                height: 50.0,
+                color: c
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 50.0, duration: 500, key: box}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 50.0, width: 150.0, duration: 500, key: box}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 50.0, width: 150.0, duration: 500, key: box}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 50.0, duration: 500, key: box}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 50.0, duration: 500, key: box}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 50.0, width: 150.0, duration: 500, key: box}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 50.0, width: 150.0, duration: 500, key: box}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:02 +41 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +42 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +42 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e/animation_e2e_test.dart: E2E: Stress Tests multiple animated containers render correctly
+DEBUG RUNTIME: Source:         widget MultiBox {
+          state active = 0;
+          
+          build {
+            Column {
+              Button("Box1", onPressed: fn() { active = 1; });
+              Button("Box2", onPressed: fn() { active = 2; });
+              Button("Box3", onPressed: fn() { active = 3; });
+              
+              var w1 = 50.0;
+              var w2 = 50.0;
+              var w3 = 50.0;
+              
+              if (active == 1) { w1 = 100.0; }
+              if (active == 2) { w2 = 100.0; }
+              if (active == 3) { w3 = 100.0; }
+              
+              Row {
+                AnimatedContainer(key: "b1", duration: 200, width: w1, height: 30.0, color: "red");
+                AnimatedContainer(key: "b2", duration: 200, width: w2, height: 30.0, color: "green");
+                AnimatedContainer(key: "b3", duration: 200, width: w3, height: 30.0, color: "blue");
+              }
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box2}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box3}, children: []), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: red, height: 30.0, width: 50.0, duration: 200, key: b1}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 30.0, width: 50.0, duration: 200, key: b2}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 30.0, width: 50.0, duration: 200, key: b3}, children: [])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box2}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box3}, children: []), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: red, height: 30.0, width: 50.0, duration: 200, key: b1}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 30.0, width: 100.0, duration: 200, key: b2}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 30.0, width: 50.0, duration: 200, key: b3}, children: [])])]) (Type: FluxWidgetNode)
+00:02 +43 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +43 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e/animation_e2e_test.dart: E2E: Stress Tests multiple animated containers render correctly
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box2}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box3}, children: []), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: red, height: 30.0, width: 50.0, duration: 200, key: b1}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 30.0, width: 100.0, duration: 200, key: b2}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 30.0, width: 50.0, duration: 200, key: b3}, children: [])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box2}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box3}, children: []), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: red, height: 30.0, width: 100.0, duration: 200, key: b1}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 30.0, width: 50.0, duration: 200, key: b2}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 30.0, width: 50.0, duration: 200, key: b3}, children: [])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box2}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Box3}, children: []), FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: red, height: 30.0, width: 100.0, duration: 200, key: b1}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 30.0, width: 50.0, duration: 200, key: b2}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 30.0, width: 50.0, duration: 200, key: b3}, children: [])])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:02 +44 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +45 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+00:02 +46 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/e2e_test.dart: E2E: Todo App (Input, State Update, List Rendering)
+DEBUG RUNTIME: Source:       widget TodoApp {
+        state todos = [];
+        state input = "";
+        
+        build {
+          Column {
+            // Input Area
+            Row {
+               Expanded {
+                 TextField(hint: "New Todo", onChanged: fn(val) {
+                     input = val;
+                 })
+               }
+               Button("Add", onPressed: fn() {
+                 if (input != "") {
+                   push(todos, input);
+                   input = "";
+                 }
+               })
+            }
+            
+            // List Area
+            Column {
+               var i = 0;
+               while (i < todos.length) {
+                   var todo = todos[i];
+                   var index = i; // Capture current index
+                   TodoItem(todo: todo, onDelete: fn() {
+                       removeAt(todos, index);
+                   });
+                   i = i + 1;
+               }
+            }
+          }
+        }
+      }
+
+      widget TodoItem {
+        props todo, onDelete;
+        build {
+          Container {
+            Padding(padding: 8.0) {
+              Row {
+                Text(todo)
+                Button("X", onPressed: onDelete)
+              }
+            }
+          }
+        }
+      }
+    
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 17
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [])]) (Type: FluxWidgetNode)
+DEBUG E2E: Found 2 Text widgets
+  Text: "New Todo"
+  Text: "Add"
+DEBUG CLOSURE: Executing onChanged closure, args=1
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])]) (Type: FluxWidgetNode)
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])]) (Type: FluxWidgetNode)
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onChanged closure, args=1
+🔧 Result from stack: FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])]) (Type: FluxWidgetNode)
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onChanged closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])]) (Type: FluxWidgetNode)
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])]) (Type: FluxWidgetNode)
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])])])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])]) (Type: FluxWidgetNode)
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Expanded, args: {}, children: [FluxWidgetNode(TextField, args: {onChanged: <closure lambda>, hint: New Todo}, children: [])]), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Add}, children: [])]), FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {}, children: [FluxWidgetNode(Padding, args: {padding: 8.0}, children: [FluxWidgetNode(Row, args: {}, children: [FluxWidgetNode(Text, args: {0: Buy Milk}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: X}, children: [])])])])])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:02 +47 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles Button onPressed callback
+00:02 +48 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/extended_bindings_test.dart: FluxRiverpodWidget handles ListView with children
+00:02 +49 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/flux_ota_demo_test.dart: FluxOtaDemo Widget Tests renders initial UI state
+00:03 +50 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/flux_ota_demo_test.dart: FluxOtaDemo Widget Tests renders initial UI state
+00:03 +51 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/flux_ota_demo_test.dart: FluxOtaDemo Widget Tests renders initial UI state
+00:03 +52 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/flux_ota_demo_test.dart: FluxOtaDemo Widget Tests renders initial UI state
+DEBUG RUNTIME: Source:     widget OtaCounter {
+      state count = 0;
+      build {
+        Column {
+          Container(
+            padding: 16,
+            child: Column {
+              Text("OTA Demo - v1.0.0")
+              Text("Count: " + toString(count))
+              Button("Increment +1", onPressed: fn() {
+                count = count + 1;
+              })
+            }
+          )
+        }
+      }
+    }
+  
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {child: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: OTA Demo - v1.0.0}, children: []), FluxWidgetNode(Text, args: {0: Count: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Increment +1}, children: [])]), padding: 16}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:03 +53 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Preserves matching state when adding new state fields
+00:03 +53 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/flux_ota_demo_test.dart: FluxOtaDemo Widget Tests shows update status when update button pressed
+DEBUG RUNTIME: Source:     widget OtaCounter {
+      state count = 0;
+      build {
+        Column {
+          Container(
+            padding: 16,
+            child: Column {
+              Text("OTA Demo - v1.0.0")
+              Text("Count: " + toString(count))
+              Button("Increment +1", onPressed: fn() {
+                count = count + 1;
+              })
+            }
+          )
+        }
+      }
+    }
+  
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {child: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: OTA Demo - v1.0.0}, children: []), FluxWidgetNode(Text, args: {0: Count: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Increment +1}, children: [])]), padding: 16}, children: [])]) (Type: FluxWidgetNode)
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete. Defined 1 widgets: OtaCounter
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {child: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: OTA Demo - v1.1.0 ✨}, children: []), FluxWidgetNode(Text, args: {0: Count: 0}, children: []), FluxWidgetNode(Text, args: {0: New: Double increment mode!}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Increment +2}, children: [])]), color: #E3F2FD, padding: 16}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:03 +54 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Preserves matching state when adding new state fields
+00:03 +54 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/flux_ota_demo_test.dart: FluxOtaDemo Widget Tests completes update workflow
+DEBUG RUNTIME: Source:     widget OtaCounter {
+      state count = 0;
+      build {
+        Column {
+          Container(
+            padding: 16,
+            child: Column {
+              Text("OTA Demo - v1.0.0")
+              Text("Count: " + toString(count))
+              Button("Increment +1", onPressed: fn() {
+                count = count + 1;
+              })
+            }
+          )
+        }
+      }
+    }
+  
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {child: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: OTA Demo - v1.0.0}, children: []), FluxWidgetNode(Text, args: {0: Count: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Increment +1}, children: [])]), padding: 16}, children: [])]) (Type: FluxWidgetNode)
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete. Defined 1 widgets: OtaCounter
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {child: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: OTA Demo - v1.1.0 ✨}, children: []), FluxWidgetNode(Text, args: {0: Count: 0}, children: []), FluxWidgetNode(Text, args: {0: New: Double increment mode!}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Increment +2}, children: [])]), color: #E3F2FD, padding: 16}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:03 +55 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Preserves matching state when adding new state fields
+00:03 +55 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/flux_ota_demo_test.dart: FluxOtaDemo Widget Tests rollback works after update
+DEBUG RUNTIME: Source:     widget OtaCounter {
+      state count = 0;
+      build {
+        Column {
+          Container(
+            padding: 16,
+            child: Column {
+              Text("OTA Demo - v1.0.0")
+              Text("Count: " + toString(count))
+              Button("Increment +1", onPressed: fn() {
+                count = count + 1;
+              })
+            }
+          )
+        }
+      }
+    }
+  
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {child: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: OTA Demo - v1.0.0}, children: []), FluxWidgetNode(Text, args: {0: Count: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Increment +1}, children: [])]), padding: 16}, children: [])]) (Type: FluxWidgetNode)
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete. Defined 1 widgets: OtaCounter
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {child: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: OTA Demo - v1.1.0 ✨}, children: []), FluxWidgetNode(Text, args: {0: Count: 0}, children: []), FluxWidgetNode(Text, args: {0: New: Double increment mode!}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Increment +2}, children: [])]), color: #E3F2FD, padding: 16}, children: [])]) (Type: FluxWidgetNode)
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete. Defined 1 widgets: OtaCounter
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Container, args: {child: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: OTA Demo - v1.0.0}, children: []), FluxWidgetNode(Text, args: {0: Count: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Increment +1}, children: [])]), padding: 16}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:03 +56 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Preserves matching state when adding new state fields
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state count = 10;
+          build {
+            Column {
+               Text("V1")
+               Text("Count: " + toString(count))
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: V1}, children: []), FluxWidgetNode(Text, args: {0: Count: 10}, children: [])]) (Type: FluxWidgetNode)
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete. Defined 1 widgets: TestWidget
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: V2}, children: []), FluxWidgetNode(Text, args: {0: Count: 10}, children: []), FluxWidgetNode(Text, args: {0: Name: Flux}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:03 +57 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:03 +57 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Handles removing state fields gracefully
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state a = "kept";
+          state b = "removed";
+          build {
+            Column {
+               Text(a)
+               Text(b)
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: kept}, children: []), FluxWidgetNode(Text, args: {0: removed}, children: [])]) (Type: FluxWidgetNode)
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete. Defined 1 widgets: TestWidget
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: kept}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:03 +58 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:03 +58 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Updates closure logic while preserving captured state
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state count = 0;
+          build {
+            Column {
+               Text(toString(count))
+               Button("Action", onPressed: fn() {
+                 count = count + 1;
+               })
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Action}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: 1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Action}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete. Defined 1 widgets: TestWidget
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: 1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Action}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: 11}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Action}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🗑️ FluxRuntime.dispose()
+00:03 +59 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:03 +59 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_comprehensive_test.dart: Flux Hot Reload Comprehensive Tests Handles syntax errors by throwing (handled by wrapper in app)
+DEBUG RUNTIME: Source:         widget TestWidget {
+          build { Text("OK") }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Text, args: {0: OK}, children: []) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:03 +60 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:03 +61 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:03 +62 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+00:03 +63 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/hot_reload_test.dart: FluxRuntime.hotReload updates widget definition
+DEBUG RUNTIME: Source:       widget TestWidget {
+        state count = 0;
+        build {
+          Column {
+             Text("Version 1")
+             Text(toString(count))
+             Button("Inc", onPressed: fn() {
+               count = count + 1;
+             })
+          }
+        }
+      }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: Version 1}, children: []), FluxWidgetNode(Text, args: {0: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Inc}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: Version 1}, children: []), FluxWidgetNode(Text, args: {0: 1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Inc}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔥 FluxRuntime: Hot Reloading...
+✅ Hot Reload Complete. Defined 1 widgets: TestWidget
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: Version 2}, children: []), FluxWidgetNode(Text, args: {0: Count is: 1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Inc}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:03 +64 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Stack with Alignment
+00:03 +65 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Positioned with props
+00:03 +66 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets renders Wrap with spacing and direction
+00:04 +67 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: Flux Layout Widgets Wrap defaults
+00:04 +68 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/layout_test.dart: (tearDownAll)
+00:04 +68 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule isAvailable returns true when supported and adapter is on
+00:04 +69 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule isAvailable returns false when not supported
+00:04 +70 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Scanning startScan invokes wrapper and returns success
+[BleModule] Starting scan...
+00:04 +71 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Scanning stopScan invokes wrapper
+00:04 +72 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Connection connect calls device connect
+00:04 +73 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Connection disconnect calls device disconnect
+00:04 +74 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Services & Characteristics discoverServices returns mapped services
+00:04 +75 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Services & Characteristics read calls characteristic read
+00:04 +76 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Services & Characteristics write calls characteristic write
+00:04 +77 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Services & Characteristics subscribe and unsubscribe logic
+00:04 +78 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Services & Characteristics read/write/subscribe fail if characteristic not found
+00:04 +79 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Error Handling Edge Cases connect fails gracefully on exception
+[BleModule] Connect error: Exception: Connection failed
+00:04 +80 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/ble_module_test.dart: BleModule Error Handling Edge Cases discoverServices fails if device not connected
+00:04 +81 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: (setUpAll)
+00:04 +81 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: CameraModule availableCameras returns mapped data
+00:04 +82 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: CameraModule initialize creates and initializes controller
+[CameraModule] Initialized camera 0 with high resolution
+00:04 +83 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: CameraModule takePicture returns path on success
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Picture taken: test_path.jpg
+00:04 +84 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: CameraModule Video Recording startVideoRecording calls controller
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Started video recording
+00:04 +85 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: CameraModule Video Recording stopVideoRecording returns video file
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Stopped video recording: video.mp4
+00:04 +86 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: CameraModule setFlashMode mapping
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Set flash mode to torch
+00:04 +87 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: CameraModule dispose cleans up controller
+[CameraModule] Initialized camera 0 with medium resolution
+[CameraModule] Disposed camera
+00:04 +88 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_module_test.dart: (tearDownAll)
+00:04 +88 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: (setUpAll)
+00:04 +88 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: FluxCameraPreview should show loading indicator and then preview
+00:04 +89 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: FluxCameraPreview should show loading indicator and then preview
+00:04 +90 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: FluxCameraPreview should show loading indicator and then preview
+00:04 +91 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Box Lifecycle hive.openBox opens a box
+00:05 +92 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Box Lifecycle hive.openBox opens a box
+00:05 +93 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: FluxCameraPreview retry button should attempt re-initialization
+00:05 +94 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: FluxCameraPreview retry button should attempt re-initialization
+00:05 +95 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: FluxCameraPreview retry button should attempt re-initialization
+00:05 +96 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Box Lifecycle hive.openBox on already open box returns true
+00:05 +97 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: FluxCameraPreview should re-initialize on cameraId change
+00:05 +98 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/camera_preview_test.dart: FluxCameraPreview should re-initialize on cameraId change
+00:05 +99 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: CRUD Operations hive.put and get work with List
+00:05 +100 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: CRUD Operations hive.put and get work with primitives
+00:05 +101 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: CRUD Operations hive.get returns null for missing key
+00:05 +102 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: CRUD Operations hive.delete removes a key
+00:05 +103 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.get returns standardized response map
+00:05 +104 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.get returns standardized response map
+00:05 +105 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.get returns standardized response map
+00:05 +106 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.get returns standardized response map
+00:05 +107 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.get returns standardized response map
+00:05 +108 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Query Operations hive.containsKey returns correct result
+00:05 +109 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/http_module_test.dart: http.post returns response
+00:05 +110 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Query Operations hive.count returns number of entries
+00:05 +111 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Complex Data hive stores nested objects correctly
+00:05 +112 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Complex Data hive stores arrays of objects
+00:05 +113 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Edge Cases special characters in keys
+00:05 +114 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Edge Cases unicode data
+00:05 +115 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: Edge Cases empty box operations
+00:05 +116 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/hive_storage_module_test.dart: (tearDownAll)
+00:05 +116 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Basic CRUD secure.set and get work correctly
+00:05 +117 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Basic CRUD secure.get returns null for missing key
+00:05 +118 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Basic CRUD secure.delete removes key
+00:05 +119 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Basic CRUD secure.deleteAll clears all storage
+00:05 +120 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Basic CRUD secure.containsKey returns correct status
+00:05 +121 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: JSON Operations secure.setJson and getJson work with Map
+00:05 +122 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: JSON Operations secure.setJson and getJson work with List
+00:05 +123 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: JSON Operations secure.setJson and getJson work with primitives
+00:05 +124 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: JSON Operations secure.getJson returns null for missing key
+00:05 +125 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: JSON Operations secure.setJson stores nested objects
+00:05 +126 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Utility secure.getAllKeys returns all keys
+00:05 +127 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Utility secure.getAll returns all key-value pairs
+00:05 +128 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Edge Cases secure.set converts non-string values to string
+00:05 +129 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Edge Cases secure.set handles null value
+00:05 +130 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Edge Cases secure storage handles unicode data
+00:05 +131 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/secure_storage_module_test.dart: Edge Cases secure.set overwrites existing key
+00:05 +132 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: String Operations storage.set and get work correctly
+00:05 +133 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: String Operations storage.get returns null for missing key
+00:05 +134 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: String Operations storage.remove works
+00:05 +135 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: String Operations storage.clear works
+00:05 +136 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: String Operations storage.containsKey works
+00:05 +137 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: JSON Operations storage.setJson and getJson work with Map
+00:05 +138 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: JSON Operations storage.setJson and getJson work with List
+00:05 +139 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: JSON Operations storage.getJson returns null for missing key
+00:05 +140 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: JSON Operations storage.getJson returns null for invalid JSON
+00:05 +141 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: JSON Operations storage.setJson with nested objects
+00:05 +142 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Integer Operations storage.setInt and getInt work correctly
+00:05 +143 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Integer Operations storage.getInt returns null for missing key
+00:05 +144 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Integer Operations storage.setInt handles double input
+00:05 +145 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Integer Operations storage.setInt handles string input
+00:05 +146 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Integer Operations storage.setInt handles negative numbers
+00:05 +147 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Boolean Operations storage.setBool and getBool work correctly
+00:05 +148 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Boolean Operations storage.getBool returns null for missing key
+00:05 +149 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Boolean Operations storage.setBool handles int input
+00:05 +150 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Boolean Operations storage.setBool handles string input
+00:05 +151 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Double Operations storage.setDouble and getDouble work correctly
+00:05 +152 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Double Operations storage.getDouble returns null for missing key
+00:05 +153 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Double Operations storage.setDouble handles int input
+00:05 +154 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Double Operations storage.setDouble handles string input
+00:05 +155 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: String List Operations storage.setStringList and getStringList work correctly
+00:05 +156 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: String List Operations storage.getStringList returns null for missing key
+00:05 +157 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: String List Operations storage.setStringList handles mixed types
+00:05 +158 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Utility Operations storage.getKeys returns all keys
+00:05 +159 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Utility Operations storage.getKeys returns empty list when empty
+00:05 +160 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Edge Cases storage operations with empty strings
+00:05 +161 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Edge Cases storage operations with special characters
+00:05 +162 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Edge Cases storage operations with unicode characters
+00:05 +163 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Edge Cases overwriting existing keys
+00:05 +164 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/storage_module_test.dart: Edge Cases set with null value converts to empty string
+00:05 +165 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/websocket_module_test.dart: WebSocketModule Tests Module registration has correct functions
+00:05 +166 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/websocket_module_test.dart: WebSocketModule Tests Should handle connection failure gracefully
+00:05 +167 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/modules/websocket_module_test.dart: WebSocketModule Tests dispose should clear all connections
+00:06 +168 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/persistence_integration_test.dart: Flux State Persistence Integration persistent state survives widget recreation
+DEBUG RUNTIME: Source:         widget Counter {
+          persistent state count = 0;
+          
+          build {
+            Column(
+              children: [
+                Text(text: toString(count)),
+                Button(
+                  text: "Increment",
+                  onPressed: fn() {
+                    count = count + 1;
+                  }
+                )
+              ]
+            )
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 2}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 2}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget Counter {
+          persistent state count = 0;
+          
+          build {
+            Column(
+              children: [
+                Text(text: toString(count)),
+                Button(
+                  text: "Increment",
+                  onPressed: fn() {
+                    count = count + 1;
+                  }
+                )
+              ]
+            )
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 2}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:06 +169 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +169 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/persistence_integration_test.dart: Flux State Persistence Integration non-persistent state does not survive recreation
+DEBUG RUNTIME: Source:         widget Counter {
+          state count = 0;
+          
+          build {
+            Column(
+              children: [
+                Text(text: toString(count)),
+                Button(
+                  text: "Increment",
+                  onPressed: fn() {
+                    count = count + 1;
+                  }
+                )
+              ]
+            )
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 1}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+DEBUG RUNTIME: Source:         widget Counter {
+          state count = 0;
+          
+          build {
+            Column(
+              children: [
+                Text(text: toString(count)),
+                Button(
+                  text: "Increment",
+                  onPressed: fn() {
+                    count = count + 1;
+                  }
+                )
+              ]
+            )
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {text: 0}, children: []), FluxWidgetNode(Button, args: {onPressed: <closure lambda>, text: Increment}, children: [])]}, children: []) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:06 +170 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +171 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +172 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +173 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +174 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +175 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +176 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +177 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +178 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +179 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +180 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +181 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +182 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +183 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget renders widget with Riverpod provider
+00:06 +184 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/security_test.dart: SecureScriptLoader enforces signature verification
+00:06 +185 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/security_test.dart: SecureScriptLoader allows loading if signature is valid
+00:06 +186 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget reads provider value
+00:06 +187 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/riverpod_test.dart: FluxRiverpodWidget shows error for missing widget
+00:06 +188 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: (setUpAll)
+00:06 +188 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders primitive Text without style
+00:07 +189 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders Text with full style
+00:07 +190 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style renders Text with numeric fontWeight
+00:07 +191 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style handles nested hex color in style
+00:07 +192 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: Flux Text Style gracefully handles invalid style
+00:07 +193 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/text_style_test.dart: (tearDownAll)
+00:07 +193 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: (setUpAll)
+00:07 +193 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +194 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +195 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +196 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +197 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +198 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +199 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +200 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +201 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +202 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +203 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +204 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +205 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +206 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +207 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +208 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +209 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +210 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +211 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +212 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +213 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +214 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +215 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +216 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +217 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +218 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +219 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +220 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +221 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +222 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+00:07 +223 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/todo_demo_test.dart: Flux ToDo Demo Complete App Flow
+DEBUG RUNTIME: Source:       widget TaskList {
+        state tasks = "foo";
+        
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Flux ToDo")),
+            body: Column(
+              children: [
+                Text("Debug Message")
+              ]
+            )
+          )
+        }
+      }
+
+      widget AddTaskParam {
+        state newTask = "";
+
+        build {
+          Scaffold(
+            appBar: AppBar(title: Text("Add Task")),
+            body: Column(
+              children: []
+            )
+          )
+        }
+      }
+      
+DEBUG RUNTIME: Parsed unit with 2 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 17
+🔧 Result from stack: FluxWidgetNode(Scaffold, args: {body: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(Text, args: {0: Debug Message}, children: [])]}, children: []), appBar: FluxWidgetNode(AppBar, args: {title: FluxWidgetNode(Text, args: {0: Flux ToDo}, children: [])}, children: [])}, children: []) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:07 +224 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton renders correctly
+00:07 +225 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton renders correctly
+00:07 +226 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton renders correctly
+00:07 +227 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton renders correctly
+00:07 +228 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton renders correctly
+00:07 +229 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton renders correctly
+00:07 +230 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: Version Management resetVersion resets to 0
+00:07 +231 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: needsMigration returns true when current < target
+00:07 +232 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +233 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +234 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +235 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +236 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +236 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: runMigrations runs migrations in order
+StateMigration: Migrating from version 0 to 3
+StateMigration: Running migration to version 1
+StateMigration: Running migration to version 2
+StateMigration: Running migration to version 3
+StateMigration: Migration complete. Migrated versions: [1, 2, 3]
+00:07 +237 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +237 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: runMigrations runs only pending migrations
+StateMigration: Migrating from version 1 to 3
+StateMigration: Running migration to version 2
+StateMigration: Running migration to version 3
+StateMigration: Migration complete. Migrated versions: [2, 3]
+00:07 +238 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +238 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: runMigrations returns list of migrated versions
+StateMigration: Migrating from version 0 to 3
+StateMigration: Running migration to version 1
+StateMigration: Running migration to version 2
+StateMigration: Running migration to version 3
+StateMigration: Migration complete. Migrated versions: [1, 2, 3]
+00:07 +239 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +239 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: runMigrations skips unregistered versions
+StateMigration: Migrating from version 0 to 3
+StateMigration: Running migration to version 1
+StateMigration: No migration registered for version 2, skipping
+StateMigration: Running migration to version 3
+StateMigration: Migration complete. Migrated versions: [1, 3]
+00:07 +240 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +240 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: runMigrations returns empty list when no migrations needed
+StateMigration: Already at version 5, no migrations needed
+00:07 +241 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +241 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: runMigrations rethrows migration errors but preserves progress
+StateMigration: Migrating from version 0 to 3
+StateMigration: Running migration to version 1
+StateMigration: Running migration to version 2
+StateMigration: Migration to version 2 failed: Exception: Migration failed
+00:07 +242 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxButton loading state
+00:07 +243 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: State Migration Scenarios simulate app upgrade from v0 to v3
+StateMigration: Migrating from version 0 to 3
+StateMigration: Running migration to version 1
+StateMigration: Running migration to version 2
+StateMigration: Running migration to version 3
+StateMigration: Migration complete. Migrated versions: [1, 2, 3]
+00:07 +244 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxInput renders correctly
+00:07 +244 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/utils/state_migration_test.dart: State Migration Scenarios incremental migrations work correctly
+StateMigration: Migrating from version 0 to 1
+StateMigration: Running migration to version 1
+StateMigration: Migration complete. Migrated versions: [1]
+StateMigration: Migrating from version 1 to 2
+StateMigration: Running migration to version 2
+StateMigration: Migration complete. Migrated versions: [2]
+StateMigration: Migrating from version 2 to 3
+StateMigration: Running migration to version 3
+StateMigration: Migration complete. Migrated versions: [3]
+00:07 +245 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxInput renders correctly
+00:07 +246 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxCard renders correctly
+00:07 +247 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/ui/flux_ui_test.dart: FluxUI Core Components FluxBadge renders correctly
+00:07 +248 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+00:07 +249 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+00:08 +250 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: TabBar and Scaffold layout
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        DefaultTabController(length: 2) {
+          Scaffold(
+            appBar: AppBar(
+              title: Text("Tabs Demo"),
+              bottom: TabBar(
+                tabs: [
+                  Tab(text: "Tab 1"),
+                  Tab(text: "Tab 2")
+                ]
+              )
+            ),
+            body: TabBarView(
+              children: [
+                Center(child: Text("Page 1")),
+                Center(child: Text("Page 2"))
+              ]
+            )
+          )
+        }
+      }
+    }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(DefaultTabController, args: {length: 2}, children: [FluxWidgetNode(Scaffold, args: {body: FluxWidgetNode(TabBarView, args: {children: [FluxWidgetNode(Center, args: {child: FluxWidgetNode(Text, args: {0: Page 1}, children: [])}, children: []), FluxWidgetNode(Center, args: {child: FluxWidgetNode(Text, args: {0: Page 2}, children: [])}, children: [])]}, children: []), appBar: FluxWidgetNode(AppBar, args: {bottom: FluxWidgetNode(TabBar, args: {tabs: [FluxWidgetNode(Tab, args: {text: Tab 1}, children: []), FluxWidgetNode(Tab, args: {text: Tab 2}, children: [])]}, children: []), title: FluxWidgetNode(Text, args: {0: Tabs Demo}, children: [])}, children: [])}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +251 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding animates width correctly with default curve
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state expanded = false;
+          
+          build {
+            Column {
+              Button("Expand", onPressed: fn() { expanded = !expanded; });
+              
+              var w = 50.0;
+              if (expanded) { w = 200.0; }
+              
+              AnimatedContainer(
+                key: "box",
+                duration: 300,
+                width: w,
+                height: 50.0,
+                color: "blue"
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Expand}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 50.0, duration: 300, key: box}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Expand}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 200.0, duration: 300, key: box}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Expand}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 200.0, duration: 300, key: box}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +252 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+00:08 +252 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding respects easeIn curve (slow start)
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state expanded = false;
+          
+          build {
+            Column {
+              Button("Go", onPressed: fn() { expanded = true; });
+              
+              var w = 0.0;
+              if (expanded) { w = 100.0; }
+              
+              AnimatedContainer(
+                key: "curved",
+                duration: 1000,
+                curve: "easeIn",
+                width: w,
+                height: 10.0,
+                color: "green"
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Go}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 10.0, width: 0.0, curve: easeIn, duration: 1000, key: curved}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Go}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 10.0, width: 100.0, curve: easeIn, duration: 1000, key: curved}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Go}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: green, height: 10.0, width: 100.0, curve: easeIn, duration: 1000, key: curved}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +253 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+00:08 +253 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Form and Input widgets
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        Scaffold(
+          body: Form(
+            child: Column(
+              children: [
+                 TextFormField(initialValue: "Test Input"),
+                 Switch(value: true),
+                 Slider(value: 0.5, min: 0.0, max: 1.0)
+              ]
+            )
+          )
+        )
+      }
+    }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Scaffold, args: {body: FluxWidgetNode(Form, args: {child: FluxWidgetNode(Column, args: {children: [FluxWidgetNode(TextFormField, args: {initialValue: Test Input}, children: []), FluxWidgetNode(Switch, args: {value: true}, children: []), FluxWidgetNode(Slider, args: {max: 1.0, min: 0.0, value: 0.5}, children: [])]}, children: [])}, children: [])}, children: []) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +254 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+00:08 +254 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding handles null key gracefully
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state toggle = false;
+          
+          build {
+            Column {
+              Button("Toggle", onPressed: fn() { toggle = !toggle; });
+              
+              var w = 100.0;
+              if (toggle) { w = 200.0; }
+              
+              AnimatedContainer(
+                duration: 200,
+                width: w,
+                height: 30.0,
+                color: "orange"
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: orange, height: 30.0, width: 100.0, duration: 200}, children: [])]) (Type: FluxWidgetNode)
+00:08 +254 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Animation widgets (Hero)
+DEBUG RUNTIME: Source:     widget Main {
+      build {
+        Hero(
+          tag: "hero-tag",
+          child: Container(width: 100, height: 100, color: 4278190335)
+        )
+      }
+    }
+    
+DEBUG RUNTIME: Parsed unit with 1 declarations
+00:08 +254 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding handles null key gracefully
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: orange, height: 30.0, width: 200.0, duration: 200}, children: [])]) (Type: FluxWidgetNode)
+00:08 +254 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Animation widgets (Hero)
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Hero, args: {child: FluxWidgetNode(Container, args: {color: 4278190335, height: 100, width: 100}, children: []), tag: hero-tag}, children: []) (Type: FluxWidgetNode)
+00:08 +254 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding handles null key gracefully
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+00:08 +254 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/v2_widgets_test.dart: Phase 24: Animation widgets (Hero)
+🗑️ FluxRuntime.dispose()
+00:08 +254 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding handles null key gracefully
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Toggle}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: orange, height: 30.0, width: 200.0, duration: 200}, children: [])]) (Type: FluxWidgetNode)
+00:08 +255 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+00:08 +255 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding handles null key gracefully
+🗑️ FluxRuntime.dispose()
+00:08 +256 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+00:08 +256 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding animates color change
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state isRed = false;
+          
+          build {
+            Column {
+              Button("Color", onPressed: fn() { isRed = !isRed; });
+              
+              var c = "blue";
+              if (isRed) { c = "red"; }
+              
+              AnimatedContainer(
+                key: "colorBox",
+                duration: 500,
+                width: 50.0,
+                height: 50.0,
+                color: c
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Color}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: blue, height: 50.0, width: 50.0, duration: 500, key: colorBox}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Color}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 50.0, duration: 500, key: colorBox}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Color}, children: []), FluxWidgetNode(AnimatedContainer, args: {color: red, height: 50.0, width: 50.0, duration: 500, key: colorBox}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +257 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders basic text widget
+DEBUG RUNTIME: Source:         widget Main {
+          build {
+            Text("Hello Flux")
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Text, args: {0: Hello Flux}, children: []) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +258 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding uses default duration when not specified
+DEBUG RUNTIME: Source:         widget TestWidget {
+          build {
+            Column {
+              AnimatedContainer(
+                key: "default",
+                width: 100.0,
+                height: 100.0,
+                color: "purple"
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: purple, height: 100.0, width: 100.0, key: default}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +259 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+00:08 +259 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedContainer Widget Binding handles padding and margin
+DEBUG RUNTIME: Source:         widget TestWidget {
+          build {
+            Column {
+              AnimatedContainer(
+                key: "padded",
+                duration: 100,
+                width: 100.0,
+                height: 100.0,
+                padding: 16,
+                margin: [8, 16],
+                color: "teal"
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: teal, margin: [8, 16], padding: 16, height: 100.0, width: 100.0, duration: 100, key: padded}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +260 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests renders nested column with children
+DEBUG RUNTIME: Source:         widget Main {
+          build {
+            Column {
+              Text("Item 1")
+              Text("Item 2")
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: Item 1}, children: []), FluxWidgetNode(Text, args: {0: Item 2}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding fades in correctly
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state visible = false;
+          
+          build {
+            Column {
+              Button("Show", onPressed: fn() { visible = true; });
+              
+              var op = 0.0;
+              if (visible) { op = 1.0; }
+              
+              AnimatedOpacity(
+                key: "fader",
+                duration: 500,
+                opacity: op,
+                child: Container(width: 50, height: 50, color: "red")
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction
+DEBUG RUNTIME: Source:         widget Counter {
+          state count = 0;
+          
+          build {
+            Column {
+              Text("Count: " + toString(count))
+            }
+          }
+        }
+      
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding fades in correctly
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction
+DEBUG RUNTIME: Parsed unit with 1 declarations
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding fades in correctly
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Show}, children: []), FluxWidgetNode(AnimatedOpacity, args: {child: FluxWidgetNode(Container, args: {color: red, height: 50, width: 50}, children: []), opacity: 0.0, duration: 500, key: fader}, children: [])]) (Type: FluxWidgetNode)
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding fades in correctly
+DEBUG CLOSURE: Executing onPressed closure, args=0
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: Count: 0}, children: [])]) (Type: FluxWidgetNode)
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding fades in correctly
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Show}, children: []), FluxWidgetNode(AnimatedOpacity, args: {child: FluxWidgetNode(Container, args: {color: red, height: 50, width: 50}, children: []), opacity: 1.0, duration: 500, key: fader}, children: [])]) (Type: FluxWidgetNode)
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles state changes and interaction
+🗑️ FluxRuntime.dispose()
+00:08 +261 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding fades in correctly
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+00:08 +262 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding fades in correctly
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Show}, children: []), FluxWidgetNode(AnimatedOpacity, args: {child: FluxWidgetNode(Container, args: {color: red, height: 50, width: 50}, children: []), opacity: 1.0, duration: 500, key: fader}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +263 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widget_test.dart: FluxWidget Tests handles text field input
+DEBUG RUNTIME: Source:         widget InputTest {
+          state text = "Hello";
+          
+          build {
+            Column {
+              Text("You typed: " + text)
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Text, args: {0: You typed: Hello}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +264 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding respects curve parameter
+DEBUG RUNTIME: Source:         widget TestWidget {
+          state show = true;
+          
+          build {
+            Column {
+              Button("Hide", onPressed: fn() { show = false; });
+              
+              var op = 1.0;
+              if (!show) { op = 0.0; }
+              
+              AnimatedOpacity(
+                key: "bouncy",
+                duration: 1000,
+                curve: "bounceOut",
+                opacity: op,
+                child: Text("Hello")
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Hide}, children: []), FluxWidgetNode(AnimatedOpacity, args: {child: FluxWidgetNode(Text, args: {0: Hello}, children: []), opacity: 1.0, curve: bounceOut, duration: 1000, key: bouncy}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: Executing onPressed closure, args=0
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Hide}, children: []), FluxWidgetNode(AnimatedOpacity, args: {child: FluxWidgetNode(Text, args: {0: Hello}, children: []), opacity: 0.0, curve: bounceOut, duration: 1000, key: bouncy}, children: [])]) (Type: FluxWidgetNode)
+DEBUG CLOSURE: onPressed closure returned InterpretResult.ok
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(Button, args: {onPressed: <closure lambda>, 0: Hide}, children: []), FluxWidgetNode(AnimatedOpacity, args: {child: FluxWidgetNode(Text, args: {0: Hello}, children: []), opacity: 0.0, curve: bounceOut, duration: 1000, key: bouncy}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +265 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: AnimatedOpacity Widget Binding uses default values for missing params
+DEBUG RUNTIME: Source:         widget TestWidget {
+          build {
+            Column {
+              AnimatedOpacity(
+                key: "defaults",
+                opacity: 0.5
+              ) {
+                Text("Half");
+              }
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedOpacity, args: {opacity: 0.5, key: defaults}, children: [FluxWidgetNode(Text, args: {0: Half}, children: [])])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +266 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "linear"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "linear",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: linear, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +267 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "easeIn"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "easeIn",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: easeIn, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +268 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "easeOut"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "easeOut",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: easeOut, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +269 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "easeInOut"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "easeInOut",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: easeInOut, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +270 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "bounceIn"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "bounceIn",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: bounceIn, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +271 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "bounceOut"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "bounceOut",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: bounceOut, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:08 +272 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "elasticIn"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "elasticIn",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: elasticIn, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:09 +273 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "elasticOut"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "elasticOut",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: elasticOut, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:09 +274 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "fastOutSlowIn"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "fastOutSlowIn",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: fastOutSlowIn, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:09 +275 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing parses curve "decelerate"
+DEBUG RUNTIME: Source:           widget TestWidget {
+            build {
+              Column {
+                AnimatedContainer(
+                  duration: 100,
+                  curve: "decelerate",
+                  width: 10.0,
+                  height: 10.0,
+                  color: "gray"
+                );
+              }
+            }
+          }
+        
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: gray, height: 10.0, width: 10.0, curve: decelerate, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:09 +276 -12: D:/OtherProject/mine/flux/packages/flux_flutter/test/widgets/implicit_animation_test.dart: Curve Parsing uses linear for unknown curve strings
+DEBUG RUNTIME: Source:         widget TestWidget {
+          build {
+            Column {
+              AnimatedContainer(
+                duration: 100,
+                curve: "unknownCurve",
+                width: 10.0,
+                height: 10.0,
+                color: "black"
+              );
+            }
+          }
+        }
+      
+DEBUG RUNTIME: Parsed unit with 1 declarations
+DEBUG RUNTIME: Compilation finished. Bytecode size: 12
+🔧 Result from stack: FluxWidgetNode(Column, args: {}, children: [FluxWidgetNode(AnimatedContainer, args: {color: black, height: 10.0, width: 10.0, curve: unknownCurve, duration: 100}, children: [])]) (Type: FluxWidgetNode)
+🗑️ FluxRuntime.dispose()
+00:09 +277 -12: Some tests failed.

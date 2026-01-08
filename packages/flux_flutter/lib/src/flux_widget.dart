@@ -308,9 +308,15 @@ class FluxRuntime {
 
     // Inject registered global functions
     for (final entry in FluxBindings.functions.entries) {
-      _vm.globals[entry.key] = NativeFunction(entry.key, -1, (args) {
-        return entry.value(args);
-      });
+      if (FluxBindings.isAsync(entry.key)) {
+        _vm.globals[entry.key] = AsyncNativeFunction(entry.key, -1, (args) {
+          return entry.value(args) as Future<Object?>;
+        });
+      } else {
+        _vm.globals[entry.key] = NativeFunction(entry.key, -1, (args) {
+          return entry.value(args);
+        });
+      }
     }
 
     // Set widget handler before initial execution
