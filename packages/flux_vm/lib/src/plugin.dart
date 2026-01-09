@@ -30,8 +30,12 @@ abstract class FluxPlugin {
 class PluginRegistry {
   final VM vm;
   final Map<String, FluxPlugin> _plugins = {};
+  
+  /// List of permissions allowed by the host application.
+  /// If null, all permissions are allowed (insecure mode).
+  final List<String>? allowedPermissions;
 
-  PluginRegistry(this.vm);
+  PluginRegistry(this.vm, {this.allowedPermissions});
 
   /// Register and load a plugin
   void register(FluxPlugin plugin) {
@@ -39,7 +43,14 @@ class PluginRegistry {
       throw 'Plugin ${plugin.id} is already registered';
     }
 
-    // TODO: content security policy check based on permissions
+    // Security Check
+    if (allowedPermissions != null) {
+      for (final permission in plugin.permissions) {
+        if (!allowedPermissions!.contains(permission)) {
+          throw 'Security Error: Plugin ${plugin.id} requested unauthorized permission: $permission';
+        }
+      }
+    }
 
     try {
       plugin.onLoad(vm);
