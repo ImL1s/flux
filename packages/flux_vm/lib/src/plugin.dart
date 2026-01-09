@@ -1,9 +1,26 @@
-/// Flux Plugin System
-///
-/// Defines the interface for extending Flux functionality via plugins.
-
 import 'vm.dart';
 import 'stdlib.dart';
+
+/// Standard permission identifiers for the Flux ecosystem.
+class FluxPermissions {
+  /// Allows network access (HTTP, WebSocket).
+  static const String network = 'flux.permission.NETWORK';
+
+  /// Allows local file system access.
+  static const String fileSystem = 'flux.permission.FILE_SYSTEM';
+
+  /// Allows spawning external processes.
+  static const String process = 'flux.permission.PROCESS';
+
+  /// Allows reading environment variables.
+  static const String env = 'flux.permission.ENV';
+
+  /// Allows Bluetooth Low Energy operations.
+  static const String ble = 'flux.permission.BLE';
+
+  /// Allows Camera access.
+  static const String camera = 'flux.permission.CAMERA';
+}
 
 /// Base class for all Flux plugins
 abstract class FluxPlugin {

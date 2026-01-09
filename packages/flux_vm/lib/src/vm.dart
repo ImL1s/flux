@@ -160,6 +160,14 @@ class VM {
     _globals[module.name] = module;
   }
 
+  /// Sets a global variable value.
+  void setGlobal(String name, Object? value) {
+    _globals[name] = value;
+  }
+
+  /// Gets a global variable value.
+  Object? getGlobal(String name) => _globals[name];
+
   /// Hot-swap a script with a new compiled function
   ///
   /// Replaces the script's bytecode while preserving:

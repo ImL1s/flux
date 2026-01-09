@@ -28,7 +28,7 @@ dependencies:
   device_info_plus: ^11.0.0
   package_info_plus: ^8.0.0
   camera: ^0.11.0
-#  flutter_blue_plus: 1.34.0
+  flutter_blue_plus: ^2.1.0
   permission_handler: ^12.0.1
   hive_ce: ^2.16.0
   hive_ce_flutter: ^2.3.3

@@ -28,7 +28,7 @@ void main() {
     });
 
     test('should allow plugin with no permissions', () {
-      final registry = PluginRegistry(vm, allowedPermissions: ['flux.permission.NETWORK']);
+      final registry = PluginRegistry(vm, allowedPermissions: [FluxPermissions.network]);
       final plugin = MockPlugin('com.example.safe');
       
       registry.register(plugin);
@@ -36,24 +36,24 @@ void main() {
     });
 
     test('should allow plugin with allowed permissions', () {
-      final registry = PluginRegistry(vm, allowedPermissions: ['flux.permission.NETWORK']);
-      final plugin = MockPlugin('com.example.net', permissions: ['flux.permission.NETWORK']);
+      final registry = PluginRegistry(vm, allowedPermissions: [FluxPermissions.network]);
+      final plugin = MockPlugin('com.example.net', permissions: [FluxPermissions.network]);
       
       registry.register(plugin);
       expect(registry.get('com.example.net'), isNotNull);
     });
 
     test('should reject plugin with disallowed permissions', () {
-      final registry = PluginRegistry(vm, allowedPermissions: ['flux.permission.NETWORK']);
-      final plugin = MockPlugin('com.example.fs', permissions: ['flux.permission.FILE_SYSTEM']);
+      final registry = PluginRegistry(vm, allowedPermissions: [FluxPermissions.network]);
+      final plugin = MockPlugin('com.example.fs', permissions: [FluxPermissions.fileSystem]);
       
       expect(() => registry.register(plugin), throwsA(stringContainsInOrder(['Security Error', 'unauthorized permission'])));
       expect(registry.get('com.example.fs'), isNull);
     });
 
     test('should reject plugin with mixed permissions (one valid, one invalid)', () {
-      final registry = PluginRegistry(vm, allowedPermissions: ['flux.permission.NETWORK']);
-      final plugin = MockPlugin('com.example.mixed', permissions: ['flux.permission.NETWORK', 'flux.permission.FILE_SYSTEM']);
+      final registry = PluginRegistry(vm, allowedPermissions: [FluxPermissions.network]);
+      final plugin = MockPlugin('com.example.mixed', permissions: [FluxPermissions.network, FluxPermissions.fileSystem]);
       
       expect(() => registry.register(plugin), throwsA(stringContainsInOrder(['Security Error', 'unauthorized permission'])));
     });
