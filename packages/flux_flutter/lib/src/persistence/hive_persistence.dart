@@ -1,8 +1,7 @@
 import 'package:hive_ce/hive.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
+import 'hive_init.dart';
 
 /// Implementation of [PersistenceDelegate] using Hive CE.
 ///
@@ -16,18 +15,11 @@ class HivePersistenceDelegate implements PersistenceDelegate {
   Future<void> init() async {
     if (_initialized) return;
 
-    if (!kIsWeb) {
-      final appDir = await getApplicationDocumentsDirectory();
-      final fluxDir = Directory('${appDir.path}/flux_persistence');
-      if (!await fluxDir.exists()) {
-        await fluxDir.create(recursive: true);
-      }
-      Hive.init(fluxDir.path);
-    }
+    await initHivePlatform();
 
     _box = await Hive.openBox(_boxName);
     _initialized = true;
-    debugPrint('📦 HivePersistenceDelegate initialized at: ${_box?.path}');
+    debugPrint('📦 HivePersistenceDelegate initialized');
   }
 
   @override

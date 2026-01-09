@@ -218,6 +218,22 @@ class FluxWidgetNode {
   @override
   String toString() =>
       'FluxWidgetNode($name, args: $args, children: $children)';
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'args': args.map((k, v) => MapEntry(k, _serializeValue(v))),
+        'children': children.map((c) => _serializeValue(c)).toList(),
+      };
+
+  static dynamic _serializeValue(dynamic value) {
+    if (value is FluxWidgetNode) return value.toJson();
+    if (value is List) return value.map((e) => _serializeValue(e)).toList();
+    if (value is Map) return value.map((k, v) => MapEntry(k, _serializeValue(v)));
+    if (value is String || value is num || value is bool || value == null) {
+      return value;
+    }
+    return value.toString();
+  }
 }
 
 /// Runtime for executing Flux code and managing widget state
@@ -522,6 +538,7 @@ class FluxRuntime {
     }
 
     if (builtNode != null) {
+      _vm.lastWidgetTree = builtNode;
       return builtNode;
     }
 

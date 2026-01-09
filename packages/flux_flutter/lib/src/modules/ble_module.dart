@@ -1,41 +1,28 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 import 'package:flux_vm/flux_vm.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+// import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-/// Wrapper interface for FlutterBluePlus static methods to enable mocking.
+/// Wrapper interface for static methods to enable mocking.
 abstract class BleWrapper {
   Future<bool> isSupported();
-  Stream<BluetoothAdapterState> get adapterState;
-  Stream<List<ScanResult>> get scanResults;
-  Future<void> startScan({Duration? timeout, List<Guid>? withServices});
+  // Stream<BluetoothAdapterState> get adapterState;
+  // Stream<List<ScanResult>> get scanResults;
+  Future<void> startScan({Duration? timeout, List<dynamic>? withServices});
   Future<void> stopScan();
-  BluetoothDevice fromId(String remoteId);
+  // BluetoothDevice fromId(String remoteId);
 }
 
-/// Real implementation of BleWrapper using FlutterBluePlus.
+/// Dummy implementation for platforms without BLE support or when dependency is disabled.
 class RealBleWrapper implements BleWrapper {
   @override
-  Future<bool> isSupported() => FlutterBluePlus.isSupported;
+  Future<bool> isSupported() async => false;
 
   @override
-  Stream<BluetoothAdapterState> get adapterState =>
-      FlutterBluePlus.adapterState;
+  Future<void> startScan({Duration? timeout, List<dynamic>? withServices}) async {}
 
   @override
-  Stream<List<ScanResult>> get scanResults => FlutterBluePlus.scanResults;
-
-  @override
-  Future<void> startScan({Duration? timeout, List<Guid>? withServices}) {
-    return FlutterBluePlus.startScan(
-        timeout: timeout, withServices: withServices ?? []);
-  }
-
-  @override
-  Future<void> stopScan() => FlutterBluePlus.stopScan();
-
-  @override
-  BluetoothDevice fromId(String remoteId) => BluetoothDevice.fromId(remoteId);
+  Future<void> stopScan() async {}
 }
 
 /// Bluetooth Low Energy (BLE) module for Flux scripting language.
@@ -78,313 +65,56 @@ class BleModule extends FluxModule {
   }
 
   // Store connected devices
-  final Map<String, BluetoothDevice> _connectedDevices = {};
+  // final Map<String, BluetoothDevice> _connectedDevices = {};
 
   // Store subscriptions
   final Map<String, StreamSubscription> _subscriptions = {};
 
   // Store discovered devices for retrieval
-  final Map<String, ScanResult> _scanResults = {};
+  // final Map<String, ScanResult> _scanResults = {};
+  final Map<String, dynamic> _scanResults = {};
 
   Future<Object?> _isAvailable(List<Object?> args) async {
-    try {
-      // Check if hardware supports BLE
-      if (!await _bleWrapper.isSupported()) {
-        return false;
-      }
-
-      // Check if Bluetooth is on
-      return await _bleWrapper.adapterState.first == BluetoothAdapterState.on;
-    } catch (e) {
-      debugPrint('[BleModule] Error checking availability: $e');
-      return false;
-    }
+    return false;
   }
 
   Future<Object?> _startScan(List<Object?> args) async {
-    final options = args.isNotEmpty && args[0] is Map ? args[0] as Map : {};
-    final timeout = (options['timeout'] as num? ?? 10000).toInt();
-    final withServices = options['withServices'] as List?;
-
-    final List<Guid> serviceGuids = [];
-    if (withServices != null) {
-      for (var s in withServices) {
-        serviceGuids.add(Guid(s.toString()));
-      }
-    }
-
-    try {
-      final subscription = _bleWrapper.scanResults.listen((results) {
-        for (var r in results) {
-          _scanResults[r.device.remoteId.toString()] = r;
-        }
-      });
-
-      debugPrint('[BleModule] Starting scan...');
-
-      // Start scanning
-      await _bleWrapper.startScan(
-        timeout: Duration(milliseconds: timeout),
-        withServices: serviceGuids,
-      );
-
-      // Wait for scan to complete
-      await Future.delayed(Duration(milliseconds: timeout));
-
-      subscription.cancel();
-
-      return {
-        'success': true,
-        'count': _scanResults.length,
-      };
-    } catch (e) {
-      debugPrint('[BleModule] Scan error: $e');
-      return {'success': false, 'error': e.toString()};
-    }
+    return {'success': false, 'error': 'BLE not supported on this build'};
   }
 
   Future<Object?> _stopScan(List<Object?> args) async {
-    try {
-      await _bleWrapper.stopScan();
-      return {'success': true};
-    } catch (e) {
-      return {'success': false, 'error': e.toString()};
-    }
+    return {'success': true};
   }
 
   Object? _getDiscoveredDevices(List<Object?> args) {
-    return _scanResults.values
-        .map((result) => {
-              'id': result.device.remoteId.toString(),
-              'rssi': result.rssi,
-              'services': result.advertisementData.serviceUuids
-                  .map((u) => u.toString())
-                  .toList(),
-              'connectable': result.advertisementData.connectable,
-            })
-        .toList();
+    return [];
   }
 
   Future<Object?> _connect(List<Object?> args) async {
-    final deviceId = args.isNotEmpty ? args[0].toString() : '';
-    if (deviceId.isEmpty) {
-      return {'success': false, 'error': 'Device ID required'};
-    }
-
-    try {
-      final device = _bleWrapper.fromId(deviceId);
-
-      // device is non-null from fromId
-      await device.connect(license: License.free);
-      _connectedDevices[deviceId] = device;
-
-      return {'success': true};
-    } catch (e) {
-      debugPrint('[BleModule] Connect error: $e');
-      return {'success': false, 'error': e.toString()};
-    }
+    return {'success': false, 'error': 'BLE not supported'};
   }
 
   Future<Object?> _disconnect(List<Object?> args) async {
-    final deviceId = args.isNotEmpty ? args[0].toString() : '';
-    final device = _connectedDevices[deviceId];
-
-    if (device == null) {
-      return {'success': false, 'error': 'Device not connected'};
-    }
-
-    try {
-      await device.disconnect();
-      _connectedDevices.remove(deviceId);
-      return {'success': true};
-    } catch (e) {
-      return {'success': false, 'error': e.toString()};
-    }
+    return {'success': false, 'error': 'BLE not supported'};
   }
 
   Future<Object?> _discoverServices(List<Object?> args) async {
-    final deviceId = args.isNotEmpty ? args[0].toString() : '';
-    final device = _connectedDevices[deviceId];
-
-    if (device == null) {
-      return {'success': false, 'error': 'Device not connected'};
-    }
-
-    try {
-      final services = await device.discoverServices();
-
-      return {
-        'success': true,
-        'services': services
-            .map((s) => {
-                  'uuid': s.serviceUuid.toString(),
-                  'characteristics': s.characteristics
-                      .map((c) => {
-                            'uuid': c.characteristicUuid.toString(),
-                            'properties': _getPropertiesList(c.properties),
-                          })
-                      .toList(),
-                })
-            .toList(),
-      };
-    } catch (e) {
-      return {'success': false, 'error': e.toString()};
-    }
-  }
-
-  List<String> _getPropertiesList(CharacteristicProperties props) {
-    final List<String> list = [];
-    if (props.read) {
-      list.add('read');
-    }
-    if (props.write) {
-      list.add('write');
-    }
-    if (props.writeWithoutResponse) {
-      list.add('writeWithoutResponse');
-    }
-    if (props.notify) {
-      list.add('notify');
-    }
-    if (props.indicate) {
-      list.add('indicate');
-    }
-    return list;
-  }
-
-  Future<BluetoothCharacteristic?> _findCharacteristic(
-      String deviceId, String serviceUuid, String charUuid) async {
-    final device = _connectedDevices[deviceId];
-    if (device == null) {
-      return null;
-    }
-
-    // We assume services are discovered
-    for (final service in device.servicesList) {
-      if (service.serviceUuid.toString().toLowerCase() ==
-          serviceUuid.toLowerCase()) {
-        for (final char in service.characteristics) {
-          if (char.characteristicUuid.toString().toLowerCase() ==
-              charUuid.toLowerCase()) {
-            return char;
-          }
-        }
-      }
-    }
-    return null;
+    return {'success': false, 'error': 'BLE not supported'};
   }
 
   Future<Object?> _read(List<Object?> args) async {
-    if (args.length < 3) {
-      return {'success': false, 'error': 'Missing arguments'};
-    }
-    final deviceId = args[0].toString();
-    final serviceUuid = args[1].toString();
-    final charUuid = args[2].toString();
-
-    try {
-      final char = await _findCharacteristic(deviceId, serviceUuid, charUuid);
-      if (char == null) {
-        return {'success': false, 'error': 'Characteristic not found'};
-      }
-
-      final value = await char.read();
-      return {'success': true, 'value': value};
-    } catch (e) {
-      return {'success': false, 'error': e.toString()};
-    }
+    return {'success': false, 'error': 'BLE not supported'};
   }
 
   Future<Object?> _write(List<Object?> args) async {
-    if (args.length < 4) {
-      return {'success': false, 'error': 'Missing arguments'};
-    }
-    final deviceId = args[0].toString();
-    final serviceUuid = args[1].toString();
-    final charUuid = args[2].toString();
-    final data = args[3];
-
-    if (data is! List) {
-      return {'success': false, 'error': 'Data must be a list of bytes'};
-    }
-    final bytes = data.map((e) => (e as num).toInt()).toList();
-
-    try {
-      final char = await _findCharacteristic(deviceId, serviceUuid, charUuid);
-      if (char == null) {
-        return {'success': false, 'error': 'Characteristic not found'};
-      }
-
-      await char.write(bytes);
-      return {'success': true};
-    } catch (e) {
-      return {'success': false, 'error': e.toString()};
-    }
+    return {'success': false, 'error': 'BLE not supported'};
   }
 
   Future<Object?> _subscribe(List<Object?> args) async {
-    if (args.length < 4) {
-      return {'success': false, 'error': 'Missing arguments'};
-    }
-    final deviceId = args[0].toString();
-    final serviceUuid = args[1].toString();
-    final charUuid = args[2].toString();
-    final callback = args[3];
-
-    if (callback is! Function) {
-      return {'success': false, 'error': 'Callback required'};
-    }
-
-    final key = '$deviceId:$serviceUuid:$charUuid';
-
-    try {
-      final char = await _findCharacteristic(deviceId, serviceUuid, charUuid);
-      if (char == null) {
-        return {'success': false, 'error': 'Characteristic not found'};
-      }
-
-      await char.setNotifyValue(true);
-
-      final sub = char.lastValueStream.listen((value) {
-        try {
-          // Invoke callback
-          // Note: In strict mode we might need to check function type,
-          // but here we rely on runtime dynamic invocation
-          (callback as dynamic)([value]);
-        } catch (e) {
-          debugPrint('Error in notification callback: $e');
-        }
-      });
-
-      _subscriptions[key] = sub;
-      return {'success': true};
-    } catch (e) {
-      return {'success': false, 'error': e.toString()};
-    }
+    return {'success': false, 'error': 'BLE not supported'};
   }
 
   Future<Object?> _unsubscribe(List<Object?> args) async {
-    if (args.length < 3) {
-      return {'success': false, 'error': 'Missing arguments'};
-    }
-    final deviceId = args[0].toString();
-    final serviceUuid = args[1].toString();
-    final charUuid = args[2].toString();
-
-    final key = '$deviceId:$serviceUuid:$charUuid';
-
-    try {
-      await _subscriptions[key]?.cancel();
-      _subscriptions.remove(key);
-
-      final char = await _findCharacteristic(deviceId, serviceUuid, charUuid);
-      if (char != null) {
-        await char.setNotifyValue(false);
-      }
-
-      return {'success': true};
-    } catch (e) {
-      return {'success': false, 'error': e.toString()};
-    }
+    return {'success': false, 'error': 'BLE not supported'};
   }
 }

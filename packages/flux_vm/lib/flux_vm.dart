@@ -9,3 +9,5 @@ export 'src/debugger.dart';
 export 'src/stdlib.dart';
 export 'src/closure.dart';
 export 'src/persistence_delegate.dart';
+export 'src/memory_manager.dart';
+export 'src/plugin.dart';

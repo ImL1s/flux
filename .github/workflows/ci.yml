@@ -189,10 +189,29 @@ jobs:
           cd packages/flux_updater
           dart test --reporter=expanded
 
+  test-devtools:
+    name: Test flux_devtools_extension
+    runs-on: ubuntu-latest
+    needs: analyze
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.5'
+          channel: 'stable'
+      - name: Install dependencies
+        run: |
+          cd packages/flux_devtools_extension
+          flutter pub get
+      - name: Run tests
+        run: |
+          cd packages/flux_devtools_extension
+          flutter test --platform chrome --reporter=expanded
+
   ci-success:
     name: CI Success
     runs-on: ubuntu-latest
-    needs: [test-compiler, test-vm, test-lsp, test-dap, test-flutter, test-cli, test-updater]
+    needs: [test-compiler, test-vm, test-lsp, test-dap, test-flutter, test-cli, test-updater, test-devtools]
     if: always()
     steps:
       - name: Check all jobs passed
@@ -203,6 +222,7 @@ jobs:
              [ "${{ needs.test-dap.result }}" != "success" ] || \
              [ "${{ needs.test-cli.result }}" != "success" ] || \
              [ "${{ needs.test-updater.result }}" != "success" ] || \
+             [ "${{ needs.test-devtools.result }}" != "success" ] || \
              [ "${{ needs.test-flutter.result }}" != "success" ]; then
             echo "Some tests failed"
             exit 1

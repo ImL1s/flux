@@ -10,6 +10,8 @@ import 'coroutine.dart';
 import 'debugger.dart';
 import 'inline_cache.dart';
 import 'persistence_delegate.dart';
+import 'memory_manager.dart';
+import 'plugin.dart';
 
 typedef WidgetCallHandler = Object? Function(Object? callee, int argCount,
     Map<String, dynamic> namedArgs, List<Object?> stack);
@@ -76,6 +78,7 @@ class VM {
   static const String version = '3.0.0';
 
   final Map<String, Object?> _globals = {};
+  late final PluginRegistry pluginRegistry;
 
   /// Widget state storage (keyed by state field name)
   /// Shared across all coroutines for the current widget instance
@@ -124,6 +127,7 @@ class VM {
   // Debugger and Profiler
   FluxDebugger? debugger;
   FluxProfiler? profiler;
+  final MemoryManager memoryManager = MemoryManager();
 
   // Module import tracking
   final List<String> _imports = [];
@@ -139,6 +143,9 @@ class VM {
 
   /// Current widget name (for persistence keys)
   String? _currentWidgetName;
+
+  /// Latest rendered widget tree for inspector (usually a FluxWidgetNode)
+  Object? lastWidgetTree;
 
   /// Loaded scripts registry (for hot-swap)
   final Map<String, CompiledFunction> _scripts = {};
@@ -175,6 +182,7 @@ class VM {
 
   /// Constructor - initializes standard library
   VM({this.enableInlineCaching = true}) {
+    pluginRegistry = PluginRegistry(this);
     _currentCoroutine = FluxCoroutine('root');
     _initStdlib();
   }
@@ -439,12 +447,14 @@ class VM {
     if (_frames.isNotEmpty) {
       final function = CompiledFunction("script", chunk);
       final closure = ObjClosure(function, []);
+      memoryManager.trackClosure(closure);
       return executeClosure(closure);
     }
 
     // Wrap chunk in a CompiledFunction then a Closure
     final function = CompiledFunction("script", chunk);
     final closure = ObjClosure(function, []);
+    memoryManager.trackClosure(closure);
 
     // Reset VM state
     _stack.clear();
@@ -622,6 +632,7 @@ class VM {
 
     // Create new upvalue
     final createdUpvalue = ObjUpvalue(localIndex);
+    memoryManager.trackUpvalue(createdUpvalue);
     createdUpvalue.next = upvalue;
 
     if (prevUpvalue == null) {
@@ -690,6 +701,7 @@ class VM {
     // Support calling raw CompiledFunctions by wrapping them (e.g. from tests or old code)
     if (callee is CompiledFunction) {
       final closure = ObjClosure(callee, []);
+      memoryManager.trackClosure(closure);
       // The named arguments were already popped from the stack in OpCode.callNamed
       // so totalArgSlots here only refers to positional arguments still on stack.
       final totalArgSlotsOnStack = argCount;
@@ -739,6 +751,7 @@ class VM {
     if (callee is CompiledClass) {
       // 1. Create the instance
       final instance = FluxInstance(callee);
+      memoryManager.trackInstance(instance);
 
       // 2. Check for 'init' method
       final initMethod = callee.methods['init'];
@@ -1280,7 +1293,9 @@ class VM {
               }
             }
 
-            _stack.add(ObjClosure(function, upvalues));
+            final closure = ObjClosure(function, upvalues);
+            memoryManager.trackClosure(closure);
+            _stack.add(closure);
             break;
 
           case OpCode.getUpvalue:
@@ -1425,6 +1440,7 @@ class VM {
             final classObj = _stack.removeLast();
             if (classObj is CompiledClass) {
               final instance = FluxInstance(classObj);
+              memoryManager.trackInstance(instance);
               _stack.add(instance);
             } else {
               throw 'Cannot instantiate non-class: $classObj';

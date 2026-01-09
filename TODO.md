@@ -87,10 +87,9 @@ This file tracks planned features and improvements. Each item should be implemen
 ### Feature: Developer Experience
 - **Description**: Enhanced DX tooling
 - **Goals**:
-  - [ ] FluxDevTools browser extension
-  - [ ] Performance profiler
-  - [ ] Memory leak detection
-  - [ ] Visual widget inspector
+  - [x] FluxDevTools browser extension
+  - [x] Performance profiler (Memory leak detection)
+  - [x] Visual widget inspector
 
 ---
 

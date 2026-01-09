@@ -131,11 +131,14 @@ class _ObjectInspectorDialogState extends State<ObjectInspectorDialog> {
 
   Widget _buildContent() {
     if (_loading) return const Center(child: CircularProgressIndicator());
-    if (_error != null)
+    if (_error != null) {
       return Center(
           child: Text('Error: $_error',
               style: const TextStyle(color: Colors.red)));
-    if (_data == null) return const Center(child: Text('No data found'));
+    }
+    if (_data == null) {
+      return const Center(child: Text('No data found'));
+    }
 
     final kind = _data!['kind'];
 

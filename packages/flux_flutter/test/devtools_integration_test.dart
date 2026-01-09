@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_flutter/src/dev_tools/flux_service_extensions.dart';
+import 'package:flux_flutter/src/flux_widget.dart';
 
 void main() {
   group('DevTools Integration Test', () {
@@ -100,6 +101,31 @@ main();
         expect(statusJson['isPaused'], true, reason: "Status should be paused");
         expect(statusJson['vmState'], 'Paused');
         expect(statusJson['pausedLine'], 7);
+
+        // 10. Test getMemoryStats (ext.flux.getMemoryStats)
+        final memoryResponse =
+            await FluxServiceExtensionHandlers.getMemoryStats(vm, {});
+        final memoryJson = jsonDecode(memoryResponse.result as String);
+
+        expect(memoryJson['type'], 'MemoryStats');
+        final stats = memoryJson['stats'];
+        expect(stats, contains('aliveInstances'));
+        expect(stats, contains('totalAllocated'));
+        expect(stats['totalAllocated'], isNotNull);
+
+        // 11. Test getWidgetTree (ext.flux.getWidgetTree)
+        // Simulate a widget tree
+        final node = FluxWidgetNode('Center', args: {'key': 'val'}, children: ['Hello']);
+        vm.lastWidgetTree = node;
+
+        final treeResponse =
+            await FluxServiceExtensionHandlers.getWidgetTree(vm, {});
+        final treeJson = jsonDecode(treeResponse.result as String);
+
+        expect(treeJson['type'], 'WidgetTree');
+        expect(treeJson['tree']['name'], 'Center');
+        expect(treeJson['tree']['args']['key'], 'val');
+        expect(treeJson['tree']['children'][0], 'Hello');
       }
     });
   });

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:flux_vm/flux_vm.dart';
+import '../flux_widget.dart';
 
 /// Registers Flux specific service extensions for DevTools integration.
 class FluxServiceExtensions {
@@ -49,6 +50,18 @@ class FluxServiceExtensions {
         'ext.flux.getObject',
         (method, parameters) =>
             FluxServiceExtensionHandlers.getObject(vm, parameters));
+
+    // 13. Get Memory Stats
+    registerExtension(
+        'ext.flux.getMemoryStats',
+        (method, parameters) =>
+            FluxServiceExtensionHandlers.getMemoryStats(vm, parameters));
+
+    // 14. Get Widget Tree
+    registerExtension(
+        'ext.flux.getWidgetTree',
+        (method, parameters) =>
+            FluxServiceExtensionHandlers.getWidgetTree(vm, parameters));
 
     // Setup Listener
     vm.debugger?.addListener((event, context) {
@@ -183,6 +196,31 @@ class FluxServiceExtensionHandlers {
     return ServiceExtensionResponse.result(jsonEncode({
       'type': 'Object',
       'object': obj,
+    }));
+  }
+
+  static Future<ServiceExtensionResponse> getMemoryStats(
+      VM vm, Map<String, String> parameters) async {
+    return ServiceExtensionResponse.result(jsonEncode({
+      'type': 'MemoryStats',
+      'stats': vm.memoryManager.stats.toJson(),
+    }));
+  }
+
+  static Future<ServiceExtensionResponse> getWidgetTree(
+      VM vm, Map<String, String> parameters) async {
+    final tree = vm.lastWidgetTree;
+    Map<String, dynamic>? treeJson;
+    
+    if (tree is FluxWidgetNode) {
+      treeJson = tree.toJson();
+    } else if (tree != null) {
+      treeJson = {'name': 'Unknown', 'details': tree.toString()};
+    }
+
+    return ServiceExtensionResponse.result(jsonEncode({
+      'type': 'WidgetTree',
+      'tree': treeJson,
     }));
   }
 }

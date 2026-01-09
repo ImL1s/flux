@@ -22,7 +22,9 @@ class _ConsolePaneState extends State<ConsolePane> {
 
   void _submit() async {
     final text = _controller.text.trim();
-    if (text.isEmpty) return;
+    if (text.isEmpty) {
+      return;
+    }
 
     setState(() {
       _entries.add(ConsoleEntry(text: text, type: EntryType.input));

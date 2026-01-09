@@ -33,4 +33,19 @@ suite('Extension Test Suite', () => {
         // Real DAP connection requires a running process and UI verification.
         assert.ok(true);
     });
+
+    test('Language ID should be flux for .flux files', async () => {
+        const doc = await vscode.workspace.openTextDocument({
+            content: 'widget main {}',
+            language: 'flux'
+        });
+        assert.strictEqual(doc.languageId, 'flux');
+    });
+
+    test('Flux Debugger configuration should be present', () => {
+        const ext = vscode.extensions.getExtension('ImL1s.flux-vscode');
+        const debuggers = ext?.packageJSON.contributes.debuggers;
+        assert.ok(debuggers && debuggers.length > 0);
+        assert.strictEqual(debuggers[0].type, 'flux');
+    });
 });

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'panes/call_stack_pane.dart';
 import 'panes/console_pane.dart';
 import 'panes/variables_pane.dart';
+import 'panes/memory_pane.dart';
+import 'panes/inspector_pane.dart';
 
 class FluxDebuggerScreen extends StatefulWidget {
   const FluxDebuggerScreen({super.key});
@@ -229,124 +231,155 @@ class _FluxDebuggerScreenState extends State<FluxDebuggerScreen> {
       ),
       body: _scripts.isEmpty
           ? const Center(child: CircularProgressIndicator())
-          : Row(
-              children: [
-                // 1. Scripts List (Left)
-                SizedBox(
-                  width: 200,
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        color: Colors.grey.shade200,
-                        width: double.infinity,
-                        child: const Text('Scripts',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: _scripts.length,
-                          itemBuilder: (context, index) {
-                            final s = _scripts[index];
-                            return ListTile(
-                              title: Text(s['name'] ?? ''),
-                              dense: true,
-                              selected: _selectedScript == s,
-                              onTap: () => setState(() => _selectedScript = s),
-                            );
-                          },
-                        ),
-                      ),
+          : DefaultTabController(
+              length: 3,
+              child: Column(
+                children: [
+                  const TabBar(
+                    tabs: [
+                      Tab(text: 'Debugger', icon: Icon(Icons.bug_report)),
+                      Tab(text: 'Memory', icon: Icon(Icons.memory)),
+                      Tab(text: 'Inspector', icon: Icon(Icons.search)),
                     ],
+                    labelColor: Colors.blue,
                   ),
-                ),
-                const VerticalDivider(width: 1),
-
-                // 2. Source View (Center)
-                Expanded(
-                  flex: 3,
-                  child: _selectedScript == null
-                      ? const Center(child: Text('Select a script'))
-                      : _CodeViewer(
-                          scriptName: _selectedScript!['name'],
-                          source: _selectedScript!['source'],
-                          breakpointLines: _breakpointIds.keys
-                              .map((k) => k.split(':'))
-                              .where((parts) =>
-                                  parts[0] == _selectedScript!['name'])
-                              .map((parts) => int.parse(parts[1]))
-                              .toSet(),
-                          pausedLine: _isPaused &&
-                                  _pausedScript == _selectedScript!['name']
-                              ? _pausedLine
-                              : null,
-                          onToggleBreakpoint: (line) =>
-                              _toggleBreakpoint(_selectedScript!['name'], line),
-                        ),
-                ),
-
-                const VerticalDivider(width: 1),
-
-                // 3. Inspector Panel (Right)
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    children: [
-                      // Top Half: Call Stack & Variables (Tabs)
-                      Expanded(
-                        flex: 2,
-                        child: DefaultTabController(
-                          length: 2,
-                          child: Column(
-                            children: [
-                              const TabBar(
-                                tabs: [
-                                  Tab(text: 'Call Stack'),
-                                  Tab(text: 'Variables'),
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        // TAB 1: Debugger
+                        Row(
+                          children: [
+                            // 1. Scripts List (Left)
+                            SizedBox(
+                              width: 200,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(8),
+                                    color: Colors.grey.shade200,
+                                    width: double.infinity,
+                                    child: const Text('Scripts',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  Expanded(
+                                    child: ListView.builder(
+                                      itemCount: _scripts.length,
+                                      itemBuilder: (context, index) {
+                                        final s = _scripts[index];
+                                        return ListTile(
+                                          title: Text(s['name'] ?? ''),
+                                          dense: true,
+                                          selected: _selectedScript == s,
+                                          onTap: () => setState(
+                                              () => _selectedScript = s),
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ],
-                                labelColor: Colors.black,
                               ),
-                              Expanded(
-                                child: TabBarView(
-                                  children: [
-                                    CallStackPane(
-                                      stack: _callStack,
-                                      selectedFrameIndex: _selectedFrameIndex,
-                                      onFrameSelected: _fetchLocals,
+                            ),
+                            const VerticalDivider(width: 1),
+                            // 2. Source View (Center)
+                            Expanded(
+                              flex: 3,
+                              child: _selectedScript == null
+                                  ? const Center(child: Text('Select a script'))
+                                  : _CodeViewer(
+                                      scriptName: _selectedScript!['name'],
+                                      source: _selectedScript!['source'],
+                                      breakpointLines: _breakpointIds.keys
+                                          .map((k) => k.split(':'))
+                                          .where((parts) =>
+                                              parts[0] ==
+                                              _selectedScript!['name'])
+                                          .map((parts) => int.parse(parts[1]))
+                                          .toSet(),
+                                      pausedLine: _isPaused &&
+                                              _pausedScript ==
+                                                  _selectedScript!['name']
+                                          ? _pausedLine
+                                          : null,
+                                      onToggleBreakpoint: (line) =>
+                                          _toggleBreakpoint(
+                                              _selectedScript!['name'], line),
                                     ),
-                                    VariablesPane(
-                                      locals: _locals,
+                            ),
+                            const VerticalDivider(width: 1),
+                            // 3. Inspector Panel (Right)
+                            Expanded(
+                              flex: 2,
+                              child: Column(
+                                children: [
+                                  // Top Half: Call Stack & Variables (Tabs)
+                                  Expanded(
+                                    flex: 2,
+                                    child: DefaultTabController(
+                                      length: 2,
+                                      child: Column(
+                                        children: [
+                                          const TabBar(
+                                            tabs: [
+                                              Tab(text: 'Call Stack'),
+                                              Tab(text: 'Variables'),
+                                            ],
+                                            labelColor: Colors.black,
+                                          ),
+                                          Expanded(
+                                            child: TabBarView(
+                                              children: [
+                                                CallStackPane(
+                                                  stack: _callStack,
+                                                  selectedFrameIndex:
+                                                      _selectedFrameIndex,
+                                                  onFrameSelected: _fetchLocals,
+                                                ),
+                                                VariablesPane(
+                                                  locals: _locals,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  const Divider(height: 1),
+                                  // Bottom Half: Console
+                                  Expanded(
+                                    flex: 1,
+                                    child: ConsolePane(
+                                      enabled: _isPaused,
+                                      onEvaluate: (expr) async {
+                                        final resp = await serviceManager
+                                            .callServiceExtensionOnMainIsolate(
+                                                'ext.flux.eval',
+                                                args: {
+                                              'expr': expr,
+                                              'frameIndex':
+                                                  '$_selectedFrameIndex',
+                                            });
+                                        final json = resp.json ?? {};
+                                        return json['result']?.toString() ??
+                                            'Error';
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const Divider(height: 1),
-                      // Bottom Half: Console
-                      Expanded(
-                        flex: 1,
-                        child: ConsolePane(
-                          enabled: _isPaused,
-                          onEvaluate: (expr) async {
-                            final resp = await serviceManager
-                                .callServiceExtensionOnMainIsolate(
-                                    'ext.flux.eval',
-                                    args: {
-                                  'expr': expr,
-                                  'frameIndex': '$_selectedFrameIndex',
-                                });
-                            final json = resp.json ?? {};
-                            return json['result']?.toString() ?? 'Error';
-                          },
-                        ),
-                      ),
-                    ],
+                        // TAB 2: Memory
+                        const MemoryPane(),
+                        // TAB 3: Inspector
+                        const InspectorPane(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
     );
   }
