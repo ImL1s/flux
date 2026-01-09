@@ -18,19 +18,19 @@ void main() {
         var b = Box("Gold");
         b.open();
       ''';
-      
+
       final logs = <String>[];
-      
+
       final tokens = Lexer(source).tokenize();
       final parser = Parser(tokens);
       final ast = parser.parse();
       final compiler = Compiler(unit: ast);
       final function = compiler.endCompiler();
-      
+
       final vm = VM();
       vm.onPrint = (msg) => logs.add(msg);
       vm.runChunk(function.chunk);
-      
+
       expect(logs.length, 1);
       expect(logs[0], 'Opened: Gold');
     });
@@ -59,17 +59,17 @@ void main() {
         var d = Dog("Buddy", "Golden");
         d.speak();
       ''';
-      
+
       final logs = <String>[];
-      
+
       final tokens = Lexer(source).tokenize();
       final ast = Parser(tokens).parse();
       final function = Compiler(unit: ast).endCompiler();
-      
+
       final vm = VM();
       vm.onPrint = (msg) => logs.add(msg);
       vm.runChunk(function.chunk);
-      
+
       expect(logs[0], 'Buddy the Golden woofs');
     });
   });

@@ -15,7 +15,7 @@ void main() {
       ''';
       final ast = _parse(source);
       final output = AstPrinter().print(ast);
-      
+
       final expected = '''
 CompilationUnit
   FunctionDecl(main)
@@ -35,7 +35,7 @@ CompilationUnit
       // trim to ignore whitespace diffs
       expect(output.trim(), equals(expected.trim()));
     });
-    
+
     test('class definitions', () {
       final source = '''
         class Foo {
@@ -44,24 +44,24 @@ CompilationUnit
       ''';
       final ast = _parse(source);
       final output = AstPrinter().print(ast);
-       final expected = '''
+      final expected = '''
 CompilationUnit
   ClassDecl(Foo)
     FunctionDecl(bar)
       Params: 
       Body:
 ''';
-       expect(output.trim(), equals(expected.trim()));
+      expect(output.trim(), equals(expected.trim()));
     });
-    
+
     test('import statement', () {
       final source = 'import "foo.flux";';
       final ast = _parse(source);
       final output = AstPrinter().print(ast);
-      
+
       expect(output.trim(), contains('ImportDecl(foo.flux)'));
     });
-    
+
     test('error recovery', () {
       try {
         // This source has a syntax error (invalid expression) but should recover
@@ -70,15 +70,15 @@ CompilationUnit
           var a = 1 + ;
           var b = 2;
         ''';
-        
+
         final lexer = Lexer(source);
         final tokens = lexer.tokenize();
         final parser = Parser(tokens);
         final ast = parser.parse();
-        
+
         // Should have reported an error
         expect(parser.errors, isNotEmpty, reason: "Parser should have errors");
-        
+
         // Should have synchronized and parsed the second declaration
         final output = AstPrinter().print(ast);
         expect(output, contains('VarDeclStmt(b)'));
@@ -95,7 +95,7 @@ CompilationUnit
       final source = 'print(1 + 2);';
       final chunk = _compile(source);
       final output = BytecodePrinter().print(chunk);
-      
+
       // Expected bytecode check: 1 + 2 folded to 3
       expect(output, contains("2: 3"));
       expect(output, contains("constant"));
@@ -103,16 +103,15 @@ CompilationUnit
       expect(output, contains("noOp"));
       expect(output, contains("print"));
     });
-    
+
     test('if statement with jump', () {
       final source = 'if (true) { print(1); }';
       final chunk = _compile(source);
       final output = BytecodePrinter().print(chunk);
-      
+
       expect(output, contains("jumpIfFalse"));
     });
 
-    
     test('function call', () {
       final source = '''
         fn foo() {}
@@ -120,7 +119,7 @@ CompilationUnit
       ''';
       final chunk = _compile(source);
       final output = BytecodePrinter().print(chunk);
-      
+
       expect(output, contains("call"));
     });
   });
@@ -132,7 +131,7 @@ CompilationUnit
       // emit CALL with 0 args
       chunk.write(OpCode.call.index, 1);
       chunk.write(0, 1); // arg count
-      
+
       final output = BytecodePrinter().print(chunk);
       print("Manual Chunk Output:\n$output");
       expect(output, contains("call"));

@@ -2,7 +2,6 @@ import 'package:test/test.dart';
 import 'package:flux_vm/flux_vm.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 
-
 void main() {
   group('StdLib Math Operations', () {
     late VM vm;
@@ -44,7 +43,8 @@ void main() {
       runScript('''
         print(pow(2, 3));
       ''');
-      expect(logs[0], '8'); // 2^3 = 8. math.pow returns num, usually int if inputs int. 
+      expect(logs[0],
+          '8'); // 2^3 = 8. math.pow returns num, usually int if inputs int.
       // Dart math.pow(2,3) returns 8 (int).
     });
 
@@ -67,9 +67,9 @@ void main() {
         if (r >= 0) { print("ge0"); }
         if (r < 10) { print("lt10"); }
       ''');
-       expect(logs[0], 'int');
-       expect(logs[1], 'ge0');
-       expect(logs[2], 'lt10');
+      expect(logs[0], 'int');
+      expect(logs[1], 'ge0');
+      expect(logs[2], 'lt10');
     });
   });
 }

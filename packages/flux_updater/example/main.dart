@@ -97,7 +97,8 @@ Future<void> main() async {
   // Step 6: Generate diff patch
   print('🔧 Generating diff patch...');
   final patch = await FluxDiffManager.createPatchFromBytes(v1Bytes, v2Bytes);
-  final compressionRatio = (patch.length / v2Bytes.length * 100).toStringAsFixed(1);
+  final compressionRatio =
+      (patch.length / v2Bytes.length * 100).toStringAsFixed(1);
   print('   Full chunk: ${v2Bytes.length} bytes');
   print('   Patch size: ${patch.length} bytes');
   print('   Compression: $compressionRatio%\n');

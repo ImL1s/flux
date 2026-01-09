@@ -8,13 +8,13 @@ class BytecodeSerializer {
 
   Uint8List serialize(CompiledFunction root) {
     _buffer.clear();
-    
+
     // Header
     _buffer.add(utf8.encode('FLUX'));
     _buffer.addByte(1); // Version 1
 
     _writeConstant(root);
-    
+
     return _buffer.toBytes();
   }
 
@@ -51,7 +51,7 @@ class BytecodeSerializer {
     _writeInt(fn.arity);
     _buffer.addByte(fn.isAsync ? 1 : 0);
     _writeString(fn.moduleName ?? '');
-    
+
     // Write param names
     _writeInt(fn.paramNames.length);
     for (final p in fn.paramNames) {
@@ -64,14 +64,14 @@ class BytecodeSerializer {
   void _writeClass(CompiledClass cls) {
     _writeString(cls.name);
     _writeString(cls.superclass ?? '');
-    
+
     // Methods
     _writeInt(cls.methods.length);
     for (final entry in cls.methods.entries) {
       _writeString(entry.key);
       _writeFunction(entry.value);
     }
-    
+
     // Fields
     _writeInt(cls.fields.length);
     for (final f in cls.fields) {
@@ -82,15 +82,15 @@ class BytecodeSerializer {
   void _writeWidget(CompiledWidget widget) {
     _writeString(widget.name);
     _writeFunction(widget.buildMethod);
-    
+
     _writeInt(widget.stateFields.length);
     for (final f in widget.stateFields) {
       _writeString(f);
     }
-    
+
     _writeInt(widget.stateInitializers.length);
     for (final init in widget.stateInitializers) {
-      _writeFunction(init); 
+      _writeFunction(init);
     }
   }
 
@@ -102,7 +102,7 @@ class BytecodeSerializer {
     for (final c in chunk.constants) {
       _writeConstant(c);
     }
-    
+
     _writeInt(chunk.lines.length);
     for (final l in chunk.lines) {
       _writeInt(l);
@@ -116,9 +116,9 @@ class BytecodeSerializer {
   }
 
   void _writeInt(int value) {
-     _buffer.addByte(value & 0xFF);
-     _buffer.addByte((value >> 8) & 0xFF);
-     _buffer.addByte((value >> 16) & 0xFF);
-     _buffer.addByte((value >> 24) & 0xFF);
+    _buffer.addByte(value & 0xFF);
+    _buffer.addByte((value >> 8) & 0xFF);
+    _buffer.addByte((value >> 16) & 0xFF);
+    _buffer.addByte((value >> 24) & 0xFF);
   }
 }

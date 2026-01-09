@@ -41,14 +41,15 @@ class WebSocketModule extends FluxModule {
     register('listen', NativeFunction('websocket.listen', 2, _listen));
 
     // State queries
-    register('isConnected', NativeFunction('websocket.isConnected', 1, _isConnected));
+    register('isConnected',
+        NativeFunction('websocket.isConnected', 1, _isConnected));
     register('getState', NativeFunction('websocket.getState', 1, _getState));
   }
 
   // ==================== Connection Management ====================
 
   /// Connect to a WebSocket server
-  /// 
+  ///
   /// Args:
   ///   - url: WebSocket URL (ws:// or wss://)
   ///   - options (optional): Map with:
@@ -60,7 +61,7 @@ class WebSocketModule extends FluxModule {
 
     try {
       final uri = Uri.parse(url);
-      
+
       // Extract options
       final protocols = options?['protocols'] as List?;
       final pingIntervalMs = options?['pingInterval'] as int?;
@@ -82,8 +83,8 @@ class WebSocketModule extends FluxModule {
         id: id,
         channel: channel,
         url: url,
-        pingInterval: pingIntervalMs != null 
-            ? Duration(milliseconds: pingIntervalMs) 
+        pingInterval: pingIntervalMs != null
+            ? Duration(milliseconds: pingIntervalMs)
             : null,
       );
 
@@ -151,7 +152,7 @@ class WebSocketModule extends FluxModule {
   }
 
   /// Listen for messages on a WebSocket connection
-  /// 
+  ///
   /// The callback will be invoked for each incoming message.
   /// Note: This sets up a stream listener. Only one listener per connection.
   Object? _listen(List<Object?> args) {
@@ -187,7 +188,7 @@ class WebSocketModule extends FluxModule {
   Object? _isConnected(List<Object?> args) {
     final connectionId = args[0] as String;
     final connection = _connections[connectionId];
-    
+
     if (connection == null) return false;
     return connection.isConnected;
   }

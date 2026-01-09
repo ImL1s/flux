@@ -37,9 +37,9 @@ void main() {
           print("Outer caught: " + e);
         }
       ''';
-      
+
       runScript(source);
-      
+
       expect(logs, [
         'Outer try',
         'Inner try',
@@ -64,10 +64,8 @@ void main() {
 
       runScript(source);
 
-      expect(logs, [
-        'Inner logging: Critical fail',
-        'Outer caught: Critical fail'
-      ]);
+      expect(logs,
+          ['Inner logging: Critical fail', 'Outer caught: Critical fail']);
     });
 
     test('Throwing non-string values', () {
@@ -82,7 +80,7 @@ void main() {
       runScript(source);
       expect(logs, ['Caught error code: 404']);
     });
-    
+
     test('Throwing nil', () {
       const source = '''
         try {
@@ -119,12 +117,9 @@ void main() {
         }
         print("Top is " + top);
       ''';
-      
+
       runScript(source);
-      expect(logs, [
-        'Recovered with d=4',
-        'Top is top'
-      ]);
+      expect(logs, ['Recovered with d=4', 'Top is top']);
     });
   });
 }

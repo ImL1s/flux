@@ -1,4 +1,3 @@
-
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/physics.dart';
@@ -29,7 +28,7 @@ class FluxAnimationController extends FluxAnimationBase {
   void stop() => native.stop();
   void repeat({bool reverse = false}) => native.repeat(reverse: reverse);
   void reset() => native.reset();
-  
+
   void animateTo(double target) {
     native.animateTo(target);
   }
@@ -62,221 +61,257 @@ class AnimationModule extends FluxModule {
   }
 
   void _init() {
-    register('createController', NativeFunction('Animation.createController', -1, (args) {
-      final duration = args.isNotEmpty ? _asInt(args[0]) ?? 300 : 300;
-      
-      final controller = AnimationController(
-        vsync: vsync,
-        duration: Duration(milliseconds: duration),
-      );
+    register(
+        'createController',
+        NativeFunction('Animation.createController', -1, (args) {
+          final duration = args.isNotEmpty ? _asInt(args[0]) ?? 300 : 300;
 
-      final fluxController = FluxAnimationController(controller);
+          final controller = AnimationController(
+            vsync: vsync,
+            duration: Duration(milliseconds: duration),
+          );
 
-      return {
-        'forward': NativeFunction('AnimationController.forward', 0, (_) {
-          fluxController.forward();
-          return null;
-        }),
-        'reverse': NativeFunction('AnimationController.reverse', 0, (_) {
-          fluxController.reverse();
-          return null;
-        }),
-        'stop': NativeFunction('AnimationController.stop', 0, (_) {
-          fluxController.stop();
-          return null;
-        }),
-        'repeat': NativeFunction('AnimationController.repeat', 0, (_) {
-          fluxController.repeat();
-          return null;
-        }),
-        'reset': NativeFunction('AnimationController.reset', 0, (_) {
-          fluxController.reset();
-          return null;
-        }),
-        'value': fluxController,
-        '__native__': fluxController,
-      };
-    }));
+          final fluxController = FluxAnimationController(controller);
 
-    register('curved', NativeFunction('Animation.curved', 2, (args) {
-      final parentArg = args[0];
-      final curveName = args[1].toString();
+          return {
+            'forward': NativeFunction('AnimationController.forward', 0, (_) {
+              fluxController.forward();
+              return null;
+            }),
+            'reverse': NativeFunction('AnimationController.reverse', 0, (_) {
+              fluxController.reverse();
+              return null;
+            }),
+            'stop': NativeFunction('AnimationController.stop', 0, (_) {
+              fluxController.stop();
+              return null;
+            }),
+            'repeat': NativeFunction('AnimationController.repeat', 0, (_) {
+              fluxController.repeat();
+              return null;
+            }),
+            'reset': NativeFunction('AnimationController.reset', 0, (_) {
+              fluxController.reset();
+              return null;
+            }),
+            'value': fluxController,
+            '__native__': fluxController,
+          };
+        }));
 
-      Animation<double>? parent;
-
-      if (parentArg is Map && parentArg.containsKey('__native__')) {
-        final nativeObj = parentArg['__native__'];
-        if (nativeObj is FluxAnimationController) {
-          parent = nativeObj.native;
-        } else if (nativeObj is FluxAnimation) {
-          final anim = nativeObj.native;
-          if (anim is Animation<double>) {
-            parent = anim;
-          }
-        }
-      }
-
-      if (parent == null) {
-        throw 'Animation.curved requires an AnimationController or Animation<double>';
-      }
-
-      final curve = _getCurve(curveName);
-      final curvedAnim = CurvedAnimation(parent: parent, curve: curve);
-      return {
-        '__native__': FluxAnimation(curvedAnim),
-        'value': FluxAnimation(curvedAnim),
-      };
-    }));
-
-    register('tween', NativeFunction('Animation.tween', 2, (args) {
-      final begin = (args[0] as num).toDouble();
-      final end = (args[1] as num).toDouble();
-      
-      final tween = Tween<double>(begin: begin, end: end);
-
-      return {
-        'animate': NativeFunction('Tween.animate', 1, (args) {
+    register(
+        'curved',
+        NativeFunction('Animation.curved', 2, (args) {
           final parentArg = args[0];
+          final curveName = args[1].toString();
+
           Animation<double>? parent;
-          
+
           if (parentArg is Map && parentArg.containsKey('__native__')) {
             final nativeObj = parentArg['__native__'];
             if (nativeObj is FluxAnimationController) {
               parent = nativeObj.native;
             } else if (nativeObj is FluxAnimation) {
-               final anim = nativeObj.native;
-               if (anim is Animation<double>) {
-                 parent = anim;
-               }
+              final anim = nativeObj.native;
+              if (anim is Animation<double>) {
+                parent = anim;
+              }
             }
           }
 
           if (parent == null) {
-            throw 'Tween.animate requires an Animation parent';
+            throw 'Animation.curved requires an AnimationController or Animation<double>';
           }
 
-          final anim = tween.animate(parent);
-          return FluxAnimation(anim);
-        }),
-      };
-    }));
+          final curve = _getCurve(curveName);
+          final curvedAnim = CurvedAnimation(parent: parent, curve: curve);
+          return {
+            '__native__': FluxAnimation(curvedAnim),
+            'value': FluxAnimation(curvedAnim),
+          };
+        }));
 
-    register('colorTween', NativeFunction('Animation.colorTween', 2, (args) {
-      final beginHex = args[0].toString();
-      final endHex = args[1].toString();
-      
-      final tween = ColorTween(
-        begin: _parseColor(beginHex),
-        end: _parseColor(endHex),
-      );
+    register(
+        'tween',
+        NativeFunction('Animation.tween', 2, (args) {
+          final begin = (args[0] as num).toDouble();
+          final end = (args[1] as num).toDouble();
 
-      return {
-        'animate': NativeFunction('ColorTween.animate', 1, (args) {
-          final parent = _extractAnimation(args[0]);
-          if (parent == null) {
-            throw 'ColorTween.animate requires an Animation parent';
+          final tween = Tween<double>(begin: begin, end: end);
+
+          return {
+            'animate': NativeFunction('Tween.animate', 1, (args) {
+              final parentArg = args[0];
+              Animation<double>? parent;
+
+              if (parentArg is Map && parentArg.containsKey('__native__')) {
+                final nativeObj = parentArg['__native__'];
+                if (nativeObj is FluxAnimationController) {
+                  parent = nativeObj.native;
+                } else if (nativeObj is FluxAnimation) {
+                  final anim = nativeObj.native;
+                  if (anim is Animation<double>) {
+                    parent = anim;
+                  }
+                }
+              }
+
+              if (parent == null) {
+                throw 'Tween.animate requires an Animation parent';
+              }
+
+              final anim = tween.animate(parent);
+              return FluxAnimation(anim);
+            }),
+          };
+        }));
+
+    register(
+        'colorTween',
+        NativeFunction('Animation.colorTween', 2, (args) {
+          final beginHex = args[0].toString();
+          final endHex = args[1].toString();
+
+          final tween = ColorTween(
+            begin: _parseColor(beginHex),
+            end: _parseColor(endHex),
+          );
+
+          return {
+            'animate': NativeFunction('ColorTween.animate', 1, (args) {
+              final parent = _extractAnimation(args[0]);
+              if (parent == null) {
+                throw 'ColorTween.animate requires an Animation parent';
+              }
+              final anim = tween.animate(parent);
+              return FluxAnimation(anim);
+            }),
+          };
+        }));
+
+    register(
+        'sizeTween',
+        NativeFunction('Animation.sizeTween', 2, (args) {
+          final begin = args[0] as Map;
+          final end = args[1] as Map;
+
+          final tween = SizeTween(
+            begin: Size((begin['width'] as num).toDouble(),
+                (begin['height'] as num).toDouble()),
+            end: Size((end['width'] as num).toDouble(),
+                (end['height'] as num).toDouble()),
+          );
+
+          return {
+            'animate': NativeFunction('SizeTween.animate', 1, (args) {
+              final parent = _extractAnimation(args[0]);
+              if (parent == null) {
+                throw 'SizeTween.animate requires an Animation parent';
+              }
+              final anim = tween.animate(parent);
+              return FluxAnimation(anim);
+            }),
+          };
+        }));
+
+    register(
+        'spring',
+        NativeFunction('Animation.spring', 1, (args) {
+          final parent = args[0] as Map;
+          final parentController = _extractController(parent);
+          if (parentController == null) {
+            throw 'Animation.spring requires an AnimationController';
           }
-          final anim = tween.animate(parent);
-          return FluxAnimation(anim);
-        }),
-      };
-    }));
 
-    register('sizeTween', NativeFunction('Animation.sizeTween', 2, (args) {
-      final begin = args[0] as Map;
-      final end = args[1] as Map;
-      
-      final tween = SizeTween(
-        begin: Size((begin['width'] as num).toDouble(), (begin['height'] as num).toDouble()),
-        end: Size((end['width'] as num).toDouble(), (end['height'] as num).toDouble()),
-      );
+          final mass = 1.0;
+          final stiffness = 100.0;
+          final damping = 10.0;
 
-      return {
-        'animate': NativeFunction('SizeTween.animate', 1, (args) {
-          final parent = _extractAnimation(args[0]);
-          if (parent == null) {
-            throw 'SizeTween.animate requires an Animation parent';
-          }
-          final anim = tween.animate(parent);
-          return FluxAnimation(anim);
-        }),
-      };
-    }));
+          final spring = SpringSimulation(
+            SpringDescription(
+              mass: mass,
+              stiffness: stiffness,
+              damping: damping,
+            ),
+            0.0,
+            1.0,
+            0.0,
+          );
 
-    register('spring', NativeFunction('Animation.spring', 1, (args) {
-      final parent = args[0] as Map;
-      final parentController = _extractController(parent);
-      if (parentController == null) {
-        throw 'Animation.spring requires an AnimationController';
-      }
+          parentController.animateWith(spring);
+          return null;
+        }));
 
-      final mass = 1.0;
-      final stiffness = 100.0;
-      final damping = 10.0;
+    register(
+        'stagger',
+        NativeFunction('Animation.stagger', 3, (args) {
+          final animations = args[0] as List;
+          final delayMs = (args[1] as num).toInt();
+          final durationMs = (args[2] as num).toInt();
 
-      final spring = SpringSimulation(
-        SpringDescription(
-          mass: mass,
-          stiffness: stiffness,
-          damping: damping,
-        ),
-        0.0,
-        1.0,
-        0.0,
-      );
-
-      parentController.animateWith(spring);
-      return null;
-    }));
-
-    register('stagger', NativeFunction('Animation.stagger', 3, (args) {
-      final animations = args[0] as List;
-      final delayMs = (args[1] as num).toInt();
-      final durationMs = (args[2] as num).toInt();
-
-      final results = [];
-      for (var i = 0; i < animations.length; i++) {
-        final anim = animations[i];
-        if (anim is Map && anim.containsKey('__native__')) {
-          final controller = _extractController(anim);
-          if (controller != null) {
-            if (durationMs > 0) {
-              controller.duration = Duration(milliseconds: durationMs);
+          final results = [];
+          for (var i = 0; i < animations.length; i++) {
+            final anim = animations[i];
+            if (anim is Map && anim.containsKey('__native__')) {
+              final controller = _extractController(anim);
+              if (controller != null) {
+                if (durationMs > 0) {
+                  controller.duration = Duration(milliseconds: durationMs);
+                }
+                final delay = Duration(milliseconds: delayMs * i);
+                Future.delayed(delay, () {
+                  controller.forward();
+                });
+                results.add(anim);
+              }
             }
-            final delay = Duration(milliseconds: delayMs * i);
-            Future.delayed(delay, () {
-              controller.forward();
-            });
-            results.add(anim);
           }
-        }
-      }
-      return results;
-    }));
+          return results;
+        }));
   }
 
   Curve _getCurve(String name) {
     switch (name) {
-      case 'linear': return Curves.linear;
-      case 'decelerate': return Curves.decelerate;
-      case 'ease': return Curves.ease;
-      case 'easeIn': return Curves.easeIn;
-      case 'easeOut': return Curves.easeOut;
-      case 'easeInOut': return Curves.easeInOut;
-      case 'easeInBack': return Curves.easeInBack;
-      case 'easeOutBack': return Curves.easeOutBack;
-      case 'easeInOutBack': return Curves.easeInOutBack;
-      case 'fastOutSlowIn': return Curves.fastOutSlowIn;
-      case 'fastLinearToSlowEaseIn': return Curves.fastLinearToSlowEaseIn;
-      case 'fastEaseInToSlowEaseOut': return Curves.fastEaseInToSlowEaseOut;
-      case 'slowMiddle': return Curves.slowMiddle;
-      case 'bounceIn': return Curves.bounceIn;
-      case 'bounceOut': return Curves.bounceOut;
-      case 'bounceInOut': return Curves.bounceInOut;
-      case 'elasticIn': return Curves.elasticIn;
-      case 'elasticOut': return Curves.elasticOut;
-      case 'elasticInOut': return Curves.elasticInOut;
-      default: return Curves.linear;
+      case 'linear':
+        return Curves.linear;
+      case 'decelerate':
+        return Curves.decelerate;
+      case 'ease':
+        return Curves.ease;
+      case 'easeIn':
+        return Curves.easeIn;
+      case 'easeOut':
+        return Curves.easeOut;
+      case 'easeInOut':
+        return Curves.easeInOut;
+      case 'easeInBack':
+        return Curves.easeInBack;
+      case 'easeOutBack':
+        return Curves.easeOutBack;
+      case 'easeInOutBack':
+        return Curves.easeInOutBack;
+      case 'fastOutSlowIn':
+        return Curves.fastOutSlowIn;
+      case 'fastLinearToSlowEaseIn':
+        return Curves.fastLinearToSlowEaseIn;
+      case 'fastEaseInToSlowEaseOut':
+        return Curves.fastEaseInToSlowEaseOut;
+      case 'slowMiddle':
+        return Curves.slowMiddle;
+      case 'bounceIn':
+        return Curves.bounceIn;
+      case 'bounceOut':
+        return Curves.bounceOut;
+      case 'bounceInOut':
+        return Curves.bounceInOut;
+      case 'elasticIn':
+        return Curves.elasticIn;
+      case 'elasticOut':
+        return Curves.elasticOut;
+      case 'elasticInOut':
+        return Curves.elasticInOut;
+      default:
+        return Curves.linear;
     }
   }
 

@@ -1,5 +1,5 @@
 /// Flux Language - Abstract Syntax Tree (AST) definitions
-/// 
+///
 /// This file defines all AST node types for the Flux language.
 
 import 'token.dart';
@@ -70,7 +70,10 @@ class AssignExpr extends Expression {
   final Expression value;
 
   const AssignExpr(this.name, this.value,
-      {this.nameLine, this.nameColumn, required super.line, required super.column});
+      {this.nameLine,
+      this.nameColumn,
+      required super.line,
+      required super.column});
 }
 
 /// Function call expression
@@ -80,7 +83,9 @@ class CallExpr extends Expression {
   final Map<String, Expression> namedArguments;
 
   const CallExpr(this.callee, this.arguments,
-      {this.namedArguments = const {}, required super.line, required super.column});
+      {this.namedArguments = const {},
+      required super.line,
+      required super.column});
 }
 
 /// Property access (a.b)
@@ -101,7 +106,10 @@ class SetExpr extends Expression {
   final Expression value;
 
   const SetExpr(this.object, this.name, this.value,
-      {this.nameLine, this.nameColumn, required super.line, required super.column});
+      {this.nameLine,
+      this.nameColumn,
+      required super.line,
+      required super.column});
 }
 
 /// Index access (a[b])
@@ -151,7 +159,8 @@ class LambdaExpr extends Expression {
 class AwaitExpr extends Expression {
   final Expression expression;
 
-  const AwaitExpr(this.expression, {required super.line, required super.column});
+  const AwaitExpr(this.expression,
+      {required super.line, required super.column});
 }
 
 /// Ternary/conditional expression (a ? b : c)
@@ -211,14 +220,21 @@ class VarDeclStmt extends Statement {
   final bool isMutable;
 
   const VarDeclStmt(this.name,
-      {this.nameLine, this.nameColumn, this.type, this.initializer, this.isMutable = true, required super.line, required super.column});
+      {this.nameLine,
+      this.nameColumn,
+      this.type,
+      this.initializer,
+      this.isMutable = true,
+      required super.line,
+      required super.column});
 }
 
 /// Block statement
 class BlockStmt extends Statement {
   final List<Statement> statements;
 
-  const BlockStmt(this.statements, {required super.line, required super.column});
+  const BlockStmt(this.statements,
+      {required super.line, required super.column});
 }
 
 /// If statement
@@ -281,15 +297,17 @@ class ContinueStmt extends Statement {
 /// Try-catch-finally statement
 class TryStmt extends Statement {
   final Statement tryBlock;
-  final String? catchVariable;  // Variable name for caught exception (e.g., "e" in catch(e))
+  final String?
+      catchVariable; // Variable name for caught exception (e.g., "e" in catch(e))
   final Statement? catchBlock;
   final Statement? finallyBlock;
 
-  const TryStmt(this.tryBlock, {
+  const TryStmt(
+    this.tryBlock, {
     this.catchVariable,
-    this.catchBlock, 
+    this.catchBlock,
     this.finallyBlock,
-    required super.line, 
+    required super.line,
     required super.column,
   });
 }
@@ -321,7 +339,12 @@ class FunctionDecl extends Declaration {
   final bool isAsync;
 
   const FunctionDecl(this.name, this.parameters, this.body,
-      {this.nameLine, this.nameColumn, this.returnType, this.isAsync = false, required super.line, required super.column});
+      {this.nameLine,
+      this.nameColumn,
+      this.returnType,
+      this.isAsync = false,
+      required super.line,
+      required super.column});
 }
 
 /// Class declaration
@@ -335,7 +358,13 @@ class ClassDecl extends Declaration {
   final List<Declaration> members;
 
   const ClassDecl(this.name, this.members,
-      {this.nameLine, this.nameColumn, this.superclass, this.interfaces = const [], this.fields = const [], required super.line, required super.column});
+      {this.nameLine,
+      this.nameColumn,
+      this.superclass,
+      this.interfaces = const [],
+      this.fields = const [],
+      required super.line,
+      required super.column});
 }
 
 /// Field declaration in a class
@@ -343,7 +372,8 @@ class FieldDecl extends Declaration {
   final String name;
   final Expression? initializer;
 
-  const FieldDecl(this.name, this.initializer, {required super.line, required super.column});
+  const FieldDecl(this.name, this.initializer,
+      {required super.line, required super.column});
 }
 
 /// Widget declaration (Flux-specific)
@@ -356,7 +386,10 @@ class WidgetDecl extends Declaration {
   final BuildBlock buildBlock;
 
   const WidgetDecl(this.name, this.props, this.stateFields, this.buildBlock,
-      {this.nameLine, this.nameColumn, required super.line, required super.column});
+      {this.nameLine,
+      this.nameColumn,
+      required super.line,
+      required super.column});
 }
 
 /// Import declaration
@@ -367,7 +400,11 @@ class ImportDecl extends Declaration {
   final List<String>? hide;
 
   const ImportDecl(this.path,
-      {this.alias, this.show, this.hide, required super.line, required super.column});
+      {this.alias,
+      this.show,
+      this.hide,
+      required super.line,
+      required super.column});
 }
 
 // ============================================================================
@@ -384,7 +421,11 @@ class Parameter {
   final bool isRequired;
 
   const Parameter(this.name,
-      {this.line, this.column, this.type, this.defaultValue, this.isRequired = true});
+      {this.line,
+      this.column,
+      this.type,
+      this.defaultValue,
+      this.isRequired = true});
 }
 
 /// State field in a widget
@@ -394,9 +435,9 @@ class StateField {
   final int? column;
   final String? type;
   final Expression initialValue;
-  final bool isPersistent;  // New: marks field for automatic persistence
+  final bool isPersistent; // New: marks field for automatic persistence
 
-  const StateField(this.name, this.initialValue, 
+  const StateField(this.name, this.initialValue,
       {this.line, this.column, this.type, this.isPersistent = false});
 }
 

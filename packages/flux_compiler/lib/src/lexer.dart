@@ -1,5 +1,5 @@
 /// Flux Language - Lexer (Tokenizer)
-/// 
+///
 /// Converts source code into a stream of tokens.
 
 import 'token.dart';
@@ -62,13 +62,17 @@ class Lexer {
       case '+':
         _addToken(_match('=') ? TokenType.plusEqual : TokenType.plus);
       case '-':
-        _addToken(_match('>') ? TokenType.arrow : (_match('=') ? TokenType.minusEqual : TokenType.minus));
+        _addToken(_match('>')
+            ? TokenType.arrow
+            : (_match('=') ? TokenType.minusEqual : TokenType.minus));
       case '*':
         _addToken(_match('=') ? TokenType.starEqual : TokenType.star);
       case '%':
         _addToken(TokenType.percent);
       case '=':
-        _addToken(_match('=') ? TokenType.equalEqual : (_match('>') ? TokenType.fatArrow : TokenType.equal));
+        _addToken(_match('=')
+            ? TokenType.equalEqual
+            : (_match('>') ? TokenType.fatArrow : TokenType.equal));
       case '!':
         _addToken(_match('=') ? TokenType.notEqual : TokenType.not);
       case '<':

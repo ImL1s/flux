@@ -32,13 +32,15 @@ import 'package:path_provider/path_provider.dart';
 class HiveStorageModule extends FluxModule {
   final Map<String, Box<String>> _openBoxes = {};
   bool _initialized = false;
-  
+
   /// Optional custom path for testing purposes
   final String? _testPath;
 
   /// Create a HiveStorageModule with optional test path for unit testing.
   /// When [testPath] is provided, it will be used instead of path_provider.
-  HiveStorageModule({String? testPath}) : _testPath = testPath, super('hive') {
+  HiveStorageModule({String? testPath})
+      : _testPath = testPath,
+        super('hive') {
     // Box lifecycle
     register('init', AsyncNativeFunction('hive.init', 0, _init));
     register('openBox', AsyncNativeFunction('hive.openBox', 1, _openBox));
@@ -54,7 +56,8 @@ class HiveStorageModule extends FluxModule {
 
     // Query operations
     register('getAll', AsyncNativeFunction('hive.getAll', 1, _getAll));
-    register('getAllKeys', AsyncNativeFunction('hive.getAllKeys', 1, _getAllKeys));
+    register(
+        'getAllKeys', AsyncNativeFunction('hive.getAllKeys', 1, _getAllKeys));
     register('containsKey',
         AsyncNativeFunction('hive.containsKey', 2, _containsKey));
     register('count', AsyncNativeFunction('hive.count', 1, _count));
@@ -73,7 +76,7 @@ class HiveStorageModule extends FluxModule {
       final directory = await getApplicationDocumentsDirectory();
       path = directory.path;
     }
-    
+
     Hive.init(path);
     _initialized = true;
     return true;

@@ -29,30 +29,30 @@ class CreateCommand extends Command<void> {
   @override
   Future<void> run() async {
     final args = argResults!;
-    
+
     if (args.rest.isEmpty) {
       usageException('Please provide a project name');
     }
-    
+
     final projectName = args.rest.first;
     final template = args['template'] as String;
     final force = args['force'] as bool;
-    
+
     final projectDir = Directory(projectName);
-    
+
     if (projectDir.existsSync() && !force) {
       stderr.writeln('Error: Directory "$projectName" already exists.');
       stderr.writeln('Use --force to overwrite.');
       exit(1);
     }
-    
+
     print('Creating Flux project "$projectName" with template "$template"...');
-    
+
     // Create project directory
     if (!projectDir.existsSync()) {
       projectDir.createSync(recursive: true);
     }
-    
+
     // Generate files based on template
     switch (template) {
       case 'basic':
@@ -65,7 +65,7 @@ class CreateCommand extends Command<void> {
         await _createServerTemplate(projectDir, projectName);
         break;
     }
-    
+
     print('');
     print('✅ Project created successfully!');
     print('');

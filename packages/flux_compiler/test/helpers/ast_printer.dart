@@ -8,7 +8,7 @@ class AstPrinter {
 
   String _visit(AstNode node, String indent) {
     final sb = StringBuffer();
-    
+
     if (node is CompilationUnit) {
       sb.writeln("${indent}CompilationUnit");
       for (final decl in node.declarations) {
@@ -16,7 +16,8 @@ class AstPrinter {
       }
     } else if (node is FunctionDecl) {
       sb.writeln("${indent}FunctionDecl(${node.name})");
-      sb.writeln("${indent}  Params: ${node.parameters.map((p) => p.name).join(", ")}");
+      sb.writeln(
+          "${indent}  Params: ${node.parameters.map((p) => p.name).join(", ")}");
       sb.writeln("${indent}  Body:");
       for (final stmt in node.body.statements) {
         sb.write(_visit(stmt, "$indent    "));
@@ -84,7 +85,7 @@ class AstPrinter {
     } else {
       sb.writeln("${indent}Unknown Node: $node");
     }
-    
+
     return sb.toString();
   }
 }

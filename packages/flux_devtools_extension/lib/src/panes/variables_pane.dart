@@ -20,10 +20,11 @@ class VariablesPane extends StatelessWidget {
     return Column(
       children: [
         Container(
-           padding: const EdgeInsets.all(8),
-           color: Colors.grey.shade100,
-           width: double.infinity,
-           child: const Text('Local Variables', style: TextStyle(fontWeight: FontWeight.bold)),
+          padding: const EdgeInsets.all(8),
+          color: Colors.grey.shade100,
+          width: double.infinity,
+          child: const Text('Local Variables',
+              style: TextStyle(fontWeight: FontWeight.bold)),
         ),
         Expanded(
           child: ListView.builder(
@@ -31,9 +32,10 @@ class VariablesPane extends StatelessWidget {
             itemBuilder: (context, index) {
               final key = locals.keys.elementAt(index);
               final value = locals[key];
-              
+
               return ListTile(
-                title: Text(key, style: const TextStyle(fontWeight: FontWeight.w500)),
+                title: Text(key,
+                    style: const TextStyle(fontWeight: FontWeight.w500)),
                 trailing: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 200),
                   child: Align(

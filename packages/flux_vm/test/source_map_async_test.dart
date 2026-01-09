@@ -26,12 +26,12 @@ void main() {
         test()
       ''';
 
-      // We need to use FluxRuntime or manual resume management because VM.interpret 
+      // We need to use FluxRuntime or manual resume management because VM.interpret
       // returns InterpretResult.awaiting for top-level awaits.
       // But here test() is called without await at top level, so test() returns a Coroutine.
-      
+
       await vm.interpret_async(source);
-      
+
       // Check if error was logged
       expect(logs.any((l) => l.contains('Runtime Error')), isTrue);
       expect(logs.any((l) => l.contains('at test() [line 5]')), isTrue);
@@ -61,7 +61,7 @@ void main() {
       ''';
 
       await vm.interpret_async(source);
-      
+
       expect(logs.any((l) => l.contains('at level2() [line 3]')), isTrue);
       expect(logs.any((l) => l.contains('at level1() [line 7]')), isTrue);
       expect(logs.any((l) => l.contains('at script() [line 10]')), isTrue);

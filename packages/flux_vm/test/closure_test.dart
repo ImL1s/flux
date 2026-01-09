@@ -20,7 +20,7 @@ void main() {
   });
 
   // testScript helper removed as it was unused and caused analysis warnings
-  
+
   test('Basic closure', () {
     final source = """
       var x = "global";
@@ -33,13 +33,13 @@ void main() {
       }
       outer();
     """;
-    
+
     var output = "";
     vm.onPrint = (msg) => output = msg;
-    
+
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(output, equals("outer"));
   });
 
@@ -56,16 +56,16 @@ void main() {
       outer();
       f();
     """;
-    
+
     var output = "";
     vm.onPrint = (msg) => output = msg;
 
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(output, equals("outside"));
   });
-  
+
   test('Closure modifies captured variable', () {
     final source = """
       var f;
@@ -79,13 +79,13 @@ void main() {
       }
       outer();
     """;
-     
+
     var output = "";
     vm.onPrint = (msg) => output = msg;
 
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(output, equals("after"));
   });
 
@@ -110,16 +110,16 @@ void main() {
       set();
       get();
     """;
-     
+
     var output = "";
     vm.onPrint = (msg) => output = msg;
 
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(output, equals("updated"));
   });
-  
+
   test('Multiple closures capture same existing upvalue', () {
     final source = """
       var x = "value";
@@ -136,16 +136,16 @@ void main() {
       }
       outer();
     """;
-    
+
     List<String> outputs = [];
     vm.onPrint = (msg) => outputs.add(msg);
 
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(outputs, equals(["value", "value"]));
   });
-  
+
   test('Nested closures', () {
     final source = """
       var f;
@@ -169,12 +169,12 @@ void main() {
 
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(output, equals("ab"));
   });
-  
+
   // Additional edge-case tests based on best practices
-  
+
   test('Counter pattern (classic closure use case)', () {
     final source = """
       var makeCounter;
@@ -194,16 +194,16 @@ void main() {
       counter();
       counter();
     """;
-    
+
     List<String> outputs = [];
     vm.onPrint = (msg) => outputs.add(msg);
-    
+
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(outputs, equals(["1", "2", "3"]));
   });
-  
+
   test('Closure captures parameter', () {
     final source = """
       var f;
@@ -216,16 +216,16 @@ void main() {
       outer("captured param");
       f();
     """;
-    
+
     var output = "";
     vm.onPrint = (msg) => output = msg;
-    
+
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(output, equals("captured param"));
   });
-  
+
   test('Two independent closures with same variable name', () {
     final source = """
       var f1;
@@ -252,16 +252,16 @@ void main() {
       f1();
       f2();
     """;
-    
+
     List<String> outputs = [];
     vm.onPrint = (msg) => outputs.add(msg);
-    
+
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(outputs, equals(["closure1", "closure2"]));
   });
-  
+
   test('Closed upvalue survives stack pop', () {
     final source = """
       var f;
@@ -278,16 +278,16 @@ void main() {
       // Now call f() after outer's stack frame is gone
       f();
     """;
-    
+
     var output = "";
     vm.onPrint = (msg) => output = msg;
-    
+
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(output, equals("survived"));
   });
-  
+
   test('Three-level nested closure', () {
     final source = """
       var f;
@@ -309,14 +309,13 @@ void main() {
       level1();
       f();
     """;
-    
+
     var output = "";
     vm.onPrint = (msg) => output = msg;
-    
+
     final unit = FluxCompiler.compile(source);
     vm.runChunk(unit.chunk);
-    
+
     expect(output, equals("L1L2L3"));
   });
 }
-

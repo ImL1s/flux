@@ -11,19 +11,19 @@ void main() {
         var c = a + b;
         print(c);
       ''';
-      
+
       final logs = <String>[];
-      
+
       final tokens = Lexer(source).tokenize();
       final parser = Parser(tokens);
       final ast = parser.parse();
       final compiler = Compiler(unit: ast);
       final function = compiler.endCompiler();
-      
+
       final vm = VM();
       vm.onPrint = (msg) => logs.add(msg);
       vm.runChunk(function.chunk);
-      
+
       expect(logs.length, 1);
       expect(logs[0], '[1, 2, 3, 4]');
     });
@@ -35,17 +35,17 @@ void main() {
         var c = a + b;
         print(c);
       ''';
-      
+
       final logs = <String>[];
-      
+
       final tokens = Lexer(source).tokenize();
       final ast = Parser(tokens).parse();
       final function = Compiler(unit: ast).endCompiler();
-      
+
       final vm = VM();
       vm.onPrint = (msg) => logs.add(msg);
       vm.runChunk(function.chunk);
-      
+
       expect(logs[0], '[1]');
     });
   });

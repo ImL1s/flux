@@ -28,7 +28,7 @@ typedef MigrationCallback = Future<void> Function();
 /// ```
 class StateMigration {
   static const String _versionKey = '_flux_state_version';
-  
+
   final Map<int, MigrationCallback> _migrations = {};
   final SharedPreferences? _prefs;
 
@@ -64,14 +64,18 @@ class StateMigration {
     final migratedVersions = <int>[];
 
     if (currentVersion >= targetVersion) {
-      debugPrint('StateMigration: Already at version $currentVersion, no migrations needed');
+      debugPrint(
+          'StateMigration: Already at version $currentVersion, no migrations needed');
       return migratedVersions;
     }
 
-    debugPrint('StateMigration: Migrating from version $currentVersion to $targetVersion');
+    debugPrint(
+        'StateMigration: Migrating from version $currentVersion to $targetVersion');
 
     // Run migrations in order
-    for (var version = currentVersion + 1; version <= targetVersion; version++) {
+    for (var version = currentVersion + 1;
+        version <= targetVersion;
+        version++) {
       final migration = _migrations[version];
       if (migration != null) {
         debugPrint('StateMigration: Running migration to version $version');
@@ -79,18 +83,21 @@ class StateMigration {
           await migration();
           migratedVersions.add(version);
         } catch (e) {
-          debugPrint('StateMigration: Migration to version $version failed: $e');
+          debugPrint(
+              'StateMigration: Migration to version $version failed: $e');
           rethrow;
         }
       } else {
-        debugPrint('StateMigration: No migration registered for version $version, skipping');
+        debugPrint(
+            'StateMigration: No migration registered for version $version, skipping');
       }
-      
+
       // Update version after each successful migration
       await setCurrentVersion(version);
     }
 
-    debugPrint('StateMigration: Migration complete. Migrated versions: $migratedVersions');
+    debugPrint(
+        'StateMigration: Migration complete. Migrated versions: $migratedVersions');
     return migratedVersions;
   }
 
@@ -114,13 +121,15 @@ class StateMigration {
   Future<List<int>> getPendingMigrations(int targetVersion) async {
     final currentVersion = await getCurrentVersion();
     final pending = <int>[];
-    
-    for (var version = currentVersion + 1; version <= targetVersion; version++) {
+
+    for (var version = currentVersion + 1;
+        version <= targetVersion;
+        version++) {
       if (_migrations.containsKey(version)) {
         pending.add(version);
       }
     }
-    
+
     return pending;
   }
 

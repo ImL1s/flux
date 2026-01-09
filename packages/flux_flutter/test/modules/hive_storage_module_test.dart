@@ -164,9 +164,21 @@ void main() {
       final putFn = hiveModule.get('put') as AsyncNativeFunction;
       final getAllFn = hiveModule.get('getAll') as AsyncNativeFunction;
 
-      await putFn.call(['getAllBox', 'user1', {'name': 'Alice'}]);
-      await putFn.call(['getAllBox', 'user2', {'name': 'Bob'}]);
-      await putFn.call(['getAllBox', 'user3', {'name': 'Charlie'}]);
+      await putFn.call([
+        'getAllBox',
+        'user1',
+        {'name': 'Alice'}
+      ]);
+      await putFn.call([
+        'getAllBox',
+        'user2',
+        {'name': 'Bob'}
+      ]);
+      await putFn.call([
+        'getAllBox',
+        'user3',
+        {'name': 'Charlie'}
+      ]);
 
       final result = await getAllFn.call(['getAllBox']);
       expect(result, isA<List>());
@@ -191,7 +203,8 @@ void main() {
 
     test('hive.containsKey returns correct result', () async {
       final putFn = hiveModule.get('put') as AsyncNativeFunction;
-      final containsKeyFn = hiveModule.get('containsKey') as AsyncNativeFunction;
+      final containsKeyFn =
+          hiveModule.get('containsKey') as AsyncNativeFunction;
 
       await putFn.call(['containsBox', 'exists', 'value']);
 
@@ -270,7 +283,8 @@ void main() {
 
       expect(await getFn.call(['specialKeys', 'key with spaces']), 'value1');
       expect(await getFn.call(['specialKeys', 'key-with-dashes']), 'value2');
-      expect(await getFn.call(['specialKeys', 'key_with_underscores']), 'value3');
+      expect(
+          await getFn.call(['specialKeys', 'key_with_underscores']), 'value3');
     });
 
     test('unicode data', () async {

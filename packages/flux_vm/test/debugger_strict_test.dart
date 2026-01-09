@@ -13,7 +13,8 @@ void main() {
 
     setUp(() {
       fluxVM = VM();
-      fluxVM.onPrint = (msg) => logFile.writeAsStringSync('$msg\n', mode: FileMode.append);
+      fluxVM.onPrint =
+          (msg) => logFile.writeAsStringSync('$msg\n', mode: FileMode.append);
       fluxDebugger = FluxDebugger(fluxVM);
       fluxVM.debugger = fluxDebugger;
       fluxDebugger.attach();
@@ -39,9 +40,9 @@ fn add(a, b) {
 var x = 1;         // Line 5
 var y = add(x, 2); // Line 6
 var z = y * 2;     // Line 7''';
-      
+
       final closure = _compile(source, 'step_over.flux');
-      
+
       // Breakdown:
       // Line 5: var x = 1;
       // Line 6: var y = add(x, 2);
@@ -49,17 +50,19 @@ var z = y * 2;     // Line 7''';
 
       // Set BP at Line 6 (add call)
       fluxDebugger.setBreakpoint('step_over.flux', 6);
-      
+
       var result = fluxVM.executeClosure(closure);
       expect(result, equals(InterpretResult.paused));
-      
+
       // Step Over
       fluxDebugger.stepOver();
       result = fluxVM.resume();
-      
-      expect(result, equals(InterpretResult.paused), reason: 'Should pause at Line 7');
-      expect(fluxVM.frames.last.chunk.getLine(fluxVM.frames.last.ip), equals(7));
-      
+
+      expect(result, equals(InterpretResult.paused),
+          reason: 'Should pause at Line 7');
+      expect(
+          fluxVM.frames.last.chunk.getLine(fluxVM.frames.last.ip), equals(7));
+
       fluxVM.resume();
     });
 
@@ -72,23 +75,24 @@ fn work() {
 }
 work(); // Line 6
 var done = true; // Line 7''';
-      
+
       final closure = _compile(source, 'step_out.flux');
-      
+
       // Set BP inside work() at line 2
       fluxDebugger.setBreakpoint('step_out.flux', 2);
-      
+
       var result = fluxVM.executeClosure(closure);
       expect(result, equals(InterpretResult.paused));
-      
+
       // Step Out
       fluxDebugger.stepOut();
       result = fluxVM.resume();
-      
+
       expect(result, equals(InterpretResult.paused));
       // Should stop at line 6 (immediately after returning to the call site)
-      expect(fluxVM.frames.last.chunk.getLine(fluxVM.frames.last.ip), equals(6));
-      
+      expect(
+          fluxVM.frames.last.chunk.getLine(fluxVM.frames.last.ip), equals(6));
+
       fluxVM.resume();
     });
 
@@ -99,22 +103,22 @@ var sum = 0;
 for (var i = 0; i < 3; i = i + 1) {
   sum = sum + i; // Line 3
 }''';
-      
+
       final closure = _compile(source, 'loop.flux');
       fluxDebugger.setBreakpoint('loop.flux', 3);
-      
+
       // Iteration 0
       var result = fluxVM.executeClosure(closure);
       expect(result, equals(InterpretResult.paused));
-      
+
       // Iteration 1
       result = fluxVM.resume();
       expect(result, equals(InterpretResult.paused));
-      
+
       // Iteration 2
       result = fluxVM.resume();
       expect(result, equals(InterpretResult.paused));
-      
+
       // End
       fluxDebugger.removeBreakpointAt('loop.flux', 3);
       result = fluxVM.resume();
@@ -128,17 +132,17 @@ fn fib(n) {
   return fib(n - 1) + fib(n - 2); // Line 3
 }
 var res = fib(3);''';
-      
+
       final closure = _compile(source, 'recursive.flux');
       fluxDebugger.setBreakpoint('recursive.flux', 3);
-      
+
       // Should hit multiple times
       var result = fluxVM.executeClosure(closure);
       expect(result, equals(InterpretResult.paused));
-      
+
       result = fluxVM.resume();
       expect(result, equals(InterpretResult.paused));
-      
+
       // Remove BP and finish
       fluxDebugger.removeBreakpointAt('recursive.flux', 3);
       fluxDebugger.continue_();
@@ -155,19 +159,20 @@ var makeAdder = fn(x) {
 };
 var adder = makeAdder(5);
 var res = adder(10); // Line 7''';
-      
+
       final closure = _compile(source, 'closure.flux');
       fluxDebugger.setBreakpoint('closure.flux', 7);
-      
+
       var result = fluxVM.executeClosure(closure);
       expect(result, equals(InterpretResult.paused));
-      
+
       fluxDebugger.stepInto();
       result = fluxVM.resume();
-      
+
       expect(result, equals(InterpretResult.paused));
-      expect(fluxVM.frames.last.chunk.getLine(fluxVM.frames.last.ip), equals(3));
-      
+      expect(
+          fluxVM.frames.last.chunk.getLine(fluxVM.frames.last.ip), equals(3));
+
       fluxVM.resume();
     });
   });

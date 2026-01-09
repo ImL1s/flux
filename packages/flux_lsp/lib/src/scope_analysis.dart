@@ -6,9 +6,9 @@ class ParsedLocation {
   final int line; // 0-indexed
   final int column; // 0-indexed
   final int length;
-  
+
   ParsedLocation(this.line, this.column, this.length);
-  
+
   Range toRange() {
     return Range(
       Position(line, column),
@@ -22,7 +22,7 @@ class Symbol {
   final String name;
   final ParsedLocation location;
   final String kind; // 'var', 'fn', 'param', 'widget', 'prop', 'state'
-  
+
   Symbol(this.name, this.location, this.kind);
 }
 
@@ -30,13 +30,13 @@ class Symbol {
 class Scope {
   final Scope? parent;
   final Map<String, Symbol> symbols = {};
-  
+
   Scope(this.parent);
-  
+
   void define(Symbol symbol) {
     symbols[symbol.name] = symbol;
   }
-  
+
   Symbol? resolve(String name) {
     if (symbols.containsKey(name)) {
       return symbols[name];
@@ -49,14 +49,14 @@ class Scope {
 class ScopeAnalysisResult {
   /// Map from usage location (line, col) to definition symbol
   final Map<ParsedLocation, Symbol> usages = {};
-  
+
   /// All definitions found
   final List<Symbol> definitions = [];
-  
+
   void addUsage(ParsedLocation outputLoc, Symbol definition) {
     usages[outputLoc] = definition;
   }
-  
+
   void addDefinition(Symbol symbol) {
     definitions.add(symbol);
   }
@@ -66,7 +66,7 @@ class ScopeAnalysisResult {
 class ScopeAnalyzer {
   final ScopeAnalysisResult result = ScopeAnalysisResult();
   Scope _currentScope = Scope(null);
-  
+
   void analyze(CompilationUnit unit) {
     _enterScope(); // Global scope
     for (final stmt in unit.declarations) {
@@ -74,17 +74,17 @@ class ScopeAnalyzer {
     }
     _exitScope();
   }
-  
+
   void _enterScope() {
     _currentScope = Scope(_currentScope);
   }
-  
+
   void _exitScope() {
     if (_currentScope.parent != null) {
       _currentScope = _currentScope.parent!;
     }
   }
-  
+
   void _define(String name, int line, int col, String kind) {
     // Flux AST line/col are 1-based, convert to 0-based
     final loc = ParsedLocation(line - 1, col - 1, name.length);
@@ -92,21 +92,21 @@ class ScopeAnalyzer {
     _currentScope.define(symbol);
     result.addDefinition(symbol);
   }
-  
+
   Symbol? _resolve(String name) {
     return _currentScope.resolve(name);
   }
-  
+
   void _recordUsage(String name, int line, int col) {
-     final symbol = _resolve(name);
-     if (symbol != null) {
-       final loc = ParsedLocation(line - 1, col - 1, name.length);
-       result.addUsage(loc, symbol);
-     }
+    final symbol = _resolve(name);
+    if (symbol != null) {
+      final loc = ParsedLocation(line - 1, col - 1, name.length);
+      result.addUsage(loc, symbol);
+    }
   }
-  
+
   // --- Visitors ---
-  
+
   void _visitDeclaration(Declaration decl) {
     if (decl is FunctionDecl) {
       _visitFunctionDecl(decl);
@@ -116,7 +116,7 @@ class ScopeAnalyzer {
       _visitWidgetDecl(decl);
     }
   }
-  
+
   void _visitStmt(Statement stmt) {
     if (stmt is Declaration) {
       _visitDeclaration(stmt);
@@ -136,21 +136,22 @@ class ScopeAnalyzer {
       if (stmt.value != null) _visitExpression(stmt.value!);
     }
   }
-  
 
-  
   void _visitVarDecl(VarDeclStmt stmt) {
     if (stmt.initializer != null) {
       _visitExpression(stmt.initializer!);
     }
-    _define(stmt.name, stmt.nameLine ?? stmt.line, stmt.nameColumn ?? stmt.column, 'var');
+    _define(stmt.name, stmt.nameLine ?? stmt.line,
+        stmt.nameColumn ?? stmt.column, 'var');
   }
-  
+
   void _visitFunctionDecl(FunctionDecl stmt) {
-    _define(stmt.name, stmt.nameLine ?? stmt.line, stmt.nameColumn ?? stmt.column, 'fn');
+    _define(stmt.name, stmt.nameLine ?? stmt.line,
+        stmt.nameColumn ?? stmt.column, 'fn');
     _enterScope();
     for (final param in stmt.parameters) {
-      _define(param.name, param.line ?? stmt.line, param.column ?? stmt.column, 'param');
+      _define(param.name, param.line ?? stmt.line, param.column ?? stmt.column,
+          'param');
     }
     // Manually visit body statements to keep same scope
     for (final s in stmt.body.statements) {
@@ -158,7 +159,7 @@ class ScopeAnalyzer {
     }
     _exitScope();
   }
-  
+
   void _visitBlock(BlockStmt stmt) {
     _enterScope();
     for (final s in stmt.statements) {
@@ -188,26 +189,30 @@ class ScopeAnalyzer {
     _visitStmt(stmt.body);
     _exitScope();
   }
-  
+
   void _visitWidgetDecl(WidgetDecl stmt) {
-    _define(stmt.name, stmt.nameLine ?? stmt.line, stmt.nameColumn ?? stmt.column, 'widget');
+    _define(stmt.name, stmt.nameLine ?? stmt.line,
+        stmt.nameColumn ?? stmt.column, 'widget');
     _enterScope();
     // Props
     for (final prop in stmt.props) {
-       _define(prop.name, prop.line ?? stmt.line, prop.column ?? stmt.column, 'prop');
+      _define(prop.name, prop.line ?? stmt.line, prop.column ?? stmt.column,
+          'prop');
     }
     // State
     for (final field in stmt.stateFields) {
-       _visitExpression(field.initialValue);
-       _define(field.name, field.line ?? stmt.line, field.column ?? stmt.column, 'state'); 
+      _visitExpression(field.initialValue);
+      _define(field.name, field.line ?? stmt.line, field.column ?? stmt.column,
+          'state');
     }
     // Build
     _visitExpression(stmt.buildBlock.body);
     _exitScope();
   }
-  
+
   void _visitClassDecl(ClassDecl stmt) {
-    _define(stmt.name, stmt.nameLine ?? stmt.line, stmt.nameColumn ?? stmt.column, 'class');
+    _define(stmt.name, stmt.nameLine ?? stmt.line,
+        stmt.nameColumn ?? stmt.column, 'class');
     _enterScope();
     for (final member in stmt.members) {
       _visitDeclaration(member);
@@ -226,7 +231,8 @@ class ScopeAnalyzer {
       for (final arg in expr.arguments) _visitExpression(arg);
       for (final arg in expr.namedArguments.values) _visitExpression(arg);
     } else if (expr is AssignExpr) {
-      _recordUsage(expr.name, expr.nameLine ?? expr.line, expr.nameColumn ?? expr.column); 
+      _recordUsage(expr.name, expr.nameLine ?? expr.line,
+          expr.nameColumn ?? expr.column);
       _visitExpression(expr.value);
     } else if (expr is LiteralExpr) {
       // no-op
@@ -238,7 +244,8 @@ class ScopeAnalyzer {
       _visitExpression(expr.object);
     } else if (expr is SetExpr) {
       _visitExpression(expr.object);
-      _recordUsage(expr.name, expr.nameLine ?? expr.line, expr.nameColumn ?? expr.column);
+      _recordUsage(expr.name, expr.nameLine ?? expr.line,
+          expr.nameColumn ?? expr.column);
       _visitExpression(expr.value);
     } else if (expr is ListExpr) {
       for (final e in expr.elements) _visitExpression(e);
@@ -252,16 +259,17 @@ class ScopeAnalyzer {
       _visitExpression(expr.thenBranch);
       _visitExpression(expr.elseBranch);
     } else if (expr is LambdaExpr) {
-        _enterScope();
-        for (final param in expr.parameters) {
-             _define(param.name, param.line ?? expr.line, param.column ?? expr.column, 'param');
-        }
-        if (expr.body is BlockStmt) {
-             for (final s in (expr.body as BlockStmt).statements) _visitStmt(s);
-        } else if (expr.body is Expression) {
-             _visitExpression(expr.body as Expression);
-        }
-        _exitScope();
+      _enterScope();
+      for (final param in expr.parameters) {
+        _define(param.name, param.line ?? expr.line,
+            param.column ?? expr.column, 'param');
+      }
+      if (expr.body is BlockStmt) {
+        for (final s in (expr.body as BlockStmt).statements) _visitStmt(s);
+      } else if (expr.body is Expression) {
+        _visitExpression(expr.body as Expression);
+      }
+      _exitScope();
     }
     // Interpolation, Await, etc...
   }

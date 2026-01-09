@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
+
 import 'dart:typed_data';
 
 import 'package:flux_compiler/flux_compiler.dart';
@@ -62,7 +62,7 @@ void main() {
         signature: 'sig',
         createdAt: DateTime.now(),
       );
-      
+
       versionManager.registerRelease(release);
       versionManager.setCurrentVersion(appId, '1.0.1');
       await mockCache.saveVersionState(versionManager.exportToJson());
@@ -77,7 +77,7 @@ void main() {
       );
 
       await newManager.initialize();
-      
+
       expect(newManager.versionManager.getCurrentVersion(appId), '1.0.1');
     });
 
@@ -87,11 +87,10 @@ void main() {
       // Since we can't easily mock static SignatureUtils.verify in Dart without extra packages,
       // we'll rely on the fact that an empty chunk and dummy signature might fail verification unless we construct valid ones.
       // Or we can just test that *if* download succeeds, it calls saveChunk.
-      
+
       // Let's manually populate the VersionManager with a release to simulate a "downloaded" state logic flow
-      // But downloadAndApply does network requests which we mocked out in the real class via http client? 
+      // But downloadAndApply does network requests which we mocked out in the real class via http client?
       // Wait, FluxUpdateManager in previous step uses versionManager.getLatestRelease to simulate network check.
-      
     });
 
     test('loadFromCache loads chunk from cache', () async {
@@ -100,22 +99,24 @@ void main() {
         appId: appId,
         version: '1.0.2',
         buildNumber: 3,
-        chunk: chunkBytes, // raw bytes here, but real usage expects serialized chunk
+        chunk:
+            chunkBytes, // raw bytes here, but real usage expects serialized chunk
         signature: 'sig',
         createdAt: DateTime.now(),
       );
 
       // Pre-populate cache
       final emptyChunk = Chunk();
-      await mockCache.saveChunk(appId, '1.0.2', ChunkSerializer.serialize(emptyChunk)); 
-      
+      await mockCache.saveChunk(
+          appId, '1.0.2', ChunkSerializer.serialize(emptyChunk));
+
       // We need valid serialized chunk data.
       final validChunk = Chunk();
       validChunk.code.add(123);
       final validSerialized = ChunkSerializer.serialize(validChunk);
-      
+
       await mockCache.saveChunk(appId, '1.0.2', validSerialized);
-      
+
       // Setup version manager state in cache
       final vm = VersionManager();
       vm.registerRelease(release);
@@ -124,11 +125,12 @@ void main() {
 
       // Initialize manager
       await manager.initialize();
-      
+
       manager.progressStream.listen((event) {
-        print('Event: ${event.status}, Message: ${event.message}, Error: ${event.error}');
+        print(
+            'Event: ${event.status}, Message: ${event.message}, Error: ${event.error}');
       });
-      
+
       bool readyCalled = false;
       final readyManager = FluxUpdateManager(
         appId: appId,
@@ -142,13 +144,14 @@ void main() {
           expect(chunk.code[0], 123);
         },
       );
-      
+
       readyManager.progressStream.listen((event) {
-        print('Event: ${event.status}, Message: ${event.message}, Error: ${event.error}');
+        print(
+            'Event: ${event.status}, Message: ${event.message}, Error: ${event.error}');
       });
 
       final result = await readyManager.loadFromCache();
-      
+
       expect(result, true);
       expect(readyCalled, true);
       expect(readyManager.currentBuildNumber, 3);

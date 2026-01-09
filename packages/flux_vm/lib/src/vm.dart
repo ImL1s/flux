@@ -1,9 +1,8 @@
 /// Flux Language - Virtual Machine
-/// 
+///
 /// Executes Flux bytecode using a stack-based architecture.
 /// Based on Crafting Interpreters bytecode VM pattern.
 
-import 'dart:io';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'stdlib.dart';
 import 'closure.dart';
@@ -12,14 +11,15 @@ import 'debugger.dart';
 import 'inline_cache.dart';
 import 'persistence_delegate.dart';
 
-typedef WidgetCallHandler = Object? Function(Object? callee, int argCount, Map<String, dynamic> namedArgs, List<Object?> stack);
+typedef WidgetCallHandler = Object? Function(Object? callee, int argCount,
+    Map<String, dynamic> namedArgs, List<Object?> stack);
 
 enum InterpretResult {
   ok,
   compileError,
   runtimeError,
-  awaiting,  // VM is suspended waiting for a Future
-  paused,    // VM is suspended by debugger
+  awaiting, // VM is suspended waiting for a Future
+  paused, // VM is suspended by debugger
 }
 
 // CallFrame is now defined in coroutine.dart
@@ -32,11 +32,11 @@ const int stackMax = framesMax * 256;
 
 /// Exception handler for try/catch/finally
 class _ExceptionHandler {
-  final int frameIndex;    // CallFrame index when handler was registered
-  final int stackHeight;   // Stack height when handler was registered
-  final int catchOffset;   // IP offset to catch block
+  final int frameIndex; // CallFrame index when handler was registered
+  final int stackHeight; // Stack height when handler was registered
+  final int catchOffset; // IP offset to catch block
   final int finallyOffset; // IP offset to finally block
-  
+
   _ExceptionHandler({
     required this.frameIndex,
     required this.stackHeight,
@@ -49,9 +49,9 @@ class _ExceptionHandler {
 class FluxInstance {
   final CompiledClass klass;
   final Map<String, Object?> fields = {};
-  
+
   FluxInstance(this.klass);
-  
+
   Object? getProperty(String name) {
     // Check instance fields first
     if (fields.containsKey(name)) {
@@ -63,11 +63,11 @@ class FluxInstance {
     }
     throw 'Undefined property: ${klass.name}.$name';
   }
-  
+
   void setProperty(String name, Object? value) {
     fields[name] = value;
   }
-  
+
   @override
   String toString() => '<${klass.name} instance>';
 }
@@ -76,60 +76,61 @@ class VM {
   static const String version = '3.0.0';
 
   final Map<String, Object?> _globals = {};
-  
+
   /// Widget state storage (keyed by state field name)
   /// Shared across all coroutines for the current widget instance
   final Map<String, Object?> _widgetState = {};
-  
+
   List<Object?> get _stack => (_pausedCoroutine ?? _currentCoroutine)!.stack;
-  List<CallFrame> get _frames => (_pausedCoroutine ?? _currentCoroutine)!.frames;
-  
+  List<CallFrame> get _frames =>
+      (_pausedCoroutine ?? _currentCoroutine)!.frames;
+
   /// Get current execution stack
   List<Object?> get stack => _stack;
-  
+
   /// Get current call frames
   List<CallFrame> get frames => _frames;
-  
+
   /// Linked list of open upvalues (for closure support)
   ObjUpvalue? _openUpvalues;
-  
+
   /// Callback triggered when setState is called (for Flutter rebuild)
   void Function(String name, Object? value)? onStateChange;
-  
+
   /// Optional widget call handler for FluxRuntime
   WidgetCallHandler? widgetCallHandler;
-  
+
   // Async/await state
   bool _awaitingFuture = false;
   Future<dynamic>? _pendingFuture;
   CallFrame? _pendingFrame;
   InterpretResult _lastResult = InterpretResult.ok;
-  
+
   // Runtime Optimizations
   final InlineCacheManager _inlineCacheManager = InlineCacheManager();
-  
+
   /// Get current inline cache stats for debugging
   Map<String, dynamic> get cacheStats => _inlineCacheManager.getStats();
-  
+
   // Exception handling state
   final List<_ExceptionHandler> _exceptionHandlers = [];
-  
+
   // Coroutine support
   FluxCoroutine? _currentCoroutine;
   FluxCoroutine? _pausedCoroutine; // Saved paused coroutine for debugger
-  
+
   CoroutineResumeCallback? coroutineResumeCallback;
-  
+
   // Debugger and Profiler
   FluxDebugger? debugger;
   FluxProfiler? profiler;
-  
+
   // Module import tracking
   final List<String> _imports = [];
-  
+
   /// Get list of imports encountered during execution
   List<String> get imports => List.unmodifiable(_imports);
-  
+
   /// Callback triggered after a hot swap is applied
   void Function(String scriptName)? onHotSwap;
 
@@ -138,37 +139,37 @@ class VM {
 
   /// Current widget name (for persistence keys)
   String? _currentWidgetName;
-  
+
   /// Loaded scripts registry (for hot-swap)
   final Map<String, CompiledFunction> _scripts = {};
-  
+
   /// Register a compiled script for potential hot-swap
   void registerScript(String name, CompiledFunction function) {
     _scripts[name] = function;
   }
-  
+
   /// Register a custom module with the VM (e.g., http, storage)
   void registerModule(FluxModule module) {
     _globals[module.name] = module;
   }
-  
+
   /// Hot-swap a script with a new compiled function
-  /// 
+  ///
   /// Replaces the script's bytecode while preserving:
   /// - Widget state (_widgetState)
   /// - Global variables (_globals)
-  /// 
+  ///
   /// Triggers onHotSwap callback on success.
   void hotSwap(String scriptName, CompiledFunction newFunction) {
     _scripts[scriptName] = newFunction;
-    
+
     // Notify listeners (e.g., FluxWidget to rebuild)
     onHotSwap?.call(scriptName);
   }
-  
+
   /// Get a registered script by name
   CompiledFunction? getScript(String name) => _scripts[name];
-  
+
   // Runtime flags
   final bool enableInlineCaching;
 
@@ -177,7 +178,7 @@ class VM {
     _currentCoroutine = FluxCoroutine('root');
     _initStdlib();
   }
-  
+
   /// Initialize standard library functions
   void _initStdlib() {
     StdLib.init();
@@ -196,154 +197,155 @@ class VM {
       return null;
     });
   }
-  
+
   /// Get the pending Future (for external await handling)
   Future<dynamic>? get pendingFuture => _pendingFuture;
-  
+
   /// Resume execution after an awaited Future completes
   InterpretResult resumeFromAwait(Object? result) {
     if (!_awaitingFuture || _pendingFrame == null) {
       return InterpretResult.runtimeError;
     }
-    
+
     // Push the result onto the stack
     _stack.add(result);
-    
+
     // Clear awaiting state
     _awaitingFuture = false;
     _pendingFuture = null;
     _pendingFrame = null;
-    
+
     // Continue execution
     _lastResult = _run();
     return _lastResult;
   }
 
-/// Resume execution after an awaited Future completes with an error
-InterpretResult resumeFromAwaitWithError(Object error) {
-  if (!_awaitingFuture || _pendingFrame == null) {
-    onPrint('DEBUG: resumeFromAwait failed: _awaitingFuture=$_awaitingFuture, _pendingFrame=$_pendingFrame');
-     return InterpretResult.runtimeError;
-  }
-  
-  // Clear awaiting state
-  _awaitingFuture = false;
-  _pendingFuture = null;
-  _pendingFrame = null;
-  
-  // Try to handle exception in VM
-  if (_handleException(error)) {
-    _lastResult = _run();
+  /// Resume execution after an awaited Future completes with an error
+  InterpretResult resumeFromAwaitWithError(Object error) {
+    if (!_awaitingFuture || _pendingFrame == null) {
+      onPrint(
+          'DEBUG: resumeFromAwait failed: _awaitingFuture=$_awaitingFuture, _pendingFrame=$_pendingFrame');
+      return InterpretResult.runtimeError;
+    }
+
+    // Clear awaiting state
+    _awaitingFuture = false;
+    _pendingFuture = null;
+    _pendingFrame = null;
+
+    // Try to handle exception in VM
+    if (_handleException(error)) {
+      _lastResult = _run();
+      return _lastResult;
+    }
+
+    _runtimeError('Unhandled async error: $error');
+    _lastResult = InterpretResult.runtimeError;
     return _lastResult;
   }
-  
-  _runtimeError('Unhandled async error: $error');
-  _lastResult = InterpretResult.runtimeError;
-  return _lastResult;
-}
-  
+
   /// Suspend current execution and create a coroutine snapshot
-  /// 
+  ///
   /// Called when await encounters a pending Future.
   /// Captures all execution state needed to resume later.
   /// Suspend current execution
-  /// 
+  ///
   /// Simply marks the current coroutine as suspended.
   FluxCoroutine suspendToCoroutine() {
     final coroutine = _currentCoroutine!;
-    
+
     coroutine.state = CoroutineState.suspended;
     coroutine.suspendedAt = DateTime.now();
-    
+
     return coroutine;
   }
-  
+
   /// Resume a suspended coroutine with the await result
-  /// 
+  ///
   /// Called when the awaited Future completes.
   /// Resume a suspended coroutine with the await result
-  /// 
+  ///
   /// Called when the awaited Future completes.
   InterpretResult resumeCoroutine(FluxCoroutine coroutine, Object? result) {
     if (coroutine.state != CoroutineState.suspended) {
       _runtimeError('Cannot resume coroutine in state: ${coroutine.state}');
       return InterpretResult.runtimeError;
     }
-    
+
     // Context Switch: Set the current coroutine
     _currentCoroutine = coroutine;
-    
+
     // Push the await result onto the coroutine's stack
     _stack.add(result);
-    
+
     // Update coroutine state
     coroutine.state = CoroutineState.running;
-    
+
     // Continue execution
     _lastResult = _run();
     final interpretResult = _lastResult;
-    
+
     // Mark coroutine as completed
     if (interpretResult == InterpretResult.ok) {
       coroutine.state = CoroutineState.completed;
     } else if (interpretResult == InterpretResult.runtimeError) {
       coroutine.state = CoroutineState.error;
     }
-    
+
     return interpretResult;
   }
-  
+
   /// Resume a suspended coroutine with an error
   /// Resume a suspended coroutine with an error
-  InterpretResult resumeCoroutineWithError(FluxCoroutine coroutine, Object error) {
+  InterpretResult resumeCoroutineWithError(
+      FluxCoroutine coroutine, Object error) {
     if (coroutine.state != CoroutineState.suspended) {
       _runtimeError('Cannot resume coroutine in state: ${coroutine.state}');
       return InterpretResult.runtimeError;
     }
-    
+
     _currentCoroutine = coroutine;
     coroutine.awaitError = error;
-    coroutine.state = CoroutineState.running; // Set to running to handle exception
-    
+    coroutine.state =
+        CoroutineState.running; // Set to running to handle exception
+
     // Try to handle exception
     if (_handleException(error)) {
       final res = _run();
       if (res == InterpretResult.runtimeError) {
-         coroutine.state = CoroutineState.error;
+        coroutine.state = CoroutineState.error;
       } else {
-         coroutine.state = CoroutineState.completed;
+        coroutine.state = CoroutineState.completed;
       }
       return res;
     }
-    
+
     coroutine.state = CoroutineState.error;
     _runtimeError('Unhandled async error: $error');
     _lastResult = InterpretResult.runtimeError;
     return _lastResult;
   }
-  
 
-  
   /// Basic output handler
   void Function(String message) onPrint = print;
-  
+
   /// Access to global variables (for FluxRuntime integration)
   Map<String, Object?> get globals => _globals;
-  
+
   /// Access to widget state for FluxRuntime
   Map<String, Object?> get widgetState => _widgetState;
-  
+
   /// Initialize widget state from CompiledWidget
   dynamic initializeState(CompiledWidget widget) {
     _currentWidgetName = widget.name;
     _persistentFields.clear();
     _persistentFields.addAll(widget.persistentFields);
-    
+
     final futures = <Future<void>>[];
     for (int i = 0; i < widget.stateFields.length; i++) {
       final name = widget.stateFields[i];
       final initializer = widget.stateInitializers[i];
-      
+
       bool isPersistent = _persistentFields.contains(name);
 
       if (isPersistent && persistenceDelegate != null) {
@@ -356,7 +358,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             } else {
               // Fallback to initializer if load returns null
               runChunk(initializer.chunk);
-              _widgetState[name] = _stack.isNotEmpty ? _stack.removeLast() : null;
+              _widgetState[name] =
+                  _stack.isNotEmpty ? _stack.removeLast() : null;
             }
           }));
           continue;
@@ -374,11 +377,11 @@ InterpretResult resumeFromAwaitWithError(Object error) {
       runChunk(initializer.chunk);
       _widgetState[name] = _stack.isNotEmpty ? _stack.removeLast() : null;
     }
-    
+
     if (futures.isEmpty) return null;
     return Future.wait(futures);
   }
-  
+
   /// Clear state (for new widget instance)
   void clearState() {
     _widgetState.clear();
@@ -402,9 +405,9 @@ InterpretResult resumeFromAwaitWithError(Object error) {
 
       final compiler = Compiler(unit: ast);
       final function = compiler.endCompiler();
-    _lastResult = runChunk(function.chunk);
-    return _lastResult;
-  } catch (e) {
+      _lastResult = runChunk(function.chunk);
+      return _lastResult;
+    } catch (e) {
       _runtimeError(e.toString());
       return InterpretResult.runtimeError;
     }
@@ -453,17 +456,18 @@ InterpretResult resumeFromAwaitWithError(Object error) {
 
     _callFunction(closure, 0);
 
-  _lastResult = _run();
-  return _lastResult;
+    _lastResult = _run();
+    return _lastResult;
   }
 
   /// Execute a closure with arguments.
   /// Used by FluxRuntime to execute widget builder closures.
-  InterpretResult executeClosure(ObjClosure closure, [List<Object?> args = const []]) {
+  InterpretResult executeClosure(ObjClosure closure,
+      [List<Object?> args = const []]) {
     final coroutine = FluxCoroutine(FluxCoroutine.generateId());
     final prevCoroutine = _currentCoroutine;
     _currentCoroutine = coroutine;
-    
+
     _stack.add(closure);
     for (final arg in args) {
       _stack.add(arg);
@@ -475,9 +479,10 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     }
 
     final result = _run();
-    
+
     if (result == InterpretResult.ok) {
-      final returnValue = coroutine.stack.isNotEmpty ? coroutine.stack.last : null;
+      final returnValue =
+          coroutine.stack.isNotEmpty ? coroutine.stack.last : null;
       _currentCoroutine = prevCoroutine;
       _stack.add(returnValue);
     } else if (result == InterpretResult.paused) {
@@ -486,7 +491,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     } else {
       _currentCoroutine = prevCoroutine;
     }
-    
+
     return result;
   }
 
@@ -495,108 +500,108 @@ InterpretResult resumeFromAwaitWithError(Object error) {
       final prev = _currentCoroutine;
       _currentCoroutine = _pausedCoroutine;
       _pausedCoroutine = null;
-      
+
       if (debugger != null && debugger!.isPaused) {
         debugger!.continue_();
       }
-      
+
       final result = _run();
-      
+
       if (result == InterpretResult.paused) {
         _pausedCoroutine = _currentCoroutine; // Paused again
       }
-      
+
       _currentCoroutine = prev;
       return result;
     }
     return _run();
   }
 
-
-
   /// Execute a closure synchronously on the current stack/coroutine.
   /// Used for callbacks that must happen within the same execution context (e.g. nested widget builds).
-  InterpretResult invokeClosure(ObjClosure closure, [List<Object?> args = const []]) {
-     if (_currentCoroutine == null) {
-       // Fallback to executeClosure if no active coroutine
-       return executeClosure(closure, args);
-     }
+  InterpretResult invokeClosure(ObjClosure closure,
+      [List<Object?> args = const []]) {
+    if (_currentCoroutine == null) {
+      // Fallback to executeClosure if no active coroutine
+      return executeClosure(closure, args);
+    }
 
-     _stack.add(closure);
-     for (final arg in args) {
-       _stack.add(arg);
-     }
-     
-     if (!_callValue(closure, args.length)) {
-       return InterpretResult.runtimeError;
-     }
+    _stack.add(closure);
+    for (final arg in args) {
+      _stack.add(arg);
+    }
 
-     // Run until we return to the current frame depth (minus the one we just pushed)
-     // _callFunction added a frame, so we want to return when that frame is popped.
-     // current frames.length is N (including new frame).
-     // We want to run until depth is N-1.
-     return _run(_frames.length - 1);
+    if (!_callValue(closure, args.length)) {
+      return InterpretResult.runtimeError;
+    }
+
+    // Run until we return to the current frame depth (minus the one we just pushed)
+    // _callFunction added a frame, so we want to return when that frame is popped.
+    // current frames.length is N (including new frame).
+    // We want to run until depth is N-1.
+    return _run(_frames.length - 1);
   }
 
   /// Execute a compiled function/expression in a specific context (isolated)
-  /// 
+  ///
   /// Used for debugger expression evaluation.
   /// Does not affect the current execution state (stack/frames are saved and restored).
-  Object? executeFunctionInContext(CompiledFunction function, List<Object?> locals) {
-     final closure = ObjClosure(function, []);
-     
-     // 1. Back up current execution state
-     final savedFrames = List<CallFrame>.from(_frames);
-     final savedStack = List<Object?>.from(_stack);
-     final savedUpvalues = _openUpvalues; 
-     
-     // 2. Clear state for isolated execution
-     _frames.clear();
-     _stack.clear();
-     _openUpvalues = null;
-     
-     try {
-       // 3. Setup stack with "locals"
-       // Slot 0 is the closure itself
-       _stack.add(closure); 
-       
-       // Slots 1..N are the provided locals
-       _stack.addAll(locals);
-       
-       // 4. Create frame manually
-       // Slot 0 is at index 0.
-       final frame = CallFrame(
-         closure,
-         slotBase: 0, 
-       );
-       
-       _frames.add(frame);
-       
-       // 5. Run until frames empty
-       final result = _run(0); 
-       
-       if (result == InterpretResult.ok) {
-         // Result is on stack
-         if (_stack.isNotEmpty) {
-           return _stack.last;
-         }
-         return null;
-       } else {
-         // Error occurred
-         return "Error: Execution failed with $result"; 
-       }
-     } catch (e) {
-       return "Error: $e";
-     } finally {
-       // 6. Restore state
-       _frames.clear();
-       _frames.addAll(savedFrames);
-       
-       _stack.clear();
-       _stack.addAll(savedStack);
-       
-       _openUpvalues = savedUpvalues; 
-     }
+  Object? executeFunctionInContext(
+      CompiledFunction function, List<Object?> locals) {
+    final closure = ObjClosure(function, []);
+
+    // 1. Back up current execution state
+    final savedFrames = List<CallFrame>.from(_frames);
+    final savedStack = List<Object?>.from(_stack);
+    final savedUpvalues = _openUpvalues;
+
+    // 2. Clear state for isolated execution
+    _frames.clear();
+    _stack.clear();
+    _openUpvalues = null;
+
+    try {
+      // 3. Setup stack with "locals"
+      // Slot 0 is the closure itself
+      _stack.add(closure);
+
+      // Slots 1..N are the provided locals
+      _stack.addAll(locals);
+
+      // 4. Create frame manually
+      // Slot 0 is at index 0.
+      final frame = CallFrame(
+        closure,
+        slotBase: 0,
+      );
+
+      _frames.add(frame);
+
+      // 5. Run until frames empty
+      final result = _run(0);
+
+      if (result == InterpretResult.ok) {
+        // Result is on stack
+        if (_stack.isNotEmpty) {
+          return _stack.last;
+        }
+        return null;
+      } else {
+        // Error occurred
+        return "Error: Execution failed with $result";
+      }
+    } catch (e) {
+      return "Error: $e";
+    } finally {
+      // 6. Restore state
+      _frames.clear();
+      _frames.addAll(savedFrames);
+
+      _stack.clear();
+      _stack.addAll(savedStack);
+
+      _openUpvalues = savedUpvalues;
+    }
   }
 
   /// Capture an upvalue for the given stack slot
@@ -634,11 +639,11 @@ InterpretResult resumeFromAwaitWithError(Object error) {
       final upvalue = _openUpvalues!;
       // print('DEBUG VM: Closing upvalue at ${upvalue.location} (stack len: ${_stack.length})');
       if (upvalue.location >= _stack.length) {
-          // Dangling upvalue (stack popped?) - close with null to avoid crash
-          upvalue.closed = null;
-          upvalue.location = -1;
+        // Dangling upvalue (stack popped?) - close with null to avoid crash
+        upvalue.closed = null;
+        upvalue.location = -1;
       } else {
-          upvalue.close(_stack);
+        upvalue.close(_stack);
       }
       _openUpvalues = upvalue.next;
     }
@@ -649,10 +654,10 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     if (value is bool) return value;
     return true;
   }
-  
+
   void _runtimeError(String message) {
     onPrint("Runtime Error: $message");
-    
+
     for (int i = _frames.length - 1; i >= 0; i--) {
       final frame = _frames[i];
       final function = frame.closure.function;
@@ -660,12 +665,13 @@ InterpretResult resumeFromAwaitWithError(Object error) {
       final line = frame.chunk.getLine(instruction);
       onPrint("   at ${function.name}() [line $line]");
     }
-    
+
     // Reset stack on fatal error
     _stack.clear();
   }
 
-  bool _callValue(Object? callee, int argCount, [Map<String, dynamic> namedArgs = const {}]) {
+  bool _callValue(Object? callee, int argCount,
+      [Map<String, dynamic> namedArgs = const {}]) {
     // Check if external handler wants to intercept this call
     if (widgetCallHandler != null) {
       final result = widgetCallHandler!(callee, argCount, namedArgs, _stack);
@@ -695,7 +701,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     if (callee is AsyncNativeFunction) {
       final args = _stack.sublist(_stack.length - argCount);
       _stack.length -= argCount + 1;
-      
+
       // Create Future and push it to stack (will be awaited by OpCode.await_)
       final future = callee.call(args);
       _stack.add(future);
@@ -722,7 +728,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
         }
         _stack.add(result);
         return true;
-      } catch (e, st) {
+      } catch (e) {
         // stdout.writeln('DEBUG NATIVE ERROR: callee=${callee.name} expectedArgs=$argCount stackTop=${_stack.length} stack=${_stack.sublist(_stack.length > 5 ? _stack.length - 5 : 0)}');
         // stdout.writeln('Error: $e');
         _runtimeError(e.toString());
@@ -733,7 +739,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     if (callee is CompiledClass) {
       // 1. Create the instance
       final instance = FluxInstance(callee);
-      
+
       // 2. Check for 'init' method
       final initMethod = callee.methods['init'];
       if (initMethod != null) {
@@ -761,7 +767,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     return false;
   }
 
-  bool _callFunction(ObjClosure closure, int argCount, [Map<String, dynamic> namedArgs = const {}]) {
+  bool _callFunction(ObjClosure closure, int argCount,
+      [Map<String, dynamic> namedArgs = const {}]) {
     if (profiler != null) {
       profiler!.recordFunctionEntry(closure.function.name);
     }
@@ -769,7 +776,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     final totalProvided = argCount + namedArgs.length;
     // print('DEBUG RUNTIME: _callFunction: ${closure.function.name}, arity: ${closure.function.arity}, totalProvided: $totalProvided (pos: $argCount, named: ${namedArgs.length})');
     if (totalProvided != closure.function.arity) {
-      _runtimeError("Expected ${closure.function.arity} arguments but got $totalProvided. (Closure: ${closure.function.name})");
+      _runtimeError(
+          "Expected ${closure.function.arity} arguments but got $totalProvided. (Closure: ${closure.function.name})");
       return false;
     }
 
@@ -802,8 +810,6 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     return true;
   }
 
-
-
   InterpretResult _run([int minDepth = 0]) {
     bool firstInstruction = true;
     try {
@@ -824,21 +830,22 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final stepMode = debugger!.stepMode;
             final currentDepth = _frames.length;
             final currentLine = frame.chunk.getLine(frame.ip);
-            
+
             if (stepMode == StepMode.stepInto) {
-              if (currentDepth > (debugger!.stepTargetDepth ?? 0) || 
+              if (currentDepth > (debugger!.stepTargetDepth ?? 0) ||
                   currentLine != debugger!.stepSourceLine) {
                 debugger!.pause();
                 return InterpretResult.paused;
               }
             } else if (stepMode == StepMode.stepOver) {
-              if (currentDepth < (debugger!.stepTargetDepth ?? 0) || 
-                  (currentDepth == debugger!.stepTargetDepth && currentLine != debugger!.stepSourceLine)) {
+              if (currentDepth < (debugger!.stepTargetDepth ?? 0) ||
+                  (currentDepth == debugger!.stepTargetDepth &&
+                      currentLine != debugger!.stepSourceLine)) {
                 debugger!.pause();
                 return InterpretResult.paused;
               }
-            } else if (stepMode == StepMode.stepOut && 
-                       debugger!.stepTargetDepth != null) {
+            } else if (stepMode == StepMode.stepOut &&
+                debugger!.stepTargetDepth != null) {
               if (currentDepth <= debugger!.stepTargetDepth!) {
                 debugger!.pause();
                 return InterpretResult.paused;
@@ -860,20 +867,20 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             }
           }
         }
-        
+
         firstInstruction = false;
 
         // print("DEBUG VM LOOP: IP ${frame.ip}. Stack ${_stack.length}");
         if (frame.ip >= frame.chunk.code.length) {
           // Chunk ended without explicit return - treat as implicit "return nil"
           // This replicates OpCode.return_ logic with nil result
-          
+
           // Close upvalues before cleaning stack
           _closeUpvalues(frame.slotBase);
-          
+
           // Pop the frame
           final endingFrame = _frames.removeLast();
-          
+
           if (_frames.length < minDepth) {
             // Top-level script or nested run() finished
             while (_stack.length > endingFrame.slotBase) {
@@ -882,12 +889,12 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             // Don't push nil for top-level - just exit cleanly
             return InterpretResult.ok;
           }
-          
+
           // Pop all locals (including callee and args) from this frame
           while (_stack.length > endingFrame.slotBase) {
             _stack.removeLast();
           }
-          
+
           // Push nil as implicit return value for caller
           _stack.add(null);
           continue; // Continue in caller's frame
@@ -899,12 +906,12 @@ InterpretResult resumeFromAwaitWithError(Object error) {
 
         final instruction = frame.chunk.code[frame.ip];
         final op = OpCode.values[instruction];
-        frame.ip++; 
-        
+        frame.ip++;
+
         int readByte() {
-           final b = frame.chunk.code[frame.ip];
-           frame.ip++;
-           return b;
+          final b = frame.chunk.code[frame.ip];
+          frame.ip++;
+          return b;
         }
 
         Object? readConstant() {
@@ -931,7 +938,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
           case OpCode.pop:
             if (_stack.isNotEmpty) _stack.removeLast();
             break;
-            
+
           case OpCode.noOp:
             break;
 
@@ -953,7 +960,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final b = _stack.removeLast();
             final a = _stack.removeLast();
             if (a is! num || b is! num) {
-              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              _runtimeError(
+                  "Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
               return InterpretResult.runtimeError;
             }
             _stack.add(a - b);
@@ -963,7 +971,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final b = _stack.removeLast();
             final a = _stack.removeLast();
             if (a is! num || b is! num) {
-              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              _runtimeError(
+                  "Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
               return InterpretResult.runtimeError;
             }
             _stack.add(a * b);
@@ -973,7 +982,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final b = _stack.removeLast();
             final a = _stack.removeLast();
             if (a is! num || b is! num) {
-              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              _runtimeError(
+                  "Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
               return InterpretResult.runtimeError;
             }
             _stack.add(a / b);
@@ -983,7 +993,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final b = _stack.removeLast();
             final a = _stack.removeLast();
             if (a is! num || b is! num) {
-              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              _runtimeError(
+                  "Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
               return InterpretResult.runtimeError;
             }
             _stack.add(a % b);
@@ -1007,7 +1018,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final b = _stack.removeLast();
             final a = _stack.removeLast();
             if (a is! num || b is! num) {
-              _runtimeError("Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              _runtimeError(
+                  "Operands must be two numbers, got ${a.runtimeType} and ${b.runtimeType}");
               return InterpretResult.runtimeError;
             }
             _stack.add(a < b);
@@ -1029,7 +1041,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final b = _stack.removeLast();
             final a = _stack.removeLast();
             if (a is! num || b is! num) {
-              _runtimeError("Operands to '>=' must be numbers, got ${a.runtimeType} and ${b.runtimeType}");
+              _runtimeError(
+                  "Operands to '>=' must be numbers, got ${a.runtimeType} and ${b.runtimeType}");
               return InterpretResult.runtimeError;
             }
             _stack.add(a >= b);
@@ -1050,11 +1063,12 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final nameIdx = readByte(); // Index in constants
             final nameObj = frame.chunk.constants[nameIdx];
             if (nameObj is! String) {
-               _runtimeError("Global name must be a string, got ${nameObj.runtimeType} ($nameObj) at index $nameIdx");
-               return InterpretResult.runtimeError;
+              _runtimeError(
+                  "Global name must be a string, got ${nameObj.runtimeType} ($nameObj) at index $nameIdx");
+              return InterpretResult.runtimeError;
             }
             final name = nameObj;
-            
+
             // Check if it's a state field first
             if (_widgetState.containsKey(name)) {
               _widgetState[name] = _stack.last;
@@ -1067,12 +1081,13 @@ InterpretResult resumeFromAwaitWithError(Object error) {
           case OpCode.getGlobal:
             final nameIdx = readByte();
             final nameObj = frame.chunk.constants[nameIdx];
-             if (nameObj is! String) {
-               _runtimeError("Global name must be a string, got ${nameObj.runtimeType} ($nameObj) at index $nameIdx");
-               return InterpretResult.runtimeError;
+            if (nameObj is! String) {
+              _runtimeError(
+                  "Global name must be a string, got ${nameObj.runtimeType} ($nameObj) at index $nameIdx");
+              return InterpretResult.runtimeError;
             }
             final name = nameObj;
-            
+
             // Check widget state first, then globals
             if (_widgetState.containsKey(name)) {
               _stack.add(_widgetState[name]);
@@ -1094,13 +1109,11 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             _stack[frame.slotBase + slot] = _stack.last;
             break;
 
-
-
           case OpCode.popScope:
-             // Should not be emitted by compiler anymore, but keep for compatibility
-             final count = readByte();
-             for(var i=0; i<count; i++) _stack.removeLast();
-             break;
+            // Should not be emitted by compiler anymore, but keep for compatibility
+            final count = readByte();
+            for (var i = 0; i < count; i++) _stack.removeLast();
+            break;
 
           // Control flow
           case OpCode.jumpIfFalse:
@@ -1162,7 +1175,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               final value = _stack.removeLast();
               final nameObj = _stack.removeLast();
               if (nameObj is! String) {
-                _runtimeError("type '${nameObj.runtimeType}' (value: $nameObj) is not a subtype of type 'String' in type cast. i=$i, namedCount=$namedCount");
+                _runtimeError(
+                    "type '${nameObj.runtimeType}' (value: $nameObj) is not a subtype of type 'String' in type cast. i=$i, namedCount=$namedCount");
                 return InterpretResult.runtimeError;
               }
               namedArgs[nameObj] = value;
@@ -1189,37 +1203,36 @@ InterpretResult resumeFromAwaitWithError(Object error) {
 
             // Close upvalues for remaining locals in this frame
             _closeUpvalues(frame.slotBase);
-            
+
             // Now remove result
             _stack.removeLast();
 
             // Pop frame
             final returningFrame = _frames.removeLast();
-            
+
             if (profiler != null) {
-              profiler!.recordFunctionExit(returningFrame.closure.function.name);
+              profiler!
+                  .recordFunctionExit(returningFrame.closure.function.name);
             }
 
-             if (_frames.length <= minDepth) {
-                // Finished execution for this nested run() or top-level script
-                // Pop slots up to the closure (slotBase)
-            while (_stack.length > returningFrame.slotBase) {
-               _stack.removeLast();
+            if (_frames.length <= minDepth) {
+              // Finished execution for this nested run() or top-level script
+              // Pop slots up to the closure (slotBase)
+              while (_stack.length > returningFrame.slotBase) {
+                _stack.removeLast();
+              }
+              _stack.add(result); // Always push result (including nil)
+              return InterpretResult.ok;
             }
-               _stack.add(result); // Always push result (including nil)
-               return InterpretResult.ok;
-            }
-            
+
             // Discard all locals from this frame (including the callee and args)
             while (_stack.length > returningFrame.slotBase) {
-               _stack.removeLast();
+              _stack.removeLast();
             }
-            
+
             // Push result back (always, including nil)
             _stack.add(result);
             break; // Continue in caller's frame
-
-
 
           case OpCode.newList:
             final count = readByte();
@@ -1230,7 +1243,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             }
             _stack.add(list);
             break;
-            
+
           case OpCode.newMap:
             final count = readByte();
             final map = <Object?, Object?>{};
@@ -1242,22 +1255,21 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             }
             _stack.add(map);
             break;
-            
 
-            
           case OpCode.closure:
             // Read function index from constants
             final funcIndex = readByte();
-            final function = frame.chunk.constants[funcIndex] as CompiledFunction;
-            
+            final function =
+                frame.chunk.constants[funcIndex] as CompiledFunction;
+
             // Read upvalue count
             final upvalueCount = readByte();
             final upvalues = <ObjUpvalue>[];
-            
+
             for (int i = 0; i < upvalueCount; i++) {
               final isLocal = readByte() == 1;
               final index = readByte();
-              
+
               if (isLocal) {
                 // Capture a local variable from current frame
                 final loc = frame.slotBase + index;
@@ -1267,10 +1279,10 @@ InterpretResult resumeFromAwaitWithError(Object error) {
                 upvalues.add(frame.closure.upvalues[index]);
               }
             }
-            
+
             _stack.add(ObjClosure(function, upvalues));
             break;
-            
+
           case OpCode.getUpvalue:
             final index = readByte();
             // Get upvalue from current closure
@@ -1281,7 +1293,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               throw 'Invalid upvalue access';
             }
             break;
-            
+
           case OpCode.setUpvalue:
             final index = readByte();
             final value = _stack.last;
@@ -1293,37 +1305,37 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               throw 'Invalid upvalue access';
             }
             break;
-            
+
           case OpCode.closeUpvalue:
             // Close any open upvalues pointing to the top of the stack
             _closeUpvalues(_stack.length - 1);
             _stack.removeLast();
             break;
-            
+
           case OpCode.try_:
             // Read catch and finally absolute addresses
             final catchAddrLow = readByte();
             final catchAddrHigh = readByte();
             final catchAddr = catchAddrLow | (catchAddrHigh << 8);
-            
+
             final finallyAddrLow = readByte();
             final finallyAddrHigh = readByte();
             final finallyAddr = finallyAddrLow | (finallyAddrHigh << 8);
-            
+
             // Register exception handler with absolute addresses
             _exceptionHandlers.add(_ExceptionHandler(
               frameIndex: _frames.length - 1,
               stackHeight: _stack.length,
-              catchOffset: catchAddr,    // Now absolute address
+              catchOffset: catchAddr, // Now absolute address
               finallyOffset: finallyAddr, // Now absolute address
             ));
             break;
-            
+
           case OpCode.catch_:
             // Nothing to do here; catch block is entered via exception path
             // The exception value is already on the stack
             break;
-            
+
           case OpCode.throw_:
             final exception = _stack.removeLast();
             if (!_handleException(exception)) {
@@ -1333,21 +1345,22 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             // Update frame to the current (potentially new) frame after unwinding
             frame = _frames.last;
             break;
-            
+
           case OpCode.endTry:
             // Pop the exception handler
             if (_exceptionHandlers.isNotEmpty) {
               _exceptionHandlers.removeLast();
             }
             break;
-          
+
           case OpCode.getIndex:
             final index = _stack.removeLast();
             final obj = _stack.removeLast();
             if (obj is List) {
               final idx = (index as num).toInt();
               if (idx < 0 || idx >= obj.length) {
-                _runtimeError("Index $idx out of bounds for list of length ${obj.length}.");
+                _runtimeError(
+                    "Index $idx out of bounds for list of length ${obj.length}.");
                 return InterpretResult.runtimeError;
               }
               _stack.add(obj[idx]);
@@ -1356,7 +1369,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             } else if (obj is String) {
               final idx = (index as num).toInt();
               if (idx < 0 || idx >= obj.length) {
-                _runtimeError("Index $idx out of bounds for string of length ${obj.length}.");
+                _runtimeError(
+                    "Index $idx out of bounds for string of length ${obj.length}.");
                 return InterpretResult.runtimeError;
               }
               _stack.add(obj[idx]);
@@ -1365,7 +1379,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               final memberName = index as String;
               final member = obj.get(memberName);
               if (member == null) {
-                _runtimeError("Module '${obj.name}' has no member '$memberName'.");
+                _runtimeError(
+                    "Module '${obj.name}' has no member '$memberName'.");
                 return InterpretResult.runtimeError;
               }
               _stack.add(member);
@@ -1374,7 +1389,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               return InterpretResult.runtimeError;
             }
             break;
-          
+
           case OpCode.setIndex:
             final value = _stack.removeLast();
             final index = _stack.removeLast();
@@ -1382,7 +1397,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             if (obj is List) {
               final idx = (index as num).toInt();
               if (idx < 0 || idx >= obj.length) {
-                _runtimeError("Index $idx out of bounds for list of length ${obj.length}.");
+                _runtimeError(
+                    "Index $idx out of bounds for list of length ${obj.length}.");
                 return InterpretResult.runtimeError;
               }
               obj[idx] = value;
@@ -1395,7 +1411,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               return InterpretResult.runtimeError;
             }
             break;
-          
+
           // Module system
           case OpCode.import_:
             final pathIdx = readByte();
@@ -1403,7 +1419,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             // Import is handled externally - store path for loader
             _imports.add(path);
             break;
-          
+
           // Class system
           case OpCode.instance:
             final classObj = _stack.removeLast();
@@ -1414,7 +1430,6 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               throw 'Cannot instantiate non-class: $classObj';
             }
             break;
-            
 
           case OpCode.getProperty:
             final nameIdx = readByte();
@@ -1423,22 +1438,23 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             if (obj is FluxInstance) {
               // 1. Check fields (Dynamic check, always first)
               if (obj.fields.containsKey(name)) {
-                 _stack.add(obj.fields[name]);
-                 break;
+                _stack.add(obj.fields[name]);
+                break;
               }
-              
+
               if (enableInlineCaching) {
                 // Cache key is the PC of this instruction
-                final callSiteOffset = frame.ip - 2; 
-                final cache = _inlineCacheManager.getCache(callSiteOffset, name);
-                
+                final callSiteOffset = frame.ip - 2;
+                final cache =
+                    _inlineCacheManager.getCache(callSiteOffset, name);
+
                 // 2. Inline Cache Path: Check for cached method
                 final cachedMethod = cache.lookupMethod(obj.klass);
                 if (cachedMethod != null) {
                   _stack.add(cachedMethod);
                   break;
                 }
-                
+
                 // 3. Slow Path: Look up in class and cache it
                 if (obj.klass.methods.containsKey(name)) {
                   final method = obj.klass.methods[name]!;
@@ -1468,19 +1484,19 @@ InterpretResult resumeFromAwaitWithError(Object error) {
                 _stack.add(obj[name]);
               }
             } else if (obj is FluxModule) {
-               final member = obj.get(name);
-               if (member != null) {
-                 _stack.add(member);
-               } else {
-                  throw "Undefined member '$name' in module '${obj.name}'";
-               }
-            } else if (_widgetState.containsKey(name)) { 
-               _stack.add(_widgetState[name]);
+              final member = obj.get(name);
+              if (member != null) {
+                _stack.add(member);
+              } else {
+                throw "Undefined member '$name' in module '${obj.name}'";
+              }
+            } else if (_widgetState.containsKey(name)) {
+              _stack.add(_widgetState[name]);
             } else {
               throw 'Cannot get property from ${obj.runtimeType}';
             }
             break;
-            
+
           case OpCode.setProperty:
             final nameIdx = readByte();
             final name = frame.chunk.constants[nameIdx] as String;
@@ -1488,7 +1504,8 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final obj = _stack.removeLast();
             if (obj is FluxInstance) {
               obj.setProperty(name, value);
-              _stack.add(value); // Standardized: Assignment leaves value on stack
+              _stack
+                  .add(value); // Standardized: Assignment leaves value on stack
             } else {
               throw 'Cannot set property on ${obj.runtimeType}';
             }
@@ -1505,10 +1522,10 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final idx = readByte();
             final name = frame.chunk.constants[idx] as String;
             if (_widgetState.containsKey(name)) {
-                _stack.add(_widgetState[name]);
+              _stack.add(_widgetState[name]);
             } else {
-                _runtimeError("Undefined state variable '$name'.");
-                return InterpretResult.runtimeError;
+              _runtimeError("Undefined state variable '$name'.");
+              return InterpretResult.runtimeError;
             }
             break;
 
@@ -1517,25 +1534,28 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final name = frame.chunk.constants[idx] as String;
             final value = _stack.last; // Peek/Assigned value
             if (_widgetState.containsKey(name)) {
-               _widgetState[name] = value;
-               
-               // Persistence check
-               final currentWidget = _currentWidgetName;
-               if (currentWidget != null && persistenceDelegate != null && _persistentFields.contains(name)) {
-                 persistenceDelegate!.save("flux_state_${currentWidget}_$name", value);
-               }
+              _widgetState[name] = value;
 
-               if (onStateChange != null) onStateChange!(name, value);
+              // Persistence check
+              final currentWidget = _currentWidgetName;
+              if (currentWidget != null &&
+                  persistenceDelegate != null &&
+                  _persistentFields.contains(name)) {
+                persistenceDelegate!
+                    .save("flux_state_${currentWidget}_$name", value);
+              }
+
+              if (onStateChange != null) onStateChange!(name, value);
             } else {
-               throw "Undefined state variable '$name'.";
+              throw "Undefined state variable '$name'.";
             }
             break;
-            
+
           case OpCode.invoke:
             final nameIdx = readByte();
             final argCount = readByte();
             final name = frame.chunk.constants[nameIdx] as String;
-            
+
             // Peek at instance (below args)
             final instance = _stack[_stack.length - argCount - 1];
 
@@ -1546,7 +1566,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
                 args.insert(0, _stack.removeLast());
               }
               _stack.removeLast(); // Pop instance
-              
+
               final method = instance.klass.methods[name];
               if (method != null) {
                 _callMethod(instance, method, args);
@@ -1555,41 +1575,42 @@ InterpretResult resumeFromAwaitWithError(Object error) {
                 return InterpretResult.runtimeError;
               }
             } else if (instance is FluxModule) {
-               final member = instance.get(name);
-               if (member != null) {
-                  // Replace module on stack with the member function
-                  _stack[_stack.length - argCount - 1] = member;
-                  if (!_callValue(member, argCount)) {
-                    if (_awaitingFuture) {
-                      return InterpretResult.awaiting;
-                    } else {
-                      return InterpretResult.runtimeError;
-                    }
+              final member = instance.get(name);
+              if (member != null) {
+                // Replace module on stack with the member function
+                _stack[_stack.length - argCount - 1] = member;
+                if (!_callValue(member, argCount)) {
+                  if (_awaitingFuture) {
+                    return InterpretResult.awaiting;
+                  } else {
+                    return InterpretResult.runtimeError;
                   }
-               } else {
-                  _runtimeError('Undefined module member: ${instance.name}.$name');
-                  return InterpretResult.runtimeError;
-               }
+                }
+              } else {
+                _runtimeError(
+                    'Undefined module member: ${instance.name}.$name');
+                return InterpretResult.runtimeError;
+              }
             } else if (instance is Map) {
-               // Support for method-like calls on Maps (e.g. Animation module objects)
-               if (instance.containsKey(name)) {
-                  final method = instance[name];
-                   // Replace instance on stack with the member function
-                  _stack[_stack.length - argCount - 1] = method;
-                  if (!_callValue(method, argCount)) {
-                    if (_awaitingFuture) {
-                      return InterpretResult.awaiting;
-                    } else {
-                      return InterpretResult.runtimeError;
-                    }
+              // Support for method-like calls on Maps (e.g. Animation module objects)
+              if (instance.containsKey(name)) {
+                final method = instance[name];
+                // Replace instance on stack with the member function
+                _stack[_stack.length - argCount - 1] = method;
+                if (!_callValue(method, argCount)) {
+                  if (_awaitingFuture) {
+                    return InterpretResult.awaiting;
+                  } else {
+                    return InterpretResult.runtimeError;
                   }
-               } else {
-                  _runtimeError('Undefined method "$name" on Map');
-                  return InterpretResult.runtimeError;
-               }
+                }
+              } else {
+                _runtimeError('Undefined method "$name" on Map');
+                return InterpretResult.runtimeError;
+              }
             } else {
-               _runtimeError('Cannot invoke $name on ${instance.runtimeType}');
-               return InterpretResult.runtimeError;
+              _runtimeError('Cannot invoke $name on ${instance.runtimeType}');
+              return InterpretResult.runtimeError;
             }
             break;
 
@@ -1597,13 +1618,13 @@ InterpretResult resumeFromAwaitWithError(Object error) {
             final nameIdx = readByte();
             final argCount = readByte();
             final name = frame.chunk.constants[nameIdx] as String;
-            
+
             // Get arguments (pop them from stack)
             final args = <Object?>[];
             for (int i = 0; i < argCount; i++) {
               args.insert(0, _stack.removeLast());
             }
-            
+
             // Get instance ('this')
             final instance = _stack.removeLast();
             if (instance is FluxInstance) {
@@ -1611,7 +1632,7 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               if (superclassName == null) {
                 throw 'Class ${instance.klass.name} has no superclass.';
               }
-              
+
               final superclass = _globals[superclassName];
               if (superclass is CompiledClass) {
                 // Find method in superclass or its ancestors
@@ -1620,14 +1641,15 @@ InterpretResult resumeFromAwaitWithError(Object error) {
                 while (currentClass != null) {
                   method = currentClass.methods[name];
                   if (method != null) break;
-                  
+
                   if (currentClass.superclass != null) {
-                    currentClass = _globals[currentClass.superclass] as CompiledClass?;
+                    currentClass =
+                        _globals[currentClass.superclass] as CompiledClass?;
                   } else {
                     currentClass = null;
                   }
                 }
-                
+
                 if (method != null) {
                   _callMethod(instance, method, args);
                 } else {
@@ -1640,20 +1662,20 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               throw 'Cannot invoke super method on ${instance.runtimeType}';
             }
             break;
-          
+
           case OpCode.await_:
-            
+
             // Pop the value to await (should be a Future)
             final value = _stack.removeLast();
             if (value is Future) {
               // Create coroutine snapshot for resumption
               final coroutine = suspendToCoroutine();
-              
+
               // Set legacy flags for compatibility
               _awaitingFuture = true;
               _pendingFuture = value;
               _pendingFrame = frame;
-              
+
               // Register callback for when Future completes
               value.then((result) {
                 coroutine.awaitResult = result;
@@ -1665,10 +1687,10 @@ InterpretResult resumeFromAwaitWithError(Object error) {
                 if (coroutineResumeCallback != null) {
                   coroutineResumeCallback!(coroutine, null, error);
                 }
-                // In standalone mode, we don't resume automatically, 
+                // In standalone mode, we don't resume automatically,
                 // but we must catch the error to prevent uncaught exception crash.
               });
-              
+
               // Return awaiting status - VM loop exits
               return InterpretResult.awaiting;
             } else {
@@ -1676,12 +1698,12 @@ InterpretResult resumeFromAwaitWithError(Object error) {
               _stack.add(value);
             }
             break;
-             
+
           default:
             throw "Unknown opcode $op";
         }
       }
-    } catch (e, stack) {
+    } catch (e) {
       _runtimeError(e.toString());
       return InterpretResult.runtimeError;
     }
@@ -1689,31 +1711,31 @@ InterpretResult resumeFromAwaitWithError(Object error) {
 
   // Helper method for isAwaiting check (used in tests)
   bool get isAwaiting => _awaitingFuture;
-  
+
   /// Handle an exception by finding and jumping to the appropriate handler
   /// Returns true if handler found, false if exception should propagate to Dart
   bool _handleException(Object? exception) {
     while (_exceptionHandlers.isNotEmpty) {
       final handler = _exceptionHandlers.removeLast();
-      
+
       // Check if we have enough frames to unwind to
       if (handler.frameIndex >= _frames.length) {
         continue; // Invalid handler, skip
       }
-      
+
       // Unwind call frames to the handler's frame
       while (_frames.length > handler.frameIndex + 1) {
         _frames.removeLast();
       }
-      
+
       // Unwind value stack to the handler's stack height
       while (_stack.length > handler.stackHeight) {
         _stack.removeLast();
       }
-      
+
       // Push exception onto stack for catch block
       _stack.add(exception);
-      
+
       // Jump to catch block in the handler's frame
       if (_frames.isNotEmpty) {
         _frames.last.ip = handler.catchOffset;
@@ -1722,22 +1744,24 @@ InterpretResult resumeFromAwaitWithError(Object error) {
     }
     return false;
   }
-  
+
   /// Call a method on an instance
-  void _callMethod(FluxInstance instance, CompiledFunction method, List<Object?> args) {
+  void _callMethod(
+      FluxInstance instance, CompiledFunction method, List<Object?> args) {
     // Create closure for method (no upvalues for simple methods)
     final closure = ObjClosure(method, []);
-    
+
     // Push instance as 'this' (slot 0)
     _stack.add(instance);
-    
+
     // Push arguments
     for (final arg in args) {
       _stack.add(arg);
     }
-    
+
     // Create new call frame
-    final newFrame = CallFrame(closure, slotBase: _stack.length - args.length - 1);
+    final newFrame =
+        CallFrame(closure, slotBase: _stack.length - args.length - 1);
     _frames.add(newFrame);
   }
 

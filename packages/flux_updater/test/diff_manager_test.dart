@@ -56,12 +56,14 @@ void main() {
 
       final oldBytes = ChunkSerializer.serialize(oldChunk);
       final newBytes = ChunkSerializer.serialize(newChunk);
-      final patch = await FluxDiffManager.createPatchFromBytes(oldBytes, newBytes);
+      final patch =
+          await FluxDiffManager.createPatchFromBytes(oldBytes, newBytes);
 
       // Patch should be significantly smaller
       print('Full size: ${newBytes.length} bytes');
       print('Patch size: ${patch.length} bytes');
-      print('Compression: ${(patch.length / newBytes.length * 100).toStringAsFixed(1)}%');
+      print(
+          'Compression: ${(patch.length / newBytes.length * 100).toStringAsFixed(1)}%');
 
       expect(patch.length, lessThan(newBytes.length));
     });

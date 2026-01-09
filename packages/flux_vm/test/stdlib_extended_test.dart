@@ -11,7 +11,7 @@ void main() {
     logs = [];
     vm = VM();
     vm.onPrint = (msg) => logs.add(msg);
-    
+
     final tokens = Lexer(source).tokenize();
     final ast = Parser(tokens).parse();
     final compiler = Compiler(unit: ast);

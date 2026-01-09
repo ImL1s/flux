@@ -12,7 +12,8 @@ void main() {
 
   group('Compiler Edge Cases', () {
     test('large constant pool (100+ constants)', () {
-      final constants = List.generate(150, (i) => 'var c$i = "constant_$i";').join('\n');
+      final constants =
+          List.generate(150, (i) => 'var c$i = "constant_$i";').join('\n');
       expect(() => compile(constants), returnsNormally);
     });
 
@@ -60,7 +61,8 @@ void main() {
     });
 
     test('class with many methods (50+)', () {
-      final methods = List.generate(50, (i) => 'method$i() { return $i; }').join('\n');
+      final methods =
+          List.generate(50, (i) => 'method$i() { return $i; }').join('\n');
       final source = '''
         class BigClass {
           $methods
@@ -100,7 +102,9 @@ void main() {
     });
 
     test('complex switch-like if-else chain', () {
-      final cases = List.generate(50, (i) => '''
+      final cases = List.generate(
+          50,
+          (i) => '''
         if (x == $i) {
           return $i;
         } else

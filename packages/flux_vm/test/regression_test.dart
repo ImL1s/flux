@@ -1,4 +1,3 @@
-
 import 'package:flux_vm/flux_vm.dart';
 import 'package:test/test.dart';
 
@@ -13,15 +12,16 @@ void main() {
           x = "finally";
         }
       """;
-      
+
       final vm = VM();
       final result = vm.interpret(source);
-      
+
       // Should Result in RuntimeError, NOT Ok
       expect(result, InterpretResult.runtimeError);
     });
 
-    test('return inside try executes finally (Fix: Return Skipping Finally)', () {
+    test('return inside try executes finally (Fix: Return Skipping Finally)',
+        () {
       final source = """
         var x = "";
         fn test() {
@@ -35,17 +35,17 @@ void main() {
         test();
         print(x);
       """;
-      
+
       final vm = VM();
       var output = "";
       vm.onPrint = (msg) => output = msg.toString();
-      
+
       final result = vm.interpret(source);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, equals("try-finally"));
     });
-    
+
     test('nested try-finally return execution', () {
       final source = """
         var log = "";
@@ -63,11 +63,11 @@ void main() {
         test();
         print(log);
       """;
-      
+
       final vm = VM();
       var output = "";
       vm.onPrint = (msg) => output = msg.toString();
-      
+
       vm.interpret(source);
       expect(output, equals("inner-outer"));
     });

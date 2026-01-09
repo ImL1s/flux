@@ -145,13 +145,18 @@ Future<void> _handleRelease(List<String> args) async {
     }
   }
 
-  if (appId == null || version == null || buildNumber == null || inputFile == null) {
+  if (appId == null ||
+      version == null ||
+      buildNumber == null ||
+      inputFile == null) {
     print('Error: Missing required arguments');
-    print('Usage: flux_updater release --app-id <id> --version <ver> --build <num> <file.fluxc>');
+    print(
+        'Usage: flux_updater release --app-id <id> --version <ver> --build <num> <file.fluxc>');
     exit(1);
   }
 
-  final signingKey = Platform.environment['FLUX_SIGNING_KEY'] ?? 'dev-secret-key';
+  final signingKey =
+      Platform.environment['FLUX_SIGNING_KEY'] ?? 'dev-secret-key';
 
   try {
     final bytes = await File(inputFile).readAsBytes();

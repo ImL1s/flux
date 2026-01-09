@@ -31,7 +31,7 @@ void main() {
       expect(Directory(projectPath).existsSync(), isTrue);
       expect(File('$projectPath/main.flux').existsSync(), isTrue);
       expect(File('$projectPath/flux.yaml').existsSync(), isTrue);
-      
+
       final mainContent = File('$projectPath/main.flux').readAsStringSync();
       expect(mainContent, contains('fn main()'));
       expect(mainContent, contains('main();'));
@@ -46,7 +46,7 @@ void main() {
       final projectPath = '${tempDir.path}/$projectName';
 
       await runner.run(['create', projectPath]);
-      
+
       // Analyze the created project
       // Need to capture stdout to verify but for now just check it doesn't throw
       await runner.run(['analyze', projectPath]);
@@ -61,9 +61,9 @@ void main() {
       final projectPath = '${tempDir.path}/$projectName';
 
       await runner.run(['create', projectPath]);
-      
+
       // Run the created project
-      // Note: RunCommand uses FluxVM which prints to stdout. 
+      // Note: RunCommand uses FluxVM which prints to stdout.
       // In a real test we'd capture this, but here we just verify it runs.
       await runner.run(['run', '$projectPath/main.flux']);
     });

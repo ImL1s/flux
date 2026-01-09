@@ -5,9 +5,10 @@ import 'package:flux_vm/flux_vm.dart';
 
 void main() {
   group('Flux State Persistence Integration', () {
-    testWidgets('persistent state survives widget recreation', (WidgetTester tester) async {
+    testWidgets('persistent state survives widget recreation',
+        (WidgetTester tester) async {
       final delegate = InMemoryPersistenceDelegate();
-      
+
       const source = '''
         widget Counter {
           persistent state count = 0;
@@ -29,7 +30,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(
-        MaterialApp( home: FluxWidget(
+        MaterialApp(
+            home: FluxWidget(
           source: source,
           widgetName: 'Counter',
           enablePersistence: true,
@@ -53,7 +55,8 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
 
       await tester.pumpWidget(
-        MaterialApp( home: FluxWidget(
+        MaterialApp(
+            home: FluxWidget(
           source: source,
           widgetName: 'Counter',
           enablePersistence: true,
@@ -65,9 +68,10 @@ void main() {
       expect(find.text('2'), findsOneWidget);
     });
 
-    testWidgets('non-persistent state does not survive recreation', (WidgetTester tester) async {
+    testWidgets('non-persistent state does not survive recreation',
+        (WidgetTester tester) async {
       final delegate = InMemoryPersistenceDelegate();
-      
+
       const source = '''
         widget Counter {
           state count = 0;
@@ -89,7 +93,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(
-        MaterialApp( home: FluxWidget(
+        MaterialApp(
+            home: FluxWidget(
           source: source,
           widgetName: 'Counter',
           enablePersistence: true,
@@ -107,7 +112,8 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
 
       await tester.pumpWidget(
-        MaterialApp( home: FluxWidget(
+        MaterialApp(
+            home: FluxWidget(
           source: source,
           widgetName: 'Counter',
           enablePersistence: true,

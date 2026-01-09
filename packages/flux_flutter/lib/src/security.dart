@@ -137,7 +137,7 @@ class FluxVersionManager {
 /// Script signature verifier using ED25519
 ///
 /// Uses the `cryptography` package for real ED25519 signature verification.
-/// 
+///
 /// Usage:
 /// ```dart
 /// final verifier = FluxSignatureVerifier('base64EncodedPublicKey');
@@ -146,7 +146,7 @@ class FluxVersionManager {
 class FluxSignatureVerifier {
   /// The public key used for verification (base64 encoded)
   final String publicKey;
-  
+
   /// Decoded public key bytes
   late final List<int> _publicKeyBytes;
 
@@ -163,7 +163,7 @@ class FluxSignatureVerifier {
   /// Returns true if:
   /// 1. The content hash matches
   /// 2. The signature is valid for the content hash
-  /// 
+  ///
   /// Note: For synchronous API compatibility, this uses a simplified check.
   /// Use [verifyAsync] for full cryptographic verification.
   bool verify(FluxScriptPackage package) {
@@ -196,7 +196,7 @@ class FluxSignatureVerifier {
   /// This performs actual cryptographic verification using the ED25519 algorithm.
   Future<VerificationResult> verifyAsync(FluxScriptPackage package) async {
     final hashValid = package.verifyHash();
-    
+
     if (!hashValid) {
       return VerificationResult(
         isValid: false,
@@ -289,14 +289,14 @@ class FluxSignatureVerifier {
           message: 'Invalid signature format - expected 64 bytes for ED25519',
         );
       }
-      
+
       final messageBytes = utf8.encode(package.contentHash);
       final isValid = _verifyEd25519Signature(
         _publicKeyBytes,
         messageBytes,
         signatureBytes,
       );
-      
+
       return VerificationResult(
         isValid: isValid,
         hashValid: true,
@@ -312,13 +312,13 @@ class FluxSignatureVerifier {
       );
     }
   }
-  
+
   /// Low-level ED25519 signature verification
-  /// 
+  ///
   /// Implements simplified ED25519 verification. For production environments,
   /// consider using a dedicated cryptography library like `cryptography` package's
   /// Ed25519 implementation for full security.
-  /// 
+  ///
   /// This implementation validates:
   /// 1. Signature length (64 bytes)
   /// 2. Public key length (32 bytes)
@@ -335,7 +335,7 @@ class FluxSignatureVerifier {
     if (signature.length != 64) {
       return false;
     }
-    
+
     // For a complete ED25519 implementation, you would:
     // 1. Decode the R point from signature[0:32]
     // 2. Decode s scalar from signature[32:64]
@@ -346,11 +346,11 @@ class FluxSignatureVerifier {
     // we use a hash-based integrity check as a practical solution.
     // For full ED25519 verification, the caller should use verifyAsync
     // with the cryptography package directly.
-    
+
     // Basic integrity check: signature should be bound to message
     final combined = [...publicKey, ...message, ...signature];
     final checksum = sha256.convert(combined);
-    
+
     // If we reach here with valid formats, return true for sync API
     // The async API provides full verification
     return checksum.bytes.isNotEmpty;

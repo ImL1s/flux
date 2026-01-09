@@ -27,7 +27,8 @@ print(x);
       expect(restored.arity, equals(original.arity));
       expect(restored.isAsync, equals(original.isAsync));
       expect(restored.chunk.code, equals(original.chunk.code));
-      expect(restored.chunk.constants.length, equals(original.chunk.constants.length));
+      expect(restored.chunk.constants.length,
+          equals(original.chunk.constants.length));
     });
 
     test('function with parameters round-trip', () {
@@ -51,10 +52,12 @@ var result = add(1, 2);
 
       expect(restored.name, equals(original.name));
       expect(restored.chunk.code, equals(original.chunk.code));
-      
+
       // Check that nested function constant was restored
-      final originalFn = original.chunk.constants.whereType<CompiledFunction>().firstOrNull;
-      final restoredFn = restored.chunk.constants.whereType<CompiledFunction>().firstOrNull;
+      final originalFn =
+          original.chunk.constants.whereType<CompiledFunction>().firstOrNull;
+      final restoredFn =
+          restored.chunk.constants.whereType<CompiledFunction>().firstOrNull;
       expect(restoredFn, isNotNull);
       expect(restoredFn!.name, equals(originalFn!.name));
       expect(restoredFn.arity, equals(originalFn.arity));
@@ -83,8 +86,10 @@ class Counter {
 
       expect(restored.chunk.code, equals(original.chunk.code));
 
-      final originalClass = original.chunk.constants.whereType<CompiledClass>().firstOrNull;
-      final restoredClass = restored.chunk.constants.whereType<CompiledClass>().firstOrNull;
+      final originalClass =
+          original.chunk.constants.whereType<CompiledClass>().firstOrNull;
+      final restoredClass =
+          restored.chunk.constants.whereType<CompiledClass>().firstOrNull;
       expect(restoredClass, isNotNull);
       expect(restoredClass!.name, equals(originalClass!.name));
       expect(restoredClass.fields, equals(originalClass.fields));

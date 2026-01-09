@@ -12,7 +12,8 @@ class ServeCommand extends Command {
   final String name = 'serve';
 
   @override
-  final String description = 'Serve a Flux script for Flutter client with hot reload.';
+  final String description =
+      'Serve a Flux script for Flutter client with hot reload.';
 
   @override
   final List<String> aliases = ['watch'];
@@ -37,10 +38,11 @@ class ServeCommand extends Command {
     print('Watching: $filePath');
 
     // Setup WebSocket handler
-    final handler = webSocketHandler((WebSocketChannel webSocket, String? protocol) {
+    final handler =
+        webSocketHandler((WebSocketChannel webSocket, String? protocol) {
       _clients.add(webSocket);
       print('Client connected (Total: ${_clients.length})');
-      
+
       // Send current content immediately on connection
       try {
         final content = file.readAsStringSync();
@@ -90,7 +92,7 @@ class ServeCommand extends Command {
       Future.delayed(const Duration(milliseconds: 100), () {
         final content = file.readAsStringSync();
         final payload = '{"type": "reload", "content": ${jsonEncode(content)}}';
-        
+
         print('Broadcasting update to ${_clients.length} clients...');
         for (final client in _clients) {
           client.sink.add(payload);

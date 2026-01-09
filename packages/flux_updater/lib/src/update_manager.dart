@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_vm/flux_vm.dart';
 
-
 import 'chunk_serializer.dart';
 import 'diff_manager.dart';
 import 'flux_release.dart';
@@ -140,7 +139,7 @@ class FluxUpdateManager {
     try {
       // TODO: Real implementation would verify with server
       // For now, check local version manager (populated via initialization or previous checks)
-      
+
       // If we have connectivity, we should try to fetch manifest from server here.
       // But adhering to the current simplified design that assumes versionManager is updated:
 
@@ -186,7 +185,8 @@ class FluxUpdateManager {
 
       // Verify compatibility
       if (!await checkCompatibility(latest)) {
-         throw Exception('Incompatible VM version. Required: ${latest.minVmVersion}, Current: ${VM.version}');
+        throw Exception(
+            'Incompatible VM version. Required: ${latest.minVmVersion}, Current: ${VM.version}');
       }
 
       // Determine if we should use patch or full chunk
@@ -227,7 +227,7 @@ class FluxUpdateManager {
         // Save the full chunk
         final bytes = ChunkSerializer.serialize(newChunk);
         await cacheManager!.saveChunk(appId, latest.version, bytes);
-        
+
         // Save version state
         await cacheManager!.saveVersionState(versionManager.exportToJson());
       }
@@ -243,7 +243,7 @@ class FluxUpdateManager {
   }
 
   /// Load the latest cached version for offline support.
-  /// 
+  ///
   /// Returns `true` if a cached version was successfully loaded.
   Future<bool> loadFromCache() async {
     if (cacheManager == null) return false;
@@ -261,7 +261,7 @@ class FluxUpdateManager {
       final bytes = await cacheManager!.loadChunk(appId, currentVersion);
       if (bytes != null) {
         final chunk = ChunkSerializer.deserialize(bytes);
-        
+
         // Apply
         if (onChunkReady != null) {
           onChunkReady!(chunk);
@@ -272,7 +272,8 @@ class FluxUpdateManager {
         return true;
       }
     } catch (e) {
-      _emitProgress(UpdateStatus.error, error: e, message: 'Failed to load cache: $e');
+      _emitProgress(UpdateStatus.error,
+          error: e, message: 'Failed to load cache: $e');
     }
     return false;
   }

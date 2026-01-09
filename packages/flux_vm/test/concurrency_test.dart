@@ -16,13 +16,13 @@ void main() {
         var x = await 42;
         print(x);
       ''';
-      
+
       String? output;
       vm.onPrint = (msg) => output = msg;
-      
+
       final chunk = _compile(source);
       final result = vm.runChunk(chunk);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, '42');
       expect(vm.isAwaiting, false);
@@ -30,47 +30,49 @@ void main() {
 
     test('await on Dart Future suspends execution', () {
       final completer = Completer<int>();
-      
+
       // Inject a native function that returns a Future
-      vm.globals['fetchData'] = NativeFunction('fetchData', 0, (List<Object?> args) {
+      vm.globals['fetchData'] =
+          NativeFunction('fetchData', 0, (List<Object?> args) {
         return completer.future;
       });
-      
+
       final source = '''
         print("Start");
         var x = await fetchData();
         print("End: " + x);
       ''';
-      
+
       final logs = <String>[];
       vm.onPrint = (msg) => logs.add(msg);
-      
+
       final chunk = _compile(source);
       final result = vm.runChunk(chunk);
-      
+
       // Should be suspended
       expect(result, InterpretResult.awaiting);
       expect(vm.isAwaiting, true);
       expect(logs, ['Start']); // Executed up to await
-      
+
       // Complete the future
       completer.complete(100);
-      
+
       // Resume VM
       final resumeResult = vm.resumeFromAwait(100);
-      
+
       expect(resumeResult, InterpretResult.ok);
       expect(logs, ['Start', 'End: 100']);
       expect(vm.isAwaiting, false);
     });
-    
+
     test('async function call flow', () {
       // Test calling a Flux function that awaits
       final completer = Completer<String>();
-      vm.globals['waitString'] = NativeFunction('waitString', 0, (List<Object?> args) {
+      vm.globals['waitString'] =
+          NativeFunction('waitString', 0, (List<Object?> args) {
         return completer.future;
       });
-      
+
       final source = '''
         fn doAsync() {
            var s = await waitString();
@@ -79,18 +81,18 @@ void main() {
         
         print(doAsync());
       ''';
-      
+
       final logs = <String>[];
       vm.onPrint = (msg) => logs.add(msg);
-      
+
       final chunk = _compile(source);
       final result = vm.runChunk(chunk);
-      
+
       expect(result, InterpretResult.awaiting);
-      
+
       // Resume
       final finalResult = vm.resumeFromAwait("Flux");
-      
+
       expect(finalResult, InterpretResult.ok);
       expect(logs, ['Got: Flux']);
     });

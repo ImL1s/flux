@@ -20,7 +20,7 @@ void main() {
       chunk.write(1, 10);
       chunk.write(2, 10);
       chunk.write(3, 10);
-      
+
       expect(chunk.lines, [3, 10]); // Run of 3 on line 10
       expect(chunk.getLine(0), 10);
       expect(chunk.getLine(1), 10);
@@ -35,9 +35,9 @@ void main() {
       chunk.write(3, 11); // offset 2
       chunk.write(4, 11); // offset 3
       chunk.write(5, 12); // offset 4
-      
+
       expect(chunk.lines, [2, 10, 2, 11, 1, 12]);
-      
+
       expect(chunk.getLine(0), 10);
       expect(chunk.getLine(1), 10);
       expect(chunk.getLine(2), 11);
@@ -63,7 +63,7 @@ void main() {
       chunk.write(1, 10);
       chunk.write(2, 5); // Line jumps back
       chunk.write(3, 15);
-      
+
       expect(chunk.lines, [1, 10, 1, 5, 1, 15]);
       expect(chunk.getLine(0), 10);
       expect(chunk.getLine(1), 5);

@@ -11,7 +11,8 @@ import 'package:flux_updater/src/ota_server.dart';
 /// ```
 Future<void> main(List<String> args) async {
   final port = args.isNotEmpty ? int.parse(args[0]) : 8080;
-  final signingKey = Platform.environment['FLUX_SIGNING_KEY'] ?? 'dev-secret-key';
+  final signingKey =
+      Platform.environment['FLUX_SIGNING_KEY'] ?? 'dev-secret-key';
 
   final server = FluxOtaServer(signingKey: signingKey);
   final httpServer = await shelf_io.serve(server.handler, 'localhost', port);

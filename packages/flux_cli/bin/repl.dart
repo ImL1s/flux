@@ -1,6 +1,7 @@
 #!/usr/bin/env dart
+
 /// Flux REPL - Interactive command line interface
-/// 
+///
 /// Usage: dart run flux_cli:repl
 
 import 'dart:io';
@@ -13,17 +14,17 @@ const String continuePrompt = '...   ';
 
 void main(List<String> args) {
   final repl = FluxRepl();
-  
+
   if (args.contains('--help') || args.contains('-h')) {
     _printHelp();
     return;
   }
-  
+
   if (args.contains('--version') || args.contains('-v')) {
     print('Flux REPL v$version');
     return;
   }
-  
+
   repl.run();
 }
 
@@ -52,37 +53,37 @@ class FluxRepl {
   final List<String> _history = [];
   bool _multilineMode = false;
   final StringBuffer _buffer = StringBuffer();
-  
+
   FluxRepl() {
     _resetVm();
   }
-  
+
   void _resetVm() {
     _vm = VM();
     _vm.onPrint = (msg) => print(msg);
   }
-  
+
   void run() {
     _printBanner();
-    
+
     while (true) {
       final line = _readLine();
       if (line == null) {
         print('\nGoodbye!');
         break;
       }
-      
+
       final trimmed = line.trim();
-      
+
       // Handle empty input
       if (trimmed.isEmpty) continue;
-      
+
       // Handle REPL commands
       if (trimmed.startsWith(':')) {
         if (_handleCommand(trimmed)) continue;
         break; // Exit command
       }
-      
+
       // Handle multi-line input
       if (_multilineMode) {
         _buffer.write('\n');
@@ -94,20 +95,20 @@ class FluxRepl {
         }
         continue;
       }
-      
+
       // Check if input is complete
       if (!_isComplete(trimmed)) {
         _multilineMode = true;
         _buffer.write(trimmed);
         continue;
       }
-      
+
       // Execute single line
       _execute(trimmed);
       _history.add(trimmed);
     }
   }
-  
+
   void _printBanner() {
     print('''
 ╔════════════════════════════════════════╗
@@ -118,12 +119,12 @@ class FluxRepl {
 Type ":help" for available commands.
 ''');
   }
-  
+
   String? _readLine() {
     stdout.write(_multilineMode ? continuePrompt : prompt);
     return stdin.readLineSync();
   }
-  
+
   bool _handleCommand(String cmd) {
     switch (cmd.toLowerCase()) {
       case ':help':
@@ -152,7 +153,7 @@ Type ":help" for available commands.
         return true;
     }
   }
-  
+
   void _printCommandHelp() {
     print('''
 Available commands:
@@ -164,13 +165,13 @@ Available commands:
   :exit     - Exit the REPL (also :quit, :q)
 ''');
   }
-  
+
   void _clearScreen() {
     // ANSI escape code to clear screen
     print('\x1B[2J\x1B[0;0H');
     _printBanner();
   }
-  
+
   void _printGlobals() {
     final globals = _vm.globals;
     if (globals.isEmpty) {
@@ -188,7 +189,7 @@ Available commands:
       }
     });
   }
-  
+
   void _printHistory() {
     if (_history.isEmpty) {
       print('No history.');
@@ -199,55 +200,62 @@ Available commands:
       print('  ${i + 1}: ${_history[i]}');
     }
   }
-  
+
   bool _isComplete(String source) {
     // Simple heuristic: count braces
     int braces = 0;
     int parens = 0;
     bool inString = false;
-    
+
     for (int i = 0; i < source.length; i++) {
       final c = source[i];
-      
+
       // Track strings to avoid counting braces inside them
       if (c == '"' && (i == 0 || source[i - 1] != '\\')) {
         inString = !inString;
         continue;
       }
-      
+
       if (inString) continue;
-      
+
       switch (c) {
-        case '{': braces++; break;
-        case '}': braces--; break;
-        case '(': parens++; break;
-        case ')': parens--; break;
+        case '{':
+          braces++;
+          break;
+        case '}':
+          braces--;
+          break;
+        case '(':
+          parens++;
+          break;
+        case ')':
+          parens--;
+          break;
       }
     }
-    
+
     return braces == 0 && parens == 0 && !inString;
   }
-  
+
   void _execute(String source) {
     try {
       // Tokenize
       final tokens = Lexer(source).tokenize();
-      
+
       // Parse
       final parser = Parser(tokens);
       final unit = parser.parse();
-      
+
       // Compile
       final compiler = Compiler(unit: unit);
       final function = compiler.endCompiler();
-      
+
       // Execute
       final result = _vm.runChunk(function.chunk);
-      
+
       if (result == InterpretResult.runtimeError) {
         // Error already printed by VM
       }
-      
     } on ParseError catch (e) {
       print('Parse error: ${e.message}');
     } catch (e) {

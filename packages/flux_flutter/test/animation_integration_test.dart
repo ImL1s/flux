@@ -23,7 +23,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: FluxWidget(
-          source: source, 
+          source: source,
           widgetName: 'AnimDemo',
         ),
       ),
@@ -36,7 +36,7 @@ void main() {
     // Find ColoredBox inside Container because Container with color uses it
     final containerFinder = find.byType(Container);
     expect(containerFinder, findsOneWidget);
-    
+
     Container container = tester.widget<Container>(containerFinder);
     expect(container.constraints?.maxWidth, 0.0);
 
@@ -46,7 +46,7 @@ void main() {
 
     // Advance 250ms (Halfway)
     await tester.pump(const Duration(milliseconds: 250));
-    
+
     container = tester.widget<Container>(containerFinder);
     // Value should be around 50.0
     expect(container.constraints?.maxWidth, closeTo(50.0, 1.0));
@@ -54,7 +54,7 @@ void main() {
     // Advance to end (remaining 250ms)
     await tester.pump(const Duration(milliseconds: 250));
     await tester.pump(); // Final tick
-    
+
     container = tester.widget<Container>(containerFinder);
     expect(container.constraints?.maxWidth, 100.0);
   });
@@ -79,7 +79,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: FluxWidget(
-          source: source, 
+          source: source,
           widgetName: 'CurvedDemo',
         ),
       ),
@@ -93,17 +93,18 @@ void main() {
 
     // Advance 500ms (Halfway)
     await tester.pump(const Duration(milliseconds: 500));
-    
+
     final containerFinder = find.byType(Container);
     Container container = tester.widget<Container>(containerFinder);
-    
+
     // With bounceOut, it might be > 50 at halfway or specific value.
     // Normalized bounceOut at t=0.5 is > 0.5?
     // Let's just check it is NOT linear 50.0 (it should be different)
     // Actually bounceOut at 0.5 is approx 0.76 (depending on implementation), definitely > 60
     final width = container.constraints!.maxWidth;
     if (width == 0.0 || width == 50.0) {
-      fail('Animation value $width suggests curve not applied (Linear would be 50.0)');
+      fail(
+          'Animation value $width suggests curve not applied (Linear would be 50.0)');
     }
   });
   testWidgets('Flux Implicit Animation Test', (WidgetTester tester) async {
@@ -140,7 +141,7 @@ void main() {
     await tester.pumpWidget(MaterialApp(
       home: Scaffold(
         body: FluxWidget(
-          source: source, 
+          source: source,
           widgetName: 'ImplicitDemo',
         ),
       ),
@@ -163,13 +164,13 @@ void main() {
     expect(tester.getSize(acFinder).width, 50.0);
 
     // Halfway (250ms of 500ms)
-    await tester.pump(const Duration(milliseconds: 250)); 
+    await tester.pump(const Duration(milliseconds: 250));
 
     final midWidth = tester.getSize(acFinder).width;
     // Should be > 50 and < 100.
     // easeIn at 0.5 is approx 0.25 * 50 = 12.5 + 50 = 62.5
     if (midWidth <= 50.0 || midWidth >= 100.0) {
-       fail("AnimatedContainer did not animate, width is $midWidth");
+      fail("AnimatedContainer did not animate, width is $midWidth");
     }
 
     // Finish

@@ -6,6 +6,6 @@ export 'src/security/verifier.dart';
 export 'src/script_loader.dart';
 export 'src/coroutine.dart';
 export 'src/debugger.dart';
-export 'src/stdlib.dart'; 
+export 'src/stdlib.dart';
 export 'src/closure.dart';
 export 'src/persistence_delegate.dart';

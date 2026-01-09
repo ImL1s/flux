@@ -27,11 +27,13 @@ class HttpModule extends FluxModule {
   final Map<String, CancelToken> _cancelTokens = {};
 
   HttpModule({Dio? dio}) : super('http') {
-    _dio = dio ?? Dio(BaseOptions(
-      connectTimeout: const Duration(seconds: 30),
-      receiveTimeout: const Duration(seconds: 30),
-      responseType: ResponseType.plain, // Keep compatibility with existing tests expecting string body
-    ));
+    _dio = dio ??
+        Dio(BaseOptions(
+          connectTimeout: const Duration(seconds: 30),
+          receiveTimeout: const Duration(seconds: 30),
+          responseType: ResponseType
+              .plain, // Keep compatibility with existing tests expecting string body
+        ));
 
     // Add logging interceptor
     _dio.interceptors.add(LogInterceptor(
@@ -50,7 +52,8 @@ class HttpModule extends FluxModule {
     register('setBaseUrl', NativeFunction('http.setBaseUrl', 1, _setBaseUrl));
     register('setTimeout', NativeFunction('http.setTimeout', 1, _setTimeout));
     register('setHeader', NativeFunction('http.setHeader', 2, _setHeader));
-    register('removeHeader', NativeFunction('http.removeHeader', 1, _removeHeader));
+    register(
+        'removeHeader', NativeFunction('http.removeHeader', 1, _removeHeader));
 
     // HTTP Methods
     register('get', AsyncNativeFunction('http.get', -1, _get));
@@ -245,8 +248,8 @@ class HttpModule extends FluxModule {
     dynamic data = response.data;
     if (data is String) {
       final contentType = response.headers.value('content-type')?.toLowerCase();
-      if (contentType?.contains('application/json') == true || 
-          (data.trim().startsWith('{') && data.trim().endsWith('}')) || 
+      if (contentType?.contains('application/json') == true ||
+          (data.trim().startsWith('{') && data.trim().endsWith('}')) ||
           (data.trim().startsWith('[') && data.trim().endsWith(']'))) {
         try {
           data = jsonDecode(data);
@@ -256,9 +259,9 @@ class HttpModule extends FluxModule {
       }
     }
 
-    final isOk = response.statusCode != null && 
-                 response.statusCode! >= 200 && 
-                 response.statusCode! < 300;
+    final isOk = response.statusCode != null &&
+        response.statusCode! >= 200 &&
+        response.statusCode! < 300;
 
     return {
       'statusCode': response.statusCode,

@@ -1,4 +1,3 @@
-
 import 'package:test/test.dart';
 import 'package:flux_compiler/flux_compiler.dart';
 import 'package:flux_vm/flux_vm.dart';
@@ -9,9 +8,9 @@ void main() {
     test('executes simple print statement', () {
       final source = 'print("Hello from Flux!");';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['Hello from Flux!']);
     });
@@ -24,9 +23,9 @@ void main() {
         print(a * b);
       ''';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['30', '200']);
     });
@@ -39,9 +38,9 @@ void main() {
         print(greet("World"));
       ''';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['Hello, World!']);
     });
@@ -57,9 +56,9 @@ void main() {
         print(sum);
       ''';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['10']); // 0+1+2+3+4 = 10
     });
@@ -74,9 +73,9 @@ void main() {
         }
       ''';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['big']);
     });
@@ -90,9 +89,9 @@ void main() {
         print(fib(10));
       ''';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['55']);
     });
@@ -113,9 +112,9 @@ void main() {
         print(counter());
       ''';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['1', '2', '3']);
     });
@@ -129,9 +128,9 @@ void main() {
         }
       ''';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['Caught: Test error']);
     });
@@ -144,9 +143,9 @@ void main() {
         print(list[3]);
       ''';
       final output = <String>[];
-      
+
       final result = _runFlux(source, onPrint: output.add);
-      
+
       expect(result, InterpretResult.ok);
       expect(output, ['4', '4']);
     });
@@ -155,20 +154,20 @@ void main() {
   group('Error Handling', () {
     test('throws ParseError for invalid syntax', () {
       final source = 'var x = ;'; // Invalid syntax
-      
+
       bool caughtError = false;
       try {
         _runFlux(source);
       } on ParseError {
         caughtError = true;
       }
-      
+
       expect(caughtError, isTrue);
     });
 
     test('reports undefined variable errors', () {
       final source = 'print(undefinedVar);';
-      
+
       final result = _runFlux(source);
       expect(result, InterpretResult.runtimeError);
     });
@@ -180,18 +179,18 @@ InterpretResult _runFlux(String source, {void Function(String)? onPrint}) {
   final tokens = Lexer(source).tokenize();
   final parser = Parser(tokens);
   final unit = parser.parse();
-  
+
   if (parser.errors.isNotEmpty) {
     throw parser.errors.first;
   }
-  
+
   final compiler = Compiler(unit: unit);
   final function = compiler.endCompiler();
-  
+
   final vm = VM();
   if (onPrint != null) {
     vm.onPrint = onPrint;
   }
-  
+
   return vm.runChunk(function.chunk);
 }

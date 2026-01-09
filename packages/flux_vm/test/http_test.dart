@@ -1,6 +1,5 @@
-
 import 'package:flux_vm/flux_vm.dart';
-import 'package:flux_vm/src/stdlib.dart';
+
 import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -48,7 +47,7 @@ void main() {
         }
         return http.Response('Not Found', 404);
       });
-      
+
       StdLib.setHttpClient(mockClient);
 
       const source = '''
@@ -74,7 +73,7 @@ void main() {
         }
         return http.Response('error', 400);
       });
-      
+
       StdLib.setHttpClient(mockClient);
 
       const source = '''

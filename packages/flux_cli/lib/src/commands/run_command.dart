@@ -77,7 +77,7 @@ class RunCommand extends Command<void> {
 
     // Watch for changes
     final watcher = FileWatcher(file.path);
-    
+
     await for (final event in watcher.events) {
       if (event.type == ChangeType.MODIFY) {
         print('\n🔄 File changed, re-running...\n');

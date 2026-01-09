@@ -10,15 +10,16 @@ class ValueRenderer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (value is Map && value['type'] == 'ref') {
-      return ObjectRefWidget(handle: value['handle'], preview: value['preview']);
+      return ObjectRefWidget(
+          handle: value['handle'], preview: value['preview']);
     } else if (value is Map && value['type'] == 'primitive') {
-      return Text(
-        '${value['value']}', 
-        style: TextStyle(
-          fontFamily: 'monospace',
-          color: value['kind'] == 'String' ? Colors.orange.shade800 : Colors.blue.shade800,
-        )
-      );
+      return Text('${value['value']}',
+          style: TextStyle(
+            fontFamily: 'monospace',
+            color: value['kind'] == 'String'
+                ? Colors.orange.shade800
+                : Colors.blue.shade800,
+          ));
     }
     // Fallback for old/simple values
     return Text('$value', style: const TextStyle(fontFamily: 'monospace'));
@@ -30,18 +31,16 @@ class ObjectRefWidget extends StatelessWidget {
   final int handle;
   final String preview;
 
-  const ObjectRefWidget({
-    super.key, 
-    required this.handle, 
-    required this.preview
-  });
+  const ObjectRefWidget(
+      {super.key, required this.handle, required this.preview});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => showDialog(
-        context: context, 
-        builder: (ctx) => ObjectInspectorDialog(handle: handle, preview: preview),
+        context: context,
+        builder: (ctx) =>
+            ObjectInspectorDialog(handle: handle, preview: preview),
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
@@ -51,9 +50,9 @@ class ObjectRefWidget extends StatelessWidget {
           border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
         ),
         child: Text(
-          preview, 
+          preview,
           style: const TextStyle(
-            color: Colors.blue, 
+            color: Colors.blue,
             decoration: TextDecoration.underline,
             fontFamily: 'monospace',
           ),
@@ -69,7 +68,7 @@ class ObjectInspectorDialog extends StatefulWidget {
   final String preview;
 
   const ObjectInspectorDialog({
-    super.key, 
+    super.key,
     required this.handle,
     required this.preview,
   });
@@ -92,7 +91,7 @@ class _ObjectInspectorDialogState extends State<ObjectInspectorDialog> {
   Future<void> _fetchDetails() async {
     try {
       final response = await serviceManager.callServiceExtensionOnMainIsolate(
-        'ext.flux.getObject', 
+        'ext.flux.getObject',
         args: {'handle': '${widget.handle}'},
       );
       final json = response.json ?? {};
@@ -123,7 +122,7 @@ class _ObjectInspectorDialogState extends State<ObjectInspectorDialog> {
       ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.of(context).pop(), 
+          onPressed: () => Navigator.of(context).pop(),
           child: const Text('Close'),
         ),
       ],
@@ -132,11 +131,14 @@ class _ObjectInspectorDialogState extends State<ObjectInspectorDialog> {
 
   Widget _buildContent() {
     if (_loading) return const Center(child: CircularProgressIndicator());
-    if (_error != null) return Center(child: Text('Error: $_error', style: const TextStyle(color: Colors.red)));
+    if (_error != null)
+      return Center(
+          child: Text('Error: $_error',
+              style: const TextStyle(color: Colors.red)));
     if (_data == null) return const Center(child: Text('No data found'));
 
     final kind = _data!['kind'];
-    
+
     if (kind == 'List') {
       final elements = _data!['elements'] as List;
       return ListView.builder(
@@ -145,7 +147,9 @@ class _ObjectInspectorDialogState extends State<ObjectInspectorDialog> {
           final el = elements[i];
           return ListTile(
             dense: true,
-            title: Text('[${el['index']}]', style: const TextStyle(color: Colors.grey, fontFamily: 'monospace')),
+            title: Text('[${el['index']}]',
+                style: const TextStyle(
+                    color: Colors.grey, fontFamily: 'monospace')),
             trailing: ValueRenderer(value: el['value']),
           );
         },
@@ -175,7 +179,8 @@ class _ObjectInspectorDialogState extends State<ObjectInspectorDialog> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Class: $text', style: const TextStyle(fontWeight: FontWeight.bold)),
+          Text('Class: $text',
+              style: const TextStyle(fontWeight: FontWeight.bold)),
           const Divider(),
           Expanded(
             child: ListView.builder(
@@ -185,7 +190,8 @@ class _ObjectInspectorDialogState extends State<ObjectInspectorDialog> {
                 final value = fields[key];
                 return ListTile(
                   dense: true,
-                  title: Text(key, style: const TextStyle(color: Colors.purple)),
+                  title:
+                      Text(key, style: const TextStyle(color: Colors.purple)),
                   trailing: ValueRenderer(value: value),
                 );
               },

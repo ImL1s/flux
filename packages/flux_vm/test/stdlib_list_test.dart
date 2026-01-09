@@ -44,21 +44,20 @@ void main() {
       expect(logs[0], '3');
       expect(logs[1], '[1, 2]');
     });
-    
-    test('list.pop throws on empty list', () {
 
-       final vm = VM();
-       vm.onPrint = (msg) {};
-       
-       // Manually running with expectation of failure result
-       final tokens = Lexer('var l = []; pop(l);').tokenize();
-       final parser = Parser(tokens);
-       final ast = parser.parse();
-       final compiler = Compiler(unit: ast);
-       final function = compiler.endCompiler();
-       
-       final result = vm.runChunk(function.chunk);
-       expect(result, InterpretResult.runtimeError);
+    test('list.pop throws on empty list', () {
+      final vm = VM();
+      vm.onPrint = (msg) {};
+
+      // Manually running with expectation of failure result
+      final tokens = Lexer('var l = []; pop(l);').tokenize();
+      final parser = Parser(tokens);
+      final ast = parser.parse();
+      final compiler = Compiler(unit: ast);
+      final function = compiler.endCompiler();
+
+      final result = vm.runChunk(function.chunk);
+      expect(result, InterpretResult.runtimeError);
     });
 
     test('list.insert adds at index', () {
@@ -103,8 +102,8 @@ void main() {
     });
 
     test('list.sort sorts in place', () {
-      // Dart sort is in-place. stdlib implementation: `sorted.sort(); return sorted;`. 
-      // Wait, stdlib.dart says: `final sorted = List.from(list); sorted.sort(); return sorted;` 
+      // Dart sort is in-place. stdlib implementation: `sorted.sort(); return sorted;`.
+      // Wait, stdlib.dart says: `final sorted = List.from(list); sorted.sort(); return sorted;`
       // So it returns a NEW list and does NOT mutate original. Let's verify.
       runScript('''
         var l = [3, 1, 2];

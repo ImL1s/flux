@@ -31,11 +31,11 @@ void main() {
 
     test('manages widget state', () {
       expect(vm.widgetState, isEmpty);
-      
+
       // Simulate state initialization
       vm.widgetState['count'] = 0;
       expect(vm.widgetState['count'], 0);
-      
+
       // Simulate state update
       vm.widgetState['count'] = 5;
       expect(vm.widgetState['count'], 5);
@@ -44,19 +44,19 @@ void main() {
     test('triggers onStateChange callback', () {
       String? changedName;
       Object? changedValue;
-      
+
       vm.onStateChange = (name, value) {
         changedName = name;
         changedValue = value;
       };
-      
+
       vm.widgetState['count'] = 10;
       vm.onStateChange?.call('count', 10);
-      
+
       expect(changedName, 'count');
       expect(changedValue, 10);
     });
-    
+
     test('clears state', () {
       vm.widgetState['a'] = 1;
       vm.widgetState['b'] = 2;
@@ -76,7 +76,7 @@ void main() {
       final result = vm.resumeFromAwait(42);
       expect(result, InterpretResult.runtimeError);
     });
-    
+
     test('pending future is null initially', () {
       final vm = VM();
       expect(vm.pendingFuture, isNull);
@@ -86,7 +86,7 @@ void main() {
   group('VM Execution', () {
     test('executes simple bytecode', () {
       final vm = VM();
-      
+
       // Simple compile and run
       final lexer = Lexer('let x = 42');
       final tokens = lexer.tokenize();
@@ -94,42 +94,42 @@ void main() {
       final ast = parser.parse();
       final compiler = Compiler(unit: ast);
       final result = compiler.endCompiler();
-      
+
       final interpretResult = vm.runChunk(result.chunk);
       expect(interpretResult, InterpretResult.ok);
     });
 
     test('executes print statement', () {
       final vm = VM();
-      
+
       final lexer = Lexer('print("Hello")');
       final tokens = lexer.tokenize();
       final parser = Parser(tokens);
       final ast = parser.parse();
       final compiler = Compiler(unit: ast);
       final result = compiler.endCompiler();
-      
+
       final interpretResult = vm.runChunk(result.chunk);
       expect(interpretResult, InterpretResult.ok);
     });
 
     test('executes arithmetic', () {
       final vm = VM();
-      
+
       final lexer = Lexer('print(2 + 3 * 4)');
       final tokens = lexer.tokenize();
       final parser = Parser(tokens);
       final ast = parser.parse();
       final compiler = Compiler(unit: ast);
       final result = compiler.endCompiler();
-      
+
       final interpretResult = vm.runChunk(result.chunk);
       expect(interpretResult, InterpretResult.ok);
     });
-    
+
     test('executes function call', () {
       final vm = VM();
-      
+
       final source = '''
         fn add(a, b) {
           return a + b;
@@ -142,18 +142,18 @@ void main() {
       final ast = parser.parse();
       final compiler = Compiler(unit: ast);
       final result = compiler.endCompiler();
-      
+
       String? printedValue;
       vm.onPrint = (msg) => printedValue = msg;
-      
+
       final interpretResult = vm.runChunk(result.chunk);
       expect(interpretResult, InterpretResult.ok);
       expect(printedValue, '5');
     });
-    
+
     test('executes if statement', () {
       final vm = VM();
-      
+
       final source = '''
         var x = 10;
         if (x > 5) {
@@ -168,18 +168,18 @@ void main() {
       final ast = parser.parse();
       final compiler = Compiler(unit: ast);
       final result = compiler.endCompiler();
-      
+
       String? printedValue;
       vm.onPrint = (msg) => printedValue = msg;
-      
+
       final interpretResult = vm.runChunk(result.chunk);
       expect(interpretResult, InterpretResult.ok);
       expect(printedValue, 'greater');
     });
-    
+
     test('executes while loop', () {
       final vm = VM();
-      
+
       final source = '''
         var i = 0;
         while (i < 3) {
@@ -193,10 +193,10 @@ void main() {
       final ast = parser.parse();
       final compiler = Compiler(unit: ast);
       final result = compiler.endCompiler();
-      
+
       String? printedValue;
       vm.onPrint = (msg) => printedValue = msg;
-      
+
       final interpretResult = vm.runChunk(result.chunk);
       expect(interpretResult, InterpretResult.ok);
       expect(printedValue, '3');

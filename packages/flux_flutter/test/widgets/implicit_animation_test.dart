@@ -32,7 +32,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
@@ -84,19 +85,20 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
       final finder = find.byKey(const ValueKey<dynamic>("curved"));
-      
+
       await tester.tap(find.text('Go'));
       await tester.pump();
 
       // At 500ms (t=0.5), easeIn should be ~25% (0.5^2 = 0.25)
       await tester.pump(const Duration(milliseconds: 500));
       final earlyWidth = tester.getSize(finder).width;
-      
+
       // easeIn: should be significantly less than linear 50
       expect(earlyWidth, lessThan(40.0));
       expect(earlyWidth, greaterThan(0.0));
@@ -126,19 +128,21 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
       // Should render without error
       expect(find.byType(AnimatedContainer), findsOneWidget);
-      
+
       // Toggle should work (though animation may snap due to no key)
       await tester.tap(find.text('Toggle'));
       await tester.pumpAndSettle();
-      
+
       // Verify it rendered at target size
-      final ac = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
+      final ac =
+          tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
       expect(ac.constraints?.maxWidth, 200.0);
     });
 
@@ -167,7 +171,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
@@ -180,13 +185,14 @@ void main() {
 
       // Check mid-animation color (should be a blend)
       await tester.pump(const Duration(milliseconds: 250));
-      
+
       // Verify animation is happening (widget still in tree)
       expect(finder, findsOneWidget);
 
       // Complete
       await tester.pumpAndSettle();
-      final ac = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
+      final ac =
+          tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
       final decoration = ac.decoration as BoxDecoration?;
       expect(decoration?.color, Colors.red);
     });
@@ -208,12 +214,14 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
       // Should render with default 250ms duration
-      final ac = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
+      final ac =
+          tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
       expect(ac.duration, const Duration(milliseconds: 250));
     });
 
@@ -237,11 +245,13 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
-      final ac = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
+      final ac =
+          tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
       expect(ac.padding, EdgeInsets.all(16.0));
       expect(ac.margin, EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0));
     });
@@ -272,7 +282,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
@@ -292,7 +303,7 @@ void main() {
       ao = tester.widget<AnimatedOpacity>(finder);
       // Opacity config shows target, but actual opacity should be in between
       // Note: AnimatedOpacity target is 1.0, actual rendered is interpolated
-      
+
       // Complete
       await tester.pumpAndSettle();
       ao = tester.widget<AnimatedOpacity>(finder);
@@ -324,7 +335,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
@@ -335,10 +347,9 @@ void main() {
       // With bounceOut, at various points the opacity may exceed 0 or "bounce"
       // Just verify it completes
       await tester.pumpAndSettle();
-      
+
       final ao = tester.widget<AnimatedOpacity>(
-        find.byKey(const ValueKey<dynamic>("bouncy"))
-      );
+          find.byKey(const ValueKey<dynamic>("bouncy")));
       expect(ao.opacity, 0.0);
     });
 
@@ -359,7 +370,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
@@ -402,11 +414,13 @@ void main() {
         ''';
 
         await tester.pumpWidget(MaterialApp(
-          home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+          home: Scaffold(
+              body: FluxWidget(source: source, widgetName: 'TestWidget')),
         ));
         await tester.pump();
 
-        final ac = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
+        final ac =
+            tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
         expect(ac.curve, entry.value);
       });
     }
@@ -429,11 +443,13 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'TestWidget')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'TestWidget')),
       ));
       await tester.pump();
 
-      final ac = tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
+      final ac =
+          tester.widget<AnimatedContainer>(find.byType(AnimatedContainer));
       expect(ac.curve, Curves.linear);
     });
   });

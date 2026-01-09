@@ -59,20 +59,20 @@ void main() {
       expect(logs[0], '10');
       expect(logs[1], '20');
     });
-    
-    test('json error handling', () {
-        // We verify that invalid json causes a runtime error (wrapped by VM)
 
-        // Actually runChunk returns result, doesn't throw.
-        // runScript helper doesn't assert.
-        // Let's rely on VM behavior.
-        
-        final tokens = Lexer('json.parse("bad")').tokenize();
-        final function = Compiler(unit: Parser(tokens).parse()).endCompiler();
-        // Since we didn't patch VM to throw dart exceptions for native errors in previous steps, 
-        // we expect InterpretResult.runtimeError usually, unless stdlib native function throws strings that VM catches.
-        final result = vm.runChunk(function.chunk);
-        expect(result, InterpretResult.runtimeError);
+    test('json error handling', () {
+      // We verify that invalid json causes a runtime error (wrapped by VM)
+
+      // Actually runChunk returns result, doesn't throw.
+      // runScript helper doesn't assert.
+      // Let's rely on VM behavior.
+
+      final tokens = Lexer('json.parse("bad")').tokenize();
+      final function = Compiler(unit: Parser(tokens).parse()).endCompiler();
+      // Since we didn't patch VM to throw dart exceptions for native errors in previous steps,
+      // we expect InterpretResult.runtimeError usually, unless stdlib native function throws strings that VM catches.
+      final result = vm.runChunk(function.chunk);
+      expect(result, InterpretResult.runtimeError);
     });
   });
 }

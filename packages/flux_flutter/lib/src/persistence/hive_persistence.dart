@@ -15,7 +15,7 @@ class HivePersistenceDelegate implements PersistenceDelegate {
   /// Initialize Hive and open the state box.
   Future<void> init() async {
     if (_initialized) return;
-    
+
     if (!kIsWeb) {
       final appDir = await getApplicationDocumentsDirectory();
       final fluxDir = Directory('${appDir.path}/flux_persistence');
@@ -24,7 +24,7 @@ class HivePersistenceDelegate implements PersistenceDelegate {
       }
       Hive.init(fluxDir.path);
     }
-    
+
     _box = await Hive.openBox(_boxName);
     _initialized = true;
     debugPrint('📦 HivePersistenceDelegate initialized at: ${_box?.path}');

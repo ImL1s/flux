@@ -66,9 +66,10 @@ void main() {
         var s = "banana";
         print(replace(s, "nan", "bat"));
       ''');
-      expect(logs[0], 'babata'); // Dart replaceAll? "banana".replaceAll("nan", "bat") -> "a" is left? "ba" + "nan" + "a" -> "ba" + "bat" + "a" = babata. Wait. 
+      expect(logs[0],
+          'babata'); // Dart replaceAll? "banana".replaceAll("nan", "bat") -> "a" is left? "ba" + "nan" + "a" -> "ba" + "bat" + "a" = babata. Wait.
       // "banana" -> "b" "anana" -> "ba" "nana" -> "ban" "ana" ? "nan" matches at index 2.
-      // b a n a n a 
+      // b a n a n a
       // 0 1 2 3 4 5
       //     ^ ^ ^
       // replaceAll replaces all occurrences.
@@ -81,14 +82,15 @@ void main() {
       ''');
       expect(logs[0], 'ell');
     });
-    
+
     test('string conversions', () {
       runScript('''
          print(toInt("42") + 1);
          print(toDouble("3.14") + 0.01);
       ''');
       expect(logs[0], '43');
-      expect(logs[1], '3.15'); // Floating point check might be fuzzy, but exact usage should work for simple cases
+      expect(logs[1],
+          '3.15'); // Floating point check might be fuzzy, but exact usage should work for simple cases
     });
   });
 }

@@ -95,7 +95,7 @@ void main() {
       final ast = parser.parse();
       expect(ast, isA<CompilationUnit>());
     });
-    
+
     test('parses local function declaration', () {
       final source = '''
         fn outer() {
@@ -148,7 +148,7 @@ void main() {
       expect(result.chunk.code, isNotEmpty);
       // Should contain: constant, call, pop, nil, return
     });
-    
+
     test('compiles closure with upvalue', () {
       final source = '''
         fn outer() {
@@ -169,7 +169,7 @@ void main() {
       // Verify closure opcode is in the generated code
       expect(result.chunk.code.contains(OpCode.closure.index), true);
     });
-    
+
     test('compiles nested closures', () {
       final source = '''
         fn outer() {

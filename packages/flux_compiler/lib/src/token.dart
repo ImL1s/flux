@@ -1,5 +1,5 @@
 /// Flux Language - Token definitions
-/// 
+///
 /// This file defines all token types used by the Flux lexer.
 
 /// Token types for the Flux language
@@ -45,7 +45,7 @@ enum TokenType {
   break_,
   continue_,
   props,
-  persistent,  // New: for persistent state
+  persistent, // New: for persistent state
 
   // Operators
   plus, // +
@@ -90,7 +90,7 @@ enum TokenType {
   newline,
   eof,
   error,
-  
+
   // Aliases for compatibility/clarity
   bangEqual, // != (alias for notEqual)
 }
@@ -112,7 +112,8 @@ class Token {
   });
 
   @override
-  String toString() => 'Token($type, "$lexeme", $literal, line: $line, col: $column)';
+  String toString() =>
+      'Token($type, "$lexeme", $literal, line: $line, col: $column)';
 }
 
 /// Keywords map for quick lookup

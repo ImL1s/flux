@@ -1,5 +1,5 @@
 /// Widget Catalog for LSP Completion
-/// 
+///
 /// Provides property information for all supported Flutter widgets
 class WidgetCatalog {
   static final Map<String, List<PropertyInfo>> catalog = {
@@ -16,19 +16,24 @@ class WidgetCatalog {
     ],
     'Column': [
       PropertyInfo('children', 'List<Widget>', 'Child widgets'),
-      PropertyInfo('mainAxisAlignment', 'MainAxisAlignment', 'Vertical alignment'),
-      PropertyInfo('crossAxisAlignment', 'CrossAxisAlignment', 'Horizontal alignment'),
+      PropertyInfo(
+          'mainAxisAlignment', 'MainAxisAlignment', 'Vertical alignment'),
+      PropertyInfo(
+          'crossAxisAlignment', 'CrossAxisAlignment', 'Horizontal alignment'),
       PropertyInfo('mainAxisSize', 'MainAxisSize', 'How much space to occupy'),
     ],
     'Row': [
       PropertyInfo('children', 'List<Widget>', 'Child widgets'),
-      PropertyInfo('mainAxisAlignment', 'MainAxisAlignment', 'Horizontal alignment'),
-      PropertyInfo('crossAxisAlignment', 'CrossAxisAlignment', 'Vertical alignment'),
+      PropertyInfo(
+          'mainAxisAlignment', 'MainAxisAlignment', 'Horizontal alignment'),
+      PropertyInfo(
+          'crossAxisAlignment', 'CrossAxisAlignment', 'Vertical alignment'),
       PropertyInfo('mainAxisSize', 'MainAxisSize', 'How much space to occupy'),
     ],
     'Stack': [
       PropertyInfo('children', 'List<Widget>', 'Child widgets'),
-      PropertyInfo('alignment', 'AlignmentGeometry', 'Non-positioned children alignment'),
+      PropertyInfo('alignment', 'AlignmentGeometry',
+          'Non-positioned children alignment'),
       PropertyInfo('fit', 'StackFit', 'How to size non-positioned children'),
     ],
     'Positioned': [
@@ -58,7 +63,7 @@ class WidgetCatalog {
       PropertyInfo('child', 'Widget', 'The child widget'),
       PropertyInfo('flex', 'int', 'Flex factor'),
     ],
-    
+
     // Text & Input Widgets
     'Text': [
       PropertyInfo('data', 'String', 'The text to display (positional)'),
@@ -76,7 +81,7 @@ class WidgetCatalog {
       PropertyInfo('obscureText', 'bool', 'Hide text (password)'),
       PropertyInfo('maxLines', 'int', 'Maximum lines'),
     ],
-    
+
     // Button Widgets
     'ElevatedButton': [
       PropertyInfo('child', 'Widget', 'Button content'),
@@ -99,7 +104,7 @@ class WidgetCatalog {
       PropertyInfo('iconSize', 'double', 'Icon size'),
       PropertyInfo('color', 'Color', 'Icon color'),
     ],
-    
+
     // List Widgets
     'ListView': [
       PropertyInfo('children', 'List<Widget>', 'Child widgets'),
@@ -114,7 +119,7 @@ class WidgetCatalog {
       PropertyInfo('trailing', 'Widget', 'Trailing widget'),
       PropertyInfo('onTap', 'Function', 'Tap callback'),
     ],
-    
+
     // Scaffold & Navigation
     'Scaffold': [
       PropertyInfo('appBar', 'PreferredSizeWidget', 'Top app bar'),
@@ -129,7 +134,7 @@ class WidgetCatalog {
       PropertyInfo('actions', 'List<Widget>', 'Action widgets'),
       PropertyInfo('backgroundColor', 'Color', 'Background color'),
     ],
-    
+
     // Media & Icons
     'Icon': [
       PropertyInfo('icon', 'IconData', 'Icon data (positional)'),
@@ -142,7 +147,7 @@ class WidgetCatalog {
       PropertyInfo('height', 'double', 'Image height'),
       PropertyInfo('fit', 'BoxFit', 'Image fit'),
     ],
-    
+
     // Card & Decoration
     'Card': [
       PropertyInfo('child', 'Widget', 'Card content'),
@@ -150,7 +155,7 @@ class WidgetCatalog {
       PropertyInfo('color', 'Color', 'Background color'),
       PropertyInfo('margin', 'EdgeInsets', 'Card margin'),
     ],
-    
+
     // Interaction
     'GestureDetector': [
       PropertyInfo('child', 'Widget', 'The child widget'),
@@ -164,12 +169,12 @@ class WidgetCatalog {
       PropertyInfo('splashColor', 'Color', 'Ripple color'),
     ],
   };
-  
+
   /// Get properties for a widget
   static List<PropertyInfo>? getProperties(String widgetName) {
     return catalog[widgetName];
   }
-  
+
   /// Get all widget names
   static List<String> get widgetNames => catalog.keys.toList();
 }
@@ -179,14 +184,14 @@ class PropertyInfo {
   final String name;
   final String type;
   final String description;
-  
+
   const PropertyInfo(this.name, this.type, this.description);
-  
+
   Map<String, dynamic> toCompletionItem() => {
-    'label': name,
-    'kind': 10, // Property
-    'detail': type,
-    'documentation': description,
-    'insertText': '$name: ',
-  };
+        'label': name,
+        'kind': 10, // Property
+        'detail': type,
+        'documentation': description,
+        'insertText': '$name: ',
+      };
 }

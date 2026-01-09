@@ -27,18 +27,19 @@ print(x + y);
 
       // Run flux build command
       final flxPath = '${tempDir.path}/build_test.flx';
-      
+
       // We assume we are running tests from the package root or a standard dart test environment
       // where 'bin/flux.dart' is accessible relative to the package root.
       // If running via `dart test`, current directory is usually the package root.
-      
+
       final result = Process.runSync(
         'dart',
         ['run', 'bin/flux.dart', 'build', sourcePath, '-o', flxPath],
       );
 
       // Check build succeeded
-      expect(result.exitCode, equals(0), reason: 'Build failed: ${result.stderr}\nStdout: ${result.stdout}');
+      expect(result.exitCode, equals(0),
+          reason: 'Build failed: ${result.stderr}\nStdout: ${result.stdout}');
       expect(File(flxPath).existsSync(), isTrue);
 
       // Load and execute to verify content correctness

@@ -38,19 +38,20 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'Dashboard')),
+        home:
+            Scaffold(body: FluxWidget(source: source, widgetName: 'Dashboard')),
       ));
       await tester.pump();
 
       final sidebar = find.byKey(const ValueKey<dynamic>("sidebar"));
-      
+
       // Initially collapsed
       expect(tester.getSize(sidebar).width, 60.0);
 
       // Open sidebar
       await tester.tap(find.text('☰'));
       await tester.pump();
-      
+
       // Mid-animation check
       await tester.pump(const Duration(milliseconds: 150));
       var midWidth = tester.getSize(sidebar).width;
@@ -112,7 +113,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'CardReveal')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'CardReveal')),
       ));
       await tester.pump();
 
@@ -180,7 +182,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'LoadingState')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'LoadingState')),
       ));
       await tester.pump();
 
@@ -254,7 +257,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'FormWizard')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'FormWizard')),
       ));
       await tester.pump();
 
@@ -313,7 +317,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'RapidToggle')),
+        home: Scaffold(
+            body: FluxWidget(source: source, widgetName: 'RapidToggle')),
       ));
       await tester.pump();
 
@@ -324,11 +329,11 @@ void main() {
       await tester.tap(button); // on = true
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
-      
+
       await tester.tap(button); // on = false
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
-      
+
       await tester.tap(button); // on = true
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
@@ -340,7 +345,8 @@ void main() {
       expect(tester.getSize(finder).width, 150.0);
     });
 
-    testWidgets('multiple animated containers render correctly', (tester) async {
+    testWidgets('multiple animated containers render correctly',
+        (tester) async {
       const source = '''
         widget MultiBox {
           state active = 0;
@@ -370,7 +376,8 @@ void main() {
       ''';
 
       await tester.pumpWidget(MaterialApp(
-        home: Scaffold(body: FluxWidget(source: source, widgetName: 'MultiBox')),
+        home:
+            Scaffold(body: FluxWidget(source: source, widgetName: 'MultiBox')),
       ));
       await tester.pump();
 

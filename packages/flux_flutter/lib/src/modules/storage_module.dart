@@ -30,8 +30,8 @@ class StorageModule extends FluxModule {
     register('set', AsyncNativeFunction('storage.set', 2, _set));
     register('remove', AsyncNativeFunction('storage.remove', 1, _remove));
     register('clear', AsyncNativeFunction('storage.clear', 0, _clear));
-    register(
-        'containsKey', AsyncNativeFunction('storage.containsKey', 1, _containsKey));
+    register('containsKey',
+        AsyncNativeFunction('storage.containsKey', 1, _containsKey));
 
     // JSON operations (new)
     register('getJson', AsyncNativeFunction('storage.getJson', 1, _getJson));
@@ -42,8 +42,10 @@ class StorageModule extends FluxModule {
     register('setInt', AsyncNativeFunction('storage.setInt', 2, _setInt));
     register('getBool', AsyncNativeFunction('storage.getBool', 1, _getBool));
     register('setBool', AsyncNativeFunction('storage.setBool', 2, _setBool));
-    register('getDouble', AsyncNativeFunction('storage.getDouble', 1, _getDouble));
-    register('setDouble', AsyncNativeFunction('storage.setDouble', 2, _setDouble));
+    register(
+        'getDouble', AsyncNativeFunction('storage.getDouble', 1, _getDouble));
+    register(
+        'setDouble', AsyncNativeFunction('storage.setDouble', 2, _setDouble));
 
     // List operations (new)
     register('getStringList',

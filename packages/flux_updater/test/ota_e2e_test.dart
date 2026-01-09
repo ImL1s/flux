@@ -52,7 +52,8 @@ void main() {
       final chunkBytes = ChunkSerializer.serialize(func.chunk);
 
       // Upload release
-      final uploadRequest = await client.postUrl(Uri.parse('$serverUrl/releases'));
+      final uploadRequest =
+          await client.postUrl(Uri.parse('$serverUrl/releases'));
       uploadRequest.headers.contentType = ContentType.json;
       uploadRequest.write(jsonEncode({
         'appId': 'com.example.test',
@@ -102,10 +103,12 @@ void main() {
       final v2Chunk = _compileSource(v2Source);
 
       // Upload v1.0.0
-      await _uploadRelease(client, serverUrl, 'patch-test-app', '1.0.0', 1, v1Chunk);
+      await _uploadRelease(
+          client, serverUrl, 'patch-test-app', '1.0.0', 1, v1Chunk);
 
       // Upload v1.1.0
-      await _uploadRelease(client, serverUrl, 'patch-test-app', '1.1.0', 2, v2Chunk);
+      await _uploadRelease(
+          client, serverUrl, 'patch-test-app', '1.1.0', 2, v2Chunk);
 
       // Download patch 1.0.0 -> 1.1.0
       final patchRequest = await client.getUrl(

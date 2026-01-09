@@ -10,7 +10,8 @@ void main() {
       vm = VM();
     });
 
-    void runScript(String source, {InterpretResult expectedResult = InterpretResult.ok}) {
+    void runScript(String source,
+        {InterpretResult expectedResult = InterpretResult.ok}) {
       final tokens = Lexer(source).tokenize();
       final parser = Parser(tokens);
       final ast = parser.parse();
@@ -40,11 +41,11 @@ void main() {
         }
         diverge(0);
       ''';
-      
+
       // We expect a runtime error due to stack overflow
       runScript(source, expectedResult: InterpretResult.runtimeError);
     });
-    
+
     test('Return from deep stack works', () {
       // Test that we can return from a moderately deep stack (e.g. 50, < 64)
       // successfully back to top level.

@@ -106,7 +106,7 @@ class VersionManager {
           version: value['version'],
           buildNumber: value['buildNumber'],
           chunk: Uint8List(0), // Placeholder
-          signature: value['signature'] ?? '', 
+          signature: value['signature'] ?? '',
           createdAt: DateTime.parse(value['createdAt']),
           patchBaseVersion: value['patchBaseVersion'],
           rollbackTo: value['rollbackTo'],

@@ -33,38 +33,38 @@ main();
       debugger.setBreakpoint('eval_test', 3);
       debugger.setBreakpoint('eval_test', 4);
       debugger.setBreakpoint('eval_test', 5);
-      
+
       bool paused = false;
       debugger.addListener((event, context) {
         if (event == DebugEvent.breakpoint) {
           paused = true;
-          
+
           if (context.line == 4) {
-             // 1. Evaluate simple local
-             expect(debugger.evaluate('a'), equals(10));
-             
-             // 2. Evaluate another local
-             expect(debugger.evaluate('b'), equals(20));
-             
-             // 3. Evaluate expression
-             expect(debugger.evaluate('a + b'), equals(30));
-             
-             // 4. Evaluate expression with literals
-             expect(debugger.evaluate('a * 2'), equals(20));
+            // 1. Evaluate simple local
+            expect(debugger.evaluate('a'), equals(10));
+
+            // 2. Evaluate another local
+            expect(debugger.evaluate('b'), equals(20));
+
+            // 3. Evaluate expression
+            expect(debugger.evaluate('a + b'), equals(30));
+
+            // 4. Evaluate expression with literals
+            expect(debugger.evaluate('a * 2'), equals(20));
           }
         }
       });
-      
+
       vm.executeClosure(ObjClosure(function, []));
-      
+
       // Pump loop
       while (debugger.isPaused) {
-         debugger.continue_();
+        debugger.continue_();
       }
-      
+
       expect(paused, isTrue);
     });
-    
+
     test('evaluates expressions with function parameters', () {
       final source = """
 fn add(x, y) {
@@ -92,21 +92,21 @@ add(5, 7);
       debugger.addListener((event, context) {
         if (event == DebugEvent.breakpoint) {
           paused = true;
-          
+
           expect(debugger.evaluate('x'), equals(5));
           expect(debugger.evaluate('y'), equals(7));
           expect(debugger.evaluate('x + y'), equals(12));
-          
+
           debugger.continue_();
         }
       });
 
       vm.executeClosure(ObjClosure(function, []));
-      
+
       while (debugger.isPaused) {
-         debugger.continue_();
+        debugger.continue_();
       }
-      
+
       expect(paused, isTrue);
     });
   });

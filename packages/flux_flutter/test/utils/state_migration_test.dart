@@ -205,7 +205,10 @@ void main() {
 
       migration.register(3, () async {
         // v3: Restructure data
-        currentData = {'data': currentData, 'timestamp': DateTime.now().millisecondsSinceEpoch};
+        currentData = {
+          'data': currentData,
+          'timestamp': DateTime.now().millisecondsSinceEpoch
+        };
       });
 
       await migration.runMigrations(3);

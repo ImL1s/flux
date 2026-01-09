@@ -165,7 +165,8 @@ class ChunkSerializer {
     }
   }
 
-  static void _writeCompiledFunction(BytesBuilder buffer, CompiledFunction func) {
+  static void _writeCompiledFunction(
+      BytesBuilder buffer, CompiledFunction func) {
     // Name
     final nameBytes = utf8.encode(func.name);
     _writeInt32(buffer, nameBytes.length);
@@ -424,7 +425,6 @@ class ChunkSerializer {
       superclass: superclass,
     );
   }
-
 }
 
 /// Helper class to read bytes sequentially.

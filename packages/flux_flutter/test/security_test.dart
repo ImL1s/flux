@@ -115,17 +115,17 @@ void main() {
         () => FluxSignatureVerifier('not-valid-base64!@#'),
         throwsA(isA<ArgumentError>()),
       );
-      
+
       // Should work with valid base64 public key
       expect(
         () => FluxSignatureVerifier(testPublicKey),
         returnsNormally,
       );
     });
-    
+
     test('rejects signature with wrong length', () {
       final verifier = FluxSignatureVerifier(testPublicKey);
-      
+
       // Create package with invalid signature length (10 bytes instead of 64)
       final shortSig = base64Encode(List.generate(10, (i) => i));
       final package = FluxScriptPackage.fromJson({
@@ -133,19 +133,19 @@ void main() {
         'content': 'test',
         'signature': shortSig,
       });
-      
+
       expect(verifier.verify(package), isFalse);
     });
-    
+
     test('accepts valid signature format', () {
       final verifier = FluxSignatureVerifier(testPublicKey);
-      
+
       final package = FluxScriptPackage.fromJson({
         'version': '1.0.0',
         'content': 'test',
         'signature': testSignature,
       });
-      
+
       // Should pass format validation (64 byte signature)
       expect(verifier.verify(package), isTrue);
     });

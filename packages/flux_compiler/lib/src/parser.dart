@@ -1,5 +1,5 @@
 /// Flux Language - Parser
-/// 
+///
 /// Converts a stream of tokens into an Abstract Syntax Tree (AST).
 
 import 'token.dart';
@@ -34,7 +34,7 @@ class Parser {
         statements.add(_declaration());
       } catch (e) {
         if (e is ParseError) {
-            errors.add(e);
+          errors.add(e);
         }
         // print('DEBUG PARSER: Error during parse: $e');
         // print(stack);
@@ -67,7 +67,9 @@ class Parser {
 
   Statement _declaration() {
     if (_match(TokenType.fn)) {
-      if (_check(TokenType.identifier) && _current + 1 < _tokens.length && _tokens[_current + 1].type == TokenType.identifier) {
+      if (_check(TokenType.identifier) &&
+          _current + 1 < _tokens.length &&
+          _tokens[_current + 1].type == TokenType.identifier) {
         return _functionDeclaration(false);
       }
       return _functionDeclaration(false);
@@ -79,8 +81,9 @@ class Parser {
     if (_match(TokenType.widget)) return _widgetDeclaration();
     if (_match(TokenType.class_)) return _classDeclaration();
     if (_match(TokenType.import_)) return _importDeclaration();
-    if (_match(TokenType.var_) || _match(TokenType.let_)) return _varDeclaration();
-    
+    if (_match(TokenType.var_) || _match(TokenType.let_))
+      return _varDeclaration();
+
     return _statement();
   }
 
@@ -88,7 +91,7 @@ class Parser {
     final fnToken = _previous;
     final nameToken = _consume(TokenType.identifier, 'Expect function name.');
     final name = nameToken.lexeme;
-    
+
     _consume(TokenType.leftParen, 'Expect "(" after function name.');
     final parameters = <Parameter>[];
     if (!_check(TokenType.rightParen)) {
@@ -96,13 +99,15 @@ class Parser {
         if (parameters.length >= 255) {
           _error(_peek, 'Can\'t have more than 255 parameters.');
         }
-        
-        final paramToken = _consume(TokenType.identifier, 'Expect parameter name.');
+
+        final paramToken =
+            _consume(TokenType.identifier, 'Expect parameter name.');
         final paramName = paramToken.lexeme;
         String? type;
         if (_match(TokenType.colon)) {
-           // Simple type parsing for now (just identifiers)
-           type = _consume(TokenType.identifier, 'Expect parameter type.').lexeme;
+          // Simple type parsing for now (just identifiers)
+          type =
+              _consume(TokenType.identifier, 'Expect parameter type.').lexeme;
         }
 
         Expression? defaultValue;
@@ -110,22 +115,30 @@ class Parser {
           defaultValue = _expression();
         }
 
-        parameters.add(Parameter(paramName, line: paramToken.line, column: paramToken.column, type: type, defaultValue: defaultValue));
+        parameters.add(Parameter(paramName,
+            line: paramToken.line,
+            column: paramToken.column,
+            type: type,
+            defaultValue: defaultValue));
       } while (_match(TokenType.comma));
     }
     _consume(TokenType.rightParen, 'Expect ")" after parameters.');
 
     String? returnType;
     if (_match(TokenType.arrow)) {
-       returnType = _consume(TokenType.identifier, 'Expect return type.').lexeme;
+      returnType = _consume(TokenType.identifier, 'Expect return type.').lexeme;
     }
 
     _consume(TokenType.leftBrace, 'Expect "{" before function body.');
     final body = _block();
 
-    return FunctionDecl(name, parameters, body, 
-        nameLine: nameToken.line, nameColumn: nameToken.column,
-        returnType: returnType, isAsync: isAsync, line: fnToken.line, column: fnToken.column);
+    return FunctionDecl(name, parameters, body,
+        nameLine: nameToken.line,
+        nameColumn: nameToken.column,
+        returnType: returnType,
+        isAsync: isAsync,
+        line: fnToken.line,
+        column: fnToken.column);
   }
 
   WidgetDecl _widgetDeclaration() {
@@ -148,9 +161,10 @@ class Parser {
           continue;
         }
       }
-      
+
       if (_match(TokenType.state)) {
-        final fieldToken = _consume(TokenType.identifier, 'Expect state variable name.');
+        final fieldToken =
+            _consume(TokenType.identifier, 'Expect state variable name.');
         final fieldName = fieldToken.lexeme;
         // print('DEBUG PARSER: Found state field: $fieldName${isPersistent ? ' (persistent)' : ''}'); // DEBUG
         String? type;
@@ -159,25 +173,34 @@ class Parser {
         }
         _consume(TokenType.equal, 'State fields must be initialized.');
         final initializer = _expression();
-        _match(TokenType.semicolon); 
-        stateFields.add(StateField(fieldName, initializer, 
-            line: fieldToken.line, column: fieldToken.column, type: type, isPersistent: isPersistent));
+        _match(TokenType.semicolon);
+        stateFields.add(StateField(fieldName, initializer,
+            line: fieldToken.line,
+            column: fieldToken.column,
+            type: type,
+            isPersistent: isPersistent));
       } else if (_match(TokenType.props)) {
         do {
-          final propToken = _consume(TokenType.identifier, 'Expect property name.');
+          final propToken =
+              _consume(TokenType.identifier, 'Expect property name.');
           final propName = propToken.lexeme;
           String? type;
           if (_match(TokenType.colon)) {
-            type = _consume(TokenType.identifier, 'Expect property type.').lexeme;
+            type =
+                _consume(TokenType.identifier, 'Expect property type.').lexeme;
           }
-          props.add(Parameter(propName, line: propToken.line, column: propToken.column, type: type, isRequired: true));
+          props.add(Parameter(propName,
+              line: propToken.line,
+              column: propToken.column,
+              type: type,
+              isRequired: true));
         } while (_match(TokenType.comma));
         _consume(TokenType.semicolon, 'Expect ";" after properties.');
       } else if (_match(TokenType.build)) {
         _consume(TokenType.leftBrace, 'Expect "{" after "build".');
         final body = _expression();
         _consume(TokenType.rightBrace, 'Expect "}" after build body.');
-        
+
         if (buildBlock != null) {
           _error(_previous, 'Widget can only have one build block.');
         }
@@ -185,7 +208,8 @@ class Parser {
       } else if (_match(TokenType.semicolon)) {
         // Ignore stray semicolons
       } else {
-        throw _error(_peek, 'Unexpected token in widget declaration: ${_peek.lexeme}');
+        throw _error(
+            _peek, 'Unexpected token in widget declaration: ${_peek.lexeme}');
       }
     }
     _consume(TokenType.rightBrace, 'Expect "}" after widget body.');
@@ -194,19 +218,22 @@ class Parser {
       throw _error(_previous, 'Widget must have a build block.');
     }
 
-    return WidgetDecl(name, props, stateFields, buildBlock, 
-        nameLine: nameToken.line, nameColumn: nameToken.column,
-        line: widgetToken.line, column: widgetToken.column);
+    return WidgetDecl(name, props, stateFields, buildBlock,
+        nameLine: nameToken.line,
+        nameColumn: nameToken.column,
+        line: widgetToken.line,
+        column: widgetToken.column);
   }
 
   ClassDecl _classDeclaration() {
     final classToken = _previous;
     final nameToken = _consume(TokenType.identifier, 'Expect class name.');
     final name = nameToken.lexeme;
-    
+
     String? superclass;
     if (_match(TokenType.extends_)) {
-      superclass = _consume(TokenType.identifier, 'Expect superclass name.').lexeme;
+      superclass =
+          _consume(TokenType.identifier, 'Expect superclass name.').lexeme;
     }
 
     // implements ...
@@ -214,33 +241,38 @@ class Parser {
     _consume(TokenType.leftBrace, 'Expect "{" before class body.');
     final members = <Declaration>[];
     final fields = <FieldDecl>[];
-    
+
     while (!_check(TokenType.rightBrace) && !_isAtEnd) {
       // Parse methods, fields
       if (_match(TokenType.fn)) {
-         members.add(_functionDeclaration(false)); // Methods look like functions
+        members.add(_functionDeclaration(false)); // Methods look like functions
       } else if (_match(TokenType.async_)) {
-         _consume(TokenType.fn, 'Expect "fn" after "async".');
-         members.add(_functionDeclaration(true));
+        _consume(TokenType.fn, 'Expect "fn" after "async".');
+        members.add(_functionDeclaration(true));
       } else if (_match(TokenType.var_)) {
-         // Field declaration: var x [= val];
-         final nameToken = _consume(TokenType.identifier, 'Expect field name.');
-         Expression? initializer;
-         if (_match(TokenType.equal)) {
-           initializer = _expression();
-         }
-         _consume(TokenType.semicolon, 'Expect ";" after field declaration.');
-         fields.add(FieldDecl(nameToken.lexeme, initializer, line: nameToken.line, column: nameToken.column));
+        // Field declaration: var x [= val];
+        final nameToken = _consume(TokenType.identifier, 'Expect field name.');
+        Expression? initializer;
+        if (_match(TokenType.equal)) {
+          initializer = _expression();
+        }
+        _consume(TokenType.semicolon, 'Expect ";" after field declaration.');
+        fields.add(FieldDecl(nameToken.lexeme, initializer,
+            line: nameToken.line, column: nameToken.column));
       } else {
-         // For now, only methods and fields.
-         _advance();
+        // For now, only methods and fields.
+        _advance();
       }
     }
     _consume(TokenType.rightBrace, 'Expect "}" after class body.');
 
-    return ClassDecl(name, members, 
-        nameLine: nameToken.line, nameColumn: nameToken.column,
-        superclass: superclass, fields: fields, line: classToken.line, column: classToken.column);
+    return ClassDecl(name, members,
+        nameLine: nameToken.line,
+        nameColumn: nameToken.column,
+        superclass: superclass,
+        fields: fields,
+        line: classToken.line,
+        column: classToken.column);
   }
 
   ImportDecl _importDeclaration() {
@@ -266,45 +298,49 @@ class Parser {
       _consume(TokenType.fn, 'Expect "fn" after "async".');
       return _functionDeclaration(true);
     }
-    if (_match(TokenType.var_) || _match(TokenType.let_)) return _varDeclaration();
+    if (_match(TokenType.var_) || _match(TokenType.let_))
+      return _varDeclaration();
     if (_match(TokenType.try_)) return _tryStatement();
     if (_match(TokenType.throw_)) return _throwStatement();
 
     return _expressionStatement();
   }
-  
+
   Statement _tryStatement() {
     final line = _previous.line;
     final column = _previous.column;
-    
+
     // Parse try block
     _consume(TokenType.leftBrace, 'Expect "{" after "try".');
     final tryBlock = _block();
-    
+
     // Parse optional catch block
     String? catchVariable;
     Statement? catchBlock;
     if (_match(TokenType.catch_)) {
       _consume(TokenType.leftParen, 'Expect "(" after "catch".');
-      catchVariable = _consume(TokenType.identifier, 'Expect exception variable name.').lexeme;
+      catchVariable =
+          _consume(TokenType.identifier, 'Expect exception variable name.')
+              .lexeme;
       _consume(TokenType.rightParen, 'Expect ")" after exception variable.');
       _consume(TokenType.leftBrace, 'Expect "{" after catch clause.');
       catchBlock = _block();
     }
-    
+
     // Parse optional finally block
     Statement? finallyBlock;
     if (_match(TokenType.finally_)) {
       _consume(TokenType.leftBrace, 'Expect "{" after "finally".');
       finallyBlock = _block();
     }
-    
+
     // Must have at least catch or finally
     if (catchBlock == null && finallyBlock == null) {
       throw _error(_peek, 'Try statement must have catch or finally block.');
     }
-    
-    return TryStmt(tryBlock,
+
+    return TryStmt(
+      tryBlock,
       catchVariable: catchVariable,
       catchBlock: catchBlock,
       finallyBlock: finallyBlock,
@@ -312,7 +348,7 @@ class Parser {
       column: column,
     );
   }
-  
+
   Statement _throwStatement() {
     final keyword = _previous;
     final value = _expression();
@@ -340,7 +376,8 @@ class Parser {
       elseBranch = _statement();
     }
 
-    return IfStmt(condition, thenBranch, elseBranch, line: _peek.line, column: _peek.column);
+    return IfStmt(condition, thenBranch, elseBranch,
+        line: _peek.line, column: _peek.column);
   }
 
   Statement _whileStatement() {
@@ -381,7 +418,8 @@ class Parser {
 
     Statement body = _statement();
 
-    return ForStmt(initializer, condition, increment, body, line: _peek.line, column: _peek.column);
+    return ForStmt(initializer, condition, increment, body,
+        line: _peek.line, column: _peek.column);
   }
 
   Statement _returnStatement() {
@@ -397,10 +435,10 @@ class Parser {
   Statement _varDeclaration() {
     final keyword = _previous;
     final isMutable = keyword.type == TokenType.var_;
-    
+
     final nameToken = _consume(TokenType.identifier, 'Expect variable name.');
     final name = nameToken.lexeme;
-    
+
     String? type;
     if (_match(TokenType.colon)) {
       type = _consume(TokenType.identifier, 'Expect variable type.').lexeme;
@@ -412,9 +450,14 @@ class Parser {
     }
 
     _match(TokenType.semicolon); // Optional semicolon
-    return VarDeclStmt(name, 
-        nameLine: nameToken.line, nameColumn: nameToken.column,
-        type: type, initializer: initializer, isMutable: isMutable, line: keyword.line, column: keyword.column);
+    return VarDeclStmt(name,
+        nameLine: nameToken.line,
+        nameColumn: nameToken.column,
+        type: type,
+        initializer: initializer,
+        isMutable: isMutable,
+        line: keyword.line,
+        column: keyword.column);
   }
 
   Statement _expressionStatement() {
@@ -439,16 +482,25 @@ class Parser {
       final value = _assignment();
 
       if (expr is VariableExpr) {
-        return AssignExpr(expr.name, value, nameLine: expr.line, nameColumn: expr.column, line: equals.line, column: equals.column);
+        return AssignExpr(expr.name, value,
+            nameLine: expr.line,
+            nameColumn: expr.column,
+            line: equals.line,
+            column: equals.column);
       } else if (expr is GetExpr) {
-        return SetExpr(expr.object, expr.name, value, nameLine: expr.line, nameColumn: expr.column, line: equals.line, column: equals.column);
+        return SetExpr(expr.object, expr.name, value,
+            nameLine: expr.line,
+            nameColumn: expr.column,
+            line: equals.line,
+            column: equals.column);
       } else if (expr is IndexExpr) {
-        return IndexAssignExpr(expr.object, expr.index, value, line: equals.line, column: equals.column);
+        return IndexAssignExpr(expr.object, expr.index, value,
+            line: equals.line, column: equals.column);
       }
 
       throw _error(equals, 'Invalid assignment target.');
     }
-    
+
     // +=, -= ...
 
     return expr;
@@ -459,7 +511,8 @@ class Parser {
     while (_match(TokenType.or)) {
       final operator = _previous;
       final right = _and();
-      expr = BinaryExpr(expr, operator, right, line: operator.line, column: operator.column);
+      expr = BinaryExpr(expr, operator, right,
+          line: operator.line, column: operator.column);
     }
     return expr;
   }
@@ -469,7 +522,8 @@ class Parser {
     while (_match(TokenType.and)) {
       final operator = _previous;
       final right = _equality();
-      expr = BinaryExpr(expr, operator, right, line: operator.line, column: operator.column);
+      expr = BinaryExpr(expr, operator, right,
+          line: operator.line, column: operator.column);
     }
     return expr;
   }
@@ -479,18 +533,22 @@ class Parser {
     while (_match(TokenType.equalEqual) || _match(TokenType.notEqual)) {
       final operator = _previous;
       final right = _comparison();
-      expr = BinaryExpr(expr, operator, right, line: operator.line, column: operator.column);
+      expr = BinaryExpr(expr, operator, right,
+          line: operator.line, column: operator.column);
     }
     return expr;
   }
 
   Expression _comparison() {
     var expr = _term();
-    while (_match(TokenType.greater) || _match(TokenType.greaterEqual) ||
-           _match(TokenType.less) || _match(TokenType.lessEqual)) {
+    while (_match(TokenType.greater) ||
+        _match(TokenType.greaterEqual) ||
+        _match(TokenType.less) ||
+        _match(TokenType.lessEqual)) {
       final operator = _previous;
       final right = _term();
-      expr = BinaryExpr(expr, operator, right, line: operator.line, column: operator.column);
+      expr = BinaryExpr(expr, operator, right,
+          line: operator.line, column: operator.column);
     }
     return expr;
   }
@@ -500,17 +558,21 @@ class Parser {
     while (_match(TokenType.minus) || _match(TokenType.plus)) {
       final operator = _previous;
       final right = _factor();
-      expr = BinaryExpr(expr, operator, right, line: operator.line, column: operator.column);
+      expr = BinaryExpr(expr, operator, right,
+          line: operator.line, column: operator.column);
     }
     return expr;
   }
 
   Expression _factor() {
     var expr = _unary();
-    while (_match(TokenType.slash) || _match(TokenType.star) || _match(TokenType.percent)) {
+    while (_match(TokenType.slash) ||
+        _match(TokenType.star) ||
+        _match(TokenType.percent)) {
       final operator = _previous;
       final right = _unary();
-      expr = BinaryExpr(expr, operator, right, line: operator.line, column: operator.column);
+      expr = BinaryExpr(expr, operator, right,
+          line: operator.line, column: operator.column);
     }
     return expr;
   }
@@ -519,11 +581,12 @@ class Parser {
     if (_match(TokenType.not) || _match(TokenType.minus)) {
       final operator = _previous;
       final right = _unary();
-      return UnaryExpr(operator, right, line: operator.line, column: operator.column);
+      return UnaryExpr(operator, right,
+          line: operator.line, column: operator.column);
     }
     return _await();
   }
-  
+
   Expression _await() {
     if (_match(TokenType.await_)) {
       final keyword = _previous;
@@ -540,27 +603,34 @@ class Parser {
       if (_match(TokenType.leftParen)) {
         expr = _finishCall(expr);
       } else if (_match(TokenType.dot)) {
-        final name = _consume(TokenType.identifier, 'Expect property name after ".".');
+        final name =
+            _consume(TokenType.identifier, 'Expect property name after ".".');
         expr = GetExpr(expr, name.lexeme, line: name.line, column: name.column);
       } else if (_match(TokenType.leftBrace)) {
-         // DSL syntax: Column { ... } => CallExpr(Column, [child1, child2])
-         final brace = _previous;
-         final statements = <Statement>[];
-         while (!_check(TokenType.rightBrace) && !_isAtEnd) {
-           statements.add(_statement());
-         }
-          _consume(TokenType.rightBrace, 'Expect "}" after widget block.');
-          
-          final block = BlockStmt(statements, line: brace.line, column: brace.column);
-          final lambda = LambdaExpr([], block, line: brace.line, column: brace.column);
-          
-          expr = CallExpr(expr, [], namedArguments: {'_children': lambda}, line: brace.line, column: brace.column);
+        // DSL syntax: Column { ... } => CallExpr(Column, [child1, child2])
+        final brace = _previous;
+        final statements = <Statement>[];
+        while (!_check(TokenType.rightBrace) && !_isAtEnd) {
+          statements.add(_statement());
+        }
+        _consume(TokenType.rightBrace, 'Expect "}" after widget block.');
+
+        final block =
+            BlockStmt(statements, line: brace.line, column: brace.column);
+        final lambda =
+            LambdaExpr([], block, line: brace.line, column: brace.column);
+
+        expr = CallExpr(expr, [],
+            namedArguments: {'_children': lambda},
+            line: brace.line,
+            column: brace.column);
       } else if (_match(TokenType.leftBracket)) {
         // Index access: list[0], map["key"]
         final bracket = _previous;
         final index = _expression();
         _consume(TokenType.rightBracket, 'Expect "]" after index.');
-        expr = IndexExpr(expr, index, line: bracket.line, column: bracket.column);
+        expr =
+            IndexExpr(expr, index, line: bracket.line, column: bracket.column);
       } else {
         break;
       }
@@ -575,8 +645,10 @@ class Parser {
 
     if (!_check(TokenType.rightParen)) {
       do {
-        if (_peek.type == TokenType.identifier && _peekNext.type == TokenType.colon) {
-          final name = _consume(TokenType.identifier, 'Expect named argument name.');
+        if (_peek.type == TokenType.identifier &&
+            _peekNext.type == TokenType.colon) {
+          final name =
+              _consume(TokenType.identifier, 'Expect named argument name.');
           _consume(TokenType.colon, 'Expect ":" after named argument name.');
           namedArguments[name.lexeme] = _expression();
         } else {
@@ -591,19 +663,23 @@ class Parser {
 
     // Trailing lambda or widget block syntax
     if (_match(TokenType.leftBrace)) {
-        final brace = _previous;
-        final statements = <Statement>[];
-        while (!_check(TokenType.rightBrace) && !_isAtEnd) {
-          statements.add(_statement());
-        }
-        _consume(TokenType.rightBrace, 'Expect "}" after widget block.');
-        
-        // Wrap children in a LambdaExpr and pass as a special named argument
-        namedArguments["_children"] = LambdaExpr([], BlockStmt(statements, line: brace.line, column: brace.column), 
-            line: brace.line, column: brace.column);
+      final brace = _previous;
+      final statements = <Statement>[];
+      while (!_check(TokenType.rightBrace) && !_isAtEnd) {
+        statements.add(_statement());
+      }
+      _consume(TokenType.rightBrace, 'Expect "}" after widget block.');
+
+      // Wrap children in a LambdaExpr and pass as a special named argument
+      namedArguments["_children"] = LambdaExpr(
+          [], BlockStmt(statements, line: brace.line, column: brace.column),
+          line: brace.line, column: brace.column);
     }
 
-    return CallExpr(callee, arguments, namedArguments: namedArguments, line: callee.line, column: callee.column);
+    return CallExpr(callee, arguments,
+        namedArguments: namedArguments,
+        line: callee.line,
+        column: callee.column);
   }
 
   Token get _peekNext {
@@ -612,17 +688,27 @@ class Parser {
   }
 
   Expression _primary() {
-    if (_match(TokenType.false_)) return LiteralExpr(false, line: _previous.line, column: _previous.column);
-    if (_match(TokenType.true_)) return LiteralExpr(true, line: _previous.line, column: _previous.column);
-    if (_match(TokenType.null_)) return LiteralExpr(null, line: _previous.line, column: _previous.column);
+    if (_match(TokenType.false_))
+      return LiteralExpr(false, line: _previous.line, column: _previous.column);
+    if (_match(TokenType.true_))
+      return LiteralExpr(true, line: _previous.line, column: _previous.column);
+    if (_match(TokenType.null_))
+      return LiteralExpr(null, line: _previous.line, column: _previous.column);
 
-    if (_match(TokenType.integer)) return LiteralExpr(_previous.literal, line: _previous.line, column: _previous.column);
-    if (_match(TokenType.double_)) return LiteralExpr(_previous.literal, line: _previous.line, column: _previous.column);
-    if (_match(TokenType.string)) return LiteralExpr(_previous.literal, line: _previous.line, column: _previous.column);
+    if (_match(TokenType.integer))
+      return LiteralExpr(_previous.literal,
+          line: _previous.line, column: _previous.column);
+    if (_match(TokenType.double_))
+      return LiteralExpr(_previous.literal,
+          line: _previous.line, column: _previous.column);
+    if (_match(TokenType.string))
+      return LiteralExpr(_previous.literal,
+          line: _previous.line, column: _previous.column);
     if (_match(TokenType.interpolationStart)) return _finishInterpolation();
 
     if (_match(TokenType.identifier)) {
-      return VariableExpr(_previous.lexeme, line: _previous.line, column: _previous.column);
+      return VariableExpr(_previous.lexeme,
+          line: _previous.line, column: _previous.column);
     }
 
     if (_match(TokenType.leftParen)) {
@@ -639,7 +725,8 @@ class Parser {
           elements.add(_expression());
         } while (_match(TokenType.comma));
       }
-      final end = _consume(TokenType.rightBracket, 'Expect "]" after list elements.');
+      final end =
+          _consume(TokenType.rightBracket, 'Expect "]" after list elements.');
       return ListExpr(elements, line: end.line, column: end.column);
     }
 
@@ -654,15 +741,16 @@ class Parser {
           entries.add(MapEntry(key, value));
         } while (_match(TokenType.comma));
       }
-      final end = _consume(TokenType.rightBrace, 'Expect "}" after map entries.');
+      final end =
+          _consume(TokenType.rightBrace, 'Expect "}" after map entries.');
       return MapExpr(entries, line: end.line, column: end.column);
     }
-    
+
     // Anonymous lambda: fn() { ... } or fn(a, b) { ... }
     if (_match(TokenType.fn)) {
       return _lambdaExpression(isAsync: false);
     }
-    
+
     if (_match(TokenType.this_)) {
       return ThisExpr(line: _previous.line, column: _previous.column);
     }
@@ -671,11 +759,14 @@ class Parser {
       final keyword = _previous;
       String? method;
       if (_match(TokenType.dot)) {
-        method = _consume(TokenType.identifier, 'Expect superclass method name.').lexeme;
+        method =
+            _consume(TokenType.identifier, 'Expect superclass method name.')
+                .lexeme;
       }
-      return SuperExpr(method: method, line: keyword.line, column: keyword.column);
+      return SuperExpr(
+          method: method, line: keyword.line, column: keyword.column);
     }
-    
+
     // Async anonymous lambda: async fn() { ... }
     if (_match(TokenType.async_)) {
       _consume(TokenType.fn, 'Expect "fn" after "async".');
@@ -684,11 +775,11 @@ class Parser {
 
     throw _error(_peek, 'Expect expression.');
   }
-  
+
   /// Parse anonymous lambda: fn(params) { body }
   Expression _lambdaExpression({required bool isAsync}) {
     final fnToken = _previous;
-    
+
     // Parse parameters
     _consume(TokenType.leftParen, 'Expect "(" after "fn".');
     final parameters = <Parameter>[];
@@ -697,38 +788,42 @@ class Parser {
         if (parameters.length >= 255) {
           _error(_peek, 'Can\'t have more than 255 parameters.');
         }
-        
-        final paramToken = _consume(TokenType.identifier, 'Expect parameter name.');
+
+        final paramToken =
+            _consume(TokenType.identifier, 'Expect parameter name.');
         final paramName = paramToken.lexeme;
         String? type;
         if (_match(TokenType.colon)) {
-          type = _consume(TokenType.identifier, 'Expect parameter type.').lexeme;
+          type =
+              _consume(TokenType.identifier, 'Expect parameter type.').lexeme;
         }
-        
-        parameters.add(Parameter(paramName, line: paramToken.line, column: paramToken.column, type: type));
+
+        parameters.add(Parameter(paramName,
+            line: paramToken.line, column: paramToken.column, type: type));
       } while (_match(TokenType.comma));
     }
     _consume(TokenType.rightParen, 'Expect ")" after parameters.');
-    
+
     // Parse body
     _consume(TokenType.leftBrace, 'Expect "{" before lambda body.');
     final body = _block();
-    
-    return LambdaExpr(parameters, body, isAsync: isAsync, line: fnToken.line, column: fnToken.column);
+
+    return LambdaExpr(parameters, body,
+        isAsync: isAsync, line: fnToken.line, column: fnToken.column);
   }
-  
+
   Expression _finishInterpolation() {
-      // already consumed ${
-      // parse expression
-      final expr = _expression();
-      _consume(TokenType.rightBrace, 'Expect "}" after interpolation.');
-      // This logic is simplified. Real String interpolation is complex in Lexer.
-      // Our Lexer produces: STRING("Hello "), INTERPOLATION_START, ...
-      // Parsing this requires the parser to know it's inside a string.
-      // But for this simple implementation, let's assume standard handling.
-      // Actually, AST for InterpolationExpr expects list of parts.
-      // But _primary returns single Expression.
-      return expr; 
+    // already consumed ${
+    // parse expression
+    final expr = _expression();
+    _consume(TokenType.rightBrace, 'Expect "}" after interpolation.');
+    // This logic is simplified. Real String interpolation is complex in Lexer.
+    // Our Lexer produces: STRING("Hello "), INTERPOLATION_START, ...
+    // Parsing this requires the parser to know it's inside a string.
+    // But for this simple implementation, let's assume standard handling.
+    // Actually, AST for InterpolationExpr expects list of parts.
+    // But _primary returns single Expression.
+    return expr;
   }
 
   // ==========================================================================
@@ -773,22 +868,22 @@ class Parser {
   void _synchronize() {
     // If the current token is a statement starter, we don't need to skip it.
     // However, if we just errored, we might need to discard SOMETHING.
-    // But if the error was "missing semicolon" and we are at "var", 
+    // But if the error was "missing semicolon" and we are at "var",
     // we logically just finished the previous statement.
-    
+
     // Check if we are already at a detailed sync point
     switch (_peek.type) {
-        case TokenType.class_:
-        case TokenType.fn:
-        case TokenType.var_:
-        case TokenType.for_:
-        case TokenType.if_:
-        case TokenType.while_:
-        case TokenType.return_:
-        case TokenType.widget:
-        case TokenType.import_:
-          return;
-        default:
+      case TokenType.class_:
+      case TokenType.fn:
+      case TokenType.var_:
+      case TokenType.for_:
+      case TokenType.if_:
+      case TokenType.while_:
+      case TokenType.return_:
+      case TokenType.widget:
+      case TokenType.import_:
+        return;
+      default:
     }
 
     _advance();

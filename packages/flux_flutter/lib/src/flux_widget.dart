@@ -7,7 +7,6 @@ import 'modules/flux_native_modules.dart';
 import 'persistence/hive_persistence.dart';
 import 'modules/animation_module.dart';
 
-
 /// A Flutter widget that executes and renders a Flux widget definition.
 ///
 /// Example usage:
@@ -260,10 +259,10 @@ class FluxRuntime {
   final List<List<FluxWidgetNode>> _childrenStack = [];
 
   Future<void>? _initializationFuture;
-  
+
   /// Wait for the runtime to finish initializing (including persistent state)
   dynamic ensureInitialized() {
-     return _initializationFuture;
+    return _initializationFuture;
   }
 
   FluxRuntime(String source,
@@ -378,7 +377,8 @@ class FluxRuntime {
     _vm.widgetState.clear();
 
     // 4. Update widget definitions and run initializers for the new version
-    _widgets.clear(); // Clear cache to ensure we only have what's in the new chunk
+    _widgets
+        .clear(); // Clear cache to ensure we only have what's in the new chunk
     int widgetCount = 0;
     for (final entry in _vm.globals.entries) {
       if (entry.value is CompiledWidget) {
@@ -395,7 +395,8 @@ class FluxRuntime {
     // 5. Restore old state (overwrite defaults with preserved values)
     _vm.widgetState.addAll(oldState);
 
-    debugPrint('✅ Hot Reload Complete. Defined $widgetCount widgets: ${_widgets.keys.join(", ")}');
+    debugPrint(
+        '✅ Hot Reload Complete. Defined $widgetCount widgets: ${_widgets.keys.join(", ")}');
 
     // Notify listeners to force update
     _vm.onStateChange?.call('*', null);
@@ -420,7 +421,6 @@ class FluxRuntime {
       }
     }
   }
-
 
   /// Handle coroutine resume callback from VM
   ///
@@ -480,10 +480,10 @@ class FluxRuntime {
     }
 
     FluxWidgetNode? builtNode;
-    
+
     // Push a new children collector to ensure isolation during build
     _childrenStack.add([]);
-    
+
     try {
       final interpretResult = _vm.executeClosure(closure, positionalArgs);
 
@@ -506,11 +506,12 @@ class FluxRuntime {
         debugPrint('⚠️ FluxRuntime: VM stack is EMPTY after build execution!');
       } else {
         final result = _vm.stack.removeLast();
-        debugPrint('🔧 Result from stack: $result (Type: ${result.runtimeType})');
+        debugPrint(
+            '🔧 Result from stack: $result (Type: ${result.runtimeType})');
         if (result is FluxWidgetNode) {
           builtNode = result;
         } else {
-           debugPrint('⚠️ FluxRuntime: Result is NOT a FluxWidgetNode: $result');
+          debugPrint('⚠️ FluxRuntime: Result is NOT a FluxWidgetNode: $result');
         }
       }
     } catch (e, st) {
@@ -671,9 +672,9 @@ class FluxRuntime {
           // Use invokeClosure to execute on current stack (preserving upvalues)
           _vm.invokeClosure(builder);
           children.addAll(_childrenStack.removeLast());
-          
-          // CRITICAL: invokeClosure leaves its result (usually null for trailing blocks) 
-          // on the VM stack. Since we collect results via _childrenStack, we MUST 
+
+          // CRITICAL: invokeClosure leaves its result (usually null for trailing blocks)
+          // on the VM stack. Since we collect results via _childrenStack, we MUST
           // pop this redundant result to keep the stack balanced for the caller.
           if (stack.isNotEmpty) {
             stack.removeLast();

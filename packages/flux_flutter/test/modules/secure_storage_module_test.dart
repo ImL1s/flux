@@ -1,5 +1,3 @@
-
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flux_flutter/src/modules/secure_storage_module.dart';
 import 'package:flux_vm/flux_vm.dart';
@@ -109,7 +107,8 @@ void main() {
     test('secure.deleteAll clears all storage', () async {
       final setFn = secureModule.get('set') as AsyncNativeFunction;
       final deleteAllFn = secureModule.get('deleteAll') as AsyncNativeFunction;
-      final getAllKeysFn = secureModule.get('getAllKeys') as AsyncNativeFunction;
+      final getAllKeysFn =
+          secureModule.get('getAllKeys') as AsyncNativeFunction;
 
       await setFn.call(['key1', 'value1']);
       await setFn.call(['key2', 'value2']);
@@ -126,7 +125,8 @@ void main() {
 
     test('secure.containsKey returns correct status', () async {
       final setFn = secureModule.get('set') as AsyncNativeFunction;
-      final containsKeyFn = secureModule.get('containsKey') as AsyncNativeFunction;
+      final containsKeyFn =
+          secureModule.get('containsKey') as AsyncNativeFunction;
 
       await setFn.call(['exists', 'value']);
 
@@ -202,7 +202,8 @@ void main() {
   group('Utility', () {
     test('secure.getAllKeys returns all keys', () async {
       final setFn = secureModule.get('set') as AsyncNativeFunction;
-      final getAllKeysFn = secureModule.get('getAllKeys') as AsyncNativeFunction;
+      final getAllKeysFn =
+          secureModule.get('getAllKeys') as AsyncNativeFunction;
 
       await setFn.call(['keyA', 'valueA']);
       await setFn.call(['keyB', 'valueB']);

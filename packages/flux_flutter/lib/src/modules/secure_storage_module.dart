@@ -24,14 +24,14 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 /// ```
 class SecureStorageModule extends FluxModule {
   final FlutterSecureStorage _storage;
-  
+
   /// Storage options for Android (encryption is enabled by default in v10+)
   AndroidOptions get _androidOptions => const AndroidOptions();
 
   /// Storage options for iOS
   IOSOptions get _iosOptions => const IOSOptions(
-    accessibility: KeychainAccessibility.first_unlock_this_device,
-  );
+        accessibility: KeychainAccessibility.first_unlock_this_device,
+      );
 
   /// Create a SecureStorageModule with optional custom storage for testing.
   SecureStorageModule({FlutterSecureStorage? storage})
@@ -41,7 +41,8 @@ class SecureStorageModule extends FluxModule {
     register('get', AsyncNativeFunction('secure.get', 1, _get));
     register('set', AsyncNativeFunction('secure.set', 2, _set));
     register('delete', AsyncNativeFunction('secure.delete', 1, _delete));
-    register('deleteAll', AsyncNativeFunction('secure.deleteAll', 0, _deleteAll));
+    register(
+        'deleteAll', AsyncNativeFunction('secure.deleteAll', 0, _deleteAll));
     register('containsKey',
         AsyncNativeFunction('secure.containsKey', 1, _containsKey));
 
@@ -50,7 +51,8 @@ class SecureStorageModule extends FluxModule {
     register('setJson', AsyncNativeFunction('secure.setJson', 2, _setJson));
 
     // Utility
-    register('getAllKeys', AsyncNativeFunction('secure.getAllKeys', 0, _getAllKeys));
+    register(
+        'getAllKeys', AsyncNativeFunction('secure.getAllKeys', 0, _getAllKeys));
     register('getAll', AsyncNativeFunction('secure.getAll', 0, _getAll));
   }
 

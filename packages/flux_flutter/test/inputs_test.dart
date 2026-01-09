@@ -38,7 +38,6 @@ void main() {
     testWidgets('Checkbox renders and callback', (tester) async {
       final builder = FluxBindings.get('Checkbox')!;
 
-
       final checkbox = builder({
         'value': true,
         'activeColor': 'blue',

@@ -25,7 +25,9 @@ void main() {
       (server) => server.reply(
         200,
         '{"foo": "bar"}',
-        headers: {'content-type': ['application/json']},
+        headers: {
+          'content-type': ['application/json']
+        },
       ),
     );
 

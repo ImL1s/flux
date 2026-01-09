@@ -169,7 +169,8 @@ class _FluxOtaDemoState extends State<FluxOtaDemo> {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.all(12),
-          color: _currentVersion == '1.1.0' ? Colors.green[100] : Colors.grey[200],
+          color:
+              _currentVersion == '1.1.0' ? Colors.green[100] : Colors.grey[200],
           child: Row(
             children: [
               Icon(

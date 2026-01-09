@@ -1,5 +1,5 @@
 /// Flux Compiler 序列化範例
-/// 
+///
 /// 展示如何編譯、序列化、反序列化 Flux bytecode
 /// 運行: dart run example/serialization_example.dart
 
@@ -33,12 +33,12 @@ void main() async {
   final tokens = lexer.tokenize();
   final parser = Parser(tokens);
   final unit = parser.parse();
-  
+
   if (parser.errors.isNotEmpty) {
     print('❌ 編譯錯誤: ${parser.errors}');
     return;
   }
-  
+
   final compiler = Compiler(unit: unit);
   final chunk = compiler.endCompiler().chunk;
   print('   ✅ 編譯成功! Bytecode: ${chunk.code.length} bytes\n');
@@ -71,7 +71,7 @@ void main() async {
   print('✅ Step 6: 驗證一致性...');
   final originalBytes = chunk.code;
   final loadedBytesFromChunk = loadedChunk.code;
-  
+
   bool isEqual = originalBytes.length == loadedBytesFromChunk.length;
   if (isEqual) {
     for (int i = 0; i < originalBytes.length; i++) {
@@ -81,7 +81,7 @@ void main() async {
       }
     }
   }
-  
+
   if (isEqual) {
     print('   ✅ Bytecode 完全一致!');
   } else {
@@ -90,7 +90,7 @@ void main() async {
 
   // 清理
   await tempFile.delete();
-  
+
   print('\n═══════════════════════════════════════════');
   print('序列化流程: Source → Compile → Serialize → Save');
   print('反序列化流程: Load → Deserialize → Execute');

@@ -43,8 +43,10 @@ class FileModule extends FluxModule {
 
   void _registerFunctions() {
     // Directory access
-    register('getDocumentsDirectory',
-        AsyncNativeFunction('file.getDocumentsDirectory', 0, _getDocumentsDirectory));
+    register(
+        'getDocumentsDirectory',
+        AsyncNativeFunction(
+            'file.getDocumentsDirectory', 0, _getDocumentsDirectory));
     register('getTempDirectory',
         AsyncNativeFunction('file.getTempDirectory', 0, _getTempDirectory));
     register('getCacheDirectory',
@@ -56,7 +58,8 @@ class FileModule extends FluxModule {
     register('readJson', AsyncNativeFunction('file.readJson', 1, _readJson));
     register('writeJson', AsyncNativeFunction('file.writeJson', 2, _writeJson));
     register('readBytes', AsyncNativeFunction('file.readBytes', 1, _readBytes));
-    register('writeBytes', AsyncNativeFunction('file.writeBytes', 2, _writeBytes));
+    register(
+        'writeBytes', AsyncNativeFunction('file.writeBytes', 2, _writeBytes));
     register('append', AsyncNativeFunction('file.append', 2, _append));
 
     // File management

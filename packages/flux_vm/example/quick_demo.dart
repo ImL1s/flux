@@ -1,16 +1,15 @@
 /// Flux 快速示例
 /// 運行: dart run example/quick_demo.dart
 
-
 import 'package:flux_vm/flux_vm.dart';
 
 void main() {
   print('=== Flux 腳本示例 ===\n');
-  
+
   // 創建 VM
   final vm = VM();
   vm.onPrint = (msg) => print('  輸出: $msg');
-  
+
   // 示例 1: 基本變量和計算
   print('【示例 1: 變量和計算】');
   vm.interpret('''
@@ -19,7 +18,7 @@ void main() {
     print(x + y);
     print(x * y);
   ''');
-  
+
   // 示例 2: 函數
   print('\n【示例 2: 函數】');
   vm.interpret('''
@@ -28,7 +27,7 @@ void main() {
     }
     print(greet("Flux"));
   ''');
-  
+
   // 示例 3: 條件判斷
   print('\n【示例 3: 條件判斷】');
   vm.interpret('''
@@ -41,7 +40,7 @@ void main() {
       print("不及格");
     }
   ''');
-  
+
   // 示例 4: 迴圈
   print('\n【示例 4: 迴圈】');
   vm.interpret('''
@@ -51,7 +50,7 @@ void main() {
     }
     print("1+2+3+4+5 = " + sum);
   ''');
-  
+
   // 示例 5: 列表操作
   print('\n【示例 5: 列表】');
   vm.interpret('''
@@ -60,7 +59,7 @@ void main() {
     push(fruits, "葡萄");
     print("添加後: " + len(fruits));
   ''');
-  
+
   // 示例 6: 字典/映射
   print('\n【示例 6: 映射】');
   vm.interpret('''
@@ -71,7 +70,7 @@ void main() {
     print(person["name"]);
     print(person["age"]);
   ''');
-  
+
   // 示例 7: 標準庫函數
   print('\n【示例 7: 標準庫】');
   vm.interpret('''
@@ -83,6 +82,6 @@ void main() {
     print(upper("hello"));
     print(lower("WORLD"));
   ''');
-  
+
   print('\n=== 示例結束 ===');
 }

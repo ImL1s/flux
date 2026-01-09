@@ -1,0 +1,15 @@
+Analyzing flux_vm...
+
+  error - lib\src\stdlib.dart:320:20 - The method 'jsonDecode' isn't defined for the type 'StdLib'. Try correcting the name to the name of an existing method, or defining a method named 'jsonDecode'. - undefined_method
+  error - lib\src\stdlib.dart:331:20 - The method 'jsonEncode' isn't defined for the type 'StdLib'. Try correcting the name to the name of an existing method, or defining a method named 'jsonEncode'. - undefined_method
+  error - lib\src\stdlib.dart:363:25 - Undefined name 'utf8'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\stdlib.dart:367:52 - The operator '&' isn't defined for the type 'double'. Try defining the operator '&'. - undefined_operator
+  error - lib\src\stdlib.dart:392:18 - The method 'base64Encode' isn't defined for the type 'StdLib'. Try correcting the name to the name of an existing method, or defining a method named 'base64Encode'. - undefined_method
+  error - lib\src\stdlib.dart:392:31 - Undefined name 'utf8'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\stdlib.dart:400:20 - Undefined name 'utf8'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier
+  error - lib\src\stdlib.dart:400:32 - The method 'base64Decode' isn't defined for the type 'StdLib'. Try correcting the name to the name of an existing method, or defining a method named 'base64Decode'. - undefined_method
+warning - lib\src\vm.dart:732:19 - The stack trace variable 'st' isn't used and can be removed. Try removing the stack trace variable, or using it. - unused_catch_stack
+warning - lib\src\vm.dart:1707:17 - The stack trace variable 'stack' isn't used and can be removed. Try removing the stack trace variable, or using it. - unused_catch_stack
+   info - test\http_test.dart:2:8 - The import of 'package:flux_vm/src/stdlib.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flux_vm/flux_vm.dart'. Try removing the import directive. - unnecessary_import
+
+11 issues found.

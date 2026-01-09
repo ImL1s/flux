@@ -23,12 +23,12 @@ class _ConsolePaneState extends State<ConsolePane> {
   void _submit() async {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
-    
+
     setState(() {
       _entries.add(ConsoleEntry(text: text, type: EntryType.input));
       _controller.clear();
     });
-    
+
     // Evaluate
     try {
       final result = await widget.onEvaluate(text);
@@ -46,11 +46,11 @@ class _ConsolePaneState extends State<ConsolePane> {
         _scrollToBottom();
       }
     }
-    
+
     // Keep focus
     _focusNode.requestFocus();
   }
-  
+
   void _scrollToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_scrollController.hasClients) {
@@ -68,20 +68,21 @@ class _ConsolePaneState extends State<ConsolePane> {
     return Column(
       children: [
         Container(
-           padding: const EdgeInsets.all(8),
-           color: Colors.grey.shade100,
-           width: double.infinity,
-           child: Row(
-             children: [
-               const Text('Console', style: TextStyle(fontWeight: FontWeight.bold)),
-               const Spacer(),
-               IconButton(
-                 icon: const Icon(Icons.block, size: 16),
-                 onPressed: () => setState(() => _entries.clear()),
-                 tooltip: 'Clear Console',
-               ),
-             ],
-           ),
+          padding: const EdgeInsets.all(8),
+          color: Colors.grey.shade100,
+          width: double.infinity,
+          child: Row(
+            children: [
+              const Text('Console',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              const Spacer(),
+              IconButton(
+                icon: const Icon(Icons.block, size: 16),
+                onPressed: () => setState(() => _entries.clear()),
+                tooltip: 'Clear Console',
+              ),
+            ],
+          ),
         ),
         // Output Area
         Expanded(
@@ -128,7 +129,7 @@ enum EntryType { input, output, error }
 class ConsoleEntry {
   final String text;
   final EntryType type;
-  
+
   ConsoleEntry({required this.text, required this.type});
 }
 
@@ -141,7 +142,7 @@ class _ConsoleRow extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color;
     IconData? icon;
-    
+
     switch (entry.type) {
       case EntryType.input:
         color = Colors.grey;
@@ -155,16 +156,16 @@ class _ConsoleRow extends StatelessWidget {
         icon = Icons.error_outline;
         break;
     }
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (icon != null) 
-             Icon(icon, size: 14, color: color)
-          else 
-             const SizedBox(width: 14),
+          if (icon != null)
+            Icon(icon, size: 14, color: color)
+          else
+            const SizedBox(width: 14),
           const SizedBox(width: 4),
           Expanded(
             child: SelectableText(

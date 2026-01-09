@@ -95,7 +95,7 @@ void main() {
       ''';
 
       vm.interpret(source);
-      
+
       expect(logs.any((l) => l.contains('at fail() [line 2]')), isTrue);
       expect(logs.any((l) => l.contains('at wrapper() [line 7]')), isTrue);
       expect(logs.any((l) => l.contains('at script() [line 13]')), isTrue);

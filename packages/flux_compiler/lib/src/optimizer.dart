@@ -22,25 +22,25 @@ class BytecodeOptimizer {
     int i = 0;
     while (i < chunk.code.length) {
       final op = OpCode.values[chunk.code[i]];
-      
+
       switch (op) {
         case OpCode.jump:
         case OpCode.jumpIfFalse:
         case OpCode.jumpIfTrue:
           // offset is 2 bytes at i+1
           if (i + 2 < chunk.code.length) {
-             int offset = chunk.code[i + 1] | (chunk.code[i + 2] << 8);
-             int target = i + 3 + offset;
-             if (target < chunk.code.length) targets.add(target);
+            int offset = chunk.code[i + 1] | (chunk.code[i + 2] << 8);
+            int target = i + 3 + offset;
+            if (target < chunk.code.length) targets.add(target);
           }
           break;
         case OpCode.loop:
           // Loop jumps backwards.
           // offset is 1 byte at i+1
-           if (i + 1 < chunk.code.length) {
-             int offset = chunk.code[i + 1];
-             int target = i + 2 - offset;
-             if (target >= 0) targets.add(target);
+          if (i + 1 < chunk.code.length) {
+            int offset = chunk.code[i + 1];
+            int target = i + 2 - offset;
+            if (target >= 0) targets.add(target);
           }
           break;
         case OpCode.try_:
@@ -57,21 +57,21 @@ class BytecodeOptimizer {
       }
       i += _getInstructionSize(chunk, i);
     }
-    
+
     // Pass 2: Mark reachability and eliminate dead code
     bool modified = false;
     bool isReachable = true;
     i = 0;
-    
+
     while (i < chunk.code.length) {
       // If this instruction is a jump target, it becomes reachable
       if (targets.contains(i)) {
         isReachable = true;
       }
-      
+
       final op = OpCode.values[chunk.code[i]];
       final size = _getInstructionSize(chunk, i);
-      
+
       if (!isReachable && op != OpCode.noOp) {
         // Replace with NO_OPs
         for (int k = 0; k < size; k++) {
@@ -79,20 +79,21 @@ class BytecodeOptimizer {
         }
         modified = true;
       }
-      
+
       if (isReachable) {
         // Check if this instruction terminates the flow
-        if (op == OpCode.return_ || 
-          op == OpCode.throw_ || 
-          op == OpCode.jump ||
-          op == OpCode.loop) { // Unconditional jump
-         isReachable = false;
+        if (op == OpCode.return_ ||
+            op == OpCode.throw_ ||
+            op == OpCode.jump ||
+            op == OpCode.loop) {
+          // Unconditional jump
+          isReachable = false;
+        }
       }
-      }
-      
+
       i += size;
     }
-    
+
     return modified;
   }
 
@@ -103,63 +104,66 @@ class BytecodeOptimizer {
     int i = 0;
     while (i < chunk.code.length) {
       final op = OpCode.values[chunk.code[i]];
-      
+
       // Pattern: NOT + JUMP_IF_FALSE -> NOOP + JUMP_IF_TRUE
-    // Pattern: NOT + JUMP_IF_TRUE -> NOOP + JUMP_IF_FALSE
-    // Pattern: NOT + NOT -> NOOP + NOOP
-    if (op == OpCode.not) {
-      int next = _peekNextInstruction(chunk, i);
-      if (next < chunk.code.length) {
-        final nextOp = OpCode.values[chunk.code[next]];
-        if (nextOp == OpCode.jumpIfFalse) {
-          chunk.code[i] = OpCode.noOp.index;
-          chunk.code[next] = OpCode.jumpIfTrue.index;
-          modified = true;
-        } else if (nextOp == OpCode.jumpIfTrue) {
-          chunk.code[i] = OpCode.noOp.index;
-          chunk.code[next] = OpCode.jumpIfFalse.index;
-          modified = true;
-        } else if (nextOp == OpCode.not) {
-          chunk.code[i] = OpCode.noOp.index;
-          chunk.code[next] = OpCode.noOp.index;
+      // Pattern: NOT + JUMP_IF_TRUE -> NOOP + JUMP_IF_FALSE
+      // Pattern: NOT + NOT -> NOOP + NOOP
+      if (op == OpCode.not) {
+        int next = _peekNextInstruction(chunk, i);
+        if (next < chunk.code.length) {
+          final nextOp = OpCode.values[chunk.code[next]];
+          if (nextOp == OpCode.jumpIfFalse) {
+            chunk.code[i] = OpCode.noOp.index;
+            chunk.code[next] = OpCode.jumpIfTrue.index;
+            modified = true;
+          } else if (nextOp == OpCode.jumpIfTrue) {
+            chunk.code[i] = OpCode.noOp.index;
+            chunk.code[next] = OpCode.jumpIfFalse.index;
+            modified = true;
+          } else if (nextOp == OpCode.not) {
+            chunk.code[i] = OpCode.noOp.index;
+            chunk.code[next] = OpCode.noOp.index;
+            modified = true;
+          }
+        }
+      }
+
+      // Pattern: SIDE_EFFECT_FREE + POP -> NOOP + NOOP
+      if (_isSideEffectFree(op)) {
+        int next = _peekNextInstruction(chunk, i);
+        if (next < chunk.code.length &&
+            OpCode.values[chunk.code[next]] == OpCode.pop) {
+          final sizeCurrent = _getInstructionSize(chunk, i);
+          final sizeNext = _getInstructionSize(chunk, next);
+
+          for (int k = 0; k < sizeCurrent; k++)
+            chunk.code[i + k] = OpCode.noOp.index;
+          for (int k = 0; k < sizeNext; k++)
+            chunk.code[next + k] = OpCode.noOp.index;
           modified = true;
         }
       }
-    }
 
-    // Pattern: SIDE_EFFECT_FREE + POP -> NOOP + NOOP
-    if (_isSideEffectFree(op)) {
-       int next = _peekNextInstruction(chunk, i);
-       if (next < chunk.code.length && OpCode.values[chunk.code[next]] == OpCode.pop) {
-          final sizeCurrent = _getInstructionSize(chunk, i);
-          final sizeNext = _getInstructionSize(chunk, next);
-          
-          for(int k=0; k<sizeCurrent; k++) chunk.code[i+k] = OpCode.noOp.index;
-          for(int k=0; k<sizeNext; k++) chunk.code[next+k] = OpCode.noOp.index;
-          modified = true;
-       }
+      i += _getInstructionSize(chunk, i);
     }
-    
-    i += _getInstructionSize(chunk, i);
+    return modified;
   }
-  return modified;
-}
 
-static bool _isSideEffectFree(OpCode op) {
-  switch (op) {
-    case OpCode.constant:
-    case OpCode.nil:
-    case OpCode.true_:
-    case OpCode.false_:
-    case OpCode.getLocal:
-    case OpCode.getUpvalue:
-    case OpCode.getGlobal:
-    case OpCode.noOp:
-      return true;
-    default:
-      return false;
+  static bool _isSideEffectFree(OpCode op) {
+    switch (op) {
+      case OpCode.constant:
+      case OpCode.nil:
+      case OpCode.true_:
+      case OpCode.false_:
+      case OpCode.getLocal:
+      case OpCode.getUpvalue:
+      case OpCode.getGlobal:
+      case OpCode.noOp:
+        return true;
+      default:
+        return false;
+    }
   }
-}
 
   /// Perform constant folding on the chunk
   static bool _foldConstants(Chunk chunk) {
@@ -167,12 +171,12 @@ static bool _isSideEffectFree(OpCode op) {
     int i = 0;
     while (i < chunk.code.length) {
       final op = OpCode.values[chunk.code[i]];
-      
+
       if (op == OpCode.noOp) {
-         i += _getInstructionSize(chunk, i);
-         continue;
+        i += _getInstructionSize(chunk, i);
+        continue;
       }
-      
+
       if (op == OpCode.constant) {
         final pattern = _matchConstantFolding(chunk, i);
         if (pattern != null) {
@@ -180,17 +184,17 @@ static bool _isSideEffectFree(OpCode op) {
           modified = true;
         }
       }
-      
+
       i += _getInstructionSize(chunk, i);
     }
     return modified;
   }
-  
+
   static int _getInstructionSize(Chunk chunk, int offset) {
     if (offset >= chunk.code.length) return 0;
-    
+
     final op = OpCode.values[chunk.code[offset]];
-    
+
     switch (op) {
       // 1-byte instructions (no args)
       case OpCode.nil:
@@ -211,7 +215,7 @@ static bool _isSideEffectFree(OpCode op) {
       case OpCode.greaterEqual:
       case OpCode.lessEqual:
       case OpCode.print:
-      case OpCode.popScope: 
+      case OpCode.popScope:
       case OpCode.listGet:
       case OpCode.listSet:
       case OpCode.mapGet:
@@ -219,13 +223,13 @@ static bool _isSideEffectFree(OpCode op) {
       case OpCode.getIndex:
       case OpCode.setIndex:
       case OpCode.catch_:
-      case OpCode.throw_: 
+      case OpCode.throw_:
       case OpCode.endTry:
       case OpCode.return_:
       case OpCode.closeUpvalue:
       case OpCode.await_:
         return 1;
-        
+
       // 2-byte instructions (1 arg)
       case OpCode.constant:
       case OpCode.getLocal:
@@ -234,7 +238,7 @@ static bool _isSideEffectFree(OpCode op) {
       case OpCode.setGlobal:
       case OpCode.getUpvalue:
       case OpCode.setUpvalue:
-      case OpCode.call: 
+      case OpCode.call:
       case OpCode.defineState:
       case OpCode.getState:
       case OpCode.setState:
@@ -245,44 +249,42 @@ static bool _isSideEffectFree(OpCode op) {
       case OpCode.instance:
       case OpCode.getProperty:
       case OpCode.setProperty:
-         return 2;
+        return 2;
 
       // 3-byte instructions (2 args or 1 uint16 arg)
       case OpCode.jump:
       case OpCode.jumpIfFalse:
       case OpCode.jumpIfTrue:
-         return 3; 
+        return 3;
 
       case OpCode.loop:
-         return 2;
+        return 2;
 
-      case OpCode.invoke: 
+      case OpCode.invoke:
       case OpCode.invokeSuper:
-      case OpCode.callNamed: 
-      case OpCode.buildWidget: 
-         return 3;
-         
+      case OpCode.callNamed:
+      case OpCode.buildWidget:
+        return 3;
+
       // 5-byte instructions (2 uint16 args)
-      case OpCode.try_: 
-         return 5;
-         
+      case OpCode.try_:
+        return 5;
+
       // Variable length
       case OpCode.closure:
-        if (offset + 2 >= chunk.code.length) return 1; 
+        if (offset + 2 >= chunk.code.length) return 1;
         final upvalueCount = chunk.code[offset + 2];
         return 3 + (2 * upvalueCount);
-        
-
     }
   }
 
   static int _peekNextInstruction(Chunk chunk, int offset) {
     int next = offset + _getInstructionSize(chunk, offset);
     while (next < chunk.code.length) {
-       if (OpCode.values[chunk.code[next]] != OpCode.noOp) {
-         return next;
-       }
-       next += _getInstructionSize(chunk, next);
+      if (OpCode.values[chunk.code[next]] != OpCode.noOp) {
+        return next;
+      }
+      next += _getInstructionSize(chunk, next);
     }
     return next;
   }
@@ -325,17 +327,38 @@ static bool _isSideEffectFree(OpCode op) {
     Object? result;
     if (val1 is num && val2 is num) {
       switch (op3) {
-        case OpCode.add: result = val1 + val2; break;
-        case OpCode.sub: result = val1 - val2; break;
-        case OpCode.mul: result = val1 * val2; break;
-        case OpCode.div: result = val1 / val2; break;
-        case OpCode.mod: result = val1 % val2; break;
-        case OpCode.equal: result = val1 == val2; break;
-        case OpCode.greater: result = val1 > val2; break;
-        case OpCode.less: result = val1 < val2; break;
-        case OpCode.greaterEqual: result = val1 >= val2; break;
-        case OpCode.lessEqual: result = val1 <= val2; break;
-        default: return null;
+        case OpCode.add:
+          result = val1 + val2;
+          break;
+        case OpCode.sub:
+          result = val1 - val2;
+          break;
+        case OpCode.mul:
+          result = val1 * val2;
+          break;
+        case OpCode.div:
+          result = val1 / val2;
+          break;
+        case OpCode.mod:
+          result = val1 % val2;
+          break;
+        case OpCode.equal:
+          result = val1 == val2;
+          break;
+        case OpCode.greater:
+          result = val1 > val2;
+          break;
+        case OpCode.less:
+          result = val1 < val2;
+          break;
+        case OpCode.greaterEqual:
+          result = val1 >= val2;
+          break;
+        case OpCode.lessEqual:
+          result = val1 <= val2;
+          break;
+        default:
+          return null;
       }
     } else if (val1 is String || val2 is String) {
       if (op3 == OpCode.add) {
@@ -346,8 +369,10 @@ static bool _isSideEffectFree(OpCode op) {
         return null;
       }
     } else if (val1 is bool && val2 is bool) {
-      if (op3 == OpCode.equal) result = val1 == val2;
-      else return null;
+      if (op3 == OpCode.equal)
+        result = val1 == val2;
+      else
+        return null;
     } else if (val1 == null || val2 == null) {
       if (op3 == OpCode.equal) {
         result = val1 == val2;
@@ -359,11 +384,10 @@ static bool _isSideEffectFree(OpCode op) {
     }
 
     return _FoldingPattern(result, [offset2, offset3]);
-
-
   }
 
-  static void _applyConstantFolding(Chunk chunk, int offset, _FoldingPattern pattern) {
+  static void _applyConstantFolding(
+      Chunk chunk, int offset, _FoldingPattern pattern) {
     int newConstIdx = chunk.addConstant(pattern.result);
     // Replace original constant index
     chunk.code[offset + 1] = newConstIdx;

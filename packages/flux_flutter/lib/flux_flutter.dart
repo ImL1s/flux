@@ -16,4 +16,3 @@ export 'src/modules/camera_module.dart';
 export 'src/modules/camera_preview.dart';
 export 'src/modules/ble_module.dart';
 export 'src/utils/state_migration.dart';
-

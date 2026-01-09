@@ -12,20 +12,20 @@ void main() {
           print("Caught: " + e);
         }
       ''';
-      
+
       final logs = <String>[];
-      
+
       final tokens = Lexer(source).tokenize();
       final parser = Parser(tokens);
       final ast = parser.parse();
       // verification of compilation is part of test
-      final compiler = Compiler(unit: ast); 
+      final compiler = Compiler(unit: ast);
       final function = compiler.endCompiler();
-      
+
       final vm = VM();
       vm.onPrint = (msg) => logs.add(msg);
       vm.runChunk(function.chunk);
-      
+
       expect(logs[0], 'Caught: error');
     });
   });

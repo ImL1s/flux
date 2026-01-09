@@ -28,7 +28,6 @@ void main() {
 
     print('Successfully compiled to bytecode (${bytecode.length} bytes).');
     print('First 10 bytes: ${bytecode.take(10).toList()}');
-
   } catch (e) {
     print('Error: $e');
   }
