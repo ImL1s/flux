@@ -213,3 +213,9 @@ dart test packages/flux_lsp
 # Integration Tests
 flutter test packages/flux_flutter
 ```
+
+---
+
+## Support
+
+If this project saved you some time, you can [buy me a coffee](https://buymeacoffee.com/iml1s).
